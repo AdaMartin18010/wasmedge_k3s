@@ -36,6 +36,8 @@
 - **架构层**：控制闭环与对象模型（见
   [3. 架构与对象模型](../03-architecture/architecture.md)）
 - **技术层**：各技术深度解析（Docker/K8s/K3s/WasmEdge/OPA）
+- **全局架构设计**：技术组合方案、规格匹配、成熟技术栈案例（见
+  [17. 全局架构设计](../17-architecture-design/architecture-design.md)）
 - **实践层**：安装部署与故障排查
 
 ## 1.2 技术栈定位
@@ -311,6 +313,8 @@ $$T^* = \arg\min_{T \in \{D, K, K_3, W, O\}} \text{cost}(T, S)$$
 - **理念层**：了解云原生核心思想 → [`2. 理念层`](../02-principles/principles.md)
 - **架构层**：深入对象模型与控制闭环 →
   [`3. 架构与对象模型`](../03-architecture/architecture.md)
+- **全局架构设计**：技术组合方案与决策框架 →
+  [`17. 全局架构设计`](../17-architecture-design/architecture-design.md)
 - **实战指南**：快速上手各技术 →
   [`15. 安装与最小示例`](../15-installation/installation.md)
 - **故障排查**：常见问题与解决方案 →

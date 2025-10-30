@@ -24,6 +24,8 @@
   ：[`15-installation/installation.md`](./15-installation/installation.md)
 - 故障排查
   ：[`16-troubleshooting/troubleshooting.md`](./16-troubleshooting/troubleshooting.md)
+- 全局架构设计
+  ：[`17-architecture-design/architecture-design.md`](./17-architecture-design/architecture-design.md)
 - 参考来源：[`REFERENCES.md`](./REFERENCES.md)
 
 ## 书写规范
