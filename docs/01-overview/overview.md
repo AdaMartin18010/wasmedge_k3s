@@ -310,6 +310,8 @@ $$T^* = \arg\min_{T \in \{D, K, K_3, W, O\}} \text{cost}(T, S)$$
 
 ## 1.8 快速导航
 
+- **认知图谱**：快速认知指南 →
+  [`0. 认知图谱`](../00-knowledge-map/knowledge-map.md)
 - **理念层**：了解云原生核心思想 → [`2. 理念层`](../02-principles/principles.md)
 - **架构层**：深入对象模型与控制闭环 →
   [`3. 架构与对象模型`](../03-architecture/architecture.md)
