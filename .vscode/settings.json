@@ -1,0 +1,23 @@
+{
+  "files.eol": "\n",
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "editor.wordWrap": "on",
+  "editor.rulers": [80, 100],
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[markdown]": {
+    "editor.wordWrap": "on",
+    "editor.renderWhitespace": "boundary",
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "markdownlint.run": "onSave",
+  "markdown.extension.toc.levels": "2..4",
+  "markdown.extension.toc.orderedList": false,
+  "markdown.extension.list.indentationSize": "adaptive",
+  "markdown.extension.print.absoluteImgPath": false,
+  "markdown.extension.tableFormatter.normalizeIndentation": true,
+  "markdown.extension.tableFormatter.delimiterRowPadding": 1
+}
+
+
