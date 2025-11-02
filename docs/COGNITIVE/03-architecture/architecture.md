@@ -598,6 +598,10 @@ graph TD
 
 > **详细分析**：参见 [执行流与调度视角](./execution-flow-scheduling.md) - 从执行
 > 流和调度视角分析虚拟化、半虚拟化、容器化、沙盒化四种技术范式的本质差异
+>
+> **设备访问决策**：参见
+> [技术决策模型](../10-decision-models/QUICK-REFERENCE.md) - 设备访问
+> （USB/PCI/GPU）和内核特性决策快速参考
 
 从**执行流与调度**的底层视角，深入分析四种技术范式的触发机制、截获机制、调度实体
 和执行路径，帮助理解技术本质和性能开销。
@@ -609,12 +613,18 @@ graph TD
 - **性能对比**：开销量化与决策依据（陷阱开销：全虚拟化 > 1000 cycles → 半虚拟化
   200-400 cycles → 容器化 0 → 沙盒化 10-50 cycles）
 - **技术选型**：基于执行流特性的决策树
+- **设备访问决策**：USB/PCI/GPU 设备访问能力矩阵与决策规则（见
+  [执行流文档](./execution-flow-scheduling.md#03x74-基于设备与内核特性的决策)）
+- **内核特性决策**：epoll/io_uring 内核特性访问能力与性能对比（见
+  [执行流文档](./execution-flow-scheduling.md#03x74-基于设备与内核特性的决策)）
 
 **关键洞察**：
 
 1. **截获机制决定开销**：VM-Exit 最高，hypercall 次之，直接执行最低
 2. **调度实体决定隔离**：vCPU 线程 > 容器进程 > Sentry 线程
 3. **执行路径决定延迟**：用户态转发最快，VM-Exit 最慢
+4. **设备访问决定范式**：USB/PCI/GPU 设备访问 → 虚拟化/半虚拟化（必需）
+5. **内核特性决定范式**：epoll/io_uring → 容器化（必需，16-62x 性能提升）
 
 ## 03.7 网络模型强制要求
 
@@ -1163,10 +1173,14 @@ $$P_{K3}(N, P) = \text{controller\_count} \times \text{sqlite\_latency}(P)$$
 
 ## 03.15 参考
 
-- [17. 架构设计](../17-architecture-design/architecture-design.md) - 全局架构设
+- [17. 架构设计](../05-architecture-design/architecture-design.md) - 全局架构设
   计与技术组合
-- [37. 矩阵视角](../37-matrix-perspective/README.md) - 矩阵力学分析方法（用于架
+- [09. 矩阵视角](../09-matrix-perspective/README.md) - 矩阵力学分析方法（用于架
   构决策量化支持）
+- [10. 技术决策模型](../10-decision-models/decision-models.md) - 技术选型决策框
+  架
+- [10. 快速参考指南](../10-decision-models/QUICK-REFERENCE.md) - 设备访问
+  （USB/PCI/GPU）和内核特性决策快速参考
 
 **外部参考**：
 

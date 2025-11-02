@@ -6,11 +6,13 @@
 - [10.1 文档定位](#101-文档定位)
 - [10.2 文档结构](#102-文档结构)
 - [10.3 快速导航](#103-快速导航)
+  - [⚡ 快速参考](#-快速参考)
   - [理论基础（第一层）](#理论基础第一层)
   - [应用决策（第二层）](#应用决策第二层)
   - [实践案例](#实践案例)
   - [形式化模型](#形式化模型)
   - [全面认知映射](#全面认知映射)
+  - [矩阵视角](#矩阵视角)
   - [技术名词概念论证](#技术名词概念论证)
 - [10.4 核心内容概览](#104-核心内容概览)
   - [10.4.1 第一层：技术范式背后的理论模型](#1041-第一层技术范式背后的理论模型)
@@ -48,6 +50,10 @@
    - **场景分析论证**：根据技术场景进行技术应用的决策
    - **技术选型决策**：具体技术的选择（Docker vs containerd）
    - **权衡框架**：多维度权衡决策模型
+   - **⭐ 关键决策维度**：
+     - **设备访问需求**：USB/PCI 设备访问 → 虚拟化/半虚拟化（必需）
+     - **内核特性需求**：epoll/io_uring → 容器化（必需，16-62x 性能提升）
+     - **资源访问需求**：CPU/内存/逻辑 → 沙盒化/容器化
 
 **核心价值**：
 
@@ -69,6 +75,8 @@
 ├── README.md                    # 文档概述与导航
 ├── OUTLINE.md                   # 文档提纲（详细结构）
 ├── decision-models.md          # 主文档（本文档）
+├── QUICK-REFERENCE.md          # 快速参考指南（设备访问和内核特性决策）
+├── CONSISTENCY-REPORT.md       # 一致性检查报告（与 Wikipedia 标准对齐）
 │
 ├── 01-theory-models/            # 第一层：技术范式背后的理论模型
 │   ├── README.md                # 理论模型概述
@@ -111,6 +119,13 @@
 
 ## 10.3 快速导航
 
+### ⚡ 快速参考
+
+| 文档               | 链接                                           | 内容                                          |
+| ------------------ | ---------------------------------------------- | --------------------------------------------- |
+| **快速参考指南**   | [QUICK-REFERENCE.md](QUICK-REFERENCE.md)       | 设备访问（USB/PCI/GPU）和内核特性决策快速参考 |
+| **一致性检查报告** | [CONSISTENCY-REPORT.md](CONSISTENCY-REPORT.md) | 文档一致性检查与 Wikipedia 标准对齐报告       |
+
 ### 理论基础（第一层）
 
 | 文档               | 链接                                                                  | 内容                                  |
@@ -122,11 +137,13 @@
 
 ### 应用决策（第二层）
 
-| 文档             | 链接                                                                    | 内容                   |
-| ---------------- | ----------------------------------------------------------------------- | ---------------------- |
-| **技术决策框架** | [01-decision-framework.md](02-scenario-models/01-decision-framework.md) | 决策模型分类、权衡框架 |
-| **场景分析论证** | [02-scenario-analysis.md](02-scenario-models/02-scenario-analysis.md)   | 场景分析框架、论证模型 |
-| **概念演进脉络** | [03-concept-evolution.md](02-scenario-models/03-concept-evolution.md)   | 技术概念定义脉络       |
+| 文档                         | 链接                                                                                                                                  | 内容                                      |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| **技术决策框架**             | [01-decision-framework.md](02-scenario-models/01-decision-framework.md)                                                               | 决策模型分类、权衡框架                    |
+| **基于设备与内核特性的决策** | [01-decision-framework.md#01211-基于设备与内核特性的决策](02-scenario-models/01-decision-framework.md#01211-基于设备与内核特性的决策) | ⭐ 设备访问和内核特性决策分析             |
+| **场景分析论证**             | [02-scenario-analysis.md](02-scenario-models/02-scenario-analysis.md)                                                                 | 场景分析框架、论证模型                    |
+| **设备访问和内核特性分析**   | [02-scenario-analysis.md#0222-技术约束分析](02-scenario-models/02-scenario-analysis.md#0222-技术约束分析)                             | ⭐ 技术约束分析中的设备访问和内核特性维度 |
+| **概念演进脉络**             | [03-concept-evolution.md](02-scenario-models/03-concept-evolution.md)                                                                 | 技术概念定义脉络                          |
 
 ### 实践案例
 
@@ -148,6 +165,14 @@
 | 文档             | 链接                                                                          | 内容                                                                 |
 | ---------------- | ----------------------------------------------------------------------------- | -------------------------------------------------------------------- |
 | **全面认知映射** | [comprehensive-mapping.md](05-comprehensive-mapping/comprehensive-mapping.md) | 矩阵对比、结构同构、关系等价、思维导图、扩缩模型、交叉映射、认知总结 |
+
+### 矩阵视角
+
+| 文档             | 链接                                                               | 内容                                          |
+| ---------------- | ------------------------------------------------------------------ | --------------------------------------------- |
+| **矩阵视角**     | [09-matrix-perspective](../09-matrix-perspective/README.md)        | 矩阵力学分析方法（用于架构决策量化支持）      |
+| **矩阵快速参考** | [09-quick-reference](../09-matrix-perspective/QUICK-REFERENCE.md)  | 核心概念和公式速查                            |
+| **矩阵实践案例** | [09-practice-cases](../09-matrix-perspective/09-practice-cases.md) | 边缘计算、Serverless、AI 推理等场景的矩阵分析 |
 
 ### 技术名词概念论证
 
@@ -264,6 +289,12 @@ $$A_{\text{attack}} = \sum_{i} A_{\text{interface}_i} \times P_{\text{vulnerabil
 │   ├── 需要 USB/PCI 设备
 │   │   ├── 高性能 → 半虚拟化
 │   │   └── 兼容性优先 → 全虚拟化
+│   ├── 需要 GPU 设备
+│   │   ├── GPU 直通
+│   │   │   ├── 强隔离 → 虚拟化/半虚拟化（性能>95%）
+│   │   │   └── 中等隔离 → 容器化（性能>98%）
+│   │   ├── GPU vGPU/SR-IOV → 虚拟化/半虚拟化（资源共享）
+│   │   └── GPU 虚拟化 → 全虚拟化（性能极低，仅兼容性）
 │   └── 不需要设备访问 → 继续判断
 ├── 内核特性需求
 │   ├── 需要 epoll/io_uring → 容器化（直接内核访问）
@@ -286,7 +317,12 @@ $$A_{\text{attack}} = \sum_{i} A_{\text{interface}_i} \times P_{\text{vulnerabil
 
 1. **设备访问优先判断**：
 
-   - USB/PCI 设备访问 → 虚拟化/半虚拟化（必需）
+   - **USB/PCI 设备访问** → 虚拟化/半虚拟化（必需）
+   - **GPU 设备访问** → 根据访问方式和隔离需求选择
+     - **GPU 直通**：强隔离 → 虚拟化/半虚拟化（性能>95%），中等隔离 → 容器化（性
+       能>98%）
+     - **GPU vGPU/SR-IOV** → 虚拟化/半虚拟化（资源共享，多租户）
+     - **GPU 虚拟化** → 全虚拟化（性能极低，仅兼容性）
    - 不需要设备访问 → 可考虑容器化/沙盒化
 
 2. **内核特性优先判断**：
@@ -353,22 +389,35 @@ $$A_{\text{attack}} = \sum_{i} A_{\text{interface}_i} \times P_{\text{vulnerabil
 **关联文档**：
 
 - **[02. 理念层](../02-principles/principles.md)** - 容器化的核心理念
+- **[03. 架构与对象模型](../03-architecture/architecture.md)** - 架构理念和设计
+  思想
+- **[03. 执行流与调度视角](../03-architecture/execution-flow-scheduling.md)** -
+  从执行流视角分析设备访问和内核特性
 - **[05. 全局架构设计](../05-architecture-design/architecture-design.md)** - 技
   术组合方案与决策框架
 - **[06. 问题解决方案矩阵](../06-problem-solution-matrix/problem-solution-matrix.md)** -
   问题分类与解决方案
 - **[08. 范畴论视角](../08-category-theory/category-theory.md)** - 技术概念的数
   学抽象
+- **[09. 矩阵视角](../09-matrix-perspective/README.md)** - 矩阵力学分析方法（用
+  于架构决策量化支持）
 
 **外部参考**：
 
-- [Virtualization](https://en.wikipedia.org/wiki/Virtualization)
-- [Containerization](https://en.wikipedia.org/wiki/Containerization)
-- [Sandboxing](<https://en.wikipedia.org/wiki/Sandbox_(computer_security)>)
+- [Virtualization (Wikipedia)](https://en.wikipedia.org/wiki/Virtualization)
+- [Paravirtualization (Wikipedia)](https://en.wikipedia.org/wiki/Paravirtualization)
+- [OS-level Virtualization (Wikipedia)](https://en.wikipedia.org/wiki/OS-level_virtualization)
+- [Containerization (Wikipedia)](https://en.wikipedia.org/wiki/Containerization)
+- [Sandboxing (Wikipedia)](<https://en.wikipedia.org/wiki/Sandbox_(computer_security)>)
+- [GPU Virtualization (Wikipedia)](https://en.wikipedia.org/wiki/GPU_virtualization)
+- [SR-IOV (Wikipedia)](https://en.wikipedia.org/wiki/Single-root_input/output_virtualization)
+- [epoll (Wikipedia)](https://en.wikipedia.org/wiki/Epoll)
+- [io_uring (Wikipedia)](https://en.wikipedia.org/wiki/Io_uring)
+- [eBPF (Wikipedia)](https://en.wikipedia.org/wiki/EBPF)
 - [WebAssembly](https://webassembly.org/)
-- [Distributed Systems](https://en.wikipedia.org/wiki/Distributed_computing)
+- [Distributed Systems (Wikipedia)](https://en.wikipedia.org/wiki/Distributed_computing)
 - [Raft Consensus Algorithm](https://raft.github.io/)
 
 ---
 
-**最后更新**：2025-01-XX **维护者**：项目团队
+**最后更新**：2025-11-03 **维护者**：项目团队

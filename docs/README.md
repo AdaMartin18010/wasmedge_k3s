@@ -158,6 +158,12 @@
   分析方法
 - **[09. 矩阵视角](COGNITIVE/09-matrix-perspective/README.md)** - 云原生技术栈的
   矩阵力学
+- **[10. 技术决策模型](COGNITIVE/10-decision-models/decision-models.md)** - 技术
+  选型决策框架
+- **[10. 快速参考指南](COGNITIVE/10-decision-models/QUICK-REFERENCE.md)** - 设备
+  访问（USB/PCI/GPU）和内核特性决策快速参考
+- **[10. 一致性检查报告](COGNITIVE/10-decision-models/CONSISTENCY-REPORT.md)** -
+  文档一致性检查与 Wikipedia 标准对齐
 
 ### 技术规格堆栈
 
@@ -194,16 +200,18 @@
 
 ### 按场景选择文档
 
-| 场景         | 推荐文档                                                                    | 说明               |
-| ------------ | --------------------------------------------------------------------------- | ------------------ |
-| **快速入门** | [01. 总览](COGNITIVE/01-overview/overview.md)                               | 了解技术栈全貌     |
-| **学习路径** | [00. 认知图谱](COGNITIVE/00-knowledge-map/knowledge-map.md)                 | 规划学习路线       |
-| **架构设计** | [17. 全局架构设计](COGNITIVE/05-architecture-design/architecture-design.md) | 技术选型和架构决策 |
-| **技术选型** | [01. 总览 - 技术决策树](COGNITIVE/01-overview/overview.md#14-技术决策树)    | 根据场景选择技术   |
-| **安装部署** | [15. 安装部署](TECHNICAL/10-installation/installation.md)                   | 快速上手各技术     |
-| **故障排查** | [16. 故障排查](TECHNICAL/11-troubleshooting/troubleshooting.md)             | 解决常见问题       |
-| **性能优化** | [14. 性能基准](COGNITIVE/04-benchmarks/benchmarks.md)                       | 了解性能基线       |
-| **安全合规** | [13. 安全合规](TECHNICAL/09-security-compliance/security-compliance.md)     | 安全最佳实践       |
+| 场景           | 推荐文档                                                                    | 说明                   |
+| -------------- | --------------------------------------------------------------------------- | ---------------------- |
+| **快速入门**   | [01. 总览](COGNITIVE/01-overview/overview.md)                               | 了解技术栈全貌         |
+| **学习路径**   | [00. 认知图谱](COGNITIVE/00-knowledge-map/knowledge-map.md)                 | 规划学习路线           |
+| **架构设计**   | [17. 全局架构设计](COGNITIVE/05-architecture-design/architecture-design.md) | 技术选型和架构决策     |
+| **技术选型**   | [01. 总览 - 技术决策树](COGNITIVE/01-overview/overview.md#14-技术决策树)    | 根据场景选择技术       |
+| **决策参考**   | [10. 快速参考指南](COGNITIVE/10-decision-models/QUICK-REFERENCE.md)         | 设备访问和内核特性决策 |
+| **一致性检查** | [10. 一致性检查报告](COGNITIVE/10-decision-models/CONSISTENCY-REPORT.md)    | 与 Wikipedia 标准对齐  |
+| **安装部署**   | [15. 安装部署](TECHNICAL/10-installation/installation.md)                   | 快速上手各技术         |
+| **故障排查**   | [16. 故障排查](TECHNICAL/11-troubleshooting/troubleshooting.md)             | 解决常见问题           |
+| **性能优化**   | [14. 性能基准](COGNITIVE/04-benchmarks/benchmarks.md)                       | 了解性能基线           |
+| **安全合规**   | [13. 安全合规](TECHNICAL/09-security-compliance/security-compliance.md)     | 安全最佳实践           |
 
 ### 按角色选择文档
 
@@ -211,9 +219,11 @@
 
 - [17. 全局架构设计](COGNITIVE/05-architecture-design/architecture-design.md)
 - [03. 架构与对象模型](COGNITIVE/03-architecture/architecture.md)
-- [19. 形式化理论](COGNITIVE/19-formal-theory/formal-theory.md)
-- [20. 范畴论视角](COGNITIVE/20-category-theory/category-theory.md)
-- [37. 矩阵视角](COGNITIVE/37-matrix-perspective/README.md)
+- [10. 技术决策模型](COGNITIVE/10-decision-models/decision-models.md)
+- [10. 快速参考指南](COGNITIVE/10-decision-models/QUICK-REFERENCE.md)
+- [10. 一致性检查报告](COGNITIVE/10-decision-models/CONSISTENCY-REPORT.md)
+- [09. 矩阵视角](COGNITIVE/09-matrix-perspective/README.md)
+- [08. 范畴论视角](COGNITIVE/08-category-theory/category-theory.md)
 
 #### 开发者
 
@@ -323,11 +333,17 @@
 
 1. 架构设计 →
    [17. 全局架构设计](COGNITIVE/05-architecture-design/architecture-design.md)
-2. 形式化理论 → [19. 形式化理论](COGNITIVE/19-formal-theory/formal-theory.md)
-3. 范畴论 → [20. 范畴论视角](COGNITIVE/20-category-theory/category-theory.md)
-4. 矩阵视角 → [37. 矩阵视角](COGNITIVE/37-matrix-perspective/README.md)
-5. 技术规格深度 →
-   [21-26. 技术规格堆栈](TECHNICAL/21-network-stack/network-stack.md)
+2. 技术决策模型 →
+   [10. 技术决策模型](COGNITIVE/10-decision-models/decision-models.md)
+3. 决策参考指南 →
+   [10. 快速参考指南](COGNITIVE/10-decision-models/QUICK-REFERENCE.md)
+4. 一致性检查 →
+   [10. 一致性检查报告](COGNITIVE/10-decision-models/CONSISTENCY-REPORT.md)
+5. 形式化理论 → [07. 形式化理论](COGNITIVE/07-formal-theory/formal-theory.md)
+6. 范畴论 → [08. 范畴论视角](COGNITIVE/08-category-theory/category-theory.md)
+7. 矩阵视角 → [09. 矩阵视角](COGNITIVE/09-matrix-perspective/README.md)
+8. 技术规格深度 →
+   [12-26. 技术规格堆栈](TECHNICAL/12-network-stack/network-stack.md)
 
 ## 📚 参考资源
 
@@ -343,7 +359,7 @@
 
 ---
 
-**最后更新**：2024
+**最后更新**：2025-11-03
 
 **文档版本**：v1.0
 

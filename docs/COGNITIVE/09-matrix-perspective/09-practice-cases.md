@@ -162,7 +162,8 @@ optimal_stack = ['WasmEdge', 'KEDA', 'OPA-Wasm']
 **场景特征**：
 
 - **模型推理**：需要支持大模型推理
-- **GPU 加速**：需要 GPU 加速支持
+- **GPU 加速**：需要 GPU 加速支持（详见
+  [设备访问决策](../10-decision-models/QUICK-REFERENCE.md#-设备访问需求决策)）
 - **低延迟**：需要低延迟推理
 - **资源优化**：需要优化资源使用
 
@@ -215,6 +216,9 @@ optimal_stack = ['WasmEdge', 'KEDA', 'OPA-Wasm', 'GPU']
   - 运行时（R）：1.0（WasmEdge + GPU 插件）
   - AI 参数（Θ）：1.0（KEDA-AI 预测适配器）
   - 扩缩容（S）：1.0（基于推理负载自动扩缩容）
+- **GPU 决策依据**：容器化 + NVIDIA Container Toolkit（性能>98%，快速部署）
+  - 详见
+    ：[设备访问决策](../10-decision-models/QUICK-REFERENCE.md#-设备访问需求决策)
 
 ## 09.9.4 多租户场景
 
@@ -344,6 +348,12 @@ optimal_stack = ['K8s', 'K3s', 'WasmEdge', 'OPA', 'Capsule']
 
 **参考**：
 
-- [实践案例 - 返回目录](../37-matrix-perspective/README.md)
+- [实践案例 - 返回目录](../09-matrix-perspective/README.md)
 - [矩阵运算与应用：实际的计算方法和应用场景](08-matrix-operations.md)
-- [36. 2025 年技术趋势汇总](../36-2025-trends/2025-trends.md)
+- [36. 2025 年技术趋势汇总](../TECHNICAL/27-2025-trends/2025-trends.md)
+- [10. 技术决策模型](../10-decision-models/decision-models.md) - 技术选型决策框
+  架
+- [10. 快速参考指南](../10-decision-models/QUICK-REFERENCE.md) - 设备访问
+  （USB/PCI/GPU）和内核特性决策快速参考
+- [03. 执行流与调度视角](../03-architecture/execution-flow-scheduling.md) - 从执
+  行流视角分析设备访问和内核特性

@@ -395,13 +395,15 @@ graph TB
 
 ### 00.6.2 场景维度
 
-| 场景           | 编排层            | 运行时          | 存储        | 网络           | 策略     | 特点       |
-| -------------- | ----------------- | --------------- | ----------- | -------------- | -------- | ---------- |
-| **大规模生产** | Kubernetes        | Docker + runc   | etcd        | Calico/Cilium  | OPA      | 成熟稳定   |
-| **边缘计算**   | K3s               | WasmEdge + crun | sqlite      | flannel        | OPA-Wasm | 轻量高效   |
-| **Serverless** | K3s/K8s           | WasmEdge + crun | sqlite/etcd | flannel/Calico | OPA-Wasm | 极速冷启动 |
-| **AI 推理**    | K3s/K8s           | WasmEdge + GPU  | sqlite/etcd | flannel/Calico | OPA-Wasm | GPU 加速   |
-| **混合云**     | K8s 中心+K3s 边缘 | Docker+WasmEdge | etcd+sqlite | Calico+flannel | OPA-Wasm | 统一管理   |
+| 场景             | 编排层            | 运行时                 | 存储        | 网络           | 策略     | 特点                           |
+| ---------------- | ----------------- | ---------------------- | ----------- | -------------- | -------- | ------------------------------ |
+| **大规模生产**   | Kubernetes        | Docker + runc          | etcd        | Calico/Cilium  | OPA      | 成熟稳定                       |
+| **边缘计算**     | K3s               | WasmEdge + crun        | sqlite      | flannel        | OPA-Wasm | 轻量高效                       |
+| **Serverless**   | K3s/K8s           | WasmEdge + crun        | sqlite/etcd | flannel/Calico | OPA-Wasm | 极速冷启动                     |
+| **AI 推理**      | K3s/K8s           | WasmEdge + GPU         | sqlite/etcd | flannel/Calico | OPA-Wasm | GPU 加速（直通，性能>98%）     |
+| **深度学习训练** | K8s               | Container/VM + GPU     | sqlite/etcd | flannel/Calico | OPA      | GPU 直通，多 OS 支持，性能>95% |
+| **多租户 GPU**   | K8s               | VM + GPU (vGPU/SR-IOV) | sqlite/etcd | flannel/Calico | OPA      | GPU 虚拟化，资源共享           |
+| **混合云**       | K8s 中心+K3s 边缘 | Docker+WasmEdge        | etcd+sqlite | Calico+flannel | OPA-Wasm | 统一管理                       |
 
 ### 00.6.3 技术维度
 
@@ -422,15 +424,24 @@ graph LR
 
 ### 00.7.1 技术选型快速参考
 
-| 场景需求       | 推荐技术栈                 | 关键指标        |
-| -------------- | -------------------------- | --------------- |
-| **资源受限**   | K3s + WasmEdge + sqlite    | 内存 < 300MB    |
-| **低延迟**     | WasmEdge + crun            | 启动 < 10ms     |
-| **大规模集群** | Kubernetes + Docker + etcd | 节点 > 1000     |
-| **边缘计算**   | K3s + WasmEdge + flannel   | 离线能力        |
-| **Serverless** | K3s + WasmEdge + HPA       | 冷启动 < 10ms   |
-| **AI 推理**    | K3s + WasmEdge + GPU       | 推理延迟 < 50ms |
-| **策略执行**   | OPA-Wasm + Gatekeeper      | 评估延迟 < 1ms  |
+| 场景需求         | 推荐技术栈                   | 关键指标           | 设备访问           | 内核特性         |
+| ---------------- | ---------------------------- | ------------------ | ------------------ | ---------------- |
+| **资源受限**     | K3s + WasmEdge + sqlite      | 内存 < 300MB       | 无需求             | 无需求           |
+| **低延迟**       | WasmEdge + crun              | 启动 < 10ms        | 无需求             | 无需求           |
+| **大规模集群**   | Kubernetes + Docker + etcd   | 节点 > 1000        | 无需求             | epoll/io_uring   |
+| **边缘计算**     | K3s + WasmEdge + flannel     | 离线能力           | 无需求             | 无需求           |
+| **Serverless**   | K3s + WasmEdge + HPA         | 冷启动 < 10ms      | 无需求             | 无需求           |
+| **AI 推理**      | K3s + WasmEdge + GPU         | 推理延迟 < 50ms    | GPU（直通）        | 无需求           |
+| **深度学习训练** | K8s + VM/Container + GPU     | GPU 性能>95%       | GPU（直通）        | 无需求           |
+| **多租户 GPU**   | K8s + VM + GPU (vGPU/SR-IOV) | GPU 资源共享       | GPU（vGPU/SR-IOV） | 无需求           |
+| **USB/PCI 设备** | K8s + VM（半虚拟化）         | 设备访问           | USB/PCI            | 无需求           |
+| **高并发网络**   | K8s + Container              | epoll 延迟 100ns   | 无需求             | epoll（必需）    |
+| **高性能数据库** | K8s + Container              | io_uring 延迟 50ns | 无需求             | io_uring（必需） |
+| **策略执行**     | OPA-Wasm + Gatekeeper        | 评估延迟 < 1ms     | 无需求             | 无需求           |
+
+> **详细决策指南**：查看
+> [10. 技术决策模型](../10-decision-models/QUICK-REFERENCE.md) - 设备访问
+> （USB/PCI/GPU）和内核特性决策快速参考
 
 ### 00.7.2 性能指标快速参考
 
@@ -445,34 +456,38 @@ graph LR
 
 ### 00.7.3 文档导航快速参考
 
-| 学习目标             | 推荐文档                                                                                   | 核心内容                 |
-| -------------------- | ------------------------------------------------------------------------------------------ | ------------------------ |
-| **快速入门**         | [01-overview](../01-overview/overview.md)                                                  | 技术栈总览               |
-| **核心理念**         | [02-principles](../02-principles/principles.md)                                            | 云原生理念               |
-| **架构设计**         | [03-architecture](../03-architecture/architecture.md)                                      | 架构与对象模型           |
-| **Docker 基础**      | [04-docker](../TECHNICAL/00-docker/docker.md)                                              | Docker 技术规范          |
-| **Kubernetes**       | [05-kubernetes](../TECHNICAL/01-kubernetes/kubernetes.md)                                  | K8s 架构与实践           |
-| **K3s 轻量**         | [06-k3s](../TECHNICAL/02-k3s/k3s.md)                                                       | K3s 轻量级架构           |
-| **WasmEdge**         | [07-wasm-edge](../TECHNICAL/03-wasm-edge/wasmedge.md)                                      | WasmEdge 集成指南        |
-| **运行时**           | [08-orchestration-runtime](../TECHNICAL/04-orchestration-runtime/orchestration-runtime.md) | CRI 与 RuntimeClass      |
-| **供应链**           | [09-oci-supply-chain](../TECHNICAL/05-oci-supply-chain/oci-supply-chain.md)                | OCI 与供应链安全         |
-| **策略即代码**       | [10-policy-opa](../TECHNICAL/06-policy-opa/policy-opa.md)                                  | OPA 策略即代码           |
-| **边缘 Serverless**  | [11-edge-serverless](../TECHNICAL/07-edge-serverless/edge-serverless.md)                   | 边缘与 Serverless        |
-| **AI 推理**          | [12-ai-inference](../TECHNICAL/08-ai-inference/ai-inference.md)                            | AI 推理                  |
-| **安全合规**         | [13-security-compliance](../TECHNICAL/09-security-compliance/security-compliance.md)       | 安全与合规               |
-| **性能基准**         | [04-benchmarks](../04-benchmarks/benchmarks.md)                                            | 性能基线                 |
-| **安装部署**         | [15-installation](../TECHNICAL/10-installation/installation.md)                            | 安装与部署               |
-| **故障排查**         | [16-troubleshooting](../TECHNICAL/11-troubleshooting/troubleshooting.md)                   | 故障排查                 |
-| **架构设计**         | [05-architecture-design](../05-architecture-design/architecture-design.md)                 | 全局架构设计             |
-| **问题解决方案**     | [06-problem-solution-matrix](../06-problem-solution-matrix/problem-solution-matrix.md)     | 技术问题与部署疑难杂症   |
-| **形式化理论**       | [07-formal-theory](../07-formal-theory/formal-theory.md)                                   | 结构同构与关系等价       |
-| **范畴论视角**       | [08-category-theory](../08-category-theory/category-theory.md)                             | 对象、态射与函子         |
-| **矩阵视角**         | [09-matrix-perspective](../09-matrix-perspective/README.md)                                | 矩阵力学与数学建模       |
-| **网络技术规格堆栈** | [21-network-stack](../TECHNICAL/12-network-stack/network-stack.md)                         | 网络技术与规格全面梳理   |
-| **缩写词汇表**       | [22-acronyms-glossary](../TECHNICAL/13-acronyms-glossary/acronyms-glossary.md)             | 所有缩写词定义与关系     |
-| **主题清单**         | [23-theme-inventory](../TECHNICAL/14-theme-inventory/theme-inventory.md)                   | 全面梳理所有主题与子主题 |
-| **存储技术规格堆栈** | [24-storage-stack](../TECHNICAL/15-storage-stack/storage-stack.md)                         | 存储技术与规格全面梳理   |
-| **监控与可观测性**   | [25-observability](../TECHNICAL/16-observability/observability.md)                         | Metrics/Logging/Tracing  |
+| 学习目标             | 推荐文档                                                                                   | 核心内容                        |
+| -------------------- | ------------------------------------------------------------------------------------------ | ------------------------------- |
+| **快速入门**         | [01-overview](../01-overview/overview.md)                                                  | 技术栈总览                      |
+| **核心理念**         | [02-principles](../02-principles/principles.md)                                            | 云原生理念                      |
+| **架构设计**         | [03-architecture](../03-architecture/architecture.md)                                      | 架构与对象模型                  |
+| **执行流与调度**     | [03-execution-flow-scheduling](../03-architecture/execution-flow-scheduling.md)            | 执行流与调度视角                |
+| **技术选型决策**     | [10-decision-models](../10-decision-models/decision-models.md)                             | 技术决策模型与权衡框架          |
+| **快速参考指南**     | [10-quick-reference](../10-decision-models/QUICK-REFERENCE.md)                             | 设备访问和内核特性决策          |
+| **一致性检查报告**   | [10-consistency-report](../10-decision-models/CONSISTENCY-REPORT.md)                       | 文档一致性检查与 Wikipedia 对齐 |
+| **Docker 基础**      | [04-docker](../TECHNICAL/00-docker/docker.md)                                              | Docker 技术规范                 |
+| **Kubernetes**       | [05-kubernetes](../TECHNICAL/01-kubernetes/kubernetes.md)                                  | K8s 架构与实践                  |
+| **K3s 轻量**         | [06-k3s](../TECHNICAL/02-k3s/k3s.md)                                                       | K3s 轻量级架构                  |
+| **WasmEdge**         | [07-wasm-edge](../TECHNICAL/03-wasm-edge/wasmedge.md)                                      | WasmEdge 集成指南               |
+| **运行时**           | [08-orchestration-runtime](../TECHNICAL/04-orchestration-runtime/orchestration-runtime.md) | CRI 与 RuntimeClass             |
+| **供应链**           | [09-oci-supply-chain](../TECHNICAL/05-oci-supply-chain/oci-supply-chain.md)                | OCI 与供应链安全                |
+| **策略即代码**       | [10-policy-opa](../TECHNICAL/06-policy-opa/policy-opa.md)                                  | OPA 策略即代码                  |
+| **边缘 Serverless**  | [11-edge-serverless](../TECHNICAL/07-edge-serverless/edge-serverless.md)                   | 边缘与 Serverless               |
+| **AI 推理**          | [12-ai-inference](../TECHNICAL/08-ai-inference/ai-inference.md)                            | AI 推理                         |
+| **安全合规**         | [13-security-compliance](../TECHNICAL/09-security-compliance/security-compliance.md)       | 安全与合规                      |
+| **性能基准**         | [04-benchmarks](../04-benchmarks/benchmarks.md)                                            | 性能基线                        |
+| **安装部署**         | [15-installation](../TECHNICAL/10-installation/installation.md)                            | 安装与部署                      |
+| **故障排查**         | [16-troubleshooting](../TECHNICAL/11-troubleshooting/troubleshooting.md)                   | 故障排查                        |
+| **架构设计**         | [05-architecture-design](../05-architecture-design/architecture-design.md)                 | 全局架构设计                    |
+| **问题解决方案**     | [06-problem-solution-matrix](../06-problem-solution-matrix/problem-solution-matrix.md)     | 技术问题与部署疑难杂症          |
+| **形式化理论**       | [07-formal-theory](../07-formal-theory/formal-theory.md)                                   | 结构同构与关系等价              |
+| **范畴论视角**       | [08-category-theory](../08-category-theory/category-theory.md)                             | 对象、态射与函子                |
+| **矩阵视角**         | [09-matrix-perspective](../09-matrix-perspective/README.md)                                | 矩阵力学与数学建模              |
+| **网络技术规格堆栈** | [21-network-stack](../TECHNICAL/12-network-stack/network-stack.md)                         | 网络技术与规格全面梳理          |
+| **缩写词汇表**       | [22-acronyms-glossary](../TECHNICAL/13-acronyms-glossary/acronyms-glossary.md)             | 所有缩写词定义与关系            |
+| **主题清单**         | [23-theme-inventory](../TECHNICAL/14-theme-inventory/theme-inventory.md)                   | 全面梳理所有主题与子主题        |
+| **存储技术规格堆栈** | [24-storage-stack](../TECHNICAL/15-storage-stack/storage-stack.md)                         | 存储技术与规格全面梳理          |
+| **监控与可观测性**   | [25-observability](../TECHNICAL/16-observability/observability.md)                         | Metrics/Logging/Tracing         |
 
 <!-- cSpell:ignore cicd containerd runc crun runwasi wasmedge WasmEdge WASI OCI Kubernetes K8s K3s RuntimeClass etcd sqlite CRI Pod Service Namespace Cgroups -->
 
@@ -554,5 +569,11 @@ $$
 > - **快速认知**：查看 [0.2 核心思维导图](#002-核心思维导图)
 > - **概念查询**：查看 [0.3 核心概念定义](#003-核心概念定义)
 > - **技术选型**：查看 [0.7.1 技术选型快速参考](#0071-技术选型快速参考)
+> - **设备访问决策**：查看
+>   [10. 技术决策模型](../10-decision-models/QUICK-REFERENCE.md) - 设备访问
+>   （USB/PCI/GPU）和内核特性决策快速参考
+> - **一致性检查**：查看
+>   [10. 一致性检查报告](../10-decision-models/CONSISTENCY-REPORT.md) - 确保所有
+>   技术定义与 Wikipedia 标准对齐
 > - **学习路径**：查看 [0.5 认知路径](#005-认知路径)
 > - **详细文档**：查看 [0.7.3 文档导航快速参考](#0073-文档导航快速参考)

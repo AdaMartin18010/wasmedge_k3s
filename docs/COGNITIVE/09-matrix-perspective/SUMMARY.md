@@ -236,6 +236,11 @@ $$\min_{\mathbf{A}} \text{Cost}(\mathbf{A}) \quad \text{s.t.} \quad \text{Score}
 - 运行时（R）：1.0（GPU 支持）
 - AI 参数（Θ）：1.0（AI 优化）
 
+**GPU 决策依据**：容器化 + NVIDIA Container Toolkit（性能>98%，快速部署）
+
+- 详见
+  ：[设备访问决策](../10-decision-models/QUICK-REFERENCE.md#-设备访问需求决策)
+
 ### 多租户场景
 
 **技术栈**：K8s + Capsule + OPA + Prometheus Tenant
@@ -285,6 +290,10 @@ $$\min_{\mathbf{A}} \text{Cost}(\mathbf{A}) \quad \text{s.t.} \quad \text{Score}
 1. **[快速参考指南](QUICK-REFERENCE.md)** - 了解核心概念和公式
 2. **[核心概念矩阵](01-core-concepts.md)** - 理解 12 维概念向量
 3. **[技术链矩阵序列](06-tech-chain-sequence.md)** - 理解技术链演进
+4. **[技术决策模型](../10-decision-models/decision-models.md)** - 技术选型决策框
+   架
+5. **[设备访问决策](../10-decision-models/QUICK-REFERENCE.md)** - 设备访问
+   （USB/PCI/GPU）和内核特性决策快速参考
 
 ### 进阶路径
 
@@ -340,6 +349,15 @@ $$\min_{\mathbf{A}} \text{Cost}(\mathbf{A}) \quad \text{s.t.} \quad \text{Score}
 - [矩阵运算与应用](08-matrix-operations.md)
 - [实践案例](09-practice-cases.md)
 - [参考链接](REFERENCES.md)
+
+## 🔗 相关文档
+
+- [10. 技术决策模型](../10-decision-models/decision-models.md) - 技术选型决策框
+  架
+- [10. 快速参考指南](../10-decision-models/QUICK-REFERENCE.md) - 设备访问
+  （USB/PCI/GPU）和内核特性决策快速参考
+- [03. 执行流与调度视角](../03-architecture/execution-flow-scheduling.md) - 从执
+  行流视角分析设备访问和内核特性
 
 ---
 

@@ -101,3 +101,7 @@ $$\text{技术链} = \text{Docker} \rightarrow \text{K8s} \rightarrow \text{K3s}
 - [06. 问题-解决方案矩阵](../06-problem-solution-matrix/problem-solution-matrix.md) -
   问题解决方案矩阵
 - [07. 形式化理论](../07-formal-theory/formal-theory.md) - 形式化理论基础
+- [10. 技术决策模型](../10-decision-models/decision-models.md) - 技术选型决策框
+  架
+- [10. 快速参考指南](../10-decision-models/QUICK-REFERENCE.md) - 设备访问
+  （USB/PCI/GPU）和内核特性决策快速参考
