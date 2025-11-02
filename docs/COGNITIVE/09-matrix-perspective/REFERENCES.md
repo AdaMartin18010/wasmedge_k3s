@@ -37,7 +37,7 @@
 - **[06. 问题-解决方案矩阵](../06-problem-solution-matrix/problem-solution-matrix.md)** -
   问题解决方案矩阵
 - **[07. 形式化理论](../07-formal-theory/formal-theory.md)** - 形式化理论基础
-- **[36. 2025 年技术趋势汇总](../../TECHNICAL/27-2025-trends/2025-trends.md)** -
+- **[27. 2025 年技术趋势汇总](../../TECHNICAL/27-2025-trends/2025-trends.md)** -
   最新技术趋势
 
 ### 矩阵视角文档
@@ -156,5 +156,5 @@
 
 **参考**：
 
-- [参考链接 - 返回目录](../37-matrix-perspective/README.md)
+- [参考链接 - 返回目录](../09-matrix-perspective/README.md)
 - [矩阵视角文档主索引](README.md)

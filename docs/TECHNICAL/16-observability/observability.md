@@ -1,57 +1,57 @@
-# 25. 监控与可观测性：全面梳理
+# 16. 监控与可观测性：全面梳理
 
 ## 目录
 
 - [目录](#目录)
-- [25.1 文档定位](#251-文档定位)
-- [25.2 可观测性技术栈全景](#252-可观测性技术栈全景)
-  - [25.2.1 可观测性三大支柱](#2521-可观测性三大支柱)
-  - [25.2.2 技术组件矩阵](#2522-技术组件矩阵)
-  - [25.2.3 技术栈组合](#2523-技术栈组合)
-- [25.3 Metrics 监控技术规格](#253-metrics-监控技术规格)
-  - [25.3.1 Prometheus 规格](#2531-prometheus-规格)
-  - [25.3.2 metrics-server 规格](#2532-metrics-server-规格)
-  - [25.3.3 Node Exporter 规格](#2533-node-exporter-规格)
-  - [25.3.4 kube-state-metrics 规格](#2534-kube-state-metrics-规格)
-  - [25.3.5 Metrics 工具对比](#2535-metrics-工具对比)
-- [25.4 Logging 日志技术规格](#254-logging-日志技术规格)
-  - [25.4.1 Loki 规格](#2541-loki-规格)
-  - [25.4.2 Fluentd 规格](#2542-fluentd-规格)
-  - [25.4.3 Fluent Bit 规格](#2543-fluent-bit-规格)
-  - [25.4.4 Promtail 规格](#2544-promtail-规格)
-  - [25.4.5 ELK Stack 规格](#2545-elk-stack-规格)
-  - [25.4.6 Logging 工具对比](#2546-logging-工具对比)
-- [25.5 Tracing 链路追踪技术规格](#255-tracing-链路追踪技术规格)
-  - [25.5.1 OpenTelemetry 规格](#2551-opentelemetry-规格)
-  - [25.5.2 Jaeger 规格](#2552-jaeger-规格)
-  - [25.5.3 Tempo 规格](#2553-tempo-规格)
-  - [25.5.4 Zipkin 规格](#2554-zipkin-规格)
-  - [25.5.5 Tracing 工具对比](#2555-tracing-工具对比)
-- [25.6 可视化技术规格](#256-可视化技术规格)
-  - [25.6.1 Grafana 规格](#2561-grafana-规格)
-  - [25.6.2 Prometheus UI 规格](#2562-prometheus-ui-规格)
-  - [25.6.3 Kibana 规格](#2563-kibana-规格)
-  - [25.6.4 可视化工具对比](#2564-可视化工具对比)
-- [25.7 告警技术规格](#257-告警技术规格)
-  - [25.7.1 Alertmanager 规格](#2571-alertmanager-规格)
-  - [25.7.2 PrometheusRule 规格](#2572-prometheusrule-规格)
-  - [25.7.3 告警路由规则](#2573-告警路由规则)
-  - [25.7.4 告警通知渠道](#2574-告警通知渠道)
-- [25.8 可观测性技术栈组合方案](#258-可观测性技术栈组合方案)
-  - [25.8.1 小规模集群组合](#2581-小规模集群组合)
-  - [25.8.2 大规模集群组合](#2582-大规模集群组合)
-  - [25.8.3 边缘计算组合](#2583-边缘计算组合)
-  - [25.8.4 完整可观测性组合](#2584-完整可观测性组合)
-- [25.9 可观测性接口规范](#259-可观测性接口规范)
-  - [25.9.1 Prometheus 指标格式](#2591-prometheus-指标格式)
-  - [25.9.2 OpenTelemetry 标准](#2592-opentelemetry-标准)
-  - [25.9.3 日志格式规范](#2593-日志格式规范)
-  - [25.9.4 追踪格式规范](#2594-追踪格式规范)
-- [25.10 参考](#2510-参考)
+- [16.1 文档定位](#161-文档定位)
+- [16.2 可观测性技术栈全景](#162-可观测性技术栈全景)
+  - [16.2.1 可观测性三大支柱](#1621-可观测性三大支柱)
+  - [16.2.2 技术组件矩阵](#1622-技术组件矩阵)
+  - [16.2.3 技术栈组合](#1623-技术栈组合)
+- [16.3 Metrics 监控技术规格](#163-metrics-监控技术规格)
+  - [16.3.1 Prometheus 规格](#1631-prometheus-规格)
+  - [16.3.2 metrics-server 规格](#1632-metrics-server-规格)
+  - [16.3.3 Node Exporter 规格](#1633-node-exporter-规格)
+  - [16.3.4 kube-state-metrics 规格](#1634-kube-state-metrics-规格)
+  - [16.3.5 Metrics 工具对比](#1635-metrics-工具对比)
+- [16.4 Logging 日志技术规格](#164-logging-日志技术规格)
+  - [16.4.1 Loki 规格](#1641-loki-规格)
+  - [16.4.2 Fluentd 规格](#1642-fluentd-规格)
+  - [16.4.3 Fluent Bit 规格](#1643-fluent-bit-规格)
+  - [16.4.4 Promtail 规格](#1644-promtail-规格)
+  - [16.4.5 ELK Stack 规格](#1645-elk-stack-规格)
+  - [16.4.6 Logging 工具对比](#1646-logging-工具对比)
+- [16.5 Tracing 链路追踪技术规格](#165-tracing-链路追踪技术规格)
+  - [16.5.1 OpenTelemetry 规格](#1651-opentelemetry-规格)
+  - [16.5.2 Jaeger 规格](#1652-jaeger-规格)
+  - [16.5.3 Tempo 规格](#1653-tempo-规格)
+  - [16.5.4 Zipkin 规格](#1654-zipkin-规格)
+  - [16.5.5 Tracing 工具对比](#1655-tracing-工具对比)
+- [16.6 可视化技术规格](#166-可视化技术规格)
+  - [16.6.1 Grafana 规格](#1661-grafana-规格)
+  - [16.6.2 Prometheus UI 规格](#1662-prometheus-ui-规格)
+  - [16.6.3 Kibana 规格](#1663-kibana-规格)
+  - [16.6.4 可视化工具对比](#1664-可视化工具对比)
+- [16.7 告警技术规格](#167-告警技术规格)
+  - [16.7.1 Alertmanager 规格](#1671-alertmanager-规格)
+  - [16.7.2 PrometheusRule 规格](#1672-prometheusrule-规格)
+  - [16.7.3 告警路由规则](#1673-告警路由规则)
+  - [16.7.4 告警通知渠道](#1674-告警通知渠道)
+- [16.8 可观测性技术栈组合方案](#168-可观测性技术栈组合方案)
+  - [16.8.1 小规模集群组合](#1681-小规模集群组合)
+  - [16.8.2 大规模集群组合](#1682-大规模集群组合)
+  - [16.8.3 边缘计算组合](#1683-边缘计算组合)
+  - [16.8.4 完整可观测性组合](#1684-完整可观测性组合)
+- [16.9 可观测性接口规范](#169-可观测性接口规范)
+  - [16.9.1 Prometheus 指标格式](#1691-prometheus-指标格式)
+  - [16.9.2 OpenTelemetry 标准](#1692-opentelemetry-标准)
+  - [16.9.3 日志格式规范](#1693-日志格式规范)
+  - [16.9.4 追踪格式规范](#1694-追踪格式规范)
+- [16.10 参考](#1610-参考)
 
 ---
 
-## 25.1 文档定位
+## 16.1 文档定位
 
 本文档全面梳理云原生容器技术栈中的监控与可观测性技术、规格和堆栈组合方案，包括
 Metrics（指标）、Logging（日志）、Tracing（链路追踪）三大支柱，以及相关的可视化
@@ -68,9 +68,9 @@ Metrics（指标）、Logging（日志）、Tracing（链路追踪）三大支�
 - **可观测性技术栈组合方案**：不同场景的可观测性技术栈组合
 - **可观测性接口规范**：Prometheus、OpenTelemetry、日志、追踪格式规范
 
-## 25.2 可观测性技术栈全景
+## 16.2 可观测性技术栈全景
 
-### 25.2.1 可观测性三大支柱
+### 16.2.1 可观测性三大支柱
 
 **可观测性三大支柱**：
 
@@ -119,7 +119,7 @@ graph TB
 | **Logging** | 事件日志，记录系统行为 | 问题排查、审计追踪 | Loki、Fluentd、ELK         |
 | **Tracing** | 请求追踪，跟踪请求链路 | 性能优化、问题定位 | OpenTelemetry、Jaeger      |
 
-### 25.2.2 技术组件矩阵
+### 16.2.2 技术组件矩阵
 
 **可观测性技术组件矩阵**：
 
@@ -144,7 +144,7 @@ graph TB
 | **告警**    | Alertmanager       | Prometheus 告警管理           | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
 |             | PrometheusRule     | Prometheus 告警规则           | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
 
-### 25.2.3 技术栈组合
+### 16.2.3 技术栈组合
 
 **可观测性技术栈组合方案**：
 
@@ -155,9 +155,9 @@ graph TB
 | **边缘计算**     | Prometheus | Fluent Bit | OpenTelemetry        | Grafana | Alertmanager |
 | **完整可观测性** | Prometheus | Loki/ELK   | OpenTelemetry+Jaeger | Grafana | Alertmanager |
 
-## 25.3 Metrics 监控技术规格
+## 16.3 Metrics 监控技术规格
 
-### 25.3.1 Prometheus 规格
+### 16.3.1 Prometheus 规格
 
 **Prometheus 规格**：
 
@@ -219,7 +219,7 @@ data:
 | **查询延迟** | < 100ms（大多数查询） |
 | **采集延迟** | < 5s                  |
 
-### 25.3.2 metrics-server 规格
+### 16.3.2 metrics-server 规格
 
 **metrics-server 规格**：
 
@@ -273,7 +273,7 @@ spec:
             - --kubelet-preferred-address-types=InternalIP
 ```
 
-### 25.3.3 Node Exporter 规格
+### 16.3.3 Node Exporter 规格
 
 **Node Exporter 规格**：
 
@@ -301,7 +301,7 @@ spec:
 - **网络指标**：网络流量、连接数
 - **系统指标**：进程数、文件描述符
 
-### 25.3.4 kube-state-metrics 规格
+### 16.3.4 kube-state-metrics 规格
 
 **kube-state-metrics 规格**：
 
@@ -327,7 +327,7 @@ spec:
 - **Service 状态**：服务类型、端口
 - **Node 状态**：节点条件、容量
 
-### 25.3.5 Metrics 工具对比
+### 16.3.5 Metrics 工具对比
 
 **Metrics 工具对比矩阵**：
 
@@ -338,9 +338,9 @@ spec:
 | **Node Exporter**      | 节点指标   | 系统指标        | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | 系统监控     |
 | **kube-state-metrics** | 对象状态   | Kubernetes 状态 | ⭐⭐⭐⭐   | ⭐⭐⭐⭐⭐ | 集群状态监控 |
 
-## 25.4 Logging 日志技术规格
+## 16.4 Logging 日志技术规格
 
-### 25.4.1 Loki 规格
+### 16.4.1 Loki 规格
 
 **Loki 规格**：
 
@@ -411,7 +411,7 @@ data:
 | **存储效率** | 比 ELK 节省 10-40% 空间 |
 | **查询性能** | 快速标签查询            |
 
-### 25.4.2 Fluentd 规格
+### 16.4.2 Fluentd 规格
 
 **Fluentd 规格**：
 
@@ -438,7 +438,7 @@ data:
 - **输出插件**：Elasticsearch、S3、Kafka、Prometheus
 - **过滤插件**：解析、转换、路由
 
-### 25.4.3 Fluent Bit 规格
+### 16.4.3 Fluent Bit 规格
 
 **Fluent Bit 规格**：
 
@@ -467,7 +467,7 @@ data:
 | **处理能力** | 100K+ 事件/秒 |
 | **延迟**     | < 1ms         |
 
-### 25.4.4 Promtail 规格
+### 16.4.4 Promtail 规格
 
 **Promtail 规格**：
 
@@ -487,7 +487,7 @@ data:
 - **GitHub Stars**：2K+
 - **生产验证**：✅ 与 Loki 配套使用
 
-### 25.4.5 ELK Stack 规格
+### 16.4.5 ELK Stack 规格
 
 **ELK Stack 规格**：
 
@@ -514,7 +514,7 @@ data:
 3. **Kibana**：可视化和分析
 4. **Beats**：轻量级数据采集器（可选）
 
-### 25.4.6 Logging 工具对比
+### 16.4.6 Logging 工具对比
 
 **Logging 工具对比矩阵**：
 
@@ -526,9 +526,9 @@ data:
 | **Promtail**   | Loki 专用    | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐   | ⭐⭐⭐⭐   | 与 Loki 配套     |
 | **ELK Stack**  | 完整日志方案 | ⭐⭐       | ⭐⭐⭐⭐   | ⭐⭐⭐⭐⭐ | 企业级日志分析   |
 
-## 25.5 Tracing 链路追踪技术规格
+## 16.5 Tracing 链路追踪技术规格
 
-### 25.5.1 OpenTelemetry 规格
+### 16.5.1 OpenTelemetry 规格
 
 **OpenTelemetry 规格**：
 
@@ -596,7 +596,7 @@ data:
           exporters: [prometheus]
 ```
 
-### 25.5.2 Jaeger 规格
+### 16.5.2 Jaeger 规格
 
 **Jaeger 规格**：
 
@@ -625,7 +625,7 @@ data:
 4. **Jaeger UI**：追踪数据可视化
 5. **Storage Backend**：Elasticsearch、Cassandra、Badger
 
-### 25.5.3 Tempo 规格
+### 16.5.3 Tempo 规格
 
 **Tempo 规格**：
 
@@ -645,7 +645,7 @@ data:
 - **GitHub Stars**：4K+
 - **生产验证**：✅ 中等规模使用
 
-### 25.5.4 Zipkin 规格
+### 16.5.4 Zipkin 规格
 
 **Zipkin 规格**：
 
@@ -664,7 +664,7 @@ data:
 - **GitHub Stars**：16K+
 - **生产验证**：✅ 广泛使用
 
-### 25.5.5 Tracing 工具对比
+### 16.5.5 Tracing 工具对比
 
 **Tracing 工具对比矩阵**：
 
@@ -675,9 +675,9 @@ data:
 | **Tempo**         | Grafana 追踪后端 | 对象存储     | ⭐⭐⭐⭐   | ⭐⭐⭐⭐   | 与 Grafana 集成 |
 | **Zipkin**        | 轻量级追踪       | ES/Cassandra | ⭐⭐⭐⭐   | ⭐⭐⭐⭐   | Spring Cloud    |
 
-## 25.6 可视化技术规格
+## 16.6 可视化技术规格
 
-### 25.6.1 Grafana 规格
+### 16.6.1 Grafana 规格
 
 **Grafana 规格**：
 
@@ -731,7 +731,7 @@ data:
         url: http://jaeger-query:16686
 ```
 
-### 25.6.2 Prometheus UI 规格
+### 16.6.2 Prometheus UI 规格
 
 **Prometheus UI 规格**：
 
@@ -752,7 +752,7 @@ data:
 - **Status**：Prometheus 状态
 - **Targets**：抓取目标状态
 
-### 25.6.3 Kibana 规格
+### 16.6.3 Kibana 规格
 
 **Kibana 规格**：
 
@@ -772,7 +772,7 @@ data:
 - **GitHub Stars**：20K+
 - **生产验证**：✅ 大规模生产使用
 
-### 25.6.4 可视化工具对比
+### 16.6.4 可视化工具对比
 
 **可视化工具对比矩阵**：
 
@@ -782,9 +782,9 @@ data:
 | **Prometheus UI** | Prometheus 内置      | ⭐⭐       | ⭐⭐⭐     | ⭐⭐⭐⭐⭐ | 简单指标查询 |
 | **Kibana**        | Elasticsearch 可视化 | ⭐⭐⭐     | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ELK Stack    |
 
-## 25.7 告警技术规格
+## 16.7 告警技术规格
 
-### 25.7.1 Alertmanager 规格
+### 16.7.1 Alertmanager 规格
 
 **Alertmanager 规格**：
 
@@ -836,7 +836,7 @@ data:
           - url: 'http://webhook:8080/alerts'
 ```
 
-### 25.7.2 PrometheusRule 规格
+### 16.7.2 PrometheusRule 规格
 
 **PrometheusRule 规格**：
 
@@ -872,7 +872,7 @@ spec:
             description: "Memory usage is above 80%"
 ```
 
-### 25.7.3 告警路由规则
+### 16.7.3 告警路由规则
 
 **告警路由规则**：
 
@@ -885,7 +885,7 @@ spec:
 | **按时间路由**     | 根据时间路由     | 工作时间、非工作时间 |
 | **按集群路由**     | 根据集群路由     | 多集群环境           |
 
-### 25.7.4 告警通知渠道
+### 16.7.4 告警通知渠道
 
 **告警通知渠道**：
 
@@ -897,9 +897,9 @@ spec:
 | **PagerDuty**     | PagerDuty 通知 | 值班系统   |
 | **钉钉/企业微信** | 企业 IM 通知   | 国内企业   |
 
-## 25.8 可观测性技术栈组合方案
+## 16.8 可观测性技术栈组合方案
 
-### 25.8.1 小规模集群组合
+### 16.8.1 小规模集群组合
 
 **小规模集群可观测性组合**：
 
@@ -918,7 +918,7 @@ spec:
 - ✅ 易于管理
 - ✅ 完整可观测性
 
-### 25.8.2 大规模集群组合
+### 16.8.2 大规模集群组合
 
 **大规模集群可观测性组合**：
 
@@ -937,7 +937,7 @@ spec:
 - ✅ 完整可观测性
 - ⚠️ 资源占用较高
 
-### 25.8.3 边缘计算组合
+### 16.8.3 边缘计算组合
 
 **边缘计算可观测性组合**：
 
@@ -956,7 +956,7 @@ spec:
 - ✅ 支持离线模式
 - ⚠️ 功能可能受限
 
-### 25.8.4 完整可观测性组合
+### 16.8.4 完整可观测性组合
 
 **完整可观测性组合**：
 
@@ -975,9 +975,9 @@ spec:
 - ✅ 完整的告警体系
 - ✅ 生产级可观测性
 
-## 25.9 可观测性接口规范
+## 16.9 可观测性接口规范
 
-### 25.9.1 Prometheus 指标格式
+### 16.9.1 Prometheus 指标格式
 
 **Prometheus 指标格式**：
 
@@ -1001,7 +1001,7 @@ container_memory_usage_bytes{container="app"} 536870912 1234567890
 - **Histogram**：直方图，分桶统计
 - **Summary**：摘要，分位数统计
 
-### 25.9.2 OpenTelemetry 标准
+### 16.9.2 OpenTelemetry 标准
 
 **OpenTelemetry 标准**：
 
@@ -1020,7 +1020,7 @@ container_memory_usage_bytes{container="app"} 536870912 1234567890
 - **Jaeger**：Jaeger 格式
 - **Zipkin**：Zipkin 格式
 
-### 25.9.3 日志格式规范
+### 16.9.3 日志格式规范
 
 **日志格式规范**：
 
@@ -1045,7 +1045,7 @@ container_memory_usage_bytes{container="app"} 536870912 1234567890
 - **ERROR**：错误信息
 - **FATAL**：致命错误
 
-### 25.9.4 追踪格式规范
+### 16.9.4 追踪格式规范
 
 **追踪格式规范**：
 
@@ -1057,7 +1057,7 @@ container_memory_usage_bytes{container="app"} 536870912 1234567890
 - **Attributes**：属性
 - **Events**：事件
 
-## 25.10 参考
+## 16.10 参考
 
 - [Prometheus 官方文档](https://prometheus.io/docs/)
 - [Grafana 官方文档](https://grafana.com/docs/)

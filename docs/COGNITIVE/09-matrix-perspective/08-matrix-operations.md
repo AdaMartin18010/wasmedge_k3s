@@ -418,6 +418,6 @@ print(f"\n总成本：{cost} MB")
 
 **参考**：
 
-- [矩阵运算与应用 - 返回目录](../37-matrix-perspective/README.md)
+- [矩阵运算与应用 - 返回目录](../09-matrix-perspective/README.md)
 - [AI 参数矩阵：AI 可学习参数矩阵](07-ai-parameters.md)
 - [实践案例：边缘计算、Serverless、AI 推理、多租户等场景的矩阵分析](09-practice-cases.md)

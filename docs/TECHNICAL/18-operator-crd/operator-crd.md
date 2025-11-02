@@ -1,56 +1,56 @@
-# 27. Operator 和 CRD：全面梳理
+# 18. Operator 和 CRD：全面梳理
 
 ## 目录
 
 - [目录](#目录)
-- [27.1 文档定位](#271-文档定位)
-- [27.2 Operator 技术栈全景](#272-operator-技术栈全景)
-  - [27.2.1 Operator 模式](#2721-operator-模式)
-  - [27.2.2 技术组件矩阵](#2722-技术组件矩阵)
-  - [27.2.3 技术栈组合](#2723-技术栈组合)
-- [27.3 CRD 技术规格](#273-crd-技术规格)
-  - [27.3.1 CRD 规范](#2731-crd-规范)
-  - [27.3.2 CRD 定义规格](#2732-crd-定义规格)
-  - [27.3.3 CRD 验证规格](#2733-crd-验证规格)
-  - [27.3.4 CRD 版本管理](#2734-crd-版本管理)
-  - [27.3.5 CRD 最佳实践](#2735-crd-最佳实践)
-- [27.4 Operator SDK 技术规格](#274-operator-sdk-技术规格)
-  - [27.4.1 Operator SDK 规范](#2741-operator-sdk-规范)
-  - [27.4.2 Helm Operator 规格](#2742-helm-operator-规格)
-  - [27.4.3 Ansible Operator 规格](#2743-ansible-operator-规格)
-  - [27.4.4 Go Operator 规格](#2744-go-operator-规格)
-  - [27.4.5 Operator SDK 对比](#2745-operator-sdk-对比)
-- [27.5 Kubebuilder 技术规格](#275-kubebuilder-技术规格)
-  - [27.5.1 Kubebuilder 规范](#2751-kubebuilder-规范)
-  - [27.5.2 项目结构](#2752-项目结构)
-  - [27.5.3 Controller 开发](#2753-controller-开发)
-  - [27.5.4 Webhook 开发](#2754-webhook-开发)
-- [27.6 常用 Operator 案例](#276-常用-operator-案例)
-  - [27.6.1 Prometheus Operator](#2761-prometheus-operator)
-  - [27.6.2 cert-manager Operator](#2762-cert-manager-operator)
-  - [27.6.3 Istio Operator](#2763-istio-operator)
-  - [27.6.4 Elasticsearch Operator](#2764-elasticsearch-operator)
-  - [27.6.5 Operator 对比](#2765-operator-对比)
-- [27.7 Controller 模式技术规格](#277-controller-模式技术规格)
-  - [27.7.1 Controller 架构](#2771-controller-架构)
-  - [27.7.2 Informer 模式](#2772-informer-模式)
-  - [27.7.3 Work Queue 模式](#2773-work-queue-模式)
-  - [27.7.4 Reconcile 循环](#2774-reconcile-循环)
-- [27.8 Webhook 技术规格](#278-webhook-技术规格)
-  - [27.8.1 Admission Webhook](#2781-admission-webhook)
-  - [27.8.2 Mutating Webhook](#2782-mutating-webhook)
-  - [27.8.3 Validating Webhook](#2783-validating-webhook)
-  - [27.8.4 Conversion Webhook](#2784-conversion-webhook)
-  - [27.8.5 Webhook 最佳实践](#2785-webhook-最佳实践)
-- [27.9 Operator 技术栈组合方案](#279-operator-技术栈组合方案)
-  - [27.9.1 小规模集群组合](#2791-小规模集群组合)
-  - [27.9.2 大规模集群组合](#2792-大规模集群组合)
-  - [27.9.3 自定义 Operator 组合](#2793-自定义-operator-组合)
-- [27.10 参考](#2710-参考)
+- [18.1 文档定位](#181-文档定位)
+- [18.2 Operator 技术栈全景](#182-operator-技术栈全景)
+  - [18.2.1 Operator 模式](#1821-operator-模式)
+  - [18.2.2 技术组件矩阵](#1822-技术组件矩阵)
+  - [18.2.3 技术栈组合](#1823-技术栈组合)
+- [18.3 CRD 技术规格](#183-crd-技术规格)
+  - [18.3.1 CRD 规范](#1831-crd-规范)
+  - [18.3.2 CRD 定义规格](#1832-crd-定义规格)
+  - [18.3.3 CRD 验证规格](#1833-crd-验证规格)
+  - [18.3.4 CRD 版本管理](#1834-crd-版本管理)
+  - [18.3.5 CRD 最佳实践](#1835-crd-最佳实践)
+- [18.4 Operator SDK 技术规格](#184-operator-sdk-技术规格)
+  - [18.4.1 Operator SDK 规范](#1841-operator-sdk-规范)
+  - [18.4.2 Helm Operator 规格](#1842-helm-operator-规格)
+  - [18.4.3 Ansible Operator 规格](#1843-ansible-operator-规格)
+  - [18.4.4 Go Operator 规格](#1844-go-operator-规格)
+  - [18.4.5 Operator SDK 对比](#1845-operator-sdk-对比)
+- [18.5 Kubebuilder 技术规格](#185-kubebuilder-技术规格)
+  - [18.5.1 Kubebuilder 规范](#1851-kubebuilder-规范)
+  - [18.5.2 项目结构](#1852-项目结构)
+  - [18.5.3 Controller 开发](#1853-controller-开发)
+  - [18.5.4 Webhook 开发](#1854-webhook-开发)
+- [18.6 常用 Operator 案例](#186-常用-operator-案例)
+  - [18.6.1 Prometheus Operator](#1861-prometheus-operator)
+  - [18.6.2 cert-manager Operator](#1862-cert-manager-operator)
+  - [18.6.3 Istio Operator](#1863-istio-operator)
+  - [18.6.4 Elasticsearch Operator](#1864-elasticsearch-operator)
+  - [18.6.5 Operator 对比](#1865-operator-对比)
+- [18.7 Controller 模式技术规格](#187-controller-模式技术规格)
+  - [18.7.1 Controller 架构](#1871-controller-架构)
+  - [18.7.2 Informer 模式](#1872-informer-模式)
+  - [18.7.3 Work Queue 模式](#1873-work-queue-模式)
+  - [18.7.4 Reconcile 循环](#1874-reconcile-循环)
+- [18.8 Webhook 技术规格](#188-webhook-技术规格)
+  - [18.8.1 Admission Webhook](#1881-admission-webhook)
+  - [18.8.2 Mutating Webhook](#1882-mutating-webhook)
+  - [18.8.3 Validating Webhook](#1883-validating-webhook)
+  - [18.8.4 Conversion Webhook](#1884-conversion-webhook)
+  - [18.8.5 Webhook 最佳实践](#1885-webhook-最佳实践)
+- [18.9 Operator 技术栈组合方案](#189-operator-技术栈组合方案)
+  - [18.9.1 小规模集群组合](#1891-小规模集群组合)
+  - [18.9.2 大规模集群组合](#1892-大规模集群组合)
+  - [18.9.3 自定义 Operator 组合](#1893-自定义-operator-组合)
+- [18.10 参考](#1810-参考)
 
 ---
 
-## 27.1 文档定位
+## 18.1 文档定位
 
 本文档全面梳理云原生容器技术栈中的 Operator 和 CRD 技术、规格和最佳实践，包括
 CRD（Custom Resource Definition）、Operator 模式、Operator
@@ -70,9 +70,9 @@ SDK、Kubebuilder、Controller 模式、Webhook 等技术。
   Webhook、Conversion Webhook
 - **Operator 技术栈组合方案**：不同场景的 Operator 技术栈组合
 
-## 27.2 Operator 技术栈全景
+## 18.2 Operator 技术栈全景
 
-### 27.2.1 Operator 模式
+### 18.2.1 Operator 模式
 
 **Operator 模式**：
 
@@ -115,7 +115,7 @@ graph TB
 4. **创建自定义资源**：用户创建 CR 实例
 5. **Controller 调和**：Controller 检测变化并调和状态
 
-### 27.2.2 技术组件矩阵
+### 18.2.2 技术组件矩阵
 
 **Operator 技术组件矩阵**：
 
@@ -132,7 +132,7 @@ graph TB
 |                   | Istio Operator         | Istio 管理 Operator       | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
 |                   | Elasticsearch Operator | Elasticsearch 管理        | ⭐⭐⭐⭐   | ⭐⭐⭐⭐   |
 
-### 27.2.3 技术栈组合
+### 18.2.3 技术栈组合
 
 **Operator 技术栈组合方案**：
 
@@ -143,9 +143,9 @@ graph TB
 | **自定义逻辑**      | Operator SDK     | Go Operator   | 灵活、高性能        |
 | **Kubernetes 原生** | Kubebuilder      | Go Controller | Kubernetes 官方框架 |
 
-## 27.3 CRD 技术规格
+## 18.3 CRD 技术规格
 
-### 27.3.1 CRD 规范
+### 18.3.1 CRD 规范
 
 **CRD（Custom Resource Definition）规范**：
 
@@ -191,7 +191,7 @@ spec:
 - **scope**：作用域（Namespaced 或 Cluster）
 - **names**：资源名称定义
 
-### 27.3.2 CRD 定义规格
+### 18.3.2 CRD 定义规格
 
 **CRD 定义规格**：
 
@@ -248,7 +248,7 @@ spec:
                   enum: [Pending, Running, Failed]
 ```
 
-### 27.3.3 CRD 验证规格
+### 18.3.3 CRD 验证规格
 
 **CRD 验证规格**：
 
@@ -283,7 +283,7 @@ properties:
     pattern: '^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$'
 ```
 
-### 27.3.4 CRD 版本管理
+### 18.3.4 CRD 版本管理
 
 **CRD 版本管理规格**：
 
@@ -321,7 +321,7 @@ versions:
           path: /convert
 ```
 
-### 27.3.5 CRD 最佳实践
+### 18.3.5 CRD 最佳实践
 
 **CRD 最佳实践**：
 
@@ -346,9 +346,9 @@ versions:
 - ✅ 实现版本转换
 - ✅ 保持向后兼容
 
-## 27.4 Operator SDK 技术规格
+## 18.4 Operator SDK 技术规格
 
-### 27.4.1 Operator SDK 规范
+### 18.4.1 Operator SDK 规范
 
 **Operator SDK 规格**：
 
@@ -375,7 +375,7 @@ versions:
 3. **Testing**：测试工具
 4. **OLM**：Operator 生命周期管理
 
-### 27.4.2 Helm Operator 规格
+### 18.4.2 Helm Operator 规格
 
 **Helm Operator 规格**：
 
@@ -406,7 +406,7 @@ helm-operator/
       templates/
 ```
 
-### 27.4.3 Ansible Operator 规格
+### 18.4.3 Ansible Operator 规格
 
 **Ansible Operator 规格**：
 
@@ -438,7 +438,7 @@ ansible-operator/
         main.yml
 ```
 
-### 27.4.4 Go Operator 规格
+### 18.4.4 Go Operator 规格
 
 **Go Operator 规格**：
 
@@ -472,7 +472,7 @@ go-operator/
     rbac/
 ```
 
-### 27.4.5 Operator SDK 对比
+### 18.4.5 Operator SDK 对比
 
 **Operator SDK 类型对比矩阵**：
 
@@ -482,9 +482,9 @@ go-operator/
 | **Ansible Operator** | ⭐⭐⭐⭐   | ⭐⭐⭐⭐   | ⭐⭐⭐     | ⭐⭐⭐⭐   | 复杂配置管理   |
 | **Go Operator**      | ⭐⭐⭐     | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐     | 高性能、自定义 |
 
-## 27.5 Kubebuilder 技术规格
+## 18.5 Kubebuilder 技术规格
 
-### 27.5.1 Kubebuilder 规范
+### 18.5.1 Kubebuilder 规范
 
 **Kubebuilder 规格**：
 
@@ -511,7 +511,7 @@ go-operator/
 3. **Code Generator**：代码生成器
 4. **Testing Framework**：测试框架
 
-### 27.5.2 项目结构
+### 18.5.2 项目结构
 
 **Kubebuilder 项目结构**：
 
@@ -533,7 +533,7 @@ project/
   Makefile
 ```
 
-### 27.5.3 Controller 开发
+### 18.5.3 Controller 开发
 
 **Controller 开发规格**：
 
@@ -559,7 +559,7 @@ func (r *MyResourceReconciler) Reconcile(ctx context.Context, req ctrl.Request) 
 4. 调和差异
 5. 更新状态
 
-### 27.5.4 Webhook 开发
+### 18.5.4 Webhook 开发
 
 **Webhook 开发规格**：
 
@@ -590,9 +590,9 @@ func (r *MyResource) ValidateDelete() error {
 }
 ```
 
-## 27.6 常用 Operator 案例
+## 18.6 常用 Operator 案例
 
-### 27.6.1 Prometheus Operator
+### 18.6.1 Prometheus Operator
 
 **Prometheus Operator 规格**：
 
@@ -618,7 +618,7 @@ func (r *MyResource) ValidateDelete() error {
 - **PodMonitor**：Pod 监控
 - **PrometheusRule**：告警规则
 
-### 27.6.2 cert-manager Operator
+### 18.6.2 cert-manager Operator
 
 **cert-manager Operator 规格**：
 
@@ -644,7 +644,7 @@ func (r *MyResource) ValidateDelete() error {
 - **Issuer/ClusterIssuer**：证书颁发者
 - **CertificateRequest**：证书请求
 
-### 27.6.3 Istio Operator
+### 18.6.3 Istio Operator
 
 **Istio Operator 规格**：
 
@@ -663,7 +663,7 @@ func (r *MyResource) ValidateDelete() error {
 - **GitHub Stars**：4K+
 - **生产验证**：✅ 大规模使用
 
-### 27.6.4 Elasticsearch Operator
+### 18.6.4 Elasticsearch Operator
 
 **Elasticsearch Operator 规格**：
 
@@ -682,7 +682,7 @@ func (r *MyResource) ValidateDelete() error {
 - **GitHub Stars**：2K+
 - **生产验证**：✅ 中等规模使用
 
-### 27.6.5 Operator 对比
+### 18.6.5 Operator 对比
 
 **常用 Operator 对比矩阵**：
 
@@ -693,9 +693,9 @@ func (r *MyResource) ValidateDelete() error {
 | **Istio Operator**         | 服务网格管理 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | Istio 管理         |
 | **Elasticsearch Operator** | 搜索管理     | ⭐⭐⭐⭐   | ⭐⭐⭐⭐   | Elasticsearch 管理 |
 
-## 27.7 Controller 模式技术规格
+## 18.7 Controller 模式技术规格
 
-### 27.7.1 Controller 架构
+### 18.7.1 Controller 架构
 
 **Controller 架构规格**：
 
@@ -724,7 +724,7 @@ graph TB
 3. **Worker**：工作线程，处理事件
 4. **Reconcile**：调和逻辑，同步状态
 
-### 27.7.2 Informer 模式
+### 18.7.2 Informer 模式
 
 **Informer 模式规格**：
 
@@ -742,7 +742,7 @@ graph TB
 3. **Delta Queue**：事件队列
 4. **Local Store**：本地缓存
 
-### 27.7.3 Work Queue 模式
+### 18.7.3 Work Queue 模式
 
 **Work Queue 模式规格**：
 
@@ -759,7 +759,7 @@ graph TB
 - **Delaying Queue**：延迟队列
 - **Priority Queue**：优先级队列
 
-### 27.7.4 Reconcile 循环
+### 18.7.4 Reconcile 循环
 
 **Reconcile 循环规格**：
 
@@ -807,9 +807,9 @@ func (r *MyResourceReconciler) Reconcile(ctx context.Context, req ctrl.Request) 
 }
 ```
 
-## 27.8 Webhook 技术规格
+## 18.8 Webhook 技术规格
 
-### 27.8.1 Admission Webhook
+### 18.8.1 Admission Webhook
 
 **Admission Webhook 规格**：
 
@@ -827,7 +827,7 @@ func (r *MyResourceReconciler) Reconcile(ctx context.Context, req ctrl.Request) 
 3. API Server 调用 Validating Webhook（验证）
 4. API Server 存储资源
 
-### 27.8.2 Mutating Webhook
+### 18.8.2 Mutating Webhook
 
 **Mutating Webhook 规格**：
 
@@ -861,7 +861,7 @@ webhooks:
         resources: ["deployments"]
 ```
 
-### 27.8.3 Validating Webhook
+### 18.8.3 Validating Webhook
 
 **Validating Webhook 规格**：
 
@@ -896,7 +896,7 @@ webhooks:
     admissionReviewVersions: ["v1"]
 ```
 
-### 27.8.4 Conversion Webhook
+### 18.8.4 Conversion Webhook
 
 **Conversion Webhook 规格**：
 
@@ -927,7 +927,7 @@ spec:
       conversionReviewVersions: ["v1"]
 ```
 
-### 27.8.5 Webhook 最佳实践
+### 18.8.5 Webhook 最佳实践
 
 **Webhook 最佳实践**：
 
@@ -952,9 +952,9 @@ spec:
 - ✅ 权限最小化
 - ✅ 输入验证
 
-## 27.9 Operator 技术栈组合方案
+## 18.9 Operator 技术栈组合方案
 
-### 27.9.1 小规模集群组合
+### 18.9.1 小规模集群组合
 
 **小规模集群 Operator 组合**：
 
@@ -970,7 +970,7 @@ spec:
 - ✅ 快速开发
 - ✅ 资源占用低
 
-### 27.9.2 大规模集群组合
+### 18.9.2 大规模集群组合
 
 **大规模集群 Operator 组合**：
 
@@ -988,7 +988,7 @@ spec:
 - ✅ 版本管理
 - ✅ 生命周期管理
 
-### 27.9.3 自定义 Operator 组合
+### 18.9.3 自定义 Operator 组合
 
 **自定义 Operator 组合**：
 
@@ -1005,7 +1005,7 @@ spec:
 - ✅ 完整生态
 - ✅ 生产级功能
 
-## 27.10 参考
+## 18.10 参考
 
 - [Kubernetes CRD 文档](https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/)
 - [Operator SDK 文档](https://sdk.operatorframework.io/)

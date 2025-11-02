@@ -97,7 +97,7 @@ $$\text{技术链} = \text{Docker} \rightarrow \text{K8s} \rightarrow \text{K3s}
 ## 参考
 
 - [ai_view.md](../../ai_view.md) - 核心矩阵内容的原始来源
-- [36. 2025 年技术趋势汇总](../36-2025-trends/2025-trends.md) - 最新技术趋势
+- [27. 2025 年技术趋势汇总](../27-2025-trends/2025-trends.md) - 最新技术趋势
 - [06. 问题-解决方案矩阵](../06-problem-solution-matrix/problem-solution-matrix.md) -
   问题解决方案矩阵
 - [07. 形式化理论](../07-formal-theory/formal-theory.md) - 形式化理论基础
@@ -107,3 +107,7 @@ $$\text{技术链} = \text{Docker} \rightarrow \text{K8s} \rightarrow \text{K3s}
   （USB/PCI/GPU）和内核特性决策快速参考
 - [10. 一致性检查报告](../10-decision-models/CONSISTENCY-REPORT.md) - 文档一致性
   检查与 Wikipedia 标准对齐
+
+---
+
+**最后更新**：2025-11-03

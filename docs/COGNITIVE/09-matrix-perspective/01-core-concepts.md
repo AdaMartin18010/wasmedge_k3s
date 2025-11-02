@@ -305,6 +305,6 @@ $$\|\mathbf{v}\| = \sqrt{\sum_{i=1}^{12} v_i^2}$$
 
 **参考**：
 
-- [核心概念矩阵 - 返回目录](../37-matrix-perspective/README.md)
+- [核心概念矩阵 - 返回目录](../09-matrix-perspective/README.md)
 - [关系矩阵：概念间的关系映射](02-relation-matrix.md)
 - [属性矩阵：概念属性在不同场景下的表现](03-attribute-matrix.md)

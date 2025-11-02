@@ -271,6 +271,6 @@ rollback_plan = plan_rollback(canary_plan)
 
 **参考**：
 
-- [场景变换矩阵 - 返回目录](../37-matrix-perspective/README.md)
+- [场景变换矩阵 - 返回目录](../09-matrix-perspective/README.md)
 - [属性矩阵：概念属性在不同场景下的表现](03-attribute-matrix.md)
 - [操作变换矩阵：各种操作的矩阵表示](05-operation-transformation.md)

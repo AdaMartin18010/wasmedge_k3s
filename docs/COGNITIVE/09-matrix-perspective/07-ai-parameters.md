@@ -394,6 +394,10 @@ effect = sum(T_deploy[i, j] * w[j] * Theta[j, j] for j in range(12))
 
 **参考**：
 
-- [AI 参数矩阵 - 返回目录](../37-matrix-perspective/README.md)
+- [AI 参数矩阵 - 返回目录](../09-matrix-perspective/README.md)
 - [技术链矩阵序列：Docker→K8s→K3s→WasmEdge→OPA→ 多租户](06-tech-chain-sequence.md)
 - [矩阵运算与应用：实际的计算方法和应用场景](08-matrix-operations.md)
+
+---
+
+**最后更新**：2025-11-03

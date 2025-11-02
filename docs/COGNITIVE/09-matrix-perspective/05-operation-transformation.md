@@ -259,6 +259,6 @@ $$\min_{\mathbf{T}_{\text{op}}} \text{Cost}(\mathbf{T}_{\text{op}} \cdot \mathbf
 
 **参考**：
 
-- [操作变换矩阵 - 返回目录](../37-matrix-perspective/README.md)
+- [操作变换矩阵 - 返回目录](../09-matrix-perspective/README.md)
 - [场景变换矩阵：场景间的迁移和转换](04-scene-transformation.md)
 - [技术链矩阵序列：Docker→K8s→K3s→WasmEdge→OPA→ 多租户](06-tech-chain-sequence.md)

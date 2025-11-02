@@ -1,45 +1,45 @@
-# 32. 开发和调试工具：全面梳理
+# 23. 开发和调试工具：全面梳理
 
 ## 目录
 
 - [目录](#目录)
-- [32.1 文档定位](#321-文档定位)
-- [32.2 开发调试工具全景](#322-开发调试工具全景)
-  - [32.2.1 工具分类](#3221-工具分类)
-  - [32.2.2 技术组件矩阵](#3222-技术组件矩阵)
-  - [32.2.3 工具栈组合](#3223-工具栈组合)
-- [32.3 kubectl 高级用法](#323-kubectl-高级用法)
-  - [32.3.1 kubectl 基础命令](#3231-kubectl-基础命令)
-  - [32.3.2 kubectl 高级命令](#3232-kubectl-高级命令)
-  - [32.3.3 kubectl 调试技巧](#3233-kubectl-调试技巧)
-- [32.4 可视化工具](#324-可视化工具)
-  - [32.4.1 k9s](#3241-k9s)
-  - [32.4.2 Lens](#3242-lens)
-  - [32.4.3 Kubernetes Dashboard](#3243-kubernetes-dashboard)
-- [32.5 上下文和命名空间工具](#325-上下文和命名空间工具)
-  - [32.5.1 kubectx](#3251-kubectx)
-  - [32.5.2 kubens](#3252-kubens)
-- [32.6 容器调试工具](#326-容器调试工具)
-  - [32.6.1 kubectl debug](#3261-kubectl-debug)
-  - [32.6.2 kubectl exec](#3262-kubectl-exec)
-  - [32.6.3 kubectl port-forward](#3263-kubectl-port-forward)
-- [32.7 性能分析工具](#327-性能分析工具)
-  - [32.7.1 kubectl top](#3271-kubectl-top)
-  - [32.7.2 kubectl describe](#3272-kubectl-describe)
-  - [32.7.3 kubectl logs](#3273-kubectl-logs)
-- [32.8 开发和调试工具栈组合方案](#328-开发和调试工具栈组合方案)
-  - [32.8.1 开发环境组合](#3281-开发环境组合)
-  - [32.8.2 生产调试组合](#3282-生产调试组合)
-  - [32.8.3 性能分析组合](#3283-性能分析组合)
-- [32.9 开发和调试最佳实践](#329-开发和调试最佳实践)
-  - [32.9.1 开发工作流](#3291-开发工作流)
-  - [32.9.2 调试技巧](#3292-调试技巧)
-  - [32.9.3 性能优化](#3293-性能优化)
-- [32.10 参考](#3210-参考)
+- [23.1 文档定位](#231-文档定位)
+- [23.2 开发调试工具全景](#232-开发调试工具全景)
+  - [23.2.1 工具分类](#2321-工具分类)
+  - [23.2.2 技术组件矩阵](#2322-技术组件矩阵)
+  - [23.2.3 工具栈组合](#2323-工具栈组合)
+- [23.3 kubectl 高级用法](#233-kubectl-高级用法)
+  - [23.3.1 kubectl 基础命令](#2331-kubectl-基础命令)
+  - [23.3.2 kubectl 高级命令](#2332-kubectl-高级命令)
+  - [23.3.3 kubectl 调试技巧](#2333-kubectl-调试技巧)
+- [23.4 可视化工具](#234-可视化工具)
+  - [23.4.1 k9s](#2341-k9s)
+  - [23.4.2 Lens](#2342-lens)
+  - [23.4.3 Kubernetes Dashboard](#2343-kubernetes-dashboard)
+- [23.5 上下文和命名空间工具](#235-上下文和命名空间工具)
+  - [23.5.1 kubectx](#2351-kubectx)
+  - [23.5.2 kubens](#2352-kubens)
+- [23.6 容器调试工具](#236-容器调试工具)
+  - [23.6.1 kubectl debug](#2361-kubectl-debug)
+  - [23.6.2 kubectl exec](#2362-kubectl-exec)
+  - [23.6.3 kubectl port-forward](#2363-kubectl-port-forward)
+- [23.7 性能分析工具](#237-性能分析工具)
+  - [23.7.1 kubectl top](#2371-kubectl-top)
+  - [23.7.2 kubectl describe](#2372-kubectl-describe)
+  - [23.7.3 kubectl logs](#2373-kubectl-logs)
+- [23.8 开发和调试工具栈组合方案](#238-开发和调试工具栈组合方案)
+  - [23.8.1 开发环境组合](#2381-开发环境组合)
+  - [23.8.2 生产调试组合](#2382-生产调试组合)
+  - [23.8.3 性能分析组合](#2383-性能分析组合)
+- [23.9 开发和调试最佳实践](#239-开发和调试最佳实践)
+  - [23.9.1 开发工作流](#2391-开发工作流)
+  - [23.9.2 调试技巧](#2392-调试技巧)
+  - [23.9.3 性能优化](#2393-性能优化)
+- [23.10 参考](#2310-参考)
 
 ---
 
-## 32.1 文档定位
+## 23.1 文档定位
 
 本文档全面梳理云原生容器技术栈中的开发和调试工具、规格和最佳实践，包括 kubectl
 高级用法、可视化工具、容器调试工具、性能分析工具等技术。
@@ -55,9 +55,9 @@
 - **开发和调试工具栈组合方案**：不同场景的工具栈组合
 - **开发和调试最佳实践**：开发工作流、调试技巧、性能优化
 
-## 32.2 开发调试工具全景
+## 23.2 开发调试工具全景
 
-### 32.2.1 工具分类
+### 23.2.1 工具分类
 
 **开发调试工具分类**：
 
@@ -100,7 +100,7 @@ graph TB
 | **调试工具**   | 容器和 Pod 调试工具 | kubectl debug、exec、port-forward | 问题排查、开发调试   |
 | **性能工具**   | 性能分析和监控工具  | kubectl top、describe、logs       | 性能分析、问题定位   |
 
-### 32.2.2 技术组件矩阵
+### 23.2.2 技术组件矩阵
 
 **开发调试工具技术组件矩阵**：
 
@@ -122,7 +122,7 @@ graph TB
 |                | kubectl describe     | 资源详细信息        | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
 |                | kubectl logs         | 日志查看            | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
 
-### 32.2.3 工具栈组合
+### 23.2.3 工具栈组合
 
 **开发调试工具栈组合方案**：
 
@@ -132,9 +132,9 @@ graph TB
 | **生产调试** | kubectl    | Lens       | kubectl exec         | kubectl describe | 功能完整、可视化   |
 | **性能分析** | kubectl    | k9s        | kubectl port-forward | kubectl top      | 实时监控、性能分析 |
 
-## 32.3 kubectl 高级用法
+## 23.3 kubectl 高级用法
 
-### 32.3.1 kubectl 基础命令
+### 23.3.1 kubectl 基础命令
 
 **kubectl 基础命令**：
 
@@ -150,7 +150,7 @@ graph TB
 |              | port-forward | 端口转发     | `kubectl port-forward <pod> 8080:80` |
 |              | debug        | 调试 Pod     | `kubectl debug <pod> -it`            |
 
-### 32.3.2 kubectl 高级命令
+### 23.3.2 kubectl 高级命令
 
 **kubectl 高级命令**：
 
@@ -222,7 +222,7 @@ k get pods
 kgp -l app=nginx
 ```
 
-### 32.3.3 kubectl 调试技巧
+### 23.3.3 kubectl 调试技巧
 
 **kubectl 调试技巧**：
 
@@ -284,9 +284,9 @@ kubectl exec <pod-name> -- ls -la
 kubectl debug <pod-name> -it --image=busybox
 ```
 
-## 32.4 可视化工具
+## 23.4 可视化工具
 
-### 32.4.1 k9s
+### 23.4.1 k9s
 
 **k9s 定义**：
 
@@ -340,7 +340,7 @@ k9s -n <namespace>
 | `e`    | 编辑     | 编辑资源     |
 | `d`    | 删除     | 删除资源     |
 
-### 32.4.2 Lens
+### 23.4.2 Lens
 
 **Lens 定义**：
 
@@ -366,7 +366,7 @@ Lens 是 Kubernetes 的桌面应用，提供图形化的集群管理界面。
 4. **终端访问**：在容器中执行命令
 5. **资源编辑**：编辑资源配置
 
-### 32.4.3 Kubernetes Dashboard
+### 23.4.3 Kubernetes Dashboard
 
 **Kubernetes Dashboard 定义**：
 
@@ -399,9 +399,9 @@ kubectl proxy
 # 访问 http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
 ```
 
-## 32.5 上下文和命名空间工具
+## 23.5 上下文和命名空间工具
 
-### 32.5.1 kubectx
+### 23.5.1 kubectx
 
 **kubectx 定义**：
 
@@ -437,7 +437,7 @@ kubectx
 kubectx -c
 ```
 
-### 32.5.2 kubens
+### 23.5.2 kubens
 
 **kubens 定义**：
 
@@ -470,9 +470,9 @@ kubens
 kubens -c
 ```
 
-## 32.6 容器调试工具
+## 23.6 容器调试工具
 
-### 32.6.1 kubectl debug
+### 23.6.1 kubectl debug
 
 **kubectl debug 定义**：
 
@@ -507,7 +507,7 @@ kubectl debug node/<node-name> -it --image=busybox
 - **优点**：可以调试任何容器
 - **缺点**：需要临时容器支持
 
-### 32.6.2 kubectl exec
+### 23.6.2 kubectl exec
 
 **kubectl exec 定义**：
 
@@ -529,7 +529,7 @@ kubectl exec -it <pod-name> -c <container-name> -- /bin/sh
 kubectl exec <pod-name> -- sh -c "cd /app && ls -la"
 ```
 
-### 32.6.3 kubectl port-forward
+### 23.6.3 kubectl port-forward
 
 **kubectl port-forward 定义**：
 
@@ -570,9 +570,9 @@ kubectl port-forward <pod-name> 127.0.0.1:8080:80
 - **优点**：安全、无需暴露服务
 - **缺点**：连接可能不稳定
 
-## 32.7 性能分析工具
+## 23.7 性能分析工具
 
-### 32.7.1 kubectl top
+### 23.7.1 kubectl top
 
 **kubectl top 定义**：
 
@@ -602,7 +602,7 @@ kubectl top pods --containers
 - 需要部署 metrics-server
 - metrics-server 需要运行并可用
 
-### 32.7.2 kubectl describe
+### 23.7.2 kubectl describe
 
 **kubectl describe 定义**：
 
@@ -627,7 +627,7 @@ kubectl describe deployment <deployment-name>
 kubectl describe namespace <namespace>
 ```
 
-### 32.7.3 kubectl logs
+### 23.7.3 kubectl logs
 
 **kubectl logs 定义**：
 
@@ -655,9 +655,9 @@ kubectl logs --previous <pod-name>
 kubectl logs -l app=nginx
 ```
 
-## 32.8 开发和调试工具栈组合方案
+## 23.8 开发和调试工具栈组合方案
 
-### 32.8.1 开发环境组合
+### 23.8.1 开发环境组合
 
 **开发环境工具栈**：
 
@@ -675,7 +675,7 @@ kubectl logs -l app=nginx
 - ✅ 适合日常开发
 - ✅ 命令行为主，可视化辅助
 
-### 32.8.2 生产调试组合
+### 23.8.2 生产调试组合
 
 **生产调试工具栈**：
 
@@ -693,7 +693,7 @@ kubectl logs -l app=nginx
 - ✅ 适合生产环境调试
 - ✅ 图形界面为主，命令行辅助
 
-### 32.8.3 性能分析组合
+### 23.8.3 性能分析组合
 
 **性能分析工具栈**：
 
@@ -711,9 +711,9 @@ kubectl logs -l app=nginx
 - ✅ 问题定位和排查
 - ✅ 实时监控和日志分析
 
-## 32.9 开发和调试最佳实践
+## 23.9 开发和调试最佳实践
 
-### 32.9.1 开发工作流
+### 23.9.1 开发工作流
 
 **开发工作流**：
 
@@ -744,7 +744,7 @@ kubectl logs -l app=nginx
     目的: 清理测试资源
 ```
 
-### 32.9.2 调试技巧
+### 23.9.2 调试技巧
 
 **调试技巧**：
 
@@ -777,7 +777,7 @@ kubectl port-forward <pod-name> 8080:80
 k9s
 ```
 
-### 32.9.3 性能优化
+### 23.9.3 性能优化
 
 **性能优化技巧**：
 
@@ -802,7 +802,7 @@ kubectl describe pod <pod-name> | grep -A 5 "Limits"
 kubectl logs <pod-name> | grep -i "error\|warning\|slow"
 ```
 
-## 32.10 参考
+## 23.10 参考
 
 - [kubectl 官方文档](https://kubernetes.io/docs/reference/kubectl/)
 - [k9s 官方文档](https://k9scli.io/)
@@ -814,8 +814,8 @@ kubectl logs <pod-name> | grep -i "error\|warning\|slow"
 
 > **使用指南**：
 >
-> - **快速开始**：查看 [32.3 kubectl 高级用法](#323-kubectl-高级用法)
-> - **可视化工具**：查看 [32.4 可视化工具](#324-可视化工具)
-> - **调试工具**：查看 [32.6 容器调试工具](#326-容器调试工具)
-> - **性能分析**：查看 [32.7 性能分析工具](#327-性能分析工具)
-> - **最佳实践**：查看 [32.9 开发和调试最佳实践](#329-开发和调试最佳实践)
+> - **快速开始**：查看 [23.3 kubectl 高级用法](#233-kubectl-高级用法)
+> - **可视化工具**：查看 [23.4 可视化工具](#234-可视化工具)
+> - **调试工具**：查看 [23.6 容器调试工具](#236-容器调试工具)
+> - **性能分析**：查看 [23.7 性能分析工具](#237-性能分析工具)
+> - **最佳实践**：查看 [23.9 开发和调试最佳实践](#239-开发和调试最佳实践)

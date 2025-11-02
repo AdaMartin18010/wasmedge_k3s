@@ -327,6 +327,6 @@ scores = [S_serverless @ A @ weights for A in tech_chains]
 
 **参考**：
 
-- [技术链矩阵序列 - 返回目录](../37-matrix-perspective/README.md)
+- [技术链矩阵序列 - 返回目录](../09-matrix-perspective/README.md)
 - [操作变换矩阵：各种操作的矩阵表示](05-operation-transformation.md)
 - [AI 参数矩阵：AI 可学习参数矩阵](07-ai-parameters.md)

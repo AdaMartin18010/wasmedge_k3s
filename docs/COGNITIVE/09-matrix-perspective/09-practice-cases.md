@@ -350,7 +350,7 @@ optimal_stack = ['K8s', 'K3s', 'WasmEdge', 'OPA', 'Capsule']
 
 - [实践案例 - 返回目录](../09-matrix-perspective/README.md)
 - [矩阵运算与应用：实际的计算方法和应用场景](08-matrix-operations.md)
-- [36. 2025 年技术趋势汇总](../TECHNICAL/27-2025-trends/2025-trends.md)
+- [27. 2025 年技术趋势汇总](../TECHNICAL/27-2025-trends/2025-trends.md)
 - [10. 技术决策模型](../10-decision-models/decision-models.md) - 技术选型决策框
   架
 - [10. 快速参考指南](../10-decision-models/QUICK-REFERENCE.md) - 设备访问

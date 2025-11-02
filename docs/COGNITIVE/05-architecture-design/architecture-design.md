@@ -1093,11 +1093,31 @@ $$
 
 ## 05.10 参考
 
-- [18. 问题解决方案](../18-problem-solution-matrix/problem-solution-matrix.md) -
+**关联文档**：
+
+- **[01. 总览](../01-overview/overview.md)** - 技术栈总览
+- **[03. 架构与对象模型](../03-architecture/architecture.md)** - Kubernetes 对象
+  模型和控制闭环
+- **[03. 执行流与调度视角](../03-architecture/execution-flow-scheduling.md)** -
+  执行流与调度视角分析
+- **[10. 技术决策模型](../10-decision-models/decision-models.md)** - 技术选型决
+  策框架
+- **[10. 快速参考指南](../10-decision-models/QUICK-REFERENCE.md)** - 设备访问
+  （USB/PCI/GPU）和内核特性决策快速参考
+- **[10. 一致性检查报告](../10-decision-models/CONSISTENCY-REPORT.md)** - 文档一
+  致性检查与 Wikipedia 标准对齐
+- **[06. 问题解决方案](../06-problem-solution-matrix/problem-solution-matrix.md)** -
   技术问题分类和解决
-- [37. 矩阵视角](../37-matrix-perspective/README.md) - 矩阵力学分析方法（用于技
-  术选型和架构决策）
-- [19. 形式化理论](../19-formal-theory/formal-theory.md) - 结构同构和关系等价
-- [20. 范畴论视角](../20-category-theory/category-theory.md) - 范畴论分析方法
+- **[09. 矩阵视角](../09-matrix-perspective/README.md)** - 矩阵力学分析方法（用
+  于技术选型和架构决策）
+- **[07. 形式化理论](../07-formal-theory/formal-theory.md)** - 结构同构和关系等
+  价
+- **[08. 范畴论视角](../08-category-theory/category-theory.md)** - 范畴论分析方
+  法
+- **[04. 性能基准](../04-benchmarks/benchmarks.md)** - 性能指标和基准测试
 
 **完整参考列表见** [REFERENCES.md](../REFERENCES.md)
+
+---
+
+**最后更新**：2025-11-03

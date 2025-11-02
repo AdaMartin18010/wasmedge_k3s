@@ -591,9 +591,14 @@ graph TB
 
 ## 06.10 参考
 
-- [16. 故障排查](../16-troubleshooting/troubleshooting.md) - 详细故障排查指南
-- [15. 安装部署](../15-installation/installation.md) - 安装部署指南
-- [37. 矩阵视角](../37-matrix-perspective/README.md) - 矩阵力学分析方法（用于问
+- [11. 故障排查](../TECHNICAL/11-troubleshooting/troubleshooting.md) - 详细故障
+  排查指南
+- [10. 安装部署](../TECHNICAL/10-installation/installation.md) - 安装部署指南
+- [09. 矩阵视角](../09-matrix-perspective/README.md) - 矩阵力学分析方法（用于问
   题分析和决策优化）
 
 **完整参考列表见** [REFERENCES.md](../REFERENCES.md)
+
+---
+
+**最后更新**：2025-11-03

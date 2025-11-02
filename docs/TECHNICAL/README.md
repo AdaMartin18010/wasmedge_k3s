@@ -111,6 +111,17 @@
 - **认知模型文档**（`../COGNITIVE/`）提供 **"为什么"**（Why）和 **"是什么
   "**（What）
 
+### 📚 决策参考
+
+进行技术选型时，请参考：
+
+- **[10. 技术决策模型](../COGNITIVE/10-decision-models/decision-models.md)** -
+  技术选型决策框架
+- **[10. 快速参考指南](../COGNITIVE/10-decision-models/QUICK-REFERENCE.md)** -
+  设备访问（USB/PCI/GPU）和内核特性决策快速参考
+- **[10. 一致性检查报告](../COGNITIVE/10-decision-models/CONSISTENCY-REPORT.md)** -
+  文档一致性检查与 Wikipedia 标准对齐
+
 ## 🎯 按角色选择文档
 
 ### 开发者
@@ -144,5 +155,5 @@
 
 ---
 
-**最后更新**：2025-11-01 **维护者**：项目团队 **参
+**最后更新**：2025-11-03 **维护者**：项目团队 **参
 考**：[文档类型说明](../META/DOCUMENT-TYPES.md)

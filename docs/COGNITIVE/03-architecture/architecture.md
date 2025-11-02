@@ -614,9 +614,9 @@ graph TD
   200-400 cycles → 容器化 0 → 沙盒化 10-50 cycles）
 - **技术选型**：基于执行流特性的决策树
 - **设备访问决策**：USB/PCI/GPU 设备访问能力矩阵与决策规则（见
-  [执行流文档](./execution-flow-scheduling.md#03x74-基于设备与内核特性的决策)）
+  [执行流文档](./execution-flow-scheduling.md#036474-基于设备与内核特性的决策)）
 - **内核特性决策**：epoll/io_uring 内核特性访问能力与性能对比（见
-  [执行流文档](./execution-flow-scheduling.md#03x74-基于设备与内核特性的决策)）
+  [执行流文档](./execution-flow-scheduling.md#036474-基于设备与内核特性的决策)）
 
 **关键洞察**：
 
@@ -1181,6 +1181,8 @@ $$P_{K3}(N, P) = \text{controller\_count} \times \text{sqlite\_latency}(P)$$
   架
 - [10. 快速参考指南](../10-decision-models/QUICK-REFERENCE.md) - 设备访问
   （USB/PCI/GPU）和内核特性决策快速参考
+- [10. 一致性检查报告](../10-decision-models/CONSISTENCY-REPORT.md) - 文档一致性
+  检查与 Wikipedia 标准对齐
 
 **外部参考**：
 
@@ -1194,3 +1196,7 @@ $$P_{K3}(N, P) = \text{controller\_count} \times \text{sqlite\_latency}(P)$$
 [^k3s-performance]: [K3s Performance](https://docs.k3s.io/)
 
 > 完整参考列表见 [REFERENCES.md](../REFERENCES.md)
+>
+> ---
+>
+> **最后更新**：2025-11-03

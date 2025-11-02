@@ -1,42 +1,42 @@
-# 15. 安装与部署：K3s + WasmEdge + OPA 完整指南
+# 10. 安装与部署：K3s + WasmEdge + OPA 完整指南
 
 ## 目录
 
 - [目录](#目录)
-- [15.1 文档定位](#151-文档定位)
-- [15.2 前置要求](#152-前置要求)
-  - [15.2.1 硬件要求](#1521-硬件要求)
-  - [15.2.2 软件要求](#1522-软件要求)
-- [15.3 安装 K3s](#153-安装-k3s)
-  - [15.3.1 单节点安装](#1531-单节点安装)
-  - [15.3.2 多节点安装](#1532-多节点安装)
-  - [15.3.3 WasmEdge 支持安装](#1533-wasmedge-支持安装)
-- [15.4 安装 WasmEdge 和 crun](#154-安装-wasmedge-和-crun)
-  - [15.4.1 安装 WasmEdge](#1541-安装-wasmedge)
-  - [15.4.2 安装 crun](#1542-安装-crun)
-  - [15.4.3 配置 RuntimeClass](#1543-配置-runtimeclass)
-- [15.5 安装 OPA Gatekeeper](#155-安装-opa-gatekeeper)
-  - [15.5.1 Helm 安装](#1551-helm-安装)
-  - [15.5.2 Wasm 引擎配置](#1552-wasm-引擎配置)
-  - [15.5.3 验证安装](#1553-验证安装)
-- [15.6 镜像签名与推送](#156-镜像签名与推送)
-  - [15.6.1 安装 Cosign](#1561-安装-cosign)
-  - [15.6.2 签名 Wasm 策略](#1562-签名-wasm-策略)
-  - [15.6.3 推送 Wasm 镜像](#1563-推送-wasm-镜像)
-- [15.7 Hello Wasm Pod 示例](#157-hello-wasm-pod-示例)
-  - [15.7.1 准备 Wasm 应用](#1571-准备-wasm-应用)
-  - [15.7.2 构建和推送镜像](#1572-构建和推送镜像)
-  - [15.7.3 部署 Pod](#1573-部署-pod)
-- [15.8 验证与测试](#158-验证与测试)
-  - [15.8.1 验证 K3s](#1581-验证-k3s)
-  - [15.8.2 验证 WasmEdge](#1582-验证-wasmedge)
-  - [15.8.3 验证 Gatekeeper](#1583-验证-gatekeeper)
-- [15.9 常见问题](#159-常见问题)
-- [15.10 参考](#1510-参考)
+- [10.1 文档定位](#101-文档定位)
+- [10.2 前置要求](#102-前置要求)
+  - [10.2.1 硬件要求](#1021-硬件要求)
+  - [10.2.2 软件要求](#1022-软件要求)
+- [10.3 安装 K3s](#103-安装-k3s)
+  - [10.3.1 单节点安装](#1031-单节点安装)
+  - [10.3.2 多节点安装](#1032-多节点安装)
+  - [10.3.3 WasmEdge 支持安装](#1033-wasmedge-支持安装)
+- [10.4 安装 WasmEdge 和 crun](#104-安装-wasmedge-和-crun)
+  - [10.4.1 安装 WasmEdge](#1041-安装-wasmedge)
+  - [10.4.2 安装 crun](#1042-安装-crun)
+  - [10.4.3 配置 RuntimeClass](#1043-配置-runtimeclass)
+- [10.5 安装 OPA Gatekeeper](#105-安装-opa-gatekeeper)
+  - [10.5.1 Helm 安装](#1051-helm-安装)
+  - [10.5.2 Wasm 引擎配置](#1052-wasm-引擎配置)
+  - [10.5.3 验证安装](#1053-验证安装)
+- [10.6 镜像签名与推送](#106-镜像签名与推送)
+  - [10.6.1 安装 Cosign](#1061-安装-cosign)
+  - [10.6.2 签名 Wasm 策略](#1062-签名-wasm-策略)
+  - [10.6.3 推送 Wasm 镜像](#1063-推送-wasm-镜像)
+- [10.7 Hello Wasm Pod 示例](#107-hello-wasm-pod-示例)
+  - [10.7.1 准备 Wasm 应用](#1071-准备-wasm-应用)
+  - [10.7.2 构建和推送镜像](#1072-构建和推送镜像)
+  - [10.7.3 部署 Pod](#1073-部署-pod)
+- [10.8 验证与测试](#108-验证与测试)
+  - [10.8.1 验证 K3s](#1081-验证-k3s)
+  - [10.8.2 验证 WasmEdge](#1082-验证-wasmedge)
+  - [10.8.3 验证 Gatekeeper](#1083-验证-gatekeeper)
+- [10.9 常见问题](#109-常见问题)
+- [10.10 参考](#1010-参考)
 
 ---
 
-## 15.1 文档定位
+## 10.1 文档定位
 
 本文档提供 K3s + WasmEdge + OPA 的完整安装和部署指南，包括单节点、多节点安装
 ，WasmEdge 集成，OPA Gatekeeper 配置和 Hello Wasm Pod 示例。
@@ -57,9 +57,9 @@
 - **镜像签名**：Cosign 签名和推送 Wasm 镜像
 - **Hello Wasm**：完整的 Hello Wasm Pod 示例
 
-## 15.2 前置要求
+## 10.2 前置要求
 
-### 15.2.1 硬件要求
+### 10.2.1 硬件要求
 
 **最小硬件要求**：
 
@@ -74,7 +74,7 @@
 - **内存**：2GB（树莓派 4B）
 - **存储**：10GB（推荐 32GB SD 卡）
 
-### 15.2.2 软件要求
+### 10.2.2 软件要求
 
 **操作系统要求**：
 
@@ -87,9 +87,9 @@
 - **curl**：用于下载安装脚本
 - **sudo**：用于执行安装命令
 
-## 15.3 安装 K3s
+## 10.3 安装 K3s
 
-### 15.3.1 单节点安装
+### 10.3.1 单节点安装
 
 **快速安装**：
 
@@ -111,7 +111,7 @@ kubectl get nodes
 - **INSTALL_K3S_EXEC**：执行参数（如 `--wasm`）
 - **INSTALL_K3S_VERSION**：指定版本
 
-### 15.3.2 多节点安装
+### 10.3.2 多节点安装
 
 **Server 节点安装**：
 
@@ -133,7 +133,7 @@ curl -sfL https://get.k3s.io | K3S_TOKEN=my-secret-token K3S_URL=https://node1-i
 curl -sfL https://get.k3s.io | K3S_TOKEN=my-secret-token K3S_URL=https://server-ip:6443 sh -s - agent
 ```
 
-### 15.3.3 WasmEdge 支持安装
+### 10.3.3 WasmEdge 支持安装
 
 **安装 K3s with WasmEdge 支持**：
 
@@ -153,9 +153,9 @@ kubectl get nodes -o wide
 - **--write-kubeconfig-mode 644**：设置 kubeconfig 权限
 - **INSTALL_K3S_VERSION**：指定 K3s 版本
 
-## 15.4 安装 WasmEdge 和 crun
+## 10.4 安装 WasmEdge 和 crun
 
-### 15.4.1 安装 WasmEdge
+### 10.4.1 安装 WasmEdge
 
 **安装 WasmEdge**：
 
@@ -175,7 +175,7 @@ wasmedge --plugin wasi_socket
 - **WasmEdge**：0.14.0+（推荐最新稳定版）
 - **安装路径**：`/usr/local/bin/wasmedge`
 
-### 15.4.2 安装 crun
+### 10.4.2 安装 crun
 
 **安装 crun**：
 
@@ -201,7 +201,7 @@ crun --version
 - **crun 版本**：≥ 1.8.5（支持 Wasm 自动识别）
 - **依赖**：libseccomp, libyajl, libcap
 
-### 15.4.3 配置 RuntimeClass
+### 10.4.3 配置 RuntimeClass
 
 **创建 RuntimeClass**：
 
@@ -231,9 +231,9 @@ EOF
 kubectl get runtimeclass
 ```
 
-## 15.5 安装 OPA Gatekeeper
+## 10.5 安装 OPA Gatekeeper
 
-### 15.5.1 Helm 安装
+### 10.5.1 Helm 安装
 
 **安装 Helm**：
 
@@ -260,7 +260,7 @@ helm install gatekeeper gatekeeper/gatekeeper \
   --set policyEngine=wasm
 ```
 
-### 15.5.2 Wasm 引擎配置
+### 10.5.2 Wasm 引擎配置
 
 **配置 Wasm 引擎**：
 
@@ -285,7 +285,7 @@ spec:
 kubectl apply -f gatekeeper-config.yaml
 ```
 
-### 15.5.3 验证安装
+### 10.5.3 验证安装
 
 **验证 Gatekeeper**：
 
@@ -300,9 +300,9 @@ kubectl get gatekeeper -A
 kubectl get validatingwebhookconfigurations
 ```
 
-## 15.6 镜像签名与推送
+## 10.6 镜像签名与推送
 
-### 15.6.1 安装 Cosign
+### 10.6.1 安装 Cosign
 
 **安装 Cosign**：
 
@@ -326,7 +326,7 @@ cosign generate-key-pair
 cosign public-key --key cosign.key > cosign.pub
 ```
 
-### 15.6.2 签名 Wasm 策略
+### 10.6.2 签名 Wasm 策略
 
 **编译 Rego 策略到 Wasm**：
 
@@ -355,7 +355,7 @@ cosign sign --key cosign.key yourhub/policy-wasm:v1
 cosign verify --key cosign.pub yourhub/policy-wasm:v1
 ```
 
-### 15.6.3 推送 Wasm 镜像
+### 10.6.3 推送 Wasm 镜像
 
 **推送策略镜像**：
 
@@ -370,9 +370,9 @@ docker push yourhub/policy-wasm:v1
 wasm-to-oci push policy.wasm yourhub/policy-wasm:v1
 ```
 
-## 15.7 Hello Wasm Pod 示例
+## 10.7 Hello Wasm Pod 示例
 
-### 15.7.1 准备 Wasm 应用
+### 10.7.1 准备 Wasm 应用
 
 **使用 Rust 编写 Wasm 应用**：
 
@@ -399,7 +399,7 @@ cargo build --release --target wasm32-wasi
 # 得到 target/wasm32-wasi/release/hello-wasm.wasm
 ```
 
-### 15.7.2 构建和推送镜像
+### 10.7.2 构建和推送镜像
 
 **构建 OCI 镜像**：
 
@@ -416,7 +416,7 @@ docker build -t yourhub/hello-wasm:v1 .
 docker push yourhub/hello-wasm:v1
 ```
 
-### 15.7.3 部署 Pod
+### 10.7.3 部署 Pod
 
 **部署 Hello Wasm Pod**：
 
@@ -458,9 +458,9 @@ kubectl logs hello-wasm
 # 输出: Hello from WasmEdge inside K3s!
 ```
 
-## 15.8 验证与测试
+## 10.8 验证与测试
 
-### 15.8.1 验证 K3s
+### 10.8.1 验证 K3s
 
 **验证 K3s 安装**：
 
@@ -475,7 +475,7 @@ kubectl get pods -A
 k3s --version
 ```
 
-### 15.8.2 验证 WasmEdge
+### 10.8.2 验证 WasmEdge
 
 **验证 WasmEdge 安装**：
 
@@ -494,7 +494,7 @@ kubectl run test-wasm --image=yourhub/hello-wasm:v1 \
 kubectl logs test-wasm
 ```
 
-### 15.8.3 验证 Gatekeeper
+### 10.8.3 验证 Gatekeeper
 
 **验证 Gatekeeper 安装**：
 
@@ -517,7 +517,7 @@ EOF
 # 应该被 Gatekeeper 拒绝
 ```
 
-## 15.9 常见问题
+## 10.9 常见问题
 
 **常见问题**：
 
@@ -529,6 +529,18 @@ EOF
 > 详细故障排查见
 > [16-troubleshooting/troubleshooting.md](../TECHNICAL/16-troubleshooting/troubleshooting.md)
 
-## 15.10 参考
+## 10.10 参考
+
+**关联文档**：
+
+- **[10. 技术决策模型](../../COGNITIVE/10-decision-models/decision-models.md)** -
+  技术选型决策框架
+- **[10. 快速参考指南](../../COGNITIVE/10-decision-models/QUICK-REFERENCE.md)** -
+  设备访问（USB/PCI/GPU）和内核特性决策快速参考
+- **[10. 一致性检查报告](../../COGNITIVE/10-decision-models/CONSISTENCY-REPORT.md)** -
+  文档一致性检查与 Wikipedia 标准对齐
+- **[02. K3s](../02-k3s/k3s.md)** - K3s 轻量级架构
+- **[03. WasmEdge](../03-wasm-edge/wasmedge.md)** - WasmEdge 集成指南
+- **[06. OPA 策略即代码](../06-policy-opa/policy-opa.md)** - Open Policy Agent
 
 > 完整参考列表见 [REFERENCES.md](../REFERENCES.md)

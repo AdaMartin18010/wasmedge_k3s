@@ -1,35 +1,35 @@
-# 16. 故障排查：常见问题与解决方案
+# 11. 故障排查：常见问题与解决方案
 
 ## 目录
 
 - [目录](#目录)
-- [16.1 文档定位](#161-文档定位)
-- [16.2 WasmEdge 相关问题](#162-wasmedge-相关问题)
-  - [16.2.1 kubectl logs 为空](#1621-kubectl-logs-为空)
-  - [16.2.2 镜像拉取失败](#1622-镜像拉取失败)
-  - [16.2.3 无法解析 DNS](#1623-无法解析-dns)
-  - [16.2.4 WasmEdge "out of bounds" 错误](#1624-wasmedge-out-of-bounds-错误)
-- [16.3 K3s 相关问题](#163-k3s-相关问题)
-  - [16.3.1 节点无法加入](#1631-节点无法加入)
-  - [16.3.2 Pod 无法启动](#1632-pod-无法启动)
-  - [16.3.3 存储问题](#1633-存储问题)
-  - [16.3.4 网络问题](#1634-网络问题)
-- [16.4 OPA Gatekeeper 相关问题](#164-opa-gatekeeper-相关问题)
-  - [16.4.1 Webhook 超时](#1641-webhook-超时)
-  - [16.4.2 策略更新未生效](#1642-策略更新未生效)
-  - [16.4.3 策略验证失败](#1643-策略验证失败)
-- [16.5 HPA 相关问题](#165-hpa-相关问题)
-  - [16.5.1 HPA 基于 CPU 不触发](#1651-hpa-基于-cpu-不触发)
-  - [16.5.2 HPA 指标收集失败](#1652-hpa-指标收集失败)
-- [16.6 性能相关问题](#166-性能相关问题)
-  - [16.6.1 启动时间过长](#1661-启动时间过长)
-  - [16.6.2 内存占用过高](#1662-内存占用过高)
-- [16.7 故障排查方法](#167-故障排查方法)
-- [16.8 参考](#168-参考)
+- [11.1 文档定位](#111-文档定位)
+- [11.2 WasmEdge 相关问题](#112-wasmedge-相关问题)
+  - [11.2.1 kubectl logs 为空](#1121-kubectl-logs-为空)
+  - [11.2.2 镜像拉取失败](#1122-镜像拉取失败)
+  - [11.2.3 无法解析 DNS](#1123-无法解析-dns)
+  - [11.2.4 WasmEdge "out of bounds" 错误](#1124-wasmedge-out-of-bounds-错误)
+- [11.3 K3s 相关问题](#113-k3s-相关问题)
+  - [11.3.1 节点无法加入](#1131-节点无法加入)
+  - [11.3.2 Pod 无法启动](#1132-pod-无法启动)
+  - [11.3.3 存储问题](#1133-存储问题)
+  - [11.3.4 网络问题](#1134-网络问题)
+- [11.4 OPA Gatekeeper 相关问题](#114-opa-gatekeeper-相关问题)
+  - [11.4.1 Webhook 超时](#1141-webhook-超时)
+  - [11.4.2 策略更新未生效](#1142-策略更新未生效)
+  - [11.4.3 策略验证失败](#1143-策略验证失败)
+- [11.5 HPA 相关问题](#115-hpa-相关问题)
+  - [11.5.1 HPA 基于 CPU 不触发](#1151-hpa-基于-cpu-不触发)
+  - [11.5.2 HPA 指标收集失败](#1152-hpa-指标收集失败)
+- [11.6 性能相关问题](#116-性能相关问题)
+  - [11.6.1 启动时间过长](#1161-启动时间过长)
+  - [11.6.2 内存占用过高](#1162-内存占用过高)
+- [11.7 故障排查方法](#117-故障排查方法)
+- [11.8 参考](#118-参考)
 
 ---
 
-## 16.1 文档定位
+## 11.1 文档定位
 
 本文档提供 K3s + WasmEdge + OPA 常见问题的排查和解决方案，包括
 WasmEdge、K3s、OPA Gatekeeper、HPA 和性能相关问题的诊断和修复。
@@ -42,9 +42,9 @@ WasmEdge、K3s、OPA Gatekeeper、HPA 和性能相关问题的诊断和修复。
 - **HPA 问题**：HPA 不触发、指标收集失败等
 - **性能问题**：启动时间、内存占用等性能问题
 
-## 16.2 WasmEdge 相关问题
+## 11.2 WasmEdge 相关问题
 
-### 16.2.1 kubectl logs 为空
+### 11.2.1 kubectl logs 为空
 
 **现象**：
 
@@ -90,7 +90,7 @@ kubectl logs hello-wasm
 # 应该有输出
 ```
 
-### 16.2.2 镜像拉取失败
+### 11.2.2 镜像拉取失败
 
 **现象**：
 
@@ -134,7 +134,7 @@ kubectl apply -f hello-wasm.yaml
 kubectl get pod hello-wasm
 ```
 
-### 16.2.3 无法解析 DNS
+### 11.2.3 无法解析 DNS
 
 **现象**：
 
@@ -176,7 +176,7 @@ wasmedge --plugin wasi_socket
 wasmedge --list-plugins
 ```
 
-### 16.2.4 WasmEdge "out of bounds" 错误
+### 11.2.4 WasmEdge "out of bounds" 错误
 
 **现象**：
 
@@ -213,9 +213,9 @@ spec:
           memory: "50Mi"
 ```
 
-## 16.3 K3s 相关问题
+## 11.3 K3s 相关问题
 
-### 16.3.1 节点无法加入
+### 11.3.1 节点无法加入
 
 **现象**：
 
@@ -254,7 +254,7 @@ kubectl get nodes
 # 应该显示所有节点
 ```
 
-### 16.3.2 Pod 无法启动
+### 11.3.2 Pod 无法启动
 
 **现象**：
 
@@ -305,7 +305,7 @@ kubectl apply -f hello-wasm.yaml
 kubectl get pod hello-wasm
 ```
 
-### 16.3.3 存储问题
+### 11.3.3 存储问题
 
 **现象**：
 
@@ -339,7 +339,7 @@ sudo cp /var/lib/rancher/k3s/server/db/state.db.backup \
 sudo systemctl start k3s
 ```
 
-### 16.3.4 网络问题
+### 11.3.4 网络问题
 
 **现象**：
 
@@ -366,9 +366,9 @@ kubectl delete pod -n kube-system -l app=flannel
 ls -la /var/lib/rancher/k3s/server/manifests/
 ```
 
-## 16.4 OPA Gatekeeper 相关问题
+## 11.4 OPA Gatekeeper 相关问题
 
-### 16.4.1 Webhook 超时
+### 11.4.1 Webhook 超时
 
 **现象**：
 
@@ -400,7 +400,7 @@ helm upgrade gatekeeper gatekeeper/gatekeeper \
   --set policyEngine=wasm
 ```
 
-### 16.4.2 策略更新未生效
+### 11.4.2 策略更新未生效
 
 **现象**：
 
@@ -430,7 +430,7 @@ data:
 kubectl delete pod -n gatekeeper-system -l app=gatekeeper
 ```
 
-### 16.4.3 策略验证失败
+### 11.4.3 策略验证失败
 
 **现象**：
 
@@ -463,9 +463,9 @@ kubectl set image -n gatekeeper-system deployment/gatekeeper-controller-manager 
   policy=yourhub/policy-wasm:v2
 ```
 
-## 16.5 HPA 相关问题
+## 11.5 HPA 相关问题
 
-### 16.5.1 HPA 基于 CPU 不触发
+### 11.5.1 HPA 基于 CPU 不触发
 
 **现象**：
 
@@ -526,7 +526,7 @@ spec:
         threshold: '100'
 ```
 
-### 16.5.2 HPA 指标收集失败
+### 11.5.2 HPA 指标收集失败
 
 **现象**：
 
@@ -556,9 +556,9 @@ kubectl top nodes
 kubectl top pods
 ```
 
-## 16.6 性能相关问题
+## 11.6 性能相关问题
 
-### 16.6.1 启动时间过长
+### 11.6.1 启动时间过长
 
 **现象**：
 
@@ -599,7 +599,7 @@ spec:
           cpu: "50m"
 ```
 
-### 16.6.2 内存占用过高
+### 11.6.2 内存占用过高
 
 **现象**：
 
@@ -638,7 +638,7 @@ spec:
           memory: "50Mi"
 ```
 
-## 16.7 故障排查方法
+## 11.7 故障排查方法
 
 **故障排查步骤**：
 
@@ -668,7 +668,7 @@ kubectl logs -n kube-system -l app=k3s
 kubectl logs -n gatekeeper-system -l app=gatekeeper
 ```
 
-## 16.8 参考
+## 11.8 参考
 
 > 完整参考列表见 [REFERENCES.md](../REFERENCES.md)
 

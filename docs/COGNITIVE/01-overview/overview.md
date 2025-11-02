@@ -37,7 +37,7 @@
   [3. 架构与对象模型](../03-architecture/architecture.md)）
 - **技术层**：各技术深度解析（Docker/K8s/K3s/WasmEdge/OPA）
 - **全局架构设计**：技术组合方案、规格匹配、成熟技术栈案例（见
-  [17. 全局架构设计](../05-architecture-design/architecture-design.md)）
+  [05. 全局架构设计](../05-architecture-design/architecture-design.md)）
 - **实践层**：安装部署与故障排查
 
 ## 01.2 技术栈定位
@@ -374,47 +374,47 @@ $$T* = \arg\min_{T \in \{D, K, K_3, W, O\}} \text{cost}(T, S)$$
 - **架构层**：深入对象模型与控制闭环 →
   [`3. 架构与对象模型`](../03-architecture/architecture.md)
 - **全局架构设计**：技术组合方案与决策框架 →
-  [`17. 全局架构设计`](../05-architecture-design/architecture-design.md)
+  [`05. 全局架构设计`](../05-architecture-design/architecture-design.md)
 - **实战指南**：快速上手各技术 →
-  [`15. 安装与最小示例`](../TECHNICAL/10-installation/installation.md)
+  [`10. 安装与最小示例`](../TECHNICAL/10-installation/installation.md)
 - **故障排查**：常见问题与解决方案 →
-  [`16. 常见问题`](../TECHNICAL/11-troubleshooting/troubleshooting.md)
+  [`11. 常见问题`](../TECHNICAL/11-troubleshooting/troubleshooting.md)
 - **缩写词汇表**：所有缩写词定义与关系 →
-  [`22. 缩写词汇表`](../TECHNICAL/13-acronyms-glossary/acronyms-glossary.md)
+  [`13. 缩写词汇表`](../TECHNICAL/13-acronyms-glossary/acronyms-glossary.md)
 - **主题清单**：全面梳理所有主题与子主题 →
-  [`23. 主题清单`](../TECHNICAL/14-theme-inventory/theme-inventory.md)
+  [`14. 主题清单`](../TECHNICAL/14-theme-inventory/theme-inventory.md)
 - **存储技术规格堆栈**：存储技术与规格全面梳理 →
-  [`24. 存储技术规格堆栈`](../TECHNICAL/15-storage-stack/storage-stack.md)
+  [`15. 存储技术规格堆栈`](../TECHNICAL/15-storage-stack/storage-stack.md)
 - **监控与可观测性**：Metrics/Logging/Tracing 技术规范 →
-  [`25. 监控与可观测性`](../TECHNICAL/16-observability/observability.md)
+  [`16. 监控与可观测性`](../TECHNICAL/16-observability/observability.md)
 - **GitOps 和持续交付**：GitOps/CI/CD 技术规范 →
-  [`26. GitOps 和持续交付`](../TECHNICAL/17-gitops-cicd/gitops-cicd.md)
+  [`17. GitOps 和持续交付`](../TECHNICAL/17-gitops-cicd/gitops-cicd.md)
 - **Operator 和 CRD**：Operator/CRD 开发规范 →
-  [`27. Operator 和 CRD`](../TECHNICAL/18-operator-crd/operator-crd.md)
+  [`18. Operator 和 CRD`](../TECHNICAL/18-operator-crd/operator-crd.md)
 - **镜像仓库和镜像管理**：镜像仓库与管理技术规范 →
-  [`30. 镜像仓库和镜像管理`](../TECHNICAL/21-image-registry/image-registry.md)
+  [`21. 镜像仓库和镜像管理`](../TECHNICAL/21-image-registry/image-registry.md)
 - **升级和迁移**：升级和迁移技术规范 →
-  [`31. 升级和迁移`](../TECHNICAL/22-upgrade-migration/upgrade-migration.md)
+  [`22. 升级和迁移`](../TECHNICAL/22-upgrade-migration/upgrade-migration.md)
 - **开发和调试工具**：开发和调试工具规范 →
-  [`32. 开发和调试工具`](../TECHNICAL/23-dev-tools/dev-tools.md)
+  [`23. 开发和调试工具`](../TECHNICAL/23-dev-tools/dev-tools.md)
 - **服务网格**：服务网格技术规范 →
-  [`28. 服务网格`](../TECHNICAL/19-service-mesh/service-mesh.md)（可选）
+  [`19. 服务网格`](../TECHNICAL/19-service-mesh/service-mesh.md)（可选）
 - **多集群管理**：多集群管理技术规范 →
-  [`29. 多集群管理`](../TECHNICAL/20-multi-cluster/multi-cluster.md)（可选）
+  [`20. 多集群管理`](../TECHNICAL/20-multi-cluster/multi-cluster.md)（可选）
 - **成本优化**：成本优化技术规范 →
-  [`33. 成本优化`](../TECHNICAL/24-cost-optimization/cost-optimization.md)（可选
+  [`24. 成本优化`](../TECHNICAL/24-cost-optimization/cost-optimization.md)（可选
   ）
 - **社区生态和最佳实践**：社区生态和最佳实践 →
-  [`34. 社区生态和最佳实践`](../TECHNICAL/25-community-best-practices/community-best-practices.md)（
+  [`25. 社区生态和最佳实践`](../TECHNICAL/25-community-best-practices/community-best-practices.md)（
   可选）
 - **文档体系分析与改进**：批判性分析和改进计划 →
-  [`35. 文档体系分析与改进`](../TECHNICAL/26-analysis-improvement/analysis-improvement.md)（
+  [`26. 文档体系分析与改进`](../TECHNICAL/26-analysis-improvement/analysis-improvement.md)（
   分析文档）
 - **2025 年技术趋势汇总**：2025 年最新技术趋势和版本信息 →
-  [`36. 2025 年技术趋势汇总`](../TECHNICAL/27-2025-trends/2025-trends.md)（趋势
+  [`27. 2025 年技术趋势汇总`](../TECHNICAL/27-2025-trends/2025-trends.md)（趋势
   文档）
 - **矩阵视角**：云原生技术栈的矩阵力学分析 →
-  [`37. 矩阵视角`](../COGNITIVE/09-matrix-perspective/README.md)（理论文档）
+  [`09. 矩阵视角`](../09-matrix-perspective/README.md)（理论文档）
 
 ## 01.9 参考
 
@@ -434,8 +434,12 @@ $$T* = \arg\min_{T \in \{D, K, K_3, W, O\}} \text{cost}(T, S)$$
 
 **理论文档**：
 
-- [19. 形式化理论](../19-formal-theory/formal-theory.md) - 结构同构和关系等价
-- [20. 范畴论视角](../20-category-theory/category-theory.md) - 范畴论分析方法
-- [37. 矩阵视角](../37-matrix-perspective/README.md) - 矩阵力学与数学建模
+- [07. 形式化理论](../07-formal-theory/formal-theory.md) - 结构同构和关系等价
+- [08. 范畴论视角](../08-category-theory/category-theory.md) - 范畴论分析方法
+- [09. 矩阵视角](../09-matrix-perspective/README.md) - 矩阵力学与数学建模
 
 > 完整参考列表见 [REFERENCES.md](../REFERENCES.md)
+>
+> ---
+>
+> **最后更新**：2025-11-03
