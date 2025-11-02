@@ -43,6 +43,13 @@
 | 矩阵视角   | `09-matrix-perspective/` | 矩阵力学模型           |
 | 决策模型   | `10-decision-models/`    | 技术决策模型与架构选择 |
 
+### 隔离栈理论实现
+
+| 文档       | 路径                                                         | 核心内容                                                                                     |
+| ---------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------------------- |
+| 隔离模型   | `10-decision-models/01-theory-models/02-isolation-models.md` | 隔离层次理论模型，四层隔离栈的理论支撑                                                       |
+| 隔离栈技术 | `../TECHNICAL/29-isolation-stack/`                           | 四层隔离栈技术实现：虚拟化 → 半虚拟化 → 容器化 → 沙盒化；横纵耦合问题定位模型（OTLP + eBPF） |
+
 ### 性能与分析
 
 | 文档     | 路径             | 核心内容               |
@@ -77,6 +84,10 @@
 2. **[矩阵视角](09-matrix-perspective/README.md)** - 理解矩阵力学模型
 3. **[问题解决方案](06-problem-solution-matrix/problem-solution-matrix.md)** -
    掌握问题分类框架
+4. **[隔离模型](10-decision-models/01-theory-models/02-isolation-models.md)** -
+   理解隔离层次理论模型
+5. **[隔离栈技术实现](../TECHNICAL/29-isolation-stack/isolation-stack.md)** - 掌
+   握四层隔离栈技术实现和问题定位模型
 
 ## 📖 使用场景
 
@@ -92,6 +103,15 @@
 - **认知模型文档**提供 **"为什么"**（Why）和 **"是什么"**（What）
 - **技术参考文档**（`../TECHNICAL/`）提供 **"怎么做"**（How）和 **"具体细节
   "**（Details）
+
+**典型关联示例**：
+
+- **[隔离模型](10-decision-models/01-theory-models/02-isolation-models.md)**（认
+  知层）↔
+  **[隔离栈技术实现](../TECHNICAL/29-isolation-stack/isolation-stack.md)**（技术
+  层）
+  - 认知层：提供隔离层次的理论模型和决策框架
+  - 技术层：提供四层隔离栈的技术实现、问题定位模型和实战案例
 
 ## 📊 文档统计
 
