@@ -1059,6 +1059,14 @@ container_memory_usage_bytes{container="app"} 536870912 1234567890
 
 ## 16.10 参考
 
+**关联文档**：
+
+- **[28. 架构框架](../28-architecture-framework/architecture-framework.md)** -
+  多维度架构体系与技术规范（技术架构、应用架构等）
+- **[01. Kubernetes](../01-kubernetes/kubernetes.md)** - Kubernetes 架构与实践
+
+**外部参考**：
+
 - [Prometheus 官方文档](https://prometheus.io/docs/)
 - [Grafana 官方文档](https://grafana.com/docs/)
 - [Loki 官方文档](https://grafana.com/docs/loki/)

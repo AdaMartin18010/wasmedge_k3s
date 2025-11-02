@@ -27,11 +27,12 @@
 
 ### 架构与设计
 
-| 文档           | 路径                          | 核心内容                     |
-| -------------- | ----------------------------- | ---------------------------- |
-| 架构与对象模型 | `03-architecture/`            | 架构理念和设计思想（混合型） |
-| 全局架构设计   | `05-architecture-design/`     | 技术组合和架构决策           |
-| 问题解决方案   | `06-problem-solution-matrix/` | 问题分类框架（混合型）       |
+| 文档           | 路径                                      | 核心内容                     |
+| -------------- | ----------------------------------------- | ---------------------------- |
+| 架构与对象模型 | `03-architecture/`                        | 架构理念和设计思想（混合型） |
+| 全局架构设计   | `05-architecture-design/`                 | 技术组合和架构决策           |
+| 问题解决方案   | `06-problem-solution-matrix/`             | 问题分类框架（混合型）       |
+| 架构框架       | `../TECHNICAL/28-architecture-framework/` | 多维度架构体系与技术规范     |
 
 ### 理论与分析
 
@@ -64,7 +65,9 @@
    想
 2. **[全局架构设计](05-architecture-design/architecture-design.md)** - 掌握技术
    组合和架构决策
-3. **[形式化理论](07-formal-theory/formal-theory.md)** - 深入理解结构同构和关系
+3. **[架构框架](../TECHNICAL/28-architecture-framework/architecture-framework.md)** -
+   了解多维度架构体系与技术规范
+4. **[形式化理论](07-formal-theory/formal-theory.md)** - 深入理解结构同构和关系
    等价
 
 ### 高级理论路径

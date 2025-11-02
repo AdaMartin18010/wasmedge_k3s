@@ -19,15 +19,16 @@
 - [13.6 对象与资源类缩写](#136-对象与资源类缩写)
 - [13.7 开发与运维类缩写](#137-开发与运维类缩写)
 - [13.8 硬件与平台类缩写](#138-硬件与平台类缩写)
-- [13.9 缩写词关系矩阵](#139-缩写词关系矩阵)
-  - [13.9.1 编排类关系矩阵](#1391-编排类关系矩阵)
-  - [13.9.2 运行时类关系矩阵](#1392-运行时类关系矩阵)
-  - [13.9.3 网络类关系矩阵](#1393-网络类关系矩阵)
-  - [13.9.4 策略类关系矩阵](#1394-策略类关系矩阵)
-- [13.10 缩写词快速检索](#1310-缩写词快速检索)
-  - [13.10.1 按字母顺序检索](#13101-按字母顺序检索)
-  - [13.10.2 按分类检索](#13102-按分类检索)
-- [13.11 参考](#1311-参考)
+- [13.9 架构类缩写](#139-架构类缩写)
+- [13.10 缩写词关系矩阵](#1310-缩写词关系矩阵)
+  - [13.10.1 编排类关系矩阵](#13101-编排类关系矩阵)
+  - [13.10.2 运行时类关系矩阵](#13102-运行时类关系矩阵)
+  - [13.10.3 网络类关系矩阵](#13103-网络类关系矩阵)
+  - [13.10.4 策略类关系矩阵](#13104-策略类关系矩阵)
+- [13.11 缩写词快速检索](#1311-缩写词快速检索)
+  - [13.11.1 按字母顺序检索](#13111-按字母顺序检索)
+  - [13.11.2 按分类检索](#13112-按分类检索)
+- [13.12 参考](#1312-参考)
 
 ---
 
@@ -45,6 +46,8 @@
 - **对象与资源类缩写**：Kubernetes 对象相关缩写词
 - **开发与运维类缩写**：CI/CD、DevOps 相关缩写词
 - **硬件与平台类缩写**：硬件和平台相关缩写词
+- **架构类缩写**：架构框架相关缩写词（技术架构、概念架构、数据架构、业务架构、软
+  件架构、应用架构、场景架构）
 - **缩写词关系矩阵**：缩写词之间的关联关系
 - **缩写词快速检索**：按字母顺序快速查找
 
@@ -219,9 +222,23 @@
 | **PaaS**       | Platform as a Service       | 平台即服务     | 云计算服务模型   | 平台服务提供         | Cloud, K8s         |
 | **IaaS**       | Infrastructure as a Service | 基础设施即服务 | 云计算服务模型   | 基础设施提供         | Cloud, VM          |
 
-## 13.9 缩写词关系矩阵
+## 13.9 架构类缩写
 
-### 13.9.1 编排类关系矩阵
+| 缩写     | 完整形式                          | 中文解释         | 概念关系             | 使用场景                       | 相关缩写                    |
+| -------- | --------------------------------- | ---------------- | -------------------- | ------------------------------ | --------------------------- |
+| **TA**   | Technical Architecture            | 技术架构         | 基础设施层架构维度   | 硬件、软件、网络等基础设施设计 | CNCF, K8s, Docker           |
+| **CA**   | Conceptual Architecture           | 概念架构         | 高层抽象模型架构维度 | 系统高层抽象模型设计           | Microservices, CNCF         |
+| **DA**   | Data Architecture                 | 数据架构         | 数据层架构维度       | 数据结构、存储、处理设计       | CSI, PV, PVC                |
+| **BA**   | Business Architecture             | 业务架构         | 业务层架构维度       | 业务流程、组织、战略设计       | DevOps, CI/CD               |
+| **SA**   | Software Architecture             | 软件架构         | 软件层架构维度       | 软件结构、组件、接口设计       | Microservices, Service Mesh |
+| **AA**   | Application Architecture          | 应用架构         | 应用层架构维度       | 应用系统结构和组件设计         | 12-Factor, Containerization |
+| **ScA**  | Scenario Architecture             | 场景架构         | 场景层架构维度       | 特定场景的架构设计             | Edge Computing, Serverless  |
+| **EA**   | Enterprise Architecture           | 企业架构         | 企业级架构框架       | 多维度架构体系的综合应用       | TOGAF, CNCF, Wikipedia      |
+| **CNCF** | Cloud Native Computing Foundation | 云原生计算基金会 | 云原生技术标准化组织 | 云原生架构定义和技术规范       | K8s, OCI, CNI, CSI          |
+
+## 13.10 缩写词关系矩阵
+
+### 13.10.1 编排类关系矩阵
 
 | 缩写    | 所属层次 | 直接关系                | 间接关系                 | 依赖关系           |
 | ------- | -------- | ----------------------- | ------------------------ | ------------------ |
@@ -231,7 +248,7 @@
 | **CNI** | 接口层   | Flannel, Calico, Cilium | Service, NetworkPolicy   | iptables, IPVS     |
 | **CSI** | 接口层   | PV, PVC, StorageClass   | Pod, StatefulSet         | Storage            |
 
-### 13.9.2 运行时类关系矩阵
+### 13.10.2 运行时类关系矩阵
 
 | 缩写           | 所属层次 | 直接关系               | 间接关系       | 依赖关系         |
 | -------------- | -------- | ---------------------- | -------------- | ---------------- |
@@ -241,7 +258,7 @@
 | **Wasm**       | 运行时层 | WasmEdge, WASI         | OPA-Wasm, crun | WebAssembly      |
 | **WasmEdge**   | 运行时层 | Wasm, WASI, WASI-NN    | runwasi, crun  | WebAssembly      |
 
-### 13.9.3 网络类关系矩阵
+### 13.10.3 网络类关系矩阵
 
 | 缩写        | 所属层次 | 直接关系                          | 间接关系               | 依赖关系      |
 | ----------- | -------- | --------------------------------- | ---------------------- | ------------- |
@@ -250,7 +267,7 @@
 | **Ingress** | 对象层   | Ingress Controller, TLS           | Service, HTTP          | CNI           |
 | **DNS**     | 服务层   | CoreDNS, Service                  | Pod, Namespace         | CNI           |
 
-### 13.9.4 策略类关系矩阵
+### 13.10.4 策略类关系矩阵
 
 | 缩写         | 所属层次 | 直接关系                  | 间接关系                  | 依赖关系   |
 | ------------ | -------- | ------------------------- | ------------------------- | ---------- |
@@ -258,20 +275,24 @@
 | **Rego**     | 语言层   | OPA, OPA-Wasm             | Policy, Rule              | OPA        |
 | **OPA-Wasm** | 策略层   | OPA, Wasm, Rego           | Admission Control         | WasmEdge   |
 
-## 13.10 缩写词快速检索
+## 13.11 缩写词快速检索
 
-### 13.10.1 按字母顺序检索
+### 13.11.1 按字母顺序检索
 
 **A**:
 
+- **AA**: Application Architecture - 应用架构
 - **API**: Application Programming Interface - 应用程序编程接口
 - **ARM**: Advanced RISC Machine - ARM 架构
 
 **B**:
 
+- **BA**: Business Architecture - 业务架构
 - **BGP**: Border Gateway Protocol - 边界网关协议
 
 **C**:
+
+- **CA**: Conceptual Architecture - 概念架构
 
 - **Calico**: Calico - CNI 网络插件
 - **CD**: Continuous Deployment - 持续部署
@@ -303,6 +324,7 @@
 
 **E**:
 
+- **EA**: Enterprise Architecture - 企业架构
 - **eBPF**: extended Berkeley Packet Filter - 扩展的伯克利包过滤器
 - **etcd**: etcd - 分布式键值存储
 - **ExternalName**: External Name - 外部名称
@@ -395,7 +417,9 @@
 
 **S**:
 
+- **SA**: Software Architecture - 软件架构
 - **SaaS**: Software as a Service - 软件即服务
+- **ScA**: Scenario Architecture - 场景架构
 - **SDK**: Software Development Kit - 软件开发工具包
 - **Secret**: Secret - Kubernetes Secret 对象
 - **Selector**: Selector - Kubernetes Selector
@@ -408,6 +432,7 @@
 
 **T**:
 
+- **TA**: Technical Architecture - 技术架构
 - **TCP**: Transmission Control Protocol - 传输控制协议
 - **TLS**: Transport Layer Security - 传输层安全
 
@@ -440,7 +465,7 @@
 
 - **5G**: 5th Generation - 第五代移动通信
 
-### 13.10.2 按分类检索
+### 13.11.2 按分类检索
 
 **编排类**:
 
@@ -478,7 +503,21 @@
 
 - CPU, GPU, ARM, x86, IoT, MEC, 5G, FaaS, Serverless, SaaS, PaaS, IaaS
 
-## 13.11 参考
+**架构类**:
+
+- TA, CA, DA, BA, SA, AA, ScA, EA, CNCF
+
+## 13.12 参考
+
+**关联文档**：
+
+- **[28. 架构框架](../28-architecture-framework/architecture-framework.md)** -
+  多维度架构体系与技术规范（技术架构、概念架构、数据架构、业务架构、软件架构、应
+  用架构、场景架构）
+- **[05. 全局架构设计](../../COGNITIVE/05-architecture-design/architecture-design.md)** -
+  技术组合和架构决策
+
+**外部参考**：
 
 - [Kubernetes 官方文档](https://kubernetes.io/docs/)
 - [Docker 官方文档](https://docs.docker.com/)
@@ -488,3 +527,10 @@
 - [CRI 规范](https://github.com/kubernetes/cri-api)
 - [WasmEdge 文档](https://wasmedge.org/docs/)
 - [OPA 文档](https://www.openpolicyagent.org/docs/)
+- [CNCF 项目清单](https://www.cncf.io/projects/)
+- [CNCF Landscape](https://landscape.cncf.io/)
+- [Wikipedia - Enterprise Architecture](https://en.wikipedia.org/wiki/Enterprise_architecture)
+
+---
+
+**最后更新**：2025-11-03 **维护者**：项目团队

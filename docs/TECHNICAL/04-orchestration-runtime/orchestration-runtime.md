@@ -456,8 +456,15 @@ $$
 
 ## 04.9 参考
 
-- [37. 矩阵视角](../COGNITIVE/09-matrix-perspective/README.md) - 运行时切换（R）
-  概念矩阵分析
+**关联文档**：
+
+- **[28. 架构框架](../28-architecture-framework/architecture-framework.md)** -
+  多维度架构体系与技术规范（技术架构、概念架构、数据架构、业务架构、软件架构、应
+  用架构、场景架构）
+- **[05. 全局架构设计](../../COGNITIVE/05-architecture-design/architecture-design.md)** -
+  技术组合和架构决策
+- [09. 矩阵视角](../../COGNITIVE/09-matrix-perspective/README.md) - 运行时切换
+  （R）概念矩阵分析
 
 **外部参考**：
 
@@ -465,3 +472,7 @@ $$
     [Container Runtime Interface](https://github.com/kubernetes/cri-api)
 
 > 完整参考列表见 [REFERENCES.md](../REFERENCES.md)
+
+---
+
+**最后更新**：2025-11-03 **维护者**：项目团队

@@ -1106,6 +1106,9 @@ $$
   （USB/PCI/GPU）和内核特性决策快速参考
 - **[10. 一致性检查报告](../10-decision-models/CONSISTENCY-REPORT.md)** - 文档一
   致性检查与 Wikipedia 标准对齐
+- **[28. 架构框架](../../TECHNICAL/28-architecture-framework/architecture-framework.md)** -
+  多维度架构体系与技术规范（技术架构、概念架构、数据架构、业务架构、软件架构、应
+  用架构、场景架构）
 - **[06. 问题解决方案](../06-problem-solution-matrix/problem-solution-matrix.md)** -
   技术问题分类和解决
 - **[09. 矩阵视角](../09-matrix-perspective/README.md)** - 矩阵力学分析方法（用

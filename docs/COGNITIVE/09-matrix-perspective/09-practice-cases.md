@@ -348,9 +348,16 @@ optimal_stack = ['K8s', 'K3s', 'WasmEdge', 'OPA', 'Capsule']
 
 **参考**：
 
+**关联文档**：
+
+- **[28. 架构框架](../../TECHNICAL/28-architecture-framework/architecture-framework.md)** -
+  多维度架构体系与技术规范（技术架构、概念架构、数据架构、业务架构、软件架构、应
+  用架构、场景架构）
+- **[05. 全局架构设计](../05-architecture-design/architecture-design.md)** - 技
+  术组合和架构决策
 - [实践案例 - 返回目录](../09-matrix-perspective/README.md)
 - [矩阵运算与应用：实际的计算方法和应用场景](08-matrix-operations.md)
-- [27. 2025 年技术趋势汇总](../TECHNICAL/27-2025-trends/2025-trends.md)
+- [27. 2025 年技术趋势汇总](../../TECHNICAL/27-2025-trends/2025-trends.md)
 - [10. 技术决策模型](../10-decision-models/decision-models.md) - 技术选型决策框
   架
 - [10. 快速参考指南](../10-decision-models/QUICK-REFERENCE.md) - 设备访问

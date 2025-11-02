@@ -1161,6 +1161,8 @@ graph TB
   设备访问（USB/PCI/GPU）和内核特性决策快速参考（包含 eBPF/epoll/io_uring 决策）
 - **[10. 一致性检查报告](../../COGNITIVE/10-decision-models/CONSISTENCY-REPORT.md)** -
   文档一致性检查与 Wikipedia 标准对齐
+- **[28. 架构框架](../28-architecture-framework/architecture-framework.md)** -
+  多维度架构体系与技术规范（技术架构、网络架构等）
 - **[01. Kubernetes](../01-kubernetes/kubernetes.md)** - Kubernetes 架构与实践
 - **[02. K3s](../02-k3s/k3s.md)** - K3s 轻量级架构
 

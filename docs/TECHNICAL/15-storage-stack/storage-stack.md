@@ -1142,6 +1142,14 @@ deletionPolicy: Delete
 
 ## 15.12 参考
 
+**关联文档**：
+
+- **[28. 架构框架](../28-architecture-framework/architecture-framework.md)** -
+  多维度架构体系与技术规范（技术架构、数据架构等）
+- **[01. Kubernetes](../01-kubernetes/kubernetes.md)** - Kubernetes 架构与实践
+
+**外部参考**：
+
 - [Kubernetes 存储文档](https://kubernetes.io/docs/concepts/storage/)
 - [CSI 规范](https://github.com/container-storage-interface/spec)
 - [NFS CSI Driver](https://github.com/kubernetes-csi/csi-driver-nfs)

@@ -161,6 +161,13 @@ print(f"K3s 在边缘场景适配度：{score:.2f}")
 
 ## 🔗 相关文档
 
+**关联文档**：
+
+- **[28. 架构框架](../../TECHNICAL/28-architecture-framework/architecture-framework.md)** -
+  多维度架构体系与技术规范（技术架构、概念架构、数据架构、业务架构、软件架构、应
+  用架构、场景架构）
+- **[05. 全局架构设计](../05-architecture-design/architecture-design.md)** - 技
+  术组合和架构决策
 - [矩阵视角主索引](README.md)
 - [矩阵运算与应用](08-matrix-operations.md)
 - [实践案例](09-practice-cases.md)

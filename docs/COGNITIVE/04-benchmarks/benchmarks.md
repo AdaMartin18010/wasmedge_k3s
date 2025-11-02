@@ -264,5 +264,21 @@ $$P_{\text{improvement}} = \frac{P_{\text{container}} - P_{\text{wasm}}}{P_{\tex
 
 ## 04.8 参考
 
+**关联文档**：
+
+- **[28. 架构框架](../../TECHNICAL/28-architecture-framework/architecture-framework.md)** -
+  多维度架构体系与技术规范（技术架构、概念架构、数据架构、业务架构、软件架构、应
+  用架构、场景架构）
+- **[05. 全局架构设计](../05-architecture-design/architecture-design.md)** - 技
+  术组合和架构决策
+- [10. 技术决策模型](../10-decision-models/decision-models.md) - 技术选型决策框
+  架
+- [10. 快速参考指南](../10-decision-models/QUICK-REFERENCE.md) - 设备访问和内核
+  特性决策快速参考
+
 > 完整参考列表见 [REFERENCES.md](../REFERENCES.md) > **重要提醒**：本文档所有性
 > 能数据必须附来源、时间、版本信息。数据可能随时间变化，需定期更新和验证。
+
+---
+
+**最后更新**：2025-11-03

@@ -1173,8 +1173,13 @@ $$P_{K3}(N, P) = \text{controller\_count} \times \text{sqlite\_latency}(P)$$
 
 ## 03.15 参考
 
-- [17. 架构设计](../05-architecture-design/architecture-design.md) - 全局架构设
-  计与技术组合
+**关联文档**：
+
+- **[28. 架构框架](../../TECHNICAL/28-architecture-framework/architecture-framework.md)** -
+  多维度架构体系与技术规范（技术架构、概念架构、数据架构、业务架构、软件架构、应
+  用架构、场景架构）
+- **[05. 全局架构设计](../05-architecture-design/architecture-design.md)** - 全
+  局架构设计与技术组合
 - [09. 矩阵视角](../09-matrix-perspective/README.md) - 矩阵力学分析方法（用于架
   构决策量化支持）
 - [10. 技术决策模型](../10-decision-models/decision-models.md) - 技术选型决策框

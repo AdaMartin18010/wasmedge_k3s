@@ -327,6 +327,13 @@ scores = [S_serverless @ A @ weights for A in tech_chains]
 
 **参考**：
 
+**关联文档**：
+
+- **[28. 架构框架](../../TECHNICAL/28-architecture-framework/architecture-framework.md)** -
+  多维度架构体系与技术规范（技术架构、概念架构、数据架构、业务架构、软件架构、应
+  用架构、场景架构）
+- **[05. 全局架构设计](../05-architecture-design/architecture-design.md)** - 技
+  术组合和架构决策
 - [技术链矩阵序列 - 返回目录](../09-matrix-perspective/README.md)
 - [操作变换矩阵：各种操作的矩阵表示](05-operation-transformation.md)
 - [AI 参数矩阵：AI 可学习参数矩阵](07-ai-parameters.md)

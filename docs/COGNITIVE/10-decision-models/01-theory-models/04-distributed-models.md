@@ -1065,6 +1065,11 @@ $$L_{\text{CH}}(k) = \arg\min_{j} \text{hash}(k, j)$$
 
 **关联文档**：
 
+- **[28. 架构框架](../../../../TECHNICAL/28-architecture-framework/architecture-framework.md)** -
+  多维度架构体系与技术规范（技术架构、概念架构、数据架构、业务架构、软件架构、应
+  用架构、场景架构）
+- **[05. 全局架构设计](../../../05-architecture-design/architecture-design.md)** -
+  技术组合和架构决策
 - **[资源模型](01-resource-models.md)** - 物理资源权衡模型
 - **[隔离模型](02-isolation-models.md)** - 隔离机制理论模型
 - **[安全模型](03-security-models.md)** - 安全机制理论模型
@@ -1081,4 +1086,4 @@ $$L_{\text{CH}}(k) = \arg\min_{j} \text{hash}(k, j)$$
 
 ---
 
-**最后更新**：2025-01-XX **维护者**：项目团队
+**最后更新**：2025-11-03 **维护者**：项目团队

@@ -1478,6 +1478,12 @@ $$\text{Choice} = \arg\max_{\mathcal{C} \in \{\mathcal{C}_{\text{VM}}, \mathcal{
 
 **关联文档**：
 
+- **[28. 架构框架](../../TECHNICAL/28-architecture-framework/architecture-framework.md)** -
+  多维度架构体系与技术规范（技术架构、概念架构、数据架构、业务架构、软件架构、应
+  用架构、场景架构）
+- **[05. 全局架构设计](../05-architecture-design/architecture-design.md)** - 技
+  术组合和架构决策
+- [03. 架构与对象模型](../03-architecture/architecture.md) - 系统架构设计
 - [07. 形式化理论](../07-formal-theory/formal-theory.md) - 结构同构和关系等价
 - [09. 矩阵视角](../09-matrix-perspective/README.md) - 矩阵力学与数学建模（补充
   视角）

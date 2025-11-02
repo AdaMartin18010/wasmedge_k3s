@@ -150,6 +150,9 @@
 
 - **[05. 全局架构设计](COGNITIVE/05-architecture-design/architecture-design.md)** -
   技术组合和架构决策
+- **[28. 架构框架](TECHNICAL/28-architecture-framework/architecture-framework.md)** -
+  多维度架构体系与技术规范（技术架构、概念架构、数据架构、业务架构、软件架构、应
+  用架构、场景架构）
 - **[06. 问题解决方案](COGNITIVE/06-problem-solution-matrix/problem-solution-matrix.md)** -
   技术问题分类和解决
 - **[07. 形式化理论](COGNITIVE/07-formal-theory/formal-theory.md)** - 结构同构和
@@ -198,35 +201,46 @@
 - **[26. 分析改进](TECHNICAL/26-analysis-improvement/analysis-improvement.md)** -
   文档体系分析与改进
 - **[27. 2025 趋势](TECHNICAL/27-2025-trends/2025-trends.md)** - 2025 技术趋势
+- **[28. 架构框架](TECHNICAL/28-architecture-framework/architecture-framework.md)** -
+  多维度架构体系与技术规范（技术架构、概念架构、数据架构、业务架构、软件架构、应
+  用架构、场景架构）
 
 ## 🎯 使用指南
 
 ### 按场景选择文档
 
-| 场景           | 推荐文档                                                                    | 说明                   |
-| -------------- | --------------------------------------------------------------------------- | ---------------------- |
-| **快速入门**   | [01. 总览](COGNITIVE/01-overview/overview.md)                               | 了解技术栈全貌         |
-| **学习路径**   | [00. 认知图谱](COGNITIVE/00-knowledge-map/knowledge-map.md)                 | 规划学习路线           |
-| **架构设计**   | [17. 全局架构设计](COGNITIVE/05-architecture-design/architecture-design.md) | 技术选型和架构决策     |
-| **技术选型**   | [01. 总览 - 技术决策树](COGNITIVE/01-overview/overview.md#14-技术决策树)    | 根据场景选择技术       |
-| **决策参考**   | [10. 快速参考指南](COGNITIVE/10-decision-models/QUICK-REFERENCE.md)         | 设备访问和内核特性决策 |
-| **一致性检查** | [10. 一致性检查报告](COGNITIVE/10-decision-models/CONSISTENCY-REPORT.md)    | 与 Wikipedia 标准对齐  |
-| **安装部署**   | [10. 安装部署](TECHNICAL/10-installation/installation.md)                   | 快速上手各技术         |
-| **故障排查**   | [11. 故障排查](TECHNICAL/11-troubleshooting/troubleshooting.md)             | 解决常见问题           |
-| **性能优化**   | [14. 性能基准](COGNITIVE/04-benchmarks/benchmarks.md)                       | 了解性能基线           |
-| **安全合规**   | [13. 安全合规](TECHNICAL/09-security-compliance/security-compliance.md)     | 安全最佳实践           |
+| 场景           | 推荐文档                                                                      | 说明                     |
+| -------------- | ----------------------------------------------------------------------------- | ------------------------ |
+| **快速入门**   | [01. 总览](COGNITIVE/01-overview/overview.md)                                 | 了解技术栈全貌           |
+| **学习路径**   | [00. 认知图谱](COGNITIVE/00-knowledge-map/knowledge-map.md)                   | 规划学习路线             |
+| **架构设计**   | [05. 全局架构设计](COGNITIVE/05-architecture-design/architecture-design.md)   | 技术组合和架构决策       |
+| **架构框架**   | [28. 架构框架](TECHNICAL/28-architecture-framework/architecture-framework.md) | 多维度架构体系与技术规范 |
+| **技术选型**   | [01. 总览 - 技术决策树](COGNITIVE/01-overview/overview.md#14-技术决策树)      | 根据场景选择技术         |
+| **决策参考**   | [10. 快速参考指南](COGNITIVE/10-decision-models/QUICK-REFERENCE.md)           | 设备访问和内核特性决策   |
+| **一致性检查** | [10. 一致性检查报告](COGNITIVE/10-decision-models/CONSISTENCY-REPORT.md)      | 与 Wikipedia 标准对齐    |
+| **安装部署**   | [10. 安装部署](TECHNICAL/10-installation/installation.md)                     | 快速上手各技术           |
+| **故障排查**   | [11. 故障排查](TECHNICAL/11-troubleshooting/troubleshooting.md)               | 解决常见问题             |
+| **性能优化**   | [14. 性能基准](COGNITIVE/04-benchmarks/benchmarks.md)                         | 了解性能基线             |
+| **安全合规**   | [13. 安全合规](TECHNICAL/09-security-compliance/security-compliance.md)       | 安全最佳实践             |
 
 ### 按角色选择文档
 
 #### 架构师
 
-- [17. 全局架构设计](COGNITIVE/05-architecture-design/architecture-design.md)
-- [03. 架构与对象模型](COGNITIVE/03-architecture/architecture.md)
-- [10. 技术决策模型](COGNITIVE/10-decision-models/decision-models.md)
-- [10. 快速参考指南](COGNITIVE/10-decision-models/QUICK-REFERENCE.md)
-- [10. 一致性检查报告](COGNITIVE/10-decision-models/CONSISTENCY-REPORT.md)
-- [09. 矩阵视角](COGNITIVE/09-matrix-perspective/README.md)
-- [08. 范畴论视角](COGNITIVE/08-category-theory/category-theory.md)
+- [28. 架构框架](TECHNICAL/28-architecture-framework/architecture-framework.md) -
+  多维度架构体系与技术规范
+- [05. 全局架构设计](COGNITIVE/05-architecture-design/architecture-design.md) -
+  技术组合和架构决策
+- [03. 架构与对象模型](COGNITIVE/03-architecture/architecture.md) - 系统架构设计
+- [10. 技术决策模型](COGNITIVE/10-decision-models/decision-models.md) - 技术选型
+  决策框架
+- [10. 快速参考指南](COGNITIVE/10-decision-models/QUICK-REFERENCE.md) - 设备访问
+  和内核特性决策
+- [10. 一致性检查报告](COGNITIVE/10-decision-models/CONSISTENCY-REPORT.md) - 与
+  Wikipedia 标准对齐
+- [09. 矩阵视角](COGNITIVE/09-matrix-perspective/README.md) - 矩阵力学模型
+- [08. 范畴论视角](COGNITIVE/08-category-theory/category-theory.md) - 范畴论分析
+  方法
 
 #### 开发者
 
@@ -335,18 +349,20 @@
 ### 专家路径（3-6 月）
 
 1. 架构设计 →
-   [17. 全局架构设计](COGNITIVE/05-architecture-design/architecture-design.md)
-2. 技术决策模型 →
+   [05. 全局架构设计](COGNITIVE/05-architecture-design/architecture-design.md)
+2. 架构框架 →
+   [28. 架构框架](TECHNICAL/28-architecture-framework/architecture-framework.md)
+3. 技术决策模型 →
    [10. 技术决策模型](COGNITIVE/10-decision-models/decision-models.md)
-3. 决策参考指南 →
+4. 决策参考指南 →
    [10. 快速参考指南](COGNITIVE/10-decision-models/QUICK-REFERENCE.md)
-4. 一致性检查 →
+5. 一致性检查 →
    [10. 一致性检查报告](COGNITIVE/10-decision-models/CONSISTENCY-REPORT.md)
-5. 形式化理论 → [07. 形式化理论](COGNITIVE/07-formal-theory/formal-theory.md)
-6. 范畴论 → [08. 范畴论视角](COGNITIVE/08-category-theory/category-theory.md)
-7. 矩阵视角 → [09. 矩阵视角](COGNITIVE/09-matrix-perspective/README.md)
-8. 技术规格深度 →
-   [12-27. 技术规格堆栈](TECHNICAL/12-network-stack/network-stack.md)
+6. 形式化理论 → [07. 形式化理论](COGNITIVE/07-formal-theory/formal-theory.md)
+7. 范畴论 → [08. 范畴论视角](COGNITIVE/08-category-theory/category-theory.md)
+8. 矩阵视角 → [09. 矩阵视角](COGNITIVE/09-matrix-perspective/README.md)
+9. 技术规格深度 →
+   [21-32. 技术规格堆栈](TECHNICAL/12-network-stack/network-stack.md)
 
 ## 📚 参考资源
 

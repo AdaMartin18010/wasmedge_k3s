@@ -96,8 +96,16 @@ $$\text{技术链} = \text{Docker} \rightarrow \text{K8s} \rightarrow \text{K3s}
 
 ## 参考
 
+**关联文档**：
+
+- **[28. 架构框架](../../TECHNICAL/28-architecture-framework/architecture-framework.md)** -
+  多维度架构体系与技术规范（技术架构、概念架构、数据架构、业务架构、软件架构、应
+  用架构、场景架构）
+- **[05. 全局架构设计](../05-architecture-design/architecture-design.md)** - 技
+  术组合和架构决策
 - [ai_view.md](../../ai_view.md) - 核心矩阵内容的原始来源
-- [27. 2025 年技术趋势汇总](../27-2025-trends/2025-trends.md) - 最新技术趋势
+- [27. 2025 年技术趋势汇总](../../TECHNICAL/27-2025-trends/2025-trends.md) - 最
+  新技术趋势
 - [06. 问题-解决方案矩阵](../06-problem-solution-matrix/problem-solution-matrix.md) -
   问题解决方案矩阵
 - [07. 形式化理论](../07-formal-theory/formal-theory.md) - 形式化理论基础

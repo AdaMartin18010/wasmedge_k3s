@@ -388,13 +388,16 @@ $$A_{\text{attack}} = \sum_{i} A_{\text{interface}_i} \times P_{\text{vulnerabil
 
 **关联文档**：
 
+- **[28. 架构框架](../../TECHNICAL/28-architecture-framework/architecture-framework.md)** -
+  多维度架构体系与技术规范（技术架构、概念架构、数据架构、业务架构、软件架构、应
+  用架构、场景架构）
+- **[05. 全局架构设计](../05-architecture-design/architecture-design.md)** - 技
+  术组合方案与决策框架
 - **[02. 理念层](../02-principles/principles.md)** - 容器化的核心理念
 - **[03. 架构与对象模型](../03-architecture/architecture.md)** - 架构理念和设计
   思想
 - **[03. 执行流与调度视角](../03-architecture/execution-flow-scheduling.md)** -
   从执行流视角分析设备访问和内核特性
-- **[05. 全局架构设计](../05-architecture-design/architecture-design.md)** - 技
-  术组合方案与决策框架
 - **[06. 问题解决方案矩阵](../06-problem-solution-matrix/problem-solution-matrix.md)** -
   问题分类与解决方案
 - **[08. 范畴论视角](../08-category-theory/category-theory.md)** - 技术概念的数

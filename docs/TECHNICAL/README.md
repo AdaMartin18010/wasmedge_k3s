@@ -68,6 +68,7 @@
 | 社区生态和最佳实践 | `25-community-best-practices/` | 社区生态和最佳实践（可选） |
 | 分析改进           | `26-analysis-improvement/`     | 分析改进文档               |
 | 2025 趋势          | `27-2025-trends/`              | 2025 技术趋势              |
+| 架构框架           | `28-architecture-framework/`   | 多维度架构体系与技术规范   |
 
 ## 🚀 快速开始
 
@@ -147,11 +148,50 @@
 - [05. OCI 供应链](05-oci-supply-chain/oci-supply-chain.md)
 - [06. OPA 策略即代码](06-policy-opa/policy-opa.md)
 
+### 架构师
+
+- [28. 架构框架](28-architecture-framework/architecture-framework.md) - 多维度架
+  构体系与技术规范
+- [00. Docker](00-docker/docker.md) - 容器化引擎技术规范
+- [01. Kubernetes](01-kubernetes/kubernetes.md) - 集群编排架构与实践
+- [02. K3s](02-k3s/k3s.md) - 轻量级 Kubernetes 架构
+
 ## 📊 文档统计
 
-- **总文档数**：25 个核心技术参考文档
-- **覆盖范围**：容器编排、运行时、策略、实践指南、技术规格
+- **总文档数**：28 个核心技术参考文档（含架构框架）
+- **覆盖范围**：容器编排、运行时、策略、实践指南、技术规格、架构框架
 - **文档类型**：技术参考文档
+
+## 🏗️ 架构框架
+
+### 架构维度体系
+
+根据 **CNCF 云原生架构定义**和 **Wikipedia 企业架构标准**（2025-11-03），本项目
+的架构体系包含以下七个核心维度：
+
+1. **[技术架构](28-architecture-framework/architecture-framework.md#283-技术架构technical-architecture)** -
+   硬件、软件、网络等基础设施
+2. **[概念架构](28-architecture-framework/architecture-framework.md#284-概念架构conceptual-architecture)** -
+   系统高层抽象模型
+3. **[数据架构](28-architecture-framework/architecture-framework.md#285-数据架构data-architecture)** -
+   数据结构、存储、处理
+4. **[业务架构](28-architecture-framework/architecture-framework.md#286-业务架构business-architecture)** -
+   业务流程、组织、战略
+5. **[软件架构](28-architecture-framework/architecture-framework.md#287-软件架构software-architecture)** -
+   软件结构、组件、接口
+6. **[应用架构](28-architecture-framework/architecture-framework.md#288-应用架构application-architecture)** -
+   应用系统结构和组件
+7. **[场景架构](28-architecture-framework/architecture-framework.md#289-场景架构scenario-architecture)** -
+   特定场景的架构设计
+
+**完整架构框架文
+档**：**[28. 架构框架](28-architecture-framework/architecture-framework.md)**
+
+**架构对齐标准**：
+
+- **CNCF 定义**：云原生计算基金会标准定义
+- **Wikipedia 标准**：Wikipedia 企业架构标准（2025-11-03）
+- **架构关系**：各架构维度间的关系和依赖
 
 ---
 

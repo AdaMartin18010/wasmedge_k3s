@@ -418,6 +418,23 @@ $$T* = \arg\min_{T \in \{D, K, K_3, W, O\}} \text{cost}(T, S)$$
 
 ## 01.9 参考
 
+**关联文档**：
+
+- **[28. 架构框架](../../TECHNICAL/28-architecture-framework/architecture-framework.md)** -
+  多维度架构体系与技术规范（技术架构、概念架构、数据架构、业务架构、软件架构、应
+  用架构、场景架构）
+- **[05. 全局架构设计](../05-architecture-design/architecture-design.md)** - 技
+  术组合和架构决策
+- [02. 理念层](../02-principles/principles.md) - 云原生核心理念演进
+- [03. 架构与对象模型](../03-architecture/architecture.md) - 系统架构设计
+- [10. 技术决策模型](../10-decision-models/decision-models.md) - 技术选型决策框
+  架
+- [07. 形式化理论](../07-formal-theory/formal-theory.md) - 结构同构和关系等价
+- [08. 范畴论视角](../08-category-theory/category-theory.md) - 范畴论分析方法
+- [09. 矩阵视角](../09-matrix-perspective/README.md) - 矩阵力学与数学建模
+
+**外部参考**：
+
 [docker-principles]: [Docker 官方文档](https://docs.docker.com/)
 [k8s-principles]: [Kubernetes 官方文档](https://kubernetes.io/docs/)
 [k3s-design]: [K3s 架构设计](https://docs.k3s.io/architecture)
@@ -431,12 +448,6 @@ $$T* = \arg\min_{T \in \{D, K, K_3, W, O\}} \text{cost}(T, S)$$
 
 [k3s-scale]: [K3s 规模限制](https://docs.k3s.io/) [wasmedge-density]:
 [WasmEdge Pod 密度](https://wasmedge.org/docs/)
-
-**理论文档**：
-
-- [07. 形式化理论](../07-formal-theory/formal-theory.md) - 结构同构和关系等价
-- [08. 范畴论视角](../08-category-theory/category-theory.md) - 范畴论分析方法
-- [09. 矩阵视角](../09-matrix-perspective/README.md) - 矩阵力学与数学建模
 
 > 完整参考列表见 [REFERENCES.md](../REFERENCES.md)
 >

@@ -31,6 +31,11 @@
 
 ### 项目内部文档
 
+- **[28. 架构框架](../../TECHNICAL/28-architecture-framework/architecture-framework.md)** -
+  多维度架构体系与技术规范（技术架构、概念架构、数据架构、业务架构、软件架构、应
+  用架构、场景架构）
+- **[05. 全局架构设计](../05-architecture-design/architecture-design.md)** - 技
+  术组合和架构决策
 - **[ai_view.md](../../ai_view.md)** - 核心矩阵内容的原始来源
 - **[01. 知识图谱](../00-knowledge-map/knowledge-map.md)** - 知识图谱
 - **[02. 概览](../01-overview/overview.md)** - 项目概览

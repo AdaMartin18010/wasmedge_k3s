@@ -456,38 +456,39 @@ graph LR
 
 ### 00.7.3 文档导航快速参考
 
-| 学习目标             | 推荐文档                                                                                   | 核心内容                        |
-| -------------------- | ------------------------------------------------------------------------------------------ | ------------------------------- |
-| **快速入门**         | [01-overview](../01-overview/overview.md)                                                  | 技术栈总览                      |
-| **核心理念**         | [02-principles](../02-principles/principles.md)                                            | 云原生理念                      |
-| **架构设计**         | [03-architecture](../03-architecture/architecture.md)                                      | 架构与对象模型                  |
-| **执行流与调度**     | [03-execution-flow-scheduling](../03-architecture/execution-flow-scheduling.md)            | 执行流与调度视角                |
-| **技术选型决策**     | [10-decision-models](../10-decision-models/decision-models.md)                             | 技术决策模型与权衡框架          |
-| **快速参考指南**     | [10-quick-reference](../10-decision-models/QUICK-REFERENCE.md)                             | 设备访问和内核特性决策          |
-| **一致性检查报告**   | [10-consistency-report](../10-decision-models/CONSISTENCY-REPORT.md)                       | 文档一致性检查与 Wikipedia 对齐 |
-| **Docker 基础**      | [00-docker](../TECHNICAL/00-docker/docker.md)                                              | Docker 技术规范                 |
-| **Kubernetes**       | [01-kubernetes](../TECHNICAL/01-kubernetes/kubernetes.md)                                  | K8s 架构与实践                  |
-| **K3s 轻量**         | [02-k3s](../TECHNICAL/02-k3s/k3s.md)                                                       | K3s 轻量级架构                  |
-| **WasmEdge**         | [03-wasm-edge](../TECHNICAL/03-wasm-edge/wasmedge.md)                                      | WasmEdge 集成指南               |
-| **运行时**           | [04-orchestration-runtime](../TECHNICAL/04-orchestration-runtime/orchestration-runtime.md) | CRI 与 RuntimeClass             |
-| **供应链**           | [05-oci-supply-chain](../TECHNICAL/05-oci-supply-chain/oci-supply-chain.md)                | OCI 与供应链安全                |
-| **策略即代码**       | [06-policy-opa](../TECHNICAL/06-policy-opa/policy-opa.md)                                  | OPA 策略即代码                  |
-| **边缘 Serverless**  | [07-edge-serverless](../TECHNICAL/07-edge-serverless/edge-serverless.md)                   | 边缘与 Serverless               |
-| **AI 推理**          | [08-ai-inference](../TECHNICAL/08-ai-inference/ai-inference.md)                            | AI 推理                         |
-| **安全合规**         | [09-security-compliance](../TECHNICAL/09-security-compliance/security-compliance.md)       | 安全与合规                      |
-| **性能基准**         | [04-benchmarks](../04-benchmarks/benchmarks.md)                                            | 性能基线                        |
-| **安装部署**         | [10-installation](../TECHNICAL/10-installation/installation.md)                            | 安装与部署                      |
-| **故障排查**         | [11-troubleshooting](../TECHNICAL/11-troubleshooting/troubleshooting.md)                   | 故障排查                        |
-| **架构设计**         | [05-architecture-design](../05-architecture-design/architecture-design.md)                 | 全局架构设计                    |
-| **问题解决方案**     | [06-problem-solution-matrix](../06-problem-solution-matrix/problem-solution-matrix.md)     | 技术问题与部署疑难杂症          |
-| **形式化理论**       | [07-formal-theory](../07-formal-theory/formal-theory.md)                                   | 结构同构与关系等价              |
-| **范畴论视角**       | [08-category-theory](../08-category-theory/category-theory.md)                             | 对象、态射与函子                |
-| **矩阵视角**         | [09-matrix-perspective](../09-matrix-perspective/README.md)                                | 矩阵力学与数学建模              |
-| **网络技术规格堆栈** | [12-network-stack](../TECHNICAL/12-network-stack/network-stack.md)                         | 网络技术与规格全面梳理          |
-| **缩写词汇表**       | [13-acronyms-glossary](../TECHNICAL/13-acronyms-glossary/acronyms-glossary.md)             | 所有缩写词定义与关系            |
-| **主题清单**         | [14-theme-inventory](../TECHNICAL/14-theme-inventory/theme-inventory.md)                   | 全面梳理所有主题与子主题        |
-| **存储技术规格堆栈** | [15-storage-stack](../TECHNICAL/15-storage-stack/storage-stack.md)                         | 存储技术与规格全面梳理          |
-| **监控与可观测性**   | [16-observability](../TECHNICAL/16-observability/observability.md)                         | Metrics/Logging/Tracing         |
+| 学习目标             | 推荐文档                                                                                      | 核心内容                        |
+| -------------------- | --------------------------------------------------------------------------------------------- | ------------------------------- |
+| **快速入门**         | [01-overview](../01-overview/overview.md)                                                     | 技术栈总览                      |
+| **核心理念**         | [02-principles](../02-principles/principles.md)                                               | 云原生理念                      |
+| **架构设计**         | [03-architecture](../03-architecture/architecture.md)                                         | 架构与对象模型                  |
+| **执行流与调度**     | [03-execution-flow-scheduling](../03-architecture/execution-flow-scheduling.md)               | 执行流与调度视角                |
+| **技术选型决策**     | [10-decision-models](../10-decision-models/decision-models.md)                                | 技术决策模型与权衡框架          |
+| **快速参考指南**     | [10-quick-reference](../10-decision-models/QUICK-REFERENCE.md)                                | 设备访问和内核特性决策          |
+| **一致性检查报告**   | [10-consistency-report](../10-decision-models/CONSISTENCY-REPORT.md)                          | 文档一致性检查与 Wikipedia 对齐 |
+| **Docker 基础**      | [00-docker](../TECHNICAL/00-docker/docker.md)                                                 | Docker 技术规范                 |
+| **Kubernetes**       | [01-kubernetes](../TECHNICAL/01-kubernetes/kubernetes.md)                                     | K8s 架构与实践                  |
+| **K3s 轻量**         | [02-k3s](../TECHNICAL/02-k3s/k3s.md)                                                          | K3s 轻量级架构                  |
+| **WasmEdge**         | [03-wasm-edge](../TECHNICAL/03-wasm-edge/wasmedge.md)                                         | WasmEdge 集成指南               |
+| **运行时**           | [04-orchestration-runtime](../TECHNICAL/04-orchestration-runtime/orchestration-runtime.md)    | CRI 与 RuntimeClass             |
+| **供应链**           | [05-oci-supply-chain](../TECHNICAL/05-oci-supply-chain/oci-supply-chain.md)                   | OCI 与供应链安全                |
+| **策略即代码**       | [06-policy-opa](../TECHNICAL/06-policy-opa/policy-opa.md)                                     | OPA 策略即代码                  |
+| **边缘 Serverless**  | [07-edge-serverless](../TECHNICAL/07-edge-serverless/edge-serverless.md)                      | 边缘与 Serverless               |
+| **AI 推理**          | [08-ai-inference](../TECHNICAL/08-ai-inference/ai-inference.md)                               | AI 推理                         |
+| **安全合规**         | [09-security-compliance](../TECHNICAL/09-security-compliance/security-compliance.md)          | 安全与合规                      |
+| **性能基准**         | [04-benchmarks](../04-benchmarks/benchmarks.md)                                               | 性能基线                        |
+| **安装部署**         | [10-installation](../TECHNICAL/10-installation/installation.md)                               | 安装与部署                      |
+| **故障排查**         | [11-troubleshooting](../TECHNICAL/11-troubleshooting/troubleshooting.md)                      | 故障排查                        |
+| **架构设计**         | [05-architecture-design](../05-architecture-design/architecture-design.md)                    | 全局架构设计                    |
+| **问题解决方案**     | [06-problem-solution-matrix](../06-problem-solution-matrix/problem-solution-matrix.md)        | 技术问题与部署疑难杂症          |
+| **形式化理论**       | [07-formal-theory](../07-formal-theory/formal-theory.md)                                      | 结构同构与关系等价              |
+| **范畴论视角**       | [08-category-theory](../08-category-theory/category-theory.md)                                | 对象、态射与函子                |
+| **矩阵视角**         | [09-matrix-perspective](../09-matrix-perspective/README.md)                                   | 矩阵力学与数学建模              |
+| **网络技术规格堆栈** | [12-network-stack](../TECHNICAL/12-network-stack/network-stack.md)                            | 网络技术与规格全面梳理          |
+| **缩写词汇表**       | [13-acronyms-glossary](../TECHNICAL/13-acronyms-glossary/acronyms-glossary.md)                | 所有缩写词定义与关系            |
+| **主题清单**         | [14-theme-inventory](../TECHNICAL/14-theme-inventory/theme-inventory.md)                      | 全面梳理所有主题与子主题        |
+| **架构框架**         | [28-architecture-framework](../TECHNICAL/28-architecture-framework/architecture-framework.md) | 多维度架构体系与技术规范        |
+| **存储技术规格堆栈** | [15-storage-stack](../TECHNICAL/15-storage-stack/storage-stack.md)                            | 存储技术与规格全面梳理          |
+| **监控与可观测性**   | [16-observability](../TECHNICAL/16-observability/observability.md)                            | Metrics/Logging/Tracing         |
 
 <!-- cSpell:ignore cicd containerd runc crun runwasi wasmedge WasmEdge WASI OCI Kubernetes K8s K3s RuntimeClass etcd sqlite CRI Pod Service Namespace Cgroups -->
 

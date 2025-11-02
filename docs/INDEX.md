@@ -25,7 +25,7 @@
 | 14   | 性能基准            | [14-benchmarks](COGNITIVE/04-benchmarks/benchmarks.md)                                           | 性能基线                           | 实践 |
 | 15   | 安装部署            | [15-installation](TECHNICAL/10-installation/installation.md)                                     | 安装和最小示例                     | 实践 |
 | 16   | 故障排查            | [16-troubleshooting](TECHNICAL/11-troubleshooting/troubleshooting.md)                            | 故障排查                           | 实践 |
-| 17   | 全局架构设计        | [17-architecture-design](COGNITIVE/05-architecture-design/architecture-design.md)                | 技术组合和架构决策                 | 设计 |
+| 05   | 全局架构设计        | [05-architecture-design](COGNITIVE/05-architecture-design/architecture-design.md)                | 技术组合和架构决策                 | 设计 |
 | 18   | 问题解决方案        | [18-problem-solution-matrix](COGNITIVE/06-problem-solution-matrix/problem-solution-matrix.md)    | 技术问题分类和解决                 | 设计 |
 | 19   | 形式化理论          | [19-formal-theory](COGNITIVE/07-formal-theory/formal-theory.md)                                  | 结构同构和关系等价                 | 理论 |
 | 20   | 范畴论视角          | [20-category-theory](COGNITIVE/08-category-theory/category-theory.md)                            | 对象、态射与函子                   | 理论 |
@@ -36,19 +36,21 @@
 | 25   | 监控与可观测性      | [25-observability](TECHNICAL/16-observability/observability.md)                                  | Metrics、Logging、Tracing 技术规范 | 规格 |
 | 26   | GitOps 和持续交付   | [26-gitops-cicd](TECHNICAL/17-gitops-cicd/gitops-cicd.md)                                        | GitOps/CI/CD 技术规范              | 规格 |
 | 27   | Operator 和 CRD     | [27-operator-crd](TECHNICAL/18-operator-crd/operator-crd.md)                                     | Operator/CRD 开发规范              | 规格 |
-| 28   | 服务网格            | [28-service-mesh](TECHNICAL/19-service-mesh/service-mesh.md)                                     | 服务网格技术规范                   | 规格 |
-| 29   | 多集群管理          | [29-multi-cluster](TECHNICAL/20-multi-cluster/multi-cluster.md)                                  | 多集群管理技术规范                 | 规格 |
-| 30   | 镜像仓库和镜像管理  | [30-image-registry](TECHNICAL/21-image-registry/image-registry.md)                               | 镜像仓库与管理技术规范             | 规格 |
-| 31   | 升级和迁移          | [31-upgrade-migration](TECHNICAL/22-upgrade-migration/upgrade-migration.md)                      | 升级和迁移技术规范                 | 规格 |
-| 32   | 开发和调试工具      | [32-dev-tools](TECHNICAL/23-dev-tools/dev-tools.md)                                              | 开发和调试工具规范                 | 实践 |
-| 33   | 成本优化            | [33-cost-optimization](TECHNICAL/24-cost-optimization/cost-optimization.md)                      | 成本优化技术规范                   | 实践 |
-| 34   | 社区生态和最佳实践  | [34-community-best-practices](TECHNICAL/25-community-best-practices/community-best-practices.md) | 社区生态和最佳实践                 | 参考 |
-| 35   | 文档体系分析与改进  | [35-analysis-improvement](TECHNICAL/26-analysis-improvement/analysis-improvement.md)             | 批判性分析和改进计划               | 参考 |
-| 36   | 2025 年技术趋势汇总 | [36-2025-trends](TECHNICAL/27-2025-trends/2025-trends.md)                                        | 2025 年最新技术趋势和版本信息      | 参考 |
-| 37   | 矩阵视角            | [37-matrix-perspective](COGNITIVE/09-matrix-perspective/README.md)                               | 云原生技术栈的矩阵力学             | 理论 |
+| 28   | 架构框架            | [28-architecture-framework](TECHNICAL/28-architecture-framework/architecture-framework.md)       | 多维度架构体系与技术规范           | 架构 |
+| 29   | 服务网格            | [29-service-mesh](TECHNICAL/19-service-mesh/service-mesh.md)                                     | 服务网格技术规范（可选）           | 规格 |
+| 30   | 多集群管理          | [30-multi-cluster](TECHNICAL/20-multi-cluster/multi-cluster.md)                                  | 多集群管理技术规范（可选）         | 规格 |
+| 31   | 镜像仓库和镜像管理  | [31-image-registry](TECHNICAL/21-image-registry/image-registry.md)                               | 镜像仓库与管理技术规范             | 规格 |
+| 32   | 升级和迁移          | [32-upgrade-migration](TECHNICAL/22-upgrade-migration/upgrade-migration.md)                      | 升级和迁移技术规范                 | 规格 |
+| 33   | 开发和调试工具      | [33-dev-tools](TECHNICAL/23-dev-tools/dev-tools.md)                                              | 开发和调试工具规范                 | 实践 |
+| 34   | 成本优化            | [34-cost-optimization](TECHNICAL/24-cost-optimization/cost-optimization.md)                      | 成本优化技术规范（可选）           | 实践 |
+| 35   | 社区生态和最佳实践  | [35-community-best-practices](TECHNICAL/25-community-best-practices/community-best-practices.md) | 社区生态和最佳实践（可选）         | 参考 |
+| 36   | 文档体系分析与改进  | [36-analysis-improvement](TECHNICAL/26-analysis-improvement/analysis-improvement.md)             | 批判性分析和改进计划               | 参考 |
+| 37   | 2025 年技术趋势汇总 | [37-2025-trends](TECHNICAL/27-2025-trends/2025-trends.md)                                        | 2025 年最新技术趋势和版本信息      | 参考 |
+| 38   | 矩阵视角            | [38-matrix-perspective](COGNITIVE/09-matrix-perspective/README.md)                               | 云原生技术栈的矩阵力学             | 理论 |
 
-**说明**：文档编号 28-29 为可选文档（服务网格、多集群管理），33 为可选文档（成本
-优化）。36 为趋势文档（2025 年技术趋势汇总）。37 为矩阵视角理论文档。
+**说明**：文档编号 28 为架构框架文档（多维度架构体系与技术规范）。文档编号 29-30
+为可选文档（服务网格、多集群管理），34 为可选文档（成本优化）。37 为趋势文档
+（2025 年技术趋势汇总）。38 为矩阵视角理论文档。
 
 ## 📂 按分类索引
 
@@ -61,9 +63,11 @@
 
 - [02. 理念层](COGNITIVE/02-principles/principles.md) - 云原生核心理念
 
-### 架构类（1 个）
+### 架构类（2 个）
 
 - [03. 架构与对象模型](COGNITIVE/03-architecture/architecture.md) - 系统架构设计
+- [28. 架构框架](TECHNICAL/28-architecture-framework/architecture-framework.md) -
+  多维度架构体系与技术规范
 
 ### 技术类（6 个）
 
@@ -95,8 +99,8 @@
 - [14. 性能基准](COGNITIVE/04-benchmarks/benchmarks.md) - 性能指标和基准测试
 - [15. 安装部署](TECHNICAL/10-installation/installation.md) - 安装和最小示例
 - [16. 故障排查](TECHNICAL/11-troubleshooting/troubleshooting.md) - 故障排查
-- [32. 开发和调试工具](TECHNICAL/23-dev-tools/dev-tools.md) - 开发和调试工具规范
-- [33. 成本优化](TECHNICAL/24-cost-optimization/cost-optimization.md) - 成本优化
+- [33. 开发和调试工具](TECHNICAL/23-dev-tools/dev-tools.md) - 开发和调试工具规范
+- [34. 成本优化](TECHNICAL/24-cost-optimization/cost-optimization.md) - 成本优化
   技术规范（可选）
 
 ### 设计类（2 个）
@@ -112,7 +116,7 @@
   等价
 - [20. 范畴论视角](COGNITIVE/08-category-theory/category-theory.md) - 范畴论分析
   方法
-- [37. 矩阵视角](COGNITIVE/09-matrix-perspective/README.md) - 云原生技术栈的矩阵
+- [38. 矩阵视角](COGNITIVE/09-matrix-perspective/README.md) - 云原生技术栈的矩阵
   力学
 
 ### 规格类（9 个）
@@ -127,26 +131,26 @@
   GitOps/CI/CD 技术规范
 - [27. Operator 和 CRD](TECHNICAL/18-operator-crd/operator-crd.md) -
   Operator/CRD 开发规范
-- [28. 服务网格](TECHNICAL/19-service-mesh/service-mesh.md) - 服务网格技术规范（
+- [29. 服务网格](TECHNICAL/19-service-mesh/service-mesh.md) - 服务网格技术规范（
   可选）
-- [29. 多集群管理](TECHNICAL/20-multi-cluster/multi-cluster.md) - 多集群管理技术
+- [30. 多集群管理](TECHNICAL/20-multi-cluster/multi-cluster.md) - 多集群管理技术
   规范（可选）
-- [30. 镜像仓库和镜像管理](TECHNICAL/21-image-registry/image-registry.md) - 镜像
+- [31. 镜像仓库和镜像管理](TECHNICAL/21-image-registry/image-registry.md) - 镜像
   仓库与管理技术规范
-- [31. 升级和迁移](TECHNICAL/22-upgrade-migration/upgrade-migration.md) - 升级和
+- [32. 升级和迁移](TECHNICAL/22-upgrade-migration/upgrade-migration.md) - 升级和
   迁移技术规范
 
-### 参考类（4 个）
+### 参考类（5 个）
 
 - [22. 缩写词汇表](TECHNICAL/13-acronyms-glossary/acronyms-glossary.md) - 所有缩
   写词定义与关系
 - [23. 主题清单](TECHNICAL/14-theme-inventory/theme-inventory.md) - 全面梳理所有
   主题与子主题
-- [34. 社区生态和最佳实践](TECHNICAL/25-community-best-practices/community-best-practices.md) -
+- [35. 社区生态和最佳实践](TECHNICAL/25-community-best-practices/community-best-practices.md) -
   社区生态和最佳实践（可选）
-- [35. 文档体系分析与改进](TECHNICAL/26-analysis-improvement/analysis-improvement.md) -
+- [36. 文档体系分析与改进](TECHNICAL/26-analysis-improvement/analysis-improvement.md) -
   批判性分析和改进计划
-- [36. 2025 年技术趋势汇总](TECHNICAL/27-2025-trends/2025-trends.md) - 2025 年最
+- [37. 2025 年技术趋势汇总](TECHNICAL/27-2025-trends/2025-trends.md) - 2025 年最
   新技术趋势和版本信息
 
 ## 🗺️ 文档关系图
@@ -183,7 +187,7 @@ graph TB
 
     Q --> S[19-形式化理论]
     R --> T[20-范畴论]
-    S --> UU[37-矩阵视角]
+    S --> UU[38-矩阵视角]
     T --> UU
 
     F --> U[21-网络规格]
@@ -294,7 +298,7 @@ graph TB
    系等价
 2. [20. 范畴论视角](COGNITIVE/08-category-theory/category-theory.md) - 范畴论分
    析
-3. [37. 矩阵视角](COGNITIVE/09-matrix-perspective/README.md) - 矩阵力学与数学建
+3. [38. 矩阵视角](COGNITIVE/09-matrix-perspective/README.md) - 矩阵力学与数学建
    模
 
 ### 参考查询
@@ -314,11 +318,11 @@ graph TB
 - [03. 架构与对象模型](COGNITIVE/03-architecture/architecture.md)
 - [19. 形式化理论](COGNITIVE/07-formal-theory/formal-theory.md)
 - [20. 范畴论视角](COGNITIVE/08-category-theory/category-theory.md)
-- [37. 矩阵视角](COGNITIVE/09-matrix-perspective/README.md)
+- [38. 矩阵视角](COGNITIVE/09-matrix-perspective/README.md)
 
 **参考文档**：
 
-- [21-31. 技术规格文档](TECHNICAL/12-network-stack/network-stack.md)
+- [21-32. 技术规格文档](TECHNICAL/12-network-stack/network-stack.md)
 - [18. 问题解决方案](COGNITIVE/06-problem-solution-matrix/problem-solution-matrix.md)
 
 ### 开发者
@@ -333,7 +337,7 @@ graph TB
 
 **参考文档**：
 
-- [21-31. 技术规格文档](TECHNICAL/12-network-stack/network-stack.md)
+- [21-32. 技术规格文档](TECHNICAL/12-network-stack/network-stack.md)
 - [15. 安装部署](TECHNICAL/10-installation/installation.md)
 
 ### 运维工程师
@@ -384,6 +388,4 @@ graph TB
 
 ---
 
-**最后更新**：2024
-
-**维护者**：项目团队
+**最后更新**：2025-11-03 **维护者**：项目团队

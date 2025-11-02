@@ -1394,6 +1394,8 @@ $$\lim_{t \to \infty} |T_t - S| = 0$$
   设备访问（USB/PCI/GPU）和内核特性决策快速参考
 - **[10. 一致性检查报告](../../COGNITIVE/10-decision-models/CONSISTENCY-REPORT.md)** -
   文档一致性检查与 Wikipedia 标准对齐
+- **[28. 架构框架](../28-architecture-framework/architecture-framework.md)** -
+  多维度架构体系与技术规范（技术架构、软件架构、应用架构等）
 - **[03. 架构与对象模型](../../COGNITIVE/03-architecture/architecture.md)** -
   Kubernetes 对象模型和控制闭环
 - **[03. 执行流与调度视角](../../COGNITIVE/03-architecture/execution-flow-scheduling.md)** -

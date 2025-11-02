@@ -591,9 +591,16 @@ graph TB
 
 ## 06.10 参考
 
-- [11. 故障排查](../TECHNICAL/11-troubleshooting/troubleshooting.md) - 详细故障
-  排查指南
-- [10. 安装部署](../TECHNICAL/10-installation/installation.md) - 安装部署指南
+**关联文档**：
+
+- **[28. 架构框架](../../TECHNICAL/28-architecture-framework/architecture-framework.md)** -
+  多维度架构体系与技术规范（技术架构、概念架构、数据架构、业务架构、软件架构、应
+  用架构、场景架构）
+- **[05. 全局架构设计](../05-architecture-design/architecture-design.md)** - 技
+  术组合和架构决策
+- [11. 故障排查](../../TECHNICAL/11-troubleshooting/troubleshooting.md) - 详细故
+  障排查指南
+- [10. 安装部署](../../TECHNICAL/10-installation/installation.md) - 安装部署指南
 - [09. 矩阵视角](../09-matrix-perspective/README.md) - 矩阵力学分析方法（用于问
   题分析和决策优化）
 
