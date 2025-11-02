@@ -48,7 +48,7 @@
   - [19.8.5 沙盒化形式化模型](#1985-沙盒化形式化模型)
   - [19.8.6 四层次形式化对比](#1986-四层次形式化对比)
 - [19.9 同构等价映射表](#199-同构等价映射表)
-- [19.10 参考](#1910-参考)
+- [19.9 参考](#199-参考)
 
 ---
 
@@ -957,22 +957,561 @@ graph TB
 **图论定理 19.24**：Kubernetes 系统架构可以用有向无环图（DAG）建模，组件依赖关系
 清晰。
 
-## 19.8 同构等价映射表
+## 19.8 虚拟化层次的形式化理论
+
+本文档从形式化理论角度深入分析虚拟化、半虚拟化、容器化、沙盒化四个技术范式，基于
+Popek-Goldberg 定理、模型论、证明论等理论基础，提供严格的形式化建模和证明。
+
+### 19.8.1 Popek-Goldberg 虚拟化定理
+
+**Popek-Goldberg 定理**（1974 年）：根据 Wikipedia，Popek-Goldberg 定理（Popek
+and Goldberg virtualization theorem）定义了虚拟机监视器（VMM）的充分必要条件，为
+判断计算机体系结构是否可被有效虚拟化提供了理论基础。
+
+**Wikipedia 定义参考**（as of 2025-11-02）：
+
+> "The Popek and Goldberg virtualization theorem is a result about the formal
+> requirements for a computer architecture to support virtualization with a
+> virtual machine monitor (VMM). The theorem provides necessary and sufficient
+> conditions for a VMM to trap all sensitive instructions."
+
+**定理内容**：
+
+设计算机体系结构为 $\mathcal{A} = \{I, R, S\}$，其中：
+
+- $I$ = 指令集合（Instruction Set）
+- $R$ = 寄存器集合（Register Set）
+- $S$ = 状态集合（State Set）
+
+**敏感指令分类**：
+
+1. **控制敏感指令（Control Sensitive Instructions）**：$I_{\text{control}}$，修
+   改特权状态的指令
+2. **行为敏感指令（Behavior Sensitive Instructions）**：$I_{\text{behavior}}$，
+   行为取决于特权状态的指令
+3. **特权指令（Privileged Instructions）**：$I_{\text{privileged}}$，只能在特权
+   模式下执行的指令
+
+**虚拟化充分必要条件**：
+
+$$\text{Virtualizable}(\mathcal{A}) \Leftrightarrow I_{\text{sensitive}} \subseteq I_{\text{privileged}}$$
+
+其中 $I_{\text{sensitive}} = I_{\text{control}} \cup I_{\text{behavior}}$ 表示敏
+感指令集合。
+
+**虚拟化定理 19.25**（Popek-Goldberg）：计算机体系结构 $\mathcal{A}$ 可被有效虚
+拟化，当且仅当所有敏感指令都是特权指令。
+
+**证明**：
+
+- **必要性（$\Rightarrow$）**：如果 $\mathcal{A}$ 可被虚拟化，则 VMM 必须能够捕
+  获所有敏感指令。如果敏感指令不是特权指令，Guest OS 可以在用户模式下执行这些指
+  令，VMM 无法拦截，导致虚拟化失败。
+- **充分性（$\Leftarrow$）**：如果所有敏感指令都是特权指令，当 Guest OS 执行这些
+  指令时，会产生陷阱（Trap），VMM 可以捕获并模拟这些指令，实现虚拟化。
+
+$\square$
+
+**硬件辅助虚拟化**：
+
+对于不满足 Popek-Goldberg 条件的体系结构（如 x86），可以通过硬件辅助虚拟化
+（Intel VT-x、AMD-V）来满足虚拟化条件：
+
+$$\text{Virtualizable}_{\text{HW}}(\mathcal{A}) = \text{Virtualizable}(\mathcal{A}) \cup \text{HW\_Support}(\mathcal{A})$$
+
+其中 $\text{HW\_Support}(\mathcal{A})$ 表示硬件虚拟化支持
+（VT-x、AMD-V、EPT/NPT、IOMMU）。
+
+### 19.8.2 虚拟化（全虚拟化）形式化模型
+
+**全虚拟化形式化定义**：
+
+设全虚拟化系统为 $\mathcal{V}_{\text{Full}} = \{H, G, P\}$，其中：
+
+- $H$ = Hypervisor（虚拟机监视器）
+- $G$ = Guest OS 集合（$\{G_1, G_2, \ldots, G_n\}$）
+- $P$ = 物理硬件资源
+
+**Hypervisor 形式化定义**：
+
+$$\text{H}: P \rightarrow \{G_1, G_2, \ldots, G_n\}$$
+
+Hypervisor $H$ 将物理硬件资源 $P$ 映射到多个 Guest OS $G_i$。
+
+**资源分配函数**：
+
+设资源分配函数为
+$f_H: P \times \{G_1, G_2, \ldots, G_n\} \rightarrow \mathbb{R}^+$，则：
+
+$$f_H(p, G_i) = r_i$$
+
+其中 $r_i$ 表示分配给 Guest OS $G_i$ 的资源量。
+
+**资源约束**：
+
+$$\sum_{i=1}^{n} f_H(p, G_i) \leq |P|$$
+
+即所有 Guest OS 分配的资源总和不超过物理资源总量。
+
+**等价性（Equivalence）定理 19.26**：
+
+根据 Popek-Goldberg 定理，在 Hypervisor 下运行的程序 $P$ 的行为应与直接运行在物
+理硬件上的相同程序 $P$ 完全一致：
+
+$$\forall P, \quad \text{Behavior}(P \mid H) = \text{Behavior}(P \mid P_{\text{physical}})$$
+
+其中 $\text{Behavior}(P \mid X)$ 表示程序 $P$ 在环境 $X$ 下的行为。
+
+**资源控制（Resource Control）定理 19.27**：
+
+Hypervisor 对所有虚拟资源进行完全控制：
+
+$$\forall G_i, \forall r \in \text{Resources}(G_i), \quad \text{Control}(H, r) = \text{True}$$
+
+其中 $\text{Control}(H, r)$ 表示 Hypervisor $H$ 对资源 $r$ 的控制。
+
+**效率性（Efficiency）定理 19.28**：
+
+大部分指令应在没有 Hypervisor 干预的情况下直接在硬件上执行：
+
+$$\text{Efficiency} = \frac{|\text{Direct\_Execution}|}{|\text{Total\_Instructions}|} \approx 1$$
+
+其中 $\text{Direct\_Execution}$ 表示直接执行的指令集合。
+
+**全虚拟化状态机模型**：
+
+设全虚拟化系统状态为 $S_{\text{VM}} = \{S_H, S_G, S_P\}$，其中：
+
+- $S_H$ = Hypervisor 状态
+- $S_G$ = Guest OS 状态集合
+- $S_P$ = 物理硬件状态
+
+**状态转换函数**：
+
+$$\delta_{\text{VM}}: S_{\text{VM}} \times I \rightarrow S_{\text{VM}}$$
+
+其中 $I$ 表示指令集合。
+
+**指令执行路径**：
+
+1. **特权指令**：$I_{\text{privileged}}$ → 陷阱（Trap）→ Hypervisor 模拟 → 状态
+   更新
+2. **非特权指令**：$I_{\text{non-privileged}}$ → 直接执行 → 硬件执行
+
+**形式化表示**：
+
+$$
+\delta_{\text{VM}}(s, i) = \begin{cases}
+\text{Hypervisor\_Emulate}(s, i) & \text{if } i \in I_{\text{privileged}} \\
+\text{Hardware\_Execute}(s, i) & \text{if } i \notin I_{\text{privileged}}
+\end{cases}
+$$
+
+**全虚拟化数学模型**：
+
+**CPU 利用率模型**：
+
+$$\text{CPU}_{\text{utilization}} = \frac{C_{\text{workload}}}{C_{\text{VM}}} = \frac{C_{\text{workload}}}{C_{\text{workload}} + C_{\text{guest\_os}} + C_{\text{hypervisor}} + C_{\text{vm\_exit}}}$$
+
+其中：
+
+- $C_{\text{workload}}$：工作负载 CPU 开销
+- $C_{\text{guest\_os}}$：Guest OS CPU 开销
+- $C_{\text{hypervisor}}$：Hypervisor CPU 开销
+- $C_{\text{vm\_exit}}$：VM Exit 开销（每次约 1000-5000 CPU cycles）
+
+**内存开销模型**：
+
+$$M_{\text{VM}} = M_{\text{guest\_os}} + M_{\text{workload}} + M_{\text{hypervisor}}$$
+
+**性能损失模型**：
+
+$$\text{Performance\_Loss} = 1 - \frac{\text{Performance}_{\text{VM}}}{\text{Performance}_{\text{Native}}} = \frac{C_{\text{hypervisor}} + C_{\text{vm\_exit}} + C_{\text{emulation}}}{C_{\text{total}}} \approx 10-30\%$$
+
+### 19.8.3 半虚拟化形式化模型
+
+**半虚拟化形式化定义**：
+
+设半虚拟化系统为 $\mathcal{V}_{\text{PV}} = \{H, G_{\text{modified}}, P, C\}$，
+其中：
+
+- $H$ = Hypervisor
+- $G_{\text{modified}}$ = 修改后的 Guest OS 集合
+- $P$ = 物理硬件资源
+- $C$ = 协作接口集合
+  （$\{\text{Hypercall}, \text{VirtIO}, \text{Grant Table}, \text{Event Channel}\}$）
+
+**协作接口形式化定义**：
+
+$$\text{Hypercall}: G_{\text{modified}} \rightarrow H$$
+
+Hypercall 接口允许修改后的 Guest OS 直接调用 Hypervisor 接口。
+
+**协作接口映射**：
+
+$$f_{\text{collaboration}}: G_{\text{modified}} \times H \rightarrow \mathbb{R}$$
+
+其中 $f_{\text{collaboration}}(g, h)$ 表示 Guest OS $g$ 与 Hypervisor $h$ 的协作
+效率。
+
+**协作效率定理 19.29**：
+
+半虚拟化通过协作机制提高性能：
+
+$$\text{Efficiency}_{\text{PV}} = \frac{|\text{Direct\_Execution}| + |\text{Hypercall}|}{|\text{Total\_Instructions}|} > \text{Efficiency}_{\text{Full}}$$
+
+其中 $|\text{Hypercall}|$ 表示通过 Hypercall 协作执行的指令数量。
+
+**半虚拟化状态机模型**：
+
+设半虚拟化系统状态为
+$S_{\text{PV}} = \{S_H, S_{G_{\text{modified}}}, S_P, S_C\}$，其中：
+
+- $S_C$ = 协作接口状态（Hypercall、VirtIO、Grant Table、Event Channel）
+
+**状态转换函数**：
+
+$$\delta_{\text{PV}}: S_{\text{PV}} \times I \rightarrow S_{\text{PV}}$$
+
+**指令执行路径**：
+
+1. **Hypercall 指令**：$I_{\text{hypercall}}$ → Guest OS 直接调用 → Hypervisor
+   处理 → 状态更新
+2. **特权指令**：$I_{\text{privileged}}$ → 陷阱 → Hypervisor 处理 → 状态更新
+3. **非特权指令**：$I_{\text{non-privileged}}$ → 直接执行 → 硬件执行
+
+**形式化表示**：
+
+$$
+\delta_{\text{PV}}(s, i) = \begin{cases}
+\text{Hypercall\_Execute}(s, i) & \text{if } i \in I_{\text{hypercall}} \\
+\text{Hypervisor\_Emulate}(s, i) & \text{if } i \in I_{\text{privileged}} \setminus I_{\text{hypercall}} \\
+\text{Hardware\_Execute}(s, i) & \text{if } i \notin I_{\text{privileged}}
+\end{cases}
+$$
+
+**半虚拟化数学模型**：
+
+**CPU 利用率模型**：
+
+$$\text{CPU}_{\text{utilization}} = \frac{C_{\text{workload}}}{C_{\text{workload}} + C_{\text{guest\_os}} + C_{\text{hypervisor}} + C_{\text{hypercall}} + C_{\text{collaboration}}}$$
+
+其中：
+
+- $C_{\text{hypercall}}$：Hypercall 开销（每次约 50-200 CPU cycles，比 VM Exit
+  少 80-95%）
+- $C_{\text{collaboration}}$：协作机制开销（VirtIO、Grant Table 等）
+
+**性能提升模型**：
+
+$$\text{Performance\_Gain} = \frac{C_{\text{vm\_exit}} - C_{\text{hypercall}}}{C_{\text{vm\_exit}}} \approx 80-95\%$$
+
+即通过 Hypercall 减少 VM Exit，性能提升 80-95%。
+
+**内存开销模型**：
+
+$$M_{\text{PV}} = M_{\text{guest\_os}} + M_{\text{workload}} + M_{\text{hypervisor}} + M_{\text{grant\_table}}$$
+
+其中 $M_{\text{grant\_table}}$ 表示 Grant Table 内存开销（通常 < 10MB）。
+
+**性能损失模型**：
+
+$$\text{Performance\_Loss} = \frac{C_{\text{hypervisor}} + C_{\text{hypercall}} + C_{\text{collaboration}}}{C_{\text{total}}} \approx 5-15\%$$
+
+相比全虚拟化（10-30%）性能损失减少 50-70%。
+
+**协作接口安全性定理 19.30**：
+
+半虚拟化的协作接口增加了攻击面：
+
+$$\text{Attack\_Surface}_{\text{PV}} = \text{Attack\_Surface}_{\text{Full}} + \text{Attack\_Surface}_{\text{Collaboration}}$$
+
+其中
+$\text{Attack\_Surface}_{\text{Collaboration}} = \{\text{Hypercall漏洞}, \text{VirtIO漏洞}, \text{Grant Table漏洞}, \text{Event Channel漏洞}\}$。
+
+### 19.8.4 容器化形式化模型
+
+**容器化形式化定义**：
+
+设容器化系统为 $\mathcal{V}_{\text{Container}} = \{K, C, P\}$，其中：
+
+- $K$ = Host OS 内核（Kernel）
+- $C$ = 容器集合（$\{C_1, C_2, \ldots, C_n\}$）
+- $P$ = 物理硬件资源（共享）
+
+**Namespace 形式化定义**：
+
+$$\text{Namespace}: K \times C_i \rightarrow V_i$$
+
+其中 $V_i$ 表示容器 $C_i$ 的虚拟视图（Virtual View）。
+
+**Namespace 类型**：
+
+- $\text{NS}_{\text{PID}}: K \times C_i \rightarrow \text{PID\_Namespace}_i$（PID
+  命名空间）
+- $\text{NS}_{\text{Network}}: K \times C_i \rightarrow \text{Network\_Namespace}_i$（
+  网络命名空间）
+- $\text{NS}_{\text{Mount}}: K \times C_i \rightarrow \text{Mount\_Namespace}_i$（
+  挂载命名空间）
+- $\text{NS}_{\text{IPC}}: K \times C_i \rightarrow \text{IPC\_Namespace}_i$（IPC
+  命名空间）
+- $\text{NS}_{\text{UTS}}: K \times C_i \rightarrow \text{UTS\_Namespace}_i$（UTS
+  命名空间）
+- $\text{NS}_{\text{User}}: K \times C_i \rightarrow \text{User\_Namespace}_i$（
+  用户命名空间）
+- $\text{NS}_{\text{Cgroup}}: K \times C_i \rightarrow \text{Cgroup\_Namespace}_i$（Cgroup
+  命名空间）
+- $\text{NS}_{\text{Time}}: K \times C_i \rightarrow \text{Time\_Namespace}_i$（
+  时间命名空间）
+
+**Cgroup 形式化定义**：
+
+$$\text{Cgroup}: K \times C_i \rightarrow R_i$$
+
+其中 $R_i$ 表示容器 $C_i$ 的资源限制集合。
+
+**资源限制函数**：
+
+$$f_{\text{cgroup}}: C_i \times \text{Resource} \rightarrow \mathbb{R}^+$$
+
+其中
+$\text{Resource} \in \{\text{CPU}, \text{Memory}, \text{IO}, \text{Network}\}$。
+
+**容器化隔离定理 19.31**：
+
+容器化通过 Namespace 和 Cgroup 实现进程级隔离：
+
+$$\forall C_i, C_j (i \neq j), \quad \text{Isolation}(C_i, C_j) = \text{True}$$
+
+其中 $\text{Isolation}(C_i, C_j)$ 表示容器 $C_i$ 和 $C_j$ 之间的隔离。
+
+**隔离条件**：
+
+$$\text{Isolation}(C_i, C_j) \Leftrightarrow \forall \text{NS} \in \{\text{PID}, \text{Network}, \text{Mount}, \ldots\}, \quad V_i \cap V_j = \emptyset$$
+
+即所有命名空间的虚拟视图互不相交。
+
+**容器化状态机模型**：
+
+设容器化系统状态为 $S_{\text{Container}} = \{S_K, S_C, S_P\}$，其中：
+
+- $S_K$ = Host OS 内核状态（共享）
+- $S_C$ = 容器状态集合（隔离）
+- $S_P$ = 物理硬件状态（共享）
+
+**状态转换函数**：
+
+$$\delta_{\text{Container}}: S_{\text{Container}} \times I \rightarrow S_{\text{Container}}$$
+
+**系统调用拦截**：
+
+$$
+\delta_{\text{Container}}(s, \text{syscall}) = \begin{cases}
+\text{Namespace\_Filter}(s, \text{syscall}) & \text{if syscall affects namespace} \\
+\text{Cgroup\_Limit}(s, \text{syscall}) & \text{if syscall affects resource} \\
+\text{Kernel\_Execute}(s, \text{syscall}) & \text{otherwise}
+\end{cases}
+$$
+
+**容器化数学模型**：
+
+**CPU 利用率模型**：
+
+$$\text{CPU}_{\text{utilization}} = \frac{C_{\text{workload}}}{C_{\text{workload}} + C_{\text{namespace}} + C_{\text{cgroup}} + C_{\text{context\_switch}}}$$
+
+其中：
+
+- $C_{\text{namespace}}$：Namespace 开销（通常 < 10 CPU cycles）
+- $C_{\text{cgroup}}$：Cgroup 开销（通常 < 50 CPU cycles）
+- $C_{\text{context\_switch}}$：上下文切换开销（通常约 500 CPU cycles）
+
+**内存开销模型**：
+
+$$M_{\text{Container}} = M_{\text{workload}} + M_{\text{namespace}} + M_{\text{runtime}}$$
+
+其中 $M_{\text{namespace}}$ 通常 < 1MB，$M_{\text{runtime}}$ 通常 < 50MB。
+
+**性能损失模型**：
+
+$$\text{Performance\_Loss} = \frac{C_{\text{namespace}} + C_{\text{cgroup}} + C_{\text{context\_switch}}}{C_{\text{total}}} < 5\%$$
+
+### 19.8.5 沙盒化形式化模型
+
+**沙盒化形式化定义**：
+
+设沙盒化系统为 $\mathcal{V}_{\text{Sandbox}} = \{R, A, K, P\}$，其中：
+
+- $R$ = 运行时（Runtime，如 WasmEdge）
+- $A$ = 应用集合（$\{A_1, A_2, \ldots, A_n\}$，如 Wasm Module）
+- $K$ = Host OS 内核（共享）
+- $P$ = 物理硬件资源（共享）
+
+**WASI 形式化定义**：
+
+$$\text{WASI}: A_i \times K \rightarrow \text{Syscall\_Intercept}$$
+
+其中 $\text{Syscall\_Intercept}$ 表示系统调用拦截函数。
+
+**系统调用拦截函数**：
+
+$$f_{\text{intercept}}: A_i \times \text{Syscall} \times \text{Permission}_i \rightarrow \text{Syscall\_Result}$$
+
+其中 $\text{Permission}_i$ 表示应用 $A_i$ 的权限集合。
+
+**沙盒化隔离定理 19.32**：
+
+沙盒化通过系统调用拦截和权限限制实现应用级隔离：
+
+$$\forall A_i, A_j (i \neq j), \quad \text{Isolation}(A_i, A_j) = \text{True}$$
+
+**隔离条件**：
+
+$$\text{Isolation}(A_i, A_j) \Leftrightarrow \text{Memory}(A_i) \cap \text{Memory}(A_j) = \emptyset \wedge \text{Permission}(A_i) \cap \text{Permission}(A_j) = \emptyset$$
+
+即应用 $A_i$ 和 $A_j$ 的内存和权限互不相交。
+
+**沙盒化状态机模型**：
+
+设沙盒化系统状态为 $S_{\text{Sandbox}} = \{S_R, S_A, S_K, S_P\}$，其中：
+
+- $S_R$ = 运行时状态
+- $S_A$ = 应用状态集合（隔离）
+- $S_K$ = Host OS 内核状态（共享）
+- $S_P$ = 物理硬件状态（共享）
+
+**状态转换函数**：
+
+$$\delta_{\text{Sandbox}}: S_{\text{Sandbox}} \times I \rightarrow S_{\text{Sandbox}}$$
+
+**系统调用拦截模型**：
+
+$$
+\delta_{\text{Sandbox}}(s, \text{syscall}) = \begin{cases}
+\text{Permission\_Check}(s, \text{syscall}) & \text{if permission denied} \\
+\text{Runtime\_Intercept}(s, \text{syscall}) & \text{if allowed} \\
+\text{Kernel\_Execute}(s, \text{syscall}) & \text{if pass through}
+\end{cases}
+$$
+
+**沙盒化数学模型**：
+
+**CPU 利用率模型**：
+
+$$\text{CPU}_{\text{utilization}} = \frac{C_{\text{workload}}}{C_{\text{workload}} + C_{\text{runtime}} + C_{\text{syscall\_intercept}}}$$
+
+其中：
+
+- $C_{\text{runtime}}$：运行时开销（WasmEdge 等，通常约 5-15 CPU cycles）
+- $C_{\text{syscall\_intercept}}$：系统调用拦截开销（通常约 1-5 CPU cycles）
+
+**内存开销模型**：
+
+$$M_{\text{Sandbox}} = M_{\text{workload}} + M_{\text{runtime}}$$
+
+其中 $M_{\text{runtime}}$ 通常 < 2MB（WasmEdge 等轻量运行时）。
+
+**性能损失模型**：
+
+$$\text{Performance\_Loss} = \frac{C_{\text{runtime}} + C_{\text{syscall\_intercept}}}{C_{\text{total}}} < 1\%$$
+
+**启动时间模型**：
+
+$$\text{Startup\_Time} = T_{\text{runtime\_init}} + T_{\text{module\_load}} + T_{\text{module\_instantiate}}$$
+
+其中：
+
+- $T_{\text{runtime\_init}}$：运行时初始化时间（通常 < 1ms）
+- $T_{\text{module\_load}}$：模块加载时间（通常 < 1ms）
+- $T_{\text{module\_instantiate}}$：模块实例化时间（通常 < 1ms）
+
+**总启动时间**：$\text{Startup\_Time} < 10\text{ms}$（相比容器化的 1-2s 快
+100-200 倍）。
+
+### 19.8.6 四层次形式化对比
+
+**形式化对比矩阵**：
+
+| 范式         | 形式化系统                       | 状态空间维度           | 隔离函数                      | Popek-Goldberg 条件 |
+| ------------ | -------------------------------- | ---------------------- | ----------------------------- | ------------------- |
+| **虚拟化**   | $\mathcal{V}_{\text{Full}}$      | $S_{\text{VM}}$        | $\text{Iso}_{\text{HW}}$      | 满足（硬件辅助）    |
+| **半虚拟化** | $\mathcal{V}_{\text{PV}}$        | $S_{\text{PV}}$        | $\text{Iso}_{\text{Kernel}}$  | 满足（协作）        |
+| **容器化**   | $\mathcal{V}_{\text{Container}}$ | $S_{\text{Container}}$ | $\text{Iso}_{\text{Process}}$ | 不适用              |
+| **沙盒化**   | $\mathcal{V}_{\text{Sandbox}}$   | $S_{\text{Sandbox}}$   | $\text{Iso}_{\text{App}}$     | 不适用              |
+
+**隔离强度形式化对比**：
+
+$$I_{\text{VM}} = 4.0 > I_{\text{PV}} = 3.0 > I_{\text{Container}} = 2.0 > I_{\text{Sandbox}} = 1.0$$
+
+其中隔离强度 $I$ 的定义见
+[隔离模型文档](../10-decision-models/01-theory-models/02-isolation-models.md)。
+
+**性能开销形式化对比**：
+
+$$\text{Overhead}_{\text{Sandbox}} < \text{Overhead}_{\text{Container}} < \text{Overhead}_{\text{PV}} < \text{Overhead}_{\text{Full}}$$
+
+其中：
+
+- $\text{Overhead}_{\text{Full}} \approx 10-30\%$
+- $\text{Overhead}_{\text{PV}} \approx 5-15\%$
+- $\text{Overhead}_{\text{Container}} < 5\%$
+- $\text{Overhead}_{\text{Sandbox}} < 1\%$
+
+**资源利用率形式化对比**：
+
+$$\text{Utilization}_{\text{Sandbox}} > \text{Utilization}_{\text{Container}} > \text{Utilization}_{\text{PV}} > \text{Utilization}_{\text{Full}}$$
+
+其中：
+
+- $\text{Utilization}_{\text{Full}} \approx 70-80\%$
+- $\text{Utilization}_{\text{PV}} \approx 75-85\%$
+- $\text{Utilization}_{\text{Container}} \approx 85-95\%$
+- $\text{Utilization}_{\text{Sandbox}} \approx 90-98\%$
+
+**兼容性形式化对比**：
+
+$$\text{Compatibility}_{\text{Full}} > \text{Compatibility}_{\text{PV}} > \text{Compatibility}_{\text{Container}} > \text{Compatibility}_{\text{Sandbox}}$$
+
+其中：
+
+- $\text{Compatibility}_{\text{Full}}$：支持所有操作系统（无需修改）
+- $\text{Compatibility}_{\text{PV}}$：支持可修改的操作系统（Linux、BSD 等）
+- $\text{Compatibility}_{\text{Container}}$：支持 Linux（共享内核）
+- $\text{Compatibility}_{\text{Sandbox}}$：支持特定应用类型（Wasm、特定运行时）
+
+**形式化决策定理 19.33**：
+
+设决策函数为
+$D: \{\text{Requirements}\} \rightarrow \{\text{Full}, \text{PV}, \text{Container}, \text{Sandbox}\}$，
+则：
+
+$$
+D(\text{requirements}) = \begin{cases}
+\text{Full} & \text{if } \text{Multi\_OS} \wedge \text{Max\_Isolation} \\
+\text{PV} & \text{if } \text{Multi\_OS} \wedge \text{High\_Performance} \wedge \text{OS\_Modifiable} \\
+\text{Container} & \text{if } \text{Linux\_Only} \wedge \text{Balance} \\
+\text{Sandbox} & \text{if } \text{Speed} \wedge \text{Efficiency}
+\end{cases}
+$$
+
+## 19.9 同构等价映射表
 
 **完整同构等价映射**：
 
-| 类别       | 技术 A         | 技术 B       | 关系 | 定理      |
-| ---------- | -------------- | ------------ | ---- | --------- |
-| **运行时** | runc           | crun         | 同构 | 定理 19.1 |
-| **运行时** | containerd     | CRI-O        | 等价 | 定理 19.5 |
-| **编排**   | Kubernetes     | K3s          | 同构 | 定理 19.2 |
-| **编排**   | Kubernetes API | K3s API      | 等价 | 定理 19.6 |
-| **存储**   | etcd           | sqlite       | 同构 | 定理 19.3 |
-| **存储**   | etcd           | Consul       | 等价 | CAP 定理  |
-| **网络**   | flannel        | Calico       | 同构 | 定理 19.4 |
-| **网络**   | CNI            | CNI-O        | 等价 | 规范等价  |
-| **协议**   | HTTP/1.1       | HTTP/2       | 等价 | 定理 19.7 |
-| **规范**   | OCI Image      | Docker Image | 等价 | 定理 19.8 |
+| 类别           | 技术 A         | 技术 B       | 关系 | 定理             |
+| -------------- | -------------- | ------------ | ---- | ---------------- |
+| **运行时**     | runc           | crun         | 同构 | 定理 19.1        |
+| **运行时**     | containerd     | CRI-O        | 等价 | 定理 19.5        |
+| **编排**       | Kubernetes     | K3s          | 同构 | 定理 19.2        |
+| **编排**       | Kubernetes API | K3s API      | 等价 | 定理 19.6        |
+| **存储**       | etcd           | sqlite       | 同构 | 定理 19.3        |
+| **存储**       | etcd           | Consul       | 等价 | CAP 定理         |
+| **网络**       | flannel        | Calico       | 同构 | 定理 19.4        |
+| **网络**       | CNI            | CNI-O        | 等价 | 规范等价         |
+| **协议**       | HTTP/1.1       | HTTP/2       | 等价 | 定理 19.7        |
+| **规范**       | OCI Image      | Docker Image | 等价 | 定理 19.8        |
+| **虚拟化层次** | 虚拟化         | 半虚拟化     | 近似 | 定理 19.25-19.33 |
+| **虚拟化层次** | 半虚拟化       | 容器化       | 不同 | 定理 19.29-19.31 |
+| **虚拟化层次** | 容器化         | 沙盒化       | 不同 | 定理 19.31-19.32 |
 
 ## 19.9 参考
 
@@ -1004,6 +1543,18 @@ graph TB
 - [Control Theory](https://en.wikipedia.org/wiki/Control_theory) - 控制理论
 - [Graph Theory](https://en.wikipedia.org/wiki/Graph_theory) - 图论
 - [Network Topology](https://en.wikipedia.org/wiki/Network_topology) - 网络拓扑
+- [Popek and Goldberg virtualization requirements](https://en.wikipedia.org/wiki/Popek_and_Goldberg_virtualization_requirements) -
+  Popek-Goldberg 虚拟化定理
+- [Full Virtualization](https://en.wikipedia.org/wiki/Virtualization#Full_virtualization) -
+  全虚拟化
+- [Paravirtualization](https://en.wikipedia.org/wiki/Paravirtualization) - 半虚
+  拟化
+- [OS-level Virtualization](https://en.wikipedia.org/wiki/OS-level_virtualization) -
+  操作系统级虚拟化（容器化）
+- [Sandbox (Computer Security)](<https://en.wikipedia.org/wiki/Sandbox_(computer_security)>) -
+  沙盒化
+- [Hardware-assisted Virtualization](https://en.wikipedia.org/wiki/Hardware-assisted_virtualization) -
+  硬件辅助虚拟化
 
 **技术规范参考**：
 
