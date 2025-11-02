@@ -356,6 +356,8 @@ $$\min_{\mathbf{A}} \text{Cost}(\mathbf{A}) \quad \text{s.t.} \quad \text{Score}
   架
 - [10. 快速参考指南](../10-decision-models/QUICK-REFERENCE.md) - 设备访问
   （USB/PCI/GPU）和内核特性决策快速参考
+- [10. 一致性检查报告](../10-decision-models/CONSISTENCY-REPORT.md) - 文档一致性
+  检查与 Wikipedia 标准对齐
 - [03. 执行流与调度视角](../03-architecture/execution-flow-scheduling.md) - 从执
   行流视角分析设备访问和内核特性
 
