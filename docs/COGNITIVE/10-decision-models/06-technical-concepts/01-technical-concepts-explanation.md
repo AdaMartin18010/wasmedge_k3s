@@ -1,4 +1,4 @@
-# 虚拟化、容器化、沙盒化技术名词概念论证
+# 虚拟化、半虚拟化、容器化、沙盒化技术名词概念论证
 
 ## 目录
 
@@ -58,17 +58,28 @@
 
 **核心内容**：
 
-1. **技术名词定义**：每个技术范式的核心技术名词及其定义
+1. **技术名词定义**：每个技术范式的核心技术名词及其定义（虚拟化、半虚拟化、容器
+   化、沙盒化）
 2. **概念论证**：技术名词背后的概念逻辑和理论依据
 3. **功能论证**：技术名词对应的功能特性和实现机制
 4. **关系论证**：技术名词之间的关系和映射
 5. **技术栈映射**：技术名词在整个技术栈中的位置和作用
+
+**关键区分**：
+
+- **虚拟化（全虚拟化）**：硬件支持的复用，Guest OS 无需修改
+- **半虚拟化**：硬件 + 驱动/OS 支持的复用，Guest OS 需要修改
+- **容器化**：OS 支持的复用，共享 Host OS 内核
+- **沙盒化**：OS 进程内支持的复用，应用级隔离
 
 **与其他文档的关系**：
 
 - **理论模型**（01-theory-models/）：提供理论基础
 - **场景模型**（02-scenario-models/）：提供应用场景
 - **认知映射**（05-comprehensive-mapping/）：提供全面映射
+- **严格定义文
+  档**（12-virtualization-paravirtualization-containerization-sandboxing-strict-definition.md）
+  ：提供严格定义
 - **本文档**：提供技术名词概念论证
 
 ---
@@ -973,45 +984,48 @@ Wasm Module 层:
 
 **技术名词概念映射矩阵**：
 
-| 概念类别     | 虚拟化       | 容器化            | 沙盒化          |
-| ------------ | ------------ | ----------------- | --------------- |
-| **核心概念** | 虚拟机（VM） | 容器（Container） | 沙盒（Sandbox） |
-| **隔离概念** | 硬件级隔离   | 进程级隔离        | 应用级隔离      |
-| **资源概念** | 虚拟资源     | 共享资源          | 共享资源        |
-| **运行概念** | Guest OS     | 容器运行时        | Wasm Runtime    |
-| **打包概念** | VM Image     | Container Image   | Wasm Module     |
-| **管理概念** | Hypervisor   | Container Runtime | Wasm Runtime    |
-| **网络概念** | 虚拟网络     | Network Namespace | WASI Network    |
-| **存储概念** | 虚拟磁盘     | OverlayFS         | 零 rootfs       |
-| **内存概念** | 虚拟内存     | 进程地址空间      | 线性内存        |
+| 概念类别     | 虚拟化       | 半虚拟化                   | 容器化            | 沙盒化          |
+| ------------ | ------------ | -------------------------- | ----------------- | --------------- |
+| **核心概念** | 虚拟机（VM） | 虚拟机（VM，协作式）       | 容器（Container） | 沙盒（Sandbox） |
+| **隔离概念** | 硬件级隔离   | 内核级隔离（协作）         | 进程级隔离        | 应用级隔离      |
+| **资源概念** | 虚拟资源     | 虚拟资源（协作共享）       | 共享资源          | 共享资源        |
+| **运行概念** | Guest OS     | Guest OS（修改后）         | 容器运行时        | Wasm Runtime    |
+| **打包概念** | VM Image     | VM Image                   | Container Image   | Wasm Module     |
+| **管理概念** | Hypervisor   | Hypervisor + Guest OS 协作 | Container Runtime | Wasm Runtime    |
+| **协作概念** | N/A          | Hypercall、VirtIO          | N/A               | N/A             |
+| **网络概念** | 虚拟网络     | VirtIO Net                 | Network Namespace | WASI Network    |
+| **存储概念** | 虚拟磁盘     | VirtIO Block               | OverlayFS         | 零 rootfs       |
+| **内存概念** | 虚拟内存     | 虚拟内存 + Grant Table     | 进程地址空间      | 线性内存        |
 
 **概念对应关系**：
 
 ```text
 概念对应关系:
 
-虚拟化概念 → 容器化概念 → 沙盒化概念:
-├── VM → Container → Sandbox（运行实体）
-├── Guest OS → Container Runtime → Wasm Runtime（运行环境）
-├── VM Image → Container Image → Wasm Module（打包格式）
-├── Hypervisor → Container Runtime → Wasm Runtime（管理组件）
-├── 虚拟硬件 → Namespace + Cgroup → WASI（隔离机制）
-└── 虚拟网络 → Network Namespace → WASI Network（网络隔离）
+虚拟化概念 → 半虚拟化概念 → 容器化概念 → 沙盒化概念:
+├── VM → VM（协作式） → Container → Sandbox（运行实体）
+├── Guest OS → Guest OS（修改后） → Container Runtime → Wasm Runtime（运行环境）
+├── VM Image → VM Image → Container Image → Wasm Module（打包格式）
+├── Hypervisor → Hypervisor + Guest OS 协作 → Container Runtime → Wasm Runtime（管理组件）
+├── 虚拟硬件 → 半虚拟化设备（VirtIO） → Namespace + Cgroup → WASI（隔离机制）
+├── N/A → Hypercall/VirtIO → N/A → N/A（协作接口，半虚拟化特有）
+└── 虚拟网络 → VirtIO Net → Network Namespace → WASI Network（网络隔离）
 ```
 
 ### 05.2 功能映射矩阵
 
 **技术名词功能映射矩阵**：
 
-| 功能类别       | 虚拟化技术名词         | 容器化技术名词         | 沙盒化技术名词            |
-| -------------- | ---------------------- | ---------------------- | ------------------------- |
-| **隔离功能**   | Hypervisor、硬件虚拟化 | Namespace、Cgroup      | WASI、系统调用拦截        |
-| **资源功能**   | 虚拟硬件、vCPU         | Cgroup、OverlayFS      | 线性内存、零 rootfs       |
-| **网络功能**   | 虚拟网卡、虚拟网络     | Network Namespace、CNI | WASI Network、Socket 拦截 |
-| **存储功能**   | 虚拟磁盘、VirtIO       | OverlayFS、镜像层      | 零 rootfs、WASI FS        |
-| **管理功能**   | vCenter、OpenStack     | Kubernetes、containerd | K3s、WasmEdge             |
-| **打包功能**   | VM Image               | Container Image        | Wasm Module               |
-| **运行时功能** | Hypervisor             | Container Runtime      | Wasm Runtime              |
+| 功能类别       | 虚拟化技术名词         | 半虚拟化技术名词                 | 容器化技术名词         | 沙盒化技术名词            |
+| -------------- | ---------------------- | -------------------------------- | ---------------------- | ------------------------- |
+| **隔离功能**   | Hypervisor、硬件虚拟化 | Hypervisor + Hypercall、VirtIO   | Namespace、Cgroup      | WASI、系统调用拦截        |
+| **资源功能**   | 虚拟硬件、vCPU         | 半虚拟化设备、vCPU、Grant Table  | Cgroup、OverlayFS      | 线性内存、零 rootfs       |
+| **协作功能**   | N/A                    | Hypercall、事件通道、Grant Table | N/A                    | N/A                       |
+| **网络功能**   | 虚拟网卡（模拟）       | VirtIO Net                       | Network Namespace、CNI | WASI Network、Socket 拦截 |
+| **存储功能**   | 虚拟磁盘（模拟）       | VirtIO Block                     | OverlayFS、镜像层      | 零 rootfs、WASI FS        |
+| **管理功能**   | vCenter、OpenStack     | libvirt、OpenStack               | Kubernetes、containerd | K3s、WasmEdge             |
+| **打包功能**   | VM Image               | VM Image                         | Container Image        | Wasm Module               |
+| **运行时功能** | Hypervisor             | Hypervisor + Guest OS 协作       | Container Runtime      | Wasm Runtime              |
 
 **功能对应关系**：
 
@@ -1043,15 +1057,16 @@ Wasm Module 层:
 
 **技术名词关系映射矩阵**：
 
-| 关系类型     | 虚拟化关系                  | 容器化关系                    | 沙盒化关系                 |
-| ------------ | --------------------------- | ----------------------------- | -------------------------- |
-| **包含关系** | VM ⊃ Guest OS ⊃ Application | Container ⊃ Application       | Sandbox ⊃ Wasm Module      |
-| **管理关系** | Hypervisor → VM             | Container Runtime → Container | Wasm Runtime → Wasm Module |
-| **创建关系** | VM Image → VM               | Container Image → Container   | Wasm Module → Sandbox      |
-| **隔离关系** | Hypervisor 隔离 VM          | Namespace 隔离 Container      | WASI 隔离 Sandbox          |
-| **资源关系** | 虚拟硬件 → VM               | Cgroup → Container            | 线性内存 → Wasm Module     |
-| **网络关系** | 虚拟网卡 → VM               | Network Namespace → Container | WASI Network → Wasm Module |
-| **存储关系** | 虚拟磁盘 → VM               | OverlayFS → Container         | 零 rootfs → Wasm Module    |
+| 关系类型     | 虚拟化关系                  | 半虚拟化关系                         | 容器化关系                    | 沙盒化关系                 |
+| ------------ | --------------------------- | ------------------------------------ | ----------------------------- | -------------------------- |
+| **包含关系** | VM ⊃ Guest OS ⊃ Application | VM ⊃ Guest OS（修改后）⊃ Application | Container ⊃ Application       | Sandbox ⊃ Wasm Module      |
+| **管理关系** | Hypervisor → VM             | Hypervisor ↔ Guest OS → VM（协作）   | Container Runtime → Container | Wasm Runtime → Wasm Module |
+| **协作关系** | N/A                         | Guest OS ↔ Hypervisor（Hypercall）   | N/A                           | N/A                        |
+| **创建关系** | VM Image → VM               | VM Image → VM（半虚拟化）            | Container Image → Container   | Wasm Module → Sandbox      |
+| **隔离关系** | Hypervisor 隔离 VM          | Hypervisor + Guest OS 协作隔离 VM    | Namespace 隔离 Container      | WASI 隔离 Sandbox          |
+| **资源关系** | 虚拟硬件 → VM               | 半虚拟化设备 → VM                    | Cgroup → Container            | 线性内存 → Wasm Module     |
+| **网络关系** | 虚拟网卡（模拟） → VM       | VirtIO Net → VM                      | Network Namespace → Container | WASI Network → Wasm Module |
+| **存储关系** | 虚拟磁盘（模拟） → VM       | VirtIO Block → VM                    | OverlayFS → Container         | 零 rootfs → Wasm Module    |
 
 **关系对应关系**：
 
@@ -1100,4 +1115,4 @@ Wasm Module 层:
 
 ---
 
-**最后更新**：2025-01-XX **维护者**：项目团队
+**最后更新**：2025-11-02 **维护者**：项目团队

@@ -36,11 +36,14 @@
   - [20.8.1 范畴的乘积](#2081-范畴的乘积)
   - [20.8.2 范畴的余乘积](#2082-范畴的余乘积)
   - [20.8.3 函子范畴](#2083-函子范畴)
-- [20.9 范畴等价](#209-范畴等价)
-  - [20.9.1 范畴同构](#2091-范畴同构)
-  - [20.9.2 范畴等价](#2092-范畴等价)
-  - [20.9.3 范畴对偶](#2093-范畴对偶)
-- [20.10 参考](#2010-参考)
+- [20.9 伴随函子](#209-伴随函子)
+  - [20.9.1 伴随函子定义](#2091-伴随函子定义)
+  - [20.9.2 Yoneda 引理](#2092-yoneda-引理)
+- [20.10 范畴等价](#2010-范畴等价)
+  - [20.10.1 范畴同构](#20101-范畴同构)
+  - [20.10.2 范畴等价](#20102-范畴等价)
+  - [20.10.3 范畴对偶](#20103-范畴对偶)
+- [20.11 参考](#2011-参考)
 
 ---
 
@@ -50,14 +53,62 @@
 （Categories）、对象（Objects）、态射（Morphisms）、函子（Functors）等数学结构，
 揭示技术本质的数学规律。
 
+根据 Wikipedia，范畴论（Category Theory）是数学的一个分支，研究数学结构及其之间
+的关系。范畴论通过对象和态射的概念，提供了一个统一的框架来描述不同数学领域中的概
+念和构造。
+
+**Wikipedia 定义参考**（as of 2025-11-02）：
+
+> "Category theory formalizes mathematical structure and its concepts in terms
+> of a labeled directed graph called a category, whose nodes are called objects,
+> and whose labelled directed edges are called arrows (or morphisms)."
+
+**范畴论核心概念**（根据 Wikipedia）：
+
+1. **范畴（Category）**：
+
+   - **对象（Objects）**：范畴中的元素
+   - **态射（Morphisms/Arrows）**：对象之间的映射
+   - **复合（Composition）**：态射的组合，满足结合律
+   - **恒等态射（Identity Morphism）**：每个对象的自映射
+
+2. **函子（Functor）**：
+
+   - 范畴之间的映射
+   - 保持对象和态射的结构
+   - 保持恒等态射和复合
+
+3. **自然变换（Natural Transformation）**：
+
+   - 函子之间的映射
+   - 满足自然性条件（Naturality Condition）
+
+4. **单子（Monad）**：
+
+   - 自函子 $(T, \eta, \mu)$
+   - 单位态射（Unit）和乘法态射（Multiplication）
+   - 满足单子法则（Monad Laws）
+
+5. **极限与余极限（Limits and Colimits）**：
+
+   - **积（Product）**和**余积（Coproduct）**
+   - **等化子（Equalizer）**和**余等化子（Coequalizer）**
+   - **拉回（Pullback）**和**推出（Pushout）**
+
+6. **泛性质（Universal Property）**：
+   - 极限和余极限的共性定义
+   - 唯一性（Uniqueness）和存在性（Existence）
+
 **文档结构**：
 
-- **范畴基础**：容器技术范畴的定义、对象与态射、态射复合、恒等态射
+- **范畴基础**：容器技术范畴的定义、对象与态射、态射复合、恒等态射（基于
+  Wikipedia 严格定义）
 - **核心范畴**：Pod、Deployment、Service、Node 等核心对象的范畴
-- **函子**：镜像构建、状态同步、调度、转换等函子
-- **自然变换**：运行时转换、API 版本转换、格式转换
-- **单子**：Option、State、Error、Future 等单子模式
-- **极限与余极限**：积、余积、等化子、余等化子、拉回、推出
+- **函子**：镜像构建、状态同步、调度、转换等函子（基于 Wikipedia 严格定义）
+- **自然变换**：运行时转换、API 版本转换、格式转换（基于 Wikipedia 严格定义）
+- **单子**：Option、State、Error、Future 等单子模式（基于 Wikipedia 严格定义）
+- **极限与余极限**：积、余积、等化子、余等化子、拉回、推出（基于 Wikipedia 严格
+  定义）
 - **范畴复合**：范畴乘积、余乘积、函子范畴
 - **范畴等价**：范畴同构、等价、对偶
 
@@ -842,9 +893,109 @@ $\mathcal{D}^{\mathcal{C}}$ 由以下组成：
 | **$\mathcal{I}^{\mathcal{S}}$** | 源代码到镜像的函子范畴       | 镜像构建函子 |
 | **$\mathcal{P}^{\mathcal{D}}$** | Deployment 到 Pod 的函子范畴 | 状态同步函子 |
 
-## 20.9 范畴等价
+## 20.9 伴随函子
 
-### 20.9.1 范畴同构
+根据 Wikipedia，伴随函子（Adjoint Functors）是范畴论中的一个核心概念，描述了函子
+之间的对偶关系。
+
+### 20.9.1 伴随函子定义
+
+**伴随定义**：设 $F: \mathcal{C} \rightarrow \mathcal{D}$ 和
+$G: \mathcal{D} \rightarrow \mathcal{C}$ 是两个函子，如果存在自然同构：
+
+$$\text{Hom}_{\mathcal{D}}(F(A), B) \cong \text{Hom}_{\mathcal{C}}(A, G(B))$$
+
+则称 $F$ 是 $G$ 的左伴随（Left Adjoint），$G$ 是 $F$ 的右伴随（Right Adjoint），
+记为 $F \dashv G$。
+
+**Wikipedia 定义参考**（as of 2025-11-02）：
+
+> "An adjunction between categories $\mathcal{C}$ and $\mathcal{D}$ is a pair of
+> functors $F: \mathcal{C} \rightarrow \mathcal{D}$ and
+> $G: \mathcal{D} \rightarrow \mathcal{C}$ together with a natural isomorphism
+> $\text{Hom}_{\mathcal{D}}(F(-), -) \cong \text{Hom}_{\mathcal{C}}(-, G(-))$."
+
+**容器技术伴随函子**：
+
+| 伴随对                                           | 左伴随（Left Adjoint） | 右伴随（Right Adjoint） | 说明             |
+| ------------------------------------------------ | ---------------------- | ----------------------- | ---------------- |
+| **$F_{\text{build}} \dashv F_{\text{pull}}$**    | Image 构建函子         | Image 拉取函子          | 构建与拉取的伴随 |
+| **$F_{\text{create}} \dashv F_{\text{remove}}$** | Container 创建函子     | Container 删除函子      | 创建与删除的伴随 |
+
+**形式化定义**：
+
+设 $F_{\text{build}}: \mathcal{S} \rightarrow \mathcal{I}$ 和
+$F_{\text{pull}}: \mathcal{I} \rightarrow \mathcal{S}$ 是伴随函子，则：
+
+$$\text{Hom}_{\mathcal{I}}(F_{\text{build}}(\text{Source}), \text{Image}) \cong \text{Hom}_{\mathcal{S}}(\text{Source}, F_{\text{pull}}(\text{Image}))$$
+
+其中：
+
+- $\mathcal{S}$ = 源代码范畴
+- $\mathcal{I}$ = 镜像范畴
+
+**伴随性质**：
+
+1. **单位（Unit）**：$\eta: \text{id}_{\mathcal{C}} \Rightarrow G \circ F$
+2. **余单位
+   （Counit）**：$\epsilon: F \circ G \Rightarrow \text{id}_{\mathcal{D}}$
+3. **三角恒等式（Triangle Identities）**：
+   - $(\epsilon F) \circ (F \eta) = \text{id}_F$
+   - $(G \epsilon) \circ (\eta G) = \text{id}_G$
+
+### 20.9.2 Yoneda 引理
+
+根据 Wikipedia，Yoneda 引理（Yoneda Lemma）是范畴论中的一个基本结果，描述了对象
+与其在 Hom-函子中的表示之间的关系。
+
+**Yoneda 引理**：
+
+设 $\mathcal{C}$ 是一个范畴
+，$A \in \text{Ob}(\mathcal{C})$，$F: \mathcal{C}^{\text{op}} \rightarrow \text{Set}$
+是一个预层（Presheaf），则存在自然双射：
+
+$$\text{Nat}(\text{Hom}_{\mathcal{C}}(-, A), F) \cong F(A)$$
+
+其中 $\text{Nat}$ 表示自然变换的集合。
+
+**Wikipedia 定义参考**（as of 2025-11-02）：
+
+> "The Yoneda lemma is one of the most famous and important results in category
+> theory. It states that for any category $\mathcal{C}$ and any functor
+> $F: \mathcal{C}^{\text{op}} \rightarrow \text{Set}$, the natural
+> transformations from $\text{Hom}_{\mathcal{C}}(-, A)$ to $F$ are in one-to-one
+> correspondence with the elements of $F(A)$."
+
+**容器技术 Yoneda 引理应用**：
+
+- **Pod 表示**：Pod 对象由其在其他对象上的作用决定
+- **Deployment 表示**：Deployment 对象由其在 Pod 上的作用决定
+- **Service 表示**：Service 对象由其在 Pod 上的作用决定
+
+**Yoneda 嵌入**：
+
+Yoneda 嵌入 $Y: \mathcal{C} \rightarrow \text{Set}^{\mathcal{C}^{\text{op}}}$ 将
+对象 $A$ 映射到 Hom-函子 $\text{Hom}_{\mathcal{C}}(-, A)$。
+
+**容器技术 Yoneda 嵌入**：
+
+$$Y(\text{Pod}) = \text{Hom}_{\mathcal{C}}(-, \text{Pod})$$
+
+表示 Pod 对象由其与其他对象的所有态射决定。
+
+**Yoneda 嵌入的保满性**：
+
+根据 Wikipedia，Yoneda 嵌入是完全忠实的（Fully Faithful），即：
+
+$$\text{Hom}_{\mathcal{C}}(A, B) \cong \text{Hom}_{\text{Set}^{\mathcal{C}^{\text{op}}}}(Y(A), Y(B))$$
+
+**容器技术应用**：
+
+Pod 之间的态射与它们对应的 Hom-函子之间的自然变换一一对应。
+
+## 20.10 范畴等价
+
+### 20.10.1 范畴同构
 
 **范畴同构定义**：两个范畴 $\mathcal{C}$ 和 $\mathcal{D}$ 同构，当且仅当存在函子
 $F: \mathcal{C} \rightarrow \mathcal{D}$ 和
@@ -859,7 +1010,7 @@ $$G \circ F = \text{id}_{\mathcal{C}} \quad \text{和} \quad F \circ G = \text{i
 | **$\mathcal{C}_{\text{Docker}} \cong \mathcal{C}_{\text{containerd}}$** | Docker 与 containerd 范畴同构 | 运行时等价   |
 | **$\mathcal{C}_{\text{K8s}} \cong \mathcal{C}_{\text{K3s}}$**           | Kubernetes 与 K3s 范畴同构    | 编排系统等价 |
 
-### 20.9.2 范畴等价
+### 20.10.2 范畴等价
 
 **范畴等价定义**：两个范畴 $\mathcal{C}$ 和 $\mathcal{D}$ 等价，当且仅当存在函子
 $F: \mathcal{C} \rightarrow \mathcal{D}$ 和
@@ -874,7 +1025,7 @@ $$\eta: \text{id}_{\mathcal{C}} \Rightarrow G \circ F \quad \text{和} \quad \ep
 | **$\mathcal{C}_{\text{OCI}} \simeq \mathcal{C}_{\text{Docker}}$**     | OCI 与 Docker 范畴等价     | 镜像格式等价   |
 | **$\mathcal{C}_{\text{CRI}} \simeq \mathcal{C}_{\text{Docker API}}$** | CRI 与 Docker API 范畴等价 | 运行时接口等价 |
 
-### 20.9.3 范畴对偶
+### 20.10.3 范畴对偶
 
 **范畴对偶定义**：范畴 $\mathcal{C}$ 的对偶范畴 $\mathcal{C}^{\text{op}}$ 由以下
 组成：
@@ -890,19 +1041,55 @@ $$\eta: \text{id}_{\mathcal{C}} \Rightarrow G \circ F \quad \text{和} \quad \ep
 | **$\mathcal{P}^{\text{op}}$** | Pod 范畴的对偶        | 反向状态转换 |
 | **$\mathcal{D}^{\text{op}}$** | Deployment 范畴的对偶 | 反向状态同步 |
 
-## 20.10 参考
+## 20.11 参考
 
-- [19. 形式化理论](../19-formal-theory/formal-theory.md) - 结构同构和关系等价
-- [37. 矩阵视角](../37-matrix-perspective/README.md) - 矩阵力学与数学建模（补充
+**关联文档**：
+
+- [07. 形式化理论](../07-formal-theory/formal-theory.md) - 结构同构和关系等价
+- [09. 矩阵视角](../09-matrix-perspective/README.md) - 矩阵力学与数学建模（补充
   视角）
 
-**外部参考**：
+**外部参考（Wikipedia，as of 2025-11-02）**：
 
-> 范畴论基础见 [范畴论](https://en.wikipedia.org/wiki/Category_theory) 函子与自
-> 然变换见 [函子](https://en.wikipedia.org/wiki/Functor) 单子见
-> [单子](<https://en.wikipedia.org/wiki/Monad_(category_theory)>) 极限与余极限见
-> [极限](<https://en.wikipedia.org/wiki/Limit_(category_theory)>)
+- [Category Theory](https://en.wikipedia.org/wiki/Category_theory) - 范畴论
+- [Category (Mathematics)](<https://en.wikipedia.org/wiki/Category_(mathematics)>) -
+  范畴（数学）
+- [Morphism](https://en.wikipedia.org/wiki/Morphism) - 态射
+- [Functor](https://en.wikipedia.org/wiki/Functor) - 函子
+- [Natural Transformation](https://en.wikipedia.org/wiki/Natural_transformation) -
+  自然变换
+- [Monad (Category Theory)](<https://en.wikipedia.org/wiki/Monad_(category_theory)>) -
+  单子（范畴论）
+- [Limit (Category Theory)](<https://en.wikipedia.org/wiki/Limit_(category_theory)>) -
+  极限（范畴论）
+- [Universal Property](https://en.wikipedia.org/wiki/Universal_property) - 泛性
+  质
+- [Adjoint Functors](https://en.wikipedia.org/wiki/Adjoint_functors) - 伴随函子
+- [Product (Category Theory)](<https://en.wikipedia.org/wiki/Product_(category_theory)>) -
+  积（范畴论）
+- [Coproduct](https://en.wikipedia.org/wiki/Coproduct) - 余积
+- [Equalizer (Mathematics)](<https://en.wikipedia.org/wiki/Equalizer_(mathematics)>) -
+  等化子
+- [Pullback (Category Theory)](<https://en.wikipedia.org/wiki/Pullback_(category_theory)>) -
+  拉回
+- [Pushout (Category Theory)](<https://en.wikipedia.org/wiki/Pushout_(category_theory)>) -
+  推出
+
+**范畴论在计算机科学中的应用**：
+
+- [Type Theory](https://en.wikipedia.org/wiki/Type_theory) - 类型论
+- [Functional Programming](https://en.wikipedia.org/wiki/Functional_programming) -
+  函数式编程
+- [Lambda Calculus](https://en.wikipedia.org/wiki/Lambda_calculus) - Lambda 演算
+- [Domain Theory](https://en.wikipedia.org/wiki/Domain_theory) - 域理论
+
+**技术规范参考**：
+
+- [OCI Specification](https://github.com/opencontainers/runtime-spec) - Open
+  Container Initiative
+- [Kubernetes API](https://kubernetes.io/docs/reference/kubernetes-api/) -
+  Kubernetes API 规范
 
 ---
 
-> 完整参考列表见 [REFERENCES.md](../REFERENCES.md)
+**最后更新**：2025-11-02 **维护者**：项目团队

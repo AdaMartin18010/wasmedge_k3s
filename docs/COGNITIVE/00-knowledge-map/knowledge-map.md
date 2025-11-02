@@ -215,7 +215,7 @@ graph LR
 
 ## 0.4 概念属性矩阵
 
-> **详细矩阵分析**：参见 [37. 矩阵视角](../37-matrix-perspective/README.md) - 完
+> **详细矩阵分析**：参见 [09. 矩阵视角](../09-matrix-perspective/README.md) - 完
 > 整的矩阵力学体系
 
 ### 0.4.1 技术栈属性矩阵
@@ -347,11 +347,11 @@ graph TB
 
 | 阶段       | 目标           | 核心概念                     | 推荐文档                                                                                    |
 | ---------- | -------------- | ---------------------------- | ------------------------------------------------------------------------------------------- |
-| **阶段 1** | 架构设计决策   | 技术组合、规格匹配、决策框架 | [17-architecture-design](../17-architecture-design/architecture-design.md)                  |
-| **阶段 2** | 性能基准与优化 | 性能指标、对比分析、优化策略 | [14-benchmarks](../14-benchmarks/benchmarks.md)                                             |
-| **阶段 3** | 安全与合规     | 镜像签名、SBOM、策略治理     | [13-security-compliance](../TECHNICAL/09-security-compliance/security-compliance.md)        |
-| **阶段 4** | 供应链安全     | OCI Artifact、Cosign、SBOM   | [09-oci-supply-chain](../TECHNICAL/05-oci-supply-chain/oci-supply-chain.md)                 |
-| **阶段 5** | 实际案例       | 华为 MEC、阿里云 ACK Edge    | [17-architecture-design](../17-architecture-design/architecture-design.md#175-实际应用案例) |
+| **阶段 1** | 架构设计决策   | 技术组合、规格匹配、决策框架 | [05-architecture-design](../05-architecture-design/architecture-design.md)                  |
+| **阶段 2** | 性能基准与优化 | 性能指标、对比分析、优化策略 | [04-benchmarks](../04-benchmarks/benchmarks.md)                                             |
+| **阶段 3** | 安全与合规     | 镜像签名、SBOM、策略治理     | [09-security-compliance](../TECHNICAL/09-security-compliance/security-compliance.md)        |
+| **阶段 4** | 供应链安全     | OCI Artifact、Cosign、SBOM   | [05-oci-supply-chain](../TECHNICAL/05-oci-supply-chain/oci-supply-chain.md)                 |
+| **阶段 5** | 实际案例       | 华为 MEC、阿里云 ACK Edge    | [05-architecture-design](../05-architecture-design/architecture-design.md#175-实际应用案例) |
 
 ## 0.6 多维层次结构
 
@@ -460,14 +460,14 @@ graph LR
 | **边缘 Serverless**  | [11-edge-serverless](../TECHNICAL/07-edge-serverless/edge-serverless.md)                   | 边缘与 Serverless        |
 | **AI 推理**          | [12-ai-inference](../TECHNICAL/08-ai-inference/ai-inference.md)                            | AI 推理                  |
 | **安全合规**         | [13-security-compliance](../TECHNICAL/09-security-compliance/security-compliance.md)       | 安全与合规               |
-| **性能基准**         | [14-benchmarks](../14-benchmarks/benchmarks.md)                                            | 性能基线                 |
+| **性能基准**         | [04-benchmarks](../04-benchmarks/benchmarks.md)                                            | 性能基线                 |
 | **安装部署**         | [15-installation](../TECHNICAL/10-installation/installation.md)                            | 安装与部署               |
 | **故障排查**         | [16-troubleshooting](../TECHNICAL/11-troubleshooting/troubleshooting.md)                   | 故障排查                 |
-| **架构设计**         | [17-architecture-design](../17-architecture-design/architecture-design.md)                 | 全局架构设计             |
-| **问题解决方案**     | [18-problem-solution-matrix](../18-problem-solution-matrix/problem-solution-matrix.md)     | 技术问题与部署疑难杂症   |
-| **形式化理论**       | [19-formal-theory](../19-formal-theory/formal-theory.md)                                   | 结构同构与关系等价       |
-| **范畴论视角**       | [20-category-theory](../20-category-theory/category-theory.md)                             | 对象、态射与函子         |
-| **矩阵视角**         | [37-matrix-perspective](../37-matrix-perspective/README.md)                                | 矩阵力学与数学建模       |
+| **架构设计**         | [05-architecture-design](../05-architecture-design/architecture-design.md)                 | 全局架构设计             |
+| **问题解决方案**     | [06-problem-solution-matrix](../06-problem-solution-matrix/problem-solution-matrix.md)     | 技术问题与部署疑难杂症   |
+| **形式化理论**       | [07-formal-theory](../07-formal-theory/formal-theory.md)                                   | 结构同构与关系等价       |
+| **范畴论视角**       | [08-category-theory](../08-category-theory/category-theory.md)                             | 对象、态射与函子         |
+| **矩阵视角**         | [09-matrix-perspective](../09-matrix-perspective/README.md)                                | 矩阵力学与数学建模       |
 | **网络技术规格堆栈** | [21-network-stack](../TECHNICAL/12-network-stack/network-stack.md)                         | 网络技术与规格全面梳理   |
 | **缩写词汇表**       | [22-acronyms-glossary](../TECHNICAL/13-acronyms-glossary/acronyms-glossary.md)             | 所有缩写词定义与关系     |
 | **主题清单**         | [23-theme-inventory](../TECHNICAL/14-theme-inventory/theme-inventory.md)                   | 全面梳理所有主题与子主题 |
@@ -479,24 +479,25 @@ graph LR
 | **GitOps 和持续交付** |
 [26-gitops-cicd](../TECHNICAL/17-gitops-cicd/gitops-cicd.md) | GitOps/CI/CD 技术
 规范 | | **Operator 和 CRD** |
-[27-operator-crd](../TECHNICAL/27-operator-crd/operator-crd.md) | Operator/CRD
-开发规范 | | **镜像仓库和镜像管理** |
-[30-image-registry](../TECHNICAL/30-image-registry/image-registry.md) | 镜像仓库
+[27-operator-crd](../TECHNICAL/18-operator-crd/operator-crd.md) | Operator/CRD
+开发规范 | | **服务网格** |
+[28-service-mesh](../TECHNICAL/19-service-mesh/service-mesh.md) | 服务网格技术规
+范（可选） | | **多集群管理** |
+[29-multi-cluster](../TECHNICAL/20-multi-cluster/multi-cluster.md) | 多集群管理
+技术规范（可选） | | **镜像仓库和镜像管理** |
+[30-image-registry](../TECHNICAL/21-image-registry/image-registry.md) | 镜像仓库
 与管理技术规范 | | **升级和迁移** |
-[31-upgrade-migration](../TECHNICAL/31-upgrade-migration/upgrade-migration.md) |
+[31-upgrade-migration](../TECHNICAL/22-upgrade-migration/upgrade-migration.md) |
 升级和迁移技术规范 | | **开发和调试工具** |
-[32-dev-tools](../TECHNICAL/32-dev-tools/dev-tools.md) | 开发和调试工具规范 | |
-**服务网格** | [28-service-mesh](../TECHNICAL/28-service-mesh/service-mesh.md) |
-服务网格技术规范（可选） | | **多集群管理** |
-[29-multi-cluster](../TECHNICAL/29-multi-cluster/multi-cluster.md) | 多集群管理
-技术规范（可选） | | **成本优化** |
-[33-cost-optimization](../TECHNICAL/33-cost-optimization/cost-optimization.md) |
+[32-dev-tools](../TECHNICAL/23-dev-tools/dev-tools.md) | 开发和调试工具规范 | |
+**成本优化** |
+[33-cost-optimization](../TECHNICAL/24-cost-optimization/cost-optimization.md) |
 成本优化技术规范（可选） | | **社区生态和最佳实践** |
-[34-community-best-practices](../TECHNICAL/34-community-best-practices/community-best-practices.md)
+[34-community-best-practices](../TECHNICAL/25-community-best-practices/community-best-practices.md)
 | 社区生态和最佳实践（可选） | | **文档体系分析与改进** |
-[35-analysis-improvement](../TECHNICAL/35-analysis-improvement/analysis-improvement.md)
+[35-analysis-improvement](../TECHNICAL/26-analysis-improvement/analysis-improvement.md)
 | 批判性分析和改进计划 | | **2025 年技术趋势汇总** |
-[36-2025-trends](../TECHNICAL/36-2025-trends/2025-trends.md) | 2025 年最新技术趋
+[36-2025-trends](../TECHNICAL/27-2025-trends/2025-trends.md) | 2025 年最新技术趋
 势和版本信息 |
 
 ## 0.8 形式化定义

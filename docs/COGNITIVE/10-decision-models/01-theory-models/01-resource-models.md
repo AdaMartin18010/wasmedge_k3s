@@ -8,6 +8,7 @@
   - [01.2.1 CPU 调度模型对比](#0121-cpu-调度模型对比)
   - [01.2.2 CPU 开销数学模型](#0122-cpu-开销数学模型)
     - [虚拟化 CPU 开销模型](#虚拟化-cpu-开销模型)
+    - [半虚拟化 CPU 开销模型](#半虚拟化-cpu-开销模型)
     - [容器化 CPU 开销模型](#容器化-cpu-开销模型)
     - [沙盒化 CPU 开销模型](#沙盒化-cpu-开销模型)
   - [01.2.3 CPU 资源权衡决策](#0123-cpu-资源权衡决策)
@@ -15,6 +16,7 @@
   - [01.3.1 内存管理模型对比](#0131-内存管理模型对比)
   - [01.3.2 内存开销数学模型](#0132-内存开销数学模型)
     - [虚拟化内存开销模型](#虚拟化内存开销模型)
+    - [半虚拟化内存开销模型](#半虚拟化内存开销模型)
     - [容器化内存开销模型](#容器化内存开销模型)
     - [沙盒化内存开销模型](#沙盒化内存开销模型)
   - [01.3.3 内存资源权衡决策](#0133-内存资源权衡决策)
@@ -22,6 +24,7 @@
   - [01.4.1 IO 模型对比](#0141-io-模型对比)
   - [01.4.2 IO 性能模型](#0142-io-性能模型)
     - [虚拟化 IO 性能](#虚拟化-io-性能)
+    - [半虚拟化 IO 性能](#半虚拟化-io-性能)
     - [容器化 IO 性能](#容器化-io-性能)
     - [沙盒化 IO 性能](#沙盒化-io-性能)
   - [01.4.3 IO 资源权衡决策](#0143-io-资源权衡决策)
@@ -29,6 +32,7 @@
   - [01.5.1 网络模型对比](#0151-网络模型对比)
   - [01.5.2 网络延迟模型](#0152-网络延迟模型)
     - [虚拟化网络延迟](#虚拟化网络延迟)
+    - [半虚拟化网络延迟](#半虚拟化网络延迟)
     - [容器化网络延迟](#容器化网络延迟)
     - [沙盒化网络延迟](#沙盒化网络延迟)
   - [01.5.3 网络资源权衡决策](#0153-网络资源权衡决策)
@@ -63,15 +67,16 @@
 
 **CPU 调度模型**是虚拟化、容器化、沙盒化的核心差异之一。
 
-| 范式       | CPU 调度模型                      | 上下文切换开销      | CPU 利用率 | 开销来源                    |
-| ---------- | --------------------------------- | ------------------- | ---------- | --------------------------- |
-| **虚拟化** | 两级调度（Hypervisor + Guest OS） | 高（> 1000 cycles） | 70-80%     | 特权指令陷阱、VM Exit       |
-| **容器化** | 单级调度（Host OS）               | 中（~500 cycles）   | 85-95%     | Namespace 切换、Cgroup 更新 |
-| **沙盒化** | 应用级调度（Runtime）             | 低（< 100 cycles）  | 90-98%     | 函数调用、轻量隔离          |
+| 范式         | CPU 调度模型                      | 上下文切换开销          | CPU 利用率 | 开销来源                          |
+| ------------ | --------------------------------- | ----------------------- | ---------- | --------------------------------- |
+| **虚拟化**   | 两级调度（Hypervisor + Guest OS） | 高（> 1000 cycles）     | 70-80%     | 特权指令陷阱、VM Exit             |
+| **半虚拟化** | 协作调度（Hypervisor + Guest OS） | 中高（800-1200 cycles） | 75-85%     | Hypercall、协作优化、减少 VM Exit |
+| **容器化**   | 单级调度（Host OS）               | 中（~500 cycles）       | 85-95%     | Namespace 切换、Cgroup 更新       |
+| **沙盒化**   | 应用级调度（Runtime）             | 低（< 100 cycles）      | 90-98%     | 函数调用、轻量隔离                |
 
 **CPU 调度路径对比**：
 
-1. **虚拟化**：
+1. **虚拟化（全虚拟化）**：
 
    ```text
    Guest App → Guest Kernel → Hypervisor → Host Kernel → CPU
@@ -81,7 +86,17 @@
    - **VM Exit**：特权指令触发 VM Exit，切换到 Hypervisor
    - **开销**：上下文切换开销高（> 1000 CPU cycles）
 
-2. **容器化**：
+2. **半虚拟化**：
+
+   ```text
+   Guest App → Guest Kernel (Hypercall) → Hypervisor → Host Kernel → CPU
+   ```
+
+   - **协作调度**：Guest OS 通过 Hypercall 与 Hypervisor 协作
+   - **Hypercall**：Guest OS 直接调用 Hypervisor 接口，减少 VM Exit
+   - **开销**：上下文切换开销中高（800-1200 CPU cycles，通过协作优化减少）
+
+3. **容器化**：
 
    ```text
    Container App → Host Kernel → CPU
@@ -91,7 +106,7 @@
    - **Namespace**：进程在隔离的 Namespace 中运行
    - **开销**：上下文切换开销中等（~500 CPU cycles）
 
-3. **沙盒化**：
+4. **沙盒化**：
 
    ```text
    Wasm Module → Runtime → Host Kernel → CPU
@@ -137,6 +152,26 @@ $$C_{\text{VM}} = C_{\text{workload}} + C_{\text{vmexit}} + C_{\text{emulation}}
 
 $$\text{CPU}_{\text{utilization}} = \frac{C_{\text{workload}}}{C_{\text{VM}}} \approx 70-80\%$$
 
+#### 半虚拟化 CPU 开销模型
+
+$$C_{\text{PV}} = C_{\text{workload}} + C_{\text{hypercall}} + C_{\text{collaboration}} + C_{\text{hypervisor}}$$
+
+其中：
+
+- $C_{\text{hypercall}}$：Hypercall 开销（协作接口）
+  - Guest OS 通过 Hypercall 调用 Hypervisor，减少 VM Exit
+  - 开销：约 100-300 CPU cycles（比 VM Exit 低）
+- $C_{\text{collaboration}}$：协作优化开销
+  - 前端/后端驱动协作，减少模拟开销
+  - 开销：约 50-150 CPU cycles
+- $C_{\text{hypervisor}}$：Hypervisor 调度开销
+  - 虚拟 CPU 调度开销（类似全虚拟化）
+  - 开销：约 50-200 CPU cycles
+
+**半虚拟化 CPU 利用率**：
+
+$$\text{CPU}_{\text{utilization}} = \frac{C_{\text{workload}}}{C_{\text{PV}}} \approx 75-85\%$$
+
 #### 容器化 CPU 开销模型
 
 $$C_{\text{Container}} = C_{\text{workload}} + C_{\text{namespace}} + C_{\text{cgroup}} + C_{\text{runtime}}$$
@@ -180,17 +215,19 @@ $$\text{CPU}_{\text{utilization}} = \frac{C_{\text{workload}}}{C_{\text{Sandbox}
 
 - **CPU 密集型应用** → 容器化（CPU 利用率 85-95%，开销适中）
 - **低延迟要求** → 沙盒化（上下文切换快，< 100 cycles）
+- **多 OS 需求 + 高性能** → 半虚拟化（CPU 利用率 75-85%，协作优化）
 - **多 OS 需求** → 虚拟化（需要 Guest OS，可接受 CPU 开销）
 
 **量化对比**：
 
-| 场景       | 推荐范式 | CPU 利用率 | 上下文切换开销 | 理由           |
-| ---------- | -------- | ---------- | -------------- | -------------- |
-| CPU 密集型 | 容器化   | 85-95%     | ~500 cycles    | 平衡性能与开销 |
-| 低延迟关键 | 沙盒化   | 90-98%     | < 100 cycles   | 最快响应       |
-| 多 OS 支持 | 虚拟化   | 70-80%     | > 1000 cycles  | 唯一支持多 OS  |
-| 资源受限   | 沙盒化   | 90-98%     | < 100 cycles   | 最高资源利用率 |
-| 大规模部署 | 容器化   | 85-95%     | ~500 cycles    | 平衡性能与成本 |
+| 场景           | 推荐范式 | CPU 利用率 | 上下文切换开销  | 理由                      |
+| -------------- | -------- | ---------- | --------------- | ------------------------- |
+| CPU 密集型     | 容器化   | 85-95%     | ~500 cycles     | 平衡性能与开销            |
+| 低延迟关键     | 沙盒化   | 90-98%     | < 100 cycles    | 最快响应                  |
+| 多 OS + 高性能 | 半虚拟化 | 75-85%     | 800-1200 cycles | 协作优化，减少 VM Exit    |
+| 多 OS 支持     | 虚拟化   | 70-80%     | > 1000 cycles   | 唯一支持多 OS（无需修改） |
+| 资源受限       | 沙盒化   | 90-98%     | < 100 cycles    | 最高资源利用率            |
+| 大规模部署     | 容器化   | 85-95%     | ~500 cycles     | 平衡性能与成本            |
 
 ---
 
@@ -200,15 +237,16 @@ $$\text{CPU}_{\text{utilization}} = \frac{C_{\text{workload}}}{C_{\text{Sandbox}
 
 **内存管理模型**决定了不同范式的内存开销和共享机制。
 
-| 范式       | 内存模型     | 内存开销              | 共享机制           | 隔离粒度     |
-| ---------- | ------------ | --------------------- | ------------------ | ------------ |
-| **虚拟化** | 独立物理内存 | 高（Guest OS + 应用） | 无（完全隔离）     | 物理内存页   |
-| **容器化** | 共享内核内存 | 中（仅应用内存）      | 内核内存、文件系统 | 进程地址空间 |
-| **沙盒化** | 应用级内存   | 低（仅运行时）        | 共享主机内存       | 应用内存空间 |
+| 范式         | 内存模型     | 内存开销              | 共享机制                | 隔离粒度           |
+| ------------ | ------------ | --------------------- | ----------------------- | ------------------ |
+| **虚拟化**   | 独立物理内存 | 高（Guest OS + 应用） | 无（完全隔离）          | 物理内存页         |
+| **半虚拟化** | 协作物理内存 | 高（Guest OS + 应用） | 共享内存（Grant Table） | 物理内存页（协作） |
+| **容器化**   | 共享内核内存 | 中（仅应用内存）      | 内核内存、文件系统      | 进程地址空间       |
+| **沙盒化**   | 应用级内存   | 低（仅运行时）        | 共享主机内存            | 应用内存空间       |
 
 **内存路径对比**：
 
-1. **虚拟化**：
+1. **虚拟化（全虚拟化）**：
 
    ```text
    Guest App → Guest Memory → Hypervisor → Host Memory → Physical Memory
@@ -218,7 +256,18 @@ $$\text{CPU}_{\text{utilization}} = \frac{C_{\text{workload}}}{C_{\text{Sandbox}
    - **Guest OS 开销**：每个 VM 需要运行完整的 Guest OS（通常 256MB-2GB）
    - **无内存共享**：VM 之间完全隔离，无法共享内存
 
-2. **容器化**：
+2. **半虚拟化**：
+
+   ```text
+   Guest App → Guest Memory (Grant Table) → Hypervisor → Host Memory → Physical Memory
+   ```
+
+   - **协作物理内存**：通过 Grant Table 机制共享内存页
+   - **Guest OS 开销**：每个 VM 需要运行完整的 Guest OS（通常 256MB-2GB）
+   - **共享内存**：通过 Grant Table 实现 Guest OS 与 Hypervisor 之间的内存共享
+   - **内存效率**：通过协作机制优化内存访问，减少内存复制开销
+
+3. **容器化**：
 
    ```text
    Container App → Process Address Space → Host Kernel → Physical Memory
@@ -228,7 +277,7 @@ $$\text{CPU}_{\text{utilization}} = \frac{C_{\text{workload}}}{C_{\text{Sandbox}
    - **进程地址空间隔离**：每个容器有独立的进程地址空间
    - **内存共享**：可以共享只读文件系统、共享库等
 
-3. **沙盒化**：
+4. **沙盒化**：
 
    ```text
    Wasm Module → Runtime Memory → Host Memory → Physical Memory
@@ -274,6 +323,27 @@ $$M_{\text{VM}} = M_{\text{guest\_os}} + M_{\text{workload}} + M_{\text{hypervis
 - **标准 VM**：Guest OS (1GB) + Workload (512MB) + Hypervisor (100MB) =
   **1.6GB**
 
+#### 半虚拟化内存开销模型
+
+$$M_{\text{PV}} = M_{\text{guest\_os}} + M_{\text{workload}} + M_{\text{hypervisor}} + M_{\text{grant\_table}}$$
+
+其中：
+
+- $M_{\text{guest\_os}}$：Guest OS 内存（通常 256MB-2GB，类似全虚拟化）
+- $M_{\text{workload}}$：工作负载内存
+- $M_{\text{hypervisor}}$：Hypervisor 开销（通常 < 100MB）
+- $M_{\text{grant\_table}}$：Grant Table 开销（内存共享机制，通常 < 10MB）
+
+**半虚拟化内存开销示例**：
+
+- **最小 PV VM**：Guest OS (256MB) + Workload (128MB) + Hypervisor (50MB) +
+  Grant Table (5MB) = **439MB**
+- **标准 PV VM**：Guest OS (1GB) + Workload (512MB) + Hypervisor (100MB) + Grant
+  Table (10MB) = **1.62GB**
+
+**内存效率**：通过 Grant Table 机制，可以减少内存复制开销，提高 IO 性能（约
+10-20% 提升）
+
 #### 容器化内存开销模型
 
 $$M_{\text{Container}} = M_{\text{workload}} + M_{\text{namespace}} + M_{\text{runtime}}$$
@@ -312,11 +382,12 @@ $$M_{\text{Wasm}} = M_{\text{wasm\_module}} + M_{\text{runtime}} + M_{\text{memo
 
 **内存开销对比**：
 
-| 范式       | 最小内存开销 | 标准内存开销 | 内存效率 |
-| ---------- | ------------ | ------------ | -------- |
-| **虚拟化** | 434MB        | 1.6GB        | 低       |
-| **容器化** | 148MB        | 562MB        | 中       |
-| **沙盒化** | 7MB          | 16MB         | 极高     |
+| 范式         | 最小内存开销 | 标准内存开销 | 内存效率             |
+| ------------ | ------------ | ------------ | -------------------- |
+| **虚拟化**   | 434MB        | 1.6GB        | 低                   |
+| **半虚拟化** | 439MB        | 1.62GB       | 低（但 IO 性能优化） |
+| **容器化**   | 148MB        | 562MB        | 中                   |
+| **沙盒化**   | 7MB          | 16MB         | 极高                 |
 
 ### 01.3.3 内存资源权衡决策
 
@@ -352,18 +423,30 @@ $$M_{\text{Wasm}} = M_{\text{wasm\_module}} + M_{\text{runtime}} + M_{\text{memo
 
 **IO 路径对比**：
 
-1. **虚拟化**：
+1. **虚拟化（全虚拟化）**：
 
    ```text
-   Guest App → Guest Kernel → VirtIO → Hypervisor → Host Kernel → Hardware
+   Guest App → Guest Kernel → 模拟设备 → Hypervisor → Host Kernel → Hardware
    ```
 
-   - **VirtIO 虚拟化**：虚拟设备接口，需要 Hypervisor 拦截
-   - **IO 拦截**：所有 IO 请求都需要经过 Hypervisor
+   - **设备模拟**：完全模拟硬件设备，需要 Hypervisor 拦截所有 IO
+   - **IO 拦截**：所有 IO 请求都需要经过 Hypervisor 模拟
    - **上下文切换**：Guest → Hypervisor → Host
    - **性能损失**：10-30%
 
-2. **容器化**：
+2. **半虚拟化**：
+
+   ```text
+   Guest App → Guest Kernel (前端驱动) → VirtIO/PV → Hypervisor (后端驱动) → Host Kernel → Hardware
+   ```
+
+   - **前端/后端驱动**：Guest OS 前端驱动与 Hypervisor 后端驱动协作
+   - **VirtIO 或 PV 驱动**：通过 Hypercall 和共享内存减少 IO 拦截开销
+   - **协作优化**：减少设备模拟开销，提高 IO 性能
+   - **上下文切换**：Guest (Hypercall) → Hypervisor → Host
+   - **性能损失**：5-15%（相比全虚拟化性能提升约 50%）
+
+3. **容器化**：
 
    ```text
    Container App → Host Kernel → Hardware
@@ -374,7 +457,7 @@ $$M_{\text{Wasm}} = M_{\text{wasm\_module}} + M_{\text{runtime}} + M_{\text{memo
    - **上下文切换**：Container → Host
    - **性能损失**：< 5%
 
-3. **沙盒化**：
+4. **沙盒化**：
 
    ```text
    Wasm Module → WASI Runtime → Host Kernel → Hardware
@@ -413,6 +496,19 @@ $$P_{\text{VM\_io}} = \frac{T_{\text{raw}} \times (1 - L_{\text{vm}})}{L_{\text{
 
 **性能损失**：约 10-30%
 
+#### 半虚拟化 IO 性能
+
+$$P_{\text{PV\_io}} = \frac{T_{\text{raw}} \times (1 - L_{\text{pv}})}{L_{\text{raw}} + L_{\text{hypercall}} + L_{\text{collaboration}}}$$
+
+其中：
+
+- $T_{\text{raw}}$：原始 IO 吞吐量
+- $L_{\text{raw}}$：原始 IO 延迟
+- $L_{\text{hypercall}}$：Hypercall 延迟（约 1-5μs，比 VM Exit 低）
+- $L_{\text{collaboration}}$：协作延迟（前端/后端驱动协作，约 2-8μs）
+
+**性能损失**：约 5-15%（相比全虚拟化性能提升约 50%）
+
 #### 容器化 IO 性能
 
 $$P_{\text{Container\_io}} = \frac{T_{\text{raw}} \times (1 - L_{\text{container}})}{L_{\text{raw}} + L_{\text{namespace}}}$$
@@ -437,11 +533,12 @@ $$P_{\text{Wasm\_io}} = \frac{T_{\text{raw}} \times (1 - L_{\text{wasm}})}{L_{\t
 
 **IO 性能对比**：
 
-| 范式       | IO 吞吐量损失 | IO 延迟增加 | 总体性能损失 |
-| ---------- | ------------- | ----------- | ------------ |
-| **虚拟化** | 10-30%        | 10-50μs     | 10-30%       |
-| **容器化** | < 5%          | 0.1-1μs     | < 5%         |
-| **沙盒化** | < 1%          | < 0.1μs     | < 1%         |
+| 范式         | IO 吞吐量损失 | IO 延迟增加 | 总体性能损失 |
+| ------------ | ------------- | ----------- | ------------ |
+| **虚拟化**   | 10-30%        | 10-50μs     | 10-30%       |
+| **半虚拟化** | 5-15%         | 3-13μs      | 5-15%        |
+| **容器化**   | < 5%          | 0.1-1μs     | < 5%         |
+| **沙盒化**   | < 1%          | < 0.1μs     | < 1%         |
 
 ### 01.4.3 IO 资源权衡决策
 
@@ -468,11 +565,12 @@ $$P_{\text{Wasm\_io}} = \frac{T_{\text{raw}} \times (1 - L_{\text{wasm}})}{L_{\t
 
 **网络模型**决定了不同范式的网络延迟和吞吐量。
 
-| 范式       | 网络模型         | 网络开销 | 虚拟化层              | 延迟开销 |
-| ---------- | ---------------- | -------- | --------------------- | -------- |
-| **虚拟化** | 虚拟网卡（vNIC） | 高       | Hypervisor + Guest OS | 10-50μs  |
-| **容器化** | 网络 Namespace   | 中       | Host OS Network Stack | 1-10μs   |
-| **沙盒化** | Socket 拦截      | 低       | Runtime + Host OS     | < 1μs    |
+| 范式         | 网络模型                   | 网络开销 | 虚拟化层                   | 延迟开销 |
+| ------------ | -------------------------- | -------- | -------------------------- | -------- |
+| **虚拟化**   | 虚拟网卡（模拟网卡）       | 高       | Hypervisor + Guest OS      | 10-50μs  |
+| **半虚拟化** | 半虚拟化网卡（VirtIO Net） | 中高     | Hypervisor + Guest OS 协作 | 5-25μs   |
+| **容器化**   | 网络 Namespace             | 中       | Host OS Network Stack      | 1-10μs   |
+| **沙盒化**   | Socket 拦截                | 低       | Runtime + Host OS          | < 1μs    |
 
 **网络路径对比**：
 
@@ -533,6 +631,18 @@ $$L_{\text{VM}} = L_{\text{hardware}} + L_{\text{host\_kernel}} + L_{\text{hyper
 
 **总延迟开销**：15-40μs
 
+#### 半虚拟化网络延迟
+
+$$L_{\text{PV}} = L_{\text{hardware}} + L_{\text{host\_kernel}} + L_{\text{hypervisor}} + L_{\text{hypercall}} + L_{\text{guest\_kernel}}$$
+
+其中：
+
+- $L_{\text{hypervisor}}$：Hypervisor 网络虚拟化（5-15μs，通过 VirtIO 优化）
+- $L_{\text{hypercall}}$：Hypercall 延迟（1-3μs，比 VM Exit 低）
+- $L_{\text{guest\_kernel}}$：Guest OS 网络栈（5-10μs）
+
+**总延迟开销**：11-28μs（相比全虚拟化减少约 30-50%）
+
 #### 容器化网络延迟
 
 $$L_{\text{Container}} = L_{\text{hardware}} + L_{\text{host\_kernel}} + L_{\text{namespace}}$$
@@ -555,11 +665,12 @@ $$L_{\text{Wasm}} = L_{\text{hardware}} + L_{\text{host\_kernel}} + L_{\text{was
 
 **网络延迟对比**：
 
-| 范式       | 延迟开销 | 网络吞吐量损失 | 总体性能 |
-| ---------- | -------- | -------------- | -------- |
-| **虚拟化** | 15-40μs  | 10-20%         | 中等     |
-| **容器化** | 1-5μs    | < 5%           | 较高     |
-| **沙盒化** | < 1μs    | < 1%           | 最高     |
+| 范式         | 延迟开销 | 网络吞吐量损失 | 总体性能 |
+| ------------ | -------- | -------------- | -------- |
+| **虚拟化**   | 15-40μs  | 10-20%         | 中等     |
+| **半虚拟化** | 11-28μs  | 5-12%          | 中高     |
+| **容器化**   | 1-5μs    | < 5%           | 较高     |
+| **沙盒化**   | < 1μs    | < 1%           | 最高     |
 
 ### 01.5.3 网络资源权衡决策
 
@@ -667,23 +778,25 @@ $$P_{\text{storage}} = \frac{\text{IOPS} \times \text{Throughput}}{\text{Latency
 
 **综合资源权衡矩阵**：
 
-| 资源维度       | 虚拟化             | 容器化            | 沙盒化           | 最佳选择 |
-| -------------- | ------------------ | ----------------- | ---------------- | -------- |
-| **CPU 利用率** | 70-80%             | 85-95%            | 90-98%           | 沙盒化   |
-| **内存开销**   | 高（+Guest OS）    | 中（仅应用）      | 低（最小）       | 沙盒化   |
-| **IO 性能**    | 中等（10-30%损失） | 较高（< 5%损失）  | 最高（< 1%损失） | 沙盒化   |
-| **网络延迟**   | 高（10-50μs）      | 中（1-10μs）      | 低（< 1μs）      | 沙盒化   |
-| **存储 IO**    | 中等（15-25%损失） | 较高（5-10%损失） | 最高（< 2%损失） | 沙盒化   |
-| **隔离强度**   | 最高（硬件级）     | 中等（进程级）    | 较低（应用级）   | 虚拟化   |
-| **兼容性**     | 最高（多 OS）      | 高（Linux）       | 低（应用特定）   | 虚拟化   |
+| 资源维度       | 虚拟化             | 半虚拟化                | 容器化            | 沙盒化           | 最佳选择 |
+| -------------- | ------------------ | ----------------------- | ----------------- | ---------------- | -------- |
+| **CPU 利用率** | 70-80%             | 75-85%                  | 85-95%            | 90-98%           | 沙盒化   |
+| **内存开销**   | 高（+Guest OS）    | 高（+Guest OS + Grant） | 中（仅应用）      | 低（最小）       | 沙盒化   |
+| **IO 性能**    | 中等（10-30%损失） | 中高（5-15%损失）       | 较高（< 5%损失）  | 最高（< 1%损失） | 沙盒化   |
+| **网络延迟**   | 高（10-50μs）      | 中高（11-28μs）         | 中（1-10μs）      | 低（< 1μs）      | 沙盒化   |
+| **存储 IO**    | 中等（15-25%损失） | 中高（8-18%损失）       | 较高（5-10%损失） | 最高（< 2%损失） | 沙盒化   |
+| **隔离强度**   | 最高（硬件级）     | 高（内核级）            | 中等（进程级）    | 较低（应用级）   | 虚拟化   |
+| **兼容性**     | 最高（多 OS）      | 高（需修改 Guest OS）   | 高（Linux）       | 低（应用特定）   | 虚拟化   |
 
 **资源权衡决策规则**：
 
 ```text
 if 资源受限 and 性能要求高:
     return 沙盒化
+elif 隔离要求高 and 兼容性要求高 and Guest OS 可修改:
+    return 半虚拟化（性能优于全虚拟化）
 elif 隔离要求高 and 兼容性要求高:
-    return 虚拟化
+    return 虚拟化（全虚拟化，无需修改 Guest OS）
 elif 资源共享需求 and 标准化需求:
     return 容器化
 ```
