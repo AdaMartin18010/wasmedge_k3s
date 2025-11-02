@@ -681,11 +681,36 @@ kubectl logs -n gatekeeper-system -l app=gatekeeper
 
 ## 11.8 参考
 
+**关联文档**：
+
+**高级故障排查方法**：
+
+- **[29. 隔离栈 - 问题定位模型](../29-isolation-stack/isolation-stack.md#296-问题定位模型横向请求链--纵向隔离栈)** -
+  横纵耦合的问题定位方法，OTLP + eBPF 联合定位
+  - [定位模型概述](../29-isolation-stack/isolation-stack.md#2961-定位模型概述) -
+    横纵耦合定位的核心思想
+  - [五步定位法](../29-isolation-stack/isolation-stack.md#2963-五步定位法) - 详
+    细的问题定位流程
+  - [eBPF 工具速查表](../29-isolation-stack/isolation-stack.md#2969-ebpf-工具速查表) -
+    工具分类和使用方法
+  - [网络定位专题](../29-isolation-stack/isolation-stack.md#29612-网络定位专题横向生命线) -
+    网络问题定位方法
+  - [实战案例总结](../29-isolation-stack/isolation-stack.md#29613-实战案例总结) -
+    3 个完整实战案例
+- **[29. 隔离栈 - 快速诊断口诀](../29-isolation-stack/isolation-stack.md#295-快速诊断口诀)** -
+  根据日志关键词快速定位问题层级
+- **[29. 隔离栈 - 观测系统作为第四大基础设施](../29-isolation-stack/isolation-stack.md#2960-观测系统作为第四大基础设施)** -
+  为什么观测系统必须，完备性判据，MVP 落地
+
+**技术规范**：
+
 > 完整参考列表见 [REFERENCES.md](../REFERENCES.md)
 
 ---
 
-> **重要提示**：如果问题仍未解决，请查看相关技术文档或提交 Issue。
+> **重要提示**：对于复杂的性能问题和延迟问题，强烈建议使用
+> [29. 隔离栈的问题定位模型](../29-isolation-stack/isolation-stack.md#296-问题定位模型横向请求链--纵向隔离栈)
+> 进行横纵耦合定位。
 
 ---
 

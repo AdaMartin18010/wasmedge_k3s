@@ -537,6 +537,19 @@ data:
 
 ## 16.5 Tracing 链路追踪技术规格
 
+> **💡 问题定位提示**：
+>
+> OpenTelemetry（OTLP）不仅用于链路追踪，更是横纵耦合问题定位模型中的**横向坐
+> 标**：
+>
+> - **横向定位**：OTLP Trace 提供请求链路的完整视图，快速定位慢跳（详见
+>   [29.6.12.2 OTLP 网络 trace](../29-isolation-stack/isolation-stack.md#296122-横向otlp-网络-trace)）
+> - **纵向定位**：结合 eBPF 提供内核栈的深度分析，定位技术层问题（详见
+>   [29.6.12.3 eBPF 网络显微镜](../29-isolation-stack/isolation-stack.md#296123-纵向ebpf-网络显微镜)）
+> - **完整方法**：参考
+>   [29.6 问题定位模型](../29-isolation-stack/isolation-stack.md#296-问题定位模型横向请求链--纵向隔离栈)
+>   了解横纵耦合定位方法
+
 ### 16.5.1 OpenTelemetry 规格
 
 **OpenTelemetry 规格**：
@@ -1028,6 +1041,18 @@ container_memory_usage_bytes{container="app"} 536870912 1234567890
 - **OTLP（HTTP）**：OpenTelemetry Protocol over HTTP
 - **Jaeger**：Jaeger 格式
 - **Zipkin**：Zipkin 格式
+
+**问题定位中的应用**：
+
+OTLP 在横纵耦合问题定位模型中扮演**横向坐标**的角色：
+
+- **横向坐标**：OTLP Trace 提供请求链路的完整视图
+  - `net.peer.ip`、`net.peer.port`：定位慢跳的网络地址
+  - `duration`：定位慢跳的时间戳
+  - `trace_id`：关联完整的请求链路
+- **数据关联**：OTLP 数据与 eBPF 数据交叉验证，实现秒级精确问题定位
+- **完整方法**：详见
+  [29.6.12.0.2 OTLP 如何给出"横向坐标"](../29-isolation-stack/isolation-stack.md#2961202-otlp-如何给出横向坐标)
 
 ### 16.9.3 日志格式规范
 
