@@ -544,3 +544,7 @@ EOF
 - **[06. OPA 策略即代码](../06-policy-opa/policy-opa.md)** - Open Policy Agent
 
 > 完整参考列表见 [REFERENCES.md](../REFERENCES.md)
+
+---
+
+**最后更新**：2025-11-03 **维护者**：项目团队

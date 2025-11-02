@@ -1129,3 +1129,7 @@ $$\min_{B} T(B) = \min_{B} \left(T(\text{download}) + T(\text{build}) + T(\text{
 [^docker-network]: [Docker Network](https://docs.docker.com/network/)
 
 > 完整参考列表见 [REFERENCES.md](../REFERENCES.md)
+
+---
+
+**最后更新**：2025-11-03 **维护者**：项目团队

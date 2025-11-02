@@ -1072,4 +1072,8 @@ $$
 
 > 完整参考列表见 [REFERENCES.md](../REFERENCES.md)
 
+---
+
+**最后更新**：2025-11-03 **维护者**：项目团队
+
 <!-- cSpell:ignore wasmedge WasmEdge runc crun runwasi containerd WASI OCI Kubernetes K8s K3s RuntimeClass wasm wasm32 -->

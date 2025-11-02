@@ -843,3 +843,7 @@ registry.example.com/myteam/myapp:abc123
 - [AWS ECR 文档](https://docs.aws.amazon.com/ecr/)
 - [Azure ACR 文档](https://docs.microsoft.com/azure/container-registry/)
 - [GCP Artifact Registry 文档](https://cloud.google.com/artifact-registry/docs)
+
+---
+
+**最后更新**：2025-11-03 **维护者**：项目团队

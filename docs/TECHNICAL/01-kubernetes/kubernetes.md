@@ -1421,3 +1421,7 @@ $$\lim_{t \to \infty} |T_t - S| = 0$$
 [Kubernetes 调度](https://kubernetes.io/docs/concepts/scheduling-eviction/)
 
 > 完整参考列表见 [REFERENCES.md](../REFERENCES.md)
+
+---
+
+**最后更新**：2025-11-03 **维护者**：项目团队

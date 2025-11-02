@@ -25,7 +25,7 @@
 | 14   | 性能基准            | [14-benchmarks](COGNITIVE/04-benchmarks/benchmarks.md)                                           | 性能基线                           | 实践 |
 | 15   | 安装部署            | [15-installation](TECHNICAL/10-installation/installation.md)                                     | 安装和最小示例                     | 实践 |
 | 16   | 故障排查            | [16-troubleshooting](TECHNICAL/11-troubleshooting/troubleshooting.md)                            | 故障排查                           | 实践 |
-| 05   | 全局架构设计        | [05-architecture-design](COGNITIVE/05-architecture-design/architecture-design.md)                | 技术组合和架构决策                 | 设计 |
+| 17   | 全局架构设计        | [17-architecture-design](COGNITIVE/05-architecture-design/architecture-design.md)                | 技术组合和架构决策                 | 设计 |
 | 18   | 问题解决方案        | [18-problem-solution-matrix](COGNITIVE/06-problem-solution-matrix/problem-solution-matrix.md)    | 技术问题分类和解决                 | 设计 |
 | 19   | 形式化理论          | [19-formal-theory](COGNITIVE/07-formal-theory/formal-theory.md)                                  | 结构同构和关系等价                 | 理论 |
 | 20   | 范畴论视角          | [20-category-theory](COGNITIVE/08-category-theory/category-theory.md)                            | 对象、态射与函子                   | 理论 |
@@ -50,7 +50,8 @@
 
 **说明**：文档编号 28 为架构框架文档（多维度架构体系与技术规范）。文档编号 29-30
 为可选文档（服务网格、多集群管理），34 为可选文档（成本优化）。37 为趋势文档
-（2025 年技术趋势汇总）。38 为矩阵视角理论文档。
+（2025 年技术趋势汇总）。38 为矩阵视角理论文档（在
+COGNITIVE/09-matrix-perspective 目录下）。
 
 ## 📂 按分类索引
 

@@ -1013,3 +1013,7 @@ spec:
 - [Controller Runtime 文档](https://pkg.go.dev/sigs.k8s.io/controller-runtime)
 - [Prometheus Operator 文档](https://github.com/prometheus-operator/prometheus-operator)
 - [cert-manager 文档](https://cert-manager.io/docs/)
+
+---
+
+**最后更新**：2025-11-03 **维护者**：项目团队

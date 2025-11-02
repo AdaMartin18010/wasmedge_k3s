@@ -1075,3 +1075,7 @@ container_memory_usage_bytes{container="app"} 536870912 1234567890
 - [Fluentd 官方文档](https://docs.fluentd.org/)
 - [Fluent Bit 官方文档](https://docs.fluentbit.io/)
 - [ELK Stack 官方文档](https://www.elastic.co/guide/)
+
+---
+
+**最后更新**：2025-11-03 **维护者**：项目团队

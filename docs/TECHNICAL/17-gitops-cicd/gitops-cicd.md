@@ -806,3 +806,7 @@ Dev -> Test -> Staging -> Production
 - [GitHub Actions 文档](https://docs.github.com/en/actions)
 - [GitLab CI 文档](https://docs.gitlab.com/ee/ci/)
 - [Tekton 官方文档](https://tekton.dev/docs/)
+
+---
+
+**最后更新**：2025-11-03 **维护者**：项目团队

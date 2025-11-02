@@ -675,3 +675,7 @@ kubectl logs -n gatekeeper-system -l app=gatekeeper
 ---
 
 > **重要提示**：如果问题仍未解决，请查看相关技术文档或提交 Issue。
+
+---
+
+**最后更新**：2025-11-03 **维护者**：项目团队

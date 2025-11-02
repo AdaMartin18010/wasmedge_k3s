@@ -1394,3 +1394,7 @@ velero restore create my-restore --from-backup my-backup
 - [Velero 官方文档](https://velero.io/docs/)
 - [Kompose 官方文档](https://kompose.io/)
 - [etcd 备份恢复文档](https://etcd.io/docs/)
+
+---
+
+**最后更新**：2025-11-03 **维护者**：项目团队

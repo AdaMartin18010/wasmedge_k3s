@@ -514,8 +514,8 @@
 - **[28. 架构框架](../28-architecture-framework/architecture-framework.md)** -
   多维度架构体系与技术规范（技术架构、概念架构、数据架构、业务架构、软件架构、应
   用架构、场景架构）
-- **[05. 全局架构设计](../../COGNITIVE/05-architecture-design/architecture-design.md)** -
-  技术组合和架构决策
+- **[17. 全局架构设计](../../COGNITIVE/05-architecture-design/architecture-design.md)** -
+  技术组合和架构决策（文档编号 17）
 
 **外部参考**：
 

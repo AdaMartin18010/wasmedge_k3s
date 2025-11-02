@@ -1157,5 +1157,10 @@ deletionPolicy: Delete
 - [Longhorn 文档](https://longhorn.io/docs/)
 - [Local Path Provisioner](https://github.com/rancher/local-path-provisioner)
 - [AWS EBS CSI Driver](https://github.com/kubernetes-sigs/aws-ebs-csi-driver)
+
 - [Azure Disk CSI Driver](https://github.com/kubernetes-sigs/azuredisk-csi-driver)
 - [GCP PD CSI Driver](https://github.com/kubernetes-sigs/gcp-compute-persistent-disk-csi-driver)
+
+---
+
+**最后更新**：2025-11-03 **维护者**：项目团队

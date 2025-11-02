@@ -1168,10 +1168,14 @@ graph TB
 
 **外部参考**：
 
-- CNI 规范见 [CNI 规范](https://github.com/containernetworking/cni)
-- Kubernetes 网络见
-  [Kubernetes 网络](https://kubernetes.io/docs/concepts/services-networking/)
-- Service API 见
-  [Service API](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.30/)
+[cni-spec]:
+[Container Network Interface](https://github.com/containernetworking/cni)
+
+[k8s-service]:
+[Kubernetes Service](https://kubernetes.io/docs/concepts/services-networking/service/)
 
 > 完整参考列表见 [REFERENCES.md](../REFERENCES.md)
+
+---
+
+**最后更新**：2025-11-03 **维护者**：项目团队

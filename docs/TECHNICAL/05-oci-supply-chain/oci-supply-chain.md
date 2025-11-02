@@ -564,3 +564,7 @@ $$
 - [OCI Artifact](https://github.com/opencontainers/artifacts)
 
 > 完整参考列表见 [REFERENCES.md](../REFERENCES.md)
+
+---
+
+**最后更新**：2025-11-03 **维护者**：项目团队
