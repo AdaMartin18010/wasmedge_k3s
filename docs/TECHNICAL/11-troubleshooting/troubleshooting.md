@@ -647,7 +647,17 @@ spec:
 3. **查看 Pod 日志**：`kubectl logs <pod-name>`
 4. **检查节点资源**：`kubectl describe node`
 5. **检查系统组件**：`kubectl get pods -A`
-6. **查看组件日志**：`kubectl logs -n <namespace> <pod-name>`
+
+**高级故障排查方法**：
+
+对于复杂的性能问题和延迟问题，请参考：
+
+- **[29.6 问题定位模型：横向请求链 + 纵向隔离栈](../29-isolation-stack/isolation-stack.md#296-问题定位模型横向请求链--纵向隔离栈)** -
+  使用 OTLP + eBPF 进行横向和纵向联合定位
+- **[29.5 快速诊断口诀](../29-isolation-stack/isolation-stack.md#295-快速诊断口诀)** -
+  根据日志关键词快速定位问题层级
+- **[29.6.9 eBPF 工具速查表](../29-isolation-stack/isolation-stack.md#2969-ebpf-工具速查表)** -
+  eBPF 工具分类和使用方法
 
 **常用命令**：
 
@@ -664,6 +674,7 @@ kubectl top pods
 kubectl get events --sort-by='.lastTimestamp'
 
 # 检查组件日志
+kubectl logs -n <namespace> <pod-name>
 kubectl logs -n kube-system -l app=k3s
 kubectl logs -n gatekeeper-system -l app=gatekeeper
 ```

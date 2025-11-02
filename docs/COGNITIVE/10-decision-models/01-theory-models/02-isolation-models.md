@@ -698,10 +698,36 @@ elif 轻量隔离需求:
 
 **关联文档**：
 
+**理论模型**：
+
 - **[资源模型](01-resource-models.md)** - 物理资源权衡模型
 - **[安全模型](03-security-models.md)** - 安全机制理论模型
 - **[分布式系统模型](04-distributed-models.md)** - 分布式系统理论模型
 - **[主文档](../decision-models.md)** - 完整技术决策模型文档
+
+**技术实现**：
+
+- **[29. 隔离栈技术文档](../../../TECHNICAL/29-isolation-stack/isolation-stack.md)** -
+  四层隔离栈完整技术文档：虚拟化 → 半虚拟化 → 容器化 → 沙盒化
+  - [L-0 硬件辅助层](../../../TECHNICAL/29-isolation-stack/isolation-stack.md#2931-l-0-硬件辅助层cpu-虚拟化指令集) -
+    VT-x、AMD-V、SEV、TPM
+  - [L-1 全虚拟化层](../../../TECHNICAL/29-isolation-stack/isolation-stack.md#2932-l-1-全虚拟化层完整假硬件) -
+    KVM、ESXi、Hyper-V、Xen HVM
+  - [L-2 半虚拟化层](../../../TECHNICAL/29-isolation-stack/isolation-stack.md#2933-l-2-半虚拟化层guest-内核配合) -
+    Xen PV、virtio、Hyper-V Enlightenment
+  - [L-3 容器化层](../../../TECHNICAL/29-isolation-stack/isolation-stack.md#2934-l-3-容器化层进程级隔离) -
+    runc、containerd、Docker、Podman
+  - [L-4 沙盒化层](../../../TECHNICAL/29-isolation-stack/isolation-stack.md#2935-l-4-沙盒化层syscall-过滤--二次内核) -
+    gVisor、Firecracker、WASM、Windows Sandbox
+  - [问题定位模型](../../../TECHNICAL/29-isolation-stack/isolation-stack.md#296-问题定位模型横向请求链--纵向隔离栈) -
+    横纵耦合定位方法（OTLP + eBPF）
+  - [网络定位专题](../../../TECHNICAL/29-isolation-stack/isolation-stack.md#29612-网络定位专题横向生命线) -
+    网络作为横向生命线的定位方法
+
+**技术概念定义**：
+
+- **[虚拟化/半虚拟化/容器化/沙盒化严格定义](../06-technical-concepts/12-virtualization-paravirtualization-containerization-sandboxing-strict-definition.md)** -
+  技术范式的严格定义
 
 **外部参考**：
 

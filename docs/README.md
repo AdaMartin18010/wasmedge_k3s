@@ -56,6 +56,8 @@
 - `TECHNICAL/03-wasm-edge/` - WasmEdge 集成指南
 - `TECHNICAL/12-network-stack/` - 网络技术规格
 - `TECHNICAL/15-storage-stack/` - 存储技术规格
+- `TECHNICAL/29-isolation-stack/` - 四层隔离栈：虚拟化 → 半虚拟化 → 容器化 → 沙
+  盒化；横纵耦合问题定位模型
 - 其他技术规格和实践文档
 
 **适用场景**：
@@ -126,6 +128,8 @@
   运行时
 - **[04. 编排运行时](TECHNICAL/04-orchestration-runtime/orchestration-runtime.md)** -
   CRI 和 RuntimeClass
+- **[29. 隔离栈](TECHNICAL/29-isolation-stack/isolation-stack.md)** - 四层隔离栈
+  ：虚拟化 → 半虚拟化 → 容器化 → 沙盒化；横纵耦合问题定位模型（OTLP + eBPF）
 - **[05. OCI 供应链](TECHNICAL/05-oci-supply-chain/oci-supply-chain.md)** - OCI
   标准和供应链安全
 - **[06. OPA 策略即代码](TECHNICAL/06-policy-opa/policy-opa.md)** - Open Policy
@@ -145,6 +149,8 @@
 - **[10. 安装部署](TECHNICAL/10-installation/installation.md)** - 安装和最小示例
 - **[11. 故障排查](TECHNICAL/11-troubleshooting/troubleshooting.md)** - 常见问题
   解决方案
+- **[29. 隔离栈](TECHNICAL/29-isolation-stack/isolation-stack.md)** - 问题定位模
+  型、横纵耦合定位方法（OTLP + eBPF）
 
 ### 架构设计与理论
 

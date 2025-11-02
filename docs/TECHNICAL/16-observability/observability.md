@@ -68,6 +68,15 @@ Metrics（指标）、Logging（日志）、Tracing（链路追踪）三大支�
 - **可观测性技术栈组合方案**：不同场景的可观测性技术栈组合
 - **可观测性接口规范**：Prometheus、OpenTelemetry、日志、追踪格式规范
 
+**相关文档**：
+
+- **[29. 隔离栈 - 观测系统作为第四大基础设施](../29-isolation-stack/isolation-stack.md#2960-观测系统作为第四大基础设施)** -
+  为什么观测系统必须而不是最好，SLA 要求，完备性判据，MVP 落地
+- **[29. 隔离栈 - 问题定位模型](../29-isolation-stack/isolation-stack.md#296-问题定位模型横向请求链--纵向隔离栈)** -
+  横纵耦合的问题定位方法，OTLP + eBPF 联合定位
+- **[29. 隔离栈 - 网络定位专题](../29-isolation-stack/isolation-stack.md#29612-网络定位专题横向生命线)** -
+  网络作为横向生命线的定位方法，OTLP 网络 trace，eBPF 网络显微镜
+
 ## 16.2 可观测性技术栈全景
 
 ### 16.2.1 可观测性三大支柱
@@ -1060,6 +1069,22 @@ container_memory_usage_bytes{container="app"} 536870912 1234567890
 ## 16.10 参考
 
 **关联文档**：
+
+**观测系统与实践**：
+
+- **[29. 隔离栈 - 观测系统作为第四大基础设施](../29-isolation-stack/isolation-stack.md#2960-观测系统作为第四大基础设施)** -
+  为什么观测系统必须而不是最好，SLA 要求，完备性判据，MVP 落地
+  - [为什么"必须"而不是"最好"](../29-isolation-stack/isolation-stack.md#29601-为什么必须而不是最好)
+  - [观测系统本身也是"系统"，需要同等 SLA](../29-isolation-stack/isolation-stack.md#29602-观测系统本身也是系统需要同等-sla)
+  - [完备性判据（可量化）](../29-isolation-stack/isolation-stack.md#29603-完备性判据可量化)
+  - [反例：没有观测的"裸容器"长什么样](../29-isolation-stack/isolation-stack.md#29604-反例没有观测的裸容器长什么样)
+  - [落地最小完备集（MVP）](../29-isolation-stack/isolation-stack.md#29605-落地最小完备集mvp)
+- **[29. 隔离栈 - 问题定位模型](../29-isolation-stack/isolation-stack.md#296-问题定位模型横向请求链--纵向隔离栈)** -
+  横纵耦合的问题定位方法，OTLP + eBPF 联合定位
+- **[29. 隔离栈 - 网络定位专题](../29-isolation-stack/isolation-stack.md#29612-网络定位专题横向生命线)** -
+  网络作为横向生命线的定位方法，OTLP 网络 trace，eBPF 网络显微镜
+
+**技术规范与架构**：
 
 - **[28. 架构框架](../28-architecture-framework/architecture-framework.md)** -
   多维度架构体系与技术规范（技术架构、应用架构等）

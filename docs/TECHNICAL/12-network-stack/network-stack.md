@@ -88,6 +88,16 @@
 - **网络协议栈**：协议层次、L2/L3、L4/L7 协议
 - **网络技术栈组合方案**：不同场景的网络技术栈组合
 
+**相关文档**：
+
+- **[29. 隔离栈 - 网络定位专题](../29-isolation-stack/isolation-stack.md#29612-网络定位专题横向生命线)** -
+  网络作为横向生命线的定位方法，OTLP + eBPF 联合网络问题定位，网络在三栈里的"切
+  片"视图，网络定位五步法
+- **[29. 隔离栈 - 问题定位模型](../29-isolation-stack/isolation-stack.md#296-问题定位模型横向请求链--纵向隔离栈)** -
+  横纵耦合的问题定位方法，OTLP + eBPF 联合定位
+- **[11. 故障排查](../11-troubleshooting/troubleshooting.md)** - 常见网络故障排
+  查方法
+
 ## 12.2 网络技术栈全景
 
 ### 12.2.1 网络层次结构
@@ -971,6 +981,17 @@ graph TB
 
 ## 12.10 网络性能规格
 
+> **💡 网络问题定位提示**：
+>
+> 遇到网络性能问题（延迟突增、丢包、吞吐量下降）时，推荐使用横纵耦合定位模型：
+>
+> - **横向定位**：使用 OTLP Trace 找到慢跳（详见
+>   [29.6.12.2 OTLP 网络 trace](../29-isolation-stack/isolation-stack.md#296122-横向otlp-网络-trace)）
+> - **纵向定位**：使用 eBPF 工具定位网络层问题（详见
+>   [29.6.12.3 eBPF 网络显微镜](../29-isolation-stack/isolation-stack.md#296123-纵向ebpf-网络显微镜)）
+> - **完整流程**：参考
+>   [29.6.12.4 网络定位五步法](../29-isolation-stack/isolation-stack.md#296124-网络定位五步法接前述故障)
+
 ### 12.10.1 延迟规格
 
 **网络延迟规格**：
@@ -1154,6 +1175,27 @@ graph TB
 ## 12.14 参考
 
 **关联文档**：
+
+**网络定位与故障排查**：
+
+- **[29. 隔离栈 - 网络定位专题](../29-isolation-stack/isolation-stack.md#29612-网络定位专题横向生命线)** -
+  网络作为横向生命线的定位方法，OTLP + eBPF 联合网络问题定位
+  - [网络在三栈里的"切片"视图](../29-isolation-stack/isolation-stack.md#296121-网络在三栈里的切片视图) -
+    L-0/L-1/L-2/L-3 各层的网络实现
+  - [OTLP 网络 trace](../29-isolation-stack/isolation-stack.md#296122-横向otlp-网络-trace) -
+    如何用 OTLP 追踪网络请求
+  - [eBPF 网络显微镜](../29-isolation-stack/isolation-stack.md#296123-纵向ebpf-网络显微镜) -
+    如何用 eBPF 定位网络问题
+  - [网络定位五步法](../29-isolation-stack/isolation-stack.md#296124-网络定位五步法接前述故障) -
+    实战网络问题定位流程
+  - [网络定位一键脚本](../29-isolation-stack/isolation-stack.md#296125-网络定位一键脚本) -
+    自动化网络诊断工具
+- **[29. 隔离栈 - 问题定位模型](../29-isolation-stack/isolation-stack.md#296-问题定位模型横向请求链--纵向隔离栈)** -
+  横纵耦合的问题定位方法，OTLP + eBPF 联合定位
+- **[11. 故障排查](../11-troubleshooting/troubleshooting.md)** - 常见网络故障排
+  查方法
+
+**技术规范与架构**：
 
 - **[10. 技术决策模型](../../COGNITIVE/10-decision-models/decision-models.md)** -
   技术选型决策框架
