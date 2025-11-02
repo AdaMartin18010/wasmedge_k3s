@@ -110,6 +110,10 @@
   络拓扑、通讯链接、信道模型、网卡模型、网络架构论证
 - [存储概念论证](06-technical-concepts/03-storage-concepts-explanation.md) - 存
   储拓扑、访问模式、通道模型、设备模型、存储架构论证
+- [CPU/内存概念论证](06-technical-concepts/04-cpu-memory-concepts-explanation.md) -
+  CPU/内存拓扑、执行模式、管理模式、通道模型、设备模型、协议栈模型论证
+- [GPU/IO 设备概念论证](06-technical-concepts/05-gpu-io-concepts-explanation.md) -
+  GPU/IO 设备拓扑、执行模式、访问模式、通道模型、设备模型、协议栈模型论证
 
 ## 🔗 相关文档
 
@@ -130,7 +134,8 @@
 - **案例**：✅ 已完成（3 个文档）
 - **形式化模型**：✅ 已完成（2 个文档）
 - **全面认知映射**：✅ 已完成（1 个文档）
-- **技术名词概念论证**：✅ 已完成（1 个文档）
+- **技术名词概念论证**：✅ 已完成（5 个文档：技术名词、网络、存储、CPU/内存
+  、GPU/IO 设备）
 
 ---
 

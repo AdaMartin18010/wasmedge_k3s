@@ -100,7 +100,11 @@
 │
 └── 06-technical-concepts/       # 技术名词概念论证
     ├── README.md                # 技术名词概念论证概述
-    └── technical-concepts-explanation.md # 技术名词概念论证文档
+    ├── technical-concepts-explanation.md # 技术名词概念论证文档
+    ├── 02-network-concepts-explanation.md # 网络概念论证
+    ├── 03-storage-concepts-explanation.md # 存储概念论证
+    ├── 04-cpu-memory-concepts-explanation.md # CPU/内存概念论证
+    └── 05-gpu-io-concepts-explanation.md # GPU/IO 设备概念论证
 ```
 
 ---
@@ -147,11 +151,13 @@
 
 ### 技术名词概念论证
 
-| 文档                 | 链接                                                                                           | 内容                                                   |
-| -------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
-| **技术名词概念论证** | [technical-concepts-explanation.md](06-technical-concepts/technical-concepts-explanation.md)   | 虚拟化、容器化、沙盒化的技术名词、概念、功能、关系论证 |
-| **网络概念论证**     | [02-network-concepts-explanation.md](06-technical-concepts/02-network-concepts-explanation.md) | 网络拓扑、通讯链接、信道模型、网卡模型、网络架构论证   |
-| **存储概念论证**     | [03-storage-concepts-explanation.md](06-technical-concepts/03-storage-concepts-explanation.md) | 存储拓扑、访问模式、通道模型、设备模型、存储架构论证   |
+| 文档                    | 链接                                                                                                 | 内容                                                                    |
+| ----------------------- | ---------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| **技术名词概念论证**    | [technical-concepts-explanation.md](06-technical-concepts/technical-concepts-explanation.md)         | 虚拟化、容器化、沙盒化的技术名词、概念、功能、关系论证                  |
+| **网络概念论证**        | [02-network-concepts-explanation.md](06-technical-concepts/02-network-concepts-explanation.md)       | 网络拓扑、通讯链接、信道模型、网卡模型、网络架构论证                    |
+| **存储概念论证**        | [03-storage-concepts-explanation.md](06-technical-concepts/03-storage-concepts-explanation.md)       | 存储拓扑、访问模式、通道模型、设备模型、存储架构论证                    |
+| **CPU/内存概念论证**    | [04-cpu-memory-concepts-explanation.md](06-technical-concepts/04-cpu-memory-concepts-explanation.md) | CPU/内存拓扑、执行模式、管理模式、通道模型、设备模型、协议栈模型论证    |
+| **GPU/IO 设备概念论证** | [05-gpu-io-concepts-explanation.md](06-technical-concepts/05-gpu-io-concepts-explanation.md)         | GPU/IO 设备拓扑、执行模式、访问模式、通道模型、设备模型、协议栈模型论证 |
 
 ---
 
