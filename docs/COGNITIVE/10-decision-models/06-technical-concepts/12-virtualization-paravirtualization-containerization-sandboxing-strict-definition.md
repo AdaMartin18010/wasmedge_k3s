@@ -58,9 +58,27 @@
 
 **虚拟化（Full Virtualization）严格定义**：
 
+根据 Wikipedia，全虚拟化（Full Virtualization）是一种虚拟化技术，允许未经修改的
+客操作系统（Guest OS）在虚拟机监视器（VMM）或 Hypervisor 上运行，提供完整的硬件
+模拟环境。客操作系统无需感知虚拟化环境，就像运行在真实的物理硬件上一样。
+
+**Wikipedia 定义参考**：
+
+> "Full virtualization is a virtualization technique that allows an unmodified
+> guest operating system to run on a virtual machine monitor (VMM) or
+> hypervisor, providing a complete hardware simulation environment."
+
 虚拟化（全虚拟化）是一种**硬件支持的复用**技术，通过在物理硬件之上创建
 Hypervisor 层，将物理硬件资源抽象为虚拟硬件资源，允许多个虚拟机（VM）完全独立地
 运行在物理硬件上。
+
+**历史演进**：
+
+- **1960s**：IBM 大型机（IBM CP/CMS）首次实现硬件虚拟化
+- **2005-2006**：Intel VT-x 和 AMD-V 硬件虚拟化扩展发布，使 x86 架构支持高效虚拟
+  化
+- **2007-2008**：KVM 集成到 Linux 内核，实现硬件辅助虚拟化
+- **2010s**：Type 1 和 Type 2 Hypervisor 广泛采用硬件辅助虚拟化
 
 **关键特征**：
 
@@ -91,18 +109,57 @@ Hypervisor 层，将物理硬件资源抽象为虚拟硬件资源，允许多个
 **技术实现**：
 
 - **Type 1 Hypervisor（裸机 Hypervisor）**：直接运行在物理硬件上（如 VMware
-  ESXi、Xen、Hyper-V）
+  ESXi、Xen、Hyper-V、KVM）
+
+  - **特点**：性能更高，资源开销更小
+  - **应用场景**：服务器虚拟化、云计算基础设施
+
 - **Type 2 Hypervisor（托管 Hypervisor）**：运行在 Host OS 之上（如 VMware
   Workstation、VirtualBox、QEMU）
-- **硬件辅助虚拟化**：Intel VT-x、AMD-V、Intel VT-d（IOMMU）
+
+  - **特点**：易于部署和管理
+  - **应用场景**：开发测试环境、桌面虚拟化
+
+- **硬件辅助虚拟化**：
+  - **Intel VT-x**：CPU 虚拟化扩展（2005 年发布）
+  - **AMD-V**：CPU 虚拟化扩展（2006 年发布）
+  - **Intel VT-d（IOMMU）**：IO 设备虚拟化扩展（2009 年发布）
+  - **AMD-Vi（IOMMU）**：IO 设备虚拟化扩展（2010 年发布）
+
+**关键技术名词（Wikipedia 对齐）**：
+
+- **VMM（Virtual Machine Monitor）**：虚拟机监视器，与 Hypervisor 同义
+- **Guest OS**：客操作系统，运行在虚拟机上的操作系统
+- **Host OS**：主操作系统，运行 Hypervisor 的操作系统（Type 2 时）
+- **Hardware-assisted Virtualization**：硬件辅助虚拟化
+- **Binary Translation**：二进制翻译（软件虚拟化技术，硬件辅助前的技术）
 
 ### 02.2 半虚拟化（Para-virtualization）严格定义
 
 **半虚拟化（Para-virtualization）严格定义**：
 
+根据 Wikipedia，半虚拟化（Paravirtualization）是一种虚拟化技术，要求对客操作系统
+进行修改，使其能够与虚拟机监视器（VMM）进行高效的交互，从而提高性能。与全虚拟化
+不同，半虚拟化不提供完整的硬件模拟，而是通过修改的 API 实现协作。
+
+**Wikipedia 定义参考**：
+
+> "Paravirtualization is a virtualization technique that requires modification
+> of the guest operating system to enable it to interact efficiently with the
+> virtual machine monitor (VMM), thereby improving performance. Unlike full
+> virtualization, paravirtualization does not provide complete hardware
+> emulation."
+
 半虚拟化是一种**硬件 + 驱动/OS 支持的复用**技术，通过在物理硬件之上创建
 Hypervisor 层，并要求 Guest OS 进行修改以配合 Hypervisor，通过协作方式提高虚拟化
 性能。
+
+**历史演进**：
+
+- **2003**：Xen 项目首次实现半虚拟化技术
+- **2005**：Xen 成为第一个广泛采用的半虚拟化 Hypervisor
+- **2007-2008**：Linux 内核集成 Xen PV（Paravirtualized）支持
+- **2010s**：VirtIO 成为半虚拟化设备的标准化接口
 
 **关键特征**：
 
@@ -134,15 +191,54 @@ Hypervisor 层，并要求 Guest OS 进行修改以配合 Hypervisor，通过协
 **技术实现**：
 
 - **Xen 半虚拟化**：Xen Hypervisor + 修改后的 Linux 内核（如 Xen PV Guest）
+
+  - **Xen PV（Paravirtualized）**：Xen 半虚拟化模式
+  - **Xen HVM（Hardware Virtual Machine）**：Xen 硬件虚拟化模式（全虚拟化）
+
 - **Hypercall 接口**：Guest OS 通过 Hypercall 与 Hypervisor 通信
-- **前端/后端驱动**：Guest OS 中的前端驱动与 Hypervisor 中的后端驱动协作
+
+  - **Xen Hypercall**：Xen 提供的超级调用接口
+  - **KVM Hypercall**：KVM 提供的超级调用接口
+
+- **前端/后端驱动模型**：
+  - **前端驱动（Frontend Driver）**：Guest OS 中的虚拟设备驱动
+  - **后端驱动（Backend Driver）**：Hypervisor 或 Host OS 中的设备驱动
+  - **VirtIO**：标准的半虚拟化设备接口规范
+
+**关键技术名词（Wikipedia 对齐）**：
+
+- **Hypercall**：超级调用，Guest OS 直接调用 Hypervisor 的接口
+- **VirtIO**：虚拟 IO 标准，定义前端/后端驱动模型
+- **Event Channel**：事件通道，用于 Guest OS 和 Hypervisor 之间的事件通知
+- **Grant Table**：授权表，用于 Guest OS 和 Hypervisor 之间的内存共享
+- **PV-on-HVM**：半虚拟化运行在硬件虚拟化之上（如 Xen HVM 模式的半虚拟化驱动）
 
 ### 02.3 容器化（Containerization）严格定义
 
 **容器化（Containerization）严格定义**：
 
+根据 Wikipedia，容器化（Containerization）是一种操作系统级虚拟化技术，通过将应用
+程序及其所有依赖项打包到一个可移植的容器中，多个容器共享同一操作系统内核，但彼此
+隔离。容器包含应用程序及其运行所需的文件系统、库和配置文件。
+
+**Wikipedia 定义参考**：
+
+> "Containerization is a form of operating-system-level virtualization where an
+> application and all its dependencies are packaged together into a portable
+> container. Multiple containers share the same operating system kernel but are
+> isolated from each other."
+
 容器化是一种**OS 支持的复用**技术，通过在操作系统层面利用 Namespace、Cgroup 等内
 核特性，使多个容器进程共享同一 Host OS 内核，实现进程级隔离和资源限制。
+
+**历史演进**：
+
+- **2000-2006**：FreeBSD Jails 和 Linux VServer 首次实现容器化概念
+- **2008**：Linux Containers (LXC) 发布，基于 Linux Namespace 和 Cgroup
+- **2013**：Docker 发布，简化容器使用，引入镜像概念
+- **2015-2016**：Open Container Initiative (OCI) 标准化容器格式和运行时
+- **2017**：Container Runtime Interface (CRI) 标准化容器编排接口
+- **2020s**：containerd、CRI-O 成为主流容器运行时
 
 **关键特征**：
 
@@ -171,18 +267,73 @@ Hypervisor 层，并要求 Guest OS 进行修改以配合 Hypervisor，通过协
 
 **技术实现**：
 
-- **Linux Namespace**：PID、Network、Mount、UTS、IPC、User 命名空间
-- **Linux Cgroup**：CPU、Memory、IO、Device、Network 控制组
-- **Container Runtime**：Docker（runc）、containerd、CRI-O
-- **容器镜像**：OCI 镜像格式、OverlayFS 文件系统
+- **Linux Namespace**：Linux 内核提供的隔离机制
+
+  - **PID Namespace**：进程 ID 命名空间，隔离进程树
+  - **Network Namespace**：网络命名空间，隔离网络栈
+  - **Mount Namespace**：挂载命名空间，隔离文件系统挂载点
+  - **UTS Namespace**：UTS（Unix Time-sharing System）命名空间，隔离主机名
+  - **IPC Namespace**：进程间通信命名空间，隔离 IPC 对象
+  - **User Namespace**：用户命名空间，隔离用户和组 ID
+  - **Cgroup Namespace**：Cgroup 命名空间（Linux 4.6+），隔离 Cgroup 视图
+  - **Time Namespace**：时间命名空间（Linux 5.6+），隔离系统时间
+
+- **Linux Cgroup**：Linux 内核提供的资源限制机制
+
+  - **Cgroup v1**：传统 Cgroup 实现（CPU、Memory、IO、Device、Network 等）
+  - **Cgroup v2**：统一层次结构的 Cgroup（Linux 4.15+）
+  - **控制组（Control Group）**：资源限制和控制的基本单元
+
+- **Container Runtime**：
+
+  - **runc**：OCI 标准的低级容器运行时（由 Docker 贡献）
+  - **containerd**：高级容器运行时，提供完整的容器生命周期管理
+  - **CRI-O**：Kubernetes 的容器运行时接口实现
+  - **gVisor**：用户空间内核容器运行时
+
+- **容器镜像**：
+  - **OCI Image Format**：开放容器倡议（OCI）定义的镜像格式标准
+  - **OverlayFS**：联合文件系统，实现镜像层复用（Docker、containerd 使用）
+  - **Union File System**：联合文件系统的通用术语
+
+**关键技术名词（Wikipedia 对齐）**：
+
+- **Operating-system-level Virtualization**：操作系统级虚拟化
+- **LXC（Linux Containers）**：Linux 容器，最早的 Linux 容器实现
+- **Docker**：容器化平台，简化了容器使用
+- **OCI（Open Container Initiative）**：开放容器倡议，容器标准化组织
+- **CRI（Container Runtime Interface）**：容器运行时接口，Kubernetes 的容器运行
+  时标准
+- **Image Layer**：镜像层，容器镜像的分层结构
+- **Container Image**：容器镜像，包含应用程序及其依赖的可移植包
 
 ### 02.4 沙盒化（Sandboxing）严格定义
 
 **沙盒化（Sandboxing）严格定义**：
 
+根据 Wikipedia，沙盒化（Sandboxing）是一种安全机制，通过在受限的环境中运行应用程
+序，限制其对系统资源的访问，防止恶意代码对主机系统造成危害。沙盒可以限制应用程序
+的文件系统访问、网络访问、系统调用等权限。
+
+**Wikipedia 定义参考**：
+
+> "Sandboxing is a security mechanism that runs an application in a restricted
+> environment, limiting its access to system resources, to prevent malicious
+> code from causing harm to the host system. Sandboxes can restrict file system
+> access, network access, system calls, and other permissions."
+
 沙盒化是一种**OS 进程内支持的复用**技术，通过在操作系统进程内部创建受限的执行环
 境，使多个应用在同一个进程空间内运行，但通过系统调用拦截、能力限制等方式实现应用
 级隔离。
+
+**历史演进**：
+
+- **1990s**：浏览器沙盒（JavaScript 沙盒）首次实现应用级沙盒
+- **2000s**：系统沙盒（seccomp、AppArmor、SELinux）实现进程级沙盒
+- **2015**：WebAssembly（Wasm）发布，提供轻量级沙盒运行时
+- **2018**：gVisor（Google）发布用户空间内核沙盒
+- **2018**：Firecracker（AWS）发布轻量级 MicroVM 沙盒
+- **2019**：WASI（WebAssembly System Interface）标准化 Wasm 系统接口
 
 **关键特征**：
 
@@ -211,10 +362,54 @@ Hypervisor 层，并要求 Guest OS 进行修改以配合 Hypervisor，通过协
 
 **技术实现**：
 
-- **WebAssembly（Wasm）**：Wasm Runtime（WasmEdge、Wasmtime）+ WASI 接口
-- **gVisor**：用户空间内核（Userspace Kernel）+ 系统调用拦截
-- **Firecracker**：轻量级虚拟机（MicroVM）+ VMM 精简
-- **进程沙盒**：seccomp、AppArmor、SELinux
+- **WebAssembly（Wasm）**：
+
+  - **Wasm Runtime**：执行 Wasm 模块的运行时环境
+    - **WasmEdge**：云原生 Wasm 运行时
+    - **Wasmtime**：独立的 Wasm 运行时
+    - **V8**：JavaScript 引擎，支持 Wasm
+    - **Lucet**：Fastly 的 Wasm 编译器
+  - **WASI（WebAssembly System Interface）**：Wasm 系统接口标准
+    - **WASI Filesystem**：文件系统访问接口
+    - **WASI Socket**：网络套接字接口
+    - **WASI Crypto**：加密接口
+    - **WASI HTTP**：HTTP 接口
+
+- **gVisor**：
+
+  - **用户空间内核（Userspace Kernel）**：在用户空间实现的内核功能
+  - **系统调用拦截**：拦截和重定向应用程序的系统调用
+  - **Sentry**：gVisor 的内核组件，处理系统调用
+  - **Gofer**：gVisor 的文件系统组件
+
+- **Firecracker**：
+
+  - **MicroVM**：轻量级虚拟机，最小化的 VMM
+  - **VMM 精简**：只保留必要的虚拟化功能
+  - **快速启动**：毫秒级启动时间
+  - **低资源占用**：最小内存和 CPU 开销
+
+- **进程沙盒**：
+  - **seccomp（Secure Computing）**：Linux 系统调用过滤机制
+    - **seccomp-bpf**：基于 BPF 的系统调用过滤
+    - **seccomp mode**：严格模式或过滤模式
+  - **AppArmor**：Linux 应用程序安全框架（SUSE、Ubuntu 使用）
+    - **AppArmor Profile**：应用程序安全配置文件
+  - **SELinux（Security-Enhanced Linux）**：Linux 安全增强框架（Red Hat、Fedora
+    使用）
+    - **SELinux Policy**：SELinux 安全策略
+  - **Capabilities**：Linux 能力机制，细粒度权限控制
+  - **chroot**：改变根目录，实现文件系统隔离（传统沙盒技术）
+
+**关键技术名词（Wikipedia 对齐）**：
+
+- **Sandbox**：沙盒，受限的执行环境
+- **Sandboxing**：沙盒化，创建沙盒环境的过程
+- **System Call Interception**：系统调用拦截
+- **Privilege Escalation**：权限提升，沙盒逃逸的主要方式
+- **Capability-based Security**：基于能力的 security 模型
+- **Mandatory Access Control (MAC)**：强制访问控制（AppArmor、SELinux）
+- **Discretionary Access Control (DAC)**：自主访问控制（传统 Unix 权限模型）
 
 ---
 
