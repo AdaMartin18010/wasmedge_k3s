@@ -25,7 +25,16 @@
   - [05.1 技术层级关系图](#051-技术层级关系图)
   - [05.2 支持层级关系图](#052-支持层级关系图)
   - [05.3 技术栈分层图](#053-技术栈分层图)
-- [06. 参考](#06-参考)
+  - [05.4 综合对比思维导图](#054-综合对比思维导图)
+  - [05.5 关键技术概念关系图](#055-关键技术概念关系图)
+  - [05.6 技术选型决策树](#056-技术选型决策树)
+- [06. 实际应用案例与最佳实践](#06-实际应用案例与最佳实践)
+  - [06.1 虚拟化（全虚拟化）应用案例](#061-虚拟化全虚拟化应用案例)
+  - [06.2 半虚拟化应用案例](#062-半虚拟化应用案例)
+  - [06.3 容器化应用案例](#063-容器化应用案例)
+  - [06.4 沙盒化应用案例](#064-沙盒化应用案例)
+  - [06.5 混合使用场景](#065-混合使用场景)
+- [07. 参考](#07-参考)
 
 ---
 
@@ -686,43 +695,43 @@ Hypervisor 层，并要求 Guest OS 进行修改以配合 Hypervisor，通过协
 
 ```text
 ┌─────────────────────────────────────────────────────────────┐
-│                    应用层（Application Layer）                 │
+│                    应用层（Application Layer）               │
 │  ┌────────────────────────────────────────────────────────┐ │
-│  │  沙盒化（Sandboxing）                                    │ │
-│  │  ├── Wasm Runtime（OS 进程内支持）                       │ │
-│  │  ├── gVisor（用户空间内核）                              │ │
-│  │  ├── Firecracker（MicroVM）                             │ │
+│  │  沙盒化（Sandboxing）                                   │ │
+│  │  ├── Wasm Runtime（OS 进程内支持）                      │ │
+│  │  ├── gVisor（用户空间内核）                             │ │
+│  │  ├── Firecracker（MicroVM）                            │ │
 │  │  └── seccomp/AppArmor/SELinux（系统调用拦截）           │ │
 │  └────────────────────────────────────────────────────────┘ │
 ├─────────────────────────────────────────────────────────────┤
-│                  操作系统层（OS Layer）                       │
+│                  操作系统层（OS Layer）                      │
 │  ┌────────────────────────────────────────────────────────┐ │
-│  │  容器化（Containerization）                              │ │
+│  │  容器化（Containerization）                             │ │
 │  │  ├── Container Runtime（OS 层支持）                     │ │
-│  │  ├── Namespace（进程隔离）                               │ │
-│  │  ├── Cgroup（资源限制）                                  │ │
-│  │  └── Capabilities（权限控制）                             │ │
+│  │  ├── Namespace（进程隔离）                              │ │
+│  │  ├── Cgroup（资源限制）                                 │ │
+│  │  └── Capabilities（权限控制）                           │ │
 │  └────────────────────────────────────────────────────────┘ │
 ├─────────────────────────────────────────────────────────────┤
 │             驱动/OS层（Driver/OS Layer）                     │
 │  ┌────────────────────────────────────────────────────────┐ │
-│  │  半虚拟化（Para-virtualization）                         │ │
-│  │  ├── Hypercall（驱动/OS 层支持）                         │ │
-│  │  ├── VirtIO（前端/后端驱动）                             │ │
-│  │  ├── 事件通道（Event Channel）                           │ │
-│  │  └── 共享内存（Shared Memory）                            │ │
+│  │  半虚拟化（Para-virtualization）                        │ │
+│  │  ├── Hypercall（驱动/OS 层支持）                        │ │
+│  │  ├── VirtIO（前端/后端驱动）                            │ │
+│  │  ├── 事件通道（Event Channel）                          │ │
+│  │  └── 共享内存（Shared Memory）                          │ │
 │  └────────────────────────────────────────────────────────┘ │
 ├─────────────────────────────────────────────────────────────┤
-│                  硬件抽象层（Hardware Abstraction Layer）      │
+│                硬件抽象层（Hardware Abstraction Layer）      │
 │  ┌────────────────────────────────────────────────────────┐ │
-│  │  虚拟化（Full Virtualization）                           │ │
-│  │  ├── Hypervisor（硬件层支持）                            │ │
-│  │  ├── Type 1 Hypervisor（裸机）                           │ │
-│  │  ├── Type 2 Hypervisor（托管）                           │ │
+│  │  虚拟化（Full Virtualization）                          │ │
+│  │  ├── Hypervisor（硬件层支持）                           │ │
+│  │  ├── Type 1 Hypervisor（裸机）                          │ │
+│  │  ├── Type 2 Hypervisor（托管）                          │ │
 │  │  └── 硬件虚拟化扩展（VT-x、AMD-V）                       │ │
 │  └────────────────────────────────────────────────────────┘ │
 ├─────────────────────────────────────────────────────────────┤
-│                    硬件层（Hardware Layer）                    │
+│                  硬件层（Hardware Layer）                    │
 │  ├── CPU（Intel VT-x、AMD-V）                                │
 │  ├── 内存（EPT/NPT）                                         │
 │  ├── IO（IOMMU、VT-d）                                       │
@@ -774,21 +783,21 @@ OS进程内支持（OS Process-Internal Support）
 技术栈分层（Technology Stack Layering）：
 
 ┌──────────────────────────────────────────────────────────┐
-│  应用层（Application Layer）                             │
+│  应用层（Application Layer）                              │
 │  ├── 应用程序（App）                                      │
-│  └── 沙盒化层（Sandboxing Layer）                        │
-│      ├── Wasm Module                                    │
-│      ├── Wasm Runtime                                   │
-│      └── WASI API                                       │
+│  └── 沙盒化层（Sandboxing Layer）                         │
+│      ├── Wasm Module                                     │
+│      ├── Wasm Runtime                                    │
+│      └── WASI API                                        │
 └──────────────────────────────────────────────────────────┘
                         ↓
 ┌──────────────────────────────────────────────────────────┐
 │  操作系统层（Operating System Layer）                     │
-│  ├── Host OS 内核（Host OS Kernel）                      │
+│  ├── Host OS 内核（Host OS Kernel）                       │
 │  │   ├── Namespace（容器化）                              │
 │  │   ├── Cgroup（容器化）                                 │
 │  │   └── Capabilities（容器化）                           │
-│  ├── Container Runtime（容器化）                         │
+│  ├── Container Runtime（容器化）                          │
 │  │   └── Container Process                               │
 │  └── 沙盒 Runtime 进程（Sandboxing）                      │
 │      └── Wasm Runtime Process                            │
@@ -796,19 +805,19 @@ OS进程内支持（OS Process-Internal Support）
                         ↓
 ┌──────────────────────────────────────────────────────────┐
 │  Guest OS 层（Guest OS Layer）                           │
-│  ├── Guest OS 内核（半虚拟化需要修改）                    │
+│  ├── Guest OS 内核（半虚拟化需要修改）                     │
 │  │   ├── Hypercall 接口（半虚拟化）                       │
-│  │   └── VirtIO 前端驱动（半虚拟化）                      │
-│  └── Guest OS 应用（虚拟化、半虚拟化）                    │
+│  │   └── VirtIO 前端驱动（半虚拟化）                       │
+│  └── Guest OS 应用（虚拟化、半虚拟化）                     │
 └──────────────────────────────────────────────────────────┘
                         ↓
 ┌──────────────────────────────────────────────────────────┐
 │  Hypervisor 层（Hypervisor Layer）                        │
 │  ├── Type 1 Hypervisor（虚拟化、半虚拟化）                 │
-│  │   ├── vCPU 调度                                       │
-│  │   ├── 虚拟内存管理（EPT/NPT）                          │
-│  │   ├── 虚拟设备模拟（虚拟化）                           │
-│  │   └── VirtIO 后端驱动（半虚拟化）                      │
+│  │   ├── vCPU 调度                                        │
+│  │   ├── 虚拟内存管理（EPT/NPT）                           │
+│  │   ├── 虚拟设备模拟（虚拟化）                            │
+│  │   └── VirtIO 后端驱动（半虚拟化）                       │
 │  └── Type 2 Hypervisor（虚拟化、半虚拟化）                 │
 │      └── Host OS（托管 Hypervisor）                       │
 └──────────────────────────────────────────────────────────┘
@@ -816,9 +825,9 @@ OS进程内支持（OS Process-Internal Support）
 ┌──────────────────────────────────────────────────────────┐
 │  硬件层（Hardware Layer）                                 │
 │  ├── CPU（硬件虚拟化扩展：VT-x、AMD-V）                    │
-│  ├── 内存（EPT/NPT）                                       │
-│  ├── IO（IOMMU、VT-d）                                     │
-│  └── 物理硬件资源                                          │
+│  ├── 内存（EPT/NPT）                                      │
+│  ├── IO（IOMMU、VT-d）                                    │
+│  └── 物理硬件资源                                         │
 └──────────────────────────────────────────────────────────┘
 
 复用机制（Multiplexing Mechanisms）：
@@ -855,9 +864,409 @@ OS进程内支持（OS Process-Internal Support）
    - **容器化**：容器应用进程
    - **沙盒化**：Wasm Module 或其他沙盒应用
 
+### 05.4 综合对比思维导图
+
+**综合对比思维导图（四范式全面对比）**：
+
+```text
+技术范式综合对比（Technology Paradigm Comprehensive Comparison）：
+
+支持层级对比（Support Layer Comparison）
+├── 虚拟化（全虚拟化）：硬件层
+│   ├── Intel VT-x、AMD-V（必需）
+│   ├── EPT/NPT（内存虚拟化）
+│   └── IOMMU（IO 虚拟化）
+│
+├── 半虚拟化：硬件层 + 驱动/OS 层
+│   ├── 硬件层：Intel VT-x、AMD-V（可选）
+│   ├── 驱动层：Hypercall、VirtIO
+│   └── OS 层：Guest OS 修改
+│
+├── 容器化：OS 层
+│   ├── Linux Namespace（进程隔离）
+│   ├── Linux Cgroup（资源限制）
+│   └── Container Runtime
+│
+└── 沙盒化：OS 进程内层
+    ├── Wasm Runtime
+    ├── 系统调用拦截
+    └── 能力限制
+
+复用机制对比（Multiplexing Mechanism Comparison）
+├── 虚拟化：硬件虚拟化复用
+│   ├── CPU：硬件虚拟化扩展
+│   ├── 内存：EPT/NPT
+│   └── IO：虚拟设备模拟
+│
+├── 半虚拟化：硬件 + 驱动协作复用
+│   ├── CPU：Hypercall 协作
+│   ├── 内存：协作内存管理
+│   └── IO：前端/后端驱动
+│
+├── 容器化：OS 内核复用
+│   ├── 内核：共享 Host OS 内核
+│   ├── 进程：共享进程调度器
+│   └── 资源：Cgroup 限制
+│
+└── 沙盒化：进程内复用
+    ├── Runtime：共享 Runtime 实例
+    ├── 进程空间：共享进程空间
+    └── 资源：能力限制隔离
+
+性能特性对比（Performance Characteristics Comparison）
+├── 启动时间
+│   ├── 虚拟化：慢（分钟级）
+│   ├── 半虚拟化：较慢（分钟级）
+│   ├── 容器化：快（秒级）
+│   └── 沙盒化：很快（毫秒级）
+│
+├── CPU 性能
+│   ├── 虚拟化：70-95%
+│   ├── 半虚拟化：80-95%
+│   ├── 容器化：95-99%
+│   └── 沙盒化：80-95%
+│
+├── 内存性能
+│   ├── 虚拟化：70-90%
+│   ├── 半虚拟化：80-95%
+│   ├── 容器化：95-99%
+│   └── 沙盒化：85-98%
+│
+└── IO 性能
+    ├── 虚拟化：50-80%
+    ├── 半虚拟化：70-90%
+    ├── 容器化：90-98%
+    └── 沙盒化：70-90%
+
+隔离强度对比（Isolation Strength Comparison）
+├── 虚拟化：硬件级隔离（最强，5/5）
+│   └── 物理硬件边界
+│
+├── 半虚拟化：内核级隔离（强，4/5）
+│   └── Guest 内核边界
+│
+├── 容器化：进程级隔离（中等，3/5）
+│   └── 进程地址空间边界
+│
+└── 沙盒化：应用级隔离（较弱，2/5）
+    └── 应用运行时边界
+```
+
+### 05.5 关键技术概念关系图
+
+**关键技术概念关系图（概念层次关系）**：
+
+```text
+技术概念层次关系（Technology Concept Hierarchy）：
+
+硬件虚拟化复用（Hardware Virtualization Multiplexing）
+    ├── 虚拟化（全虚拟化）
+    │   ├── Hypervisor（硬件抽象层）
+    │   ├── 硬件虚拟化扩展（硬件层）
+    │   │   ├── Intel VT-x
+    │   │   ├── AMD-V
+    │   │   ├── EPT/NPT
+    │   │   └── IOMMU
+    │   └── 虚拟硬件（虚拟硬件层）
+    │       ├── vCPU
+    │       ├── 虚拟内存
+    │       └── 虚拟设备
+    │
+    └── 半虚拟化（部分）
+        ├── Hypervisor（硬件抽象层）
+        ├── 硬件虚拟化扩展（硬件层，可选）
+        └── 半虚拟化接口（驱动/OS 层）
+            ├── Hypercall
+            ├── VirtIO
+            └── 事件通道
+
+OS 内核复用（OS Kernel Multiplexing）
+    └── 容器化
+        ├── Host OS 内核（OS 层）
+        │   ├── Namespace
+        │   ├── Cgroup
+        │   └── Capabilities
+        └── Container Runtime（OS 层）
+            ├── runc
+            ├── containerd
+            └── CRI-O
+
+进程内复用（Process-Internal Multiplexing）
+    └── 沙盒化
+        ├── Sandbox Runtime（应用运行时层）
+        │   ├── Wasm Runtime
+        │   ├── gVisor
+        │   └── Firecracker
+        └── 系统调用拦截（应用运行时层）
+            ├── seccomp
+            ├── ptrace
+            └── WASI
+```
+
+### 05.6 技术选型决策树
+
+**技术选型决策树（根据需求选择技术范式）**：
+
+```text
+技术选型决策树（Technology Selection Decision Tree）：
+
+开始选择
+│
+├─ 是否需要运行不同的操作系统？
+│  │
+│  ├─ 是 → 虚拟化或半虚拟化
+│  │   │
+│  │   ├─ 是否需要最高性能？
+│  │   │   │
+│  │   │   ├─ 是 → 半虚拟化（需要 Guest OS 修改）
+│  │   │   │   └─ 实现：Xen PV、KVM + VirtIO
+│  │   │   │
+│  │   │   └─ 否 → 虚拟化（全虚拟化，无需 Guest OS 修改）
+│  │   │       └─ 实现：VMware、KVM、VirtualBox
+│  │   │
+│  │   └─ 隔离需求？
+│  │       ├─ 强隔离（多租户） → 虚拟化/半虚拟化
+│  │       └─ 一般隔离 → 考虑其他方案
+│  │
+│  └─ 否 → 继续判断
+│
+├─ 是否需要极速启动（毫秒级）？
+│  │
+│  ├─ 是 → 沙盒化
+│  │   │
+│  │   ├─ Serverless 场景 → Wasm（WasmEdge、Wasmtime）
+│  │   ├─ 安全隔离场景 → gVisor 或 Firecracker
+│  │   └─ 进程级安全 → seccomp、AppArmor、SELinux
+│  │
+│  └─ 否 → 继续判断
+│
+├─ 是否需要在共享内核上运行（秒级启动）？
+│  │
+│  ├─ 是 → 容器化
+│  │   │
+│  │   ├─ Kubernetes 场景 → containerd、CRI-O
+│  │   ├─ 简单容器场景 → Docker（runc）
+│  │   └─ 高级安全场景 → gVisor（容器运行时）
+│  │
+│  └─ 否 → 继续判断
+│
+└─ 资源效率需求？
+    │
+    ├─ 最高效率（最低开销） → 沙盒化
+    ├─ 高效率（低开销） → 容器化
+    ├─ 中等效率（中等开销） → 半虚拟化
+    └─ 一般效率（高开销） → 虚拟化
+
+最终选择总结：
+├─ 多 OS + 强隔离 → 虚拟化/半虚拟化
+├─ 快速启动 + 资源高效 → 容器化
+├─ 极速启动 + 最低开销 → 沙盒化
+└─ 云原生 + 微服务 → 容器化（Kubernetes）
+```
+
 ---
 
-## 06. 参考
+## 06. 实际应用案例与最佳实践
+
+### 06.1 虚拟化（全虚拟化）应用案例
+
+**典型应用场景**：
+
+1. **云计算基础设施（IaaS）**：
+
+   - **案例**：AWS EC2、Azure Virtual Machines、Google Compute Engine
+   - **技术选择**：虚拟化（全虚拟化）
+   - **原因**：需要运行多种操作系统（Linux、Windows），强隔离需求，多租户环境
+   - **最佳实践**：
+     - 使用 Type 1 Hypervisor（VMware ESXi、KVM、Hyper-V）
+     - 启用硬件辅助虚拟化（VT-x、AMD-V、EPT/NPT）
+     - 使用 SR-IOV 或 PCIe Passthrough 提升 IO 性能
+     - 配置资源预留和限制（CPU、内存、IO）
+
+2. **企业虚拟化平台**：
+
+   - **案例**：VMware vSphere、Microsoft Hyper-V、Citrix XenServer
+   - **技术选择**：虚拟化（全虚拟化）
+   - **原因**：需要运行 Windows 和 Linux 混合环境，强隔离需求
+   - **最佳实践**：
+     - 使用集群管理（VMware vCenter、SCVMM）
+     - 配置高可用性（HA）和容错（FT）
+     - 使用虚拟机模板简化部署
+     - 配置动态资源调度（DRS）
+
+3. **开发和测试环境**：
+   - **案例**：开发团队使用 VirtualBox、VMware Workstation
+   - **技术选择**：Type 2 Hypervisor（虚拟化）
+   - **原因**：易于部署和管理，支持快照和回滚
+   - **最佳实践**：
+     - 使用虚拟机快照功能
+     - 配置共享文件夹提高开发效率
+     - 使用 NAT 网络模式简化网络配置
+
+### 06.2 半虚拟化应用案例
+
+**典型应用场景**：
+
+1. **高性能云计算平台**：
+
+   - **案例**：早期 AWS EC2（Xen PV）、阿里云 ECS（Xen PV）
+   - **技术选择**：半虚拟化（Xen PV）
+   - **原因**：性能优化需求，Guest OS 可以修改（Linux）
+   - **最佳实践**：
+     - 使用 Xen PV 模式提升 IO 性能
+     - 使用 VirtIO 驱动优化网络和存储性能
+     - 配置事件通道减少中断开销
+
+2. **KVM 半虚拟化模式**：
+
+   - **案例**：KVM + VirtIO 驱动（Linux 虚拟机）
+   - **技术选择**：半虚拟化（KVM + VirtIO）
+   - **原因**：结合硬件虚拟化性能和半虚拟化 IO 性能
+   - **最佳实践**：
+     - 在 Linux Guest OS 中使用 VirtIO 驱动
+     - 配置 virtio-net、virtio-blk 设备
+     - 使用 vhost-net 和 vhost-blk 提升性能
+
+3. **容器化虚拟机**：
+   - **案例**：Kata Containers（Firecracker + VirtIO）
+   - **技术选择**：半虚拟化 + 轻量级虚拟机
+   - **原因**：容器安全性需求，接近容器的性能
+   - **最佳实践**：
+     - 使用 Firecracker 创建 MicroVM
+     - 配置 VirtIO 驱动优化性能
+     - 限制资源使用（CPU、内存）
+
+### 06.3 容器化应用案例
+
+**典型应用场景**：
+
+1. **Kubernetes 容器编排**：
+
+   - **案例**：生产环境 Kubernetes 集群（containerd、CRI-O）
+   - **技术选择**：容器化
+   - **原因**：云原生应用，快速部署，资源高效
+   - **最佳实践**：
+     - 使用 OCI 标准容器运行时（containerd、CRI-O）
+     - 配置资源限制（CPU、内存、IO）
+     - 使用容器镜像分层优化镜像大小
+     - 配置安全上下文（SecurityContext）限制权限
+     - 使用 NetworkPolicy 实现网络隔离
+
+2. **微服务架构**：
+
+   - **案例**：微服务应用容器化部署（Docker、containerd）
+   - **技术选择**：容器化
+   - **原因**：服务独立部署，快速扩展，资源高效
+   - **最佳实践**：
+     - 每个服务一个容器，独立镜像
+     - 使用容器编排（Kubernetes、Docker Swarm）
+     - 配置健康检查和自动重启
+     - 使用服务网格（Istio、Linkerd）实现服务治理
+
+3. **CI/CD 流水线**：
+
+   - **案例**：Jenkins、GitLab CI、GitHub Actions 使用容器执行构建
+   - **技术选择**：容器化
+   - **原因**：环境一致性，快速启动，资源隔离
+   - **最佳实践**：
+     - 使用容器作为构建和执行环境
+     - 配置缓存层加速构建
+     - 使用多阶段构建优化镜像大小
+     - 配置资源限制防止资源耗尽
+
+4. **边缘计算**：
+   - **案例**：K3s（轻量级 Kubernetes）在边缘设备运行容器
+   - **技术选择**：容器化（K3s）
+   - **原因**：轻量级，快速部署，资源高效
+   - **最佳实践**：
+     - 使用 K3s 替代完整 Kubernetes
+     - 配置边缘节点自动注册
+     - 使用轻量级容器镜像（Alpine Linux）
+     - 配置自动更新和回滚机制
+
+### 06.4 沙盒化应用案例
+
+**典型应用场景**：
+
+1. **Serverless 函数计算**：
+
+   - **案例**：AWS Lambda、Cloudflare Workers、Vercel Functions（Wasm）
+   - **技术选择**：沙盒化（Wasm）
+   - **原因**：极速启动（毫秒级），低资源占用，安全隔离
+   - **最佳实践**：
+     - 使用 Wasm Runtime（WasmEdge、Wasmtime）
+     - 配置 WASI 接口限制资源访问
+     - 优化 Wasm 模块大小（代码压缩）
+     - 配置冷启动优化策略
+
+2. **边缘计算沙盒**：
+
+   - **案例**：边缘设备运行 Wasm 应用（WasmEdge）
+   - **技术选择**：沙盒化（Wasm）
+   - **原因**：轻量级，快速启动，跨平台
+   - **最佳实践**：
+     - 使用 WasmEdge 作为 Wasm 运行时
+     - 配置 WASI 文件系统和网络接口
+     - 使用流式执行减少内存占用
+     - 配置热更新机制
+
+3. **安全隔离环境**：
+
+   - **案例**：运行不受信任代码（gVisor、Firecracker）
+   - **技术选择**：沙盒化（gVisor、Firecracker）
+   - **原因**：强安全隔离，快速启动，低资源占用
+   - **最佳实践**：
+     - 使用 gVisor 拦截系统调用
+     - 使用 Firecracker 创建 MicroVM
+     - 配置最小权限原则（Least Privilege）
+     - 配置资源限制和审计日志
+
+4. **浏览器沙盒**：
+   - **案例**：浏览器中运行 JavaScript 和 Wasm 应用（V8、Wasmtime）
+   - **技术选择**：沙盒化（V8、Wasmtime）
+   - **原因**：安全隔离，跨平台，快速执行
+   - **最佳实践**：
+     - 使用 V8 引擎执行 JavaScript
+     - 使用 Wasmtime 执行 Wasm 模块
+     - 配置内容安全策略（CSP）
+     - 配置沙盒属性限制 API 访问
+
+### 06.5 混合使用场景
+
+**典型应用场景**：
+
+1. **容器化虚拟机**：
+
+   - **案例**：Kata Containers、gVisor（容器运行时）
+   - **技术组合**：虚拟化 + 容器化
+   - **原因**：容器易用性 + 虚拟机安全性
+   - **最佳实践**：
+     - 使用 Kata Containers 或 gVisor 作为容器运行时
+     - 配置 Kubernetes 选择沙盒运行时
+     - 配置资源限制和网络策略
+
+2. **虚拟机中运行容器**：
+
+   - **案例**：在 VMware ESXi 虚拟机中运行 Kubernetes
+   - **技术组合**：虚拟化 + 容器化
+   - **原因**：多租户隔离 + 容器编排
+   - **最佳实践**：
+     - 在虚拟机中部署 Kubernetes
+     - 配置虚拟机资源分配
+     - 使用 SR-IOV 提升网络性能
+
+3. **容器中运行沙盒**：
+   - **案例**：在 Kubernetes Pod 中运行 Wasm 应用
+   - **技术组合**：容器化 + 沙盒化
+   - **原因**：容器编排 + Wasm 性能
+   - **最佳实践**：
+     - 使用 containerd-shim-wasm 运行 Wasm 容器
+     - 配置 Pod 资源限制
+     - 使用 Init Container 准备 Wasm 模块
+
+---
+
+## 07. 参考
 
 **关联文档**：
 
