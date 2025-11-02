@@ -1,24 +1,24 @@
-# 37.6 技术链矩阵序列：Docker→K8s→K3s→WasmEdge→OPA→ 多租户
+# 09.6 技术链矩阵序列：Docker→K8s→K3s→WasmEdge→OPA→ 多租户
 
 ## 目录
 
 - [目录](#目录)
-- [37.6.1 技术链矩阵序列定义](#3761-技术链矩阵序列定义)
-- [37.6.2 Docker 矩阵](#3762-docker-矩阵)
-- [37.6.3 Kubernetes 矩阵](#3763-kubernetes-矩阵)
-- [37.6.4 K3s 矩阵](#3764-k3s-矩阵)
-- [37.6.5 WasmEdge 矩阵](#3765-wasmedge-矩阵)
-- [37.6.6 OPA 矩阵](#3766-opa-矩阵)
-- [37.6.7 多租户矩阵](#3767-多租户矩阵)
-- [37.6.8 技术链跃迁矩阵](#3768-技术链跃迁矩阵)
-- [37.6.9 技术链矩阵序列的应用](#3769-技术链矩阵序列的应用)
+- [09.6.1 技术链矩阵序列定义](#0961-技术链矩阵序列定义)
+- [09.6.2 Docker 矩阵](#0962-docker-矩阵)
+- [09.6.3 Kubernetes 矩阵](#0963-kubernetes-矩阵)
+- [09.6.4 K3s 矩阵](#0964-k3s-矩阵)
+- [09.6.5 WasmEdge 矩阵](#0965-wasmedge-矩阵)
+- [09.6.6 OPA 矩阵](#0966-opa-矩阵)
+- [09.6.7 多租户矩阵](#0967-多租户矩阵)
+- [09.6.8 技术链跃迁矩阵](#0968-技术链跃迁矩阵)
+- [09.6.9 技术链矩阵序列的应用](#0969-技术链矩阵序列的应用)
   - [1. 技术选型决策](#1-技术选型决策)
   - [2. 技术链迁移规划](#2-技术链迁移规划)
   - [3. 技术链组合优化](#3-技术链组合优化)
 
 ---
 
-## 37.6.1 技术链矩阵序列定义
+## 09.6.1 技术链矩阵序列定义
 
 **技术链矩阵序列定义**：
 
@@ -43,7 +43,7 @@ $$\mathbf{A}^{(i \rightarrow j)} = \mathbf{A}^{(j)} \cdot \boldsymbol{\Theta} \c
 
 其中 $\boldsymbol{\Theta}$ 是 AI 可学习参数矩阵，用于优化技术链跃迁。
 
-## 37.6.2 Docker 矩阵
+## 09.6.2 Docker 矩阵
 
 **Docker 矩阵**：$\mathbf{A}^{(1)} \in \mathbb{R}^{12 \times 6}$
 
@@ -72,7 +72,7 @@ $$\mathbf{A}^{(i \rightarrow j)} = \mathbf{A}^{(j)} \cdot \boldsymbol{\Theta} \c
 - **弱项**：扩缩容（S）、策略（P）、租户（T）在大部分场景下成熟度低
 - **定位**：单机容器化、镜像构建和运行时管理
 
-## 37.6.3 Kubernetes 矩阵
+## 09.6.3 Kubernetes 矩阵
 
 **Kubernetes 矩阵**：$\mathbf{A}^{(2)} \in \mathbb{R}^{12 \times 6}$
 
@@ -102,7 +102,7 @@ $$\mathbf{A}^{(i \rightarrow j)} = \mathbf{A}^{(j)} \cdot \boldsymbol{\Theta} \c
 - **弱项**：在本地开发（Dev）场景下，部分概念成熟度较低
 - **定位**：企业级容器编排、大规模集群管理
 
-## 37.6.4 K3s 矩阵
+## 09.6.4 K3s 矩阵
 
 **K3s 矩阵**：$\mathbf{A}^{(3)} \in \mathbb{R}^{12 \times 6}$
 
@@ -132,7 +132,7 @@ $$\mathbf{A}^{(i \rightarrow j)} = \mathbf{A}^{(j)} \cdot \boldsymbol{\Theta} \c
 - **弱项**：在生产环境（Prod）下，成熟度略低于 Kubernetes
 - **定位**：轻量级 Kubernetes、边缘计算、资源受限环境
 
-## 37.6.5 WasmEdge 矩阵
+## 09.6.5 WasmEdge 矩阵
 
 **WasmEdge 矩阵**：$\mathbf{A}^{(4)} \in \mathbb{R}^{12 \times 6}$
 
@@ -162,7 +162,7 @@ $$\mathbf{A}^{(i \rightarrow j)} = \mathbf{A}^{(j)} \cdot \boldsymbol{\Theta} \c
 - **弱项**：在本地开发（Dev）场景下，部分概念成熟度较低
 - **定位**：WebAssembly 运行时、毫秒级冷启动、Serverless、边缘计算
 
-## 37.6.6 OPA 矩阵
+## 09.6.6 OPA 矩阵
 
 **OPA 矩阵**：$\mathbf{A}^{(5)} \in \mathbb{R}^{12 \times 6}$
 
@@ -193,7 +193,7 @@ $$\mathbf{A}^{(i \rightarrow j)} = \mathbf{A}^{(j)} \cdot \boldsymbol{\Theta} \c
 - **强项**：在 Serverless/AI 场景下，策略（P）和运行时（R）成熟度都很高（≥1.0）
 - **定位**：策略即代码、微秒级策略决策、OPA-Wasm
 
-## 37.6.7 多租户矩阵
+## 09.6.7 多租户矩阵
 
 **多租户矩阵**：$\mathbf{A}^{(6)} \in \mathbb{R}^{12 \times 6}$
 
@@ -223,7 +223,7 @@ $$\mathbf{A}^{(i \rightarrow j)} = \mathbf{A}^{(j)} \cdot \boldsymbol{\Theta} \c
 - **弱项**：在本地开发（Dev）场景下，租户（T）相关概念成熟度较低
 - **定位**：企业级多租户、资源隔离、策略隔离、租户管理
 
-## 37.6.8 技术链跃迁矩阵
+## 09.6.8 技术链跃迁矩阵
 
 **技术链跃迁矩阵**：
 
@@ -263,7 +263,7 @@ $$\mathbf{A}^{(i \rightarrow j)} = \mathbf{A}^{(j)} \cdot \boldsymbol{\Theta} \c
 - **Docker → OPA**（0.6）：需要引入策略层
 - **Docker → WasmEdge**（0.5）：需要适配运行时
 
-## 37.6.9 技术链矩阵序列的应用
+## 09.6.9 技术链矩阵序列的应用
 
 ### 1. 技术选型决策
 

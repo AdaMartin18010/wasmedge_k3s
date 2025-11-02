@@ -1,9 +1,9 @@
-# 37. 矩阵视角：云原生技术栈的矩阵力学
+# 09. 矩阵视角：云原生技术栈的矩阵力学
 
 ## 目录结构
 
 ```text
-37-matrix-perspective/
+09-matrix-perspective/
 ├── README.md                    # 文档主索引
 ├── QUICK-REFERENCE.md           # 快速参考指南
 ├── SUMMARY.md                   # 文档体系总结
@@ -98,6 +98,6 @@ $$\text{技术链} = \text{Docker} \rightarrow \text{K8s} \rightarrow \text{K3s}
 
 - [ai_view.md](../../ai_view.md) - 核心矩阵内容的原始来源
 - [36. 2025 年技术趋势汇总](../36-2025-trends/2025-trends.md) - 最新技术趋势
-- [18. 问题-解决方案矩阵](../18-problem-solution-matrix/problem-solution-matrix.md) -
+- [06. 问题-解决方案矩阵](../06-problem-solution-matrix/problem-solution-matrix.md) -
   问题解决方案矩阵
-- [19. 形式化理论](../19-formal-theory/formal-theory.md) - 形式化理论基础
+- [07. 形式化理论](../07-formal-theory/formal-theory.md) - 形式化理论基础

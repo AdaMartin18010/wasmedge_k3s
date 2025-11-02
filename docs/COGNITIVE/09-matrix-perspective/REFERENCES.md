@@ -1,42 +1,42 @@
-# 37. 矩阵视角参考链接
+# 09. 矩阵视角参考链接
 
 ## 目录
 
 - [目录](#目录)
-- [37.1 核心文档](#371-核心文档)
+- [09.1 核心文档](#091-核心文档)
   - [项目内部文档](#项目内部文档)
   - [矩阵视角文档](#矩阵视角文档)
-- [37.2 技术文档](#372-技术文档)
+- [09.2 技术文档](#092-技术文档)
   - [Docker](#docker)
   - [Kubernetes](#kubernetes)
   - [K3s](#k3s)
   - [WasmEdge](#wasmedge)
   - [OPA](#opa)
   - [多租户](#多租户)
-- [37.3 学术资源](#373-学术资源)
+- [09.3 学术资源](#093-学术资源)
   - [矩阵理论](#矩阵理论)
   - [机器学习](#机器学习)
   - [云原生理论](#云原生理论)
-- [37.4 开源项目](#374-开源项目)
+- [09.4 开源项目](#094-开源项目)
   - [核心项目](#核心项目)
   - [相关项目](#相关项目)
-- [37.5 社区资源](#375-社区资源)
+- [09.5 社区资源](#095-社区资源)
   - [CNCF](#cncf)
   - [社区活动](#社区活动)
   - [技术博客](#技术博客)
 
 ---
 
-## 37.1 核心文档
+## 09.1 核心文档
 
 ### 项目内部文档
 
 - **[ai_view.md](../../ai_view.md)** - 核心矩阵内容的原始来源
 - **[01. 知识图谱](../00-knowledge-map/knowledge-map.md)** - 知识图谱
 - **[02. 概览](../01-overview/overview.md)** - 项目概览
-- **[18. 问题-解决方案矩阵](../06-problem-solution-matrix/problem-solution-matrix.md)** -
+- **[06. 问题-解决方案矩阵](../06-problem-solution-matrix/problem-solution-matrix.md)** -
   问题解决方案矩阵
-- **[19. 形式化理论](../07-formal-theory/formal-theory.md)** - 形式化理论基础
+- **[07. 形式化理论](../07-formal-theory/formal-theory.md)** - 形式化理论基础
 - **[36. 2025 年技术趋势汇总](../../TECHNICAL/27-2025-trends/2025-trends.md)** -
   最新技术趋势
 
@@ -54,7 +54,7 @@
 - **[实践案例](09-practice-cases.md)** - 边缘计算、Serverless、AI 推理、多租户等
   场景的矩阵分析
 
-## 37.2 技术文档
+## 09.2 技术文档
 
 ### Docker
 
@@ -92,7 +92,7 @@
 - [HNC 文档](https://github.com/kubernetes-sigs/hierarchical-namespaces)
 - [Cluster-API 文档](https://cluster-api.sigs.k8s.io/)
 
-## 37.3 学术资源
+## 09.3 学术资源
 
 ### 矩阵理论
 
@@ -112,7 +112,7 @@
 - [KubeCon 2025 议题](https://www.cncf.io/events/kubecon-cloudnativecon-events/)
 - [云原生最佳实践](https://www.cncf.io/reports/)
 
-## 37.4 开源项目
+## 09.4 开源项目
 
 ### 核心项目
 
@@ -132,7 +132,7 @@
 - [ArgoCD](https://github.com/argoproj/argo-cd)
 - [Flux](https://github.com/fluxcd/flux2)
 
-## 37.5 社区资源
+## 09.5 社区资源
 
 ### CNCF
 

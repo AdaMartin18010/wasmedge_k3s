@@ -62,17 +62,17 @@
 
 1. **[架构与对象模型](03-architecture/architecture.md)** - 理解架构理念和设计思
    想
-2. **[全局架构设计](17-architecture-design/architecture-design.md)** - 掌握技术
+2. **[全局架构设计](05-architecture-design/architecture-design.md)** - 掌握技术
    组合和架构决策
-3. **[形式化理论](19-formal-theory/formal-theory.md)** - 深入理解结构同构和关系
+3. **[形式化理论](07-formal-theory/formal-theory.md)** - 深入理解结构同构和关系
    等价
 
 ### 高级理论路径
 
-1. **[范畴论视角](20-category-theory/category-theory.md)** - 探索对象、态射与函
+1. **[范畴论视角](08-category-theory/category-theory.md)** - 探索对象、态射与函
    子
-2. **[矩阵视角](37-matrix-perspective/README.md)** - 理解矩阵力学模型
-3. **[问题解决方案](18-problem-solution-matrix/problem-solution-matrix.md)** -
+2. **[矩阵视角](09-matrix-perspective/README.md)** - 理解矩阵力学模型
+3. **[问题解决方案](06-problem-solution-matrix/problem-solution-matrix.md)** -
    掌握问题分类框架
 
 ## 📖 使用场景

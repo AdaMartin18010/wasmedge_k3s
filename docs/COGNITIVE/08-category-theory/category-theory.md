@@ -1,53 +1,59 @@
-# 20. 范畴论视角：对象、态射与函子
+# 08. 范畴论视角：对象、态射与函子
 
 ## 目录
 
 - [目录](#目录)
-- [20.1 文档定位](#201-文档定位)
-- [20.2 范畴基础](#202-范畴基础)
-  - [20.2.1 容器技术范畴](#2021-容器技术范畴)
-  - [20.2.2 对象与态射](#2022-对象与态射)
-  - [20.2.3 态射的复合](#2023-态射的复合)
-  - [20.2.4 恒等态射](#2024-恒等态射)
-- [20.3 核心范畴](#203-核心范畴)
-  - [20.3.1 Pod 范畴](#2031-pod-范畴)
-  - [20.3.2 Deployment 范畴](#2032-deployment-范畴)
-  - [20.3.3 Service 范畴](#2033-service-范畴)
-  - [20.3.4 Node 范畴](#2034-node-范畴)
-- [20.4 函子](#204-函子)
-  - [20.4.1 镜像构建函子](#2041-镜像构建函子)
-  - [20.4.2 状态同步函子](#2042-状态同步函子)
-  - [20.4.3 调度函子](#2043-调度函子)
-  - [20.4.4 转换函子](#2044-转换函子)
-- [20.5 自然变换](#205-自然变换)
-  - [20.5.1 运行时转换](#2051-运行时转换)
-  - [20.5.2 API 版本转换](#2052-api-版本转换)
-  - [20.5.3 格式转换](#2053-格式转换)
-- [20.6 单子](#206-单子)
-  - [20.6.1 Option 单子](#2061-option-单子)
-  - [20.6.2 State 单子](#2062-state-单子)
-  - [20.6.3 Error 单子](#2063-error-单子)
-  - [20.6.4 Future 单子](#2064-future-单子)
-- [20.7 极限与余极限](#207-极限与余极限)
-  - [20.7.1 积与余积](#2071-积与余积)
-  - [20.7.2 等化子与余等化子](#2072-等化子与余等化子)
-  - [20.7.3 拉回与推出](#2073-拉回与推出)
-- [20.8 范畴复合](#208-范畴复合)
-  - [20.8.1 范畴的乘积](#2081-范畴的乘积)
-  - [20.8.2 范畴的余乘积](#2082-范畴的余乘积)
-  - [20.8.3 函子范畴](#2083-函子范畴)
-- [20.9 伴随函子](#209-伴随函子)
-  - [20.9.1 伴随函子定义](#2091-伴随函子定义)
-  - [20.9.2 Yoneda 引理](#2092-yoneda-引理)
-- [20.10 范畴等价](#2010-范畴等价)
-  - [20.10.1 范畴同构](#20101-范畴同构)
-  - [20.10.2 范畴等价](#20102-范畴等价)
-  - [20.10.3 范畴对偶](#20103-范畴对偶)
-- [20.11 参考](#2011-参考)
+- [08.1 文档定位](#081-文档定位)
+- [08.2 范畴基础](#082-范畴基础)
+  - [08.2.1 容器技术范畴](#0821-容器技术范畴)
+  - [08.2.2 对象与态射](#0822-对象与态射)
+  - [08.2.3 态射的复合](#0823-态射的复合)
+  - [08.2.4 恒等态射](#0824-恒等态射)
+- [08.3 核心范畴](#083-核心范畴)
+  - [08.3.1 Pod 范畴](#0831-pod-范畴)
+  - [08.3.2 Deployment 范畴](#0832-deployment-范畴)
+  - [08.3.3 Service 范畴](#0833-service-范畴)
+  - [08.3.4 Node 范畴](#0834-node-范畴)
+- [08.4 函子](#084-函子)
+  - [08.4.1 镜像构建函子](#0841-镜像构建函子)
+  - [08.4.2 状态同步函子](#0842-状态同步函子)
+  - [08.4.3 调度函子](#0843-调度函子)
+  - [08.4.4 转换函子](#0844-转换函子)
+- [08.5 自然变换](#085-自然变换)
+  - [08.5.1 运行时转换](#0851-运行时转换)
+  - [08.5.2 API 版本转换](#0852-api-版本转换)
+  - [08.5.3 格式转换](#0853-格式转换)
+- [08.6 单子](#086-单子)
+  - [08.6.1 Option 单子](#0861-option-单子)
+  - [08.6.2 State 单子](#0862-state-单子)
+  - [08.6.3 Error 单子](#0863-error-单子)
+  - [08.6.4 Future 单子](#0864-future-单子)
+- [08.7 极限与余极限](#087-极限与余极限)
+  - [08.7.1 积与余积](#0871-积与余积)
+  - [08.7.2 等化子与余等化子](#0872-等化子与余等化子)
+  - [08.7.3 拉回与推出](#0873-拉回与推出)
+- [08.8 范畴复合](#088-范畴复合)
+  - [08.8.1 范畴的乘积](#0881-范畴的乘积)
+  - [08.8.2 范畴的余乘积](#0882-范畴的余乘积)
+  - [08.8.3 函子范畴](#0883-函子范畴)
+- [08.9 伴随函子](#089-伴随函子)
+  - [08.9.1 伴随函子定义](#0891-伴随函子定义)
+  - [08.9.2 Yoneda 引理](#0892-yoneda-引理)
+- [08.10 范畴等价](#0810-范畴等价)
+  - [08.10.1 范畴同构](#08101-范畴同构)
+  - [08.10.2 范畴等价](#08102-范畴等价)
+  - [08.10.3 范畴对偶](#08103-范畴对偶)
+- [08.11 虚拟化层次的范畴论建模](#0811-虚拟化层次的范畴论建模)
+  - [08.11.1 虚拟化（全虚拟化）范畴](#08111-虚拟化全虚拟化范畴)
+  - [08.11.2 半虚拟化范畴](#08112-半虚拟化范畴)
+  - [08.11.3 容器化范畴](#08113-容器化范畴)
+  - [08.11.4 沙盒化范畴](#08114-沙盒化范畴)
+  - [08.11.5 四层次范畴关系](#08115-四层次范畴关系)
+- [08.12 参考](#0812-参考)
 
 ---
 
-## 20.1 文档定位
+## 08.1 文档定位
 
 本文档从范畴论（Category Theory）视角梳理云原生容器技术栈，将系统抽象为范畴
 （Categories）、对象（Objects）、态射（Morphisms）、函子（Functors）等数学结构，
@@ -112,9 +118,9 @@
 - **范畴复合**：范畴乘积、余乘积、函子范畴
 - **范畴等价**：范畴同构、等价、对偶
 
-## 20.2 范畴基础
+## 08.2 范畴基础
 
-### 20.2.1 容器技术范畴
+### 08.2.1 容器技术范畴
 
 **范畴定义**：容器技术范畴 $\mathcal{C}$ 由以下组成：
 
@@ -146,7 +152,7 @@ $$\mathcal{C} = (\text{Ob}(\mathcal{C}), \text{Hom}(\mathcal{C}), \circ, \text{i
 | **Service**    | 稳定网络标识 | ClusterIP、Labels   |
 | **Node**       | 工作节点     | Kubelet、容器运行时 |
 
-### 20.2.2 对象与态射
+### 08.2.2 对象与态射
 
 **态射定义**：态射 $f: A \rightarrow B$ 表示从对象 $A$ 到对象 $B$ 的转换。
 
@@ -185,7 +191,7 @@ $$\mathcal{C} = (\text{Ob}(\mathcal{C}), \text{Hom}(\mathcal{C}), \circ, \text{i
   schedule: Pod -> Node - Pod 对象 -> 节点绑定 - 调度算法
 ```
 
-### 20.2.3 态射的复合
+### 08.2.3 态射的复合
 
 **复合定义**：给定态射 $f: A \rightarrow B$ 和 $g: B \rightarrow C$，其复合为：
 
@@ -221,7 +227,7 @@ $$(g \circ f)(a) = g(f(a))$$
   rollback = stop ∘ start - 停止当前 -> 启动旧版本
 ```
 
-### 20.2.4 恒等态射
+### 08.2.4 恒等态射
 
 **恒等定义**：对于每个对象 $A$，存在恒等态射 $\text{id}_A: A \rightarrow A$。
 
@@ -255,9 +261,9 @@ $$\text{id}_A(a) = a$$
   id_Pod: Pod -> Pod - Pod 状态不变（保持运行）
 ```
 
-## 20.3 核心范畴
+## 08.3 核心范畴
 
-### 20.3.1 Pod 范畴
+### 08.3.1 Pod 范畴
 
 **Pod 范畴定义**：$\mathcal{P}$ 是由 Pod 对象及其态射组成的范畴。
 
@@ -303,7 +309,7 @@ graph LR
     E -->|delete| F
 ```
 
-### 20.3.2 Deployment 范畴
+### 08.3.2 Deployment 范畴
 
 **Deployment 范畴定义**：$\mathcal{D}$ 是由 Deployment 对象及其态射组成的范畴。
 
@@ -353,7 +359,7 @@ Deployment 态射:
     - 回滚到旧版本
 ```
 
-### 20.3.3 Service 范畴
+### 08.3.3 Service 范畴
 
 **Service 范畴定义**：$\mathcal{S}$ 是由 Service 对象及其态射组成的范畴。
 
@@ -392,7 +398,7 @@ Service 态射:
   loadbalance: Exposed -> Exposed - 分配流量 - 负载均衡
 ```
 
-### 20.3.4 Node 范畴
+### 08.3.4 Node 范畴
 
 **Node 范畴定义**：$\mathcal{N}$ 是由 Node 对象及其态射组成的范畴。
 
@@ -422,9 +428,9 @@ $\mathcal{N} = (\text{Ob}(\mathcal{N}), \text{Hom}(\mathcal{N}))$，其中：
 - $\text{Ob}(\mathcal{N}) = \{\text{Ready}, \text{NotReady}, \text{Schedulable}, \text{Unschedulable}\}$
 - $\text{Hom}(\mathcal{N})$ 包含所有状态转换态射
 
-## 20.4 函子
+## 08.4 函子
 
-### 20.4.1 镜像构建函子
+### 08.4.1 镜像构建函子
 
 **函子定义**：函子 $F: \mathcal{C} \rightarrow \mathcal{D}$ 将范畴 $\mathcal{C}$
 映射到范畴 $\mathcal{D}$。
@@ -456,7 +462,7 @@ $\mathcal{N} = (\text{Ob}(\mathcal{N}), \text{Hom}(\mathcal{N}))$，其中：
 2. **保持复
    合**：$F_{\text{build}}(g \circ f) = F_{\text{build}}(g) \circ F_{\text{build}}(f)$
 
-### 20.4.2 状态同步函子
+### 08.4.2 状态同步函子
 
 **状态同步函子**：$F_{\text{sync}}: \mathcal{D} \rightarrow \mathcal{P}$
 
@@ -491,7 +497,7 @@ $\mathcal{N} = (\text{Ob}(\mathcal{N}), \text{Hom}(\mathcal{N}))$，其中：
     - Pod.create (多个)
 ```
 
-### 20.4.3 调度函子
+### 08.4.3 调度函子
 
 **调度函子**：$F_{\text{schedule}}: \mathcal{P} \rightarrow \mathcal{N}$
 
@@ -526,7 +532,7 @@ $\mathcal{N} = (\text{Ob}(\mathcal{N}), \text{Hom}(\mathcal{N}))$，其中：
     - Node.assign (Pod 绑定到节点)
 ```
 
-### 20.4.4 转换函子
+### 08.4.4 转换函子
 
 **转换函子**：$F_{\text{convert}}: \mathcal{C} \rightarrow \mathcal{C}'$
 
@@ -550,9 +556,9 @@ $\mathcal{N} = (\text{Ob}(\mathcal{N}), \text{Hom}(\mathcal{N}))$，其中：
 - $F_{\text{convert}}(A) = A'$（对象转换）
 - $F_{\text{convert}}(f: A \rightarrow B) = f': A' \rightarrow B'$（态射转换）
 
-## 20.5 自然变换
+## 08.5 自然变换
 
-### 20.5.1 运行时转换
+### 08.5.1 运行时转换
 
 **自然变换定义**：自然变换 $\alpha: F \Rightarrow G$ 是两个函子之间的映射。
 
@@ -585,7 +591,7 @@ $$G(f) \circ \alpha_A = \alpha_B \circ F(f)$$
     rootfs -> .wasm - runc -> WasmEdge Runtime
 ```
 
-### 20.5.2 API 版本转换
+### 08.5.2 API 版本转换
 
 **API 版本自然变换**：$\alpha_{\text{version}}: F_{v1} \Rightarrow F_{v2}$
 
@@ -604,7 +610,7 @@ API 版本自然变换:
     - 字段映射
 ```
 
-### 20.5.3 格式转换
+### 08.5.3 格式转换
 
 **格式自然变
 换**：$\alpha_{\text{format}}: F_{\text{OCI}} \Rightarrow F_{\text{Docker}}$
@@ -623,9 +629,9 @@ API 版本自然变换:
     Manifest - 格式兼容
 ```
 
-## 20.6 单子
+## 08.6 单子
 
-### 20.6.1 Option 单子
+### 08.6.1 Option 单子
 
 **单子定义**：单子 $M$ 是自函子 $(T, \eta, \mu)$，其中：
 
@@ -662,7 +668,7 @@ Option 单子:
     - None: 拉取失败
 ```
 
-### 20.6.2 State 单子
+### 08.6.2 State 单子
 
 **State 单子**：$M_{\text{State}} = (T_{\text{State}}, \eta, \mu)$
 
@@ -690,7 +696,7 @@ State 单子:
     - 输出: (操作结果, 更新的对象)
 ```
 
-### 20.6.3 Error 单子
+### 08.6.3 Error 单子
 
 **Error 单子**：$M_{\text{Error}} = (T_{\text{Error}}, \eta, \mu)$
 
@@ -719,7 +725,7 @@ Error 单子:
     - Error("网络错误"): 拉取失败
 ```
 
-### 20.6.4 Future 单子
+### 08.6.4 Future 单子
 
 **Future 单子**：$M_{\text{Future}} = (T_{\text{Future}}, \eta, \mu)$
 
@@ -743,9 +749,9 @@ Future 单子:
   Image.pull(): Future[Image] - 异步拉取镜像 - 返回 Future[Image]
 ```
 
-## 20.7 极限与余极限
+## 08.7 极限与余极限
 
-### 20.7.1 积与余积
+### 08.7.1 积与余积
 
 **积定义**：对象 $A$ 和 $B$ 的积 $A \times B$ 是满足以下性质的泛对象：
 
@@ -781,7 +787,7 @@ $$h \circ i_1 = f \quad \text{和} \quad h \circ i_2 = g$$
 | **Deployment $+$ StatefulSet** | Deployment 和 StatefulSet 的余积 | 不同类型的副本集 |
 | **Node $+$ Node**              | Node 的余积                      | 多个节点的集合   |
 
-### 20.7.2 等化子与余等化子
+### 08.7.2 等化子与余等化子
 
 **等化子定义**：态射 $f, g: A \rightarrow B$ 的等化子 $\text{Eq}(f, g)$ 是满足以
 下性质的对象：
@@ -811,7 +817,7 @@ $$h \circ i_1 = f \quad \text{和} \quad h \circ i_2 = g$$
 | **$\text{Coeq}(\text{scale}, \text{id})$**   | scale 与恒等的余等化子   | 副本数变更   |
 | **$\text{Coeq}(\text{rollout}, \text{id})$** | rollout 与恒等的余等化子 | 镜像版本变更 |
 
-### 20.7.3 拉回与推出
+### 08.7.3 拉回与推出
 
 **拉回定义**：给定态射 $f: A \rightarrow C$ 和 $g: B \rightarrow C$，其拉回
 $A \times_C B$ 是满足以下性质的泛对象：
@@ -844,9 +850,9 @@ $k: A +_C B \rightarrow X$ 使得 $h_1 = k \circ i_1$ 和 $h_2 = k \circ i_2$。
 | **Pod $+_{\text{Image}}$ Pod**                    | Pod 的推出                       | 共享镜像的 Pod 集合    |
 | **Deployment $+_{\text{Namespace}}$ StatefulSet** | Deployment 和 StatefulSet 的推出 | 同一命名空间的不同类型 |
 
-## 20.8 范畴复合
+## 08.8 范畴复合
 
-### 20.8.1 范畴的乘积
+### 08.8.1 范畴的乘积
 
 **范畴乘积定义**：两个范畴 $\mathcal{C}$ 和 $\mathcal{D}$ 的乘积
 $\mathcal{C} \times \mathcal{D}$ 由以下组成：
@@ -863,7 +869,7 @@ $\mathcal{C} \times \mathcal{D}$ 由以下组成：
 | **$\mathcal{P} \times \mathcal{N}$** | Pod 范畴与 Node 范畴的乘积           | Pod-Node 绑定关系       |
 | **$\mathcal{D} \times \mathcal{S}$** | Deployment 范畴与 Service 范畴的乘积 | Deployment-Service 关系 |
 
-### 20.8.2 范畴的余乘积
+### 08.8.2 范畴的余乘积
 
 **范畴余乘积定义**：两个范畴 $\mathcal{C}$ 和 $\mathcal{D}$ 的余乘积
 $\mathcal{C} + \mathcal{D}$ 由以下组成：
@@ -878,7 +884,7 @@ $\mathcal{C} + \mathcal{D}$ 由以下组成：
 | **$\mathcal{D} + \mathcal{SS}$** | Deployment 与 StatefulSet 的余乘积 | 不同类型的副本集 |
 | **$\mathcal{P} + \mathcal{P}$**  | Pod 与 Pod 的余乘积                | 多个 Pod 的集合  |
 
-### 20.8.3 函子范畴
+### 08.8.3 函子范畴
 
 **函子范畴定义**：两个范畴 $\mathcal{C}$ 和 $\mathcal{D}$ 之间的函子范畴
 $\mathcal{D}^{\mathcal{C}}$ 由以下组成：
@@ -893,12 +899,12 @@ $\mathcal{D}^{\mathcal{C}}$ 由以下组成：
 | **$\mathcal{I}^{\mathcal{S}}$** | 源代码到镜像的函子范畴       | 镜像构建函子 |
 | **$\mathcal{P}^{\mathcal{D}}$** | Deployment 到 Pod 的函子范畴 | 状态同步函子 |
 
-## 20.9 伴随函子
+## 08.9 伴随函子
 
 根据 Wikipedia，伴随函子（Adjoint Functors）是范畴论中的一个核心概念，描述了函子
 之间的对偶关系。
 
-### 20.9.1 伴随函子定义
+### 08.9.1 伴随函子定义
 
 **伴随定义**：设 $F: \mathcal{C} \rightarrow \mathcal{D}$ 和
 $G: \mathcal{D} \rightarrow \mathcal{C}$ 是两个函子，如果存在自然同构：
@@ -943,7 +949,7 @@ $$\text{Hom}_{\mathcal{I}}(F_{\text{build}}(\text{Source}), \text{Image}) \cong 
    - $(\epsilon F) \circ (F \eta) = \text{id}_F$
    - $(G \epsilon) \circ (\eta G) = \text{id}_G$
 
-### 20.9.2 Yoneda 引理
+### 08.9.2 Yoneda 引理
 
 根据 Wikipedia，Yoneda 引理（Yoneda Lemma）是范畴论中的一个基本结果，描述了对象
 与其在 Hom-函子中的表示之间的关系。
@@ -993,9 +999,9 @@ $$\text{Hom}_{\mathcal{C}}(A, B) \cong \text{Hom}_{\text{Set}^{\mathcal{C}^{\tex
 
 Pod 之间的态射与它们对应的 Hom-函子之间的自然变换一一对应。
 
-## 20.10 范畴等价
+## 08.10 范畴等价
 
-### 20.10.1 范畴同构
+### 08.10.1 范畴同构
 
 **范畴同构定义**：两个范畴 $\mathcal{C}$ 和 $\mathcal{D}$ 同构，当且仅当存在函子
 $F: \mathcal{C} \rightarrow \mathcal{D}$ 和
@@ -1010,7 +1016,7 @@ $$G \circ F = \text{id}_{\mathcal{C}} \quad \text{和} \quad F \circ G = \text{i
 | **$\mathcal{C}_{\text{Docker}} \cong \mathcal{C}_{\text{containerd}}$** | Docker 与 containerd 范畴同构 | 运行时等价   |
 | **$\mathcal{C}_{\text{K8s}} \cong \mathcal{C}_{\text{K3s}}$**           | Kubernetes 与 K3s 范畴同构    | 编排系统等价 |
 
-### 20.10.2 范畴等价
+### 08.10.2 范畴等价
 
 **范畴等价定义**：两个范畴 $\mathcal{C}$ 和 $\mathcal{D}$ 等价，当且仅当存在函子
 $F: \mathcal{C} \rightarrow \mathcal{D}$ 和
@@ -1025,7 +1031,7 @@ $$\eta: \text{id}_{\mathcal{C}} \Rightarrow G \circ F \quad \text{和} \quad \ep
 | **$\mathcal{C}_{\text{OCI}} \simeq \mathcal{C}_{\text{Docker}}$**     | OCI 与 Docker 范畴等价     | 镜像格式等价   |
 | **$\mathcal{C}_{\text{CRI}} \simeq \mathcal{C}_{\text{Docker API}}$** | CRI 与 Docker API 范畴等价 | 运行时接口等价 |
 
-### 20.10.3 范畴对偶
+### 08.10.3 范畴对偶
 
 **范畴对偶定义**：范畴 $\mathcal{C}$ 的对偶范畴 $\mathcal{C}^{\text{op}}$ 由以下
 组成：
@@ -1041,7 +1047,434 @@ $$\eta: \text{id}_{\mathcal{C}} \Rightarrow G \circ F \quad \text{和} \quad \ep
 | **$\mathcal{P}^{\text{op}}$** | Pod 范畴的对偶        | 反向状态转换 |
 | **$\mathcal{D}^{\text{op}}$** | Deployment 范畴的对偶 | 反向状态同步 |
 
-## 20.11 参考
+## 08.11 虚拟化层次的范畴论建模
+
+本文档从范畴论角度深入分析虚拟化、半虚拟化、容器化、沙盒化四个技术范式，将各范式
+抽象为范畴（Categories）、对象（Objects）、态射（Morphisms）、函子（Functors）等
+数学结构，揭示技术本质的范畴论规律。
+
+### 08.11.1 虚拟化（全虚拟化）范畴
+
+**虚拟化范畴定义**：
+
+设虚拟化范畴为 $\mathcal{C}_{\text{VM}}$，由以下组成：
+
+$$\mathcal{C}_{\text{VM}} = (\text{Ob}(\mathcal{C}_{\text{VM}}), \text{Hom}(\mathcal{C}_{\text{VM}}), \circ, \text{id})$$
+
+**虚拟化范畴对象**：
+
+$$\text{Ob}(\mathcal{C}_{\text{VM}}) = \{\text{Hypervisor}, \text{VM}_1, \text{VM}_2, \ldots, \text{VM}_n, \text{Hardware}\}$$
+
+其中：
+
+- $\text{Hypervisor}$：虚拟机监视器对象
+- $\text{VM}_i$：第 $i$ 个虚拟机对象
+- $\text{Hardware}$：物理硬件对象
+
+**虚拟化范畴态射**：
+
+$$\text{Hom}(\mathcal{C}_{\text{VM}}) = \{\text{create}: \text{Hypervisor} \rightarrow \text{VM}_i, \text{start}: \text{VM}_i \rightarrow \text{VM}_i, \text{stop}: \text{VM}_i \rightarrow \text{VM}_i, \text{delete}: \text{VM}_i \rightarrow \emptyset, \text{emulate}: \text{Hypervisor} \times \text{Hardware} \rightarrow \text{VM}_i\}$$
+
+其中：
+
+- $\text{create}$：创建虚拟机态射
+- $\text{start}$：启动虚拟机态射
+- $\text{stop}$：停止虚拟机态射
+- $\text{delete}$：删除虚拟机态射
+- $\text{emulate}$：硬件模拟态射
+
+**虚拟化范畴态射复合**：
+
+$$\text{start} \circ \text{create}: \text{Hypervisor} \rightarrow \text{VM}_i$$
+
+表示创建并启动虚拟机的复合态射。
+
+**虚拟化范畴恒等态射**：
+
+$$\text{id}_{\text{VM}_i}: \text{VM}_i \rightarrow \text{VM}_i$$
+
+表示虚拟机 $i$ 的恒等态射（状态不变）。
+
+**虚拟化范畴定义**（根据 Wikipedia，as of 2025-11-02）：
+
+虚拟化范畴满足范畴的所有公理：
+
+1. **结合律**：$(h \circ g) \circ f = h \circ (g \circ f)$
+2. **恒等律**：$f \circ \text{id}_A = f = \text{id}_B \circ f$
+
+**虚拟化函子**：
+
+设
+$F_{\text{VM}}: \mathcal{C}_{\text{Hardware}} \rightarrow \mathcal{C}_{\text{VM}}$
+是虚拟化函子，则：
+
+$$F_{\text{VM}}(\text{Hardware}) = \text{VM}_1 \times \text{VM}_2 \times \cdots \times \text{VM}_n$$
+
+其中 $\times$ 表示积（Product），表示一个物理硬件资源映射到多个虚拟机。
+
+**虚拟化函子保持复合**：
+
+$$F_{\text{VM}}(g \circ f) = F_{\text{VM}}(g) \circ F_{\text{VM}}(f)$$
+
+**虚拟化函子保持恒等**：
+
+$$F_{\text{VM}}(\text{id}_A) = \text{id}_{F_{\text{VM}}(A)}$$
+
+### 08.11.2 半虚拟化范畴
+
+**半虚拟化范畴定义**：
+
+设半虚拟化范畴为 $\mathcal{C}_{\text{PV}}$，由以下组成：
+
+$$\mathcal{C}_{\text{PV}} = (\text{Ob}(\mathcal{C}_{\text{PV}}), \text{Hom}(\mathcal{C}_{\text{PV}}), \circ, \text{id})$$
+
+**半虚拟化范畴对象**：
+
+$$\text{Ob}(\mathcal{C}_{\text{PV}}) = \{\text{Hypervisor}, \text{PV\_VM}_1, \text{PV\_VM}_2, \ldots, \text{PV\_VM}_n, \text{Hardware}, \text{Collaboration\_Interface}\}$$
+
+其中：
+
+- $\text{PV\_VM}_i$：第 $i$ 个半虚拟化虚拟机对象（修改后的 Guest OS）
+- $\text{Collaboration\_Interface}$：协作接口对象（Hypercall、VirtIO、Grant
+  Table、Event Channel）
+
+**半虚拟化范畴态射**：
+
+$$\text{Hom}(\mathcal{C}_{\text{PV}}) = \{\text{create}: \text{Hypervisor} \rightarrow \text{PV\_VM}_i, \text{hypercall}: \text{PV\_VM}_i \rightarrow \text{Hypervisor}, \text{virtio}: \text{PV\_VM}_i \leftrightarrow \text{Hypervisor}, \text{grant}: \text{PV\_VM}_i \times \text{Hypervisor} \rightarrow \text{Memory\_Shared}\}$$
+
+其中：
+
+- $\text{hypercall}$：Hypercall 态射（Guest OS 调用 Hypervisor）
+- $\text{virtio}$：VirtIO 态射（前端/后端驱动协作）
+- $\text{grant}$：Grant Table 态射（内存共享）
+
+**半虚拟化范畴态射复合**：
+
+$$\text{hypercall} \circ \text{create}: \text{Hypervisor} \rightarrow \text{Hypervisor}$$
+
+表示创建半虚拟化虚拟机并通过 Hypercall 协作的复合态射。
+
+**半虚拟化函子**：
+
+设
+$F_{\text{PV}}: \mathcal{C}_{\text{Full}} \rightarrow \mathcal{C}_{\text{PV}}$
+是半虚拟化转换函子，则：
+
+$$F_{\text{PV}}(\text{VM}_i) = \text{PV\_VM}_i$$
+
+其中 $\text{PV\_VM}_i$ 表示修改后的虚拟机（支持协作接口）。
+
+**协作函子**：
+
+设
+$F_{\text{collaboration}}: \mathcal{C}_{\text{PV}} \rightarrow \mathcal{C}_{\text{Performance}}$
+是协作函子，则：
+
+$$F_{\text{collaboration}}(\text{PV\_VM}_i) = \text{Performance}_{\text{optimized}}$$
+
+表示通过协作机制优化性能。
+
+**协作效率自然变换**：
+
+设 $\alpha_{\text{efficiency}}: F_{\text{Full}} \Rightarrow F_{\text{PV}}$ 是效
+率自然变换，则：
+
+$$\alpha_{\text{efficiency}}(\text{VM}_i): F_{\text{Full}}(\text{VM}_i) \rightarrow F_{\text{PV}}(\text{PV\_VM}_i)$$
+
+表示从全虚拟化到半虚拟化的效率提升。
+
+**协作效率定理 08.25**：
+
+半虚拟化通过协作机制提高性能：
+
+$$\text{Performance}(F_{\text{PV}}(\text{PV\_VM}_i)) > \text{Performance}(F_{\text{Full}}(\text{VM}_i))$$
+
+**证明**：通过 Hypercall 减少 VM Exit，通过 VirtIO 减少设备模拟，性能提升
+30-50%。
+
+$\square$
+
+### 08.11.3 容器化范畴
+
+**容器化范畴定义**：
+
+设容器化范畴为 $\mathcal{C}_{\text{Container}}$，由以下组成：
+
+$$\mathcal{C}_{\text{Container}} = (\text{Ob}(\mathcal{C}_{\text{Container}}), \text{Hom}(\mathcal{C}_{\text{Container}}), \circ, \text{id})$$
+
+**容器化范畴对象**：
+
+$$\text{Ob}(\mathcal{C}_{\text{Container}}) = \{\text{Host\_Kernel}, \text{Container}_1, \text{Container}_2, \ldots, \text{Container}_n, \text{Namespace}, \text{Cgroup}\}$$
+
+其中：
+
+- $\text{Host\_Kernel}$：Host OS 内核对象（共享）
+- $\text{Container}_i$：第 $i$ 个容器对象
+- $\text{Namespace}$：命名空间对象
+- $\text{Cgroup}$：控制组对象
+
+**容器化范畴态射**：
+
+$$\text{Hom}(\mathcal{C}_{\text{Container}}) = \{\text{create}: \text{Host\_Kernel} \times \text{Image} \rightarrow \text{Container}_i, \text{namespace}: \text{Host\_Kernel} \times \text{Container}_i \rightarrow \text{Namespace}_i, \text{cgroup}: \text{Host\_Kernel} \times \text{Container}_i \rightarrow \text{Cgroup}_i, \text{start}: \text{Container}_i \rightarrow \text{Container}_i, \text{stop}: \text{Container}_i \rightarrow \text{Container}_i\}$$
+
+其中：
+
+- $\text{namespace}$：命名空间隔离态射
+- $\text{cgroup}$：资源限制态射
+
+**容器化范畴态射复合**：
+
+$$\text{start} \circ \text{cgroup} \circ \text{namespace} \circ \text{create}: \text{Host\_Kernel} \times \text{Image} \rightarrow \text{Container}_i$$
+
+表示创建、隔离、限制并启动容器的复合态射。
+
+**容器化函子**：
+
+设
+$F_{\text{Container}}: \mathcal{C}_{\text{Image}} \rightarrow \mathcal{C}_{\text{Container}}$
+是容器化函子，则：
+
+$$F_{\text{Container}}(\text{Image}) = \text{Container}$$
+
+表示从镜像到容器的转换。
+
+**Namespace 函子**：
+
+设
+$F_{\text{namespace}}: \mathcal{C}_{\text{Container}} \rightarrow \mathcal{C}_{\text{Isolated}}$
+是 Namespace 函子，则：
+
+$$F_{\text{namespace}}(\text{Container}_i) = \text{Isolated\_Container}_i$$
+
+表示通过 Namespace 实现隔离。
+
+**Cgroup 函子**：
+
+设
+$F_{\text{cgroup}}: \mathcal{C}_{\text{Container}} \rightarrow \mathcal{C}_{\text{Limited}}$
+是 Cgroup 函子，则：
+
+$$F_{\text{cgroup}}(\text{Container}_i) = \text{Limited\_Container}_i$$
+
+表示通过 Cgroup 实现资源限制。
+
+**容器化隔离定理 08.26**：
+
+容器化通过 Namespace 和 Cgroup 实现进程级隔离：
+
+$$\forall \text{Container}_i, \text{Container}_j (i \neq j), \quad F_{\text{namespace}}(\text{Container}_i) \cap F_{\text{namespace}}(\text{Container}_j) = \emptyset$$
+
+**证明**：每个容器拥有独立的 Namespace，虚拟视图互不相交。
+
+$\square$
+
+### 08.11.4 沙盒化范畴
+
+**沙盒化范畴定义**：
+
+设沙盒化范畴为 $\mathcal{C}_{\text{Sandbox}}$，由以下组成：
+
+$$\mathcal{C}_{\text{Sandbox}} = (\text{Ob}(\mathcal{C}_{\text{Sandbox}}), \text{Hom}(\mathcal{C}_{\text{Sandbox}}), \circ, \text{id})$$
+
+**沙盒化范畴对象**：
+
+$$\text{Ob}(\mathcal{C}_{\text{Sandbox}}) = \{\text{Runtime}, \text{Sandbox}_1, \text{Sandbox}_2, \ldots, \text{Sandbox}_n, \text{Host\_Kernel}, \text{WASI}\}$$
+
+其中：
+
+- $\text{Runtime}$：运行时对象（如 WasmEdge）
+- $\text{Sandbox}_i$：第 $i$ 个沙盒对象（如 Wasm Module）
+- $\text{WASI}$：WebAssembly System Interface 对象
+
+**沙盒化范畴态射**：
+
+$$\text{Hom}(\mathcal{C}_{\text{Sandbox}}) = \{\text{load}: \text{Runtime} \times \text{Wasm\_Module} \rightarrow \text{Sandbox}_i, \text{instantiate}: \text{Sandbox}_i \rightarrow \text{Sandbox}_i, \text{invoke}: \text{Sandbox}_i \times \text{Function} \rightarrow \text{Sandbox}_i, \text{intercept}: \text{Sandbox}_i \times \text{Syscall} \rightarrow \text{Host\_Kernel}, \text{permission}: \text{Sandbox}_i \times \text{Resource} \rightarrow \text{Boolean}\}$$
+
+其中：
+
+- $\text{load}$：加载 Wasm 模块态射
+- $\text{instantiate}$：实例化模块态射
+- $\text{invoke}$：调用函数态射
+- $\text{intercept}$：系统调用拦截态射
+- $\text{permission}$：权限检查态射
+
+**沙盒化范畴态射复合**：
+
+$$\text{invoke} \circ \text{instantiate} \circ \text{load}: \text{Runtime} \times \text{Wasm\_Module} \times \text{Function} \rightarrow \text{Sandbox}_i$$
+
+表示加载、实例化并调用函数的复合态射。
+
+**沙盒化函子**：
+
+设
+$F_{\text{Sandbox}}: \mathcal{C}_{\text{Wasm\_Module}} \rightarrow \mathcal{C}_{\text{Sandbox}}$
+是沙盒化函子，则：
+
+$$F_{\text{Sandbox}}(\text{Wasm\_Module}) = \text{Sandbox}$$
+
+表示从 Wasm 模块到沙盒的转换。
+
+**WASI 函子**：
+
+设
+$F_{\text{WASI}}: \mathcal{C}_{\text{Sandbox}} \rightarrow \mathcal{C}_{\text{Isolated}}$
+是 WASI 函子，则：
+
+$$F_{\text{WASI}}(\text{Sandbox}_i) = \text{Isolated\_Sandbox}_i$$
+
+表示通过 WASI 实现隔离。
+
+**沙盒化隔离定理 08.27**：
+
+沙盒化通过系统调用拦截和权限限制实现应用级隔离：
+
+$$\forall \text{Sandbox}_i, \text{Sandbox}_j (i \neq j), \quad F_{\text{WASI}}(\text{Sandbox}_i) \cap F_{\text{WASI}}(\text{Sandbox}_j) = \emptyset$$
+
+**证明**：每个沙盒拥有独立的内存和权限，互不相交。
+
+$\square$
+
+**沙盒化性能定理 08.28**：
+
+沙盒化通过轻量运行时实现高性能：
+
+$$\text{Performance}(F_{\text{Sandbox}}(\text{Sandbox}_i)) > \text{Performance}(F_{\text{Container}}(\text{Container}_i))$$
+
+**证明**：运行时开销极小（< 2MB），系统调用拦截开销低（< 5 cycles），启动时间短
+（< 10ms）。
+
+$\square$
+
+### 08.11.5 四层次范畴关系
+
+**四层次范畴对比矩阵**：
+
+| 范式         | 范畴定义                         | 对象集合                                      | 态射集合                                  | 隔离机制                                    |
+| ------------ | -------------------------------- | --------------------------------------------- | ----------------------------------------- | ------------------------------------------- |
+| **虚拟化**   | $\mathcal{C}_{\text{VM}}$        | $\{\text{H}, \text{VM}_i, \text{HW}\}$        | $\{\text{create}, \text{emulate}\}$       | 硬件级隔离（$\text{Iso}_{\text{HW}}$）      |
+| **半虚拟化** | $\mathcal{C}_{\text{PV}}$        | $\{\text{H}, \text{PV\_VM}_i, \text{CI}\}$    | $\{\text{hypercall}, \text{virtio}\}$     | 内核级隔离（$\text{Iso}_{\text{Kernel}}$）  |
+| **容器化**   | $\mathcal{C}_{\text{Container}}$ | $\{\text{K}, \text{Container}_i, \text{NS}\}$ | $\{\text{namespace}, \text{cgroup}\}$     | 进程级隔离（$\text{Iso}_{\text{Process}}$） |
+| **沙盒化**   | $\mathcal{C}_{\text{Sandbox}}$   | $\{\text{R}, \text{Sandbox}_i, \text{WASI}\}$ | $\{\text{intercept}, \text{permission}\}$ | 应用级隔离（$\text{Iso}_{\text{App}}$）     |
+
+**四层次范畴函子映射**：
+
+**从虚拟化到半虚拟化的函子**：
+
+设 $F_{\text{PV}}: \mathcal{C}_{\text{VM}} \rightarrow \mathcal{C}_{\text{PV}}$
+是半虚拟化转换函子，则：
+
+$$F_{\text{PV}}(\text{VM}_i) = \text{PV\_VM}_i$$
+$$F_{\text{PV}}(\text{emulate}) = \text{hypercall} \circ \text{virtio}$$
+
+表示将全虚拟化的模拟态射转换为半虚拟化的协作态射。
+
+**从半虚拟化到容器化的函子**：
+
+设
+$F_{\text{Container}}: \mathcal{C}_{\text{PV}} \rightarrow \mathcal{C}_{\text{Container}}$
+是容器化转换函子，则：
+
+$$F_{\text{Container}}(\text{PV\_VM}_i) = \text{Container}_i$$
+$$F_{\text{Container}}(\text{hypercall}) = \text{syscall}$$
+
+表示将半虚拟化的 Hypercall 态射转换为容器化的系统调用态射。
+
+**从容器化到沙盒化的函子**：
+
+设
+$F_{\text{Sandbox}}: \mathcal{C}_{\text{Container}} \rightarrow \mathcal{C}_{\text{Sandbox}}$
+是沙盒化转换函子，则：
+
+$$F_{\text{Sandbox}}(\text{Container}_i) = \text{Sandbox}_i$$
+$$F_{\text{Sandbox}}(\text{namespace}) = \text{permission}$$
+
+表示将容器化的命名空间态射转换为沙盒化的权限态射。
+
+**四层次范畴自然变换**：
+
+**性能优化自然变换**：
+
+设
+$\alpha_{\text{performance}}: F_{\text{VM}} \Rightarrow F_{\text{PV}} \Rightarrow F_{\text{Container}} \Rightarrow F_{\text{Sandbox}}$
+是性能优化自然变换，则：
+
+$$\text{Performance}(F_{\text{Sandbox}}(\text{Sandbox})) > \text{Performance}(F_{\text{Container}}(\text{Container})) > \text{Performance}(F_{\text{PV}}(\text{PV\_VM})) > \text{Performance}(F_{\text{VM}}(\text{VM}))$$
+
+**隔离强度自然变换**：
+
+设
+$\alpha_{\text{isolation}}: F_{\text{Sandbox}} \Rightarrow F_{\text{Container}} \Rightarrow F_{\text{PV}} \Rightarrow F_{\text{VM}}$
+是隔离强度自然变换，则：
+
+$$\text{Isolation}(F_{\text{VM}}(\text{VM})) > \text{Isolation}(F_{\text{PV}}(\text{PV\_VM})) > \text{Isolation}(F_{\text{Container}}(\text{Container})) > \text{Isolation}(F_{\text{Sandbox}}(\text{Sandbox}))$$
+
+**四层次范畴等价关系**：
+
+**范畴近似等价**：
+
+$\mathcal{C}_{\text{VM}} \simeq \mathcal{C}_{\text{PV}}$（虚拟化与半虚拟化近似等
+价）
+
+存在自然变换 $\alpha: F_{\text{VM}} \Rightarrow F_{\text{PV}}$ 和
+$\beta: F_{\text{PV}} \Rightarrow F_{\text{VM}}$ 使得：
+
+$$\beta \circ \alpha \cong \text{id}_{F_{\text{VM}}} \quad \text{和} \quad \alpha \circ \beta \cong \text{id}_{F_{\text{PV}}}$$
+
+**范畴不等价关系**：
+
+$\mathcal{C}_{\text{PV}} \not\simeq \mathcal{C}_{\text{Container}}$（半虚拟化与
+容器化不等价）
+
+$\mathcal{C}_{\text{Container}} \not\simeq \mathcal{C}_{\text{Sandbox}}$（容器化
+与沙盒化不等价）
+
+原因：隔离机制、资源模型、运行环境完全不同。
+
+**四层次范畴极限与余极限**：
+
+**积（Product）**：
+
+$$\text{VM}_1 \times \text{VM}_2 \times \cdots \times \text{VM}_n = \text{Hypervisor}(\text{Hardware})$$
+
+表示多个虚拟机共享同一物理硬件资源的积。
+
+**余积（Coproduct）**：
+
+$$\text{Container}_1 \coprod \text{Container}_2 \coprod \cdots \coprod \text{Container}_n = \text{Host\_Kernel}(\text{Container}_1, \text{Container}_2, \ldots, \text{Container}_n)$$
+
+表示多个容器共享同一 Host 内核的余积。
+
+**拉回（Pullback）**：
+
+$$\text{Sandbox}_i \times_{\text{Runtime}} \text{WASI} = \text{Isolated\_Sandbox}_i$$
+
+表示沙盒通过 Runtime 和 WASI 实现隔离的拉回。
+
+**四层次范畴决策函子**：
+
+设
+$D: \{\text{Requirements}\} \rightarrow \{\mathcal{C}_{\text{VM}}, \mathcal{C}_{\text{PV}}, \mathcal{C}_{\text{Container}}, \mathcal{C}_{\text{Sandbox}}\}$
+是决策函子，则：
+
+$$
+D(\text{requirements}) = \begin{cases}
+\mathcal{C}_{\text{VM}} & \text{if } \text{Multi\_OS} \wedge \text{Max\_Isolation} \\
+\mathcal{C}_{\text{PV}} & \text{if } \text{Multi\_OS} \wedge \text{High\_Performance} \wedge \text{OS\_Modifiable} \\
+\mathcal{C}_{\text{Container}} & \text{if } \text{Linux\_Only} \wedge \text{Balance} \\
+\mathcal{C}_{\text{Sandbox}} & \text{if } \text{Speed} \wedge \text{Efficiency}
+\end{cases}
+$$
+
+**范畴论决策定理 08.29**：
+
+根据范畴论分析，四层次技术范式的选择取决于需求集合的范畴结构：
+
+$$\text{Choice} = \arg\max_{\mathcal{C} \in \{\mathcal{C}_{\text{VM}}, \mathcal{C}_{\text{PV}}, \mathcal{C}_{\text{Container}}, \mathcal{C}_{\text{Sandbox}}\}} \text{Utility}(\mathcal{C}, \text{Requirements})$$
+
+其中 $\text{Utility}$ 表示范畴 $\mathcal{C}$ 满足需求 $\text{Requirements}$ 的效
+用函数。
+
+## 08.12 参考
 
 **关联文档**：
 
@@ -1074,6 +1507,14 @@ $$\eta: \text{id}_{\mathcal{C}} \Rightarrow G \circ F \quad \text{和} \quad \ep
   拉回
 - [Pushout (Category Theory)](<https://en.wikipedia.org/wiki/Pushout_(category_theory)>) -
   推出
+- [Full Virtualization](https://en.wikipedia.org/wiki/Virtualization#Full_virtualization) -
+  全虚拟化
+- [Paravirtualization](https://en.wikipedia.org/wiki/Paravirtualization) - 半虚
+  拟化
+- [OS-level Virtualization](https://en.wikipedia.org/wiki/OS-level_virtualization) -
+  操作系统级虚拟化（容器化）
+- [Sandbox (Computer Security)](<https://en.wikipedia.org/wiki/Sandbox_(computer_security)>) -
+  沙盒化
 
 **范畴论在计算机科学中的应用**：
 
