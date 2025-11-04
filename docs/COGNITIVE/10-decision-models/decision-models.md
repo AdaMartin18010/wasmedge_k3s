@@ -53,6 +53,8 @@
    - **⭐ 关键决策维度**：
      - **设备访问需求**：USB/PCI 设备访问 → 虚拟化/半虚拟化（必需）
      - **内核特性需求**：epoll/io_uring → 容器化（必需，16-62x 性能提升）
+     - **微服务架构需求**：服务数量 >50、服务间通信复杂 → Service
+       Mesh（Istio/Linkerd/Cilium）
      - **资源访问需求**：CPU/内存/逻辑 → 沙盒化/容器化
 
 **核心价值**：
@@ -95,7 +97,8 @@
 │   ├── README.md                # 案例概述
 │   ├── 01-edge-computing.md     # 边缘计算平台案例
 │   ├── 02-serverless.md         # Serverless函数服务案例
-│   └── 03-enterprise.md         # 企业级多租户平台案例
+│   ├── 03-enterprise.md         # 企业级多租户平台案例
+│   └── 04-service-mesh.md      # 服务网格架构案例
 │
 ├── 04-formalization/            # 形式化模型
 │   ├── README.md                # 形式化模型概述
@@ -152,6 +155,7 @@
 | **边缘计算平台**        | [01-edge-computing.md](03-cases/01-edge-computing.md) | 5G MEC 边缘计算平台案例 |
 | **Serverless 函数服务** | [02-serverless.md](03-cases/02-serverless.md)         | 云函数平台案例          |
 | **企业级多租户平台**    | [03-enterprise.md](03-cases/03-enterprise.md)         | 企业级 SaaS 平台案例    |
+| **服务网格架构**        | [04-service-mesh.md](03-cases/04-service-mesh.md)     | 微服务架构平台案例      |
 
 ### 形式化模型
 
@@ -255,10 +259,11 @@ $$A_{\text{attack}} = \sum_{i} A_{\text{interface}_i} \times P_{\text{vulnerabil
 
 - **集群管理模型**：集中式、分布式、混合集群
 - **P2P 网络模型**：纯 P2P、混合 P2P、结构化 P2P
-- **服务发现模型**：客户端发现、服务端发现、服务注册表
+- **服务发现模型**：客户端发现、服务端发现、服务注册表、Service Mesh 自动服务发
+  现
 - **一致性模型**：强一致性、最终一致性、因果一致性
 - **共识算法**：Raft、Paxos、Gossip
-- **负载均衡模型**：集中式、分布式、客户端负载均衡
+- **负载均衡模型**：集中式、分布式、客户端负载均衡、Service Mesh L7 负载均衡
 
 **数学模型**：
 

@@ -724,12 +724,13 @@ $Impl_1 \equiv Impl_2$（通过相同接口）。
 
 **插件机制示例**：
 
-| 系统           | 插件机制      | 插件示例                     |
-| -------------- | ------------- | ---------------------------- |
-| **Kubernetes** | Controller    | HPA、VPA、Cluster Autoscaler |
-| **WasmEdge**   | Plugin        | WASI-NN、GPU Plugin          |
-| **CNI**        | CNI Plugin    | flannel、Calico、Cilium      |
-| **OPA**        | Policy Plugin | Gatekeeper、Kyverno          |
+| 系统             | 插件机制          | 插件示例                      |
+| ---------------- | ----------------- | ----------------------------- |
+| **Kubernetes**   | Controller        | HPA、VPA、Cluster Autoscaler  |
+| **WasmEdge**     | Plugin            | WASI-NN、GPU Plugin           |
+| **CNI**          | CNI Plugin        | flannel、Calico、Cilium       |
+| **OPA**          | Policy Plugin     | Gatekeeper、Kyverno           |
+| **Service Mesh** | Envoy Wasm Plugin | Wasm 插件热加载、流量治理插件 |
 
 **形式化定义**：
 
@@ -747,12 +748,13 @@ $System = Base + \sum Plug_i$。
 
 **模块化设计层次**：
 
-| 层次           | 模块                     | 职责       | 接口           |
-| -------------- | ------------------------ | ---------- | -------------- |
-| **应用层**     | Pod、Service、Deployment | 应用管理   | Kubernetes API |
-| **编排层**     | Controller、Scheduler    | 编排逻辑   | Controller API |
-| **运行时层**   | CRI、RuntimeClass        | 运行时管理 | CRI API        |
-| **基础设施层** | CNI、CSI                 | 基础设施   | CNI/CSI API    |
+| 层次           | 模块                           | 职责           | 接口             |
+| -------------- | ------------------------------ | -------------- | ---------------- |
+| **应用层**     | Pod、Service、Deployment       | 应用管理       | Kubernetes API   |
+| **编排层**     | Controller、Scheduler          | 编排逻辑       | Controller API   |
+| **通信层**     | Service Mesh（Istiod/Linkerd） | 服务间通信治理 | Service Mesh API |
+| **运行时层**   | CRI、RuntimeClass              | 运行时管理     | CRI API          |
+| **基础设施层** | CNI、CSI                       | 基础设施       | CNI/CSI API      |
 
 **形式化定义**：
 
@@ -786,6 +788,10 @@ $System = \sum M_i$（模块独立）。
 
 **拓扑定理 07.17**：Kubernetes 控制平面采用星型拓扑，数据平面采用网状拓扑。
 
+**Service Mesh 拓扑定理 07.17.1**：Service Mesh 数据平面采用网状拓扑，每个服务实
+例通过 Sidecar 或节点代理相互连接，实现服务间直接通信，即
+$G_{SM} = (V_{Service}, E_{Mesh})$，其中 $E_{Mesh}$ 表示服务间的网状连接。
+
 ### 07.6.2 路由协议
 
 **路由协议分类**：
@@ -808,12 +814,13 @@ $System = \sum M_i$（模块独立）。
 
 **负载均衡算法**：
 
-| 算法                     | 定义     | 特点     | 应用场景   |
-| ------------------------ | -------- | -------- | ---------- |
-| **Round Robin**          | 轮询     | 简单     | 无状态服务 |
-| **Least Connections**    | 最少连接 | 均衡负载 | 长连接服务 |
-| **IP Hash**              | IP 哈希  | 会话保持 | 有状态服务 |
-| **Weighted Round Robin** | 加权轮询 | 性能差异 | 异构节点   |
+| 算法                     | 定义             | 特点              | 应用场景   |
+| ------------------------ | ---------------- | ----------------- | ---------- |
+| **Round Robin**          | 轮询             | 简单              | 无状态服务 |
+| **Least Connections**    | 最少连接         | 均衡负载          | 长连接服务 |
+| **IP Hash**              | IP 哈希          | 会话保持          | 有状态服务 |
+| **Weighted Round Robin** | 加权轮询         | 性能差异          | 异构节点   |
+| **Service Mesh LB**      | 服务网格负载均衡 | 统一管理、L7 路由 | 微服务架构 |
 
 **形式化定义**：
 
@@ -822,26 +829,42 @@ $System = \sum M_i$（模块独立）。
 - $S$ = 服务器集合
 - $A$ = 算法
 
+**Service Mesh 负载均衡增强**：
+
+设 Service Mesh 负载均衡为 $LB_{SM}(S, A, P)$，其中：
+
+- $S$ = 服务器集合
+- $A$ = 算法（Round Robin、Least Connections、Consistent Hashing 等）
+- $P$ = 策略（路由规则、灰度发布、熔断等）
+
 **负载均衡定理 07.19**：根据服务类型选择合适的负载均衡算法，无状态服务选择 Round
 Robin，有状态服务选择 IP Hash。
+
+**Service Mesh 负载均衡定理 07.19.1**：Service Mesh 提供统一的负载均衡和流量管理
+，支持 L4/L7 负载均衡，增强负载均衡能力，即
+$LB_{SM}(S, A, P) = LB(S, A) + TrafficManagement(P)$。
 
 ### 07.6.4 服务发现
 
 **服务发现机制**：
 
-| 机制                   | 定义           | 特点   | 应用场景     |
-| ---------------------- | -------------- | ------ | ------------ |
-| **DNS**                | 域名解析       | 简单   | 标准服务发现 |
-| **Consul**             | 分布式服务发现 | 高可用 | 大规模集群   |
-| **etcd**               | 键值存储       | 强一致 | Kubernetes   |
-| **Kubernetes Service** | 服务抽象       | 内置   | Kubernetes   |
+| 机制                   | 定义             | 特点       | 应用场景     |
+| ---------------------- | ---------------- | ---------- | ------------ |
+| **DNS**                | 域名解析         | 简单       | 标准服务发现 |
+| **Consul**             | 分布式服务发现   | 高可用     | 大规模集群   |
+| **etcd**               | 键值存储         | 强一致     | Kubernetes   |
+| **Kubernetes Service** | 服务抽象         | 内置       | Kubernetes   |
+| **Service Mesh**       | 服务网格服务发现 | 自动、透明 | 微服务架构   |
 
 **形式化定义**：
 
-设服务发现为 $SD = \{DNS, Consul, etcd, K8s Service\}$。
+设服务发现为 $SD = \{DNS, Consul, etcd, K8s Service, ServiceMesh\}$。
 
 **服务发现定理 07.20**：Kubernetes 使用 Service 实现服务发现，通过 DNS 或环境变
 量暴露服务。
+
+**Service Mesh 服务发现定理 07.20.1**：Service Mesh 自动发现和注册服务，提供透明
+的服务发现，即 $SD_{SM} = SD_{K8s} + AutoDiscovery + TransparentProxy$。
 
 ## 07.7 形式化模型
 

@@ -71,20 +71,20 @@ $$\text{云原生技术栈} = \{ \mathbf{E}, \mathbf{R}, \mathbf{A}, \mathbf{S},
 
 ### 12 维原子概念向量
 
-| 编号 | 符号  | 概念                        | 2025 代表实例                    |
-| ---- | ----- | --------------------------- | -------------------------------- |
-| e₁   | **I** | Image 镜像                  | `yourhub/app:v1.2.0@sha256:abc`  |
-| e₂   | **C** | Container 容器运行时实例    | `containerd cri-container`       |
-| e₃   | **Q** | Quota 配额                  | `ResourceQuota/LimitRange`       |
-| e₄   | **R** | RuntimeTransform 运行时切换 | `runc ↔ crun ↔ wasm`             |
-| e₅   | **M** | Monitor 观测                | `Prometheus + OTEL`              |
-| e₆   | **V** | VersionUpgrade 版本变更     | `Git → Flux → RollingUpdate`     |
-| e₇   | **L** | LoadBalance 负载均衡        | `Cilium L4/L7 + Envoy Wasm`      |
-| e₈   | **S** | Scale 扩缩容                | `HPA/VPA/CA/KEDA`                |
-| e₉   | **B** | BackupRestore 灾备          | `Velero + VolumeSnapshot`        |
-| e₁₀  | **P** | Policy 策略                 | `OPA/Gatekeeper + OPA-Wasm`      |
-| e₁₁  | **T** | Tenant 隔离                 | `Capsule/HNC/Cluster-API-Nested` |
-| e₁₂  | **Θ** | AI-Parameter 可学习参数     | `KEDA-AI/Fluid-AI/Volcano-AI`    |
+| 编号 | 符号  | 概念                        | 2025 代表实例                              |
+| ---- | ----- | --------------------------- | ------------------------------------------ |
+| e₁   | **I** | Image 镜像                  | `yourhub/app:v1.2.0@sha256:abc`            |
+| e₂   | **C** | Container 容器运行时实例    | `containerd cri-container`                 |
+| e₃   | **Q** | Quota 配额                  | `ResourceQuota/LimitRange`                 |
+| e₄   | **R** | RuntimeTransform 运行时切换 | `runc ↔ crun ↔ wasm`                       |
+| e₅   | **M** | Monitor 观测                | `Prometheus + OTEL`                        |
+| e₆   | **V** | VersionUpgrade 版本变更     | `Git → Flux → RollingUpdate`               |
+| e₇   | **L** | LoadBalance 负载均衡        | `Cilium L4/L7 + Envoy Wasm + Service Mesh` |
+| e₈   | **S** | Scale 扩缩容                | `HPA/VPA/CA/KEDA`                          |
+| e₉   | **B** | BackupRestore 灾备          | `Velero + VolumeSnapshot`                  |
+| e₁₀  | **P** | Policy 策略                 | `OPA/Gatekeeper + OPA-Wasm`                |
+| e₁₁  | **T** | Tenant 隔离                 | `Capsule/HNC/Cluster-API-Nested`           |
+| e₁₂  | **Θ** | AI-Parameter 可学习参数     | `KEDA-AI/Fluid-AI/Volcano-AI`              |
 
 ### 6 维场景向量
 
@@ -92,7 +92,13 @@ $$\mathbf{S} = [\text{本地开发}, \text{CI/测试}, \text{在线生产}, \tex
 
 ### 技术链序列
 
-$$\text{技术链} = \text{Docker} \rightarrow \text{K8s} \rightarrow \text{K3s} \rightarrow \text{WasmEdge} \rightarrow \text{OPA} \rightarrow \text{多租户}$$
+$$\text{技术链} = \text{Docker} \rightarrow \text{K8s} \rightarrow \text{K3s} \rightarrow \text{WasmEdge} \rightarrow \text{Service Mesh} \rightarrow \text{OPA} \rightarrow \text{多租户}$$
+
+**技术链增强**：
+
+- **Service Mesh**：作为 K8s/K3s 的增强层，提供服务间通信治理、零信任安全、可观
+  测性
+- **增强效果**：负载均衡（L）概念成熟度在所有场景下提升 0.2-0.3
 
 ## 参考
 

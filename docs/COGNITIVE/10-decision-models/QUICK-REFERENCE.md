@@ -153,19 +153,19 @@ else:
 
 ## 🎯 常见场景快速决策
 
-| 场景                    | 设备访问           | 内核特性         | 推荐方案                 | 理由                               |
-| ----------------------- | ------------------ | ---------------- | ------------------------ | ---------------------------------- |
-| **边缘计算**            | 无需求             | 无需求           | WasmEdge + K3s           | 资源受限，低延迟                   |
-| **Serverless**          | 无需求             | 无需求           | WasmEdge + K3s           | 极速启动，按需计费                 |
-| **企业应用**            | USB/PCI            | 无需求           | VM + K8s                 | 设备访问，强隔离                   |
-| **微服务**              | 无需求             | epoll/io_uring   | Container + K8s          | 内核特性，标准化                   |
-| **高并发网络**          | 无需求             | epoll（必需）    | Container + K8s          | 直接 epoll，低延迟                 |
-| **高性能数据库**        | 无需求             | io_uring（必需） | Container + K8s          | 直接 io_uring，高吞吐              |
-| **USB 设备应用**        | USB（必需）        | 无需求           | 半虚拟化 + K8s           | VirtIO-USB，高性能                 |
-| **AI 推理（GPU）**      | GPU（直通）        | 无需求           | Container + K8s + NVIDIA | NVIDIA Container Toolkit，性能>98% |
-| **深度学习训练（GPU）** | GPU（直通）        | 无需求           | VM + K8s                 | GPU 完全直通，多 OS 支持，性能>95% |
-| **多租户 GPU 平台**     | GPU（vGPU/SR-IOV） | 无需求           | VM + K8s                 | GPU 虚拟化，资源共享               |
-| **图形渲染（GPU）**     | GPU（直通）        | 无需求           | VM + K8s                 | GPU 完全直通，多 OS 支持           |
+| 场景                    | 设备访问           | 内核特性         | 推荐方案                       | 理由                                 |
+| ----------------------- | ------------------ | ---------------- | ------------------------------ | ------------------------------------ |
+| **边缘计算**            | 无需求             | 无需求           | WasmEdge + K3s                 | 资源受限，低延迟                     |
+| **Serverless**          | 无需求             | 无需求           | WasmEdge + K3s                 | 极速启动，按需计费                   |
+| **企业应用**            | USB/PCI            | 无需求           | VM + K8s                       | 设备访问，强隔离                     |
+| **微服务架构**          | 无需求             | epoll/io_uring   | Container + K8s + Service Mesh | 内核特性、服务间通信治理、零信任安全 |
+| **高并发网络**          | 无需求             | epoll（必需）    | Container + K8s                | 直接 epoll，低延迟                   |
+| **高性能数据库**        | 无需求             | io_uring（必需） | Container + K8s                | 直接 io_uring，高吞吐                |
+| **USB 设备应用**        | USB（必需）        | 无需求           | 半虚拟化 + K8s                 | VirtIO-USB，高性能                   |
+| **AI 推理（GPU）**      | GPU（直通）        | 无需求           | Container + K8s + NVIDIA       | NVIDIA Container Toolkit，性能>98%   |
+| **深度学习训练（GPU）** | GPU（直通）        | 无需求           | VM + K8s                       | GPU 完全直通，多 OS 支持，性能>95%   |
+| **多租户 GPU 平台**     | GPU（vGPU/SR-IOV） | 无需求           | VM + K8s                       | GPU 虚拟化，资源共享                 |
+| **图形渲染（GPU）**     | GPU（直通）        | 无需求           | VM + K8s                       | GPU 完全直通，多 OS 支持             |
 
 ---
 

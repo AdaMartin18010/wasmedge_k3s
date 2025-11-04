@@ -100,9 +100,14 @@ $$
 #### e₇: LoadBalance（负载均衡）
 
 - **定义**：流量分发与路由，支持 L4/L7 负载均衡
-- **2025 实例**：`Cilium L4/L7 + Envoy Wasm`
-- **特性**：流量分发、路由规则、Wasm 插件
-- **相关技术**：Cilium、Envoy、Istio
+- **2025 实例**：`Cilium L4/L7 + Envoy Wasm + Service Mesh`
+- **特性**：流量分发、路由规则、Wasm 插件、服务网格
+- **相关技术**：Cilium、Envoy、Istio、Linkerd、Service Mesh
+- **Service Mesh 关联**：
+  - **流量治理**：Service Mesh 提供统一的流量管理（负载均衡、路由、灰度发布）
+  - **零信任安全**：Service Mesh 提供自动 mTLS 和服务间认证
+  - **可观测性**：Service Mesh 自动生成 Trace/Metric，无需应用埋点
+  - **多语言支持**：Service Mesh 与语言无关，统一治理多语言服务
 
 #### e₈: Scale（扩缩容）
 

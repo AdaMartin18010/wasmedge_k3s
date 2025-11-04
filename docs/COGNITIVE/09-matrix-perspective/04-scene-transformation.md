@@ -127,6 +127,15 @@ $$\text{Adapt}(e_i, s_j, s_k) = \alpha \cdot \min(A^{(\text{mat})}_{i,j}, A^{(\t
 | R    | Prod     | Serverless/AI | 1.0    | WasmEdge 在 Serverless 适配完美 |
 | R    | Edge/IoT | Serverless/AI | 0.95   | 两者都使用 WasmEdge，适配度高   |
 
+**负载均衡（L）的场景适配**：
+
+| 概念             | 从场景 | 到场景      | 适配度 | 说明                                  |
+| ---------------- | ------ | ----------- | ------ | ------------------------------------- |
+| L                | Prod   | Prod        | 1.0    | Service Mesh 在生产环境适配完美       |
+| L                | Dev    | Prod        | 0.8    | Service Mesh 提供统一的流量管理       |
+| L                | Prod   | MultiTenant | 0.95   | Service Mesh 支持多租户流量隔离       |
+| L + Service Mesh | Prod   | Prod        | 1.0    | Service Mesh 增强后负载均衡成熟度提升 |
+
 ## 09.4.4 场景转换规则
 
 ### 规则 1：场景依赖规则

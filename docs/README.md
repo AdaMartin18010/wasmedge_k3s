@@ -32,13 +32,32 @@
 - `COGNITIVE/08-category-theory/` - 范畴论视角
 - `COGNITIVE/09-matrix-perspective/` - 矩阵力学模型
 
+#### 2. 🏗️ 架构视图文档（Architecture View Documents）
+
+**定位**：从软件架构的视角系统梳理虚拟化、容器化、沙盒化以及 Service Mesh、OPA
+等现代云原生架构技术。
+
+**特点**：
+
+- 从**架构拆解与组合**的视角理解技术
+- 提供**多视角架构视图**（虚拟化、容器化、沙盒化、Service Mesh）
+- 包含**分层架构模型**、**组合模式**、**案例研究**
+
+**主要文档**：
+
+- `ARCHITECTURE/01-views/` - 多视角架构视图
+- `ARCHITECTURE/02-layers/` - 分层架构模型
+- `ARCHITECTURE/03-composition/` - 组合模式与实践
+- `ARCHITECTURE/05-trends-2025/` - 2025 年技术趋势
+- `ARCHITECTURE/07-case-studies/` - 案例研究
+
 **适用场景**：
 
 - 快速建立技术栈的认知框架
 - 理解技术演进的内在逻辑
 - 进行技术选型和架构决策
 
-#### 2. 📚 技术参考文档（Technical Reference Documents）
+#### 3. 📚 技术参考文档（Technical Reference Documents）
 
 **定位**：提供详细的技术规格、接口定义和实践指南，作为认知模型的技术支撑。
 
@@ -66,21 +85,24 @@
 - 实施技术方案
 - 故障排查和性能优化
 
-### 🎯 如何使用两类文档
+### 🎯 如何使用三类文档
 
 **新手推荐路径**：
 
 1. 先阅读**认知模型文档**（如 `ai_view.md`）建立整体认知框架
-2. 再根据需要查阅**技术参考文档**深入学习具体技术
+2. 再阅读**架构视图文档**（如 `ARCHITECTURE/`）理解架构设计视角
+3. 最后查阅**技术参考文档**深入学习具体技术
 
 **按需查阅**：
 
 - 需要**理解理念**和**演进逻辑** → 查阅认知模型文档
+- 需要**架构设计**和**组合模式** → 查阅架构视图文档
 - 需要**技术细节**和**实践指导** → 查阅技术参考文档
 
-**两类文档的关系**：
+**三类文档的关系**：
 
 - 认知模型文档提供**"为什么"**（Why）和**"是什么"**（What）
+- 架构视图文档提供**"如何设计"**（How to Design）和**"架构模式"**（Patterns）
 - 技术参考文档提供**"怎么做"**（How）和**"具体细节"**（Details）
 
 ---
@@ -92,8 +114,9 @@
 1. **[总览](COGNITIVE/01-overview/overview.md)** - 了解技术栈全貌和核心理念
 2. **[认知图谱](COGNITIVE/00-knowledge-map/knowledge-map.md)** - 快速理解知识结
    构和学习路径
-3. **[理念层](COGNITIVE/02-principles/principles.md)** - 理解云原生核心思想
-4. **[Docker 基础](TECHNICAL/00-docker/docker.md)** - 掌握容器技术基础
+3. **[架构视图](ARCHITECTURE/INDEX.md)** - 理解架构设计的多视角
+4. **[理念层](COGNITIVE/02-principles/principles.md)** - 理解云原生核心思想
+5. **[Docker 基础](TECHNICAL/00-docker/docker.md)** - 掌握容器技术基础
 
 ### 进阶学习
 
@@ -167,6 +190,8 @@
   分析方法
 - **[09. 矩阵视角](COGNITIVE/09-matrix-perspective/README.md)** - 云原生技术栈的
   矩阵力学
+- **[11. 代数结构视角](COGNITIVE/11-algebraic-structure/README.md)** - 算子理论
+  与代数结构
 - **[10. 技术决策模型](COGNITIVE/10-decision-models/decision-models.md)** - 技术
   选型决策框架
 - **[10. 快速参考指南](COGNITIVE/10-decision-models/QUICK-REFERENCE.md)** - 设备
@@ -226,7 +251,7 @@
 | **一致性检查** | [10. 一致性检查报告](COGNITIVE/10-decision-models/CONSISTENCY-REPORT.md)      | 与 Wikipedia 标准对齐    |
 | **安装部署**   | [10. 安装部署](TECHNICAL/10-installation/installation.md)                     | 快速上手各技术           |
 | **故障排查**   | [11. 故障排查](TECHNICAL/11-troubleshooting/troubleshooting.md)               | 解决常见问题             |
-| **性能优化**   | [14. 性能基准](COGNITIVE/04-benchmarks/benchmarks.md)                         | 了解性能基线             |
+| **性能优化**   | [04. 性能基准](COGNITIVE/04-benchmarks/benchmarks.md)                         | 了解性能基线             |
 | **安全合规**   | [13. 安全合规](TECHNICAL/09-security-compliance/security-compliance.md)       | 安全最佳实践             |
 
 ### 按角色选择文档
@@ -291,7 +316,7 @@
 
 ### 技术规格
 
-- [网络技术规格](TECHNICAL/21-network-stack/network-stack.md) -
+- [网络技术规格](TECHNICAL/12-network-stack/network-stack.md) -
   CNI、Service、Ingress
 - [存储技术规格](TECHNICAL/15-storage-stack/storage-stack.md) - CSI、PV/PVC
 - [监控与可观测性](TECHNICAL/16-observability/observability.md) -

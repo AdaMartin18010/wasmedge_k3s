@@ -39,7 +39,8 @@
 │   ├── README.md                # 案例概述
 │   ├── 01-edge-computing.md     # 边缘计算平台案例
 │   ├── 02-serverless.md        # Serverless函数服务案例
-│   └── 03-enterprise.md        # 企业级多租户平台案例
+│   ├── 03-enterprise.md        # 企业级多租户平台案例
+│   └── 04-service-mesh.md     # 服务网格架构案例
 │
 ├── 04-formalization/            # 形式化模型
 │   ├── README.md                # 形式化模型概述

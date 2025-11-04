@@ -12,19 +12,19 @@
 | 01   | 总览                | [01-overview](COGNITIVE/01-overview/overview.md)                                                 | 技术栈定位和决策树                 | 导航 |
 | 02   | 理念层              | [02-principles](COGNITIVE/02-principles/principles.md)                                           | 云原生核心理念                     | 理念 |
 | 03   | 架构与对象模型      | [03-architecture](COGNITIVE/03-architecture/architecture.md)                                     | 系统架构设计                       | 架构 |
-| 04   | Docker              | [04-docker](TECHNICAL/00-docker/docker.md)                                                       | Docker 技术规范                    | 技术 |
-| 05   | Kubernetes          | [05-kubernetes](TECHNICAL/01-kubernetes/kubernetes.md)                                           | K8s 架构与实践                     | 技术 |
-| 06   | K3s                 | [06-k3s](TECHNICAL/02-k3s/k3s.md)                                                                | K3s 轻量级架构                     | 技术 |
-| 07   | WasmEdge            | [07-wasm-edge](TECHNICAL/03-wasm-edge/wasmedge.md)                                               | WasmEdge 集成指南                  | 技术 |
-| 08   | 编排运行时          | [08-orchestration-runtime](TECHNICAL/04-orchestration-runtime/orchestration-runtime.md)          | CRI 与 RuntimeClass                | 技术 |
-| 09   | OCI 供应链          | [09-oci-supply-chain](TECHNICAL/05-oci-supply-chain/oci-supply-chain.md)                         | OCI 与供应链安全                   | 安全 |
-| 10   | OPA 策略即代码      | [10-policy-opa](TECHNICAL/06-policy-opa/policy-opa.md)                                           | OPA 策略即代码                     | 技术 |
-| 11   | 边缘 Serverless     | [11-edge-serverless](TECHNICAL/07-edge-serverless/edge-serverless.md)                            | 边缘与 Serverless                  | 场景 |
-| 12   | AI 推理             | [12-ai-inference](TECHNICAL/08-ai-inference/ai-inference.md)                                     | AI 推理应用                        | 场景 |
-| 13   | 安全合规            | [13-security-compliance](TECHNICAL/09-security-compliance/security-compliance.md)                | 安全与合规最佳实践                 | 安全 |
-| 14   | 性能基准            | [14-benchmarks](COGNITIVE/04-benchmarks/benchmarks.md)                                           | 性能基线                           | 实践 |
-| 15   | 安装部署            | [15-installation](TECHNICAL/10-installation/installation.md)                                     | 安装和最小示例                     | 实践 |
-| 16   | 故障排查            | [16-troubleshooting](TECHNICAL/11-troubleshooting/troubleshooting.md)                            | 故障排查                           | 实践 |
+| 04   | Docker              | [00-docker](TECHNICAL/00-docker/docker.md)                                                       | Docker 技术规范                    | 技术 |
+| 05   | Kubernetes          | [01-kubernetes](TECHNICAL/01-kubernetes/kubernetes.md)                                           | K8s 架构与实践                     | 技术 |
+| 06   | K3s                 | [02-k3s](TECHNICAL/02-k3s/k3s.md)                                                                | K3s 轻量级架构                     | 技术 |
+| 07   | WasmEdge            | [03-wasm-edge](TECHNICAL/03-wasm-edge/wasmedge.md)                                               | WasmEdge 集成指南                  | 技术 |
+| 08   | 编排运行时          | [04-orchestration-runtime](TECHNICAL/04-orchestration-runtime/orchestration-runtime.md)          | CRI 与 RuntimeClass                | 技术 |
+| 09   | OCI 供应链          | [05-oci-supply-chain](TECHNICAL/05-oci-supply-chain/oci-supply-chain.md)                         | OCI 与供应链安全                   | 安全 |
+| 10   | OPA 策略即代码      | [06-policy-opa](TECHNICAL/06-policy-opa/policy-opa.md)                                           | OPA 策略即代码                     | 技术 |
+| 11   | 边缘 Serverless     | [07-edge-serverless](TECHNICAL/07-edge-serverless/edge-serverless.md)                            | 边缘与 Serverless                  | 场景 |
+| 12   | AI 推理             | [08-ai-inference](TECHNICAL/08-ai-inference/ai-inference.md)                                     | AI 推理应用                        | 场景 |
+| 13   | 安全合规            | [09-security-compliance](TECHNICAL/09-security-compliance/security-compliance.md)                | 安全与合规最佳实践                 | 安全 |
+| 14   | 性能基准            | [04-benchmarks](COGNITIVE/04-benchmarks/benchmarks.md)                                           | 性能基线                           | 实践 |
+| 15   | 安装部署            | [10-installation](TECHNICAL/10-installation/installation.md)                                     | 安装和最小示例                     | 实践 |
+| 16   | 故障排查            | [11-troubleshooting](TECHNICAL/11-troubleshooting/troubleshooting.md)                            | 故障排查                           | 实践 |
 | 17   | 全局架构设计        | [17-architecture-design](COGNITIVE/05-architecture-design/architecture-design.md)                | 技术组合和架构决策                 | 设计 |
 | 18   | 问题解决方案        | [18-problem-solution-matrix](COGNITIVE/06-problem-solution-matrix/problem-solution-matrix.md)    | 技术问题分类和解决                 | 设计 |
 | 19   | 形式化理论          | [19-formal-theory](COGNITIVE/07-formal-theory/formal-theory.md)                                  | 结构同构和关系等价                 | 理论 |
@@ -47,6 +47,7 @@
 | 36   | 文档体系分析与改进  | [36-analysis-improvement](TECHNICAL/26-analysis-improvement/analysis-improvement.md)             | 批判性分析和改进计划               | 参考 |
 | 37   | 2025 年技术趋势汇总 | [37-2025-trends](TECHNICAL/27-2025-trends/2025-trends.md)                                        | 2025 年最新技术趋势和版本信息      | 参考 |
 | 38   | 矩阵视角            | [38-matrix-perspective](COGNITIVE/09-matrix-perspective/README.md)                               | 云原生技术栈的矩阵力学             | 理论 |
+| 39   | 代数结构视角        | [39-algebraic-structure](COGNITIVE/11-algebraic-structure/README.md)                             | 算子理论与代数结构                 | 理论 |
 
 **说明**：文档编号 28 为架构框架文档（多维度架构体系与技术规范）。文档编号 29-30
 为可选文档（服务网格、多集群管理），34 为可选文档（成本优化）。37 为趋势文档
@@ -97,7 +98,7 @@ COGNITIVE/09-matrix-perspective 目录下）。
 
 ### 实践类（5 个）
 
-- [14. 性能基准](COGNITIVE/04-benchmarks/benchmarks.md) - 性能指标和基准测试
+- [04. 性能基准](COGNITIVE/04-benchmarks/benchmarks.md) - 性能指标和基准测试
 - [15. 安装部署](TECHNICAL/10-installation/installation.md) - 安装和最小示例
 - [16. 故障排查](TECHNICAL/11-troubleshooting/troubleshooting.md) - 故障排查
 - [33. 开发和调试工具](TECHNICAL/23-dev-tools/dev-tools.md) - 开发和调试工具规范
@@ -111,7 +112,7 @@ COGNITIVE/09-matrix-perspective 目录下）。
 - [18. 问题解决方案](COGNITIVE/06-problem-solution-matrix/problem-solution-matrix.md) -
   技术问题分类和解决
 
-### 理论类（3 个）
+### 理论类（4 个）
 
 - [19. 形式化理论](COGNITIVE/07-formal-theory/formal-theory.md) - 结构同构和关系
   等价
@@ -119,6 +120,8 @@ COGNITIVE/09-matrix-perspective 目录下）。
   方法
 - [38. 矩阵视角](COGNITIVE/09-matrix-perspective/README.md) - 云原生技术栈的矩阵
   力学
+- [39. 代数结构视角](COGNITIVE/11-algebraic-structure/README.md) - 算子理论与代
+  数结构
 
 ### 规格类（9 个）
 
@@ -241,7 +244,7 @@ graph TB
 
 #### 性能优化
 
-1. [14. 性能基准](COGNITIVE/04-benchmarks/benchmarks.md) - 性能基线
+1. [04. 性能基准](COGNITIVE/04-benchmarks/benchmarks.md) - 性能基线
 
 #### 安全合规
 

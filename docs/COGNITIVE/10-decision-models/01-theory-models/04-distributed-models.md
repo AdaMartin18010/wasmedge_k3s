@@ -921,11 +921,16 @@ $$R = O(\log |V|)$$
 
 - **Kubernetes Ingress**：基于 Ingress 的负载均衡
 - **Istio Gateway**：服务网格负载均衡
+- **Service Mesh（Istio/Linkerd/Cilium）**：服务网格分布式负载均衡
 
 **在容器化中的应用**：
 
 - **Ingress Controller**：分布式 Ingress Controller
 - **Istio Gateway**：服务网格网关
+- **Service Mesh**：
+  - **数据平面**：每个服务实例通过 Sidecar/节点代理进行负载均衡
+  - **控制平面**：统一管理负载均衡策略和路由规则
+  - **L7 负载均衡**：支持 HTTP/gRPC 等 L7 协议的负载均衡和流量治理
 
 ### 04.7.3 客户端负载均衡
 
@@ -1020,6 +1025,11 @@ $$L_{\text{CH}}(k) = \arg\min_{j} \text{hash}(k, j)$$
 - **Kubernetes Service**：基于 iptables/IPVS 的负载均衡（轮询、最少连接等）
 - **Ingress Controller**：基于 Nginx/Envoy 的负载均衡（支持多种算法）
 - **K3s**：内置 Traefik Ingress，支持负载均衡（轮询、最少连接、一致性哈希等）
+- **Service Mesh**：
+  - **负载均衡算法**：支持轮询、加权轮询、最少连接、一致性哈希等算法
+  - **L7 负载均衡**：支持 HTTP/gRPC 等 L7 协议的负载均衡
+  - **智能路由**：基于流量特征的智能路由（如灰度发布、A/B 测试）
+  - **流量预测**：结合 Service Mesh 的流量数据，可以预测热点并优化负载均衡
 
 ---
 
@@ -1038,9 +1048,9 @@ $$L_{\text{CH}}(k) = \arg\min_{j} \text{hash}(k, j)$$
 
 2. 容器化（Container）:
    ├── 集群管理: Kubernetes、K3s（主从模型、混合集群模型）
-   ├── 服务发现: Service、CoreDNS、etcd（服务注册表模型）
+   ├── 服务发现: Service、CoreDNS、etcd（服务注册表模型）、Service Mesh（自动服务发现）
    ├── 一致性: etcd（Raft，强一致性）、Consul（Raft/Gossip）
-   └── 负载均衡: Service（iptables/IPVS，客户端负载均衡）、Ingress（分布式负载均衡）
+   └── 负载均衡: Service（iptables/IPVS，客户端负载均衡）、Ingress（分布式负载均衡）、Service Mesh（L7 负载均衡和流量治理）
 
 3. 沙盒化（Sandbox/Wasm）:
    ├── 集群管理: K3s（轻量集群，混合集群模型）
@@ -1058,6 +1068,7 @@ $$L_{\text{CH}}(k) = \arg\min_{j} \text{hash}(k, j)$$
 - **强一致性需求** → Raft 算法（etcd）
 - **最终一致性可接受** → Gossip 协议（Consul）
 - **负载均衡需求** → 集中式或分布式负载均衡（Service、Ingress）
+- **微服务架构** → Service Mesh（L7 负载均衡、流量治理、零信任安全）
 
 ---
 

@@ -526,8 +526,7 @@ EOF
 - **无法解析 DNS**：启用 `wasmedge_wasi_socket` 插件
 - **HPA 不触发**：改用 QPS 或自定义指标（KEDA）
 
-> 详细故障排查见
-> [16-troubleshooting/troubleshooting.md](../TECHNICAL/16-troubleshooting/troubleshooting.md)
+> 详细故障排查见 [11. 故障排查](../11-troubleshooting/troubleshooting.md)
 
 ## 10.10 参考
 

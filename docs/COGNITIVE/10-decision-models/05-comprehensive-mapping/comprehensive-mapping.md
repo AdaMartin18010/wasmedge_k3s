@@ -929,4 +929,4 @@ $$C_{\text{scale}} = C_{\text{startup}} + C_{\text{runtime}} \times T_{\text{sca
 
 ---
 
-**最后更新**：2025-01-XX **维护者**：项目团队
+**最后更新**：2025-11-03 **维护者**：项目团队

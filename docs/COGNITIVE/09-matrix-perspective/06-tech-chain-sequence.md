@@ -37,11 +37,27 @@ $$\mathbf{A}^{(1)}, \mathbf{A}^{(2)}, \mathbf{A}^{(3)}, \mathbf{A}^{(4)}, \mathb
 
 $$\text{Docker} \rightarrow \text{K8s} \rightarrow \text{K3s} \rightarrow \text{WasmEdge} \rightarrow \text{OPA} \rightarrow \text{MultiTenant}$$
 
+**技术链增强**：
+
+- **Service Mesh**：作为 K8s/K3s 的增强层，提供服务间通信治理、零信任安全、可观
+  测性
+- **适用场景**：微服务架构、多云环境、边缘计算
+- **技术选型**：Istio、Linkerd、Cilium Service Mesh
+
 **技术链跃迁**：
 
 $$\mathbf{A}^{(i \rightarrow j)} = \mathbf{A}^{(j)} \cdot \boldsymbol{\Theta} \cdot \mathbf{A}^{(i)T}$$
 
 其中 $\boldsymbol{\Theta}$ 是 AI 可学习参数矩阵，用于优化技术链跃迁。
+
+**Service Mesh 增强效果**：
+
+当技术链包含 Service Mesh 时，负载均衡（L）概念的成熟度在所有场景下提升
+0.2-0.3：
+
+- **流量治理**：统一的路由、灰度发布、A/B 测试
+- **零信任安全**：自动 mTLS、服务间认证、授权策略
+- **可观测性**：自动生成 Trace/Metric，无需应用埋点
 
 ## 09.6.2 Docker 矩阵
 

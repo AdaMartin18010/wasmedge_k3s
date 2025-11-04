@@ -727,6 +727,33 @@ graph TB
   权衡: 需要内核支持
 ```
 
+**场景 4：微服务架构**:
+
+**决策依据**：
+
+- ✅ 需要统一的服务间通信治理
+- ✅ 需要零信任安全（自动 mTLS）
+- ✅ 需要完整的可观测性（Trace/Metric）
+- ✅ 需要流量治理（路由、灰度发布）
+
+**决策思路**：
+
+```yaml
+网络方案选择:
+  CNI: Calico/Cilium（基础网络）
+  Service Mesh: Istio/Linkerd/Cilium Mesh（服务间通信）
+  原因:
+    - CNI 提供 Pod 间网络连通
+    - Service Mesh 提供 L7 流量治理和安全
+  权衡:
+    - Service Mesh 增加延迟（0.3-1ms）
+    - Service Mesh 增加资源占用（20-200MB/服务）
+  适用场景:
+    - 微服务架构（>50 个服务）
+    - 多云环境
+    - 需要统一治理
+```
+
 ## 03.8 存储抽象：CSI
 
 ### 03.8.1 CSI 的必要性
@@ -1121,7 +1148,15 @@ $$\text{Performance} = f(\text{Pod\_density}, \text{Network\_topology}, \text{Co
   if 小规模集群 (< 100): 选择 Flannel
   elif 大规模集群 (> 500): 选择 Calico 或 Cilium
   elif 安全要求高: 选择 Cilium（eBPF）
+  elif 微服务架构:
+    选择 Calico/Cilium + Service Mesh（Istio/Linkerd/Cilium Mesh）
   else: 选择 Flannel（默认）
+
+Service Mesh 选择决策:
+  if 微服务架构 (>50 服务) and 功能完整需求: 选择 Istio（Ambient 模式）
+  elif 微服务架构 and 轻量级需求: 选择 Linkerd
+  elif 微服务架构 and 高性能需求: 选择 Cilium Service Mesh
+  else: 无需 Service Mesh
 ```
 
 ## 03.14 形式化总结
@@ -1141,6 +1176,9 @@ $$A_K = \{\text{API Server} + \text{etcd}, \text{etcd}, \text{kubelet} + \text{C
 
 **K3s 架构**：
 $$A_{K3} = \{\text{k3s 二进制}, \text{sqlite}, \text{kubelet} + \text{内置组件}\}$$
+
+**Service Mesh 增强架构**：
+$$A_{SM} = A_K + \{\text{Istiod/Linkerd}, \text{Sidecar/Ambient}, \text{流量治理} + \text{安全} + \text{可观测性}\}$$
 
 ### 03.14.2 性能模型形式化
 

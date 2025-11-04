@@ -23,20 +23,20 @@
 
 $$\mathbf{E} = [e_1, e_2, \ldots, e_{12}]^T$$
 
-| 符号  | 概念             | 核心功能            |
-| ----- | ---------------- | ------------------- |
-| **I** | Image            | 不可变构建产物      |
-| **C** | Container        | 运行时隔离单元      |
-| **Q** | Quota            | 资源限制边界        |
-| **R** | RuntimeTransform | 运行时适配层        |
-| **M** | Monitor          | 可观测性基础设施    |
-| **V** | VersionUpgrade   | 版本演进机制        |
-| **L** | LoadBalance      | 流量分发与路由      |
-| **S** | Scale            | 弹性伸缩机制        |
-| **B** | BackupRestore    | 数据保护与恢复      |
-| **P** | Policy           | 策略即代码          |
-| **T** | Tenant           | 多租户隔离机制      |
-| **Θ** | AI-Parameter     | AI 参与的自适应参数 |
+| 符号  | 概念             | 核心功能                            |
+| ----- | ---------------- | ----------------------------------- |
+| **I** | Image            | 不可变构建产物                      |
+| **C** | Container        | 运行时隔离单元                      |
+| **Q** | Quota            | 资源限制边界                        |
+| **R** | RuntimeTransform | 运行时适配层                        |
+| **M** | Monitor          | 可观测性基础设施                    |
+| **V** | VersionUpgrade   | 版本演进机制                        |
+| **L** | LoadBalance      | 流量分发与路由（Service Mesh 增强） |
+| **S** | Scale            | 弹性伸缩机制                        |
+| **B** | BackupRestore    | 数据保护与恢复                      |
+| **P** | Policy           | 策略即代码                          |
+| **T** | Tenant           | 多租户隔离机制                      |
+| **Θ** | AI-Parameter     | AI 参与的自适应参数                 |
 
 **6 维场景向量**：
 
@@ -104,7 +104,13 @@ $$\mathbf{E}' = \mathbf{T}_{\text{op}} \cdot \mathbf{E}$$
 
 **技术链演进**：
 
-$$\text{Docker} \rightarrow \text{K8s} \rightarrow \text{K3s} \rightarrow \text{WasmEdge} \rightarrow \text{OPA} \rightarrow \text{MultiTenant}$$
+$$\text{Docker} \rightarrow \text{K8s} \rightarrow \text{K3s} \rightarrow \text{WasmEdge} \rightarrow \text{Service Mesh} \rightarrow \text{OPA} \rightarrow \text{MultiTenant}$$
+
+**技术链增强**：
+
+- **Service Mesh**：作为 K8s/K3s 的增强层，提供服务间通信治理、零信任安全、可观
+  测性
+- **增强效果**：负载均衡（L）概念成熟度在所有场景下提升 0.2-0.3
 
 **技术链跃迁矩阵**：
 
@@ -118,20 +124,20 @@ $$\boldsymbol{\Theta} = \text{diag}(\theta_1, \theta_2, \ldots, \theta_{12})$$
 
 **12 个可学习参数**：
 
-| 参数 | 概念  | 物理含义         | 2025 实现            |
-| ---- | ----- | ---------------- | -------------------- |
-| θ₁   | **I** | 镜像构建时长预测 | Docker BuildKit AI   |
-| θ₂   | **C** | 容器冷启动时长   | WasmEdge/crun AI     |
-| θ₃   | **Q** | 配额浪费率预测   | Volcano AI-Queue     |
-| θ₄   | **R** | 运行时切换失败率 | runwasi AI 健康分    |
-| θ₅   | **M** | 监测误报率       | Grafana LLM 异常检测 |
-| θ₆   | **V** | 升级回滚概率     | Flux-AI 自动审批     |
-| θ₇   | **L** | 负载均衡热点预测 | Cilium AI 拓扑       |
-| θ₈   | **S** | 扩缩容提前量     | KEDA AI 预测适配器   |
-| θ₉   | **B** | 灾备 RPO 预测    | Velero-AI 插件       |
-| θ₁₀  | **P** | 策略冲突概率     | OPA-AI 自动生成      |
-| θ₁₁  | **T** | 租户噪声干扰     | Capsule-AI 负载画像  |
-| θ₁₂  | **Θ** | AI 自误差        | Meta-ML 在线校正     |
+| 参数 | 概念  | 物理含义         | 2025 实现                              |
+| ---- | ----- | ---------------- | -------------------------------------- |
+| θ₁   | **I** | 镜像构建时长预测 | Docker BuildKit AI                     |
+| θ₂   | **C** | 容器冷启动时长   | WasmEdge/crun AI                       |
+| θ₃   | **Q** | 配额浪费率预测   | Volcano AI-Queue                       |
+| θ₄   | **R** | 运行时切换失败率 | runwasi AI 健康分                      |
+| θ₅   | **M** | 监测误报率       | Grafana LLM 异常检测                   |
+| θ₆   | **V** | 升级回滚概率     | Flux-AI 自动审批                       |
+| θ₇   | **L** | 负载均衡热点预测 | Cilium AI 拓扑 + Service Mesh 流量预测 |
+| θ₈   | **S** | 扩缩容提前量     | KEDA AI 预测适配器                     |
+| θ₉   | **B** | 灾备 RPO 预测    | Velero-AI 插件                         |
+| θ₁₀  | **P** | 策略冲突概率     | OPA-AI 自动生成                        |
+| θ₁₁  | **T** | 租户噪声干扰     | Capsule-AI 负载画像                    |
+| θ₁₂  | **Θ** | AI 自误差        | Meta-ML 在线校正                       |
 
 **学习机制**：
 
@@ -151,6 +157,7 @@ $$\boldsymbol{\Theta} \leftarrow \boldsymbol{\Theta} - \alpha \cdot \nabla_{\bol
 
 - **边缘/IoT**：K3s + WasmEdge（得分 9.2）
 - **Serverless/AI**：WasmEdge + KEDA（得分 9.8）
+- **微服务架构**：K8s + Service Mesh（得分 9.8）
 - **多租户**：K8s + Capsule（得分 10.0）
 
 ### 2. 技术链迁移规划
