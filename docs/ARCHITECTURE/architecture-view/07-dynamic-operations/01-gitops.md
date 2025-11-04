@@ -1,5 +1,18 @@
 # GitOps：持续交付的声明式范式
 
+## 目录
+
+- [1. 概述](#1-概述)
+- [2. GitOps 工作流](#2-gitops-工作流)
+- [3. ArgoCD](#3-argocd)
+- [4. Flux](#4-flux)
+- [5. GitOps 最佳实践](#5-gitops-最佳实践)
+- [6. GitOps 与 CI/CD 集成](#6-gitops-与-cicd-集成)
+- [7. 形式化定义](#7-形式化定义)
+- [8. 总结](#8-总结)
+
+---
+
 ## 1. 概述
 
 **GitOps** 是一种使用 Git 作为**单一可信源（Single Source of Truth）**的持续交付

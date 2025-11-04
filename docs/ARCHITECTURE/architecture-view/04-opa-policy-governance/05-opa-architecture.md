@@ -1,5 +1,46 @@
 # OPA 体系结构：范畴论视角
 
+## 📑 目录
+
+- [📑 目录](#-目录)
+- [1. 概述](#1-概述)
+  - [1.1 核心思想](#11-核心思想)
+- [2. OPA 体系结构](#2-opa-体系结构)
+  - [2.1 层次结构](#21-层次结构)
+  - [2.2 核心组件](#22-核心组件)
+- [3. PDP（Policy Decision Point）](#3-pdppolicy-decision-point)
+  - [3.1 PDP 定义](#31-pdp-定义)
+  - [3.2 PDP 功能](#32-pdp-功能)
+  - [3.3 PDP 接口](#33-pdp-接口)
+- [4. PEP（Policy Enforcement Point）](#4-peppolicy-enforcement-point)
+  - [4.1 PEP 定义](#41-pep-定义)
+  - [4.2 PEP 类型](#42-pep-类型)
+  - [4.3 PEP 流程](#43-pep-流程)
+- [5. OCP（OPA Control Plane）](#5-ocpopa-control-plane)
+  - [5.1 OCP 定义](#51-ocp-定义)
+  - [5.2 OCP 功能](#52-ocp-功能)
+  - [5.3 OCP API](#53-ocp-api)
+- [6. Bundle（策略包）](#6-bundle策略包)
+  - [6.1 Bundle 定义](#61-bundle-定义)
+  - [6.2 Bundle 结构](#62-bundle-结构)
+  - [6.3 Bundle 操作](#63-bundle-操作)
+- [7. Decision Log（决策日志）](#7-decision-log决策日志)
+  - [7.1 Decision Log 定义](#71-decision-log-定义)
+  - [7.2 Decision Log 格式](#72-decision-log-格式)
+  - [7.3 Decision Log 集成](#73-decision-log-集成)
+- [8. Discovery（发现）](#8-discovery发现)
+  - [8.1 Discovery 定义](#81-discovery-定义)
+  - [8.2 Discovery 配置](#82-discovery-配置)
+- [9. OPA 在层次模型中的定位](#9-opa-在层次模型中的定位)
+  - [9.1 各层中的 OPA 角色](#91-各层中的-opa-角色)
+- [10. 形式化定义](#10-形式化定义)
+  - [10.1 OPA 体系结构定义](#101-opa-体系结构定义)
+  - [10.2 决策流程定义](#102-决策流程定义)
+  - [10.3 Bundle 分发定义](#103-bundle-分发定义)
+- [11. 总结](#11-总结)
+
+---
+
 ## 1. 概述
 
 本文档从**范畴论视角**阐述 **OPA 体系结构**，包括 PDP、PEP、OCP 等核心组件。
