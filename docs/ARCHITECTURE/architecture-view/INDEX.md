@@ -1,5 +1,22 @@
 # 软件架构视角文档索引
 
+## 目录
+
+- [目录](#目录)
+- [📋 文档索引](#-文档索引)
+  - [1. 架构拆解与组合 (`01-decomposition-composition/`)](#1-架构拆解与组合-01-decomposition-composition)
+  - [2. 虚拟化容器化沙盒化 (`02-virtualization-containerization-sandboxing/`)](#2-虚拟化容器化沙盒化-02-virtualization-containerization-sandboxing)
+  - [3. 服务网格与网络服务网格 (`03-service-mesh-nsm/`)](#3-服务网格与网络服务网格-03-service-mesh-nsm)
+  - [4. OPA 策略治理 (`04-opa-policy-governance/`)](#4-opa-策略治理-04-opa-policy-governance)
+  - [5. 形式化论证 (`05-formal-proofs/`)](#5-形式化论证-05-formal-proofs)
+  - [6. 概念属性关系 (`06-concepts-properties-relations/`)](#6-概念属性关系-06-concepts-properties-relations)
+  - [7. 动态运维 (`07-dynamic-operations/`)](#7-动态运维-07-dynamic-operations)
+  - [8. 组合模式 (`08-composition-patterns/`)](#8-组合模式-08-composition-patterns)
+  - [9. 多视角分析 (`09-multi-perspectives/`)](#9-多视角分析-09-multi-perspectives)
+  - [10. 2025 年 11 月更新 (`10-november-2025-updates/`)](#10-2025-年-11-月更新-10-november-2025-updates)
+
+---
+
 ## 📋 文档索引
 
 ### 1. 架构拆解与组合 (`01-decomposition-composition/`)
