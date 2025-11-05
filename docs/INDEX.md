@@ -48,6 +48,7 @@
 | 37   | 2025 年技术趋势汇总 | [37-2025-trends](TECHNICAL/27-2025-trends/2025-trends.md)                                        | 2025 年最新技术趋势和版本信息      | 参考 |
 | 38   | 矩阵视角            | [38-matrix-perspective](COGNITIVE/09-matrix-perspective/README.md)                               | 云原生技术栈的矩阵力学             | 理论 |
 | 39   | 代数结构视角        | [39-algebraic-structure](COGNITIVE/11-algebraic-structure/README.md)                             | 算子理论与代数结构                 | 理论 |
+| 40   | 结构视角            | [40-structural-perspective](COGNITIVE/12-structural-perspective/README.md)                        | 计算结构、控制结构、信息结构（结构主义视角） | 理论 |
 
 **说明**：文档编号 28 为架构框架文档（多维度架构体系与技术规范）。文档编号 29-30
 为可选文档（服务网格、多集群管理），34 为可选文档（成本优化）。37 为趋势文档
@@ -120,7 +121,7 @@ COGNITIVE/09-matrix-perspective 目录下）。
 - [18. 问题解决方案](COGNITIVE/06-problem-solution-matrix/problem-solution-matrix.md) -
   技术问题分类和解决
 
-### 理论类（4 个）
+### 理论类（5 个）
 
 - [19. 形式化理论](COGNITIVE/07-formal-theory/formal-theory.md) - 结构同构和关系
   等价
@@ -130,6 +131,7 @@ COGNITIVE/09-matrix-perspective 目录下）。
   力学
 - [39. 代数结构视角](COGNITIVE/11-algebraic-structure/README.md) - 算子理论与代
   数结构
+- [40. 结构视角](COGNITIVE/12-structural-perspective/README.md) ⭐ - 计算结构、控制结构、信息结构（结构主义视角）
 
 ### 规格类（9 个）
 
@@ -201,6 +203,9 @@ graph TB
     R --> T[20-范畴论]
     S --> UU[38-矩阵视角]
     T --> UU
+    UU --> VV[39-代数结构]
+    UU --> WW[40-结构视角]
+    VV --> WW
 
     F --> U[21-网络规格]
     F --> V[24-存储规格]
@@ -343,6 +348,8 @@ graph TB
 - [19. 形式化理论](COGNITIVE/07-formal-theory/formal-theory.md)
 - [20. 范畴论视角](COGNITIVE/08-category-theory/category-theory.md)
 - [38. 矩阵视角](COGNITIVE/09-matrix-perspective/README.md)
+- [39. 代数结构视角](COGNITIVE/11-algebraic-structure/README.md)
+- [40. 结构视角](COGNITIVE/12-structural-perspective/README.md) ⭐
 
 **参考文档**：
 
@@ -394,11 +401,12 @@ graph TB
 
 ## 📊 文档统计
 
-- **总文档数**：36 个核心文档（含可选文档和分析文档）
+- **总文档数**：41 个核心文档（含可选文档和分析文档，新增结构视角）
 - **主题覆盖度**：98.2%（113/115 主题）
 - **技术规范覆盖度**：100%（27/27 规范）
 - **文档分类**：11 大类（导航、理念、架构、技术、安全、场景、实践、设计、理论、
   规格、参考）
+- **理论类文档**：5 个（形式化理论、范畴论视角、矩阵视角、代数结构视角、结构视角）
 
 ## 🔗 快速链接
 

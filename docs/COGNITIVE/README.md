@@ -36,13 +36,14 @@
 
 ### 理论与分析
 
-| 文档         | 路径                      | 核心内容               |
-| ------------ | ------------------------- | ---------------------- |
-| 形式化理论   | `07-formal-theory/`       | 结构同构和关系等价     |
-| 范畴论视角   | `08-category-theory/`     | 对象、态射与函子       |
-| 矩阵视角     | `09-matrix-perspective/`  | 矩阵力学模型           |
-| 代数结构视角 | `11-algebraic-structure/` | 算子理论与代数结构     |
-| 决策模型     | `10-decision-models/`     | 技术决策模型与架构选择 |
+| 文档         | 路径                         | 核心内容                                     |
+| ------------ | ---------------------------- | -------------------------------------------- |
+| 形式化理论   | `07-formal-theory/`          | 结构同构和关系等价                           |
+| 范畴论视角   | `08-category-theory/`        | 对象、态射与函子                             |
+| 矩阵视角     | `09-matrix-perspective/`     | 矩阵力学模型                                 |
+| 代数结构视角 | `11-algebraic-structure/`    | 算子理论与代数结构                           |
+| 结构视角     | `12-structural-perspective/` | 计算结构、控制结构、信息结构（结构主义视角） |
+| 决策模型     | `10-decision-models/`        | 技术决策模型与架构选择                       |
 
 ### 隔离栈理论实现
 
@@ -83,13 +84,15 @@
 1. **[范畴论视角](08-category-theory/category-theory.md)** - 探索对象、态射与函
    子
 2. **[矩阵视角](09-matrix-perspective/README.md)** - 理解矩阵力学模型
-3. **[问题解决方案](06-problem-solution-matrix/problem-solution-matrix.md)** -
+3. **[结构视角](12-structural-perspective/README.md)** ⭐ - 从结构主义视角理解计
+   算结构、控制结构、信息结构
+4. **[问题解决方案](06-problem-solution-matrix/problem-solution-matrix.md)** -
    掌握问题分类框架
-4. **[隔离模型](10-decision-models/01-theory-models/02-isolation-models.md)** -
+5. **[隔离模型](10-decision-models/01-theory-models/02-isolation-models.md)** -
    理解隔离层次理论模型
-5. **[隔离栈技术实现](../TECHNICAL/29-isolation-stack/isolation-stack.md)** - 掌
+6. **[隔离栈技术实现](../TECHNICAL/29-isolation-stack/isolation-stack.md)** - 掌
    握四层隔离栈技术实现和问题定位模型
-6. **[服务网格架构案例](10-decision-models/03-cases/04-service-mesh.md)** - 理解
+7. **[服务网格架构案例](10-decision-models/03-cases/04-service-mesh.md)** - 理解
    服务间通信治理和零信任安全场景的技术选择论证
 
 ## 4. 使用场景
@@ -125,11 +128,11 @@
 
 ## 5. 文档统计
 
-- **总文档数**：11 个核心认知模型文档
+- **总文档数**：12 个核心认知模型文档
 - **覆盖范围**：认知框架、架构设计、理论分析、性能评估
 - **文档类型**：认知模型文档（含部分混合型文档）
 
 ---
 
-**最后更新**：2025-11-03 **维护者**：项目团队 **参
+**最后更新**：2025-11-05 **维护者**：项目团队 **参
 考**：[文档类型说明](../META/DOCUMENT-TYPES.md)

@@ -2,11 +2,26 @@
 
 ## 📑 目录
 
+- [📑 目录](#-目录)
 - [12.2.1 文档概述](#1221-文档概述)
 - [12.2.2 计算结构（Computational Structure）](#1222-计算结构computational-structure)
+  - [核心问题](#核心问题)
+  - [类比](#类比)
+  - [核心特征](#核心特征)
+  - [典型实例](#典型实例)
 - [12.2.3 控制结构（Control Structure）](#1223-控制结构control-structure)
+  - [核心问题](#核心问题-1)
+  - [类比](#类比-1)
+  - [核心特征](#核心特征-1)
+  - [典型实例](#典型实例-1)
 - [12.2.4 信息结构（Information Structure）](#1224-信息结构information-structure)
+  - [核心问题](#核心问题-2)
+  - [类比](#类比-2)
+  - [核心特征](#核心特征-2)
+  - [典型实例](#典型实例-2)
 - [12.2.5 参考](#1225-参考)
+  - [相关文档](#相关文档)
+  - [学术参考](#学术参考)
 
 ---
 
@@ -19,6 +34,7 @@
 3. **[信息结构](03-information-structure.md)** - 拓扑/近似视角的信息结构
 
 每类结构都包含：
+
 - 核心特征
 - 典型实例
 - 形式化工具
@@ -86,7 +102,7 @@
 
 ### 核心问题
 
-**"信息如何被表示、近似、压缩与保护？"**
+**"信息如何被表示、近似、压缩与保护？"**:
 
 ### 类比
 
@@ -116,18 +132,19 @@
 
 ### 相关文档
 
-- **[结构主义基础理论](../01-foundation/README.md)** - 数学结构主义启示和三元结构框架
-- **[结构交互与复合](../03-structure-interaction/README.md)** - 结构的复合和深层联系
+- **[结构主义基础理论](../01-foundation/README.md)** - 数学结构主义启示和三元结
+  构框架
+- **[结构交互与复合](../03-structure-interaction/README.md)** - 结构的复合和深层
+  联系
 - **[源文档](../../../structure_view.md)** - 结构视角的完整论述
 
 ### 学术参考
 
 1. Goguen, J. A. — _A Categorical Manifesto_（范畴论视角下的计算结构）
-2. Winskel, G. — _The Formal Semantics of Programming Languages_（事件结构与控制）
+2. Winskel, G. — _The Formal Semantics of Programming Languages_（事件结构与控制
+   ）
 3. Abramsky, S. — _Domain Theory in Logical Form_（信息结构与拓扑）
 
 ---
 
-**更新时间**：2025-11-05  
-**版本**：v1.0
-
+**更新时间**：2025-11-05 **版本**：v1.0
