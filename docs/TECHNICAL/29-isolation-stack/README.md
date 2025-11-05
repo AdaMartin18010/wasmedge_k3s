@@ -10,8 +10,43 @@
 | 文档                                     | 描述                                                                 |
 | ---------------------------------------- | -------------------------------------------------------------------- |
 | [isolation-stack.md](isolation-stack.md) | 四层隔离栈完整技术文档，包含各层级概念、机制、组件、黑话和一句话解释 |
+| [layers/](layers/)                       | 各隔离层次独立文档目录，便于检索和对比                               |
+
+### 2.1 各层次独立文档
+
+| 文档                                                   | 描述                                                                    |
+| ------------------------------------------------------ | ----------------------------------------------------------------------- |
+| [L-0 硬件辅助层](layers/L-0-hardware-assist.md)        | VT-x、AMD-V、SEV、TPM 详细文档                                          |
+| [L-1 全虚拟化层](layers/L-1-full-virtualization.md)    | KVM、ESXi、Hyper-V、Xen HVM 详细文档                                    |
+| [L-2 半虚拟化层](layers/L-2-paravirtualization.md)     | Xen PV、virtio、Hyper-V Enlightenment 详细文档                          |
+| [L-3 容器化层](layers/L-3-containerization.md)         | runc、containerd、Docker、Podman 详细文档                               |
+| [L-4 沙盒化层](layers/L-4-sandboxing.md)               | gVisor、Firecracker、WASM、Windows Sandbox 详细文档（包括 WebAssembly） |
+| [隔离层次总结合并对比](layers/isolation-comparison.md) | 五层隔离栈总结合并对比文档                                              |
 
 ## 3. 快速导航
+
+### 3.1 按层次导航
+
+- **[L-0 硬件辅助层](layers/L-0-hardware-assist.md)** - VT-x、AMD-V、SEV、TPM
+- **[L-1 全虚拟化层](layers/L-1-full-virtualization.md)** -
+  KVM、ESXi、Hyper-V、Xen HVM
+- **[L-2 半虚拟化层](layers/L-2-paravirtualization.md)** - Xen
+  PV、virtio、Hyper-V Enlightenment
+- **[L-3 容器化层](layers/L-3-containerization.md)** -
+  runc、containerd、Docker、Podman
+- **[L-4 沙盒化层](layers/L-4-sandboxing.md)** -
+  gVisor、Firecracker、WASM、Windows Sandbox（包括 WebAssembly）
+
+### 3.2 总结合并对比
+
+- **[隔离层次总结合并对比](layers/isolation-comparison.md)** - 五层隔离栈总结合
+  并对比文档
+  - 快速对比矩阵
+  - 技术选型决策树
+  - 应用场景匹配
+  - 混合部署策略
+
+### 3.3 完整文档导航
 
 - **[L-0 硬件辅助层](isolation-stack.md#2931-l-0-硬件辅助层cpu-虚拟化指令集)** -
   VT-x、AMD-V、SEV、TPM

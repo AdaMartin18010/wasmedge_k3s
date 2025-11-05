@@ -37,7 +37,16 @@
   - [11.9.3 性能问题诊断](#1193-性能问题诊断)
   - [11.9.4 高级故障排查方法](#1194-高级故障排查方法)
   - [11.9.5 常用命令速查](#1195-常用命令速查)
-- [11.10 参考](#1110-参考)
+- [11.10 故障排查检查清单](#1110-故障排查检查清单)
+  - [11.10.1 WasmEdge 故障排查清单](#11101-wasmedge-故障排查清单)
+  - [11.10.2 K3s 故障排查清单](#11102-k3s-故障排查清单)
+  - [11.10.3 OPA Gatekeeper 故障排查清单](#11103-opa-gatekeeper-故障排查清单)
+  - [11.10.4 综合故障排查清单](#11104-综合故障排查清单)
+- [11.11 故障排查与概念关系矩阵](#1111-故障排查与概念关系矩阵)
+  - [11.11.1 使用概念关系矩阵定位问题](#11111-使用概念关系矩阵定位问题)
+  - [11.11.2 依赖关系故障排查](#11112-依赖关系故障排查)
+  - [11.11.3 属性传递故障排查](#11113-属性传递故障排查)
+- [11.12 参考](#1112-参考)
 
 ---
 
@@ -998,9 +1007,229 @@ kubectl describe pod <pod-name>
 kubectl get pod <pod-name> -o yaml
 ```
 
-## 11.10 参考
+## 11.10 故障排查检查清单
+
+### 11.10.1 WasmEdge 故障排查清单
+
+**WasmEdge 问题快速检查**：
+
+| 检查项            | 命令/方法                                           | 预期结果     | 问题处理          |
+| ----------------- | --------------------------------------------------- | ------------ | ----------------- |
+| **crun 版本**     | `crun --version`                                    | ≥ 1.8.5      | 升级 crun         |
+| **WasmEdge 镜像** | `kubectl describe pod <pod>`                        | 镜像拉取成功 | 检查镜像仓库      |
+| **RuntimeClass**  | `kubectl get runtimeclass wasm`                     | wasm 存在    | 创建 RuntimeClass |
+| **Pod 日志**      | `kubectl logs <pod>`                                | 有日志输出   | 检查 crun 版本    |
+| **DNS 解析**      | `kubectl exec <pod> -- nslookup kubernetes.default` | 解析成功     | 检查 CoreDNS      |
+| **资源限制**      | `kubectl describe pod <pod>`                        | 资源充足     | 调整资源限制      |
+
+### 11.10.2 K3s 故障排查清单
+
+**K3s 问题快速检查**：
+
+| 检查项         | 命令/方法                                            | 预期结果        | 问题处理        |
+| -------------- | ---------------------------------------------------- | --------------- | --------------- |
+| **节点状态**   | `kubectl get nodes`                                  | Ready           | 检查节点连接    |
+| **Pod 状态**   | `kubectl get pods -A`                                | Running/Pending | 查看 Pod 事件   |
+| **系统组件**   | `kubectl get pods -n kube-system`                    | 所有 Running    | 重启异常组件    |
+| **网络插件**   | `kubectl get pods -n kube-system \| grep flannel`    | Running         | 检查 CNI 配置   |
+| **存储插件**   | `kubectl get pods -n kube-system \| grep local-path` | Running         | 检查存储配置    |
+| **API Server** | `kubectl cluster-info`                               | 正常响应        | 检查 API Server |
+
+### 11.10.3 OPA Gatekeeper 故障排查清单
+
+**OPA Gatekeeper 问题快速检查**：
+
+| 检查项              | 命令/方法                                                               | 预期结果      | 问题处理        |
+| ------------------- | ----------------------------------------------------------------------- | ------------- | --------------- |
+| **Gatekeeper 状态** | `kubectl get pods -n gatekeeper-system`                                 | Running       | 检查 Gatekeeper |
+| **Webhook 状态**    | `kubectl get validatingwebhookconfigurations`                           | Active        | 检查 Webhook    |
+| **策略状态**        | `kubectl get constraints`                                               | 所有 Enforced | 检查策略配置    |
+| **策略模板**        | `kubectl get constrainttemplates`                                       | 所有 Ready    | 检查模板定义    |
+| **Webhook 超时**    | `kubectl describe pod <pod>`                                            | 无超时错误    | 增加超时时间    |
+| **策略日志**        | `kubectl logs -n gatekeeper-system -l control-plane=controller-manager` | 无错误        | 检查策略语法    |
+
+### 11.10.4 综合故障排查清单
+
+**通用故障排查流程**：
+
+1. **环境检查**：
+
+   - [ ] K3s 版本 ≥ 1.28
+   - [ ] crun 版本 ≥ 1.8.5
+   - [ ] containerd 正常运行
+   - [ ] 节点资源充足
+
+2. **网络检查**：
+
+   - [ ] CoreDNS 正常运行
+   - [ ] CNI 插件正常
+   - [ ] 节点间网络连通
+   - [ ] Service DNS 解析正常
+
+3. **存储检查**：
+
+   - [ ] StorageClass 存在
+   - [ ] CSI 驱动正常
+   - [ ] PVC 绑定成功
+   - [ ] 存储空间充足
+
+4. **策略检查**：
+
+   - [ ] Gatekeeper 运行正常
+   - [ ] Webhook 配置正确
+   - [ ] 策略语法正确
+   - [ ] 策略已生效
+
+5. **性能检查**：
+   - [ ] Pod 启动时间正常
+   - [ ] 内存占用合理
+   - [ ] CPU 使用正常
+   - [ ] 网络延迟正常
+
+---
+
+## 11.11 故障排查与概念关系矩阵
+
+### 11.11.1 使用概念关系矩阵定位问题
+
+**概念关系矩阵在故障排查中的应用**：
+
+参考
+[30. 概念关系矩阵](../30-concept-relations-matrix/concept-relations-matrix.md)
+进行故障定位：
+
+**步骤 1：确定问题域**:
+
+根据问题现象确定涉及的概念（参考 30.19.1 概念索引）。
+
+**步骤 2：查询依赖链**:
+
+使用 30.7.3 依赖关系图谱定位依赖链问题。
+
+**步骤 3：检查属性传递**:
+
+使用 30.15 关系属性传递分析检查属性传递是否异常。
+
+**步骤 4：验证演进兼容**:
+
+使用 30.16 动态演进分析检查技术演进是否兼容。
+
+**示例**：性能问题定位
+
+```text
+1. 问题：冷启动慢
+2. 概念：运行时 → WasmEdge (参考 30.19.1)
+3. 依赖链：应用 → K3s → containerd → crun → WasmEdge (参考 30.7.3)
+4. 属性传递：性能属性传递 → 检查组合关系 (参考 30.15.2)
+5. 演进：检查是否使用最新版本（2025技术栈，参考 30.16）
+```
+
+### 11.11.2 依赖关系故障排查
+
+**依赖关系故障排查**：
+
+根据
+[30.11.3 依赖关系传递](../30-concept-relations-matrix/concept-relations-matrix.md#30113-依赖关系传递)，
+如果 A → B → C，则 A → C。
+
+**排查步骤**：
+
+1. **检查直接依赖**：
+
+   ```bash
+   # 检查 K3s → containerd
+   systemctl status containerd
+   ```
+
+2. **检查间接依赖**：
+
+   ```bash
+   # 检查 containerd → crun
+   which crun
+   crun --version
+   ```
+
+3. **检查完整依赖链**：
+
+   ```bash
+   # 应用 → K3s → containerd → crun → WasmEdge
+   kubectl get nodes
+   kubectl get pods -n kube-system | grep containerd
+   crun --version
+   kubectl get runtimeclass wasm
+   ```
+
+### 11.11.3 属性传递故障排查
+
+**属性传递故障排查**：
+
+根据
+[30.15 关系属性传递分析](../30-concept-relations-matrix/concept-relations-matrix.md#3015-关系属性传递分析)：
+
+**性能属性传递**：
+
+```text
+K3s(性能=4) ∘ WasmEdge(性能=5) = 边缘Wasm编排(性能=5)
+```
+
+如果性能未达到预期，检查：
+
+1. **组件性能**：
+
+   ```bash
+   # 检查 K3s 性能
+   kubectl top nodes
+
+   # 检查 WasmEdge 性能
+   kubectl exec <wasm-pod> -- time wasmtime run <wasm-file>
+   ```
+
+2. **组合关系**：
+
+   ```bash
+   # 检查 RuntimeClass 配置
+   kubectl get runtimeclass wasm -o yaml
+   ```
+
+**安全属性传递**：
+
+```text
+应用层 → K3s → containerd → crun → WasmEdge
+```
+
+如果安全属性未达到预期，检查：
+
+1. **各层安全配置**：
+
+   ```bash
+   # 检查 K3s RBAC
+   kubectl get clusterrolebindings
+
+   # 检查 NetworkPolicy
+   kubectl get networkpolicies -A
+
+   # 检查 Pod Security
+   kubectl get pod -o json | jq '.spec.securityContext'
+   ```
+
+---
+
+## 11.12 参考
 
 **关联文档**：
+
+**概念关系矩阵**：
+
+- **[30. 概念关系矩阵](../30-concept-relations-matrix/concept-relations-matrix.md)** -
+  技术堆栈概念关系梳理
+  - [30.19.1 核心概念索引](../30-concept-relations-matrix/concept-relations-matrix.md#30191-核心概念索引) -
+    快速查找概念
+  - [30.20.3 问题定位使用](../30-concept-relations-matrix/concept-relations-matrix.md#30203-问题定位使用) -
+    使用概念关系矩阵定位问题
+  - [30.7.3 依赖关系图谱](../30-concept-relations-matrix/concept-relations-matrix.md#3073-依赖关系图谱) -
+    依赖关系可视化
+  - [30.15 关系属性传递分析](../30-concept-relations-matrix/concept-relations-matrix.md#3015-关系属性传递分析) -
+    属性传递检查
 
 **高级故障排查方法**：
 

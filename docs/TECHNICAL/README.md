@@ -50,26 +50,27 @@
 
 ### 技术规格堆栈
 
-| 文档               | 路径                           | 核心内容                                                                                                                       |
-| ------------------ | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
-| 网络技术规格       | `12-network-stack/`            | CNI、Service、Ingress                                                                                                          |
-| 缩写词汇表         | `13-acronyms-glossary/`        | 所有缩写词定义与关系                                                                                                           |
-| 主题清单           | `14-theme-inventory/`          | 全面梳理所有主题与子主题                                                                                                       |
-| 存储技术规格       | `15-storage-stack/`            | CSI、PV/PVC                                                                                                                    |
-| 监控与可观测性     | `16-observability/`            | Metrics、Logging、Tracing                                                                                                      |
-| GitOps 和持续交付  | `17-gitops-cicd/`              | GitOps/CI/CD 技术规范                                                                                                          |
-| Operator 和 CRD    | `18-operator-crd/`             | Operator/CRD 开发规范                                                                                                          |
-| 服务网格           | `19-service-mesh/`             | 服务网格技术规范（可选）                                                                                                       |
-| 多集群管理         | `20-multi-cluster/`            | 多集群管理技术规范（可选）                                                                                                     |
-| 镜像仓库和镜像管理 | `21-image-registry/`           | 镜像仓库与管理技术规范                                                                                                         |
-| 升级和迁移         | `22-upgrade-migration/`        | 升级和迁移技术规范                                                                                                             |
-| 开发和调试工具     | `23-dev-tools/`                | 开发和调试工具规范                                                                                                             |
-| 成本优化           | `24-cost-optimization/`        | 成本优化技术规范（可选）                                                                                                       |
-| 社区生态和最佳实践 | `25-community-best-practices/` | 社区生态和最佳实践（可选）                                                                                                     |
-| 分析改进           | `26-analysis-improvement/`     | 分析改进文档                                                                                                                   |
-| 2025 趋势          | `27-2025-trends/`              | 2025 技术趋势                                                                                                                  |
-| 架构框架           | `28-architecture-framework/`   | 多维度架构体系与技术规范                                                                                                       |
-| 隔离栈             | `29-isolation-stack/`          | 四层隔离栈：虚拟化 → 半虚拟化 → 容器化 → 沙盒化；横纵耦合问题定位模型（OTLP + eBPF）；观测系统作为第四大基础设施；网络定位专题 |
+| 文档               | 路径                           | 核心内容                                                                                                                                          |
+| ------------------ | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 网络技术规格       | `12-network-stack/`            | CNI、Service、Ingress                                                                                                                             |
+| 缩写词汇表         | `13-acronyms-glossary/`        | 所有缩写词定义与关系                                                                                                                              |
+| 主题清单           | `14-theme-inventory/`          | 全面梳理所有主题与子主题                                                                                                                          |
+| 存储技术规格       | `15-storage-stack/`            | CSI、PV/PVC                                                                                                                                       |
+| 监控与可观测性     | `16-observability/`            | Metrics、Logging、Tracing                                                                                                                         |
+| GitOps 和持续交付  | `17-gitops-cicd/`              | GitOps/CI/CD 技术规范                                                                                                                             |
+| Operator 和 CRD    | `18-operator-crd/`             | Operator/CRD 开发规范                                                                                                                             |
+| 服务网格           | `19-service-mesh/`             | 服务网格技术规范（可选）                                                                                                                          |
+| 多集群管理         | `20-multi-cluster/`            | 多集群管理技术规范（可选）                                                                                                                        |
+| 镜像仓库和镜像管理 | `21-image-registry/`           | 镜像仓库与管理技术规范                                                                                                                            |
+| 升级和迁移         | `22-upgrade-migration/`        | 升级和迁移技术规范                                                                                                                                |
+| 开发和调试工具     | `23-dev-tools/`                | 开发和调试工具规范                                                                                                                                |
+| 成本优化           | `24-cost-optimization/`        | 成本优化技术规范（可选）                                                                                                                          |
+| 社区生态和最佳实践 | `25-community-best-practices/` | 社区生态和最佳实践（可选）                                                                                                                        |
+| 分析改进           | `26-analysis-improvement/`     | 分析改进文档                                                                                                                                      |
+| 2025 趋势          | `27-2025-trends/`              | 2025 技术趋势                                                                                                                                     |
+| 架构框架           | `28-architecture-framework/`   | 多维度架构体系与技术规范                                                                                                                          |
+| 隔离栈             | `29-isolation-stack/`          | 四层隔离栈：虚拟化 → 半虚拟化 → 容器化 → 沙盒化；横纵耦合问题定位模型（OTLP + eBPF）；观测系统作为第四大基础设施；网络定位专题                    |
+| 概念关系矩阵       | `30-concept-relations-matrix/` | 2025 技术堆栈概念关系矩阵与多维关系分析；二维、三维、多维关系矩阵；思维导图；形式化定义；快速参考指南；使用指南；概念索引；与故障排查文档深度集成 |
 
 ## 3. 快速开始
 
@@ -99,6 +100,17 @@
    Metrics、Logging、Tracing
 4. **[隔离栈](29-isolation-stack/isolation-stack.md)** - 四层隔离栈：虚拟化 → 半
    虚拟化 → 容器化 → 沙盒化，横纵耦合问题定位模型
+
+### 3.5 概念关系与故障排查
+
+1. **[概念关系矩阵](30-concept-relations-matrix/concept-relations-matrix.md)** -
+   技术堆栈概念关系梳理
+   - **快速查找概念**：30.19.1 核心概念索引
+   - **使用指南**：30.20 使用指南（架构设计、技术选型、问题定位）
+   - **快速参考**：30.18 快速参考指南
+2. **[故障排查](11-troubleshooting/troubleshooting.md)** - 常见问题解决方案
+   - **检查清单**：11.10 故障排查检查清单
+   - **概念关系矩阵集成**：11.11 故障排查与概念关系矩阵
 
 ## 4. 使用场景
 
@@ -159,13 +171,15 @@
   构体系与技术规范
 - [29. 隔离栈](29-isolation-stack/isolation-stack.md) - 四层隔离栈、观测系统作为
   第四大基础设施、网络定位专题
+- [30. 概念关系矩阵](30-concept-relations-matrix/concept-relations-matrix.md) -
+  2025 技术堆栈概念关系矩阵与多维关系分析
 - [00. Docker](00-docker/docker.md) - 容器化引擎技术规范
 - [01. Kubernetes](01-kubernetes/kubernetes.md) - 集群编排架构与实践
 - [02. K3s](02-k3s/k3s.md) - 轻量级 Kubernetes 架构
 
 ## 6. 文档统计
 
-- **总文档数**：29 个核心技术参考文档（含架构框架和隔离栈）
+- **总文档数**：30 个核心技术参考文档（含架构框架、隔离栈和概念关系矩阵）
 - **覆盖范围**：容器编排、运行时、策略、实践指南、技术规格、架构框架、隔离栈
 - **文档类型**：技术参考文档
 
@@ -185,6 +199,20 @@
   - **问题定位模型**：横纵耦合定位（OTLP + eBPF）
   - **观测系统**：观测系统作为第四大基础设施
   - **网络定位**：网络作为横向生命线的定位方法
+  - **各层次独立文档**：[layers/](29-isolation-stack/layers/) - 每个隔离层次的独
+    立文档，便于检索和对比
+    - **[L-0 硬件辅助层](29-isolation-stack/layers/L-0-hardware-assist.md)** -
+      VT-x、AMD-V、SEV、TPM 详细文档
+    - **[L-1 全虚拟化层](29-isolation-stack/layers/L-1-full-virtualization.md)** -
+      KVM、ESXi、Hyper-V、Xen HVM 详细文档
+    - **[L-2 半虚拟化层](29-isolation-stack/layers/L-2-paravirtualization.md)** -
+      Xen PV、virtio、Hyper-V Enlightenment 详细文档
+    - **[L-3 容器化层](29-isolation-stack/layers/L-3-containerization.md)** -
+      runc、containerd、Docker、Podman 详细文档
+    - **[L-4 沙盒化层](29-isolation-stack/layers/L-4-sandboxing.md)** -
+      gVisor、Firecracker、WASM、Windows Sandbox 详细文档（包括 WebAssembly）
+    - **[隔离层次总结合并对比](29-isolation-stack/layers/isolation-comparison.md)** -
+      五层隔离栈总结合并对比文档
 
 ### 架构维度体系
 
@@ -214,6 +242,24 @@
 - **CNCF 定义**：云原生计算基金会标准定义
 - **Wikipedia 标准**：Wikipedia 企业架构标准（2025-11-06）
 - **架构关系**：各架构维度间的关系和依赖
+
+### 概念关系矩阵体系
+
+**2025 技术堆栈概念关系矩阵与多维关系分析**：
+
+- **[30. 概念关系矩阵](30-concept-relations-matrix/concept-relations-matrix.md)** -
+  完整的概念关系梳理文档
+  - **核心概念体系**：概念定义、属性、关系、结构（30.3）
+  - **关系矩阵**：二维、三维、多维关系矩阵（30.4-30.6）
+  - **关系图谱**：包含、组合、依赖、实现关系图谱（30.7）
+  - **属性分析**：性能、安全、可扩展性、可观测性属性矩阵（30.8）
+  - **动态演进**：技术演进路径、关系演进模式、属性演进趋势（30.16）
+  - **范畴论视角**：对象与态射、函子与自然变换、范畴化关系（30.17）
+  - **快速参考**：概念快速查找、关系快速查询、属性快速对比（30.18）
+  - **概念索引**：核心概念索引、关系符号索引、属性维度索引（30.19）
+  - **使用指南**：架构设计、技术选型、问题定位使用指南（30.20）
+  - **故障排查集成**：与 [11. 故障排查](11-troubleshooting/troubleshooting.md)
+    深度集成
 
 ---
 
