@@ -88,10 +88,9 @@ architecture-view/
 │   ├── 04-data-perspective.md        # 数据视角
 │   ├── 05-security-perspective.md    # 安全视角
 │   └── 06-observability-perspective.md # 可观测视角
-└── 10-november-2025-updates/        # 2025年11月更新
-    ├── 01-trends-november-2025.md    # 2025年11月趋势
-    ├── 02-technology-updates.md      # 技术更新
-    └── 03-best-practices.md          # 最佳实践
+└── 10-november-2025-updates/        # ⚠️ 已删除（内容合并到 05-trends-2025/）
+    ├── README.md                     # 重定向说明
+    └── (内容已合并到 ../../05-trends-2025/)
 ```
 
 ### 1.3 相关文档
@@ -114,7 +113,7 @@ architecture-view/
 7. **实践路径**：查看 `07-dynamic-operations/`，学习动态运维
 8. **模式路径**：查看 `08-composition-patterns/`，掌握组合模式
 9. **多视角路径**：查看 `09-multi-perspectives/`，理解多视角分析
-10. **趋势路径**：查看 `10-november-2025-updates/`，了解最新趋势
+10. **趋势路径**：查看 `../../05-trends-2025/`，了解最新趋势（原 `10-november-2025-updates/` 内容已合并）
 
 ---
 

@@ -26,7 +26,7 @@ docs/ARCHITECTURE/architecture-view/
 ├── 07-dynamic-operations/           # 动态运维
 ├── 08-composition-patterns/         # 组合模式
 ├── 09-multi-perspectives/           # 多视角分析
-├── 10-november-2025-updates/        # 2025年11月更新
+├── 10-november-2025-updates/        # ⚠️ 已删除（内容合并到 05-trends-2025/）
 ├── README.md                         # 文档集说明
 ├── INDEX.md                          # 文档索引
 └── SUMMARY.md                        # 本文档
@@ -106,17 +106,17 @@ docs/ARCHITECTURE/architecture-view/
   - CRI 适配器
   - Service Mesh 适配器
 
-#### 9. 2025 年 11 月更新 (`10-november-2025-updates/`)
+#### 9. 2025 年 11 月更新 (`10-november-2025-updates/`) ⚠️ 已删除
 
-- ✅
-  [01. 2025 年 11 月趋势](10-november-2025-updates/01-trends-november-2025.md)
-  - 虚拟化趋势
-  - 容器化趋势
-  - 沙盒化趋势
-  - Service Mesh 趋势
-  - OPA 策略治理趋势
-  - 动态运维趋势
-  - 架构范式演进
+> **注意**：`10-november-2025-updates/` 目录已删除，内容已合并到
+> `../../05-trends-2025/`。详细内容请参考：
+>
+> - [`../../05-trends-2025/01-trends-november-2025.md`](../../05-trends-2025/01-trends-november-2025.md) -
+>   2025 年 11 月趋势
+> - [`../../05-trends-2025/02-technology-updates.md`](../../05-trends-2025/02-technology-updates.md) -
+>   技术更新
+> - [`../../05-trends-2025/03-best-practices.md`](../../05-trends-2025/03-best-practices.md) -
+>   最佳实践
 
 ## 2. 文档统计
 
@@ -133,7 +133,7 @@ docs/ARCHITECTURE/architecture-view/
   - ✅ 动态运维（5 个文档）
   - ✅ 组合模式（5 个文档）
   - ✅ 多视角分析（6 个文档）
-  - ✅ 2025 年 11 月更新（3 个文档）
+  - ⚠️ 2025 年 11 月更新（已删除，内容合并到 `../../05-trends-2025/`）
 
 ## 3. 核心主题覆盖
 
@@ -209,11 +209,17 @@ docs/ARCHITECTURE/architecture-view/
 - ✅ 安全视角
 - ✅ 可观测视角
 
-### 10. 2025 年 11 月更新
+### 10. 2025 年 11 月更新 ⚠️ 已删除
 
-- ✅ 2025 年 11 月趋势
-- ✅ 技术更新
-- ✅ 最佳实践
+> **注意**：`10-november-2025-updates/` 目录已删除，内容已合并到
+> `../../05-trends-2025/`。详细内容请参考：
+>
+> - [`../../05-trends-2025/01-trends-november-2025.md`](../../05-trends-2025/01-trends-november-2025.md) -
+>   2025 年 11 月趋势
+> - [`../../05-trends-2025/02-technology-updates.md`](../../05-trends-2025/02-technology-updates.md) -
+>   技术更新
+> - [`../../05-trends-2025/03-best-practices.md`](../../05-trends-2025/03-best-practices.md) -
+>   最佳实践
 
 ## 4. 已完成工作
 
@@ -230,7 +236,7 @@ docs/ARCHITECTURE/architecture-view/
 7. **动态运维**：5 个文档全部完成
 8. **组合模式**：5 个文档全部完成
 9. **多视角分析**：6 个文档全部完成
-10. **2025 年 11 月更新**：3 个文档全部完成
+10. **2025 年 11 月更新**：⚠️ 已删除（内容已合并到 `../../05-trends-2025/`）
 
 ### 📋 文档质量
 

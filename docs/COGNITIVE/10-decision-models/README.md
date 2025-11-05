@@ -5,7 +5,7 @@
 本文档深入梳理虚拟化、容器化、沙盒化背后的**技术架构模型选择**，以及**技术决策模
 型的权衡和分类**，阐述技术场景的分析论证过程和技术概念定义的脉络。
 
-## 📁 文档结构
+## 1. 文档结构
 
 ### 核心文档
 
@@ -52,7 +52,7 @@
     └── comprehensive-mapping.md  # 多维度认知映射文档
 ```
 
-## 🎯 文档定位
+## 2. 文档定位
 
 **文档双重结构**：
 
@@ -80,16 +80,16 @@
      - **内核特性需求**：epoll/io_uring → 容器化（必需，16-62x 性能提升）
      - **资源访问需求**：CPU/内存/逻辑 → 沙盒化/容器化
 
-## 📚 快速导航
+## 3. 快速导航
 
-### ⚡ 快速参考
+### 3.1 快速参考
 
 - **[快速参考指南](QUICK-REFERENCE.md)** - 设备访问（USB/PCI/GPU）和内核特性决策
   快速参考
 - **[一致性检查报告](CONSISTENCY-REPORT.md)** - 文档一致性检查与 Wikipedia 标准
   对齐报告
 
-### 理论基础（第一层）
+### 3.2 理论基础（第一层）
 
 - [物理资源模型](01-theory-models/01-resource-models.md) -
   CPU、IO、Network、Storage 权衡模型
@@ -100,7 +100,7 @@
 - [分布式系统模型](01-theory-models/04-distributed-models.md) - 集群、P2P、服务
   发现、一致性、共识算法
 
-### 应用决策（第二层）
+### 3.3 应用决策（第二层）
 
 - [技术决策模型与权衡框架](02-scenario-models/01-decision-framework.md)
   - ⭐
@@ -112,23 +112,23 @@
     技术约束分析中的设备访问和内核特性维度
 - [技术概念定义脉络](02-scenario-models/03-concept-evolution.md)
 
-### 实践案例
+### 3.4 实践案例
 
 - [边缘计算平台案例](03-cases/01-edge-computing.md)
 - [Serverless 函数服务案例](03-cases/02-serverless.md)
 - [企业级多租户平台案例](03-cases/03-enterprise.md)
 
-### 形式化模型
+### 3.5 形式化模型
 
 - [技术决策模型形式化](04-formalization/01-decision-models.md)
 - [物理资源模型形式化](04-formalization/02-resource-models.md)
 
-### 全面认知映射
+### 3.6 全面认知映射
 
 - [全面认知映射](05-comprehensive-mapping/comprehensive-mapping.md) - 矩阵对比、
   结构同构、关系等价、思维导图、扩缩模型、交叉映射、认知总结
 
-### 技术名词概念论证
+### 3.7 技术名词概念论证
 
 - [技术名词概念论证](06-technical-concepts/technical-concepts-explanation.md) -
   虚拟化、容器化、沙盒化的技术名词、概念、功能、关系论证

@@ -5,7 +5,7 @@
 本目录包含**技术参考文档**，提供详细的技术规格、接口定义和实践指南，作为认知模型
 的技术支撑。
 
-## 🎯 文档定位
+## 1. 文档定位
 
 **核心特征**：
 
@@ -14,7 +14,7 @@
 - ✅ **最佳实践**：总结生产环境的最佳实践和注意事项
 - 🚀 **可操作性**：读者可以直接按照文档实施
 
-## 📚 文档列表
+## 2. 文档列表
 
 ### 容器与编排
 
@@ -71,27 +71,27 @@
 | 架构框架           | `28-architecture-framework/`   | 多维度架构体系与技术规范                                                                                                       |
 | 隔离栈             | `29-isolation-stack/`          | 四层隔离栈：虚拟化 → 半虚拟化 → 容器化 → 沙盒化；横纵耦合问题定位模型（OTLP + eBPF）；观测系统作为第四大基础设施；网络定位专题 |
 
-## 🚀 快速开始
+## 3. 快速开始
 
-### 新手入门路径
+### 3.1 新手入门路径
 
 1. **[Docker](00-docker/docker.md)** - 掌握容器技术基础
 2. **[Kubernetes](01-kubernetes/kubernetes.md)** - 深入学习容器编排
 3. **[安装部署](10-installation/installation.md)** - 快速上手各技术
 
-### 进阶学习路径
+### 3.2 进阶学习路径
 
 1. **[K3s](02-k3s/k3s.md)** - 了解轻量级 Kubernetes
 2. **[WasmEdge](03-wasm-edge/wasmedge.md)** - 探索字节码运行时
 3. **[OPA 策略即代码](06-policy-opa/policy-opa.md)** - 掌握策略管理
 
-### 实践应用路径
+### 3.3 实践应用路径
 
 1. **[故障排查](11-troubleshooting/troubleshooting.md)** - 解决常见问题
 2. **[安全合规](09-security-compliance/security-compliance.md)** - 安全最佳实践
 3. **[GitOps 和持续交付](17-gitops-cicd/gitops-cicd.md)** - 实现自动化部署
 
-### 技术规格深入
+### 3.4 技术规格深入
 
 1. **[网络技术规格](12-network-stack/network-stack.md)** - CNI、Service、Ingress
 2. **[存储技术规格](15-storage-stack/storage-stack.md)** - CSI、PV/PVC
@@ -100,22 +100,22 @@
 4. **[隔离栈](29-isolation-stack/isolation-stack.md)** - 四层隔离栈：虚拟化 → 半
    虚拟化 → 容器化 → 沙盒化，横纵耦合问题定位模型
 
-## 📖 使用场景
+## 4. 使用场景
 
-### ✅ 适用场景
+### 4.1 适用场景
 
 - ✅ 深入学习特定技术
 - ✅ 实施技术方案
 - ✅ 故障排查和性能优化
 - ✅ 需要"怎么做"的具体指导
 
-### 🔗 与其他文档的关系
+### 4.2 与其他文档的关系
 
 - **技术参考文档**提供 **"怎么做"**（How）和 **"具体细节"**（Details）
 - **认知模型文档**（`../COGNITIVE/`）提供 **"为什么"**（Why）和 **"是什么
   "**（What）
 
-### 📚 决策参考
+### 4.3 决策参考
 
 进行技术选型时，请参考：
 
@@ -126,9 +126,9 @@
 - **[10. 一致性检查报告](../COGNITIVE/10-decision-models/CONSISTENCY-REPORT.md)** -
   文档一致性检查与 Wikipedia 标准对齐
 
-## 🎯 按角色选择文档
+## 5. 按角色选择文档
 
-### 开发者
+### 5.1 开发者
 
 - [00. Docker](00-docker/docker.md)
 - [01. Kubernetes](01-kubernetes/kubernetes.md)
@@ -136,7 +136,7 @@
 - [03. WasmEdge](03-wasm-edge/wasmedge.md)
 - [18. Operator 和 CRD](18-operator-crd/operator-crd.md)
 
-### 运维工程师
+### 5.2 运维工程师
 
 - [10. 安装部署](10-installation/installation.md)
 - [11. 故障排查](11-troubleshooting/troubleshooting.md)
@@ -146,14 +146,14 @@
 - [29. 隔离栈](29-isolation-stack/isolation-stack.md) - 问题定位模型、横纵耦合定
   位方法
 
-### DevOps 工程师
+### 5.3 DevOps 工程师
 
 - [17. GitOps 和持续交付](17-gitops-cicd/gitops-cicd.md)
 - [21. 镜像仓库和镜像管理](21-image-registry/image-registry.md)
 - [05. OCI 供应链](05-oci-supply-chain/oci-supply-chain.md)
 - [06. OPA 策略即代码](06-policy-opa/policy-opa.md)
 
-### 架构师
+### 5.4 架构师
 
 - [28. 架构框架](28-architecture-framework/architecture-framework.md) - 多维度架
   构体系与技术规范
@@ -163,13 +163,13 @@
 - [01. Kubernetes](01-kubernetes/kubernetes.md) - 集群编排架构与实践
 - [02. K3s](02-k3s/k3s.md) - 轻量级 Kubernetes 架构
 
-## 📊 文档统计
+## 6. 文档统计
 
 - **总文档数**：29 个核心技术参考文档（含架构框架和隔离栈）
 - **覆盖范围**：容器编排、运行时、策略、实践指南、技术规格、架构框架、隔离栈
 - **文档类型**：技术参考文档
 
-## 🏗️ 架构框架与隔离栈
+## 7. 架构框架与隔离栈
 
 ### 隔离栈体系
 

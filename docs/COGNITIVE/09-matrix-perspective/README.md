@@ -1,6 +1,6 @@
 # 09. 矩阵视角：云原生技术栈的矩阵力学
 
-## 目录结构
+## 1. 目录结构
 
 ```text
 09-matrix-perspective/
@@ -21,7 +21,7 @@
 
 ```
 
-## 快速导航
+## 2. 快速导航
 
 - **[快速参考指南](QUICK-REFERENCE.md)** - 核心概念、公式、决策表速查
 - **[文档体系总结](SUMMARY.md)** - 矩阵视角文档体系完整总结
@@ -39,7 +39,7 @@
 - **[实践案例](09-practice-cases.md)** - 边缘计算、Serverless、AI 推理、多租户等
   场景的矩阵分析
 
-## 文档定位
+## 3. 文档定位
 
 本文档从**矩阵视角**（Matrix Perspective）审视云原生容器技术栈，将系统抽象为**概
 念矩阵**、**关系矩阵**、**属性矩阵**、**场景矩阵**和**变换矩阵**等数学结构，揭示
@@ -53,7 +53,7 @@
 - **矩阵视角实用性强**：矩阵元素直接对应技术成熟度、性能指标等可观测量
 - **矩阵视角场景适配**：通过场景向量与矩阵的运算，可以直接得到场景适配度
 
-## 矩阵视角数学基础
+## 4. 矩阵视角数学基础
 
 $$\text{云原生技术栈} = \{ \mathbf{E}, \mathbf{R}, \mathbf{A}, \mathbf{S}, \mathbf{T}, \boldsymbol{\Theta} \}$$
 
@@ -67,9 +67,9 @@ $$\text{云原生技术栈} = \{ \mathbf{E}, \mathbf{R}, \mathbf{A}, \mathbf{S},
 - $\mathbf{T} \in \mathbb{R}^{12 \times 12}$：变换矩阵
 - $\boldsymbol{\Theta} \in \mathbb{R}^{12 \times 12}$：AI 可学习参数矩阵（对角）
 
-## 核心概念
+## 5. 核心概念
 
-### 12 维原子概念向量
+### 5.1 12 维原子概念向量
 
 | 编号 | 符号  | 概念                        | 2025 代表实例                              |
 | ---- | ----- | --------------------------- | ------------------------------------------ |
@@ -86,11 +86,11 @@ $$\text{云原生技术栈} = \{ \mathbf{E}, \mathbf{R}, \mathbf{A}, \mathbf{S},
 | e₁₁  | **T** | Tenant 隔离                 | `Capsule/HNC/Cluster-API-Nested`           |
 | e₁₂  | **Θ** | AI-Parameter 可学习参数     | `KEDA-AI/Fluid-AI/Volcano-AI`              |
 
-### 6 维场景向量
+### 5.2 6 维场景向量
 
 $$\mathbf{S} = [\text{本地开发}, \text{CI/测试}, \text{在线生产}, \text{边缘/IoT}, \text{Serverless/AI}, \text{多租户平台}]$$
 
-### 技术链序列
+### 5.3 技术链序列
 
 $$\text{技术链} = \text{Docker} \rightarrow \text{K8s} \rightarrow \text{K3s} \rightarrow \text{WasmEdge} \rightarrow \text{Service Mesh} \rightarrow \text{OPA} \rightarrow \text{多租户}$$
 
@@ -100,7 +100,7 @@ $$\text{技术链} = \text{Docker} \rightarrow \text{K8s} \rightarrow \text{K3s}
   测性
 - **增强效果**：负载均衡（L）概念成熟度在所有场景下提升 0.2-0.3
 
-## 参考
+## 6. 参考
 
 **关联文档**：
 
