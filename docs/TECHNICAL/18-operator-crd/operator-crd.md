@@ -59,6 +59,9 @@
 - [18.13 Operator 故障排查](#1813-operator-故障排查)
   - [18.13.1 常见问题](#18131-常见问题)
 - [18.14 参考](#1814-参考)
+  - [18.14.1 隔离栈相关文档](#18141-隔离栈相关文档)
+  - [18.14.2 Operator 和 CRD 相关文档](#18142-operator-和-crd-相关文档)
+  - [18.14.3 外部参考](#18143-外部参考)
 
 ---
 
@@ -1609,13 +1612,27 @@ kubectl apply -f config/samples/database_v1_mysql.yaml --dry-run=server
 
 ## 18.14 参考
 
+### 18.14.1 隔离栈相关文档
+
+- **[29. 隔离栈](../29-isolation-stack/isolation-stack.md)** - 完整的隔离栈技术
+  解析，包括 Operator 运行时
+- **[L-3 容器化层](../29-isolation-stack/layers/L-3-containerization.md)** - 容
+  器化层详细文档（Operator 通常运行在容器中）
+- **[隔离层次对比文档](../29-isolation-stack/layers/isolation-comparison.md)** -
+  运行时性能对比和技术选型
+
+### 18.14.2 Operator 和 CRD 相关文档
+
+- **[01. Kubernetes](../01-kubernetes/kubernetes.md)** - Kubernetes 详细文档
+- **[04. 编排运行时](../04-orchestration-runtime/orchestration-runtime.md)** -
+  CRI 和 RuntimeClass 配置
+- **[10. 安装部署](../10-installation/installation.md)** - Operator 安装指南
+
+### 18.14.3 外部参考
+
 - [Kubernetes CRD 文档](https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/)
 - [Operator SDK 文档](https://sdk.operatorframework.io/)
 - [Kubebuilder 文档](https://book.kubebuilder.io/)
 - [Controller Runtime 文档](https://pkg.go.dev/sigs.k8s.io/controller-runtime)
 - [Prometheus Operator 文档](https://github.com/prometheus-operator/prometheus-operator)
 - [cert-manager 文档](https://cert-manager.io/docs/)
-
----
-
-**最后更新**：2025-11-06 **维护者**：项目团队

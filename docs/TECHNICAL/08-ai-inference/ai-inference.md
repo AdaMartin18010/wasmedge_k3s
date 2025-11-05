@@ -45,6 +45,9 @@
   - [08.12.3 边缘 AI 推理最佳实践](#08123-边缘-ai-推理最佳实践)
   - [08.12.4 AI 推理检查清单](#08124-ai-推理检查清单)
 - [08.13 参考](#0813-参考)
+  - [08.13.1 隔离栈相关文档](#08131-隔离栈相关文档)
+  - [08.13.2 AI 推理相关文档](#08132-ai-推理相关文档)
+  - [08.13.3 其他相关文档](#08133-其他相关文档)
 
 ---
 
@@ -73,6 +76,16 @@
 ## 08.2 AI 推理场景
 
 ### 08.2.1 边缘 AI 推理
+
+> **💡 隔离层次关联**：边缘 AI 推理使用 L-4 沙盒化层的 WasmEdge 运行时，提供极速
+> 冷启动（<10ms）和低资源占用，是边缘计算的理想选择。详细的技术解析请参考：
+>
+> - **[29. 隔离栈](../29-isolation-stack/isolation-stack.md)** - 完整的隔离栈技
+>   术解析
+> - **[L-4 沙盒化层](../29-isolation-stack/layers/L-4-sandboxing.md)** - WASM 运
+>   行时详细文档，包含边缘 AI 推理应用场景
+> - **[隔离层次对比文档](../29-isolation-stack/layers/isolation-comparison.md)** -
+>   WASM 性能对比和应用场景匹配
 
 **场景描述**：在边缘节点运行 AI 推理，降低延迟，减少数据传输。
 
@@ -836,22 +849,28 @@ kubectl describe pod <pod-name> | grep -i gpu
 
 ## 08.13 参考
 
-**关联文档**：
+### 08.13.1 隔离栈相关文档
 
-- **[10. 技术决策模型](../../COGNITIVE/10-decision-models/decision-models.md)** -
-  技术选型决策框架
+- **[29. 隔离栈](../29-isolation-stack/isolation-stack.md)** - 完整的隔离栈技术
+  解析，包括 AI 推理应用场景
+- **[L-4 沙盒化层](../29-isolation-stack/layers/L-4-sandboxing.md)** - WASM 运行
+  时详细文档，包含边缘 AI 推理最佳实践
+- **[隔离层次对比文档](../29-isolation-stack/layers/isolation-comparison.md)** -
+  WASM 性能对比和应用场景匹配
+
+### 08.13.2 AI 推理相关文档
+
+- **[03. WasmEdge](../03-wasm-edge/wasmedge.md)** - WasmEdge 技术规范
+- **[07. 边缘与 Serverless](../07-edge-serverless/edge-serverless.md)** - 边缘计
+  算和 Serverless 场景
+- **[10. 安装部署](../10-installation/installation.md)** - 安装和部署指南
+
+### 08.13.3 其他相关文档
+
 - **[10. 快速参考指南](../../COGNITIVE/10-decision-models/QUICK-REFERENCE.md)** -
   设备访问（USB/PCI/GPU）和内核特性决策快速参考
-- **[10. 一致性检查报告](../../COGNITIVE/10-decision-models/CONSISTENCY-REPORT.md)** -
-  文档一致性检查与 Wikipedia 标准对齐
 - **[28. 架构框架](../28-architecture-framework/architecture-framework.md)** -
-  多维度架构体系与技术规范（场景架构、应用架构、技术架构等）
-- **[11. 边缘与 Serverless](../07-edge-serverless/edge-serverless.md)** - 边缘计
-  算和 Serverless 场景
-- **[03. WasmEdge](../03-wasm-edge/wasmedge.md)** - WasmEdge 技术规范
-- **[15. 安装部署](../10-installation/installation.md)** - 安装和部署指南
-
-> 完整参考列表见 [REFERENCES.md](../REFERENCES.md)
+  多维度架构体系与技术规范
 
 ---
 

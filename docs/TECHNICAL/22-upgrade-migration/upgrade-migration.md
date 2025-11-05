@@ -518,6 +518,18 @@ kubectl get pods --all-namespaces
 
 ## 22.5 运行时迁移技术规格
 
+> **💡 隔离层次关联**：运行时迁移涉及隔离栈的不同层次（L-3 容器化层、L-4 沙盒化
+> 层）。详细的技术解析和对比请参考：
+>
+> - **[29. 隔离栈](../29-isolation-stack/isolation-stack.md)** - 完整的隔离栈技
+>   术解析
+> - **[隔离层次对比文档](../29-isolation-stack/layers/isolation-comparison.md)** -
+>   快速对比和选型指南
+> - **[L-3 容器化层](../29-isolation-stack/layers/L-3-containerization.md)** -
+>   runc、containerd、Docker 详细文档
+> - **[L-4 沙盒化层](../29-isolation-stack/layers/L-4-sandboxing.md)** -
+>   gVisor、Firecracker、WASM 详细文档
+
 ### 22.5.1 Docker 到 containerd 迁移
 
 **Docker 到 containerd 迁移规格**：

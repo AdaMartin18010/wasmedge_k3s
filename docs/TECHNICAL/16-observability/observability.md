@@ -63,6 +63,9 @@
   - [16.11.5 采样和聚合策略](#16115-采样和聚合策略)
 - [16.12 可观测性检查清单](#1612-可观测性检查清单)
 - [16.13 参考](#1613-参考)
+  - [16.13.1 隔离栈相关文档](#16131-隔离栈相关文档)
+  - [16.13.2 可观测性相关文档](#16132-可观测性相关文档)
+  - [16.13.3 架构相关文档](#16133-架构相关文档)
 
 ---
 
@@ -1911,26 +1914,30 @@ exporters:
 
 ## 16.13 参考
 
-**关联文档**：
+### 16.13.1 隔离栈相关文档
 
-**观测系统与实践**：
-
-- **[29. 隔离栈 - 观测系统作为第四大基础设施](../29-isolation-stack/isolation-stack.md#2960-观测系统作为第四大基础设施)** -
-  为什么观测系统必须而不是最好，SLA 要求，完备性判据，MVP 落地
-  - [为什么"必须"而不是"最好"](../29-isolation-stack/isolation-stack.md#29601-为什么必须而不是最好)
-  - [观测系统本身也是"系统"，需要同等 SLA](../29-isolation-stack/isolation-stack.md#29602-观测系统本身也是系统需要同等-sla)
-  - [完备性判据（可量化）](../29-isolation-stack/isolation-stack.md#29603-完备性判据可量化)
-  - [反例：没有观测的"裸容器"长什么样](../29-isolation-stack/isolation-stack.md#29604-反例没有观测的裸容器长什么样)
-  - [落地最小完备集（MVP）](../29-isolation-stack/isolation-stack.md#29605-落地最小完备集mvp)
-- **[29. 隔离栈 - 问题定位模型](../29-isolation-stack/isolation-stack.md#296-问题定位模型横向请求链--纵向隔离栈)** -
+- **[29. 隔离栈](../29-isolation-stack/isolation-stack.md)** - 完整的隔离栈技术
+  解析，包括观测系统作为第四大基础设施
+- **[29.6.0 观测系统作为第四大基础设施](../29-isolation-stack/isolation-stack.md#2960-观测系统作为第四大基础设施)** -
+  为什么观测系统必须，完备性判据，MVP 落地
+- **[29.6 问题定位模型](../29-isolation-stack/isolation-stack.md#296-问题定位模型横向请求链--纵向隔离栈)** -
   横纵耦合的问题定位方法，OTLP + eBPF 联合定位
-- **[29. 隔离栈 - 网络定位专题](../29-isolation-stack/isolation-stack.md#29612-网络定位专题横向生命线)** -
-  网络作为横向生命线的定位方法，OTLP 网络 trace，eBPF 网络显微镜
+- **[29.6.12 网络定位专题](../29-isolation-stack/isolation-stack.md#29612-网络定位专题横向生命线)** -
+  网络作为横向生命线的定位方法
+- **[隔离层次对比文档](../29-isolation-stack/layers/isolation-comparison.md)** -
+  可观测性对比和技术选型
 
-**技术规范与架构**：
+### 16.13.2 可观测性相关文档
+
+- **[11. 故障排查](../11-troubleshooting/troubleshooting.md)** - 使用可观测性数
+  据进行故障排查
+- **[12. 网络栈](../12-network-stack/network-stack.md)** - 网络技术规格，包括网
+  络性能监控
+
+### 16.13.3 架构相关文档
 
 - **[28. 架构框架](../28-architecture-framework/architecture-framework.md)** -
-  多维度架构体系与技术规范（技术架构、应用架构等）
+  多维度架构体系与技术规范
 - **[01. Kubernetes](../01-kubernetes/kubernetes.md)** - Kubernetes 架构与实践
 
 **外部参考**：

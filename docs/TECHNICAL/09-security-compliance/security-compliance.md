@@ -48,6 +48,9 @@
   - [09.10.7 安全合规检查清单](#09107-安全合规检查清单)
   - [09.10.8 安全工具集成矩阵](#09108-安全工具集成矩阵)
 - [09.11 参考](#0911-参考)
+  - [09.11.1 隔离栈相关文档](#09111-隔离栈相关文档)
+  - [09.11.2 安全相关文档](#09112-安全相关文档)
+  - [09.11.3 其他相关文档](#09113-其他相关文档)
 
 ---
 
@@ -345,6 +348,16 @@ FIPS 合规策略:
 - **策略脱敏**：使用策略定义脱敏规则，灵活控制
 
 ### 09.6.3 OPA-Wasm 数据脱敏
+
+> **💡 隔离层次关联**：OPA-Wasm 数据脱敏使用 L-4 沙盒化层的 WASM 运行时
+> （WasmEdge）进行快速策略执行。详细的技术解析请参考：
+>
+> - **[29. 隔离栈](../29-isolation-stack/isolation-stack.md)** - 完整的隔离栈技
+>   术解析
+> - **[L-4 沙盒化层](../29-isolation-stack/layers/L-4-sandboxing.md)** - WASM 运
+>   行时详细文档
+> - **[隔离层次对比文档](../29-isolation-stack/layers/isolation-comparison.md)** -
+>   WASM 性能对比和安全特点
 
 **OPA-Wasm 数据脱敏**：使用 OPA-Wasm 进行细粒度数据脱敏。
 
@@ -894,18 +907,30 @@ vault kv put secret/cosign-key \
 
 ## 09.11 参考
 
-**关联文档**：
+### 09.11.1 隔离栈相关文档
 
-- **[10. 技术决策模型](../../COGNITIVE/10-decision-models/decision-models.md)** -
-  技术选型决策框架
+- **[29. 隔离栈](../29-isolation-stack/isolation-stack.md)** - 完整的隔离栈技术
+  解析，包括安全隔离
+- **[L-3 容器化层](../29-isolation-stack/layers/L-3-containerization.md)** - 容
+  器安全最佳实践
+- **[L-4 沙盒化层](../29-isolation-stack/layers/L-4-sandboxing.md)** - WASM 安全
+  特点（OPA-Wasm）
+- **[隔离层次对比文档](../29-isolation-stack/layers/isolation-comparison.md)** -
+  安全特点对比和技术选型
+
+### 09.11.2 安全相关文档
+
+- **[25. 社区最佳实践](../25-community-best-practices/community-best-practices.md)** -
+  安全最佳实践
+- **[11. 故障排查](../11-troubleshooting/troubleshooting.md)** - 安全相关故障排
+  查
+- **[06. OPA 策略](../06-policy-opa/policy-opa.md)** - OPA 策略详细文档
+
+### 09.11.3 其他相关文档
+
 - **[10. 快速参考指南](../../COGNITIVE/10-decision-models/QUICK-REFERENCE.md)** -
   设备访问（USB/PCI/GPU）和内核特性决策快速参考
-- **[10. 一致性检查报告](../../COGNITIVE/10-decision-models/CONSISTENCY-REPORT.md)** -
-  文档一致性检查与 Wikipedia 标准对齐
-- **[06. OPA 策略即代码](../06-policy-opa/policy-opa.md)** - Open Policy Agent
 - **[01. Kubernetes](../01-kubernetes/kubernetes.md)** - Kubernetes 架构与实践
-
-> 完整参考列表见 [REFERENCES.md](../REFERENCES.md)
 
 ---
 

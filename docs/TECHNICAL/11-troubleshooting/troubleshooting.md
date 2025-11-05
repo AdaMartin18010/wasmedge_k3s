@@ -1249,6 +1249,19 @@ K3s(性能=4) ∘ WasmEdge(性能=5) = 边缘Wasm编排(性能=5)
   根据日志关键词快速定位问题层级
 - **[29. 隔离栈 - 观测系统作为第四大基础设施](../29-isolation-stack/isolation-stack.md#2960-观测系统作为第四大基础设施)** -
   为什么观测系统必须，完备性判据，MVP 落地
+- **[隔离层次对比文档 - 故障排查快速参考](../29-isolation-stack/layers/isolation-comparison.md#10-故障排查快速参考)** -
+  诊断命令速查、日志关键词定位、性能问题排查
+
+**隔离栈相关文档**：
+
+- **[29. 隔离栈](../29-isolation-stack/isolation-stack.md)** - 完整的隔离栈技术
+  解析
+- **[L-3 容器化层](../29-isolation-stack/layers/L-3-containerization.md)** - 容
+  器故障排查相关内容
+- **[L-4 沙盒化层](../29-isolation-stack/layers/L-4-sandboxing.md)** - WASM 故障
+  排查相关内容
+- **[隔离层次对比文档](../29-isolation-stack/layers/isolation-comparison.md)** -
+  故障排查快速参考和常见问题 FAQ
 
 **技术规范**：
 

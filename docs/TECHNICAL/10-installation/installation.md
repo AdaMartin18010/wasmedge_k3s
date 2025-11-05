@@ -43,6 +43,9 @@
   - [10.10.4 性能问题](#10104-性能问题)
 - [10.11 部署检查清单](#1011-部署检查清单)
 - [10.12 参考](#1012-参考)
+  - [10.12.1 隔离栈相关文档](#10121-隔离栈相关文档)
+  - [10.12.2 安装部署相关文档](#10122-安装部署相关文档)
+  - [10.12.3 其他相关文档](#10123-其他相关文档)
 
 ---
 
@@ -144,6 +147,16 @@ curl -sfL https://get.k3s.io | K3S_TOKEN=my-secret-token K3S_URL=https://server-
 ```
 
 ### 10.3.3 WasmEdge 支持安装
+
+> **💡 隔离层次关联**：WasmEdge 属于 L-4 沙盒化层，提供快速启动和低资源占用的运
+> 行时。详细的技术解析请参考：
+>
+> - **[29. 隔离栈](../29-isolation-stack/isolation-stack.md)** - 完整的隔离栈技
+>   术解析
+> - **[L-4 沙盒化层](../29-isolation-stack/layers/L-4-sandboxing.md)** - WASM 运
+>   行时详细文档
+> - **[隔离层次对比文档](../29-isolation-stack/layers/isolation-comparison.md)** -
+>   WASM 性能对比和应用场景
 
 **安装 K3s with WasmEdge 支持**：
 
@@ -956,19 +969,28 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.containers[*].resources}'
 
 ## 10.12 参考
 
-**关联文档**：
+### 10.12.1 隔离栈相关文档
 
-- **[10. 技术决策模型](../../COGNITIVE/10-decision-models/decision-models.md)** -
-  技术选型决策框架
+- **[29. 隔离栈](../29-isolation-stack/isolation-stack.md)** - 完整的隔离栈技术
+  解析，包括运行时安装
+- **[L-4 沙盒化层](../29-isolation-stack/layers/L-4-sandboxing.md)** - WasmEdge
+  详细文档和安装指南
+- **[隔离层次对比文档](../29-isolation-stack/layers/isolation-comparison.md)** -
+  运行时性能对比和技术选型
+
+### 10.12.2 安装部署相关文档
+
+- **[02. K3s](../02-k3s/k3s.md)** - K3s 详细文档
+- **[03. WasmEdge](../03-wasm-edge/wasmedge.md)** - WasmEdge 集成指南
+- **[04. 编排运行时](../04-orchestration-runtime/orchestration-runtime.md)** -
+  RuntimeClass 配置文档
+- **[11. 故障排查](../11-troubleshooting/troubleshooting.md)** - 安装和运行时故
+  障排查
+
+### 10.12.3 其他相关文档
+
 - **[10. 快速参考指南](../../COGNITIVE/10-decision-models/QUICK-REFERENCE.md)** -
   设备访问（USB/PCI/GPU）和内核特性决策快速参考
-- **[10. 一致性检查报告](../../COGNITIVE/10-decision-models/CONSISTENCY-REPORT.md)** -
-  文档一致性检查与 Wikipedia 标准对齐
-- **[02. K3s](../02-k3s/k3s.md)** - K3s 轻量级架构
-- **[03. WasmEdge](../03-wasm-edge/wasmedge.md)** - WasmEdge 集成指南
-- **[06. OPA 策略即代码](../06-policy-opa/policy-opa.md)** - Open Policy Agent
-
-> 完整参考列表见 [REFERENCES.md](../REFERENCES.md)
 
 ---
 

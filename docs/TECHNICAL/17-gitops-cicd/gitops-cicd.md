@@ -55,6 +55,9 @@
   - [17.11.2 Flux 常见问题](#17112-flux-常见问题)
 - [17.12 GitOps 最佳实践检查清单](#1712-gitops-最佳实践检查清单)
 - [17.13 参考](#1713-参考)
+  - [17.13.1 隔离栈相关文档](#17131-隔离栈相关文档)
+  - [17.13.2 GitOps 和 CI/CD 相关文档](#17132-gitops-和-cicd-相关文档)
+  - [17.13.3 外部参考](#17133-外部参考)
 
 ---
 
@@ -1290,6 +1293,27 @@ flux reconcile image repository my-app -n flux-system
 ```
 
 ## 17.13 参考
+
+### 17.13.1 隔离栈相关文档
+
+- **[29. 隔离栈](../29-isolation-stack/isolation-stack.md)** - 完整的隔离栈技术
+  解析，包括部署和运行时
+- **[L-3 容器化层](../29-isolation-stack/layers/L-3-containerization.md)** - 容
+  器化层详细文档
+- **[L-4 沙盒化层](../29-isolation-stack/layers/L-4-sandboxing.md)** - WASM 运行
+  时详细文档
+- **[隔离层次对比文档](../29-isolation-stack/layers/isolation-comparison.md)** -
+  运行时性能对比和技术选型
+
+### 17.13.2 GitOps 和 CI/CD 相关文档
+
+- **[10. 安装部署](../10-installation/installation.md)** - 安装和部署指南
+- **[22. 升级和迁移](../22-upgrade-migration/upgrade-migration.md)** - 升级和迁
+  移策略
+- **[21. 镜像仓库和镜像管理](../21-image-registry/image-registry.md)** - 镜像仓
+  库和镜像管理
+
+### 17.13.3 外部参考
 
 - [ArgoCD 官方文档](https://argo-cd.readthedocs.io/)
 - [Flux 官方文档](https://fluxcd.io/docs/)

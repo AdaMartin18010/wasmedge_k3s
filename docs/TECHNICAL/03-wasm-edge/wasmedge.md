@@ -69,6 +69,10 @@
 - [03.16 WasmEdge 故障排查](#0316-wasmedge-故障排查)
   - [03.16.1 常见问题](#03161-常见问题)
 - [03.17 参考](#0317-参考)
+  - [03.17.1 隔离栈相关文档](#03171-隔离栈相关文档)
+  - [03.17.2 WasmEdge 相关文档](#03172-wasmedge-相关文档)
+  - [03.17.3 其他相关文档](#03173-其他相关文档)
+  - [03.17.4 外部参考](#03174-外部参考)
 
 ---
 
@@ -93,6 +97,16 @@
 - **决策分析**：路线选择、场景适配、性能优化
 
 ## 03.2 核心定位
+
+> **💡 隔离层次关联**：WasmEdge 属于 L-4 沙盒化层，提供极速冷启动和低资源占用，
+> 是边缘计算和 Serverless 的理想选择。详细的技术解析请参考：
+>
+> - **[29. 隔离栈](../29-isolation-stack/isolation-stack.md)** - 完整的隔离栈技
+>   术解析
+> - **[L-4 沙盒化层](../29-isolation-stack/layers/L-4-sandboxing.md)** - WASM 运
+>   行时详细文档
+> - **[隔离层次对比文档](../29-isolation-stack/layers/isolation-comparison.md)** -
+>   WASM 性能对比和应用场景匹配
 
 ### 03.2.1 WasmEdge 是什么？
 
@@ -562,6 +576,16 @@ CRI 集成设计:
 ```
 
 ## 03.8 性能优势
+
+> **💡 隔离层次关联**：WasmEdge 作为 L-4 沙盒化层的典型运行时，其性能优势（启动
+> 时间、资源占用、部署密度）远超 L-3 容器化层。详细的技术解析请参考：
+>
+> - **[29. 隔离栈](../29-isolation-stack/isolation-stack.md)** - 完整的隔离栈技
+>   术解析
+> - **[L-4 沙盒化层](../29-isolation-stack/layers/L-4-sandboxing.md)** - WASM 性
+>   能特点详细文档
+> - **[隔离层次对比文档](../29-isolation-stack/layers/isolation-comparison.md)** -
+>   性能对比矩阵和技术选型决策树
 
 ### 03.8.1 对比数据
 
@@ -1262,27 +1286,36 @@ wasmedge --version
 
 ## 03.17 参考
 
-**关联文档**：
+### 03.17.1 隔离栈相关文档
+
+- **[29. 隔离栈](../29-isolation-stack/isolation-stack.md)** - 完整的隔离栈技术
+  解析，包括 WASM 运行时
+- **[L-4 沙盒化层](../29-isolation-stack/layers/L-4-sandboxing.md)** - WASM 运行
+  时详细文档，包含 WasmEdge 最佳实践
+- **[隔离层次对比文档](../29-isolation-stack/layers/isolation-comparison.md)** -
+  WASM 性能对比和应用场景匹配
+
+### 03.17.2 WasmEdge 相关文档
+
+- **[07. 边缘与 Serverless](../07-edge-serverless/edge-serverless.md)** - 边缘计
+  算和 Serverless 场景
+- **[08. AI 推理](../08-ai-inference/ai-inference.md)** - AI 推理应用
+- **[04. 编排运行时](../04-orchestration-runtime/orchestration-runtime.md)** -
+  CRI 和 RuntimeClass 配置
+- **[10. 安装部署](../10-installation/installation.md)** - WasmEdge 安装指南
+
+### 03.17.3 其他相关文档
 
 - **[10. 技术决策模型](../../COGNITIVE/10-decision-models/decision-models.md)** -
   技术选型决策框架
 - **[10. 快速参考指南](../../COGNITIVE/10-decision-models/QUICK-REFERENCE.md)** -
   设备访问（USB/PCI/GPU）和内核特性决策快速参考
-- **[10. 一致性检查报告](../../COGNITIVE/10-decision-models/CONSISTENCY-REPORT.md)** -
-  文档一致性检查与 Wikipedia 标准对齐
 - **[28. 架构框架](../28-architecture-framework/architecture-framework.md)** -
-  多维度架构体系与技术规范（应用架构、场景架构等）
-- **[09. 矩阵视角](../../COGNITIVE/09-matrix-perspective/README.md)** - WasmEdge
-  技术链矩阵分析（Serverless/AI 场景优化）
-- **[11. 边缘与 Serverless](../07-edge-serverless/edge-serverless.md)** - 边缘计
-  算和 Serverless 场景
-- **[12. AI 推理](../08-ai-inference/ai-inference.md)** - AI 推理应用
+  多维度架构体系与技术规范
 
-**外部参考**：
+### 03.17.4 外部参考
 
 [wasmedge-performance]: [WasmEdge 性能基准](https://wasmedge.org/docs/)
-
-> 完整参考列表见 [REFERENCES.md](../REFERENCES.md)
 
 ---
 

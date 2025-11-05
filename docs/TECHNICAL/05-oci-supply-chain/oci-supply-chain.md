@@ -46,6 +46,9 @@
   - [05.11.2 SBOM 生成最佳实践](#05112-sbom-生成最佳实践)
   - [05.11.3 供应链安全最佳实践](#05113-供应链安全最佳实践)
 - [05.12 参考](#0512-参考)
+  - [05.12.1 隔离栈相关文档](#05121-隔离栈相关文档)
+  - [05.12.2 OCI 和供应链相关文档](#05122-oci-和供应链相关文档)
+  - [05.12.3 外部参考](#05123-外部参考)
 
 ---
 
@@ -302,6 +305,16 @@ CMD ["./app"]
 - **构建效率**：分离构建和运行环境，提高构建效率
 
 ### 05.5.3 Wasm-native 构建
+
+> **💡 隔离层次关联**：Wasm-native 构建直接编译到 L-4 沙盒化层的 WASM 格式，无需
+> L-3 容器化层的容器运行时。详细的技术解析请参考：
+>
+> - **[29. 隔离栈](../29-isolation-stack/isolation-stack.md)** - 完整的隔离栈技
+>   术解析
+> - **[L-4 沙盒化层](../29-isolation-stack/layers/L-4-sandboxing.md)** - WASM 运
+>   行时详细文档
+> - **[隔离层次对比文档](../29-isolation-stack/layers/isolation-comparison.md)** -
+>   WASM 构建和部署对比
 
 **Wasm-native 构建**：直接编译到 Wasm 目标，无需容器运行时。
 
@@ -807,10 +820,26 @@ fi
 
 ## 05.12 参考
 
+### 05.12.1 隔离栈相关文档
+
+- **[29. 隔离栈](../29-isolation-stack/isolation-stack.md)** - 完整的隔离栈技术
+  解析，包括容器镜像和 WASM 构建
+- **[L-3 容器化层](../29-isolation-stack/layers/L-3-containerization.md)** - 容
+  器镜像和运行时详细文档
+- **[L-4 沙盒化层](../29-isolation-stack/layers/L-4-sandboxing.md)** - WASM 构建
+  和部署详细文档
+- **[隔离层次对比文档](../29-isolation-stack/layers/isolation-comparison.md)** -
+  镜像构建和部署对比
+
+### 05.12.2 OCI 和供应链相关文档
+
+- **[09. 安全合规](../09-security-compliance/security-compliance.md)** - 镜像签
+  名和供应链安全最佳实践
+- **[06. OPA 策略](../06-policy-opa/policy-opa.md)** - OPA 策略详细文档（包含镜
+  像验证策略）
+
+### 05.12.3 外部参考
+
 - [OCI Artifact](https://github.com/opencontainers/artifacts)
 
 > 完整参考列表见 [REFERENCES.md](../REFERENCES.md)
-
----
-
-**最后更新**：2025-11-06 **维护者**：项目团队

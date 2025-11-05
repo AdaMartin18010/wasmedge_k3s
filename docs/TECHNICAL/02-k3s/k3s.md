@@ -68,6 +68,10 @@
 - [02.17 K3s 故障排查](#0217-k3s-故障排查)
   - [02.17.1 常见问题](#02171-常见问题)
 - [02.18 参考](#0218-参考)
+  - [02.18.1 隔离栈相关文档](#02181-隔离栈相关文档)
+  - [02.18.2 K3s 相关文档](#02182-k3s-相关文档)
+  - [02.18.3 其他相关文档](#02183-其他相关文档)
+  - [02.18.4 外部参考](#02184-外部参考)
 
 ---
 
@@ -178,6 +182,18 @@ graph LR
 ```
 
 ## 02.3 架构设计
+
+> **💡 隔离层次关联**：K3s 内置 containerd 作为容器运行时（L-3 容器化层），同时
+> 支持 WasmEdge（L-4 沙盒化层）通过 `--wasm` flag 启用。详细的技术解析请参考：
+>
+> - **[29. 隔离栈](../29-isolation-stack/isolation-stack.md)** - 完整的隔离栈技
+>   术解析
+> - **[L-3 容器化层](../29-isolation-stack/layers/L-3-containerization.md)** -
+>   containerd 详细文档
+> - **[L-4 沙盒化层](../29-isolation-stack/layers/L-4-sandboxing.md)** -
+>   WasmEdge 详细文档
+> - **[隔离层次对比文档](../29-isolation-stack/layers/isolation-comparison.md)** -
+>   运行时性能对比和技术选型
 
 ### 02.3.1 单二进制架构
 
@@ -1336,24 +1352,35 @@ kubectl top pods
 
 ## 02.18 参考
 
-**关联文档**：
+### 02.18.1 隔离栈相关文档
 
-- **[10. 技术决策模型](../../COGNITIVE/10-decision-models/decision-models.md)** -
-  技术选型决策框架
+- **[29. 隔离栈](../29-isolation-stack/isolation-stack.md)** - 完整的隔离栈技术
+  解析，包括运行时接口
+- **[L-3 容器化层](../29-isolation-stack/layers/L-3-containerization.md)** -
+  containerd 详细文档
+- **[L-4 沙盒化层](../29-isolation-stack/layers/L-4-sandboxing.md)** - WasmEdge
+  详细文档（K3s 支持）
+- **[隔离层次对比文档](../29-isolation-stack/layers/isolation-comparison.md)** -
+  运行时性能对比和技术选型
+
+### 02.18.2 K3s 相关文档
+
+- **[01. Kubernetes](../01-kubernetes/kubernetes.md)** - Kubernetes 详细文档
+- **[03. WasmEdge](../03-wasm-edge/wasmedge.md)** - WasmEdge 运行时详细文档
+- **[04. 编排运行时](../04-orchestration-runtime/orchestration-runtime.md)** -
+  CRI 和 RuntimeClass 配置
+- **[07. 边缘与 Serverless](../07-edge-serverless/edge-serverless.md)** - 边缘计
+  算和 Serverless 场景
+- **[10. 安装部署](../10-installation/installation.md)** - K3s 安装指南
+
+### 02.18.3 其他相关文档
+
 - **[10. 快速参考指南](../../COGNITIVE/10-decision-models/QUICK-REFERENCE.md)** -
   设备访问（USB/PCI/GPU）和内核特性决策快速参考
-- **[10. 一致性检查报告](../../COGNITIVE/10-decision-models/CONSISTENCY-REPORT.md)** -
-  文档一致性检查与 Wikipedia 标准对齐
 - **[28. 架构框架](../28-architecture-framework/architecture-framework.md)** -
-  多维度架构体系与技术规范（场景架构、技术架构等）
-- **[09. 矩阵视角](../../COGNITIVE/09-matrix-perspective/README.md)** - K3s 技术
-  链矩阵分析（边缘场景优化）
-- **[11. 边缘与 Serverless](../07-edge-serverless/edge-serverless.md)** - 边缘计
-  算和 Serverless 场景
-- **[12. AI 推理](../08-ai-inference/ai-inference.md)** - AI 推理应用
-- **[15. 安装部署](../10-installation/installation.md)** - 安装和部署指南
+  多维度架构体系与技术规范
 
-**外部参考**：
+### 02.18.4 外部参考
 
 [^k3s-architecture]: [K3s Architecture](https://docs.k3s.io/architecture)
 [^k3s-memory]:

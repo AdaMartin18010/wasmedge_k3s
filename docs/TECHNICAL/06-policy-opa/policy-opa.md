@@ -42,6 +42,9 @@
 - [06.12 OPA 故障排查](#0612-opa-故障排查)
   - [06.12.1 常见问题](#06121-常见问题)
 - [06.13 参考](#0613-参考)
+  - [06.13.1 隔离栈相关文档](#06131-隔离栈相关文档)
+  - [06.13.2 OPA 策略相关文档](#06132-opa-策略相关文档)
+  - [06.13.3 外部参考](#06133-外部参考)
 
 ---
 
@@ -115,6 +118,16 @@ OPA 设计:
 ```
 
 ## 06.3 Rego → Wasm 编译
+
+> **💡 隔离层次关联**：OPA-Wasm 使用 L-4 沙盒化层的 WasmEdge 运行时执行策略，提
+> 供快速策略执行和低资源占用。详细的技术解析请参考：
+>
+> - **[29. 隔离栈](../29-isolation-stack/isolation-stack.md)** - 完整的隔离栈技
+>   术解析
+> - **[L-4 沙盒化层](../29-isolation-stack/layers/L-4-sandboxing.md)** - WASM 运
+>   行时详细文档，包含 OPA-Wasm 应用场景
+> - **[隔离层次对比文档](../29-isolation-stack/layers/isolation-comparison.md)** -
+>   WASM 性能对比和应用场景匹配
 
 ### 06.3.1 编译流程
 
@@ -766,27 +779,32 @@ kubectl top pod <opa-pod-name>
 
 ## 06.13 参考
 
-**关联文档**：
+### 06.13.1 隔离栈相关文档
+
+- **[29. 隔离栈](../29-isolation-stack/isolation-stack.md)** - 完整的隔离栈技术
+  解析，包括 OPA-Wasm 应用场景
+- **[L-4 沙盒化层](../29-isolation-stack/layers/L-4-sandboxing.md)** - WASM 运行
+  时详细文档，包含 OPA-Wasm 最佳实践
+- **[隔离层次对比文档](../29-isolation-stack/layers/isolation-comparison.md)** -
+  WASM 性能对比和应用场景匹配
+
+### 06.13.2 OPA 策略相关文档
 
 - **[09. 安全合规](../09-security-compliance/security-compliance.md)** - 安全与
-  合规最佳实践
+  合规最佳实践（包含 OPA-Wasm 数据脱敏）
 - **[03. WasmEdge](../03-wasm-edge/wasmedge.md)** - WasmEdge 运行时和 Wasm 容器
   化
 - **[10. 安装部署](../10-installation/installation.md)** - K3s + WasmEdge + OPA
   完整安装指南
 - **[04. 编排运行时](../04-orchestration-runtime/orchestration-runtime.md)** -
   CRI 和 RuntimeClass 配置
-- [37. 矩阵视角](../../COGNITIVE/09-matrix-perspective/README.md) - 策略（P）概
-  念矩阵分析（OPA 技术链矩阵）
 
-**外部参考**：
+### 06.13.3 外部参考
 
 - [OPA 官方文档](https://www.openpolicyagent.org/docs/)
 - [Gatekeeper 官方文档](https://open-policy-agent.github.io/gatekeeper/)
 - [Rego 语言参考](https://www.openpolicyagent.org/docs/latest/policy-language/)
 - [OPA Wasm 支持](https://www.openpolicyagent.org/docs/latest/wasm/)
-
-> 完整参考列表见 [REFERENCES.md](../REFERENCES.md)
 
 ---
 
