@@ -2,7 +2,7 @@
 
 ## 📑 目录
 
-- [� 目录](#-目录)
+- [📑 目录](#-目录)
 - [📖 文档简介](#-文档简介)
   - [1. 核心主题](#1-核心主题)
   - [2. 文档结构](#2-文档结构)
@@ -33,7 +33,11 @@
 ```text
 ARCHITECTURE/
 ├── 00-theory/             # 理论论证（纯形式化）⭐
+│   └── 07-system-model/   # ⭐ 新增：7层4域模型形式化论证
+│       ├── README.md
+│       └── 7-layer-4-domain-formalization.md
 ├── 01-implementation/     # 实现细节（纯技术）📋
+├── SYSTEM-VIEW-INTEGRATION.md ⭐ 新增：系统视角与架构文档整合指南
 ├── 01-views/              # 多视角架构视图
 │   ├── decomposition-composition.md
 │   ├── virtualization-view.md
@@ -75,7 +79,8 @@ ARCHITECTURE/
 │   ├── payment-gateway.md
 │   ├── e-commerce-platform.md
 │   ├── financial-system.md
-│   └── multi-cloud-hybrid.md
+│   ├── multi-cloud-hybrid.md
+│   └── system-view-cases-analysis.md ⭐ 新增：system_view 案例扩展分析
 ├── 08-concepts-relations/ # ⚠️ 已删除（内容合并到 architecture-view/06-concepts-properties-relations/）
 │   └── README.md（重定向文档）
 ├── 09-november-2025-special/ # ⚠️ 已删除（内容合并到 05-trends-2025/november-2025-special/）
@@ -105,6 +110,16 @@ ARCHITECTURE/
   - **交叉引用**：包含完整的理论论证文档链接（20+ 个链接）
   - **位置**：`../../architecture_view.md`
   - **重构报告**：[重构完成报告](REFACTORING-COMPLETE-V2-2025-11-04.md)
+- **系统视角文档**：`system_view.md` ⭐ 新增 - 从系统视角（7 层 4 域模型）梳理虚
+  拟化、容器化、沙盒化
+  - **位置**：`../../system_view.md`
+  - **整合指南**：[SYSTEM-VIEW-INTEGRATION.md](SYSTEM-VIEW-INTEGRATION.md) ⭐ 新
+    增
+  - **理论论证**：[00-theory/07-system-model/](00-theory/07-system-model/) ⭐ 新
+    增
+  - **案例扩
+    展**：[07-case-studies/system-view-cases-analysis.md](07-case-studies/system-view-cases-analysis.md)
+    ⭐ 新增
 - **技术文档**：`docs/TECHNICAL/` - 技术实现细节
 - **认知模型**：`docs/COGNITIVE/` - 认知框架和理论模型
 - **参考资源**：[REFERENCES.md](REFERENCES.md) - 参考标准、框架、工具和资源
@@ -125,8 +140,8 @@ ARCHITECTURE/
 
 ---
 
-**更新时间**：2025-11-04 **版本**：v1.0 **参考**：基于 `architecture_view.md` 内
-容扩展
+**更新时间**：2025-11-05 **版本**：v1.1 **参考**：基于 `architecture_view.md` 和
+`system_view.md` 内容扩展
 
 ## 📌 推荐阅读顺序
 

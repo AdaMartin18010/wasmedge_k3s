@@ -251,6 +251,10 @@
 - [电商平台案例](07-case-studies/e-commerce-platform.md) - 电商平台架构设计
 - [金融系统案例](07-case-studies/financial-system.md) - 金融系统架构设计
 - [多云混合案例](07-case-studies/multi-cloud-hybrid.md) - 多云混合架构设计
+- [CI/CD 高密度场景](07-case-studies/cicd-high-density.md) ⭐ 新增 - 基于 system_view 案例 B
+- [桌面应用沙盒化](07-case-studies/desktop-sandboxing.md) ⭐ 新增 - 基于 system_view 案例 C
+- [浏览器 WASM 架构](07-case-studies/browser-wasm.md) ⭐ 新增 - 基于 system_view 案例 E
+- [system_view 案例扩展分析](07-case-studies/system-view-cases-analysis.md) ⭐ 新增 - system_view 案例的详细分析
 
 ### 8. 概念属性关系 (`08-concepts-relations/`) ⚠️ 已删除
 
