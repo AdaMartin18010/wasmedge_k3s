@@ -1,8 +1,7 @@
 # 05. OCI 与供应链安全：镜像签名与 SBOM
 
-## 目录
+## 📑 目录
 
-- [目录](#目录)
 - [05.1 文档定位](#051-文档定位)
 - [05.2 OCI Artifact](#052-oci-artifact)
   - [05.2.1 OCI Artifact 概念](#0521-oci-artifact-概念)
