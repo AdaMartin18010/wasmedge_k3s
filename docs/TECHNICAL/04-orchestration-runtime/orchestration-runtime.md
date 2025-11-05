@@ -39,6 +39,7 @@
 - [04.11 最佳实践](#0411-最佳实践)
   - [04.11.1 RuntimeClass 配置最佳实践](#04111-runtimeclass-配置最佳实践)
   - [04.11.2 多运行时管理最佳实践](#04112-多运行时管理最佳实践)
+  - [04.11.3 编排运行时检查清单](#04113-编排运行时检查清单)
 - [04.12 参考](#0412-参考)
 
 ---
@@ -663,6 +664,45 @@ crictl info | grep runtime
 - ✅ 使用 RuntimeClass 明确指定运行时
 - ✅ 监控不同运行时的资源使用
 - ✅ 定期评估运行时的性能
+
+### 04.11.3 编排运行时检查清单
+
+**运行时配置检查**：
+
+- [ ] containerd 或 CRI-O 已正确安装和配置
+- [ ] 所需运行时（runc/crun/runwasi）已安装
+- [ ] containerd 配置中包含所有运行时的 handler
+- [ ] RuntimeClass 资源已创建（kubectl get runtimeclass）
+- [ ] 节点支持所需的运行时（检查节点标签）
+
+**Wasm 运行时检查**：
+
+- [ ] WasmEdge 已安装（wasmedge --version）
+- [ ] crun 或 runwasi 已安装并可用
+- [ ] RuntimeClass `wasm` 已创建且 handler 为 `crun`
+- [ ] 节点标签 `wasm-runtime=enabled` 已设置（如需要）
+- [ ] Wasm 镜像 OCI 注释正确（module.wasm.image/variant）
+
+**混合工作负载检查**：
+
+- [ ] 多个 RuntimeClass 已创建（runc/wasm）
+- [ ] 节点标签区分不同运行时支持
+- [ ] Pod 正确指定 runtimeClassName
+- [ ] 调度策略正确（节点选择器/污点容忍）
+
+**运行时验证**：
+
+- [ ] Linux 容器 Pod 可以正常启动（使用默认或 runc）
+- [ ] Wasm 容器 Pod 可以正常启动（使用 wasm RuntimeClass）
+- [ ] 运行时切换正常工作
+- [ ] 资源限制在运行时层面正确应用
+
+**监控和日志**：
+
+- [ ] 运行时相关指标正常收集
+- [ ] containerd 日志正常记录运行时信息
+- [ ] Pod 事件显示正确的运行时选择
+- [ ] 运行时性能指标在合理范围内
 
 ## 04.12 参考
 

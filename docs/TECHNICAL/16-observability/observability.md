@@ -61,7 +61,8 @@
   - [16.11.3 多语言 SDK 集成](#16113-多语言-sdk-集成)
   - [16.11.4 自定义指标和追踪](#16114-自定义指标和追踪)
   - [16.11.5 采样和聚合策略](#16115-采样和聚合策略)
-- [16.12 参考](#1612-参考)
+- [16.12 可观测性检查清单](#1612-可观测性检查清单)
+- [16.13 参考](#1613-参考)
 
 ---
 
@@ -1831,7 +1832,84 @@ exporters:
         action: drop
 ```
 
-## 16.12 参考
+## 16.12 可观测性检查清单
+
+**Metrics 监控检查**：
+
+- [ ] Prometheus 已正确安装和配置
+- [ ] Prometheus 服务正常运行（kubectl get pods -n monitoring）
+- [ ] ServiceMonitor/PodMonitor 资源已创建
+- [ ] 指标抓取配置正确（scrape_configs）
+- [ ] Prometheus 存储配置合理（保留时间、存储大小）
+- [ ] 指标查询正常（PromQL）
+- [ ] metrics-server 正常运行（kubectl top nodes/pods）
+- [ ] Node Exporter 正常运行（如需要）
+
+**Logging 日志检查**：
+
+- [ ] 日志收集组件已安装（Loki/Fluentd/Fluent Bit）
+- [ ] 日志收集服务正常运行
+- [ ] 日志采集配置正确（DaemonSet/Deployment）
+- [ ] 日志存储配置合理（保留时间、存储大小）
+- [ ] 日志查询正常（LogQL/LokiQL）
+- [ ] 日志路由规则配置正确
+- [ ] 日志解析规则配置正确（如需要）
+
+**Tracing 链路追踪检查**：
+
+- [ ] OpenTelemetry Collector 已安装
+- [ ] Tracing 后端已配置（Jaeger/Tempo/Zipkin）
+- [ ] 应用自动检测已配置（Auto-Instrumentation）
+- [ ] Trace 采集配置正确
+- [ ] Trace 查询正常
+- [ ] Trace 采样策略配置合理
+- [ ] Trace 关联性正常（Trace ID 传播）
+
+**可视化检查**：
+
+- [ ] Grafana 已安装和配置
+- [ ] Grafana 数据源配置正确（Prometheus/Loki/Jaeger）
+- [ ] Grafana 仪表板已创建
+- [ ] 仪表板展示正常
+- [ ] Grafana 告警规则已配置（如需要）
+- [ ] Grafana 用户权限配置正确
+
+**告警检查**：
+
+- [ ] Alertmanager 已安装和配置
+- [ ] PrometheusRule 资源已创建
+- [ ] 告警规则配置正确
+- [ ] 告警路由规则配置正确
+- [ ] 告警通知渠道配置正确（邮件/Slack/Webhook）
+- [ ] 告警测试正常
+- [ ] 告警抑制规则配置合理（如需要）
+
+**可观测性集成检查**：
+
+- [ ] eBPF 工具已集成（如需要）
+- [ ] OpenTelemetry Collector 配置完整
+- [ ] 指标、日志、追踪关联性正常
+- [ ] 跨服务追踪正常
+- [ ] 服务依赖关系正确展示
+
+**可观测性性能检查**：
+
+- [ ] 指标采集频率合理
+- [ ] 日志采集性能正常
+- [ ] Trace 采样率合理
+- [ ] 存储使用率在合理范围内
+- [ ] 查询性能满足需求
+
+**可观测性安全检查**：
+
+- [ ] 可观测性数据访问权限控制
+- [ ] 敏感信息脱敏处理（日志）
+- [ ] 可观测性数据加密传输
+- [ ] 可观测性数据访问审计
+
+---
+
+## 16.13 参考
 
 **关联文档**：
 

@@ -61,9 +61,14 @@
   - [01.14.1 案例 1：使用 kubeadm 部署 Kubernetes 集群](#01141-案例-1使用-kubeadm-部署-kubernetes-集群)
   - [01.14.2 案例 2：部署应用和服务](#01142-案例-2部署应用和服务)
   - [01.14.3 案例 3：配置 ConfigMap 和 Secret](#01143-案例-3配置-configmap-和-secret)
-- [01.15 Kubernetes 故障排查](#0115-kubernetes-故障排查)
-  - [01.15.1 常见问题](#01151-常见问题)
-- [01.16 参考](#0116-参考)
+- [01.15 Kubernetes 最佳实践](#0115-kubernetes-最佳实践)
+  - [01.15.1 集群部署最佳实践](#01151-集群部署最佳实践)
+  - [01.15.2 资源管理最佳实践](#01152-资源管理最佳实践)
+  - [01.15.3 安全配置最佳实践](#01153-安全配置最佳实践)
+  - [01.15.4 Kubernetes 检查清单](#01154-kubernetes-检查清单)
+- [01.16 Kubernetes 故障排查](#0116-kubernetes-故障排查)
+  - [01.16.1 常见问题](#01161-常见问题)
+- [01.17 参考](#0117-参考)
 
 ---
 
@@ -1543,9 +1548,133 @@ spec:
         name: app-config
 ```
 
-## 01.15 Kubernetes 故障排查
+## 01.15 Kubernetes 最佳实践
 
-### 01.15.1 常见问题
+### 01.15.1 集群部署最佳实践
+
+**集群规划**：
+
+- ✅ 生产环境至少 3 个控制平面节点，确保高可用
+- ✅ 使用独立的 etcd 集群，避免单点故障
+- ✅ 配置合适的 Pod 网络 CIDR，避免 IP 冲突
+- ✅ 使用 CNI 插件（如 Flannel、Calico）提供网络功能
+
+**节点配置**：
+
+- ✅ 为节点设置合适的污点和标签
+- ✅ 配置资源预留（kube-reserved, system-reserved）
+- ✅ 启用节点自动修复功能
+- ✅ 定期更新节点操作系统和容器运行时
+
+**安全配置**：
+
+- ✅ 使用 RBAC 限制访问权限
+- ✅ 启用网络策略（NetworkPolicy）
+- ✅ 使用 Pod 安全策略（PodSecurityPolicy）或 Pod 安全标准
+  （PodSecurityStandard）
+- ✅ 定期轮换证书和密钥
+
+### 01.15.2 资源管理最佳实践
+
+**资源请求和限制**：
+
+- ✅ 为所有 Pod 设置资源请求（requests）
+- ✅ 为所有 Pod 设置资源限制（limits）
+- ✅ 使用 ResourceQuota 限制命名空间资源
+- ✅ 使用 LimitRange 设置默认资源限制
+
+**资源配额示例**：
+
+```yaml
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: compute-quota
+  namespace: production
+spec:
+  hard:
+    requests.cpu: "10"
+    requests.memory: 20Gi
+    limits.cpu: "20"
+    limits.memory: 40Gi
+    persistentvolumeclaims: "10"
+```
+
+**命名空间管理**：
+
+- ✅ 使用命名空间隔离不同环境（dev, staging, prod）
+- ✅ 为每个命名空间设置资源配额
+- ✅ 使用标签和注解组织资源
+- ✅ 定期清理未使用的资源
+
+### 01.15.3 安全配置最佳实践
+
+**RBAC 配置**：
+
+- ✅ 遵循最小权限原则
+- ✅ 为 ServiceAccount 设置最小权限
+- ✅ 使用 Role 和 RoleBinding（命名空间级别）
+- ✅ 使用 ClusterRole 和 ClusterRoleBinding（集群级别）要谨慎
+
+**网络策略**：
+
+- ✅ 默认拒绝所有流量
+- ✅ 明确允许需要的流量
+- ✅ 使用命名空间标签组织策略
+- ✅ 测试网络策略不阻塞正常流量
+
+**镜像安全**：
+
+- ✅ 使用私有镜像仓库
+- ✅ 扫描镜像漏洞
+- ✅ 使用镜像签名验证
+- ✅ 定期更新基础镜像
+
+### 01.15.4 Kubernetes 检查清单
+
+**集群部署前检查**：
+
+- [ ] 控制平面节点数量 >= 3（生产环境）
+- [ ] etcd 集群配置完成（如使用外部 etcd）
+- [ ] CNI 插件已选择并准备安装
+- [ ] Pod 网络 CIDR 已规划
+- [ ] Service 网络 CIDR 已规划
+- [ ] 节点操作系统版本符合要求
+- [ ] 容器运行时已安装（containerd/docker）
+- [ ] 防火墙规则已配置
+- [ ] SSL 证书已准备
+
+**运行时检查**：
+
+- [ ] 所有节点状态为 Ready
+- [ ] 所有系统 Pod 运行正常
+- [ ] CoreDNS 正常运行
+- [ ] Metrics Server 正常运行
+- [ ] 存储类（StorageClass）配置完成
+- [ ] 资源使用率在合理范围内
+- [ ] 监控和告警配置完成
+
+**安全配置检查**：
+
+- [ ] RBAC 配置完成
+- [ ] ServiceAccount 权限最小化
+- [ ] 网络策略配置完成（如需要）
+- [ ] Pod 安全策略/标准配置完成
+- [ ] 镜像仓库访问控制配置完成
+- [ ] 审计日志配置完成
+
+**备份和恢复检查**：
+
+- [ ] etcd 备份策略已制定
+- [ ] 备份自动化配置完成
+- [ ] 恢复流程已测试
+- [ ] 灾难恢复计划已制定
+
+---
+
+## 01.16 Kubernetes 故障排查
+
+### 01.16.1 常见问题
 
 **问题 1：Pod 处于 Pending 状态**:
 
@@ -1593,7 +1722,7 @@ systemctl status containerd
 systemctl status docker
 ```
 
-## 01.16 参考
+## 01.17 参考
 
 **关联文档**：
 

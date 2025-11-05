@@ -68,9 +68,14 @@
   - [12.14.1 案例 1：K3s 部署 Flannel CNI](#12141-案例-1k3s-部署-flannel-cni)
   - [12.14.2 案例 2：配置 Nginx Ingress Controller](#12142-案例-2配置-nginx-ingress-controller)
   - [12.14.3 案例 3：配置 NetworkPolicy 网络隔离](#12143-案例-3配置-networkpolicy-网络隔离)
-- [12.15 网络故障排查](#1215-网络故障排查)
-  - [12.15.1 常见问题](#12151-常见问题)
-- [12.16 参考](#1216-参考)
+- [12.15 网络最佳实践](#1215-网络最佳实践)
+  - [12.15.1 CNI 插件最佳实践](#12151-cni-插件最佳实践)
+  - [12.15.2 Service 和 Ingress 最佳实践](#12152-service-和-ingress-最佳实践)
+  - [12.15.3 网络策略最佳实践](#12153-网络策略最佳实践)
+  - [12.15.4 网络检查清单](#12154-网络检查清单)
+- [12.16 网络故障排查](#1216-网络故障排查)
+  - [12.16.1 常见问题](#12161-常见问题)
+- [12.17 参考](#1217-参考)
 
 ---
 
@@ -1320,9 +1325,125 @@ spec:
           port: 5432
 ```
 
-## 12.15 网络故障排查
+## 12.15 网络最佳实践
 
-### 12.15.1 常见问题
+### 12.15.1 CNI 插件最佳实践
+
+**CNI 插件选择**：
+
+- ✅ **K3s 默认**：使用 Flannel（VXLAN 模式），简单可靠
+- ✅ **网络策略需求**：使用 Calico 或 Cilium（支持 NetworkPolicy）
+- ✅ **高性能需求**：使用 Cilium（eBPF 加速）
+- ✅ **边缘场景**：使用 Flannel（资源占用低）
+
+**CNI 配置建议**：
+
+- ✅ 为 CNI 插件配置资源限制
+- ✅ 定期检查 CNI Pod 健康状态
+- ✅ 配置 CNI 日志级别（生产环境使用 INFO）
+- ✅ 监控 CNI 插件性能指标
+
+### 12.15.2 Service 和 Ingress 最佳实践
+
+**Service 配置**：
+
+- ✅ 使用 ClusterIP 作为默认 Service 类型
+- ✅ 明确指定 Service 的 selector
+- ✅ 使用 headless Service（StatefulSet 场景）
+- ✅ 配置 Service sessionAffinity（需要会话保持的场景）
+
+**Ingress 配置**：
+
+- ✅ 使用 ingressClassName 明确指定 Ingress Controller
+- ✅ 配置 Ingress 的 TLS 证书（生产环境必须）
+- ✅ 使用 Ingress annotations 优化性能（如 Nginx 限流）
+- ✅ 配置 Ingress 的 health check path
+
+**性能优化**：
+
+- ✅ 使用 IPVS 模式（kube-proxy）提升性能
+- ✅ 配置 Ingress Controller 的 HPA（自动扩缩容）
+- ✅ 使用 ExternalName Service 减少 DNS 查询
+
+### 12.15.3 网络策略最佳实践
+
+**策略设计**：
+
+- ✅ 采用最小权限原则（默认拒绝所有流量）
+- ✅ 先允许 DNS 访问（CoreDNS）
+- ✅ 按命名空间隔离（namespaceSelector）
+- ✅ 使用标签选择器精确匹配 Pod
+
+**策略管理**：
+
+- ✅ 文档化网络策略规则
+- ✅ 定期审查网络策略
+- ✅ 使用策略模板（Policy Template）
+- ✅ 监控网络策略拒绝的流量
+
+**安全建议**：
+
+- ✅ 生产环境必须启用 NetworkPolicy
+- ✅ 限制 Pod 的出站流量（Egress）
+- ✅ 限制 Pod 的入站流量（Ingress）
+- ✅ 禁止跨命名空间的默认访问
+
+### 12.15.4 网络检查清单
+
+**CNI 插件检查**：
+
+- [ ] CNI 插件已正确安装和配置
+- [ ] CNI Pod 运行正常（kubectl get pods -n kube-system | grep cni）
+- [ ] 节点间网络连通性正常
+- [ ] Pod 网络 IP 地址分配正常
+- [ ] CNI 配置文件和二进制文件存在
+
+**Service 检查**：
+
+- [ ] Service 资源已创建（kubectl get svc）
+- [ ] Service 的 Endpoints 正确（kubectl get endpoints）
+- [ ] Service DNS 解析正常（nslookup service-name）
+- [ ] Service 负载均衡正常工作
+- [ ] NodePort/LoadBalancer 端口可访问（如适用）
+
+**Ingress 检查**：
+
+- [ ] Ingress Controller 已安装（kubectl get pods -n ingress-nginx）
+- [ ] Ingress Controller Service 为 LoadBalancer 或 NodePort
+- [ ] Ingress 资源已创建（kubectl get ingress）
+- [ ] Ingress 路由规则正确
+- [ ] TLS 证书配置正确（如适用）
+- [ ] 外部访问 Ingress 正常
+
+**网络策略检查**：
+
+- [ ] CNI 插件支持 NetworkPolicy（Calico/Cilium）
+- [ ] NetworkPolicy 资源已创建（kubectl get networkpolicy）
+- [ ] 默认策略已配置（默认拒绝或允许）
+- [ ] DNS 访问策略已配置
+- [ ] 关键应用网络隔离已配置
+- [ ] 网络策略规则测试通过
+
+**网络性能检查**：
+
+- [ ] Pod 间延迟 < 1ms（同节点）
+- [ ] Pod 间延迟 < 10ms（跨节点）
+- [ ] 网络吞吐量满足需求
+- [ ] CNI 插件资源使用正常
+- [ ] kube-proxy 模式正确（iptables/IPVS）
+
+**网络监控检查**：
+
+- [ ] 网络流量监控配置完成
+- [ ] NetworkPolicy 拒绝流量有告警
+- [ ] Service 和 Ingress 指标正常收集
+- [ ] CNI 插件日志正常记录
+
+---
+
+## 12.16 网络故障排查
+
+### 12.16.1 常见问题
 
 **问题 1：Pod 无法访问 Service**:
 
@@ -1374,7 +1495,7 @@ kubectl get svc -n ingress-nginx
 iptables -L -n | grep ingress
 ```
 
-## 12.16 参考
+## 12.17 参考
 
 **关联文档**：
 

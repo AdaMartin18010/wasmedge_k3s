@@ -55,9 +55,10 @@
   - [18.11.2 代码质量最佳实践](#18112-代码质量最佳实践)
   - [18.11.3 性能优化最佳实践](#18113-性能优化最佳实践)
   - [18.11.4 安全最佳实践](#18114-安全最佳实践)
-- [18.12 Operator 故障排查](#1812-operator-故障排查)
-  - [18.12.1 常见问题](#18121-常见问题)
-- [18.13 参考](#1813-参考)
+- [18.12 Operator 检查清单](#1812-operator-检查清单)
+- [18.13 Operator 故障排查](#1813-operator-故障排查)
+  - [18.13.1 常见问题](#18131-常见问题)
+- [18.14 参考](#1814-参考)
 
 ---
 
@@ -1497,9 +1498,69 @@ kubectl apply -f config/samples/web_v1_nginx.yaml
 - ✅ **TLS 加密**：Webhook 使用 TLS 加密
 - ✅ **审计日志**：记录重要操作日志
 
-## 18.12 Operator 故障排查
+## 18.12 Operator 检查清单
 
-### 18.12.1 常见问题
+**CRD 开发检查**：
+
+- [ ] CRD Schema 定义完整和正确
+- [ ] CRD 验证规则配置正确（OpenAPI Schema）
+- [ ] CRD 版本管理策略已制定
+- [ ] CRD 转换 Webhook 已配置（如需要）
+- [ ] CRD 子资源（Status/Scale）已配置（如需要）
+
+**Operator 开发检查**：
+
+- [ ] Operator 项目结构符合规范（Kubebuilder/Operator SDK）
+- [ ] Controller Reconcile 逻辑实现正确
+- [ ] Controller 幂等性已保证
+- [ ] Finalizer 已实现（资源清理）
+- [ ] Status 更新逻辑正确
+- [ ] 事件记录完整
+
+**Webhook 开发检查**：
+
+- [ ] Mutating Webhook 已配置（如需要）
+- [ ] Validating Webhook 已配置（如需要）
+- [ ] Webhook 证书管理正确
+- [ ] Webhook Service 配置正确
+- [ ] Webhook 失败策略配置合理
+
+**Operator 部署检查**：
+
+- [ ] Operator 镜像已构建和推送
+- [ ] Operator Deployment 配置正确
+- [ ] RBAC 权限配置完整
+- [ ] ServiceAccount 配置正确
+- [ ] 资源限制配置合理
+- [ ] Operator 健康检查配置正确
+
+**Operator 测试检查**：
+
+- [ ] 单元测试覆盖率高
+- [ ] 集成测试通过
+- [ ] E2E 测试通过
+- [ ] Webhook 测试通过
+- [ ] 性能测试通过
+
+**Operator 监控检查**：
+
+- [ ] Operator 指标正常收集
+- [ ] Operator 日志正常记录
+- [ ] Operator 告警规则已配置
+- [ ] Operator 性能监控完成
+
+**Operator 安全检查**：
+
+- [ ] RBAC 权限最小化
+- [ ] Webhook TLS 加密配置正确
+- [ ] Secret 管理安全
+- [ ] 审计日志正常记录
+
+---
+
+## 18.13 Operator 故障排查
+
+### 18.13.1 常见问题
 
 **问题 1：CRD 无法创建**:
 
@@ -1546,7 +1607,7 @@ kubectl get secret -n mysql-operator-system
 kubectl apply -f config/samples/database_v1_mysql.yaml --dry-run=server
 ```
 
-## 18.13 参考
+## 18.14 参考
 
 - [Kubernetes CRD 文档](https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/)
 - [Operator SDK 文档](https://sdk.operatorframework.io/)

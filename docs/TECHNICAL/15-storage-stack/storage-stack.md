@@ -61,9 +61,14 @@
   - [15.12.1 案例 1：K3s 配置本地存储](#15121-案例-1k3s-配置本地存储)
   - [15.12.2 案例 2：配置 NFS 存储](#15122-案例-2配置-nfs-存储)
   - [15.12.3 案例 3：配置 Ceph RBD 存储](#15123-案例-3配置-ceph-rbd-存储)
-- [15.13 存储故障排查](#1513-存储故障排查)
-  - [15.13.1 常见问题](#15131-常见问题)
-- [15.14 参考](#1514-参考)
+- [15.13 存储最佳实践](#1513-存储最佳实践)
+  - [15.13.1 CSI 驱动最佳实践](#15131-csi-驱动最佳实践)
+  - [15.13.2 PV/PVC 最佳实践](#15132-pvpvc-最佳实践)
+  - [15.13.3 存储性能最佳实践](#15133-存储性能最佳实践)
+  - [15.13.4 存储检查清单](#15134-存储检查清单)
+- [15.14 存储故障排查](#1514-存储故障排查)
+  - [15.14.1 常见问题](#15141-常见问题)
+- [15.15 参考](#1515-参考)
 
 ---
 
@@ -1278,9 +1283,123 @@ volumeBindingMode: Immediate
 EOF
 ```
 
-## 15.13 存储故障排查
+## 15.13 存储最佳实践
 
-### 15.13.1 常见问题
+### 15.13.1 CSI 驱动最佳实践
+
+**CSI 驱动选择**：
+
+- ✅ **K3s 默认**：使用 Local Path Provisioner（简单、轻量）
+- ✅ **共享存储需求**：使用 NFS CSI（适合共享文件存储）
+- ✅ **高性能需求**：使用 Ceph RBD（块存储、高性能）
+- ✅ **云环境**：使用云厂商 CSI（AWS EBS、Azure Disk、GCE PD）
+
+**CSI 驱动配置**：
+
+- ✅ 为 CSI Driver Pod 配置资源限制
+- ✅ 定期检查 CSI Driver 健康状态
+- ✅ 配置 CSI Driver 的日志级别
+- ✅ 监控 CSI Driver 的性能指标
+
+### 15.13.2 PV/PVC 最佳实践
+
+**StorageClass 配置**：
+
+- ✅ 为不同应用场景创建不同的 StorageClass
+- ✅ 设置合理的 reclaimPolicy（Retain/Delete）
+- ✅ 配置 allowVolumeExpansion（支持卷扩容）
+- ✅ 选择合适的 volumeBindingMode（Immediate/WaitForFirstConsumer）
+
+**PV/PVC 管理**：
+
+- ✅ 使用动态供给（StorageClass）而非静态供给
+- ✅ 明确指定 PVC 的 accessMode（RWO/RWX/ROX）
+- ✅ 设置合理的 PVC 大小（避免过度分配）
+- ✅ 定期清理未使用的 PVC（避免资源浪费）
+
+**存储安全**：
+
+- ✅ 使用 StorageClass 的 secret（如需要）
+- ✅ 配置存储加密（加密存储卷）
+- ✅ 限制 PVC 的命名空间访问
+- ✅ 审计存储使用情况
+
+### 15.13.3 存储性能最佳实践
+
+**性能优化**：
+
+- ✅ 根据应用需求选择存储类型（块存储 vs 文件存储）
+- ✅ 使用本地存储提升性能（StatefulSet + Local PV）
+- ✅ 配置存储后端性能参数（如 Ceph 的 pg_num）
+- ✅ 监控存储 IOPS、吞吐量、延迟
+
+**容量管理**：
+
+- ✅ 设置存储配额（ResourceQuota）
+- ✅ 定期监控存储使用情况
+- ✅ 配置存储告警（存储空间不足）
+- ✅ 规划存储扩容策略
+
+### 15.13.4 存储检查清单
+
+**CSI 驱动检查**：
+
+- [ ] CSI Driver 已正确安装（kubectl get pods -n kube-system | grep csi）
+- [ ] CSI Driver Pod 运行正常
+- [ ] StorageClass 资源已创建（kubectl get storageclass）
+- [ ] CSI Driver 与存储后端连接正常
+- [ ] CSI Driver 日志正常记录
+
+**StorageClass 检查**：
+
+- [ ] StorageClass 的 provisioner 正确
+- [ ] StorageClass 的 reclaimPolicy 配置合理
+- [ ] StorageClass 的 volumeBindingMode 正确
+- [ ] StorageClass 支持卷扩容（如需要）
+- [ ] 默认 StorageClass 已设置（如需要）
+
+**PV/PVC 检查**：
+
+- [ ] PVC 已创建（kubectl get pvc）
+- [ ] PVC 状态为 Bound
+- [ ] PV 已自动创建（动态供给）或已存在（静态供给）
+- [ ] PV 的 accessMode 正确
+- [ ] PV 的大小满足需求
+
+**存储挂载检查**：
+
+- [ ] Pod 可以正常挂载 PVC
+- [ ] 卷挂载路径正确
+- [ ] 存储读写权限正确
+- [ ] Pod 可以正常访问存储数据
+- [ ] 节点上的挂载点正确
+
+**存储性能检查**：
+
+- [ ] 存储 IOPS 满足需求
+- [ ] 存储吞吐量满足需求
+- [ ] 存储延迟在合理范围内
+- [ ] 存储后端健康状态正常（如 Ceph health）
+
+**存储安全检查**：
+
+- [ ] 存储加密已配置（如需要）
+- [ ] 存储访问权限正确
+- [ ] 存储密钥管理安全
+- [ ] 存储审计日志正常记录
+
+**存储监控检查**：
+
+- [ ] 存储使用率监控配置完成
+- [ ] 存储性能指标正常收集
+- [ ] 存储告警规则已配置
+- [ ] 存储备份策略已制定（如需要）
+
+---
+
+## 15.14 存储故障排查
+
+### 15.14.1 常见问题
 
 **问题 1：PVC 无法绑定**:
 
@@ -1334,4 +1453,4 @@ ceph health
 kubectl exec <pod-name> -- df -h /data
 ```
 
-## 15.14 参考
+## 15.15 参考

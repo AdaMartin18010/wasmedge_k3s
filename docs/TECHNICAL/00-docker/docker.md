@@ -56,7 +56,16 @@
   - [00.13.2 镜像体积模型](#00132-镜像体积模型)
   - [00.13.3 构建性能模型](#00133-构建性能模型)
   - [00.13.4 缓存命中率模型](#00134-缓存命中率模型)
-- [00.14 参考](#0014-参考)
+- [00.14 实际部署案例](#0014-实际部署案例)
+  - [00.14.1 案例 1：多阶段构建优化镜像](#00141-案例-1多阶段构建优化镜像)
+  - [00.14.2 案例 2：Docker Compose 多容器应用](#00142-案例-2docker-compose-多容器应用)
+  - [00.14.3 案例 3：Docker 网络配置](#00143-案例-3docker-网络配置)
+- [00.15 Docker 综合最佳实践](#0015-docker-综合最佳实践)
+  - [00.15.1 生产环境部署最佳实践](#00151-生产环境部署最佳实践)
+  - [00.15.2 Docker 检查清单](#00152-docker-检查清单)
+- [00.16 Docker 故障排查](#0016-docker-故障排查)
+  - [00.16.1 常见问题](#00161-常见问题)
+- [00.17 参考](#0017-参考)
 
 ---
 
@@ -1102,7 +1111,313 @@ $$\min_{B} T(B) = \min_{B} \left(T(\text{download}) + T(\text{build}) + T(\text{
 - 变化层在顶层
 - 合理顺序的 Dockerfile
 
-## 00.14 参考
+## 00.14 实际部署案例
+
+### 00.14.1 案例 1：多阶段构建优化镜像
+
+**场景**：构建一个 Go Web 应用，优化镜像体积
+
+**优化前 Dockerfile**：
+
+```dockerfile
+FROM golang:1.21
+WORKDIR /app
+COPY . .
+RUN go build -o app .
+CMD ["./app"]
+```
+
+**优化后 Dockerfile（多阶段构建）**：
+
+```dockerfile
+# 构建阶段
+FROM golang:1.21 AS builder
+WORKDIR /app
+COPY go.mod go.sum ./
+RUN go mod download
+COPY . .
+RUN CGO_ENABLED=0 GOOS=linux go build -o app .
+
+# 运行阶段
+FROM distroless/base:nonroot
+WORKDIR /app
+COPY --from=builder /app/app .
+USER nonroot:nonroot
+CMD ["./app"]
+```
+
+**优化效果**：
+
+- **镜像体积**：从 ~800MB 减少到 ~20MB（减少 97.5%）
+- **安全性**：使用 distroless 基础镜像，最小攻击面
+- **权限**：使用非 root 用户运行
+
+### 00.14.2 案例 2：Docker Compose 多容器应用
+
+**场景**：部署包含 Web 应用、数据库和 Redis 的完整应用栈
+
+**docker-compose.yml**：
+
+```yaml
+version: "3.8"
+
+services:
+  web:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - DATABASE_URL=postgres://db:5432/myapp
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - db
+      - redis
+    networks:
+      - app-network
+    volumes:
+      - app-data:/app/data
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=myapp
+      - POSTGRES_USER=myapp
+      - POSTGRES_PASSWORD=secret
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  redis:
+    image: redis:7-alpine
+    command: redis-server --appendonly yes
+    volumes:
+      - redis-data:/data
+    networks:
+      - app-network
+
+volumes:
+  app-data:
+  postgres-data:
+  redis-data:
+
+networks:
+  app-network:
+    driver: bridge
+```
+
+**部署命令**：
+
+```bash
+# 启动所有服务
+docker-compose up -d
+
+# 查看服务状态
+docker-compose ps
+
+# 查看日志
+docker-compose logs -f web
+
+# 停止所有服务
+docker-compose down
+```
+
+### 00.14.3 案例 3：Docker 网络配置
+
+**场景**：配置自定义网络，实现容器间通信和网络隔离
+
+**创建自定义网络**：
+
+```bash
+# 创建 bridge 网络
+docker network create --driver bridge \
+  --subnet=172.20.0.0/16 \
+  --gateway=172.20.0.1 \
+  my-network
+
+# 创建 overlay 网络（Swarm 模式）
+docker network create --driver overlay \
+  --attachable \
+  my-overlay-network
+```
+
+**使用自定义网络**：
+
+```bash
+# 运行容器并连接到网络
+docker run -d --name app1 \
+  --network my-network \
+  nginx:alpine
+
+docker run -d --name app2 \
+  --network my-network \
+  nginx:alpine
+
+# 容器间可以通过容器名通信
+docker exec app1 ping app2
+```
+
+## 00.15 Docker 综合最佳实践
+
+### 00.15.1 生产环境部署最佳实践
+
+**镜像管理**：
+
+- ✅ 使用多阶段构建减小镜像体积
+- ✅ 使用 distroless 或 scratch 基础镜像
+- ✅ 固定基础镜像版本（避免使用 latest）
+- ✅ 定期更新基础镜像和安全补丁
+
+**安全配置**：
+
+- ✅ 使用非 root 用户运行容器
+- ✅ 设置只读文件系统（read-only root filesystem）
+- ✅ 限制容器能力（capabilities）
+- ✅ 使用镜像签名验证（Docker Content Trust）
+- ✅ 定期扫描镜像漏洞
+
+**资源管理**：
+
+- ✅ 为容器设置 CPU 和内存限制
+- ✅ 使用健康检查（healthcheck）
+- ✅ 配置自动重启策略
+- ✅ 监控容器资源使用情况
+
+**数据管理**：
+
+- ✅ 使用命名卷（named volumes）管理数据
+- ✅ 定期备份重要数据
+- ✅ 避免使用 Bind Mount（生产环境）
+- ✅ 使用 tmpfs 存储临时数据
+
+### 00.15.2 Docker 检查清单
+
+**镜像构建检查**：
+
+- [ ] 使用多阶段构建（如适用）
+- [ ] 基础镜像版本固定（不使用 latest）
+- [ ] 镜像体积合理（< 500MB 优先）
+- [ ] 使用 .dockerignore 排除不必要的文件
+- [ ] Dockerfile 层顺序合理（稳定层在底层）
+- [ ] 减少层数（合并 RUN 命令）
+
+**安全配置检查**：
+
+- [ ] 使用非 root 用户运行容器
+- [ ] 设置只读文件系统（如适用）
+- [ ] 限制容器能力（capabilities）
+- [ ] 镜像已签名（如适用）
+- [ ] 镜像已扫描漏洞
+- [ ] 不使用特权模式（privileged）
+
+**运行时配置检查**：
+
+- [ ] CPU 和内存限制已设置
+- [ ] 健康检查已配置
+- [ ] 自动重启策略已设置
+- [ ] 日志配置合理（日志驱动、日志大小限制）
+- [ ] 网络配置正确（网络模式、端口映射）
+- [ ] 数据卷配置正确（Volume 或 Bind Mount）
+
+**监控和维护检查**：
+
+- [ ] 监控工具已配置（如 Prometheus）
+- [ ] 日志收集已配置（如 ELK Stack）
+- [ ] 备份策略已制定
+- [ ] 更新策略已制定
+- [ ] 灾难恢复计划已制定
+
+---
+
+## 00.16 Docker 故障排查
+
+### 00.16.1 常见问题
+
+**问题 1：容器无法启动**:
+
+```bash
+# 检查容器日志
+docker logs <container-id>
+
+# 检查容器详细信息
+docker inspect <container-id>
+
+# 检查 Docker daemon 日志
+journalctl -u docker -f
+
+# 检查容器启动命令
+docker run --rm <image> <command>
+```
+
+**问题 2：镜像构建失败**:
+
+```bash
+# 检查构建日志
+docker build --progress=plain -t test:latest .
+
+# 使用 --no-cache 重新构建
+docker build --no-cache -t test:latest .
+
+# 检查 Dockerfile 语法
+docker build --target builder -t test:latest .
+
+# 检查构建上下文
+docker build --progress=plain -f Dockerfile .
+```
+
+**问题 3：容器无法访问网络**:
+
+```bash
+# 检查容器网络配置
+docker inspect <container-id> | grep -A 20 NetworkSettings
+
+# 检查 Docker 网络
+docker network ls
+docker network inspect <network-name>
+
+# 检查防火墙规则
+iptables -L -n | grep DOCKER
+
+# 测试容器间通信
+docker exec <container-id> ping <other-container>
+```
+
+**问题 4：容器磁盘空间不足**:
+
+```bash
+# 检查 Docker 磁盘使用
+docker system df
+
+# 清理未使用的资源
+docker system prune -a
+
+# 检查特定容器磁盘使用
+docker exec <container-id> df -h
+
+# 检查镜像和容器大小
+docker images --format "table {{.Repository}}\t{{.Tag}}\t{{.Size}}"
+docker ps -a --format "table {{.Names}}\t{{.Size}}"
+```
+
+**问题 5：容器性能问题**:
+
+```bash
+# 检查容器资源使用
+docker stats <container-id>
+
+# 检查容器进程
+docker top <container-id>
+
+# 检查存储驱动性能
+docker info | grep -i storage
+
+# 检查网络性能
+docker exec <container-id> iperf3 -c <target>
+```
+
+---
+
+## 00.17 参考
 
 **关联文档**：
 
