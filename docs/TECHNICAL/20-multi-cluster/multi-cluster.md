@@ -2,6 +2,7 @@
 
 ## 📑 目录
 
+- [📑 目录](#-目录)
 - [20.1 文档定位](#201-文档定位)
 - [20.2 多集群管理技术栈全景](#202-多集群管理技术栈全景)
   - [20.2.1 多集群架构定义](#2021-多集群架构定义)
@@ -38,7 +39,14 @@
   - [20.10.1 集群规划](#20101-集群规划)
   - [20.10.2 网络配置](#20102-网络配置)
   - [20.10.3 应用部署](#20103-应用部署)
-- [20.11 参考](#2011-参考)
+- [20.11 实际部署案例](#2011-实际部署案例)
+  - [20.11.1 案例 1：Karmada 多集群联邦部署](#20111-案例-1karmada-多集群联邦部署)
+  - [20.11.2 案例 2：Rancher Fleet 边缘集群管理](#20112-案例-2rancher-fleet-边缘集群管理)
+  - [20.11.3 案例 3：跨集群服务发现（Istio Multi-Cluster）](#20113-案例-3跨集群服务发现istio-multi-cluster)
+  - [20.11.4 案例 4：ArgoCD 多集群应用部署](#20114-案例-4argocd-多集群应用部署)
+- [20.12 多集群故障排查](#2012-多集群故障排查)
+  - [20.12.1 常见问题](#20121-常见问题)
+- [20.13 参考](#2013-参考)
 
 ---
 
@@ -694,7 +702,346 @@ K3s 支持通过 Rancher Fleet 或其他工具管理多个 K3s 集群。
 3. **监控验证**：部署后验证功能
 4. **故障转移**：配置自动故障转移
 
-## 20.11 参考
+## 20.11 实际部署案例
+
+### 20.11.1 案例 1：Karmada 多集群联邦部署
+
+**场景**：使用 Karmada 管理 3 个 Kubernetes 集群（2 个云端 + 1 个边缘）
+
+**部署步骤**：
+
+```bash
+# 1. 安装 Karmada Control Plane
+kubectl create namespace karmada-system
+helm repo add karmada https://charts.karmada.io
+helm install karmada karmada/karmada \
+  --namespace karmada-system \
+  --create-namespace
+
+# 2. 注册成员集群
+# 集群 1：云端生产集群
+karmadactl join member-cluster-1 \
+  --karmada-context=karmada-apiserver \
+  --cluster-kubeconfig=/path/to/cluster1-kubeconfig
+
+# 集群 2：云端测试集群
+karmadactl join member-cluster-2 \
+  --karmada-context=karmada-apiserver \
+  --cluster-kubeconfig=/path/to/cluster2-kubeconfig
+
+# 集群 3：边缘集群（K3s）
+karmadactl join edge-cluster \
+  --karmada-context=karmada-apiserver \
+  --cluster-kubeconfig=/path/to/edge-kubeconfig
+
+# 3. 验证集群注册
+karmadactl get clusters --karmada-context=karmada-apiserver
+```
+
+**部署应用到多集群**：
+
+```yaml
+# myapp-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+        - name: app
+          image: myregistry.com/myapp:v1.0.0
+---
+# PropagationPolicy
+apiVersion: policy.karmada.io/v1alpha1
+kind: PropagationPolicy
+metadata:
+  name: myapp-propagation
+spec:
+  resourceSelectors:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: myapp
+  placement:
+    clusterAffinity:
+      clusterNames:
+        - member-cluster-1
+        - member-cluster-2
+    replicaScheduling:
+      replicaDivisionPreference: Weighted
+      replicaSchedulingType: Divided
+      weightPreference:
+        staticWeightList:
+          - targetCluster:
+              clusterNames:
+                - member-cluster-1
+            weight: 2
+          - targetCluster:
+              clusterNames:
+                - member-cluster-2
+            weight: 1
+```
+
+### 20.11.2 案例 2：Rancher Fleet 边缘集群管理
+
+**场景**：使用 Rancher Fleet 管理 100+ 边缘 K3s 集群
+
+**部署步骤**：
+
+```bash
+# 1. 在主集群安装 Fleet
+helm repo add fleet https://charts.rancher.io
+helm install fleet fleet/fleet \
+  --namespace fleet-system \
+  --create-namespace
+
+# 2. 创建 GitRepo
+kubectl apply -f - <<EOF
+apiVersion: fleet.cattle.io/v1alpha1
+kind: GitRepo
+metadata:
+  name: edge-apps
+  namespace: fleet-default
+spec:
+  repo: https://github.com/example/edge-apps.git
+  branch: main
+  paths:
+    - apps/**
+EOF
+
+# 3. 边缘集群自动注册
+# Fleet 会自动发现并注册 K3s 集群
+```
+
+**Fleet 配置示例**：
+
+```yaml
+# apps/myapp/fleet.yaml
+namespace: default
+helm:
+  chart: myapp
+  repo: https://charts.example.com
+  version: 1.0.0
+  values:
+    replicaCount: 1
+---
+# apps/myapp/cluster-group.yaml
+apiVersion: fleet.cattle.io/v1alpha1
+kind: ClusterGroup
+metadata:
+  name: edge-clusters
+spec:
+  selector:
+    matchLabels:
+      environment: edge
+---
+# apps/myapp/bundle.yaml
+apiVersion: fleet.cattle.io/v1alpha1
+kind: Bundle
+metadata:
+  name: myapp-edge
+spec:
+  targets:
+    - clusterGroup: edge-clusters
+      namespace: default
+```
+
+### 20.11.3 案例 3：跨集群服务发现（Istio Multi-Cluster）
+
+**场景**：使用 Istio 实现跨集群服务发现和流量管理
+
+**部署步骤**：
+
+```bash
+# 1. 在每个集群安装 Istio
+istioctl install --set values.global.multiCluster.clusterName=cluster1
+
+# 2. 配置集群间网络
+# 创建 Secret 包含远程集群的 kubeconfig
+istioctl create-remote-secret \
+  --name=cluster2 \
+  --kubeconfig=/path/to/cluster2-kubeconfig \
+  | kubectl apply -f -
+
+# 3. 配置服务发现
+# 在每个集群创建 ServiceEntry
+kubectl apply -f - <<EOF
+apiVersion: networking.istio.io/v1beta1
+kind: ServiceEntry
+metadata:
+  name: myapp-cluster2
+spec:
+  hosts:
+    - myapp.cluster2.svc.cluster.local
+  ports:
+    - number: 8080
+      name: http
+      protocol: HTTP
+  resolution: DNS
+  location: MESH_INTERNAL
+EOF
+```
+
+**跨集群流量路由**：
+
+```yaml
+# VirtualService for cross-cluster routing
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: myapp
+spec:
+  hosts:
+    - myapp.example.com
+  http:
+    - match:
+        - headers:
+            x-cluster:
+              exact: cluster2
+      route:
+        - destination:
+            host: myapp.cluster2.svc.cluster.local
+            port:
+              number: 8080
+    - route:
+        - destination:
+            host: myapp.cluster1.svc.cluster.local
+            port:
+              number: 8080
+          weight: 70
+        - destination:
+            host: myapp.cluster2.svc.cluster.local
+            port:
+              number: 8080
+          weight: 30
+```
+
+### 20.11.4 案例 4：ArgoCD 多集群应用部署
+
+**场景**：使用 ArgoCD 在多个集群中部署应用
+
+**部署步骤**：
+
+```bash
+# 1. 在主集群安装 ArgoCD
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+# 2. 添加远程集群
+argocd cluster add cluster2-context \
+  --name cluster2 \
+  --kubeconfig=/path/to/cluster2-kubeconfig
+
+# 3. 创建 ApplicationSet 自动部署到多集群
+kubectl apply -f - <<EOF
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: myapp
+  namespace: argocd
+spec:
+  generators:
+    - clusters:
+        selector:
+          matchLabels:
+            environment: production
+  template:
+    metadata:
+      name: "{{name}}-myapp"
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/example/gitops-repo.git
+        targetRevision: main
+        path: apps/myapp
+      destination:
+        server: "{{server}}"
+        namespace: default
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+EOF
+```
+
+## 20.12 多集群故障排查
+
+### 20.12.1 常见问题
+
+**问题 1：集群无法加入联邦**
+
+```bash
+# 检查网络连接
+ping <cluster-api-server>
+
+# 检查 kubeconfig
+kubectl --kubeconfig=/path/to/cluster-kubeconfig get nodes
+
+# 检查集群状态
+karmadactl get clusters --karmada-context=karmada-apiserver
+
+# 查看详细错误
+karmadactl describe cluster <cluster-name> --karmada-context=karmada-apiserver
+```
+
+**问题 2：跨集群服务无法访问**
+
+```bash
+# 检查服务发现配置
+kubectl get serviceentry -A
+
+# 检查 VirtualService
+kubectl get virtualservice -A
+
+# 检查网络策略
+kubectl get networkpolicies -A
+
+# 测试跨集群连接
+kubectl run test-pod --image=busybox --rm -it -- \
+  wget -O- http://service.cluster2.svc.cluster.local:8080
+```
+
+**问题 3：应用无法分发到成员集群**
+
+```bash
+# 检查 PropagationPolicy
+kubectl get propagationpolicy -A
+
+# 检查应用状态
+karmadactl get deployment myapp --karmada-context=karmada-apiserver
+
+# 检查成员集群状态
+kubectl get deployment myapp -n default --context=member-cluster-1
+
+# 查看详细事件
+kubectl describe propagationpolicy myapp-propagation --karmada-context=karmada-apiserver
+```
+
+**问题 4：Fleet 无法同步到边缘集群**
+
+```bash
+# 检查 GitRepo 状态
+kubectl get gitrepo -n fleet-default
+
+# 检查 Bundle 状态
+kubectl get bundle -n fleet-default
+
+# 检查边缘集群状态
+kubectl get clusters -n fleet-default
+
+# 查看 Fleet 日志
+kubectl logs -n fleet-system deployment/fleet-controller -f
+```
+
+## 20.13 参考
 
 - [Karmada 官方文档](https://karmada.io/docs/)
 - [Clusternet 官方文档](https://clusternet.io/docs/)

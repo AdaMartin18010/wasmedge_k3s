@@ -2,6 +2,7 @@
 
 ## 📑 目录
 
+- [📑 目录](#-目录)
 - [18.1 文档定位](#181-文档定位)
 - [18.2 Operator 技术栈全景](#182-operator-技术栈全景)
   - [18.2.1 Operator 模式](#1821-operator-模式)
@@ -45,7 +46,18 @@
   - [18.9.1 小规模集群组合](#1891-小规模集群组合)
   - [18.9.2 大规模集群组合](#1892-大规模集群组合)
   - [18.9.3 自定义 Operator 组合](#1893-自定义-operator-组合)
-- [18.10 参考](#1810-参考)
+- [18.10 实际开发案例](#1810-实际开发案例)
+  - [18.10.1 案例 1：使用 Kubebuilder 开发简单 Operator](#18101-案例-1使用-kubebuilder-开发简单-operator)
+  - [18.10.2 案例 2：开发 Validating Webhook](#18102-案例-2开发-validating-webhook)
+  - [18.10.3 案例 3：使用 Operator SDK 开发 Helm Operator](#18103-案例-3使用-operator-sdk-开发-helm-operator)
+- [18.11 Operator 开发最佳实践](#1811-operator-开发最佳实践)
+  - [18.11.1 开发流程最佳实践](#18111-开发流程最佳实践)
+  - [18.11.2 代码质量最佳实践](#18112-代码质量最佳实践)
+  - [18.11.3 性能优化最佳实践](#18113-性能优化最佳实践)
+  - [18.11.4 安全最佳实践](#18114-安全最佳实践)
+- [18.12 Operator 故障排查](#1812-operator-故障排查)
+  - [18.12.1 常见问题](#18121-常见问题)
+- [18.13 参考](#1813-参考)
 
 ---
 
@@ -1004,7 +1016,537 @@ spec:
 - ✅ 完整生态
 - ✅ 生产级功能
 
-## 18.10 参考
+## 18.10 实际开发案例
+
+### 18.10.1 案例 1：使用 Kubebuilder 开发简单 Operator
+
+**场景**：开发一个简单的 MySQL Operator，自动创建和管理 MySQL 实例
+
+**步骤 1：初始化项目**：
+
+```bash
+# 安装 Kubebuilder
+# 参考：https://book.kubebuilder.io/quick-start.html
+
+# 创建项目
+mkdir mysql-operator
+cd mysql-operator
+kubebuilder init --domain example.com --repo github.com/example/mysql-operator
+
+# 创建 API
+kubebuilder create api --group database --version v1 --kind MySQL
+```
+
+**步骤 2：定义 CRD**：
+
+```go
+// api/v1/mysql_types.go
+package v1
+
+import (
+    metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+)
+
+// MySQLSpec defines the desired state of MySQL
+type MySQLSpec struct {
+    // Replicas is the number of MySQL instances
+    Replicas int32 `json:"replicas,omitempty"`
+
+    // Image is the MySQL image to use
+    Image string `json:"image,omitempty"`
+
+    // StorageSize is the storage size
+    StorageSize string `json:"storageSize,omitempty"`
+
+    // RootPassword is the root password
+    RootPassword string `json:"rootPassword,omitempty"`
+}
+
+// MySQLStatus defines the observed state of MySQL
+type MySQLStatus struct {
+    // Phase represents the current phase
+    Phase string `json:"phase,omitempty"`
+
+    // ReadyReplicas is the number of ready replicas
+    ReadyReplicas int32 `json:"readyReplicas,omitempty"`
+}
+
+// +kubebuilder:object:root=true
+// +kubebuilder:subresource:status
+
+// MySQL is the Schema for the mysqls API
+type MySQL struct {
+    metav1.TypeMeta   `json:",inline"`
+    metav1.ObjectMeta `json:"metadata,omitempty"`
+
+    Spec   MySQLSpec   `json:"spec,omitempty"`
+    Status MySQLStatus `json:"status,omitempty"`
+}
+
+// +kubebuilder:object:root=true
+
+// MySQLList contains a list of MySQL
+type MySQLList struct {
+    metav1.TypeMeta `json:",inline"`
+    metav1.ListMeta `json:"metadata,omitempty"`
+    Items           []MySQL `json:"items"`
+}
+
+func init() {
+    SchemeBuilder.Register(&MySQL{}, &MySQLList{})
+}
+```
+
+**步骤 3：实现 Controller**：
+
+```go
+// controllers/mysql_controller.go
+package controllers
+
+import (
+    "context"
+    appsv1 "k8s.io/api/apps/v1"
+    corev1 "k8s.io/api/core/v1"
+    "k8s.io/apimachinery/pkg/api/errors"
+    metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+    "k8s.io/apimachinery/pkg/runtime"
+    "k8s.io/apimachinery/pkg/util/intstr"
+    ctrl "sigs.k8s.io/controller-runtime"
+    "sigs.k8s.io/controller-runtime/pkg/client"
+    "sigs.k8s.io/controller-runtime/pkg/log"
+
+    databasev1 "github.com/example/mysql-operator/api/v1"
+)
+
+// MySQLReconciler reconciles a MySQL object
+type MySQLReconciler struct {
+    client.Client
+    Scheme *runtime.Scheme
+}
+
+//+kubebuilder:rbac:groups=database.example.com,resources=mysqls,verbs=get;list;watch;create;update;patch;delete
+//+kubebuilder:rbac:groups=database.example.com,resources=mysqls/status,verbs=get;update;patch
+//+kubebuilder:rbac:groups=database.example.com,resources=mysqls/finalizers,verbs=update
+//+kubebuilder:rbac:groups=apps,resources=deployments,verbs=get;list;watch;create;update;patch;delete
+//+kubebuilder:rbac:groups=core,resources=services,verbs=get;list;watch;create;update;patch;delete
+
+func (r *MySQLReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
+    logger := log.FromContext(ctx)
+
+    // Fetch MySQL instance
+    mysql := &databasev1.MySQL{}
+    if err := r.Get(ctx, req.NamespacedName, mysql); err != nil {
+        if errors.IsNotFound(err) {
+            return ctrl.Result{}, nil
+        }
+        return ctrl.Result{}, err
+    }
+
+    // Check if Deployment exists
+    deployment := &appsv1.Deployment{}
+    if err := r.Get(ctx, req.NamespacedName, deployment); err != nil {
+        if errors.IsNotFound(err) {
+            // Create Deployment
+            deployment := r.createDeployment(mysql)
+            if err := r.Create(ctx, deployment); err != nil {
+                logger.Error(err, "Failed to create Deployment")
+                return ctrl.Result{}, err
+            }
+            logger.Info("Created Deployment")
+        } else {
+            return ctrl.Result{}, err
+        }
+    }
+
+    // Check if Service exists
+    service := &corev1.Service{}
+    if err := r.Get(ctx, req.NamespacedName, service); err != nil {
+        if errors.IsNotFound(err) {
+            // Create Service
+            service := r.createService(mysql)
+            if err := r.Create(ctx, service); err != nil {
+                logger.Error(err, "Failed to create Service")
+                return ctrl.Result{}, err
+            }
+            logger.Info("Created Service")
+        } else {
+            return ctrl.Result{}, err
+        }
+    }
+
+    // Update status
+    mysql.Status.Phase = "Running"
+    mysql.Status.ReadyReplicas = *deployment.Spec.Replicas
+    if err := r.Status().Update(ctx, mysql); err != nil {
+        logger.Error(err, "Failed to update status")
+        return ctrl.Result{}, err
+    }
+
+    return ctrl.Result{}, nil
+}
+
+func (r *MySQLReconciler) createDeployment(mysql *databasev1.MySQL) *appsv1.Deployment {
+    replicas := int32(1)
+    if mysql.Spec.Replicas > 0 {
+        replicas = mysql.Spec.Replicas
+    }
+
+    image := "mysql:8.0"
+    if mysql.Spec.Image != "" {
+        image = mysql.Spec.Image
+    }
+
+    deployment := &appsv1.Deployment{
+        ObjectMeta: metav1.ObjectMeta{
+            Name:      mysql.Name,
+            Namespace: mysql.Namespace,
+        },
+        Spec: appsv1.DeploymentSpec{
+            Replicas: &replicas,
+            Selector: &metav1.LabelSelector{
+                MatchLabels: map[string]string{
+                    "app": mysql.Name,
+                },
+            },
+            Template: corev1.PodTemplateSpec{
+                ObjectMeta: metav1.ObjectMeta{
+                    Labels: map[string]string{
+                        "app": mysql.Name,
+                    },
+                },
+                Spec: corev1.PodSpec{
+                    Containers: []corev1.Container{
+                        {
+                            Name:  "mysql",
+                            Image: image,
+                            Env: []corev1.EnvVar{
+                                {
+                                    Name:  "MYSQL_ROOT_PASSWORD",
+                                    Value: mysql.Spec.RootPassword,
+                                },
+                            },
+                            Ports: []corev1.ContainerPort{
+                                {
+                                    ContainerPort: 3306,
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+        },
+    }
+
+    ctrl.SetControllerReference(mysql, deployment, r.Scheme)
+    return deployment
+}
+
+func (r *MySQLReconciler) createService(mysql *databasev1.MySQL) *corev1.Service {
+    service := &corev1.Service{
+        ObjectMeta: metav1.ObjectMeta{
+            Name:      mysql.Name,
+            Namespace: mysql.Namespace,
+        },
+        Spec: corev1.ServiceSpec{
+            Selector: map[string]string{
+                "app": mysql.Name,
+            },
+            Ports: []corev1.ServicePort{
+                {
+                    Port: 3306,
+                    TargetPort: intstr.FromInt(3306),
+                },
+            },
+        },
+    }
+
+    ctrl.SetControllerReference(mysql, service, r.Scheme)
+    return service
+}
+
+// SetupWithManager sets up the controller with the Manager.
+func (r *MySQLReconciler) SetupWithManager(mgr ctrl.Manager) error {
+    return ctrl.NewControllerManagedBy(mgr).
+        For(&databasev1.MySQL{}).
+        Complete(r)
+}
+```
+
+**步骤 4：部署和测试**：
+
+```bash
+# 生成 CRD 和 RBAC
+make manifests
+
+# 安装 CRD
+make install
+
+# 运行 Operator
+make run
+
+# 创建 MySQL 实例
+kubectl apply -f - <<EOF
+apiVersion: database.example.com/v1
+kind: MySQL
+metadata:
+  name: mysql-sample
+spec:
+  replicas: 1
+  image: mysql:8.0
+  storageSize: 10Gi
+  rootPassword: mypassword
+EOF
+```
+
+### 18.10.2 案例 2：开发 Validating Webhook
+
+**场景**：开发一个 Validating Webhook 来验证 Pod 的资源限制
+
+**步骤 1：创建 Webhook**：
+
+```go
+// api/v1/mysql_webhook.go
+package v1
+
+import (
+    apierrors "k8s.io/apimachinery/pkg/api/errors"
+    "k8s.io/apimachinery/pkg/runtime"
+    "k8s.io/apimachinery/pkg/runtime/schema"
+    "k8s.io/apimachinery/pkg/util/validation/field"
+    "sigs.k8s.io/controller-runtime/pkg/webhook"
+    "sigs.k8s.io/controller-runtime/pkg/webhook/admission"
+)
+
+// +kubebuilder:webhook:path=/validate-database-example-com-v1-mysql,mutating=false,failurePolicy=fail,sideEffects=None,groups=database.example.com,resources=mysqls,verbs=create;update,versions=v1,name=vmysql.kb.io,admissionReviewVersions=v1
+
+var _ webhook.Validator = &MySQL{}
+
+// ValidateCreate implements webhook.Validator so a webhook will be registered for the type
+func (r *MySQL) ValidateCreate() (admission.Warnings, error) {
+    return nil, r.validateMySQL()
+}
+
+// ValidateUpdate implements webhook.Validator so a webhook will be registered for the type
+func (r *MySQL) ValidateUpdate(old runtime.Object) (admission.Warnings, error) {
+    return nil, r.validateMySQL()
+}
+
+// ValidateDelete implements webhook.Validator so a webhook will be registered for the type
+func (r *MySQL) ValidateDelete() (admission.Warnings, error) {
+    return nil, nil
+}
+
+func (r *MySQL) validateMySQL() error {
+    var allErrs field.ErrorList
+
+    // Validate replicas
+    if r.Spec.Replicas < 0 {
+        allErrs = append(allErrs, field.Invalid(
+            field.NewPath("spec").Child("replicas"),
+            r.Spec.Replicas,
+            "replicas must be non-negative"))
+    }
+
+    // Validate image
+    if r.Spec.Image == "" {
+        allErrs = append(allErrs, field.Required(
+            field.NewPath("spec").Child("image"),
+            "image is required"))
+    }
+
+    // Validate root password
+    if r.Spec.RootPassword == "" {
+        allErrs = append(allErrs, field.Required(
+            field.NewPath("spec").Child("rootPassword"),
+            "rootPassword is required"))
+    } else if len(r.Spec.RootPassword) < 8 {
+        allErrs = append(allErrs, field.Invalid(
+            field.NewPath("spec").Child("rootPassword"),
+            r.Spec.RootPassword,
+            "rootPassword must be at least 8 characters"))
+    }
+
+    if len(allErrs) == 0 {
+        return nil
+    }
+
+    return apierrors.NewInvalid(
+        schema.GroupKind{Group: "database.example.com", Kind: "MySQL"},
+        r.Name, allErrs)
+}
+```
+
+**步骤 2：生成证书和部署**：
+
+```bash
+# 生成证书
+make manifests
+make install
+
+# 部署 Webhook
+kubectl apply -f config/webhook/manifests.yaml
+```
+
+### 18.10.3 案例 3：使用 Operator SDK 开发 Helm Operator
+
+**场景**：使用 Helm Operator 包装现有的 Helm Chart
+
+**步骤 1：初始化 Helm Operator**：
+
+```bash
+# 创建 Helm Operator
+operator-sdk init --plugins=helm.sdk.operatorframework.io/v1 \
+  --domain=example.com \
+  --project-name=nginx-operator
+
+# 创建 API
+operator-sdk create api \
+  --group=web \
+  --version=v1 \
+  --kind=Nginx \
+  --helm-chart=nginx
+```
+
+**步骤 2：自定义 Helm Chart 值**：
+
+```yaml
+# config/samples/web_v1_nginx.yaml
+apiVersion: web.example.com/v1
+kind: Nginx
+metadata:
+  name: nginx-sample
+spec:
+  replicaCount: 3
+  image:
+    repository: nginx
+    tag: "1.21"
+  service:
+    type: LoadBalancer
+    port: 80
+```
+
+**步骤 3：部署和测试**：
+
+```bash
+# 构建镜像
+make docker-build docker-push IMG=myregistry.com/nginx-operator:v1.0.0
+
+# 部署 Operator
+make deploy IMG=myregistry.com/nginx-operator:v1.0.0
+
+# 创建 Nginx 实例
+kubectl apply -f config/samples/web_v1_nginx.yaml
+```
+
+## 18.11 Operator 开发最佳实践
+
+### 18.11.1 开发流程最佳实践
+
+**开发流程**：
+
+1. **设计阶段**：
+
+   - 明确 Operator 的职责和边界
+   - 设计 CRD Schema
+   - 定义状态和事件
+
+2. **开发阶段**：
+
+   - 使用 Kubebuilder 或 Operator SDK 脚手架
+   - 实现 Reconcile 逻辑
+   - 添加 Webhook 验证
+
+3. **测试阶段**：
+
+   - 单元测试
+   - 集成测试
+   - E2E 测试
+
+4. **部署阶段**：
+   - 使用 OLM 管理生命周期
+   - 配置 RBAC
+   - 监控和告警
+
+### 18.11.2 代码质量最佳实践
+
+**代码质量**：
+
+- ✅ **错误处理**：正确处理所有错误，记录日志
+- ✅ **幂等性**：确保 Reconcile 操作是幂等的
+- ✅ **资源清理**：实现 Finalizer 清理资源
+- ✅ **状态更新**：及时更新 Status，反映实际状态
+- ✅ **事件记录**：记录重要事件，便于调试
+
+### 18.11.3 性能优化最佳实践
+
+**性能优化**：
+
+- ✅ **批量操作**：批量处理多个资源
+- ✅ **缓存使用**：使用 Informer 缓存减少 API 调用
+- ✅ **并发控制**：合理设置并发数，避免资源竞争
+- ✅ **定期同步**：设置合理的 RequeueAfter 时间
+- ✅ **资源限制**：设置合理的资源限制
+
+### 18.11.4 安全最佳实践
+
+**安全实践**：
+
+- ✅ **RBAC 最小权限**：只授予必要的权限
+- ✅ **Webhook 验证**：使用 Webhook 验证输入
+- ✅ **Secret 管理**：使用 Secret 存储敏感信息
+- ✅ **TLS 加密**：Webhook 使用 TLS 加密
+- ✅ **审计日志**：记录重要操作日志
+
+## 18.12 Operator 故障排查
+
+### 18.12.1 常见问题
+
+**问题 1：CRD 无法创建**:
+
+```bash
+# 检查 CRD 定义
+kubectl get crd mysqls.database.example.com -o yaml
+
+# 检查 CRD 验证
+kubectl apply -f config/samples/database_v1_mysql.yaml --dry-run=client
+
+# 检查 Operator 日志
+kubectl logs -n mysql-operator-system deployment/mysql-operator-controller-manager
+```
+
+**问题 2：Controller 不工作**:
+
+```bash
+# 检查 Controller 状态
+kubectl get deployment -n mysql-operator-system
+
+# 检查 Pod 状态
+kubectl get pods -n mysql-operator-system
+
+# 检查日志
+kubectl logs -n mysql-operator-system deployment/mysql-operator-controller-manager
+
+# 检查事件
+kubectl get events --sort-by='.lastTimestamp' -n mysql-operator-system
+```
+
+**问题 3：Webhook 无法访问**:
+
+```bash
+# 检查 Webhook 配置
+kubectl get validatingwebhookconfiguration
+
+# 检查 Service
+kubectl get svc -n mysql-operator-system
+
+# 检查证书
+kubectl get secret -n mysql-operator-system
+
+# 测试 Webhook
+kubectl apply -f config/samples/database_v1_mysql.yaml --dry-run=server
+```
+
+## 18.13 参考
 
 - [Kubernetes CRD 文档](https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/)
 - [Operator SDK 文档](https://sdk.operatorframework.io/)

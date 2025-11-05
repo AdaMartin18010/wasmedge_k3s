@@ -2,6 +2,7 @@
 
 ## 📑 目录
 
+- [📑 目录](#-目录)
 - [22.1 文档定位](#221-文档定位)
 - [22.2 升级和迁移技术栈全景](#222-升级和迁移技术栈全景)
   - [22.2.1 升级和迁移分类](#2221-升级和迁移分类)
@@ -55,7 +56,16 @@
   - [22.11.2 迁移前规划](#22112-迁移前规划)
   - [22.11.3 升级和迁移流程](#22113-升级和迁移流程)
   - [22.11.4 风险控制和回滚](#22114-风险控制和回滚)
-- [22.12 参考](#2212-参考)
+- [22.12 实际迁移案例](#2212-实际迁移案例)
+  - [22.12.1 案例 1：K3s 从 1.28 升级到 1.30（零停机）](#22121-案例-1k3s-从-128-升级到-130零停机)
+  - [22.12.2 案例 2：从 Docker 迁移到 containerd](#22122-案例-2从-docker-迁移到-containerd)
+  - [22.12.3 案例 3：传统容器迁移到 Wasm（渐进式）](#22123-案例-3传统容器迁移到-wasm渐进式)
+  - [22.12.4 案例 4：Velero 备份和恢复](#22124-案例-4velero-备份和恢复)
+  - [22.12.5 案例 5：单集群迁移到多集群（Karmada）](#22125-案例-5单集群迁移到多集群karmada)
+- [22.13 升级和迁移故障排查](#2213-升级和迁移故障排查)
+  - [22.13.1 升级常见问题](#22131-升级常见问题)
+  - [22.13.2 迁移常见问题](#22132-迁移常见问题)
+- [22.14 参考](#2214-参考)
 
 ---
 
@@ -1386,7 +1396,406 @@ velero restore create my-restore --from-backup my-backup
 - ✅ 回滚流程测试
 - ✅ 回滚时间估算
 
-## 22.12 参考
+## 22.12 实际迁移案例
+
+### 22.12.1 案例 1：K3s 从 1.28 升级到 1.30（零停机）
+
+**场景**：生产环境 K3s 集群需要从 1.28 升级到 1.30，包含 100+ 个 Pod
+
+**升级步骤**：
+
+```bash
+# 1. 升级前检查
+kubectl get nodes
+kubectl get pods -A
+kubectl top nodes
+
+# 2. 备份 etcd
+sudo k3s etcd-snapshot --name=pre-upgrade-backup
+
+# 3. 升级主节点
+# 在第一个主节点执行
+curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=v1.30.4+k3s1 sh -
+
+# 等待主节点就绪
+kubectl wait --for=condition=ready node <master-node> --timeout=300s
+
+# 4. 升级其他主节点（如果是多主）
+curl -sfL https://get.k3s.io | \
+  K3S_URL=https://<master-ip>:6443 \
+  K3S_TOKEN=<token> \
+  INSTALL_K3S_VERSION=v1.30.4+k3s1 sh -
+
+# 5. 升级工作节点（逐个升级）
+# 驱逐节点上的 Pod
+kubectl drain <worker-node> --ignore-daemonsets --delete-emptydir-data
+
+# 升级节点
+curl -sfL https://get.k3s.io | \
+  K3S_URL=https://<master-ip>:6443 \
+  K3S_TOKEN=<token> \
+  INSTALL_K3S_VERSION=v1.30.4+k3s1 sh -
+
+# 取消驱逐
+kubectl uncordon <worker-node>
+
+# 6. 验证升级
+kubectl get nodes
+kubectl version
+k3s --version
+```
+
+**升级后验证**：
+
+```bash
+# 检查集群状态
+kubectl get nodes -o wide
+kubectl get pods -A | grep -v Running
+
+# 检查应用功能
+kubectl get svc -A
+curl http://<service-ip>:<port>
+
+# 检查存储
+kubectl get pv,pvc -A
+
+# 检查网络
+kubectl get networkpolicies -A
+```
+
+### 22.12.2 案例 2：从 Docker 迁移到 containerd
+
+**场景**：K3s 集群需要从 Docker 运行时迁移到 containerd
+
+**迁移步骤**：
+
+```bash
+# 1. 备份当前配置
+sudo cp /etc/k3s/config.yaml /etc/k3s/config.yaml.backup
+
+# 2. 停止 K3s
+sudo systemctl stop k3s
+
+# 3. 卸载 Docker（保留镜像数据）
+sudo systemctl stop docker
+sudo systemctl disable docker
+
+# 4. 修改 K3s 配置使用 containerd
+sudo mkdir -p /etc/rancher/k3s
+sudo cat > /etc/rancher/k3s/config.yaml <<EOF
+runtime-endpoint: unix:///run/containerd/containerd.sock
+EOF
+
+# 5. 启动 K3s（会自动使用 containerd）
+sudo systemctl start k3s
+
+# 6. 验证运行时
+kubectl get nodes -o jsonpath='{.items[0].status.nodeInfo.containerRuntimeVersion}'
+# 应该显示：containerd://<version>
+
+# 7. 验证 Pod 运行
+kubectl get pods -A
+```
+
+**迁移后清理**：
+
+```bash
+# 清理 Docker 残留（可选）
+sudo apt-get remove docker-ce docker-ce-cli containerd.io
+sudo rm -rf /var/lib/docker
+```
+
+### 22.12.3 案例 3：传统容器迁移到 Wasm（渐进式）
+
+**场景**：将部分轻量应用从传统容器迁移到 Wasm，降低资源占用
+
+**迁移步骤**：
+
+```bash
+# 1. 准备 Wasm 运行时
+# 安装 WasmEdge 和 crun（参考安装文档）
+
+# 2. 创建 RuntimeClass
+kubectl apply -f - <<EOF
+apiVersion: node.k8s.io/v1
+kind: RuntimeClass
+metadata:
+  name: crun-wasm
+handler: crun
+EOF
+
+# 3. 构建 Wasm 镜像
+# 将应用编译为 Wasm 格式（如使用 Rust、Go 等）
+wasmedgec myapp.wasm myapp.so
+
+# 4. 创建 OCI 镜像
+cat > Dockerfile <<EOF
+FROM scratch
+COPY myapp.wasm /myapp.wasm
+ENTRYPOINT ["/myapp.wasm"]
+EOF
+
+docker build -t myregistry.com/myapp-wasm:v1.0.0 .
+docker push myregistry.com/myapp-wasm:v1.0.0
+
+# 5. 部署 Wasm Pod（与原容器并行）
+kubectl apply -f - <<EOF
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-wasm
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: myapp-wasm
+  template:
+    metadata:
+      labels:
+        app: myapp-wasm
+      annotations:
+        module.wasm.image/variant: compat-smart
+    spec:
+      runtimeClassName: crun-wasm
+      containers:
+      - name: app
+        image: myregistry.com/myapp-wasm:v1.0.0
+        command: ["/myapp.wasm"]
+        resources:
+          requests:
+            cpu: 10m
+            memory: 10Mi
+          limits:
+            cpu: 100m
+            memory: 50Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-wasm
+spec:
+  selector:
+    app: myapp-wasm
+  ports:
+  - port: 8080
+    targetPort: 8080
+EOF
+
+# 6. 流量切换（使用 Service Mesh 或 Ingress）
+# 逐步将流量从传统容器切换到 Wasm Pod
+
+# 7. 验证性能
+kubectl top pods -l app=myapp-wasm
+kubectl logs -l app=myapp-wasm
+
+# 8. 逐步关闭传统容器
+kubectl scale deployment myapp --replicas=0
+```
+
+### 22.12.4 案例 4：Velero 备份和恢复
+
+**场景**：使用 Velero 备份整个命名空间并恢复到新集群
+
+**备份步骤**：
+
+```bash
+# 1. 安装 Velero
+velero install \
+  --provider aws \
+  --plugins velero/velero-plugin-for-aws:v1.8.0 \
+  --bucket my-backup-bucket \
+  --secret-file ./credentials-velero \
+  --use-volume-snapshots=false
+
+# 2. 备份命名空间
+velero backup create myapp-backup-$(date +%Y%m%d) \
+  --include-namespaces production \
+  --wait
+
+# 3. 验证备份
+velero backup describe myapp-backup-$(date +%Y%m%d)
+velero backup logs myapp-backup-$(date +%Y%m%d)
+```
+
+**恢复步骤**：
+
+```bash
+# 1. 在新集群安装 Velero（相同配置）
+velero install \
+  --provider aws \
+  --plugins velero/velero-plugin-for-aws:v1.8.0 \
+  --bucket my-backup-bucket \
+  --secret-file ./credentials-velero \
+  --use-volume-snapshots=false
+
+# 2. 查看可用备份
+velero backup get
+
+# 3. 恢复备份
+velero restore create myapp-restore-$(date +%Y%m%d) \
+  --from-backup myapp-backup-20250101 \
+  --wait
+
+# 4. 验证恢复
+velero restore describe myapp-restore-$(date +%Y%m%d)
+kubectl get pods -n production
+kubectl get svc -n production
+```
+
+### 22.12.5 案例 5：单集群迁移到多集群（Karmada）
+
+**场景**：将单集群应用迁移到 Karmada 多集群联邦
+
+**迁移步骤**：
+
+```bash
+# 1. 安装 Karmada
+# 在主集群安装 Karmada（参考 Karmada 文档）
+
+# 2. 注册成员集群
+karmadactl join member-cluster \
+  --karmada-context=karmada-apiserver \
+  --cluster-kubeconfig=/path/to/member-cluster-kubeconfig
+
+# 3. 创建 PropagationPolicy
+kubectl apply -f - <<EOF
+apiVersion: policy.karmada.io/v1alpha1
+kind: PropagationPolicy
+metadata:
+  name: myapp-propagation
+spec:
+  resourceSelectors:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: myapp
+  placement:
+    clusterAffinity:
+      clusterNames:
+        - member-cluster-1
+        - member-cluster-2
+    replicaScheduling:
+      replicaDivisionPreference: Weighted
+      replicaSchedulingType: Divided
+      weightPreference:
+        staticWeightList:
+          - targetCluster:
+              clusterNames:
+                - member-cluster-1
+            weight: 1
+          - targetCluster:
+              clusterNames:
+                - member-cluster-2
+            weight: 1
+EOF
+
+# 4. 创建应用（会自动分发到成员集群）
+kubectl apply -f myapp-deployment.yaml
+
+# 5. 验证分发
+karmadactl get deployment myapp --karmada-context=karmada-apiserver
+kubectl get deployment myapp -n <namespace> --context=member-cluster-1
+kubectl get deployment myapp -n <namespace> --context=member-cluster-2
+```
+
+## 22.13 升级和迁移故障排查
+
+### 22.13.1 升级常见问题
+
+**问题 1：升级后 Pod 无法启动**:
+
+```bash
+# 检查 Pod 状态
+kubectl describe pod <pod-name>
+
+# 检查节点状态
+kubectl describe node <node-name>
+
+# 检查运行时
+kubectl get nodes -o jsonpath='{.items[0].status.nodeInfo.containerRuntimeVersion}'
+
+# 检查日志
+journalctl -u k3s -f
+```
+
+**问题 2：API 版本不兼容**:
+
+```bash
+# 检查 API 版本
+kubectl api-versions
+
+# 检查资源版本
+kubectl get <resource> -o yaml | grep apiVersion
+
+# 使用 kubectl convert（已废弃）或手动更新 YAML
+```
+
+**问题 3：CRD 版本不兼容**:
+
+```bash
+# 检查 CRD 版本
+kubectl get crd
+
+# 更新 CRD
+kubectl apply -f <crd-definition.yaml>
+
+# 验证 CRD
+kubectl get crd <crd-name> -o yaml
+```
+
+### 22.13.2 迁移常见问题
+
+**问题 1：数据迁移失败**:
+
+```bash
+# 检查 PVC 状态
+kubectl get pvc -A
+
+# 检查 PV 状态
+kubectl get pv
+
+# 检查存储类
+kubectl get storageclass
+
+# 手动迁移数据
+kubectl run data-migration --image=busybox --rm -it -- sh
+# 在 Pod 中执行数据迁移命令
+```
+
+**问题 2：网络配置迁移失败**:
+
+```bash
+# 检查 Service
+kubectl get svc -A
+
+# 检查 Ingress
+kubectl get ingress -A
+
+# 检查 NetworkPolicy
+kubectl get networkpolicies -A
+
+# 检查 DNS
+kubectl run test-dns --image=busybox --rm -it -- nslookup <service-name>
+```
+
+**问题 3：应用配置迁移失败**:
+
+```bash
+# 检查 ConfigMap
+kubectl get configmap -A
+
+# 检查 Secret
+kubectl get secret -A
+
+# 检查环境变量
+kubectl exec <pod-name> -- env
+
+# 对比配置
+kubectl get configmap <name> -o yaml > old-config.yaml
+kubectl get configmap <name> -n <new-namespace> -o yaml > new-config.yaml
+diff old-config.yaml new-config.yaml
+```
+
+## 22.14 参考
 
 - [Kubernetes 升级文档](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/)
 - [K3s 升级文档](https://docs.k3s.io/upgrades)

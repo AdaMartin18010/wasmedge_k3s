@@ -2,6 +2,7 @@
 
 ## 📑 目录
 
+- [📑 目录](#-目录)
 - [16.1 文档定位](#161-文档定位)
 - [16.2 可观测性技术栈全景](#162-可观测性技术栈全景)
   - [16.2.1 可观测性三大支柱](#1621-可观测性三大支柱)
@@ -46,7 +47,21 @@
   - [16.9.2 OpenTelemetry 标准](#1692-opentelemetry-标准)
   - [16.9.3 日志格式规范](#1693-日志格式规范)
   - [16.9.4 追踪格式规范](#1694-追踪格式规范)
-- [16.10 参考](#1610-参考)
+- [16.10 eBPF 与可观测性集成](#1610-ebpf-与可观测性集成)
+  - [16.10.1 eBPF 在可观测性中的作用](#16101-ebpf-在可观测性中的作用)
+  - [16.10.2 eBPF 工具集集成](#16102-ebpf-工具集集成)
+  - [16.10.3 eBPF 与 OpenTelemetry 集成](#16103-ebpf-与-opentelemetry-集成)
+  - [16.10.4 eBPF 采集器部署](#16104-ebpf-采集器部署)
+  - [16.10.5 实际应用案例](#16105-实际应用案例)
+    - [案例 1：网络延迟问题定位](#案例-1网络延迟问题定位)
+    - [案例 2：CPU Throttle 问题定位](#案例-2cpu-throttle-问题定位)
+- [16.11 OpenTelemetry 深度集成实践](#1611-opentelemetry-深度集成实践)
+  - [16.11.1 OpenTelemetry Collector 配置](#16111-opentelemetry-collector-配置)
+  - [16.11.2 应用自动检测（Auto-Instrumentation）](#16112-应用自动检测auto-instrumentation)
+  - [16.11.3 多语言 SDK 集成](#16113-多语言-sdk-集成)
+  - [16.11.4 自定义指标和追踪](#16114-自定义指标和追踪)
+  - [16.11.5 采样和聚合策略](#16115-采样和聚合策略)
+- [16.12 参考](#1612-参考)
 
 ---
 
@@ -1090,7 +1105,733 @@ OTLP 在横纵耦合问题定位模型中扮演**横向坐标**的角色：
 - **Attributes**：属性
 - **Events**：事件
 
-## 16.10 参考
+## 16.10 eBPF 与可观测性集成
+
+### 16.10.1 eBPF 在可观测性中的作用
+
+**eBPF 核心价值**：
+
+- **零侵入观测**：无需修改应用代码，在内核层直接观测
+- **低开销**：相比传统代理方式，开销降低 90%+
+- **深度可见性**：可以看到内核层的详细事件（系统调用、网络包、调度等）
+- **实时性**：毫秒级延迟，适合实时监控
+
+**eBPF 观测能力**：
+
+| 观测维度     | eBPF 能力            | 传统方式对比              |
+| ------------ | -------------------- | ------------------------- |
+| **系统调用** | 实时追踪所有 syscall | 需要 strace，开销高       |
+| **网络流量** | 包级别追踪，丢包定位 | 需要 tcpdump，影响性能    |
+| **CPU 调度** | 调度延迟分析         | 需要 perf，难以持续       |
+| **磁盘 IO**  | 块设备 IO 追踪       | 需要 iostat，粒度粗       |
+| **内存使用** | 内存分配追踪         | 需要 valgrind，不适合生产 |
+
+### 16.10.2 eBPF 工具集集成
+
+**BCC 工具集**：
+
+```bash
+# 安装 BCC 工具集
+sudo apt-get install bpfcc-tools linux-headers-$(uname -r)
+
+# 或使用容器方式
+docker run -it --rm \
+  --privileged \
+  -v /sys/kernel/debug:/sys/kernel/debug \
+  -v /usr/src:/usr/src:ro \
+  zlim/bcc-tools
+```
+
+**常用 eBPF 工具**：
+
+```bash
+# 1. CPU 调度延迟分析
+sudo /usr/share/bcc/tools/runqlat -m 10
+
+# 2. 网络连接追踪
+sudo /usr/share/bcc/tools/tcpconnect -p $(pgrep -f myapp)
+
+# 3. 磁盘 IO 延迟分析
+sudo /usr/share/bcc/tools/biolatency -m 10
+
+# 4. 系统调用追踪
+sudo /usr/share/bcc/tools/syscount -p $(pgrep -f myapp)
+
+# 5. 内存分配追踪
+sudo /usr/share/bcc/tools/memleak -p $(pgrep -f myapp)
+
+# 6. 网络丢包分析
+sudo /usr/share/bcc/tools/dropwatch -l kas
+```
+
+**Inspektor Gadget（Kubernetes 原生）**：
+
+```bash
+# 安装 Inspektor Gadget
+kubectl gadget deploy
+
+# 追踪 Pod 网络连接
+kubectl gadget trace network -n mynamespace -p mypod
+
+# 追踪 Pod 系统调用
+kubectl gadget trace syscall -n mynamespace -p mypod
+
+# 分析 Pod CPU 使用
+kubectl gadget top cpu -n mynamespace
+```
+
+### 16.10.3 eBPF 与 OpenTelemetry 集成
+
+**使用 OpenTelemetry eBPF Exporter**：
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: otel-collector-config
+data:
+  otel-collector.yaml: |
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+            endpoint: 0.0.0.0:4317
+          http:
+            endpoint: 0.0.0.0:4318
+      # eBPF 接收器
+      ebpf:
+        endpoint: 0.0.0.0:4319
+        kernel_headers_path: /usr/src/linux-headers-$(uname -r)
+
+    processors:
+      batch:
+      memory_limiter:
+        limit_mib: 512
+      # 关联 eBPF 事件和 OTLP trace
+      resource:
+        attributes:
+          - key: ebpf.enabled
+            value: true
+            action: upsert
+
+    exporters:
+      otlp:
+        endpoint: jaeger:4317
+        tls:
+          insecure: true
+      prometheus:
+        endpoint: "0.0.0.0:8889"
+
+    service:
+      pipelines:
+        traces:
+          receivers: [otlp, ebpf]
+          processors: [resource, memory_limiter, batch]
+          exporters: [otlp]
+        metrics:
+          receivers: [otlp, ebpf]
+          processors: [resource, memory_limiter, batch]
+          exporters: [prometheus]
+```
+
+**使用 Cilium Hubble（eBPF 原生观测）**：
+
+```bash
+# 安装 Cilium
+helm install cilium cilium/cilium --version 1.14.0 \
+  --namespace kube-system \
+  --set hubble.enabled=true \
+  --set hubble.metrics.enabled="{dns,drop,tcp,flow,port-distribution,icmp,http}"
+
+# 查看网络流
+kubectl exec -n kube-system deployment/hubble-ui -- \
+  hubble observe --follow
+
+# 导出 OpenTelemetry 格式
+kubectl exec -n kube-system deployment/hubble-relay -- \
+  hubble observe --output otlp --server hubble-relay:80
+```
+
+### 16.10.4 eBPF 采集器部署
+
+**使用 eBPF Exporter（Prometheus 格式）**：
+
+```yaml
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: ebpf-exporter
+spec:
+  selector:
+    matchLabels:
+      app: ebpf-exporter
+  template:
+    metadata:
+      labels:
+        app: ebpf-exporter
+    spec:
+      hostNetwork: true
+      hostPID: true
+      containers:
+        - name: ebpf-exporter
+          image: cloudflare/ebpf_exporter:latest
+          securityContext:
+            privileged: true
+          volumeMounts:
+            - name: sys-kernel-debug
+              mountPath: /sys/kernel/debug
+            - name: usr-src
+              mountPath: /usr/src:ro
+          args:
+            - --config.file=/etc/ebpf-exporter/config.yaml
+            - --web.listen-address=:9435
+          ports:
+            - containerPort: 9435
+              name: metrics
+          volumes:
+            - name: sys-kernel-debug
+              hostPath:
+                path: /sys/kernel/debug
+            - name: usr-src
+              hostPath:
+                path: /usr/src
+                type: Directory
+```
+
+**eBPF Exporter 配置示例**：
+
+```yaml
+# config.yaml
+programs:
+  - name: tcp_connect
+    metrics:
+      counters:
+        - name: tcp_connect_total
+          help: Total number of TCP connections
+          table: events
+          labels:
+            - name: pid
+              size: 8
+              decoders:
+                - name: uint
+            - name: comm
+              size: 16
+              decoders:
+                - name: string
+```
+
+### 16.10.5 实际应用案例
+
+#### 案例 1：网络延迟问题定位
+
+**场景**：Service A 调用 Service B 延迟突增到 1.2s
+
+**使用 eBPF 定位**：
+
+```bash
+# 1. 使用 tcpconnect 追踪连接
+sudo /usr/share/bcc/tools/tcpconnect -p $(pgrep -f service-b) -t
+
+# 2. 使用 tcpdrop 检查丢包
+sudo /usr/share/bcc/tools/tcpdrop -p $(pgrep -f service-b)
+
+# 3. 使用 tcpretrans 检查重传
+sudo /usr/share/bcc/tools/tcpretrans -p $(pgrep -f service-b)
+
+# 4. 关联到 OpenTelemetry trace
+# 通过 socket cookie 关联
+kubectl exec -it pod/service-a -- \
+  curl -H "traceparent: 00-$(uuidgen | tr -d -)" \
+  http://service-b:8080
+```
+
+#### 案例 2：CPU Throttle 问题定位
+
+**场景**：容器 CPU 使用率低，但应用响应慢
+
+**使用 eBPF 定位**：
+
+```bash
+# 1. 检查 CPU 调度延迟
+sudo /usr/share/bcc/tools/runqlat -p $(pgrep -f container-process) 10
+
+# 2. 检查 CPU Throttle
+sudo /usr/share/bcc/tools/cpudist -p $(pgrep -f container-process) 10
+
+# 3. 检查 cgroup 限制
+sudo /usr/share/bcc/tools/cgroupstats
+
+# 4. 导出为 Prometheus 指标
+# 使用 eBPF Exporter 持续监控
+```
+
+## 16.11 OpenTelemetry 深度集成实践
+
+### 16.11.1 OpenTelemetry Collector 配置
+
+**完整的 Collector 配置示例**：
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: otel-collector-config
+data:
+  otel-collector.yaml: |
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+            endpoint: 0.0.0.0:4317
+          http:
+            endpoint: 0.0.0.0:4318
+
+      prometheus:
+        config:
+          scrape_configs:
+            - job_name: 'kubernetes-pods'
+              kubernetes_sd_configs:
+                - role: pod
+
+      filelog:
+        include:
+          - /var/log/containers/*.log
+        operators:
+          - type: json_parser
+            id: parser-json
+            output: extract_metadata_from_filepath
+          - type: regex_parser
+            id: extract_metadata_from_filepath
+            regex: '^.*\/(?P<namespace>[^_]+)_(?P<pod_name>[^_]+)_(?P<uid>[^_]+)\/(?P<container_name>.+)-(?P<container_id>[^\.]+)\.log$'
+            parse_from: attributes["log.file.path"]
+
+    processors:
+      batch:
+        timeout: 10s
+        send_batch_size: 1024
+
+      memory_limiter:
+        limit_mib: 512
+        check_interval: 1s
+
+      resource:
+        attributes:
+          - key: service.name
+            value: ${OTEL_SERVICE_NAME}
+            action: upsert
+          - key: k8s.cluster.name
+            value: ${K8S_CLUSTER_NAME}
+            action: upsert
+
+      # 采样处理器
+      probabilistic_sampler:
+        sampling_percentage: 10.0
+
+      # 属性处理器
+      attributes:
+        actions:
+          - key: environment
+            value: production
+            action: upsert
+          - key: remove_me
+            action: delete
+
+    exporters:
+      otlp:
+        endpoint: jaeger:4317
+        tls:
+          insecure: true
+        headers:
+          custom-header: "custom-value"
+
+      prometheus:
+        endpoint: "0.0.0.0:8889"
+        const_labels:
+          environment: production
+
+      logging:
+        loglevel: debug
+
+      # 多后端导出
+      otlp/jaeger:
+        endpoint: jaeger:4317
+        tls:
+          insecure: true
+      otlp/tempo:
+        endpoint: tempo:4317
+        tls:
+          insecure: true
+
+    service:
+      pipelines:
+        traces:
+          receivers: [otlp]
+          processors: [memory_limiter, resource, probabilistic_sampler, batch]
+          exporters: [otlp/jaeger, otlp/tempo]
+        metrics:
+          receivers: [otlp, prometheus]
+          processors: [memory_limiter, resource, batch]
+          exporters: [prometheus]
+        logs:
+          receivers: [filelog]
+          processors: [memory_limiter, resource, batch]
+          exporters: [otlp]
+```
+
+### 16.11.2 应用自动检测（Auto-Instrumentation）
+
+**Java 应用自动检测**：
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-app
+spec:
+  template:
+    spec:
+      containers:
+        - name: app
+          image: myapp:latest
+          env:
+            - name: JAVA_TOOL_OPTIONS
+              value: "-javaagent:/otel/opentelemetry-javaagent.jar"
+            - name: OTEL_SERVICE_NAME
+              value: "java-app"
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "http://otel-collector:4317"
+            - name: OTEL_TRACES_EXPORTER
+              value: "otlp"
+            - name: OTEL_METRICS_EXPORTER
+              value: "otlp"
+          volumeMounts:
+            - name: otel-agent
+              mountPath: /otel
+          volumes:
+            - name: otel-agent
+              emptyDir: {}
+          initContainers:
+            - name: otel-agent
+              image: otel/opentelemetry-java-instrumentation:latest
+              command:
+                ["cp", "/javaagent.jar", "/otel/opentelemetry-javaagent.jar"]
+              volumeMounts:
+                - name: otel-agent
+                  mountPath: /otel
+```
+
+**Python 应用自动检测**：
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-app
+spec:
+  template:
+    spec:
+      containers:
+        - name: app
+          image: myapp:latest
+          env:
+            - name: OTEL_SERVICE_NAME
+              value: "python-app"
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "http://otel-collector:4317"
+            - name: OTEL_PYTHON_AUTO_INSTRUMENTATION_ENABLED
+              value: "true"
+          volumeMounts:
+            - name: otel-agent
+              mountPath: /otel
+          volumes:
+            - name: otel-agent
+              emptyDir: {}
+          initContainers:
+            - name: otel-agent
+              image: otel/opentelemetry-python-instrumentation:latest
+              command: ["cp", "-r", "/autoinstrumentation", "/otel"]
+              volumeMounts:
+                - name: otel-agent
+                  mountPath: /otel
+```
+
+**Node.js 应用自动检测**：
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-app
+spec:
+  template:
+    spec:
+      containers:
+        - name: app
+          image: myapp:latest
+          command: ["node", "-r", "/otel/autoinstrumentation.js", "server.js"]
+          env:
+            - name: OTEL_SERVICE_NAME
+              value: "nodejs-app"
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "http://otel-collector:4317"
+          volumeMounts:
+            - name: otel-agent
+              mountPath: /otel
+          volumes:
+            - name: otel-agent
+              emptyDir: {}
+          initContainers:
+            - name: otel-agent
+              image: otel/opentelemetry-nodejs-instrumentation:latest
+              command: ["cp", "-r", "/autoinstrumentation", "/otel"]
+              volumeMounts:
+                - name: otel-agent
+                  mountPath: /otel
+```
+
+### 16.11.3 多语言 SDK 集成
+
+**Go 应用手动集成**：
+
+```go
+package main
+
+import (
+    "context"
+    "go.opentelemetry.io/otel"
+    "go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc"
+    "go.opentelemetry.io/otel/sdk/resource"
+    sdktrace "go.opentelemetry.io/otel/sdk/trace"
+    "go.opentelemetry.io/otel/trace"
+    semconv "go.opentelemetry.io/otel/semconv/v1.21.0"
+)
+
+func initTracer() func() {
+    ctx := context.Background()
+
+    res, _ := resource.New(ctx,
+        resource.WithAttributes(
+            semconv.ServiceNameKey.String("my-service"),
+            semconv.ServiceVersionKey.String("1.0.0"),
+        ),
+    )
+
+    exporter, _ := otlptracegrpc.New(ctx,
+        otlptracegrpc.WithEndpoint("otel-collector:4317"),
+        otlptracegrpc.WithInsecure(),
+    )
+
+    tp := sdktrace.NewTracerProvider(
+        sdktrace.WithBatcher(exporter),
+        sdktrace.WithResource(res),
+    )
+
+    otel.SetTracerProvider(tp)
+
+    return func() {
+        _ = tp.Shutdown(ctx)
+    }
+}
+
+func main() {
+    cleanup := initTracer()
+    defer cleanup()
+
+    tracer := otel.Tracer("my-service")
+    ctx, span := tracer.Start(context.Background(), "my-operation")
+    defer span.End()
+
+    // 业务逻辑
+}
+```
+
+**Rust 应用手动集成**：
+
+```rust
+use opentelemetry::global;
+use opentelemetry::trace::{TraceError, Tracer};
+use opentelemetry_otlp::WithExportConfig;
+use opentelemetry_sdk::trace as sdktrace;
+use opentelemetry_sdk::Resource;
+
+fn init_tracer() -> Result<sdktrace::Tracer, TraceError> {
+    opentelemetry_otlp::new_pipeline()
+        .tracing()
+        .with_exporter(
+            opentelemetry_otlp::new_exporter()
+                .tonic()
+                .with_endpoint("http://otel-collector:4317"),
+        )
+        .with_trace_config(
+            sdktrace::config().with_resource(Resource::new(vec![
+                opentelemetry::KeyValue::new("service.name", "rust-service"),
+                opentelemetry::KeyValue::new("service.version", "1.0.0"),
+            ])),
+        )
+        .install_batch(opentelemetry_sdk::runtime::Tokio)
+}
+```
+
+### 16.11.4 自定义指标和追踪
+
+**自定义指标示例**：
+
+```go
+package main
+
+import (
+    "go.opentelemetry.io/otel"
+    "go.opentelemetry.io/otel/exporters/otlp/otlpmetric/otlpmetricgrpc"
+    "go.opentelemetry.io/otel/sdk/metric"
+    "go.opentelemetry.io/otel/sdk/resource"
+    semconv "go.opentelemetry.io/otel/semconv/v1.21.0"
+)
+
+func initMetrics() {
+    res, _ := resource.New(context.Background(),
+        resource.WithAttributes(
+            semconv.ServiceNameKey.String("my-service"),
+        ),
+    )
+
+    exporter, _ := otlpmetricgrpc.New(context.Background(),
+        otlpmetricgrpc.WithEndpoint("otel-collector:4317"),
+        otlpmetricgrpc.WithInsecure(),
+    )
+
+    mp := metric.NewMeterProvider(
+        metric.WithResource(res),
+        metric.WithReader(metric.NewPeriodicReader(exporter)),
+    )
+
+    otel.SetMeterProvider(mp)
+}
+
+func recordMetrics() {
+    meter := otel.Meter("my-service")
+
+    // Counter
+    counter, _ := meter.Int64Counter(
+        "http_requests_total",
+        instrument.WithDescription("Total HTTP requests"),
+    )
+    counter.Add(context.Background(), 1,
+        attribute.String("method", "GET"),
+        attribute.String("status", "200"),
+    )
+
+    // Gauge
+    gauge, _ := meter.Int64UpDownCounter(
+        "active_connections",
+        instrument.WithDescription("Active connections"),
+    )
+    gauge.Add(context.Background(), 1)
+
+    // Histogram
+    histogram, _ := meter.Int64Histogram(
+        "http_request_duration_ms",
+        instrument.WithDescription("HTTP request duration"),
+    )
+    histogram.Record(context.Background(), 150,
+        attribute.String("method", "GET"),
+    )
+}
+```
+
+**自定义追踪示例**：
+
+```go
+func handleRequest(ctx context.Context, req *Request) (*Response, error) {
+    tracer := otel.Tracer("my-service")
+    ctx, span := tracer.Start(ctx, "handleRequest")
+    defer span.End()
+
+    // 添加属性
+    span.SetAttributes(
+        attribute.String("http.method", req.Method),
+        attribute.String("http.path", req.Path),
+    )
+
+    // 添加事件
+    span.AddEvent("processing started")
+
+    // 业务逻辑
+    result, err := processRequest(ctx, req)
+
+    if err != nil {
+        span.RecordError(err)
+        span.SetStatus(codes.Error, err.Error())
+        return nil, err
+    }
+
+    span.SetAttributes(
+        attribute.Int("result.size", len(result.Data)),
+    )
+    span.AddEvent("processing completed")
+
+    return result, nil
+}
+```
+
+### 16.11.5 采样和聚合策略
+
+**采样策略配置**：
+
+```yaml
+# OpenTelemetry Collector 采样配置
+processors:
+  # 头部采样（在入口处采样）
+  head_sampler:
+    decision_wait: 10s
+    num_traces: 10000
+    expected_new_traces_per_sec: 100
+
+  # 尾部采样（基于完整 trace 信息采样）
+  tail_sampler:
+    decision_wait: 10s
+    num_traces: 50000
+    expected_new_traces_per_sec: 1000
+    policies:
+      - name: error-policy
+        type: always_sample
+        spans:
+          - name: ".*error.*"
+      - name: slow-policy
+        type: latency
+        latency:
+          threshold_ms: 500
+
+  # 概率采样
+  probabilistic_sampler:
+    sampling_percentage: 10.0
+
+  # 基于属性的采样
+  attributes:
+    actions:
+      - key: sampling.priority
+        value: 1
+        action: upsert
+```
+
+**聚合策略配置**：
+
+```yaml
+# Prometheus 聚合配置
+exporters:
+  prometheus:
+    endpoint: "0.0.0.0:8889"
+    const_labels:
+      environment: production
+    metric_relabel_configs:
+      - source_labels: [__name__]
+        regex: "http_request_duration.*"
+        action: keep
+      - source_labels: [method, status]
+        regex: "GET.*200"
+        action: drop
+```
+
+## 16.12 参考
 
 **关联文档**：
 

@@ -2,6 +2,7 @@
 
 ## 📑 目录
 
+- [📑 目录](#-目录)
 - [25.1 文档定位](#251-文档定位)
 - [25.2 云原生社区生态全景](#252-云原生社区生态全景)
   - [25.2.1 CNCF 生态系统](#2521-cncf-生态系统)
@@ -38,6 +39,9 @@
   - [25.8.1 企业案例](#2581-企业案例)
   - [25.8.2 开源项目案例](#2582-开源项目案例)
   - [25.8.3 最佳实践模板](#2583-最佳实践模板)
+  - [25.8.4 实际企业案例](#2584-实际企业案例)
+  - [25.8.5 CI/CD 最佳实践模板](#2585-cicd-最佳实践模板)
+  - [25.8.6 监控和告警最佳实践模板](#2586-监控和告警最佳实践模板)
 - [25.9 持续学习和成长](#259-持续学习和成长)
   - [25.9.1 学习路径](#2591-学习路径)
   - [25.9.2 认证考试](#2592-认证考试)
@@ -633,6 +637,297 @@ graph TB
     - 备份策略
     - 升级流程
     - 故障处理
+```
+
+**实际项目最佳实践模板**：
+
+```yaml
+# project-best-practices.yaml
+project:
+  name: my-app
+  version: v1.0.0
+
+architecture:
+  containerization:
+    strategy: multi-stage-build
+    baseImage: distroless
+    nonRoot: true
+  orchestration:
+    platform: k3s
+    runtime: wasmedge
+    replicas: 3
+  serviceMesh:
+    enabled: false
+    reason: "边缘场景，轻量优先"
+
+security:
+  imageScanning:
+    enabled: true
+    tool: trivy
+    frequency: "on-build"
+  imageSigning:
+    enabled: true
+    tool: cosign
+  networkPolicy:
+    enabled: true
+    defaultDeny: true
+  rbac:
+    enabled: true
+    leastPrivilege: true
+
+monitoring:
+  metrics:
+    enabled: true
+    exporter: prometheus
+    interval: 30s
+  logging:
+    enabled: true
+    aggregator: loki
+    retention: 30d
+  tracing:
+    enabled: true
+    exporter: jaeger
+  alerts:
+    enabled: true
+    channels: [email, slack]
+
+cicd:
+  gitops:
+    enabled: true
+    tool: argocd
+    autoSync: true
+  pipeline:
+    stages:
+      - build
+      - test
+      - scan
+      - sign
+      - deploy
+    triggers:
+      - push-to-main
+      - pull-request
+
+operations:
+  backup:
+    enabled: true
+    frequency: daily
+    retention: 30d
+  upgrade:
+    strategy: rolling-update
+    testing: required
+  disasterRecovery:
+    rto: 4h
+    rpo: 1h
+```
+
+### 25.8.4 实际企业案例
+
+**案例 1：互联网公司微服务架构最佳实践**:
+
+**背景**：某互联网公司从单体应用迁移到微服务架构
+
+**实践要点**：
+
+```yaml
+架构实践:
+  容器化:
+    - 使用多阶段构建，镜像大小 < 100MB
+    - 使用 distroless 基础镜像
+    - 非 root 用户运行
+  编排:
+    - Kubernetes 1.28+ 集群
+    - 使用 Deployment + Service
+    - HPA 自动扩缩容
+  服务网格:
+    - Istio 1.19+ 服务网格
+    - STRICT mTLS 模式
+    - 分布式追踪集成
+  监控:
+    - Prometheus + Grafana
+    - OpenTelemetry 链路追踪
+    - ELK 日志聚合
+  安全:
+    - 镜像签名（Cosign）
+    - 网络策略（NetworkPolicy）
+    - OPA Gatekeeper 策略治理
+  成本优化:
+    - VPA 自动调整资源
+    - 使用 Spot 实例
+    - 镜像多阶段构建
+```
+
+**实施效果**：
+
+- 部署速度提升 80%
+- 资源利用率提升 60%
+- 故障恢复时间降低 70%
+
+**案例 2：边缘计算场景最佳实践**:
+
+**背景**：某制造企业部署边缘 IoT 平台
+
+**实践要点**：
+
+```yaml
+架构实践:
+  编排:
+    - K3s 1.30（轻量级）
+    - WasmEdge 0.14 运行时
+    - RuntimeClass: crun-wasm
+  边缘特性:
+    - 离线自治能力
+    - 热更新支持
+    - 冷启动优化（< 10ms）
+  网络:
+    - Flannel CNI（简单）
+    - 边缘节点 VPN 连接
+  存储:
+    - 本地存储（sqlite）
+    - 定期同步到中心
+  监控:
+    - Prometheus + Grafana
+    - 边缘节点指标上报
+  安全:
+    - 镜像签名验证
+    - 网络策略隔离
+    - OPA 策略治理
+```
+
+**实施效果**：
+
+- 边缘节点资源占用降低 90%
+- 冷启动时间 < 6ms
+- 离线运行能力 30 天
+
+### 25.8.5 CI/CD 最佳实践模板
+
+**GitHub Actions 工作流模板**：
+
+```yaml
+# .github/workflows/ci-cd.yml
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run tests
+        run: |
+          go test ./...
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build image
+        run: |
+          docker build -t myapp:${{ github.sha }} .
+      - name: Scan image
+        run: |
+          trivy image --exit-code 1 --severity HIGH,CRITICAL myapp:${{ github.sha }}
+      - name: Sign image
+        run: |
+          cosign sign --key cosign.key myapp:${{ github.sha }}
+      - name: Push image
+        run: |
+          docker push myapp:${{ github.sha }}
+
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update GitOps repo
+        run: |
+          # 更新 GitOps 仓库中的镜像标签
+          git clone https://github.com/example/gitops-repo.git
+          cd gitops-repo
+          sed -i "s|image: myapp:.*|image: myapp:${{ github.sha }}|g" \
+            apps/myapp/deployment.yaml
+          git commit -m "Update myapp to ${{ github.sha }}"
+          git push
+```
+
+### 25.8.6 监控和告警最佳实践模板
+
+**Prometheus 告警规则模板**：
+
+```yaml
+# prometheus-alerts.yaml
+groups:
+  - name: kubernetes
+    rules:
+      - alert: PodCrashLooping
+        expr: rate(kube_pod_container_status_restarts_total[5m]) > 0
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Pod {{ $labels.pod }} is crash looping"
+
+      - alert: HighMemoryUsage
+        expr:
+          (container_memory_usage_bytes / container_spec_memory_limit_bytes) >
+          0.9
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Pod {{ $labels.pod }} memory usage is high"
+
+      - alert: HighCPUUsage
+        expr:
+          (rate(container_cpu_usage_seconds_total[5m]) /
+          container_spec_cpu_quota) > 0.9
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Pod {{ $labels.pod }} CPU usage is high"
+```
+
+**Grafana Dashboard 模板**：
+
+```json
+{
+  "dashboard": {
+    "title": "Kubernetes Cluster Overview",
+    "panels": [
+      {
+        "title": "CPU Usage",
+        "targets": [
+          {
+            "expr": "sum(rate(container_cpu_usage_seconds_total[5m])) by (pod)"
+          }
+        ]
+      },
+      {
+        "title": "Memory Usage",
+        "targets": [
+          {
+            "expr": "sum(container_memory_usage_bytes) by (pod)"
+          }
+        ]
+      },
+      {
+        "title": "Pod Status",
+        "targets": [
+          {
+            "expr": "count(kube_pod_status_phase) by (phase)"
+          }
+        ]
+      }
+    ]
+  }
+}
 ```
 
 ## 25.9 持续学习和成长

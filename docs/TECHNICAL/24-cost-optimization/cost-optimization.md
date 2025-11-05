@@ -2,6 +2,7 @@
 
 ## 📑 目录
 
+- [📑 目录](#-目录)
 - [24.1 文档定位](#241-文档定位)
 - [24.2 成本优化技术栈全景](#242-成本优化技术栈全景)
   - [24.2.1 成本构成分析](#2421-成本构成分析)
@@ -29,11 +30,18 @@
   - [24.7.1 云原生优化组合](#2471-云原生优化组合)
   - [24.7.2 边缘优化组合](#2472-边缘优化组合)
   - [24.7.3 混合优化组合](#2473-混合优化组合)
-- [24.8 成本优化最佳实践](#248-成本优化最佳实践)
-  - [24.8.1 资源规划](#2481-资源规划)
-  - [24.8.2 监控和告警](#2482-监控和告警)
-  - [24.8.3 持续优化](#2483-持续优化)
-- [24.9 参考](#249-参考)
+- [24.8 实际优化案例](#248-实际优化案例)
+  - [24.8.1 案例 1：微服务架构资源优化](#2481-案例-1微服务架构资源优化)
+  - [24.8.2 案例 2：镜像存储成本优化](#2482-案例-2镜像存储成本优化)
+  - [24.8.3 案例 3：边缘节点资源优化](#2483-案例-3边缘节点资源优化)
+  - [24.8.4 案例 4：网络流量成本优化](#2484-案例-4网络流量成本优化)
+- [24.9 成本优化最佳实践](#249-成本优化最佳实践)
+  - [24.9.1 资源规划](#2491-资源规划)
+  - [24.9.2 监控和告警](#2492-监控和告警)
+  - [24.9.3 持续优化](#2493-持续优化)
+  - [24.9.4 成本优化检查清单](#2494-成本优化检查清单)
+  - [24.9.5 成本优化 ROI 计算](#2495-成本优化-roi-计算)
+- [24.10 参考](#2410-参考)
 
 ---
 
@@ -573,18 +581,328 @@ parameters:
 | **存储优化** | 混合存储策略 | 云存储和本地存储混合 |
 | **网络优化** | 混合网络策略 | 云网络和边缘网络混合 |
 
-## 24.8 成本优化最佳实践
+## 24.8 实际优化案例
 
-### 24.8.1 资源规划
+### 24.8.1 案例 1：微服务架构资源优化
+
+**场景**：50 个微服务，每个服务都有独立的 Pod，资源使用率低于 30%
+
+**问题分析**：
+
+```bash
+# 检查资源使用情况
+kubectl top pods --all-namespaces | awk '{sum+=$2} END {print "Total CPU: " sum "m"}'
+kubectl top pods --all-namespaces | awk '{sum+=$3} END {print "Total Memory: " sum "Mi"}'
+
+# 分析资源请求 vs 实际使用
+kubectl get pods --all-namespaces -o json | jq -r '.items[] | "\(.metadata.name) \(.spec.containers[0].resources.requests.cpu) \(.spec.containers[0].resources.requests.memory)"'
+```
+
+**优化方案**：
+
+1. **使用 VPA 自动调整资源请求**：
+
+   ```yaml
+   apiVersion: autoscaling.k8s.io/v1
+   kind: VerticalPodAutoscaler
+   metadata:
+     name: microservice-vpa
+   spec:
+     targetRef:
+       apiVersion: apps/v1
+       kind: Deployment
+       name: microservice
+     updatePolicy:
+       updateMode: "Auto"
+     resourcePolicy:
+       containerPolicies:
+         - containerName: "*"
+           minAllowed:
+             cpu: 100m
+             memory: 128Mi
+           maxAllowed:
+             cpu: 2000m
+             memory: 2Gi
+   ```
+
+2. **合并低资源使用率的服务**：
+
+```yaml
+# 使用共享 Pod 部署多个轻量级服务
+apiVersion: v1
+kind: Pod
+metadata:
+  name: shared-services
+spec:
+  containers:
+    - name: service-a
+      image: service-a:latest
+      resources:
+        requests:
+          cpu: 50m
+          memory: 64Mi
+    - name: service-b
+      image: service-b:latest
+      resources:
+        requests:
+          cpu: 50m
+          memory: 64Mi
+```
+
+**优化效果**：
+
+- **资源节省**：CPU 使用率从 30% 提升到 70%，节省 40% 资源
+- **成本节省**：每月节省约 $500-800（取决于云平台）
+- **性能影响**：无显著性能影响
+
+### 24.8.2 案例 2：镜像存储成本优化
+
+**场景**：镜像仓库存储了 1000+ 个镜像，占用 500GB 存储空间
+
+**问题分析**：
+
+```bash
+# 检查镜像存储使用情况
+docker system df
+
+# 找出未使用的镜像
+docker images --format "{{.Repository}}:{{.Tag}}" | xargs -I {} docker image inspect {} --format '{{.Id}} {{.Created}}' | sort -k2
+
+# 检查镜像层共享情况
+docker history <image-name> --no-trunc
+```
+
+**优化方案**：
+
+1. **清理未使用的镜像**：
+
+   ```bash
+   #!/bin/bash
+   # cleanup-unused-images.sh
+
+   # 删除未使用的镜像（超过 30 天）
+   docker images --format "{{.Repository}}:{{.Tag}} {{.ID}}" | while read image id; do
+       if [ $(docker ps -a --filter ancestor=$id -q | wc -l) -eq 0 ]; then
+           docker rmi $id
+       fi
+   done
+
+   # 清理未使用的镜像层
+   docker image prune -a --filter "until=720h" -f
+   ```
+
+2. **使用多阶段构建减小镜像大小**：
+
+   ```dockerfile
+   # 优化前：单个阶段构建，镜像大小 500MB
+   FROM node:16
+   WORKDIR /app
+   COPY . .
+   RUN npm install
+   CMD ["node", "server.js"]
+
+   # 优化后：多阶段构建，镜像大小 50MB
+   FROM node:16 AS builder
+   WORKDIR /app
+   COPY package*.json ./
+   RUN npm ci --only=production
+
+   FROM node:16-alpine
+   WORKDIR /app
+   COPY --from=builder /app/node_modules ./node_modules
+   COPY . .
+   CMD ["node", "server.js"]
+   ```
+
+3. **镜像层优化策略**：
+
+```bash
+# 使用 distroless 基础镜像
+FROM gcr.io/distroless/nodejs:16
+COPY --from=builder /app /app
+CMD ["/app/server.js"]
+
+# 使用 Alpine 基础镜像
+FROM node:16-alpine
+# ... 构建步骤
+```
+
+**优化效果**：
+
+- **存储节省**：镜像大小减少 70-80%，存储空间从 500GB 降至 100-150GB
+- **成本节省**：每月节省约 $50-100（取决于存储成本）
+- **拉取速度**：镜像拉取时间减少 60-70%
+
+### 24.8.3 案例 3：边缘节点资源优化
+
+**场景**：10 个边缘节点，每个节点 4 核 8GB，运行 20 个 Pod
+
+**问题分析**：
+
+```bash
+# 检查节点资源使用情况
+kubectl top nodes
+
+# 检查 Pod 分布
+kubectl get pods --all-namespaces -o wide | awk '{print $7}' | sort | uniq -c
+
+# 检查资源请求总量
+kubectl describe nodes | grep -A 5 "Allocated resources"
+```
+
+**优化方案**：
+
+1. **使用 WasmEdge 轻量级运行时**：
+
+   ```yaml
+   apiVersion: node.k8s.io/v1
+   kind: RuntimeClass
+   metadata:
+     name: wasmedge
+   handler: crun-wasm
+   ---
+   apiVersion: v1
+   kind: Pod
+   metadata:
+     name: wasm-app
+   spec:
+     runtimeClassName: wasmedge
+     containers:
+       - name: app
+         image: wasm-app:latest
+         resources:
+           requests:
+             cpu: 10m # Wasm 应用 CPU 需求极低
+             memory: 10Mi # Wasm 应用内存需求极低
+           limits:
+             cpu: 100m
+             memory: 50Mi
+   ```
+
+2. **节点资源超配策略**：
+
+```yaml
+# K3s 配置优化
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: k3s-config
+data:
+  config.yaml: |
+    kubelet-arg:
+    - "cpu-manager-policy=static"
+    - "reserved-cpu=100m"
+    - "reserved-memory=512Mi"
+```
+
+**优化效果**：
+
+- **Pod 密度提升**：从每节点 20 个 Pod 提升到 60-80 个 Pod
+- **资源利用率**：从 40% 提升到 85%
+- **成本节省**：边缘节点数量可减少 40-50%
+
+### 24.8.4 案例 4：网络流量成本优化
+
+**场景**：跨区域数据传输，每月流量费用 $2000
+
+**问题分析**：
+
+```bash
+# 检查网络流量
+kubectl get svc --all-namespaces -o json | jq -r '.items[] | select(.spec.type=="LoadBalancer") | "\(.metadata.name) \(.spec.ports[].port)"'
+
+# 检查跨区域流量
+# 使用云平台的监控工具查看跨区域流量
+```
+
+**优化方案**：
+
+1. **使用 CDN 缓存静态资源**：
+
+   ```yaml
+   apiVersion: networking.k8s.io/v1
+   kind: Ingress
+   metadata:
+     name: static-assets
+     annotations:
+       nginx.ingress.kubernetes.io/ssl-redirect: "true"
+       nginx.ingress.kubernetes.io/use-regex: "true"
+       nginx.ingress.kubernetes.io/rewrite-target: /$1
+   spec:
+     rules:
+       - host: cdn.example.com
+         http:
+           paths:
+             - path: /static/(.*)
+               pathType: Prefix
+               backend:
+                 service:
+                   name: cdn-service
+                   port:
+                     number: 80
+   ```
+
+2. **数据压缩和优化**：
+
+   ```yaml
+   apiVersion: v1
+   kind: ConfigMap
+   metadata:
+     name: nginx-config
+   data:
+     nginx.conf: |
+       gzip on;
+       gzip_vary on;
+       gzip_min_length 1024;
+       gzip_types text/plain text/css application/json application/javascript;
+       gzip_comp_level 6;
+   ```
+
+3. **区域部署策略**：
+
+```yaml
+# 使用节点亲和性将 Pod 部署到同一区域
+apiVersion: v1
+kind: Pod
+metadata:
+  name: regional-pod
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: topology.kubernetes.io/zone
+                operator: In
+                values:
+                  - us-east-1a
+```
+
+**优化效果**：
+
+- **流量减少**：跨区域流量减少 60-70%
+- **成本节省**：每月节省约 $1200-1400
+- **性能提升**：CDN 缓存提升响应速度 50%
+
+## 24.9 成本优化最佳实践
+
+### 24.9.1 资源规划
 
 **资源规划最佳实践**：
 
 1. **容量规划**：根据业务需求规划资源容量
-2. **预留实例**：生产环境使用预留实例
-3. **Spot 实例**：测试环境使用 Spot 实例
+2. **预留实例**：生产环境使用预留实例（节省 30-50%）
+3. **Spot 实例**：测试环境使用 Spot 实例（节省 70-90%）
 4. **监控使用**：持续监控资源使用情况
 
-### 24.8.2 监控和告警
+**容量规划公式**：
+
+```yaml
+总资源需求 = 业务峰值需求 × 1.2 (缓冲) × 1.1 (增长空间) 节点数量 =
+ceil(总资源需求 / 单节点容量)
+```
+
+### 24.9.2 监控和告警
 
 **监控和告警最佳实践**：
 
@@ -593,16 +911,110 @@ parameters:
 3. **告警规则**：设置成本超支告警
 4. **定期审查**：定期审查成本和使用情况
 
-### 24.8.3 持续优化
+**Kubecost 安装和配置**：
+
+```bash
+# 安装 Kubecost
+helm repo add kubecost https://kubecost.github.io/cost-analyzer/
+helm install kubecost kubecost/cost-analyzer \
+  --namespace kubecost \
+  --create-namespace \
+  --set kubecostProductConfigs.productAnalytics=false
+
+# 配置成本告警
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kubecost-alerts
+data:
+  alerts.yaml: |
+    - name: cost-threshold
+      type: cost
+      threshold: 1000  # 美元
+      window: 24h
+```
+
+### 24.9.3 持续优化
 
 **持续优化最佳实践**：
 
-1. **定期审查**：定期审查成本和优化机会
+1. **定期审查**：每月审查成本和优化机会
 2. **自动化优化**：使用自动化工具持续优化
 3. **策略调整**：根据实际情况调整优化策略
 4. **成本意识**：建立成本意识文化
 
-## 24.9 参考
+**自动化优化脚本**：
+
+```bash
+#!/bin/bash
+# auto-optimize-resources.sh
+
+# 1. 检查未使用的资源
+echo "=== Checking Unused Resources ==="
+kubectl get pods --all-namespaces -o json | jq -r '.items[] | select(.status.phase=="Succeeded" or .status.phase=="Failed") | "\(.metadata.namespace)/\(.metadata.name)"'
+
+# 2. 检查资源使用率低的 Pod
+echo "=== Checking Low Resource Usage ==="
+kubectl top pods --all-namespaces | awk 'NR>1 {cpu=$2; mem=$3; if(cpu<100 && mem<100) print $1"/"$2}'
+
+# 3. 建议 VPA 配置
+echo "=== VPA Recommendations ==="
+# 这里可以集成 VPA recommender API
+
+# 4. 检查镜像大小
+echo "=== Checking Image Sizes ==="
+docker images --format "{{.Repository}}:{{.Tag}} {{.Size}}" | sort -k2 -h | tail -20
+```
+
+### 24.9.4 成本优化检查清单
+
+**定期检查清单**：
+
+```yaml
+成本优化检查清单:
+  资源优化:
+    - [ ] 检查资源请求是否合理
+    - [ ] 启用 VPA 自动调整资源
+    - [ ] 使用 HPA 根据负载自动扩缩容
+    - [ ] 检查节点资源利用率
+    - [ ] 清理未使用的 Pod 和 Job
+  存储优化:
+    - [ ] 清理未使用的镜像
+    - [ ] 优化镜像大小（多阶段构建）
+    - [ ] 清理未绑定的 PVC
+    - [ ] 使用存储压缩
+    - [ ] 定期清理日志文件
+  网络优化:
+    - [ ] 使用 CDN 缓存静态资源
+    - [ ] 启用数据压缩
+    - [ ] 优化跨区域流量
+    - [ ] 检查 Service 类型（避免不必要的 LoadBalancer）
+  监控优化:
+    - [ ] 设置成本告警
+    - [ ] 定期审查成本报告
+    - [ ] 跟踪资源使用趋势
+    - [ ] 识别成本异常
+```
+
+### 24.9.5 成本优化 ROI 计算
+
+**投资回报率计算示例**：
+
+```yaml
+优化项目 ROI 计算:
+  项目: 镜像存储优化
+  投资:
+    - 开发时间: 8 小时 × $100/小时 = $800
+    - 工具成本: $0 (开源工具)
+  收益:
+    - 存储节省: 400GB × $0.10/GB = $40/月
+    - 时间节省: 5 小时/月 × $100/小时 = $500/月
+  年化收益: ($40 + $500) × 12 = $6,480
+  ROI: ($6,480 - $800) / $800 × 100% = 710%
+  回收期: $800 / ($540/月) = 1.5 个月
+```
+
+## 24.10 参考
 
 - [Kubecost 官方文档](https://www.kubecost.com/docs/)
 - [OpenCost 官方文档](https://www.opencost.io/docs/)
@@ -616,7 +1028,7 @@ parameters:
 > - **快速开始**：查看 [24.2 成本优化技术栈全景](#242-成本优化技术栈全景)
 > - **成本分析**：查看 [24.3 资源成本分析](#243-资源成本分析)
 > - **优化策略**：查看 [24.4 成本优化策略](#244-成本优化策略)
-> - **最佳实践**：查看 [24.8 成本优化最佳实践](#248-成本优化最佳实践)
+> - **最佳实践**：查看 [24.9 成本优化最佳实践](#249-成本优化最佳实践)
 
 ---
 

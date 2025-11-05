@@ -34,7 +34,13 @@
   - [23.9.1 开发工作流](#2391-开发工作流)
   - [23.9.2 调试技巧](#2392-调试技巧)
   - [23.9.3 性能优化](#2393-性能优化)
-- [23.10 参考](#2310-参考)
+- [23.10 实用技巧和脚本](#2310-实用技巧和脚本)
+  - [23.10.1 kubectl 别名和函数](#23101-kubectl-别名和函数)
+  - [23.10.2 实用调试脚本](#23102-实用调试脚本)
+  - [23.10.3 高级调试技巧](#23103-高级调试技巧)
+  - [23.10.4 性能分析工具组合](#23104-性能分析工具组合)
+  - [23.10.5 工具组合最佳实践](#23105-工具组合最佳实践)
+- [23.11 参考](#2311-参考)
 
 ---
 
@@ -801,13 +807,320 @@ kubectl describe pod <pod-name> | grep -A 5 "Limits"
 kubectl logs <pod-name> | grep -i "error\|warning\|slow"
 ```
 
-## 23.10 参考
+## 23.10 实用技巧和脚本
+
+### 23.10.1 kubectl 别名和函数
+
+**常用 kubectl 别名**：
+
+```bash
+# 添加到 ~/.bashrc 或 ~/.zshrc
+alias k='kubectl'
+alias kg='kubectl get'
+alias kd='kubectl describe'
+alias ka='kubectl apply'
+alias kd='kubectl delete'
+alias kl='kubectl logs'
+alias ke='kubectl exec -it'
+alias kp='kubectl port-forward'
+alias kgp='kubectl get pods'
+alias kgs='kubectl get svc'
+alias kgn='kubectl get nodes'
+alias kdp='kubectl describe pod'
+alias kds='kubectl describe svc'
+alias kdn='kubectl describe node'
+alias klf='kubectl logs -f'
+alias kgpa='kubectl get pods --all-namespaces'
+alias kga='kubectl get all'
+alias kgaa='kubectl get all --all-namespaces'
+```
+
+**实用 kubectl 函数**：
+
+```bash
+# Pod 名称自动补全
+function kp() {
+    kubectl get pods | grep $1 | awk '{print $1}' | head -1
+}
+
+# 快速查看 Pod 日志
+function klog() {
+    kubectl logs -f $(kp $1)
+}
+
+# 快速进入 Pod
+function kexec() {
+    kubectl exec -it $(kp $1) -- /bin/sh
+}
+
+# 快速删除 Pod
+function kdel() {
+    kubectl delete pod $(kp $1)
+}
+
+# 快速查看 Pod 详细信息
+function kdesc() {
+    kubectl describe pod $(kp $1)
+}
+
+# 快速查看所有命名空间的资源
+function kgall() {
+    kubectl get $1 --all-namespaces
+}
+
+# 快速清理失败的 Pod
+function kclean() {
+    kubectl get pods --all-namespaces | grep -E 'Error|CrashLoopBackOff|Completed' | awk '{print $1, $2}' | xargs -n2 kubectl delete pod -n
+}
+```
+
+### 23.10.2 实用调试脚本
+
+**Pod 健康检查脚本**：
+
+```bash
+#!/bin/bash
+# pod-health-check.sh
+
+POD_NAME=$1
+NAMESPACE=${2:-default}
+
+if [ -z "$POD_NAME" ]; then
+    echo "Usage: $0 <pod-name> [namespace]"
+    exit 1
+fi
+
+echo "=== Pod Health Check: $POD_NAME ==="
+echo ""
+
+echo "1. Pod Status:"
+kubectl get pod $POD_NAME -n $NAMESPACE
+echo ""
+
+echo "2. Pod Details:"
+kubectl describe pod $POD_NAME -n $NAMESPACE | grep -A 10 "Status\|Events\|Conditions"
+echo ""
+
+echo "3. Pod Logs (last 50 lines):"
+kubectl logs $POD_NAME -n $NAMESPACE --tail=50
+echo ""
+
+echo "4. Resource Usage:"
+kubectl top pod $POD_NAME -n $NAMESPACE 2>/dev/null || echo "Metrics server not available"
+echo ""
+
+echo "5. Container Status:"
+kubectl get pod $POD_NAME -n $NAMESPACE -o jsonpath='{.status.containerStatuses[*].name}' | tr ' ' '\n' | while read container; do
+    echo "  Container: $container"
+    kubectl get pod $POD_NAME -n $NAMESPACE -o jsonpath="{.status.containerStatuses[?(@.name=='$container')].ready}"
+    echo ""
+done
+```
+
+**快速资源清理脚本**：
+
+```bash
+#!/bin/bash
+# cleanup-resources.sh
+
+NAMESPACE=${1:-default}
+
+echo "=== Cleaning up resources in namespace: $NAMESPACE ==="
+echo ""
+
+echo "1. Failed Pods:"
+kubectl get pods -n $NAMESPACE | grep -E 'Error|CrashLoopBackOff|Completed' | awk '{print $1}' | while read pod; do
+    echo "  Deleting pod: $pod"
+    kubectl delete pod $pod -n $NAMESPACE
+done
+echo ""
+
+echo "2. Old Completed Jobs:"
+kubectl get jobs -n $NAMESPACE | grep -E 'Complete' | awk '{print $1}' | while read job; do
+    echo "  Deleting job: $job"
+    kubectl delete job $job -n $NAMESPACE
+done
+echo ""
+
+echo "3. Unused PVCs:"
+kubectl get pvc -n $NAMESPACE | grep -v Bound | awk '{print $1}' | while read pvc; do
+    echo "  Deleting PVC: $pvc"
+    kubectl delete pvc $pvc -n $NAMESPACE
+done
+echo ""
+
+echo "Cleanup completed!"
+```
+
+**资源使用监控脚本**：
+
+```bash
+#!/bin/bash
+# resource-monitor.sh
+
+NAMESPACE=${1:-""}
+
+echo "=== Resource Usage Monitor ==="
+echo ""
+
+if [ -z "$NAMESPACE" ]; then
+    echo "Node Resources:"
+    kubectl top nodes
+    echo ""
+    echo "Pod Resources (all namespaces):"
+    kubectl top pods --all-namespaces | head -20
+else
+    echo "Pod Resources (namespace: $NAMESPACE):"
+    kubectl top pods -n $NAMESPACE
+fi
+
+echo ""
+echo "Resource Quotas:"
+if [ -z "$NAMESPACE" ]; then
+    kubectl get resourcequota --all-namespaces
+else
+    kubectl get resourcequota -n $NAMESPACE
+fi
+```
+
+### 23.10.3 高级调试技巧
+
+**多容器 Pod 调试**：
+
+```bash
+# 列出 Pod 中的所有容器
+kubectl get pod <pod-name> -o jsonpath='{.spec.containers[*].name}'
+
+# 进入特定容器
+kubectl exec -it <pod-name> -c <container-name> -- /bin/sh
+
+# 查看特定容器的日志
+kubectl logs <pod-name> -c <container-name>
+
+# 在容器中执行命令
+kubectl exec <pod-name> -c <container-name> -- <command>
+```
+
+**网络调试技巧**：
+
+```bash
+# 检查 DNS 解析
+kubectl run -it --rm debug --image=busybox --restart=Never -- nslookup <service-name>
+
+# 测试网络连通性
+kubectl run -it --rm debug --image=busybox --restart=Never -- ping <target-ip>
+
+# 测试端口连通性
+kubectl run -it --rm debug --image=busybox --restart=Never -- telnet <target-ip> <port>
+
+# 使用 curl 测试 HTTP 服务
+kubectl run -it --rm debug --image=curlimages/curl --restart=Never -- curl <url>
+```
+
+**事件监控脚本**：
+
+```bash
+#!/bin/bash
+# watch-events.sh
+
+NAMESPACE=${1:-""}
+
+if [ -z "$NAMESPACE" ]; then
+    watch -n 2 'kubectl get events --all-namespaces --sort-by='\''.lastTimestamp'\'' | tail -20'
+else
+    watch -n 2 "kubectl get events -n $NAMESPACE --sort-by='.lastTimestamp' | tail -20"
+fi
+```
+
+### 23.10.4 性能分析工具组合
+
+**完整的性能分析流程**：
+
+```bash
+#!/bin/bash
+# performance-analysis.sh
+
+POD_NAME=$1
+NAMESPACE=${2:-default}
+
+if [ -z "$POD_NAME" ]; then
+    echo "Usage: $0 <pod-name> [namespace]"
+    exit 1
+fi
+
+echo "=== Performance Analysis for Pod: $POD_NAME ==="
+echo ""
+
+echo "1. Resource Requests and Limits:"
+kubectl get pod $POD_NAME -n $NAMESPACE -o jsonpath='{.spec.containers[*].resources}' | jq .
+echo ""
+
+echo "2. Current Resource Usage:"
+kubectl top pod $POD_NAME -n $NAMESPACE
+echo ""
+
+echo "3. Pod Status:"
+kubectl get pod $POD_NAME -n $NAMESPACE -o jsonpath='{.status}' | jq .
+echo ""
+
+echo "4. Container States:"
+kubectl get pod $POD_NAME -n $NAMESPACE -o jsonpath='{.status.containerStatuses[*]}' | jq .
+echo ""
+
+echo "5. Recent Events:"
+kubectl get events -n $NAMESPACE --field-selector involvedObject.name=$POD_NAME --sort-by='.lastTimestamp' | tail -10
+echo ""
+
+echo "6. Log Analysis (errors and warnings):"
+kubectl logs $POD_NAME -n $NAMESPACE --tail=100 | grep -iE "error|warning|slow|timeout" | tail -20
+```
+
+### 23.10.5 工具组合最佳实践
+
+**开发环境工具栈**：
+
+```yaml
+开发环境推荐工具栈:
+  命令行工具:
+    - kubectl (基础操作)
+    - kubectx/kubens (上下文切换)
+    - k9s (可视化管理)
+  调试工具:
+    - kubectl debug (临时调试容器)
+    - kubectl exec (容器内执行命令)
+    - kubectl port-forward (端口转发)
+  监控工具:
+    - kubectl top (资源监控)
+    - kubectl logs (日志查看)
+    - kubectl describe (详细信息)
+```
+
+**生产环境工具栈**：
+
+```yaml
+生产环境推荐工具栈:
+  监控工具:
+    - Prometheus + Grafana (指标监控)
+    - kubectl top (命令行快速查看)
+    - Lens (可视化监控)
+  日志工具:
+    - kubectl logs (快速查看)
+    - Elasticsearch + Kibana (日志聚合)
+    - Fluentd/Fluent Bit (日志收集)
+  调试工具:
+    - kubectl debug (临时调试容器)
+    - kubectl exec (容器内执行命令)
+    - 可观测性工具 (OTLP + eBPF)
+```
+
+## 23.11 参考
 
 - [kubectl 官方文档](https://kubernetes.io/docs/reference/kubectl/)
 - [k9s 官方文档](https://k9scli.io/)
 - [Lens 官方文档](https://k8slens.dev/)
 - [Kubernetes Dashboard 官方文档](https://kubernetes.io/docs/tasks/access/application-cluster/web-ui-dashboard/)
 - [kubectx/kubens 官方文档](https://github.com/ahmetb/kubectx)
+- [kubectl 别名和插件](https://kubernetes.io/docs/reference/kubectl/kubectl/)
 
 ---
 

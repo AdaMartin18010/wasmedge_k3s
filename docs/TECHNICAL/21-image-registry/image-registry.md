@@ -2,6 +2,7 @@
 
 ## 📑 目录
 
+- [📑 目录](#-目录)
 - [21.1 文档定位](#211-文档定位)
 - [21.2 镜像仓库技术栈全景](#212-镜像仓库技术栈全景)
   - [21.2.1 镜像仓库层次结构](#2121-镜像仓库层次结构)
@@ -40,7 +41,14 @@
   - [21.8.2 镜像版本策略](#2182-镜像版本策略)
   - [21.8.3 镜像安全策略](#2183-镜像安全策略)
   - [21.8.4 镜像优化策略](#2184-镜像优化策略)
-- [21.9 参考](#219-参考)
+- [21.9 实际部署案例](#219-实际部署案例)
+  - [21.9.1 案例 1：Harbor 高可用部署](#2191-案例-1harbor-高可用部署)
+  - [21.9.2 案例 2：镜像清理自动化脚本](#2192-案例-2镜像清理自动化脚本)
+  - [21.9.3 案例 3：镜像同步到边缘节点](#2193-案例-3镜像同步到边缘节点)
+  - [21.9.4 案例 4：镜像扫描和签名集成](#2194-案例-4镜像扫描和签名集成)
+- [21.10 镜像仓库故障排查](#2110-镜像仓库故障排查)
+  - [21.10.1 常见问题](#21101-常见问题)
+- [21.11 参考](#2111-参考)
 
 ---
 
@@ -832,7 +840,314 @@ registry.example.com/myteam/myapp:abc123
 - ✅ 基础镜像优化（Alpine、Distroless）
 - ✅ 镜像压缩
 
-## 21.9 参考
+## 21.9 实际部署案例
+
+### 21.9.1 案例 1：Harbor 高可用部署
+
+**场景**：生产环境部署高可用 Harbor 镜像仓库
+
+**部署步骤**：
+
+```bash
+# 1. 准备 PostgreSQL 数据库（外部）
+# 使用云数据库或自建数据库
+
+# 2. 准备 Redis（外部）
+# 使用云 Redis 或自建 Redis
+
+# 3. 部署 Harbor（Helm Chart）
+helm repo add harbor https://helm.goharbor.io
+helm repo update
+
+helm install harbor harbor/harbor \
+  --namespace harbor-system \
+  --create-namespace \
+  --set externalURL=https://harbor.example.com \
+  --set persistence.enabled=true \
+  --set persistence.size=500Gi \
+  --set database.type=external \
+  --set database.external.host=postgres.example.com \
+  --set database.external.port=5432 \
+  --set database.external.username=harbor \
+  --set database.external.password=yourpassword \
+  --set redis.type=external \
+  --set redis.external.host=redis.example.com \
+  --set redis.external.port=6379 \
+  --set trivy.enabled=true \
+  --set notary.enabled=true
+```
+
+**Harbor 配置示例**：
+
+```yaml
+# values.yaml
+exposure:
+  type: ingress
+  tls:
+    enabled: true
+    certSource: secret
+    secret:
+      secretName: harbor-tls
+
+persistence:
+  enabled: true
+  resourcePolicy: "keep"
+  persistentVolumeClaim:
+    registry:
+      size: 500Gi
+      storageClass: "fast-ssd"
+
+trivy:
+  enabled: true
+  image:
+    repository: aquasec/trivy
+    tag: "0.42.0"
+
+notary:
+  enabled: true
+```
+
+### 21.9.2 案例 2：镜像清理自动化脚本
+
+**场景**：定期清理旧镜像和未使用的镜像
+
+**清理脚本**：
+
+```bash
+#!/bin/bash
+# cleanup-images.sh
+
+set -e
+
+REGISTRY="harbor.example.com"
+PROJECT="myproject"
+KEEP_DAYS=30
+DRY_RUN=${DRY_RUN:-false}
+
+# 获取所有标签
+TAGS=$(curl -s -u "${REGISTRY_USER}:${REGISTRY_PASSWORD}" \
+  "https://${REGISTRY}/api/v2.0/projects/${PROJECT}/repositories/myapp/artifacts" \
+  | jq -r '.[].tags[].name')
+
+# 计算截止日期
+CUTOFF_DATE=$(date -d "${KEEP_DAYS} days ago" +%s)
+
+for TAG in $TAGS; do
+  # 获取镜像创建时间
+  CREATED=$(curl -s -u "${REGISTRY_USER}:${REGISTRY_PASSWORD}" \
+    "https://${REGISTRY}/api/v2.0/projects/${PROJECT}/repositories/myapp/artifacts/${TAG}" \
+    | jq -r '.push_time')
+
+  CREATED_TIMESTAMP=$(date -d "$CREATED" +%s)
+
+  if [ "$CREATED_TIMESTAMP" -lt "$CUTOFF_DATE" ]; then
+    echo "Deleting tag: ${TAG} (created: ${CREATED})"
+
+    if [ "$DRY_RUN" = "false" ]; then
+      DIGEST=$(curl -s -u "${REGISTRY_USER}:${REGISTRY_PASSWORD}" \
+        "https://${REGISTRY}/api/v2.0/projects/${PROJECT}/repositories/myapp/artifacts/${TAG}" \
+        | jq -r '.digest')
+
+      curl -X DELETE -u "${REGISTRY_USER}:${REGISTRY_PASSWORD}" \
+        "https://${REGISTRY}/api/v2.0/projects/${PROJECT}/repositories/myapp/artifacts/${DIGEST}"
+    fi
+  fi
+done
+```
+
+**定时任务配置**：
+
+```yaml
+# CronJob for image cleanup
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: image-cleanup
+spec:
+  schedule: "0 2 * * *" # 每天凌晨 2 点
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: cleanup
+              image: curlimages/curl:latest
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  DRY_RUN=false \
+                  REGISTRY_USER=${REGISTRY_USER} \
+                  REGISTRY_PASSWORD=${REGISTRY_PASSWORD} \
+                  /scripts/cleanup-images.sh
+              env:
+                - name: REGISTRY_USER
+                  valueFrom:
+                    secretKeyRef:
+                      name: registry-credentials
+                      key: username
+                - name: REGISTRY_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: registry-credentials
+                      key: password
+          restartPolicy: OnFailure
+```
+
+### 21.9.3 案例 3：镜像同步到边缘节点
+
+**场景**：将中心 Harbor 的镜像同步到边缘 Docker Registry
+
+**同步脚本**：
+
+```bash
+#!/bin/bash
+# sync-images-to-edge.sh
+
+set -e
+
+CENTER_REGISTRY="harbor.example.com"
+EDGE_REGISTRY="edge-registry.example.com"
+IMAGES=(
+  "myapp:v1.0.0"
+  "myapp:v1.1.0"
+  "sidecar:v2.0.0"
+)
+
+for IMAGE in "${IMAGES[@]}"; do
+  echo "Syncing ${IMAGE}..."
+
+  # 从中心仓库拉取
+  docker pull ${CENTER_REGISTRY}/${IMAGE}
+
+  # 标记为边缘仓库
+  docker tag ${CENTER_REGISTRY}/${IMAGE} ${EDGE_REGISTRY}/${IMAGE}
+
+  # 推送到边缘仓库
+  docker push ${EDGE_REGISTRY}/${IMAGE}
+
+  # 清理本地镜像
+  docker rmi ${CENTER_REGISTRY}/${IMAGE} ${EDGE_REGISTRY}/${IMAGE}
+
+  echo "Synced ${IMAGE}"
+done
+```
+
+**使用 Harbor 镜像复制**：
+
+```yaml
+# Harbor 镜像复制规则
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: harbor-replication-policy
+data:
+  policy.yaml: |
+    replication:
+      - name: sync-to-edge
+        source:
+          registry: harbor.example.com
+          project: myproject
+        destination:
+          registry: edge-registry.example.com
+          project: myproject
+        filters:
+          - tag: "v*"
+        trigger:
+          type: manual
+```
+
+### 21.9.4 案例 4：镜像扫描和签名集成
+
+**场景**：CI/CD 流程中集成镜像扫描和签名
+
+**CI/CD 集成脚本**：
+
+```bash
+#!/bin/bash
+# build-scan-sign-push.sh
+
+set -e
+
+IMAGE="myapp"
+VERSION="${1:-latest}"
+REGISTRY="harbor.example.com"
+PROJECT="myproject"
+
+# 1. 构建镜像
+docker build -t ${IMAGE}:${VERSION} .
+
+# 2. 扫描镜像
+echo "Scanning image..."
+trivy image --exit-code 1 --severity HIGH,CRITICAL ${IMAGE}:${VERSION}
+
+# 3. 签名镜像
+echo "Signing image..."
+cosign sign --key cosign.key ${IMAGE}:${VERSION}
+
+# 4. 推送镜像和签名
+echo "Pushing image..."
+docker tag ${IMAGE}:${VERSION} ${REGISTRY}/${PROJECT}/${IMAGE}:${VERSION}
+docker push ${REGISTRY}/${PROJECT}/${IMAGE}:${VERSION}
+
+cosign copy ${IMAGE}:${VERSION} ${REGISTRY}/${PROJECT}/${IMAGE}:${VERSION}
+```
+
+## 21.10 镜像仓库故障排查
+
+### 21.10.1 常见问题
+
+**问题 1：镜像拉取失败 - "unauthorized"**:
+
+```bash
+# 检查认证配置
+kubectl get secret -n default | grep docker-registry
+
+# 检查镜像仓库访问
+curl -u username:password https://registry.example.com/v2/
+
+# 更新认证信息
+kubectl create secret docker-registry regcred \
+  --docker-server=registry.example.com \
+  --docker-username=username \
+  --docker-password=password \
+  --docker-email=email@example.com \
+  --dry-run=client -o yaml | kubectl apply -f -
+```
+
+**问题 2：镜像仓库存储空间不足**:
+
+```bash
+# 检查 Harbor 存储使用
+kubectl exec -n harbor-system deployment/harbor-core -- \
+  df -h /storage
+
+# 清理未使用的镜像
+# 使用 Harbor UI 或 API 清理
+
+# 检查 Docker Registry 存储
+docker exec registry du -sh /var/lib/registry/docker/registry/v2/
+
+# 执行垃圾回收
+docker exec registry registry garbage-collect /etc/docker/registry/config.yml
+```
+
+**问题 3：镜像扫描失败**:
+
+```bash
+# 检查 Trivy 扫描器状态
+kubectl get pods -n harbor-system | grep trivy
+
+# 检查扫描日志
+kubectl logs -n harbor-system deployment/harbor-trivy -f
+
+# 手动触发扫描
+curl -X POST -u admin:password \
+  "https://harbor.example.com/api/v2.0/projects/myproject/repositories/myapp/artifacts/v1.0.0/scan" \
+  -H "Content-Type: application/json"
+```
+
+## 21.11 参考
 
 - [Docker Registry 文档](https://docs.docker.com/registry/)
 - [Harbor 官方文档](https://goharbor.io/docs/)

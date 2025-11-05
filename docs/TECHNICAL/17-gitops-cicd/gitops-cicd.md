@@ -2,6 +2,7 @@
 
 ## 📑 目录
 
+- [📑 目录](#-目录)
 - [17.1 文档定位](#171-文档定位)
 - [17.2 GitOps 技术栈全景](#172-gitops-技术栈全景)
   - [17.2.1 GitOps 核心理念](#1721-gitops-核心理念)
@@ -44,7 +45,16 @@
   - [17.9.2 配置管理最佳实践](#1792-配置管理最佳实践)
   - [17.9.3 部署流程最佳实践](#1793-部署流程最佳实践)
   - [17.9.4 安全最佳实践](#1794-安全最佳实践)
-- [17.10 参考](#1710-参考)
+- [17.10 实际部署案例](#1710-实际部署案例)
+  - [17.10.1 案例 1：ArgoCD 多环境部署](#17101-案例-1argocd-多环境部署)
+  - [17.10.2 案例 2：Flux + Helm 自动化部署](#17102-案例-2flux--helm-自动化部署)
+  - [17.10.3 案例 3：GitHub Actions + ArgoCD CI/CD 流水线](#17103-案例-3github-actions--argocd-cicd-流水线)
+  - [17.10.4 案例 4：金丝雀部署实践](#17104-案例-4金丝雀部署实践)
+- [17.11 GitOps 故障排查](#1711-gitops-故障排查)
+  - [17.11.1 ArgoCD 常见问题](#17111-argocd-常见问题)
+  - [17.11.2 Flux 常见问题](#17112-flux-常见问题)
+- [17.12 GitOps 最佳实践检查清单](#1712-gitops-最佳实践检查清单)
+- [17.13 参考](#1713-参考)
 
 ---
 
@@ -795,7 +805,491 @@ Dev -> Test -> Staging -> Production
 - ✅ 镜像签名验证
 - ✅ 安全扫描集成
 
-## 17.10 参考
+## 17.10 实际部署案例
+
+### 17.10.1 案例 1：ArgoCD 多环境部署
+
+**场景**：使用 ArgoCD 管理开发、测试、生产三个环境
+
+**目录结构**：
+
+```text
+gitops-repo/
+├── apps/
+│   ├── my-app/
+│   │   ├── base/
+│   │   │   ├── deployment.yaml
+│   │   │   ├── service.yaml
+│   │   │   └── kustomization.yaml
+│   │   └── overlays/
+│   │       ├── dev/
+│   │       │   ├── kustomization.yaml
+│   │       │   └── config.yaml
+│   │       ├── staging/
+│   │       │   ├── kustomization.yaml
+│   │       │   └── config.yaml
+│   │       └── prod/
+│   │           ├── kustomization.yaml
+│   │           └── config.yaml
+├── argocd/
+│   └── applications/
+│       ├── my-app-dev.yaml
+│       ├── my-app-staging.yaml
+│       └── my-app-prod.yaml
+```
+
+**ArgoCD Application 配置**：
+
+```yaml
+# argocd/applications/my-app-dev.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: my-app-dev
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/example/gitops-repo.git
+    targetRevision: main
+    path: apps/my-app/overlays/dev
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: dev
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+---
+# argocd/applications/my-app-prod.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: my-app-prod
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/example/gitops-repo.git
+    targetRevision: main
+    path: apps/my-app/overlays/prod
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: prod
+  syncPolicy:
+    automated:
+      prune: false # 生产环境需要手动确认
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+```
+
+**Kustomize 配置**：
+
+```yaml
+# apps/my-app/base/kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - deployment.yaml
+  - service.yaml
+
+# apps/my-app/overlays/dev/kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+bases:
+  - ../../base
+namespace: dev
+replicas:
+  - name: my-app
+    count: 1
+images:
+  - name: my-app
+    newTag: dev-latest
+configMapGenerator:
+  - name: app-config
+    files:
+      - config.yaml
+```
+
+### 17.10.2 案例 2：Flux + Helm 自动化部署
+
+**场景**：使用 Flux 自动部署 Helm Chart，自动更新镜像版本
+
+**Flux 配置**：
+
+```yaml
+# GitRepository
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: GitRepository
+metadata:
+  name: my-app
+  namespace: flux-system
+spec:
+  interval: 1m
+  url: https://github.com/example/gitops-repo.git
+  ref:
+    branch: main
+---
+# HelmRepository
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: my-charts
+  namespace: flux-system
+spec:
+  interval: 5m
+  url: https://charts.example.com
+---
+# HelmRelease
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: my-app
+  namespace: flux-system
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: my-app
+      sourceRef:
+        kind: HelmRepository
+        name: my-charts
+      version: "1.0.0"
+  values:
+    replicaCount: 3
+    image:
+      repository: myapp
+      tag: latest
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+```
+
+**镜像自动更新配置**：
+
+```yaml
+# ImageRepository
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImageRepository
+metadata:
+  name: my-app
+  namespace: flux-system
+spec:
+  image: myregistry.com/myapp
+  interval: 1m
+---
+# ImagePolicy
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImagePolicy
+metadata:
+  name: my-app
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: my-app
+  policy:
+    semver:
+      range: ">=1.0.0"
+---
+# HelmRelease（更新）
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: my-app
+  namespace: flux-system
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: my-app
+      sourceRef:
+        kind: HelmRepository
+        name: my-charts
+      version: "1.0.0"
+  values:
+    image:
+      repository: myregistry.com/myapp
+      tag: "1.0.0" # 会被 ImagePolicy 自动更新
+```
+
+### 17.10.3 案例 3：GitHub Actions + ArgoCD CI/CD 流水线
+
+**场景**：使用 GitHub Actions 构建镜像，ArgoCD 自动部署
+
+**GitHub Actions 工作流**：
+
+```yaml
+# .github/workflows/ci-cd.yml
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build Docker image
+        run: |
+          docker build -t myregistry.com/myapp:${{ github.sha }} .
+          docker push myregistry.com/myapp:${{ github.sha }}
+
+      - name: Update GitOps repo
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITOPS_TOKEN }}
+        run: |
+          git clone https://github.com/example/gitops-repo.git
+          cd gitops-repo
+          # 更新镜像标签
+          sed -i "s|image: myregistry.com/myapp:.*|image: myregistry.com/myapp:${{ github.sha }}|g" \
+            apps/my-app/base/deployment.yaml
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add apps/my-app/base/deployment.yaml
+          git commit -m "Update my-app image to ${{ github.sha }}"
+          git push
+
+      - name: Trigger ArgoCD sync
+        run: |
+          argocd app sync my-app-dev
+```
+
+**ArgoCD Webhook 配置**：
+
+```yaml
+# argocd/applications/my-app-dev.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: my-app-dev
+  namespace: argocd
+  annotations:
+    notifications.argoproj.io/subscribe.on-sync-succeeded.slack: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/example/gitops-repo.git
+    targetRevision: main
+    path: apps/my-app/overlays/dev
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: dev
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      syncOptions:
+        - CreateNamespace=true
+```
+
+### 17.10.4 案例 4：金丝雀部署实践
+
+**场景**：使用 ArgoCD 实现金丝雀部署策略
+
+**Rollout 配置**：
+
+```yaml
+# apps/my-app/base/rollout.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: my-app
+spec:
+  replicas: 10
+  strategy:
+    canary:
+      steps:
+        - setWeight: 10
+        - pause: { duration: 1h }
+        - setWeight: 25
+        - pause: { duration: 1h }
+        - setWeight: 50
+        - pause: { duration: 1h }
+        - setWeight: 100
+      canaryService: my-app-canary
+      stableService: my-app-stable
+      trafficRouting:
+        istio:
+          virtualService:
+            name: my-app
+            routes:
+              - primary
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+        - name: my-app
+          image: myregistry.com/myapp:v1.0.0
+          ports:
+            - containerPort: 8080
+```
+
+**ArgoCD Application 配置**：
+
+```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: my-app-canary
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/example/gitops-repo.git
+    targetRevision: main
+    path: apps/my-app/overlays/prod
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: prod
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
+    syncOptions:
+      - CreateNamespace=true
+```
+
+## 17.11 GitOps 故障排查
+
+### 17.11.1 ArgoCD 常见问题
+
+**问题 1：应用同步失败**:
+
+```bash
+# 检查应用状态
+argocd app get my-app
+
+# 检查同步历史
+argocd app history my-app
+
+# 查看详细错误
+argocd app logs my-app
+
+# 手动同步
+argocd app sync my-app --force
+```
+
+**问题 2：Git 仓库认证失败**:
+
+```bash
+# 更新 Git 仓库凭证
+argocd repo add https://github.com/example/repo.git \
+  --username myuser \
+  --password mytoken
+
+# 或使用 SSH
+argocd repo add git@github.com:example/repo.git \
+  --ssh-private-key-path ~/.ssh/id_rsa
+```
+
+**问题 3：资源冲突**:
+
+```bash
+# 检查资源状态
+kubectl get all -n <namespace>
+
+# 强制替换
+argocd app sync my-app --replace
+
+# 删除冲突资源
+kubectl delete <resource-type> <resource-name> -n <namespace>
+```
+
+### 17.11.2 Flux 常见问题
+
+**问题 1：GitRepository 无法连接**:
+
+```bash
+# 检查 GitRepository 状态
+kubectl get gitrepository -n flux-system
+
+# 查看详细事件
+kubectl describe gitrepository my-app -n flux-system
+
+# 检查 Secret
+kubectl get secret -n flux-system
+```
+
+**问题 2：Kustomization 同步失败**:
+
+```bash
+# 检查 Kustomization 状态
+kubectl get kustomization -n flux-system
+
+# 查看详细事件
+kubectl describe kustomization my-app -n flux-system
+
+# 手动触发同步
+flux reconcile kustomization my-app -n flux-system
+```
+
+**问题 3：镜像自动更新不工作**:
+
+```bash
+# 检查 ImageRepository 状态
+kubectl get imagerepository -n flux-system
+
+# 检查 ImagePolicy 状态
+kubectl get imagepolicy -n flux-system
+
+# 手动触发镜像扫描
+flux reconcile image repository my-app -n flux-system
+```
+
+## 17.12 GitOps 最佳实践检查清单
+
+**仓库结构检查清单**：
+
+```yaml
+仓库结构:
+  目录组织:
+    - [ ] 应用配置与应用代码分离
+    - [ ] 使用 base/overlays 结构
+    - [ ] 环境配置独立管理
+    - [ ] 敏感信息使用 Sealed Secrets
+  Git 管理:
+    - [ ] 使用语义化版本标签
+    - [ ] 主要分支保护
+    - [ ] PR 审查流程
+    - [ ] 提交信息规范
+```
+
+**部署流程检查清单**：
+
+```yaml
+部署流程:
+  自动化:
+    - [ ] CI/CD 流水线自动化
+    - [ ] 镜像构建自动化
+    - [ ] GitOps 同步自动化
+    - [ ] 健康检查自动化
+  安全:
+    - [ ] 镜像签名验证
+    - [ ] 安全扫描集成
+    - [ ] RBAC 权限控制
+    - [ ] 密钥管理（Sealed Secrets/Vault）
+  监控:
+    - [ ] 部署状态监控
+    - [ ] 同步状态告警
+    - [ ] 应用健康监控
+    - [ ] 回滚机制测试
+```
+
+## 17.13 参考
 
 - [ArgoCD 官方文档](https://argo-cd.readthedocs.io/)
 - [Flux 官方文档](https://fluxcd.io/docs/)

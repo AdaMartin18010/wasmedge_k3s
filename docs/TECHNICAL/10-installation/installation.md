@@ -2,6 +2,7 @@
 
 ## 📑 目录
 
+- [📑 目录](#-目录)
 - [10.1 文档定位](#101-文档定位)
 - [10.2 前置要求](#102-前置要求)
   - [10.2.1 硬件要求](#1021-硬件要求)
@@ -30,8 +31,18 @@
   - [10.8.1 验证 K3s](#1081-验证-k3s)
   - [10.8.2 验证 WasmEdge](#1082-验证-wasmedge)
   - [10.8.3 验证 Gatekeeper](#1083-验证-gatekeeper)
-- [10.9 常见问题](#109-常见问题)
-- [10.10 参考](#1010-参考)
+- [10.9 生产环境部署最佳实践](#109-生产环境部署最佳实践)
+  - [10.9.1 高可用部署配置](#1091-高可用部署配置)
+  - [10.9.2 边缘设备部署](#1092-边缘设备部署)
+  - [10.9.3 一键安装脚本](#1093-一键安装脚本)
+  - [10.9.4 离线安装方案](#1094-离线安装方案)
+- [10.10 常见问题与故障排查](#1010-常见问题与故障排查)
+  - [10.10.1 安装相关问题](#10101-安装相关问题)
+  - [10.10.2 运行时问题](#10102-运行时问题)
+  - [10.10.3 网络问题](#10103-网络问题)
+  - [10.10.4 性能问题](#10104-性能问题)
+- [10.11 部署检查清单](#1011-部署检查清单)
+- [10.12 参考](#1012-参考)
 
 ---
 
@@ -516,18 +527,431 @@ EOF
 # 应该被 Gatekeeper 拒绝
 ```
 
-## 10.9 常见问题
+## 10.9 生产环境部署最佳实践
 
-**常见问题**：
+### 10.9.1 高可用部署配置
 
-- **kubectl logs 为空**：升级 crun ≥ 1.8.5
-- **镜像拉取失败**：使用 `wasm-to-oci` 推送至支持 Wasm 的镜像仓库
-- **无法解析 DNS**：启用 `wasmedge_wasi_socket` 插件
-- **HPA 不触发**：改用 QPS 或自定义指标（KEDA）
+**多节点高可用 K3s 集群**：
 
-> 详细故障排查见 [11. 故障排查](../11-troubleshooting/troubleshooting.md)
+```bash
+# 第一台服务器（主节点）
+curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--cluster-init --wasm" sh -
 
-## 10.10 参考
+# 获取 token
+sudo cat /var/lib/rancher/k3s/server/node-token
+
+# 第二台服务器（加入主节点）
+curl -sfL https://get.k3s.io | \
+  K3S_URL=https://主节点IP:6443 \
+  K3S_TOKEN=主节点token \
+  INSTALL_K3S_EXEC="--wasm" sh -
+
+# 第三台服务器（加入主节点）
+curl -sfL https://get.k3s.io | \
+  K3S_URL=https://主节点IP:6443 \
+  K3S_TOKEN=主节点token \
+  INSTALL_K3S_EXEC="--wasm" sh -
+```
+
+**高可用数据库配置**：
+
+```bash
+# 使用外部数据库（MySQL/PostgreSQL）
+curl -sfL https://get.k3s.io | \
+  INSTALL_K3S_EXEC="--datastore-endpoint=mysql://user:password@tcp(host:3306)/database --wasm" sh -
+```
+
+### 10.9.2 边缘设备部署
+
+**树莓派 4B 部署**：
+
+```bash
+# ARM64 架构
+curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--wasm" sh -s - --write-kubeconfig-mode 644
+
+# 配置 WasmEdge（ARM64）
+wget https://github.com/WasmEdge/WasmEdge/releases/download/0.14.0/WasmEdge-0.14.0-arm64.tar.gz
+tar -xzf WasmEdge-0.14.0-arm64.tar.gz
+sudo cp -r WasmEdge-0.14.0-arm64/include /usr/local/include/wasmedge
+sudo cp -r WasmEdge-0.14.0-arm64/lib /usr/local/lib/wasmedge
+sudo cp WasmEdge-0.14.0-arm64/bin/wasmedge /usr/local/bin/
+```
+
+**资源受限设备优化**：
+
+```bash
+# 禁用不必要的组件
+curl -sfL https://get.k3s.io | \
+  INSTALL_K3S_EXEC="--disable traefik,metrics-server --wasm" sh -
+```
+
+### 10.9.3 一键安装脚本
+
+**完整安装脚本**：
+
+```bash
+#!/bin/bash
+# install-k3s-wasmedge-opa.sh
+
+set -e
+
+echo "=== K3s + WasmEdge + OPA 一键安装脚本 ==="
+
+# 检查系统要求
+if [ "$EUID" -ne 0 ]; then
+    echo "请使用 sudo 运行此脚本"
+    exit 1
+fi
+
+KERNEL_VERSION=$(uname -r | cut -d. -f1,2)
+if [ "$(echo "$KERNEL_VERSION < 5.4" | bc)" -eq 1 ]; then
+    echo "错误: 内核版本需要 >= 5.4"
+    exit 1
+fi
+
+# 安装 K3s（带 WasmEdge 支持）
+echo "步骤 1/5: 安装 K3s..."
+curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--wasm" sh -
+
+# 等待 K3s 就绪
+echo "等待 K3s 就绪..."
+sleep 30
+kubectl wait --for=condition=ready node --all --timeout=300s
+
+# 安装 WasmEdge 和 crun
+echo "步骤 2/5: 安装 WasmEdge..."
+ARCH=$(uname -m)
+if [ "$ARCH" = "x86_64" ]; then
+    WASMEDGE_ARCH="x86_64"
+elif [ "$ARCH" = "aarch64" ]; then
+    WASMEDGE_ARCH="arm64"
+else
+    echo "不支持的架构: $ARCH"
+    exit 1
+fi
+
+wget -q https://github.com/WasmEdge/WasmEdge/releases/download/0.14.0/WasmEdge-0.14.0-${WASMEDGE_ARCH}.tar.gz
+tar -xzf WasmEdge-0.14.0-${WASMEDGE_ARCH}.tar.gz
+sudo cp -r WasmEdge-0.14.0-${WASMEDGE_ARCH}/include /usr/local/include/wasmedge
+sudo cp -r WasmEdge-0.14.0-${WASMEDGE_ARCH}/lib /usr/local/lib/wasmedge
+sudo cp WasmEdge-0.14.0-${WASMEDGE_ARCH}/bin/wasmedge /usr/local/bin/
+sudo ldconfig
+
+# 安装 crun
+echo "步骤 3/5: 安装 crun..."
+if command -v apt-get &> /dev/null; then
+    sudo apt-get update
+    sudo apt-get install -y crun
+elif command -v yum &> /dev/null; then
+    sudo yum install -y crun
+else
+    echo "请手动安装 crun >= 1.8.5"
+fi
+
+# 配置 RuntimeClass
+echo "步骤 4/5: 配置 RuntimeClass..."
+kubectl apply -f - <<EOF
+apiVersion: node.k8s.io/v1
+kind: RuntimeClass
+metadata:
+  name: crun-wasm
+handler: crun
+EOF
+
+# 安装 OPA Gatekeeper
+echo "步骤 5/5: 安装 OPA Gatekeeper..."
+kubectl apply -f https://raw.githubusercontent.com/open-policy-agent/gatekeeper/release-3.15/deploy/gatekeeper.yaml
+kubectl wait --for=condition=ready pod -l control-plane=controller-manager -n gatekeeper-system --timeout=300s
+
+echo "=== 安装完成 ==="
+echo "验证安装:"
+echo "  kubectl get nodes"
+echo "  kubectl get pods -A"
+echo "  wasmedge --version"
+echo "  kubectl get runtimeclass"
+```
+
+### 10.9.4 离线安装方案
+
+**准备离线安装包**：
+
+```bash
+#!/bin/bash
+# prepare-offline-install.sh
+
+# 创建离线安装目录
+mkdir -p offline-install/{k3s,wasmedge,crun,gatekeeper}
+
+# 下载 K3s 离线安装包
+wget https://github.com/k3s-io/k3s/releases/download/v1.30.4+k3s1/k3s-airgap-images-amd64.tar
+wget https://github.com/k3s-io/k3s/releases/download/v1.30.4+k3s1/k3s
+mv k3s-airgap-images-amd64.tar offline-install/k3s/
+mv k3s offline-install/k3s/
+
+# 下载 WasmEdge
+wget https://github.com/WasmEdge/WasmEdge/releases/download/0.14.0/WasmEdge-0.14.0-x86_64.tar.gz
+mv WasmEdge-0.14.0-x86_64.tar.gz offline-install/wasmedge/
+
+# 下载 Gatekeeper 清单
+wget -O offline-install/gatekeeper/gatekeeper.yaml \
+  https://raw.githubusercontent.com/open-policy-agent/gatekeeper/release-3.15/deploy/gatekeeper.yaml
+
+# 打包
+tar -czf k3s-wasmedge-opa-offline.tar.gz offline-install/
+```
+
+**离线安装脚本**：
+
+```bash
+#!/bin/bash
+# offline-install.sh
+
+set -e
+
+echo "=== 离线安装 K3s + WasmEdge + OPA ==="
+
+# 解压离线安装包
+tar -xzf k3s-wasmedge-opa-offline.tar.gz
+cd offline-install
+
+# 加载 K3s 镜像
+sudo mkdir -p /var/lib/rancher/k3s/agent/images/
+sudo cp k3s/k3s-airgap-images-amd64.tar /var/lib/rancher/k3s/agent/images/
+
+# 安装 K3s（离线模式）
+sudo cp k3s/k3s /usr/local/bin/
+sudo chmod +x /usr/local/bin/k3s
+sudo INSTALL_K3S_SKIP_DOWNLOAD=true INSTALL_K3S_EXEC="--wasm" sh -c "curl -sfL https://get.k3s.io | sh -"
+
+# 安装 WasmEdge（离线）
+tar -xzf wasmedge/WasmEdge-0.14.0-x86_64.tar.gz
+sudo cp -r WasmEdge-0.14.0-x86_64/include /usr/local/include/wasmedge
+sudo cp -r WasmEdge-0.14.0-x86_64/lib /usr/local/lib/wasmedge
+sudo cp WasmEdge-0.14.0-x86_64/bin/wasmedge /usr/local/bin/
+sudo ldconfig
+
+# 安装 Gatekeeper（离线）
+kubectl apply -f gatekeeper/gatekeeper.yaml
+
+echo "=== 离线安装完成 ==="
+```
+
+## 10.10 常见问题与故障排查
+
+### 10.10.1 安装相关问题
+
+**问题 1：K3s 安装失败 - "Failed to connect to github.com"**:
+
+```bash
+# 解决方案：使用国内镜像源
+export INSTALL_K3S_MIRROR=cn
+curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--wasm" sh -
+
+# 或使用离线安装包
+sudo INSTALL_K3S_SKIP_DOWNLOAD=true INSTALL_K3S_EXEC="--wasm" \
+  sh -c "curl -sfL https://get.k3s.io | sh -"
+```
+
+**问题 2：WasmEdge 运行时找不到**:
+
+```bash
+# 检查 WasmEdge 安装
+wasmedge --version
+
+# 如果未安装，手动安装
+ARCH=$(uname -m)
+if [ "$ARCH" = "x86_64" ]; then
+    WASMEDGE_ARCH="x86_64"
+elif [ "$ARCH" = "aarch64" ]; then
+    WASMEDGE_ARCH="arm64"
+fi
+
+wget https://github.com/WasmEdge/WasmEdge/releases/download/0.14.0/WasmEdge-0.14.0-${WASMEDGE_ARCH}.tar.gz
+tar -xzf WasmEdge-0.14.0-${WASMEDGE_ARCH}.tar.gz
+sudo cp -r WasmEdge-0.14.0-${WASMEDGE_ARCH}/include /usr/local/include/wasmedge
+sudo cp -r WasmEdge-0.14.0-${WASMEDGE_ARCH}/lib /usr/local/lib/wasmedge
+sudo cp WasmEdge-0.14.0-${WASMEDGE_ARCH}/bin/wasmedge /usr/local/bin/
+sudo ldconfig
+```
+
+**问题 3：crun 版本过低**:
+
+```bash
+# 检查 crun 版本
+crun --version
+
+# 如果版本 < 1.8.5，需要升级
+# Ubuntu/Debian
+sudo apt-get update
+sudo apt-get install -y crun
+
+# CentOS/RHEL
+sudo yum install -y crun
+
+# 或从源码编译
+git clone https://github.com/containers/crun.git
+cd crun
+./autogen.sh
+./configure
+make
+sudo make install
+```
+
+### 10.10.2 运行时问题
+
+**问题 4：Wasm Pod 无法启动 - "Failed to create containerd task"**:
+
+```bash
+# 检查 RuntimeClass 配置
+kubectl get runtimeclass crun-wasm -o yaml
+
+# 检查 crun 配置
+cat /etc/containerd/config.toml | grep crun
+
+# 重启 containerd
+sudo systemctl restart containerd
+sudo systemctl restart k3s
+```
+
+**问题 5：Wasm Pod 日志为空**:
+
+```bash
+# 检查 crun 版本（需要 >= 1.8.5）
+crun --version
+
+# 检查 Pod 状态
+kubectl describe pod <pod-name>
+
+# 检查 containerd 日志
+sudo journalctl -u containerd -f
+```
+
+**问题 6：镜像拉取失败**:
+
+```bash
+# 检查镜像仓库配置
+kubectl get secret -n default
+
+# 配置镜像仓库认证
+kubectl create secret docker-registry regcred \
+  --docker-server=<registry-url> \
+  --docker-username=<username> \
+  --docker-password=<password>
+
+# 在 Pod 中使用
+# spec:
+#   imagePullSecrets:
+#   - name: regcred
+```
+
+### 10.10.3 网络问题
+
+**问题 7：Wasm Pod 无法访问网络**:
+
+```bash
+# 检查 Wasm 镜像是否包含网络插件
+# 确保镜像注解包含：
+# annotations:
+#   module.wasm.image/variant: compat-smart
+
+# 检查网络策略
+kubectl get networkpolicies -A
+
+# 测试网络连接
+kubectl run test-network --image=busybox --rm -it -- sh
+# 在容器内执行: wget -O- http://google.com
+```
+
+**问题 8：DNS 解析失败**:
+
+```bash
+# 检查 CoreDNS
+kubectl get pods -n kube-system -l k8s-app=kube-dns
+
+# 检查 DNS 配置
+kubectl get configmap coredns -n kube-system -o yaml
+
+# 测试 DNS
+kubectl run test-dns --image=busybox --rm -it -- nslookup kubernetes.default
+```
+
+### 10.10.4 性能问题
+
+**问题 9：Wasm Pod 启动慢**:
+
+```bash
+# 检查镜像大小（Wasm 镜像应该很小）
+docker images | grep wasm
+
+# 使用多阶段构建优化镜像
+# FROM scratch
+# COPY --from=builder /app/target/wasm32-wasi/release/app.wasm /app.wasm
+
+# 检查节点资源
+kubectl top nodes
+kubectl top pods
+```
+
+**问题 10：资源使用过高**:
+
+```bash
+# 检查 Pod 资源限制
+kubectl get pod <pod-name> -o jsonpath='{.spec.containers[*].resources}'
+
+# 设置资源限制
+# resources:
+#   requests:
+#     cpu: 10m
+#     memory: 10Mi
+#   limits:
+#     cpu: 100m
+#     memory: 50Mi
+```
+
+## 10.11 部署检查清单
+
+**安装前检查清单**：
+
+```yaml
+前置要求:
+  硬件:
+    - [ ] CPU >= 2 核心
+    - [ ] 内存 >= 4GB
+    - [ ] 存储 >= 20GB
+    - [ ] 网络连接正常
+  软件:
+    - [ ] Linux 内核 >= 5.4
+    - [ ] curl 已安装
+    - [ ] sudo 权限
+    - [ ] 防火墙端口开放（6443, 10250）
+  环境:
+    - [ ] 可以访问互联网（或准备离线安装包）
+    - [ ] 时间同步正常（NTP）
+    - [ ] SELinux 已配置（如适用）
+```
+
+**安装后验证清单**：
+
+```yaml
+验证项目:
+  K3s:
+    - [ ] kubectl get nodes 显示节点 Ready
+    - [ ] kubectl get pods -A 所有系统 Pod 运行正常
+    - [ ] k3s --version 显示正确版本
+  WasmEdge:
+    - [ ] wasmedge --version 显示正确版本
+    - [ ] crun --version >= 1.8.5
+    - [ ] kubectl get runtimeclass crun-wasm 存在
+  OPA Gatekeeper:
+    - [ ] kubectl get pods -n gatekeeper-system 运行正常
+    - [ ] kubectl get constrainttemplates 可以列出
+  测试部署:
+    - [ ] 可以部署 Hello Wasm Pod
+    - [ ] kubectl logs hello-wasm 有输出
+    - [ ] Wasm Pod 可以访问网络
+```
+
+## 10.12 参考
 
 **关联文档**：
 

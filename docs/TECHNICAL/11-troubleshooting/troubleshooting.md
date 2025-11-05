@@ -23,8 +23,20 @@
 - [11.6 性能相关问题](#116-性能相关问题)
   - [11.6.1 启动时间过长](#1161-启动时间过长)
   - [11.6.2 内存占用过高](#1162-内存占用过高)
-- [11.7 故障排查方法](#117-故障排查方法)
-- [11.8 参考](#118-参考)
+- [11.7 网络相关问题](#117-网络相关问题)
+  - [11.7.1 Pod 无法访问服务](#1171-pod-无法访问服务)
+  - [11.7.2 跨节点 Pod 通信失败](#1172-跨节点-pod-通信失败)
+  - [11.7.3 外部访问失败](#1173-外部访问失败)
+- [11.8 存储相关问题](#118-存储相关问题)
+  - [11.8.1 PVC 挂载失败](#1181-pvc-挂载失败)
+  - [11.8.2 存储性能问题](#1182-存储性能问题)
+- [11.9 故障排查方法](#119-故障排查方法)
+  - [11.9.1 基础故障排查步骤](#1191-基础故障排查步骤)
+  - [11.9.2 一键诊断脚本](#1192-一键诊断脚本)
+  - [11.9.3 性能问题诊断](#1193-性能问题诊断)
+  - [11.9.4 高级故障排查方法](#1194-高级故障排查方法)
+  - [11.9.5 常用命令速查](#1195-常用命令速查)
+- [11.10 参考](#1110-参考)
 
 ---
 
@@ -637,9 +649,201 @@ spec:
           memory: "50Mi"
 ```
 
-## 11.7 故障排查方法
+## 11.7 网络相关问题
 
-**故障排查步骤**：
+### 11.7.1 Pod 无法访问服务
+
+**现象**：
+
+```bash
+# 在 Pod 内无法访问 Service
+$ kubectl exec -it pod-name -- curl http://service-name:port
+# 连接超时或拒绝连接
+```
+
+**诊断步骤**：
+
+```bash
+# 1. 检查 Service 是否存在
+kubectl get svc service-name
+
+# 2. 检查 Service 的 Endpoints
+kubectl get endpoints service-name
+
+# 3. 检查 Pod 标签是否匹配
+kubectl get pods -l app=your-app-label
+
+# 4. 检查 DNS 解析
+kubectl exec -it pod-name -- nslookup service-name
+
+# 5. 检查 CNI 插件状态
+kubectl get pods -n kube-system | grep cni
+
+# 6. 检查网络策略
+kubectl get networkpolicies
+```
+
+**常见原因与解决方案**：
+
+| 原因 | 解决方案 |
+|------|---------|
+| Service 没有 Endpoints | 检查 Pod 标签是否匹配 Service selector |
+| DNS 解析失败 | 检查 CoreDNS 是否正常运行 |
+| NetworkPolicy 阻止 | 检查 NetworkPolicy 规则 |
+| CNI 插件异常 | 重启 CNI 插件 Pod |
+
+### 11.7.2 跨节点 Pod 通信失败
+
+**现象**：
+
+```bash
+# 不同节点上的 Pod 无法互相访问
+```
+
+**诊断步骤**：
+
+```bash
+# 1. 检查节点间网络连通性
+ping <node-ip>
+
+# 2. 检查路由表
+ip route show
+
+# 3. 检查 iptables 规则
+sudo iptables -L -n -v
+
+# 4. 检查 CNI 配置
+cat /etc/cni/net.d/*.conf
+
+# 5. 检查 Flannel/Calico 状态（如果使用）
+kubectl get pods -n kube-system | grep flannel
+kubectl get pods -n kube-system | grep calico
+```
+
+**解决方案**：
+
+```bash
+# 如果是 Flannel，检查 VXLAN 接口
+ip link show flannel.1
+
+# 如果是 Calico，检查 BGP 状态
+calicoctl node status
+
+# 重启 CNI 插件
+kubectl delete pod -n kube-system -l app=flannel
+```
+
+### 11.7.3 外部访问失败
+
+**现象**：
+
+```bash
+# 外部无法访问 Ingress 或 LoadBalancer Service
+```
+
+**诊断步骤**：
+
+```bash
+# 1. 检查 Ingress Controller
+kubectl get pods -n ingress-nginx
+
+# 2. 检查 Ingress 资源
+kubectl get ingress
+kubectl describe ingress <ingress-name>
+
+# 3. 检查 Service 类型
+kubectl get svc
+
+# 4. 检查端口映射
+kubectl get svc <service-name> -o yaml
+
+# 5. 检查防火墙规则
+sudo iptables -L -n | grep <port>
+```
+
+## 11.8 存储相关问题
+
+### 11.8.1 PVC 挂载失败
+
+**现象**：
+
+```bash
+# Pod 无法挂载 PVC
+Events:
+  Warning  FailedMount  Unable to mount volumes for pod
+```
+
+**诊断步骤**：
+
+```bash
+# 1. 检查 PVC 状态
+kubectl get pvc
+kubectl describe pvc <pvc-name>
+
+# 2. 检查 PV 状态
+kubectl get pv
+kubectl describe pv <pv-name>
+
+# 3. 检查 StorageClass
+kubectl get storageclass
+kubectl describe storageclass <storageclass-name>
+
+# 4. 检查 CSI 驱动状态
+kubectl get pods -n kube-system | grep csi
+
+# 5. 检查节点上的挂载点
+kubectl debug node/<node-name> -it --image=busybox -- mount | grep volume
+```
+
+**常见原因与解决方案**：
+
+| 原因 | 解决方案 |
+|------|---------|
+| StorageClass 不存在 | 创建或指定正确的 StorageClass |
+| CSI 驱动未安装 | 安装对应的 CSI 驱动 |
+| 节点资源不足 | 检查节点磁盘空间 |
+| 权限问题 | 检查 ServiceAccount 权限 |
+
+### 11.8.2 存储性能问题
+
+**现象**：
+
+```bash
+# 读写速度慢，IO 延迟高
+```
+
+**诊断步骤**：
+
+```bash
+# 1. 检查磁盘 IO
+kubectl top pod <pod-name>
+
+# 2. 使用 iostat 检查（在节点上）
+iostat -x 1
+
+# 3. 检查存储后端性能
+# 如果是本地存储，检查磁盘健康状态
+smartctl -a /dev/sda
+
+# 4. 检查文件系统类型
+df -T
+
+# 5. 检查是否有磁盘配额限制
+quota -u
+```
+
+**优化建议**：
+
+- 使用 SSD 存储
+- 调整文件系统挂载选项（如 `noatime`）
+- 使用本地存储类（local-path-provisioner）
+- 考虑使用分布式存储（如 Ceph）
+
+## 11.9 故障排查方法
+
+### 11.9.1 基础故障排查步骤
+
+**标准排查流程**：
 
 1. **检查 Pod 状态**：`kubectl get pods`
 2. **查看 Pod 事件**：`kubectl describe pod <pod-name>`
@@ -647,7 +851,69 @@ spec:
 4. **检查节点资源**：`kubectl describe node`
 5. **检查系统组件**：`kubectl get pods -A`
 
-**高级故障排查方法**：
+### 11.9.2 一键诊断脚本
+
+**创建诊断脚本**：
+
+```bash
+#!/bin/bash
+# cluster-diagnosis.sh
+
+echo "=== Cluster Status ==="
+kubectl get nodes
+kubectl get pods -A | grep -v Running
+
+echo "=== Resource Usage ==="
+kubectl top nodes 2>/dev/null || echo "Metrics server not available"
+kubectl top pods -A 2>/dev/null | head -20
+
+echo "=== Recent Events ==="
+kubectl get events --sort-by='.lastTimestamp' | tail -20
+
+echo "=== System Components ==="
+kubectl get pods -n kube-system
+
+echo "=== Network Check ==="
+kubectl get svc -A | grep -v ClusterIP
+
+echo "=== Storage Check ==="
+kubectl get pvc -A
+kubectl get pv
+
+echo "=== DNS Check ==="
+kubectl get pods -n kube-system | grep coredns
+```
+
+**使用方法**：
+
+```bash
+chmod +x cluster-diagnosis.sh
+./cluster-diagnosis.sh > diagnosis.txt
+```
+
+### 11.9.3 性能问题诊断
+
+**性能诊断流程**：
+
+```bash
+# 1. 检查资源使用情况
+kubectl top nodes
+kubectl top pods -A
+
+# 2. 检查 CPU 和内存限制
+kubectl describe pod <pod-name> | grep -A 5 "Limits"
+
+# 3. 检查节点资源压力
+kubectl describe node <node-name> | grep -A 10 "Allocated resources"
+
+# 4. 使用 cAdvisor 查看详细指标（如果已安装）
+# 访问 http://<node-ip>:4194
+
+# 5. 检查慢查询或长时间运行的进程
+kubectl exec -it <pod-name> -- ps aux | sort -k3 -rn | head -10
+```
+
+### 11.9.4 高级故障排查方法
 
 对于复杂的性能问题和延迟问题，请参考：
 
@@ -658,12 +924,15 @@ spec:
 - **[29.6.9 eBPF 工具速查表](../29-isolation-stack/isolation-stack.md#2969-ebpf-工具速查表)** -
   eBPF 工具分类和使用方法
 
-**常用命令**：
+### 11.9.5 常用命令速查
+
+**集群状态检查**：
 
 ```bash
 # 检查集群状态
 kubectl get nodes
 kubectl get pods -A
+kubectl cluster-info
 
 # 检查资源使用
 kubectl top nodes
@@ -671,6 +940,7 @@ kubectl top pods
 
 # 检查事件
 kubectl get events --sort-by='.lastTimestamp'
+kubectl get events --field-selector type=Warning
 
 # 检查组件日志
 kubectl logs -n <namespace> <pod-name>
@@ -678,7 +948,56 @@ kubectl logs -n kube-system -l app=k3s
 kubectl logs -n gatekeeper-system -l app=gatekeeper
 ```
 
-## 11.8 参考
+**网络诊断**：
+
+```bash
+# DNS 诊断
+kubectl exec -it <pod-name> -- nslookup <service-name>
+kubectl exec -it <pod-name> -- dig <service-name>
+
+# 网络连通性
+kubectl exec -it <pod-name> -- ping <target-ip>
+kubectl exec -it <pod-name> -- curl <url>
+
+# 端口检查
+kubectl get svc
+kubectl port-forward svc/<service-name> 8080:80
+```
+
+**存储诊断**：
+
+```bash
+# PVC/PV 状态
+kubectl get pvc -A
+kubectl get pv
+kubectl describe pvc <pvc-name>
+
+# StorageClass
+kubectl get storageclass
+kubectl describe storageclass <storageclass-name>
+
+# CSI 驱动
+kubectl get pods -n kube-system | grep csi
+```
+
+**调试工具**：
+
+```bash
+# 进入 Pod 调试
+kubectl exec -it <pod-name> -- /bin/sh
+
+# 调试 Pod（临时容器）
+kubectl debug <pod-name> -it --image=busybox
+
+# 端口转发
+kubectl port-forward <pod-name> 8080:80
+
+# 查看 Pod 详细信息
+kubectl describe pod <pod-name>
+kubectl get pod <pod-name> -o yaml
+```
+
+## 11.10 参考
 
 **关联文档**：
 

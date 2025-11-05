@@ -2,6 +2,7 @@
 
 ## 📑 目录
 
+- [📑 目录](#-目录)
 - [09.1 文档定位](#091-文档定位)
 - [09.2 零信任架构](#092-零信任架构)
   - [09.2.1 零信任概念](#0921-零信任概念)
@@ -34,7 +35,19 @@
 - [09.9 形式化总结](#099-形式化总结)
   - [09.9.1 零信任模型形式化](#0991-零信任模型形式化)
   - [09.9.2 安全策略模型形式化](#0992-安全策略模型形式化)
-- [09.10 参考](#0910-参考)
+- [09.10 供应链安全最佳实践](#0910-供应链安全最佳实践)
+  - [09.10.1 供应链安全概述](#09101-供应链安全概述)
+  - [09.10.2 SBOM（软件物料清单）](#09102-sbom软件物料清单)
+  - [09.10.3 依赖项漏洞扫描](#09103-依赖项漏洞扫描)
+  - [09.10.4 镜像签名和验证完整流程](#09104-镜像签名和验证完整流程)
+  - [09.10.5 Kubernetes 准入控制集成](#09105-kubernetes-准入控制集成)
+  - [09.10.6 实际安全案例](#09106-实际安全案例)
+    - [案例 1：Log4Shell 漏洞应对](#案例-1log4shell-漏洞应对)
+    - [案例 2：供应链攻击防范](#案例-2供应链攻击防范)
+    - [案例 3：密钥管理最佳实践](#案例-3密钥管理最佳实践)
+  - [09.10.7 安全合规检查清单](#09107-安全合规检查清单)
+  - [09.10.8 安全工具集成矩阵](#09108-安全工具集成矩阵)
+- [09.11 参考](#0911-参考)
 
 ---
 
@@ -498,7 +511,388 @@ $$S(P) = \{\text{sign}(P), \text{verify}(P), \text{enforce}(P)\}$$
 - $\text{verify}$ = 验证函数
 - $\text{enforce}$ = 执行函数
 
-## 09.10 参考
+## 09.10 供应链安全最佳实践
+
+### 09.10.1 供应链安全概述
+
+**供应链安全**是指在整个软件供应链中确保代码、镜像、依赖项等的安全性和完整性。
+
+**供应链安全威胁**：
+
+- **依赖项漏洞**：第三方库的安全漏洞
+- **镜像篡改**：镜像在传输或存储过程中被篡改
+- **恶意代码注入**：在构建过程中注入恶意代码
+- **密钥泄露**：构建密钥或访问凭证泄露
+
+### 09.10.2 SBOM（软件物料清单）
+
+**SBOM 定义**：软件物料清单（Software Bill of Materials）记录了软件的所有组件和
+依赖项。
+
+**SBOM 生成工具**：
+
+```bash
+# 使用 Syft 生成 SBOM
+syft docker image myapp:latest -o spdx-json > sbom.json
+
+# 使用 Cosign 签名 SBOM
+cosign sign-blob --bundle sbom.json --key cosign.key
+
+# 使用 in-toto 生成完整供应链证明
+```
+
+**SBOM 示例**：
+
+```json
+{
+  "spdxVersion": "SPDX-2.3",
+  "name": "myapp-1.0.0",
+  "packages": [
+    {
+      "name": "myapp",
+      "version": "1.0.0",
+      "supplier": "Organization: MyCompany",
+      "dependencies": ["node:16-alpine", "express:4.18.0", "lodash:4.17.21"]
+    }
+  ]
+}
+```
+
+### 09.10.3 依赖项漏洞扫描
+
+**漏洞扫描工具**：
+
+```bash
+# 使用 Trivy 扫描镜像漏洞
+trivy image myapp:latest
+
+# 使用 Grype 扫描漏洞
+grype docker:myapp:latest
+
+# 使用 Snyk 扫描依赖项
+snyk test --docker myapp:latest
+```
+
+**CI/CD 集成示例**：
+
+```yaml
+# .github/workflows/security-scan.yml
+name: Security Scan
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build image
+        run: docker build -t myapp:latest .
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: "myapp:latest"
+          format: "sarif"
+          output: "trivy-results.sarif"
+
+      - name: Upload Trivy results
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: "trivy-results.sarif"
+
+      - name: Generate SBOM
+        run: |
+          syft docker image myapp:latest -o spdx-json > sbom.json
+
+      - name: Sign SBOM
+        run: |
+          cosign sign-blob --bundle sbom.json --key cosign.key
+```
+
+### 09.10.4 镜像签名和验证完整流程
+
+**完整签名流程**：
+
+```bash
+#!/bin/bash
+# complete-signing-flow.sh
+
+# 1. 构建镜像
+docker build -t myapp:1.0.0 .
+
+# 2. 生成 SBOM
+syft docker image myapp:1.0.0 -o spdx-json > sbom.json
+
+# 3. 扫描漏洞
+trivy image myapp:1.0.0 --format json > vuln-report.json
+
+# 4. 验证无高危漏洞
+if grep -q '"Severity":"CRITICAL"' vuln-report.json; then
+    echo "Critical vulnerabilities found, aborting"
+    exit 1
+fi
+
+# 5. 签名镜像
+cosign sign --key cosign.key myapp:1.0.0
+
+# 6. 签名 SBOM
+cosign sign-blob --bundle sbom.json --key cosign.key
+
+# 7. 推送镜像和签名
+docker push myapp:1.0.0
+cosign copy myapp:1.0.0 myregistry.io/myapp:1.0.0
+
+# 8. 推送 SBOM
+cosign upload blob --bundle sbom.json myregistry.io/myapp:1.0.0-sbom
+```
+
+**验证流程**：
+
+```bash
+#!/bin/bash
+# verify-image.sh
+
+IMAGE=$1
+
+# 1. 验证镜像签名
+if ! cosign verify --key cosign.pub $IMAGE; then
+    echo "Image signature verification failed"
+    exit 1
+fi
+
+# 2. 验证 SBOM 签名
+if ! cosign verify-blob --key cosign.pub --bundle sbom.json; then
+    echo "SBOM signature verification failed"
+    exit 1
+fi
+
+# 3. 扫描漏洞
+trivy image --exit-code 1 --severity HIGH,CRITICAL $IMAGE
+
+echo "Image verification passed"
+```
+
+### 09.10.5 Kubernetes 准入控制集成
+
+**使用 Gatekeeper 验证镜像签名**：
+
+```yaml
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: k8srequiredimagesignature
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sRequiredImageSignature
+      validation:
+        openAPIV3Schema:
+          type: object
+          properties:
+            key:
+              type: string
+            images:
+              type: array
+              items:
+                type: string
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package k8srequiredimagesignature
+
+        violation[{"msg": msg}] {
+          container := input.review.object.spec.containers[_]
+          not check_image_signature(container.image)
+          msg := sprintf("Image %v is not signed", [container.image])
+        }
+
+        check_image_signature(image) {
+          # 调用 cosign verify 验证签名
+          # 这里需要集成外部验证服务
+        }
+---
+apiVersion: config.gatekeeper.sh/v1alpha1
+kind: Config
+metadata:
+  name: config
+spec:
+  match:
+    - excludedNamespaces: ["kube-system", "gatekeeper-system"]
+  validation:
+    traces:
+      - userGroups: ["system:serviceaccounts"]
+        kind:
+          group: ""
+          version: "v1"
+          kind: "Pod"
+```
+
+**使用 Kyverno 验证镜像签名**：
+
+```yaml
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: require-image-signature
+spec:
+  validationFailureAction: enforce
+  rules:
+    - name: verify-image-signature
+      match:
+        resources:
+          kinds:
+            - Pod
+      validate:
+        message: "All images must be signed"
+        pattern:
+          spec:
+            containers:
+              - name: "*"
+                image: "myregistry.io/*"
+          # 这里需要集成外部验证逻辑
+```
+
+### 09.10.6 实际安全案例
+
+#### 案例 1：Log4Shell 漏洞应对
+
+**场景**：2021 年 Log4Shell 漏洞（CVE-2021-44228）影响大量 Java 应用
+
+**应对措施**：
+
+```bash
+# 1. 扫描所有镜像中的 Log4j
+trivy image --severity CRITICAL myapp:latest | grep log4j
+
+# 2. 生成受影响镜像清单
+kubectl get pods --all-namespaces -o json | \
+  jq -r '.items[].spec.containers[].image' | \
+  sort -u | \
+  xargs -I {} trivy image --format json {} | \
+  jq -r 'select(.Results[].Vulnerabilities[].VulnerabilityID=="CVE-2021-44228") | .Target'
+
+# 3. 自动更新策略
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: block-log4j-vulnerable-images
+spec:
+  validationFailureAction: enforce
+  rules:
+  - name: block-log4j
+    match:
+      resources:
+        kinds:
+        - Pod
+    validate:
+      message: "Images with Log4j vulnerability are not allowed"
+      deny:
+        conditions:
+        - key: "{{ images.containers.*.image }}"
+          operator: AnyIn
+          value: ["*log4j*"]
+```
+
+#### 案例 2：供应链攻击防范
+
+**场景**：防止构建过程中注入恶意代码
+
+**防护措施**：
+
+```yaml
+# 1. 使用可信基础镜像
+FROM gcr.io/distroless/base:nonroot
+
+# 2. 多阶段构建隔离
+FROM node:16-alpine AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --only=production
+
+FROM gcr.io/distroless/nodejs:16
+COPY --from=builder /app /app
+CMD ["/app/server.js"]
+
+# 3. 构建时扫描
+# 在 CI/CD 中集成安全扫描
+```
+
+#### 案例 3：密钥管理最佳实践
+
+**场景**：安全地管理镜像签名密钥和访问凭证
+
+**最佳实践**：
+
+```bash
+# 1. 使用 Kubernetes Secrets 存储密钥
+kubectl create secret generic cosign-key \
+  --from-file=cosign.key=cosign.key \
+  --from-file=cosign.pub=cosign.pub
+
+# 2. 使用 Sealed Secrets 加密密钥
+kubectl create secret generic cosign-key \
+  --from-file=cosign.key=cosign.key \
+  --dry-run=client -o yaml | \
+  kubeseal -o yaml > sealed-secret.yaml
+
+# 3. 使用外部密钥管理服务（如 HashiCorp Vault）
+vault kv put secret/cosign-key \
+  private_key=@cosign.key \
+  public_key=@cosign.pub
+```
+
+### 09.10.7 安全合规检查清单
+
+**定期安全检查清单**：
+
+```yaml
+供应链安全检查清单:
+  镜像安全:
+    - [ ] 所有镜像已签名
+    - [ ] 签名验证已启用
+    - [ ] 定期扫描镜像漏洞
+    - [ ] 使用可信基础镜像
+    - [ ] 最小化镜像大小和攻击面
+  依赖项安全:
+    - [ ] 生成 SBOM 清单
+    - [ ] 扫描所有依赖项漏洞
+    - [ ] 及时更新依赖项
+    - [ ] 使用依赖项锁定文件
+    - [ ] 审核第三方依赖项
+  构建安全:
+    - [ ] 使用多阶段构建
+    - [ ] 构建过程隔离
+    - [ ] 构建日志审计
+    - [ ] 构建密钥安全存储
+    - [ ] CI/CD 管道安全加固
+  运行时安全:
+    - [ ] 使用非 root 用户运行
+    - [ ] 最小权限原则
+    - [ ] 网络策略隔离
+    - [ ] 定期安全更新
+    - [ ] 运行时安全监控
+```
+
+### 09.10.8 安全工具集成矩阵
+
+**安全工具对比**：
+
+| 工具类别       | 工具           | 用途                | 集成方式                   |
+| -------------- | -------------- | ------------------- | -------------------------- |
+| **镜像签名**   | Cosign         | 镜像签名和验证      | CI/CD、Kubernetes 准入控制 |
+| **SBOM 生成**  | Syft           | 生成软件物料清单    | CI/CD                      |
+| **漏洞扫描**   | Trivy          | 镜像和文件系统扫描  | CI/CD、Kubernetes Operator |
+| **策略治理**   | OPA Gatekeeper | Kubernetes 策略执行 | Kubernetes 准入控制        |
+| **密钥管理**   | Sealed Secrets | 密钥加密存储        | Kubernetes Secrets         |
+| **运行时安全** | Falco          | 运行时威胁检测      | Kubernetes DaemonSet       |
+
+## 09.11 参考
 
 **关联文档**：
 
