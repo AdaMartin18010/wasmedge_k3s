@@ -1,6 +1,6 @@
 # 2025 年 11 月 4 日专题文档索引
 
-## 目录
+## 📑 目录
 
 - [文档导航](#文档导航)
 - [文档结构](#文档结构)
@@ -137,8 +137,9 @@
   - [分层架构模型](../02-layers/) - 从硬件到业务的分层抽象
   - [组合模式与实践](../architecture-view/08-composition-patterns/) - 架构组合的
     核心模式
-  - [形式化理论](../06-formalization/) - 数学基础与理论
-  - [概念属性关系](../08-concepts-relations/) - 概念、属性、关系的系统梳理
+  - [形式化理论](../00-theory/) - 数学基础与理论
+  - [概念属性关系](../architecture-view/06-concepts-properties-relations/) - 概
+    念、属性、关系的系统梳理
 
 ### 技术文档
 

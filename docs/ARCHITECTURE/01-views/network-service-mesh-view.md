@@ -1,6 +1,6 @@
 # Network Service Mesh (NSM) 架构视角
 
-## 目录
+## 📑 目录
 
 - [1. 目标与视角](#1-目标与视角)
 - [2. 关键概念](#2-关键概念)
@@ -322,8 +322,10 @@ Request → [JWT|RBAC|RateLimit|Circuit|Retry|Transform] → upstream
 
 - `03-service-mesh-nsm/04-nsm-architecture.md` - NSM 架构详细说明
 - `03-service-mesh-nsm/05-use-cases.md` - NSM 典型用例
-- `architecture-view/08-composition-patterns/05-nsm-pattern.md` - NSM 模式详细说明
-- `architecture-view/08-composition-patterns/05-nsm-pattern.md#service-aggregation` - Service Aggregation 模式详细说明
+- `architecture-view/08-composition-patterns/05-nsm-pattern.md` - NSM 模式详细说
+  明
+- `architecture-view/08-composition-patterns/05-nsm-pattern.md#service-aggregation` -
+  Service Aggregation 模式详细说明
 
 ### 学术资源 1
 

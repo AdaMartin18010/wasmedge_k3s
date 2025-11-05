@@ -581,8 +581,8 @@ Capability(u) = { c | c ∈ seccomp-white-list }
   - 季度报告：<https://cloud.google.com/run/docs>
   - 安全公告：<https://cloud.google.com/security/>
 - **相关文档**：
-  - `06-formalization/state-space-compression.md` - 状态空间压缩形式化证明
-  - `06-formalization/induction-proof.md` - 归纳证明
+  - `00-theory/state-space-compression.md` - 状态空间压缩形式化证明
+  - `00-theory/induction-proof.md` - 归纳证明
   - `04-opa-policy-governance/03-capability-closure.md` - 能力闭包详细说明
 
 ---

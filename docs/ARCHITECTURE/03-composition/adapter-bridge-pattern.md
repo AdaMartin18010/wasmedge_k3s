@@ -1,6 +1,6 @@
 # Adapter/Bridge 组合模式
 
-## 目录
+## 📑 目录
 
 - [1. 概述](#1-概述)
 - [2. 模式定义](#2-模式定义)
@@ -346,8 +346,8 @@ Adapter 与 OPA 集成，提供统一的策略控制：
 
 - `architecture-view/08-composition-patterns/01-adapter-bridge.md` -
   Adapter/Bridge 模式详细说明
-- `03-composition/composition-patterns.md` - 组合模式总览
-- `03-composition/service-aggregation.md` - Service Aggregation 模式详细说明
+- `architecture-view/08-composition-patterns/README.md` - 组合模式总览
+- `architecture-view/08-composition-patterns/05-nsm-pattern.md#service-aggregation` - Service Aggregation 模式详细说明
 
 ### 学术资源
 

@@ -1,8 +1,7 @@
 # 软件架构视角文档索引
 
-## 目录
+## 📑 目录
 
-- [目录](#目录)
 - [📋 文档索引](#-文档索引)
   - [1. 架构拆解与组合 (`01-decomposition-composition/`)](#1-架构拆解与组合-01-decomposition-composition)
   - [2. 虚拟化容器化沙盒化 (`02-virtualization-containerization-sandboxing/`)](#2-虚拟化容器化沙盒化-02-virtualization-containerization-sandboxing)
