@@ -1,0 +1,133 @@
+# 12.2 三类结构的深入分析
+
+## 📑 目录
+
+- [12.2.1 文档概述](#1221-文档概述)
+- [12.2.2 计算结构（Computational Structure）](#1222-计算结构computational-structure)
+- [12.2.3 控制结构（Control Structure）](#1223-控制结构control-structure)
+- [12.2.4 信息结构（Information Structure）](#1224-信息结构information-structure)
+- [12.2.5 参考](#1225-参考)
+
+---
+
+## 12.2.1 文档概述
+
+本目录包含三类结构的深入分析文档：
+
+1. **[计算结构](01-computational-structure.md)** - 代数视角的计算结构
+2. **[控制结构](02-control-structure.md)** - 序视角的控制结构
+3. **[信息结构](03-information-structure.md)** - 拓扑/近似视角的信息结构
+
+每类结构都包含：
+- 核心特征
+- 典型实例
+- 形式化工具
+- 哲学意义
+
+---
+
+## 12.2.2 计算结构（Computational Structure）
+
+### 核心问题
+
+**"什么可以被计算？"**以及**"如何通过规则组合出复杂行为？"**
+
+### 类比
+
+代数结构（群、环、幺半群）
+
+### 核心特征
+
+- **封闭性**：操作作用于对象后仍在系统内（如函数组合）
+- **结合律**：计算顺序可重组（如函数复合、Monad 结合律）
+- **单位元**：空操作、恒等函数、return/unit
+- **可组合性**：小部件可组合成大系统（模块化、函数式编程）
+
+### 典型实例
+
+- λ-演算
+- 代数数据类型（ADT）
+- Monad
+- 图灵机
+
+**详细文档**：[01-computational-structure.md](01-computational-structure.md)
+
+---
+
+## 12.2.3 控制结构（Control Structure）
+
+### 核心问题
+
+**"何时发生？"**与**"以何顺序发生？"**
+
+### 类比
+
+序结构（偏序、全序、格）
+
+### 核心特征
+
+- **顺序性**：语句执行的先后关系
+- **依赖性**：数据依赖、控制依赖
+- **并发性**：事件间的偏序关系（非全序）
+- **同步机制**：通过屏障、锁、消息等建立序关系
+
+### 典型实例
+
+- 程序控制流图（CFG）
+- Happens-before 关系
+- 并发模型（如 CSP、Actor）
+- 事务隔离级别
+
+**详细文档**：[02-control-structure.md](02-control-structure.md)
+
+---
+
+## 12.2.4 信息结构（Information Structure）
+
+### 核心问题
+
+**"信息如何被表示、近似、压缩与保护？"**
+
+### 类比
+
+拓扑结构（邻近、连续性、鲁棒性）
+
+### 核心特征
+
+- **邻近性**：信息之间的"相似"或"可达"
+- **连续性**：小扰动不导致大变化（鲁棒性）
+- **逼近性**：用有限表示无限（如浮点近似实数）
+- **抽象层次**：从具体值到类型、规范、语义
+
+### 典型实例
+
+- 类型系统
+- 抽象解释（Abstract Interpretation）
+- 容错计算
+- 拓扑数据结构（如 Mapper、持续同调）
+- 域名理论（Domain Theory）
+- 机器学习中的嵌入空间
+
+**详细文档**：[03-information-structure.md](03-information-structure.md)
+
+---
+
+## 12.2.5 参考
+
+### 相关文档
+
+- **[结构主义基础理论](../01-foundation/README.md)** - 数学结构主义启示和三元结构框架
+- **[结构交互与复合](../03-structure-interaction/README.md)** - 结构的复合和深层联系
+- **[源文档](../../../structure_view.md)** - 结构视角的完整论述
+
+### 学术参考
+
+1. Goguen, J. A. — _A Categorical Manifesto_（范畴论视角下的计算结构）
+2. Winskel, G. — _The Formal Semantics of Programming Languages_（事件结构与控制）
+3. Abramsky, S. — _Domain Theory in Logical Form_（信息结构与拓扑）
+
+---
+
+**更新时间**：2025-11-05  
+**版本**：v1.0
+
