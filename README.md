@@ -37,7 +37,18 @@ Kubernetes → K3s → WasmEdge → OPA** 的完整技术栈，包含理念、�
 
 **核心文档**：
 
-- [`docs/ARCHIVE/standalone-themes/ai_view.md`](docs/ARCHIVE/standalone-themes/ai_view.md) - 认知视角和技术演进主线（已归档）
+- [`docs/ARCHIVE/standalone-themes/ai_view.md`](docs/ARCHIVE/standalone-themes/ai_view.md) -
+  认知视角和技术演进主线（已归档）
+- [`system_view.md`](system_view.md) ⭐ - 系统视角：从系统视角（7 层 4 域模型）
+  梳理虚拟化、容器化、沙盒化
+- [`architecture_view.md`](architecture_view.md) ⭐ v2.0 - 架构视角：从软件架构
+  视角看虚拟化容器化沙盒化（已重构）
+- [`structure_view.md`](structure_view.md) ⭐ - 结构视角：从抽象结构（计算结构、
+  控制结构、信息结构）视角看虚拟化容器化沙盒化
+- [`tech_view.md`](tech_view.md) ⭐ - 技术社会视角：从技术和社会的视角（基础设施
+  史、风险社会学、发展经济学、人类学）看虚拟化容器化沙盒化
+- [`docs/ARCHITECTURE/`](docs/ARCHITECTURE/) ⭐ - 架构文档集：理论论证、实现细节
+  、架构视图、案例研究
 - [`docs/COGNITIVE/00-knowledge-map/`](docs/COGNITIVE/00-knowledge-map/) - 认知
   图谱和学习路径
 - [`docs/COGNITIVE/01-overview/`](docs/COGNITIVE/01-overview/) - 技术栈总览和决
@@ -49,7 +60,8 @@ Kubernetes → K3s → WasmEdge → OPA** 的完整技术栈，包含理念、�
 - [`docs/COGNITIVE/29-isolation-stack/`](docs/TECHNICAL/29-isolation-stack/) -
   隔离栈理论模型（认知层）
 
-**注意**：`ai_view.md` 和 `algebra_view.md` 已归档到 `docs/ARCHIVE/standalone-themes/`，因为它们与云原生架构主题无关。
+**注意**：`ai_view.md` 和 `algebra_view.md` 已归档到
+`docs/ARCHIVE/standalone-themes/`，因为它们与云原生架构主题无关。
 
 **完整列表**：详见 [`docs/COGNITIVE/README.md`](docs/COGNITIVE/README.md)
 
@@ -86,7 +98,8 @@ Kubernetes → K3s → WasmEdge → OPA** 的完整技术栈，包含理念、�
 2. **[认知图谱](docs/COGNITIVE/00-knowledge-map/knowledge-map.md)** - 快速理解知
    识结构和学习路径
 3. **[理念层](docs/COGNITIVE/02-principles/principles.md)** - 理解云原生核心思想
-4. **[认知视角](docs/ARCHIVE/standalone-themes/ai_view.md)** - 掌握技术演进主线和认知框架（已归档）
+4. **[认知视角](docs/ARCHIVE/standalone-themes/ai_view.md)** - 掌握技术演进主线
+   和认知框架（已归档）
 5. **[Docker 基础](docs/TECHNICAL/00-docker/docker.md)** - 掌握容器技术基础
 
 ### 进阶学习路径
@@ -116,7 +129,9 @@ Kubernetes → K3s → WasmEdge → OPA** 的完整技术栈，包含理念、�
 
 **新手推荐**：
 
-1. 先阅读**认知模型文档**（如 [`docs/ARCHIVE/standalone-themes/ai_view.md`](docs/ARCHIVE/standalone-themes/ai_view.md)）建立整体认知框架
+1. 先阅读**认知模型文档**（如
+   [`docs/ARCHIVE/standalone-themes/ai_view.md`](docs/ARCHIVE/standalone-themes/ai_view.md)）
+   建立整体认知框架
 2. 再根据需要查阅**技术参考文档**深入学习具体技术
 
 **按需查阅**：
@@ -198,6 +213,16 @@ Kubernetes → K3s → WasmEdge → OPA** 的完整技术栈，包含理念、�
 ### 主要入口
 
 - **[文档总览](docs/README.md)** - 完整的文档集介绍和使用指南
+- **[架构视角文档集](docs/ARCHITECTURE/README.md)** ⭐ - 软件架构视角文档集（理
+  论论证、实现细节、架构视图）
+- **[系统视角文档](system_view.md)** ⭐ - 从系统视角（7 层 4 域模型）梳理虚拟化
+  、容器化、沙盒化
+- **[架构视角文档](architecture_view.md)** ⭐ v2.0 - 从软件架构视角看虚拟化容器
+  化沙盒化（已重构）
+- **[结构视角文档](structure_view.md)** ⭐ - 从抽象结构（计算结构、控制结构、信
+  息结构）视角看虚拟化容器化沙盒化
+- **[技术社会视角文档](tech_view.md)** ⭐ - 从技术和社会的视角（基础设施史、风险
+  社会学、发展经济学、人类学）看虚拟化容器化沙盒化
 - **[认知模型文档](docs/COGNITIVE/README.md)** - 认知框架和推理模型
 - **[技术参考文档](docs/TECHNICAL/README.md)** - 技术规格和实践指南
 - **[文档索引](docs/INDEX.md)** - 所有文档的快速索引

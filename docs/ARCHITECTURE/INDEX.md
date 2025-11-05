@@ -160,6 +160,13 @@
   - [nsm-edge.md](01-implementation/08-edge/nsm-edge.md) - NSM 边缘网关配置 ✅
   - [edge-cloud-sync.md](01-implementation/08-edge/edge-cloud-sync.md) - 边缘-云
     同步配置 ✅
+- **7 层 4 域模型实现** (`09-system-view/`) ⭐ 新增：
+  - [README](01-implementation/09-system-view/README.md) - 7 层 4 域模型实现文档
+    集
+  - [7-layer-4-domain-implementation.md](01-implementation/09-system-view/7-layer-4-domain-implementation.md) -
+    实现细节
+  - [deployment-guide.md](01-implementation/09-system-view/deployment-guide.md) -
+    部署指南
 
 ### 1. 多视角架构视图 (`01-views/`)
 
@@ -182,6 +189,8 @@
   范式
 - [动态运维视角](01-views/dynamic-operations-view.md) -
   GitOps、Observability、Autoscaling
+- [系统视角架构视图](01-views/system-view-architecture.md) ⭐ 新增 - 7 层 4 域模
+  型的完整架构视图
 
 ### 2. 分层架构模型 (`02-layers/`)
 
@@ -251,10 +260,18 @@
 - [电商平台案例](07-case-studies/e-commerce-platform.md) - 电商平台架构设计
 - [金融系统案例](07-case-studies/financial-system.md) - 金融系统架构设计
 - [多云混合案例](07-case-studies/multi-cloud-hybrid.md) - 多云混合架构设计
-- [CI/CD 高密度场景](07-case-studies/cicd-high-density.md) ⭐ 新增 - 基于 system_view 案例 B
-- [桌面应用沙盒化](07-case-studies/desktop-sandboxing.md) ⭐ 新增 - 基于 system_view 案例 C
-- [浏览器 WASM 架构](07-case-studies/browser-wasm.md) ⭐ 新增 - 基于 system_view 案例 E
-- [system_view 案例扩展分析](07-case-studies/system-view-cases-analysis.md) ⭐ 新增 - system_view 案例的详细分析
+- [CI/CD 高密度场景](07-case-studies/cicd-high-density.md) ⭐ 新增 - 基于
+  system_view 案例 B
+- [桌面应用沙盒化](07-case-studies/desktop-sandboxing.md) ⭐ 新增 - 基于
+  system_view 案例 C
+- [浏览器 WASM 架构](07-case-studies/browser-wasm.md) ⭐ 新增 - 基于 system_view
+  案例 E
+- [银行核心系统](07-case-studies/banking-core-system.md) ⭐ 新增 - 基于
+  system_view 案例 A
+- [边缘零售 K8s](07-case-studies/edge-retail-k8s.md) ⭐ 新增 - 基于 system_view
+  案例 D
+- [system_view 案例扩展分析](07-case-studies/system-view-cases-analysis.md) ⭐
+  新增 - system_view 案例的详细分析
 
 ### 8. 概念属性关系 (`08-concepts-relations/`) ⚠️ 已删除
 

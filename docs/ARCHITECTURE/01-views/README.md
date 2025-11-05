@@ -25,6 +25,7 @@
 | `dynamic-operations-view.md`    | [`architecture-view/07-dynamic-operations/`](../architecture-view/07-dynamic-operations/)                                                                                                                     |
 | `ai-ml-architecture-view.md`    | ⚠️ 待补充到 `architecture-view/`                                                                                                                                                                              |
 | `edge-computing-view.md`        | ⚠️ 待补充到 `architecture-view/`                                                                                                                                                                              |
+| `system-view-architecture.md`   | [`../00-theory/07-system-model/`](../00-theory/07-system-model/) ⭐ 新增 - 7 层 4 域模型架构视图                                                                                                              |
 
 ## 📚 推荐阅读路径
 

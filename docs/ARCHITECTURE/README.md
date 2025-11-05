@@ -37,6 +37,10 @@ ARCHITECTURE/
 │       ├── README.md
 │       └── 7-layer-4-domain-formalization.md
 ├── 01-implementation/     # 实现细节（纯技术）📋
+│   └── 09-system-view/    # ⭐ 新增：7层4域模型实现细节
+│       ├── README.md
+│       ├── 7-layer-4-domain-implementation.md
+│       └── deployment-guide.md
 ├── SYSTEM-VIEW-INTEGRATION.md ⭐ 新增：系统视角与架构文档整合指南
 ├── 01-views/              # 多视角架构视图
 │   ├── decomposition-composition.md
@@ -46,7 +50,8 @@ ARCHITECTURE/
 │   ├── service-mesh-view.md
 │   ├── network-service-mesh-view.md
 │   ├── opa-policy-governance-view.md
-│   └── dynamic-operations-view.md
+│   ├── dynamic-operations-view.md
+│   └── system-view-architecture.md ⭐ 新增：7层4域模型架构视图
 ├── REFERENCES.md          # 参考资源文档
 ├── 02-layers/             # 分层架构模型
 │   ├── layer-model.md
@@ -80,7 +85,12 @@ ARCHITECTURE/
 │   ├── e-commerce-platform.md
 │   ├── financial-system.md
 │   ├── multi-cloud-hybrid.md
-│   └── system-view-cases-analysis.md ⭐ 新增：system_view 案例扩展分析
+│   ├── system-view-cases-analysis.md ⭐ 新增：system_view 案例扩展分析
+│   ├── cicd-high-density.md ⭐ 新增：CI/CD 高密度场景
+│   ├── desktop-sandboxing.md ⭐ 新增：桌面应用沙盒化
+│   ├── browser-wasm.md ⭐ 新增：浏览器 WASM 架构
+│   ├── banking-core-system.md ⭐ 新增：银行核心系统
+│   └── edge-retail-k8s.md ⭐ 新增：边缘零售 K8s
 ├── 08-concepts-relations/ # ⚠️ 已删除（内容合并到 architecture-view/06-concepts-properties-relations/）
 │   └── README.md（重定向文档）
 ├── 09-november-2025-special/ # ⚠️ 已删除（内容合并到 05-trends-2025/november-2025-special/）

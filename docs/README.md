@@ -63,17 +63,37 @@
     化论证
   - **状态**：已重构（v2.0），压缩比 71%，结构清晰
   - **适用场景**：深入理解架构设计原理和组合模式
+- [`../system_view.md`](../system_view.md) ⭐ - 从系统视角（7 层 4 域模型）梳理
+  虚拟化、容器化、沙盒化
+  - **内容**：7 层 4 域模型、隔离维度定量对比、分层功能对比矩阵、实战案例、选型
+    决策指南
+  - **状态**：已与 ARCHITECTURE 文档体系整合，包含理论论证、案例扩展、实现细节
+  - **适用场景**：理解系统视角的技术选型和架构决策
+- [`../structure_view.md`](../structure_view.md) ⭐ - 从抽象结构（计算结构、控制
+  结构、信息结构）视角看虚拟化容器化沙盒化
+  - **内容**：数学结构主义启示、三类结构深入分析、结构主义三棱镜、复合结构、结构
+    选型格言
+  - **状态**：结构主义视角的独特分析
+  - **适用场景**：理解技术的数学本质和结构特征
+- [`../tech_view.md`](../tech_view.md) ⭐ - 从技术和社会的视角（基础设施史、风险
+  社会学、发展经济学、人类学）看虚拟化容器化沙盒化
+  - **内容**：基础设施史视角、风险社会学视角、发展经济学视角、人类学视角
+  - **状态**：人文社科视角的独特分析
+  - **适用场景**：理解技术的社会意义和文化内涵
 
 **目录文档**：
 
 - `ARCHITECTURE/01-views/` - 多视角架构视图（快捷入口）
 - `ARCHITECTURE/architecture-view/` - 架构视图文档集（详细文档，推荐）
 - `ARCHITECTURE/02-layers/` - 分层架构模型
-- `ARCHITECTURE/00-theory/` - 理论论证（纯形式化）
-- `ARCHITECTURE/01-implementation/` - 实现细节（纯技术）
-- `ARCHITECTURE/03-composition/` - 组合模式与实践
-- `ARCHITECTURE/05-trends-2025/` - 2025 年技术趋势
-- `ARCHITECTURE/07-case-studies/` - 案例研究
+- `ARCHITECTURE/00-theory/` - 理论论证（纯形式化），包含 7 层 4 域模型形式化论证
+  ⭐
+- `ARCHITECTURE/01-implementation/` - 实现细节（纯技术），包含 7 层 4 域模型实现
+  细节 ⭐
+- `ARCHITECTURE/07-case-studies/` - 案例研究，包含 system_view 案例扩展 ⭐
+- `ARCHITECTURE/SYSTEM-VIEW-INTEGRATION.md` ⭐ - 系统视角与架构文档整合指南
+- `ARCHITECTURE/architecture-view/09-multi-perspectives/02-structural-perspective.md`
+  ⭐ - 结构视角架构视图（与 structure_view.md 相关）
 
 **适用场景**：
 
@@ -116,7 +136,13 @@
 1. 先阅读**认知模型文档**（如 [`../ai_view.md`](../ai_view.md)）建立整体认知框架
 2. 再阅读**架构视图文档**（如
    [`../architecture_view.md`](../architecture_view.md)）理解架构设计视角
-3. 最后查阅**技术参考文档**深入学习具体技术
+3. 阅读**系统视角文档**（如 [`../system_view.md`](../system_view.md)）理解系统视
+   角的技术选型 ⭐
+4. 阅读**结构视角文档**（如 [`../structure_view.md`](../structure_view.md)）理解
+   技术的数学本质和结构特征 ⭐
+5. 阅读**技术社会视角文档**（如 [`../tech_view.md`](../tech_view.md)）理解技术的
+   社会意义和文化内涵 ⭐
+6. 最后查阅**技术参考文档**深入学习具体技术
 
 **按需查阅**：
 
@@ -125,6 +151,9 @@
   - 代数解构：`../algebra_view.md`
 - 需要**架构设计**和**组合模式** → 查阅架构视图文档
   - 核心文档：`../architecture_view.md`
+  - 系统视角：`../system_view.md` ⭐
+  - 结构视角：`../structure_view.md` ⭐
+  - 技术社会视角：`../tech_view.md` ⭐
   - 详细文档：`ARCHITECTURE/architecture-view/`
 - 需要**技术细节**和**实践指导** → 查阅技术参考文档
   - 技术规范：`TECHNICAL/` 目录
@@ -137,6 +166,10 @@
 - **架构视图文档**提供**"如何设计"**（How to Design）和**"架构模式
   "**（Patterns）
   - `architecture_view.md`：统一中层模型 ℳ 和架构拆解与组合
+  - `system_view.md`：7 层 4 域模型和系统视角的技术选型 ⭐
+  - `structure_view.md`：三类结构（计算、控制、信息）的结构主义分析 ⭐
+  - `tech_view.md`：技术的社会意义和文化内涵（基础设施史、风险社会学、发展经济学
+    、人类学） ⭐
   - `ARCHITECTURE/`：多视角架构视图和详细文档
 - **技术参考文档**提供**"怎么做"**（How）和**"具体细节"**（Details）
   - `TECHNICAL/`：技术规格和实践指南
@@ -146,6 +179,11 @@
 - `ai_view.md` ↔ `COGNITIVE/` - 认知模型文档集
 - `algebra_view.md` ↔ `COGNITIVE/11-algebraic-structure/` - 代数结构文档
 - `architecture_view.md` ↔ `ARCHITECTURE/` - 架构视图文档集
+- `system_view.md` ↔ `ARCHITECTURE/` - 系统视角文档集（7 层 4 域模型） ⭐
+- `structure_view.md` ↔
+  `ARCHITECTURE/architecture-view/09-multi-perspectives/` - 结构视角文档集 ⭐
+- `tech_view.md` ↔ `ARCHITECTURE/architecture-view/09-multi-perspectives/` - 技
+  术社会视角文档集 ⭐
 
 ---
 
@@ -159,9 +197,15 @@
    构和学习路径
 4. **[架构视角](../architecture_view.md)** ⭐ - 从软件架构视角理解虚拟化、容器化
    、沙盒化
-5. **[架构视图](ARCHITECTURE/INDEX.md)** - 理解架构设计的多视角
-6. **[理念层](COGNITIVE/02-principles/principles.md)** - 理解云原生核心思想
-7. **[Docker 基础](TECHNICAL/00-docker/docker.md)** - 掌握容器技术基础
+5. **[系统视角](../system_view.md)** ⭐ - 从系统视角（7 层 4 域模型）理解虚拟化
+   、容器化、沙盒化
+6. **[结构视角](../structure_view.md)** ⭐ - 从抽象结构（计算结构、控制结构、信
+   息结构）视角理解虚拟化、容器化、沙盒化
+7. **[技术社会视角](../tech_view.md)** ⭐ - 从技术和社会的视角（基础设施史、风险
+   社会学、发展经济学、人类学）理解虚拟化、容器化、沙盒化
+8. **[架构视图](ARCHITECTURE/INDEX.md)** - 理解架构设计的多视角
+9. **[理念层](COGNITIVE/02-principles/principles.md)** - 理解云原生核心思想
+10. **[Docker 基础](TECHNICAL/00-docker/docker.md)** - 掌握容器技术基础
 
 ### 进阶学习
 
@@ -180,6 +224,12 @@
   化
 - **[architecture_view.md](../architecture_view.md)** ⭐ v2.0 - 从软件架构的视角
   看待虚拟化容器化沙盒化
+- **[system_view.md](../system_view.md)** ⭐ - 从系统视角（7 层 4 域模型）梳理虚
+  拟化、容器化、沙盒化
+- **[structure_view.md](../structure_view.md)** ⭐ - 从抽象结构（计算结构、控制
+  结构、信息结构）视角看虚拟化容器化沙盒化
+- **[tech_view.md](../tech_view.md)** ⭐ - 从技术和社会的视角（基础设施史、风险
+  社会学、发展经济学、人类学）看虚拟化容器化沙盒化
 
 ### 核心理念与架构
 
@@ -368,6 +418,11 @@
 - **[algebra_view.md](../algebra_view.md)** ⭐ - 代数解构视角
 - **[architecture_view.md](../architecture_view.md)** ⭐ v2.0 - 架构视角（已重构
   ）
+- **[system_view.md](../system_view.md)** ⭐ - 系统视角（7 层 4 域模型）
+- **[structure_view.md](../structure_view.md)** ⭐ - 结构视角（计算结构、控制结
+  构、信息结构）
+- **[tech_view.md](../tech_view.md)** ⭐ - 技术社会视角（基础设施史、风险社会学
+  、发展经济学、人类学）
 
 ### 核心文档
 

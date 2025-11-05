@@ -14,7 +14,7 @@
 
 ## 1. 案例概述
 
-`system_view.md` 提供了5个真实生产案例，本文档对这些案例进行扩展分析，包括：
+`system_view.md` 提供了 5 个真实生产案例，本文档对这些案例进行扩展分析，包括：
 
 - 架构设计的理论基础
 - 技术选型的决策依据
@@ -28,6 +28,7 @@
 ### 2.1 案例回顾
 
 **需求**：
+
 - 合规：银保监会要求"不同等级系统不得共享内核"
 - 业务：核心账务 0 中断，季度演练热迁移
 
@@ -37,18 +38,22 @@
 
 #### 2.2.1 合规要求的理论依据
 
-**引用公理**：A2（OS 资源封闭）- 参见 [`00-theory/01-axioms/A2-os-resource.md`](00-theory/01-axioms/A2-os-resource.md)
+**引用公理**：A2（OS 资源封闭）- 参见
+[`00-theory/01-axioms/A2-os-resource.md`](00-theory/01-axioms/A2-os-resource.md)
 
 **分析**：
+
 - 监管要求"硬件级隔离"，对应虚拟化的归纳映射 Ψ₁
 - 容器化共享内核，违反监管要求
 - 虚拟化提供独立的 guest 内核，满足合规要求
 
 #### 2.2.2 热迁移的理论依据
 
-**引用引理**：状态空间压缩理论 - 参见 [`00-theory/04-state-compression/`](00-theory/04-state-compression/)
+**引用引理**：状态空间压缩理论 - 参见
+[`00-theory/04-state-compression/`](00-theory/04-state-compression/)
 
 **分析**：
+
 - 热迁移需要 VM 状态的完整快照
 - 虚拟化的状态空间可以完整捕获和传输
 - 容器化的状态依赖宿主内核，难以完整迁移
@@ -60,11 +65,13 @@
 **模式**：VM + Container 混合部署
 
 **实现**：
+
 - VM 用于核心业务（合规要求）
 - Container 用于非核心业务（密度优化）
 - KubeVirt 统一调度
 
 **参考文档**：
+
 - [`architecture-view/08-composition-patterns/`](architecture-view/08-composition-patterns/)
 - [`07-case-studies/financial-system.md`](07-case-studies/financial-system.md)
 
@@ -73,22 +80,27 @@
 **模式**：OpenPolicy Agent 统一策略
 
 **实现**：
+
 - Nova-quota 与 K8s ResourceQuota 统一到 OPA
 - 避免双轨制带来的策略不一致
 
 **参考文档**：
+
 - [`01-views/opa-policy-governance-view.md`](01-views/opa-policy-governance-view.md)
 - [`01-implementation/05-opa/`](01-implementation/05-opa/)
 
 ### 2.4 扩展建议
 
-**建议补充文档**：`07-case-studies/banking-core-system.md`
+**✅ 已补充文档**：`07-case-studies/banking-core-system.md`
 
-**内容应包括**：
-- 完整的架构设计文档
-- 热迁移的实现细节
-- 合规审计的检查清单
-- 性能基准测试数据
+**内容包含**：
+
+- ✅ 完整的架构设计文档
+- ✅ 热迁移的实现细节
+- ✅ 合规审计的检查清单
+- ✅ 性能基准测试数据
+
+**详细文档**：参见 [`banking-core-system.md`](banking-core-system.md)
 
 ---
 
@@ -97,6 +109,7 @@
 ### 3.1 案例回顾
 
 **需求**：
+
 - 启动快、内存省、镜像缓存
 - 多租户安全：外部开发者代码不可逃逸
 
@@ -106,18 +119,22 @@
 
 #### 3.2.1 安全隔离的理论依据
 
-**引用引理**：L2（能力闭包引理）- 参见 [`00-theory/05-lemmas-theorems/L2-capability-closure.md`](00-theory/05-lemmas-theorems/L2-capability-closure.md)
+**引用引理**：L2（能力闭包引理）- 参见
+[`00-theory/05-lemmas-theorems/L2-capability-closure.md`](00-theory/05-lemmas-theorems/L2-capability-closure.md)
 
 **分析**：
+
 - 外部代码需要更强的隔离
 - gVisor 通过 syscall 白名单实现最小权限
 - Firecracker 通过 microVM 实现硬件级隔离
 
 #### 3.2.2 成本优化的理论依据
 
-**引用理论**：状态空间压缩 - 参见 [`00-theory/04-state-compression/`](00-theory/04-state-compression/)
+**引用理论**：状态空间压缩 - 参见
+[`00-theory/04-state-compression/`](00-theory/04-state-compression/)
 
 **分析**：
+
 - Firecracker 内存占用 5 MB，比 gVisor 的 30 MB 更省
 - 启动延迟 125 ms，接近容器性能
 - 安全性与 VM 相当，成本接近容器
@@ -129,11 +146,13 @@
 **模式**：基于信任级别的自动路由
 
 **实现**：
+
 - 内部业务 → runC 容器（可信代码）
 - 外部 PR → gVisor/Firecracker（不可信代码）
 - 调度器自动路由
 
 **参考文档**：
+
 - [`architecture-view/08-composition-patterns/service-aggregation.md`](architecture-view/08-composition-patterns/service-aggregation.md)
 
 #### 3.3.2 渐进式迁移模式
@@ -141,11 +160,13 @@
 **模式**：灰度迁移策略
 
 **实现**：
+
 - 2023 Q2 灰度 Firecracker
 - 2024 全量替换 gVisor
 - 预计再省 18% 成本
 
 **参考文档**：
+
 - [`05-trends-2025/`](05-trends-2025/)
 
 ### 3.4 扩展建议
@@ -153,6 +174,7 @@
 **✅ 已补充文档**：`07-case-studies/cicd-high-density.md`
 
 **内容包含**：
+
 - ✅ 10 万 job/天的架构设计
 - ✅ gVisor/Firecracker 混部方案
 - ✅ 成本优化策略和实证数据
@@ -167,6 +189,7 @@
 ### 4.1 案例回顾
 
 **需求**：
+
 - Windows 桌面环境，需加载未知 .dll
 - 用户体验：不能明显拖慢 Office
 
@@ -176,18 +199,22 @@
 
 #### 4.2.1 沙盒化的理论依据
 
-**引用归纳映射**：Ψ₃（沙盒化层）- 参见 [`00-theory/02-induction-proof/psi3-sandboxing.md`](00-theory/02-induction-proof/psi3-sandboxing.md)
+**引用归纳映射**：Ψ₃（沙盒化层）- 参见
+[`00-theory/02-induction-proof/psi3-sandboxing.md`](00-theory/02-induction-proof/psi3-sandboxing.md)
 
 **分析**：
+
 - 沙盒化提供进程级隔离
 - Windows AppContainer + CET/CFI 缓解 ROP/JOP
 - 内存开销 10-20 MB，CPU 损耗 <5%
 
 #### 4.2.2 WASM 化的理论依据
 
-**引用归纳映射**：Ψ₅（WebAssembly 抽象层）- 参见 [`00-theory/02-induction-proof/psi5-wasm.md`](00-theory/02-induction-proof/psi5-wasm.md)
+**引用归纳映射**：Ψ₅（WebAssembly 抽象层）- 参见
+[`00-theory/02-induction-proof/psi5-wasm.md`](00-theory/02-induction-proof/psi5-wasm.md)
 
 **分析**：
+
 - WASM 提供内存安全的执行环境
 - 完全去掉 native dll，减少攻击面
 - 侧信道攻击面进一步缩小
@@ -199,11 +226,13 @@
 **模式**：从沙盒到 WASM 的渐进迁移
 
 **实现**：
+
 - 第一阶段：Windows 沙盒（当前）
 - 第二阶段：部分插件 WASM 化
 - 第三阶段：完全 WASM 化
 
 **参考文档**：
+
 - [`01-views/sandboxing-view.md`](01-views/sandboxing-view.md)
 - [`01-views/webassembly-view.md`](01-views/webassembly-view.md)
 
@@ -212,6 +241,7 @@
 **✅ 已补充文档**：`07-case-studies/desktop-sandboxing.md`
 
 **内容包含**：
+
 - ✅ Windows 沙盒的实现细节
 - ✅ Chrome 沙盒架构的分析
 - ✅ WASM 插件化的迁移方案
@@ -226,6 +256,7 @@
 ### 5.1 案例回顾
 
 **需求**：
+
 - 100 门店，4 核 ARM 盒子
 - 跑 AI 推理 + POS 容器，不可被恶意盒子逃逸到门店局域网
 
@@ -235,18 +266,22 @@
 
 #### 5.2.1 边缘计算的理论依据
 
-**引用架构视图**：边缘计算视角 - 参见 [`01-views/edge-computing-view.md`](01-views/edge-computing-view.md)
+**引用架构视图**：边缘计算视角 - 参见
+[`01-views/edge-computing-view.md`](01-views/edge-computing-view.md)
 
 **分析**：
+
 - ARM Cortex-A55 无 VT 型虚拟化，纯容器风险高
 - gVisor 提供用户态 syscall 拦截，绕过硬件限制
 - K3s 提供轻量级 Kubernetes
 
 #### 5.2.2 网络隔离的理论依据
 
-**引用定理**：T1（身份-路由等价定理）- 参见 [`00-theory/05-lemmas-theorems/T1-identity-routing.md`](00-theory/05-lemmas-theorems/T1-identity-routing.md)
+**引用定理**：T1（身份-路由等价定理）- 参见
+[`00-theory/05-lemmas-theorems/T1-identity-routing.md`](00-theory/05-lemmas-theorems/T1-identity-routing.md)
 
 **分析**：
+
 - Cilium+eBPF 强制 mTLS + SPIFFE ID
 - 边缘无 NAT 穿透，直接身份认证
 - 恶意容器无法调用门店银企直连网段
@@ -258,23 +293,28 @@
 **模式**：边缘计算与云计算的协同
 
 **实现**：
+
 - 边缘：轻量级控制面（K3s）、本地缓存
 - 云端：统一监控（Prometheus）、策略下发（OPA）
 - 同步：卫星链路回传 1% 采样
 
 **参考文档**：
+
 - [`01-implementation/08-edge/`](01-implementation/08-edge/)
 - [`07-case-studies/multi-cloud-hybrid.md`](07-case-studies/multi-cloud-hybrid.md)
 
 ### 5.4 扩展建议
 
-**建议补充文档**：`07-case-studies/edge-retail.md`
+**✅ 已补充文档**：`07-case-studies/edge-retail-k8s.md`
 
-**内容应包括**：
-- 边缘 K8s 的完整部署方案
-- 100 门店的规模化部署策略
-- 网络隔离的实现细节
-- 渗透测试报告
+**内容包含**：
+
+- ✅ 边缘 K8s 的完整部署方案
+- ✅ 100 门店的规模化部署策略
+- ✅ 网络隔离的实现细节
+- ✅ 渗透测试报告
+
+**详细文档**：参见 [`edge-retail-k8s.md`](edge-retail-k8s.md)
 
 ---
 
@@ -283,6 +323,7 @@
 ### 6.1 案例回顾
 
 **需求**：
+
 - 浏览器里跑轻节点，验证区块
 - 不可访问用户硬盘
 
@@ -292,18 +333,22 @@
 
 #### 6.2.1 WASM 的理论依据
 
-**引用归纳映射**：Ψ₅（WebAssembly 抽象层）- 参见 [`00-theory/02-induction-proof/psi5-wasm.md`](00-theory/02-induction-proof/psi5-wasm.md)
+**引用归纳映射**：Ψ₅（WebAssembly 抽象层）- 参见
+[`00-theory/02-induction-proof/psi5-wasm.md`](00-theory/02-induction-proof/psi5-wasm.md)
 
 **分析**：
+
 - WASM 提供内存安全的执行环境
 - WASI 提供 capability-based 接口
 - 只能访问明确授予的能力（random、clock、stdio）
 
 #### 6.2.2 侧信道防护的理论依据
 
-**引用引理**：L4（Wasm 内存安全引理）- 参见 [`00-theory/05-lemmas-theorems/L4-wasm-memory-safety.md`](00-theory/05-lemmas-theorems/L4-wasm-memory-safety.md)
+**引用引理**：L4（Wasm 内存安全引理）- 参见
+[`00-theory/05-lemmas-theorems/L4-wasm-memory-safety.md`](00-theory/05-lemmas-theorems/L4-wasm-memory-safety.md)
 
 **分析**：
+
 - V8 Site-Isolation + Spectre 缓解
 - 用户私钥放在 WebCrypto，WASM 无法访问
 - 理论上无法被 WASM 侧 JS 读取
@@ -315,11 +360,13 @@
 **模式**：基于能力的访问控制
 
 **实现**：
+
 - WASI 仅给 random、clock、stdio
 - 无文件系统访问
 - 无网络访问（通过 WebRTC 独立通道）
 
 **参考文档**：
+
 - [`01-implementation/06-wasm/wasi-examples.md`](01-implementation/06-wasm/wasi-examples.md)
 
 #### 6.3.2 P2P 网络模式
@@ -327,11 +374,13 @@
 **模式**：去中心化的节点发现
 
 **实现**：
+
 - DHT 自发现节点
 - WebRTC 数据通道
 - libp2p-wasm-ext
 
 **参考文档**：
+
 - [`01-views/webassembly-view.md`](01-views/webassembly-view.md)
 
 ### 6.4 扩展建议
@@ -339,6 +388,7 @@
 **✅ 已补充文档**：`07-case-studies/browser-wasm.md`
 
 **内容包含**：
+
 - ✅ WebAssembly 运行时的完整设计
 - ✅ WASI 接口的详细实现
 - ✅ P2P 网络的集成方案
@@ -352,33 +402,33 @@
 
 ### 7.1 技术选型对比
 
-| 案例 | 主要技术 | 次要技术 | 选型依据 |
-|------|---------|---------|---------|
-| A: 银行核心 | KVM | KubeVirt | 合规要求 |
-| B: CI/CD | runC/gVisor/Firecracker | - | 成本+安全 |
-| C: PC 安全 | Windows 沙盒 | WASM（未来） | 用户体验 |
-| D: 边缘 K8s | gVisor/K3s | Cilium/OPA | 边缘限制 |
-| E: WASM-P2P | WASM/WASI | WebRTC | 浏览器环境 |
+| 案例        | 主要技术                | 次要技术     | 选型依据   |
+| ----------- | ----------------------- | ------------ | ---------- |
+| A: 银行核心 | KVM                     | KubeVirt     | 合规要求   |
+| B: CI/CD    | runC/gVisor/Firecracker | -            | 成本+安全  |
+| C: PC 安全  | Windows 沙盒            | WASM（未来） | 用户体验   |
+| D: 边缘 K8s | gVisor/K3s              | Cilium/OPA   | 边缘限制   |
+| E: WASM-P2P | WASM/WASI               | WebRTC       | 浏览器环境 |
 
 ### 7.2 架构模式对比
 
-| 案例 | 架构模式 | 适用场景 |
-|------|---------|---------|
-| A: 银行核心 | 混合部署 | 合规要求+DevOps |
-| B: CI/CD | 路由决策 | 多租户+成本优化 |
-| C: PC 安全 | 渐进增强 | 用户体验+安全 |
-| D: 边缘 K8s | 边缘-云协同 | 边缘计算+统一管理 |
-| E: WASM-P2P | Capability-Based | 浏览器+去中心化 |
+| 案例        | 架构模式         | 适用场景          |
+| ----------- | ---------------- | ----------------- |
+| A: 银行核心 | 混合部署         | 合规要求+DevOps   |
+| B: CI/CD    | 路由决策         | 多租户+成本优化   |
+| C: PC 安全  | 渐进增强         | 用户体验+安全     |
+| D: 边缘 K8s | 边缘-云协同      | 边缘计算+统一管理 |
+| E: WASM-P2P | Capability-Based | 浏览器+去中心化   |
 
 ### 7.3 理论支撑对比
 
-| 案例 | 主要理论 | 次要理论 |
-|------|---------|---------|
-| A: 银行核心 | Ψ₁（虚拟化） | A2（OS 资源封闭） |
-| B: CI/CD | L2（能力闭包） | 状态空间压缩 |
-| C: PC 安全 | Ψ₃（沙盒化） | Ψ₅（WASM） |
-| D: 边缘 K8s | Ψ₃（沙盒化） | T1（身份-路由等价） |
-| E: WASM-P2P | Ψ₅（WASM） | L4（Wasm 内存安全） |
+| 案例        | 主要理论       | 次要理论            |
+| ----------- | -------------- | ------------------- |
+| A: 银行核心 | Ψ₁（虚拟化）   | A2（OS 资源封闭）   |
+| B: CI/CD    | L2（能力闭包） | 状态空间压缩        |
+| C: PC 安全  | Ψ₃（沙盒化）   | Ψ₅（WASM）          |
+| D: 边缘 K8s | Ψ₃（沙盒化）   | T1（身份-路由等价） |
+| E: WASM-P2P | Ψ₅（WASM）     | L4（Wasm 内存安全） |
 
 ---
 
@@ -416,13 +466,13 @@
 
 **相关文档**：
 
-- [`SYSTEM-VIEW-INTEGRATION.md`](SYSTEM-VIEW-INTEGRATION.md) - 系统视角与架构文档整合指南
+- [`SYSTEM-VIEW-INTEGRATION.md`](SYSTEM-VIEW-INTEGRATION.md) - 系统视角与架构文
+  档整合指南
 - [`07-case-studies/`](07-case-studies/) - 案例研究文档集
-- [`architecture-view/08-composition-patterns/`](architecture-view/08-composition-patterns/) - 组合模式文档集
+- [`architecture-view/08-composition-patterns/`](architecture-view/08-composition-patterns/) -
+  组合模式文档集
 
 ---
 
-**更新时间**：2025-11-05  
-**版本**：v1.0  
-**维护者**：基于 `system_view.md` 案例扩展分析
-
+**更新时间**：2025-11-05 **版本**：v1.0 **维护者**：基于 `system_view.md` 案例扩
+展分析

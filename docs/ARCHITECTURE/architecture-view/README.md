@@ -2,8 +2,9 @@
 
 ## 📑 目录
 
+- [📑 目录](#-目录)
 - [1. 文档简介](#1-文档简介)
-  - [1.1 核心主题](#11-核心主题)
+  - [🎯 核心主题](#-核心主题)
   - [1.2 文档结构](#12-文档结构)
   - [1.3 相关文档](#13-相关文档)
   - [1.4 阅读路径](#14-阅读路径)
@@ -95,10 +96,18 @@ architecture-view/
 
 ### 1.3 相关文档
 
-- **源文档**：`architecture_view.md` - 架构视角的核心论述
+- **源文档**：`architecture_view.md` ⭐ v2.0 - 架构视角的核心论述（**已重构**）
+- **系统视角文档**：`system_view.md` ⭐ - 从系统视角（7 层 4 域模型）梳理虚拟化
+  、容器化、沙盒化
+  - **位置**：`../../system_view.md`
+  - **整合指
+    南**：[`../SYSTEM-VIEW-INTEGRATION.md`](../SYSTEM-VIEW-INTEGRATION.md)
+  - **理论论
+    证**：[`../00-theory/07-system-model/`](../00-theory/07-system-model/)
+  - **架构视
+    图**：[`../01-views/system-view-architecture.md`](../01-views/system-view-architecture.md)
 - **技术文档**：`docs/TECHNICAL/` - 技术实现细节
 - **认知模型**：`docs/COGNITIVE/` - 认知框架和理论模型
-- **架构文档**：`docs/ARCHITECTURE/` - 其他架构相关文档
 
 ### 1.4 阅读路径
 
@@ -113,7 +122,8 @@ architecture-view/
 7. **实践路径**：查看 `07-dynamic-operations/`，学习动态运维
 8. **模式路径**：查看 `08-composition-patterns/`，掌握组合模式
 9. **多视角路径**：查看 `09-multi-perspectives/`，理解多视角分析
-10. **趋势路径**：查看 `../../05-trends-2025/`，了解最新趋势（原 `10-november-2025-updates/` 内容已合并）
+10. **趋势路径**：查看 `../../05-trends-2025/`，了解最新趋势（原
+    `10-november-2025-updates/` 内容已合并）
 
 ---
 

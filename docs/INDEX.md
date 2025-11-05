@@ -65,11 +65,19 @@ COGNITIVE/09-matrix-perspective 目录下）。
 
 - [02. 理念层](COGNITIVE/02-principles/principles.md) - 云原生核心理念
 
-### 架构类（2 个）
+### 架构类（5 个）
 
 - [03. 架构与对象模型](COGNITIVE/03-architecture/architecture.md) - 系统架构设计
 - [28. 架构框架](TECHNICAL/28-architecture-framework/architecture-framework.md) -
   多维度架构体系与技术规范
+- [架构视角文档](../architecture_view.md) ⭐ v2.0 - 从软件架构视角看虚拟化容器化
+  沙盒化（已重构）
+- [系统视角文档](../system_view.md) ⭐ - 从系统视角（7 层 4 域模型）梳理虚拟化、
+  容器化、沙盒化
+- [结构视角文档](../structure_view.md) ⭐ - 从抽象结构（计算结构、控制结构、信息
+  结构）视角看虚拟化容器化沙盒化
+- [技术社会视角文档](../tech_view.md) ⭐ - 从技术和社会的视角（基础设施史、风险
+  社会学、发展经济学、人类学）看虚拟化容器化沙盒化
 
 ### 技术类（6 个）
 
@@ -255,12 +263,24 @@ graph TB
 
 ### 架构设计
 
-1. [17. 全局架构设计](COGNITIVE/05-architecture-design/architecture-design.md) -
-   技术组合和决策
-2. [18. 问题解决方案](COGNITIVE/06-problem-solution-matrix/problem-solution-matrix.md) -
-   问题分类和解决
-3. [03. 架构与对象模型](COGNITIVE/03-architecture/architecture.md) - 系统架构设
+1. [03. 架构与对象模型](COGNITIVE/03-architecture/architecture.md) - 系统架构设
    计
+2. [架构视角文档](../architecture_view.md) ⭐ v2.0 - 从软件架构视角看虚拟化容器
+   化沙盒化（已重构）
+3. [系统视角文档](../system_view.md) ⭐ - 从系统视角（7 层 4 域模型）梳理虚拟化
+   、容器化、沙盒化
+4. [结构视角文档](../structure_view.md) ⭐ - 从抽象结构（计算结构、控制结构、信
+   息结构）视角看虚拟化容器化沙盒化
+5. [技术社会视角文档](../tech_view.md) ⭐ - 从技术和社会的视角（基础设施史、风险
+   社会学、发展经济学、人类学）看虚拟化容器化沙盒化
+6. [架构文档集](ARCHITECTURE/README.md) ⭐ - 架构视角文档集（理论论证、实现细节
+   、架构视图）
+7. [28. 架构框架](TECHNICAL/28-architecture-framework/architecture-framework.md) -
+   多维度架构体系与技术规范
+8. [17. 全局架构设计](COGNITIVE/05-architecture-design/architecture-design.md) -
+   技术组合和决策
+9. [18. 问题解决方案](COGNITIVE/06-problem-solution-matrix/problem-solution-matrix.md) -
+   问题分类和解决
 
 ### 技术规格
 
@@ -392,4 +412,4 @@ graph TB
 
 ---
 
-**最后更新**：2025-11-03 **维护者**：项目团队
+**最后更新**：2025-11-05 **维护者**：项目团队

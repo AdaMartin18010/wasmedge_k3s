@@ -782,12 +782,33 @@ Dynamic Software World
   - [WebAssembly 实现](docs/ARCHITECTURE/01-implementation/06-wasm/) ⭐ 待创建 -
     WasmEdge、WASI、Wasm 编译示例
 
-### 10.4 技术文档
+### 10.4 系统视角文档
+
+- **[系统视角文档](system_view.md)** ⭐ 新增 - 从系统视角（7 层 4 域模型）梳理虚
+  拟化、容器化、沙盒化
+  - **位置**：`system_view.md`
+  - **整合指
+    南**：[`docs/ARCHITECTURE/SYSTEM-VIEW-INTEGRATION.md`](docs/ARCHITECTURE/SYSTEM-VIEW-INTEGRATION.md) -
+    完整的整合指南和交叉引用
+  - **理论论
+    证**：[`docs/ARCHITECTURE/00-theory/07-system-model/`](docs/ARCHITECTURE/00-theory/07-system-model/) -
+    7 层 4 域模型形式化论证
+  - **架构视
+    图**：[`docs/ARCHITECTURE/01-views/system-view-architecture.md`](docs/ARCHITECTURE/01-views/system-view-architecture.md) -
+    7 层 4 域模型架构视图
+  - **实现细
+    节**：[`docs/ARCHITECTURE/01-implementation/09-system-view/`](docs/ARCHITECTURE/01-implementation/09-system-view/) -
+    7 层 4 域模型实现和部署
+  - **案例扩
+    展**：[`docs/ARCHITECTURE/07-case-studies/system-view-cases-analysis.md`](docs/ARCHITECTURE/07-case-studies/system-view-cases-analysis.md) -
+    system_view 案例的详细分析
+
+### 10.5 技术文档
 
 - **[技术实现细节](docs/TECHNICAL/)** - Docker、Kubernetes、K3s、WasmEdge 等技术
   文档
 
-### 10.5 认知模型
+### 10.6 认知模型
 
 - **[形式化理论](docs/COGNITIVE/07-formal-theory/)** - 形式化理论模型
 - **[范畴论](docs/COGNITIVE/08-category-theory/)** - 范畴论视角
