@@ -4,14 +4,14 @@
 
 本目录的内容已合并到 [`05-trends-2025/`](../../05-trends-2025/) 目录。
 
-## 重定向
+## 1. 重定向
 
 - **趋势文档**：请访问 [`05-trends-2025/`](../../05-trends-2025/)
   - 技术趋势：`05-trends-2025/trends-november-2025.md`
   - 技术更新：`05-trends-2025/technology-updates.md`
   - 最佳实践：`05-trends-2025/best-practices.md`
 
-## 重构说明
+## 2. 重构说明
 
 根据 `REFACTORING-PLAN-2025-11-05.md`，本目录已删除，内容已合并到
 `05-trends-2025/` 目录。
