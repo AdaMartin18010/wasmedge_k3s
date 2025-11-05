@@ -10,7 +10,7 @@
 
 ### 📋 文档分类
 
-本文档集包含两类文档，服务于不同的认知目标：
+本文档集包含三类文档，服务于不同的认知目标：
 
 #### 1. 🧠 认知模型文档（Cognitive Model Documents）
 
@@ -22,15 +22,27 @@
 - 使用**类比**、**思维导图**、**矩阵**等认知工具
 - 提供**演进主线**和**论证推理**过程
 
-**主要文档**：
+**核心视角文档**（位于项目根目录）：
 
-- `ai_view.md` - 认知视角和技术演进主线
+- [`../ai_view.md`](../ai_view.md) ⭐ - 云原生技术栈认知视图：Docker → K8s/K3s →
+  WasmEdge → OPA
+  - **内容**：从认知视角梳理技术演进主线，包含理念层、知识结构、技术层、时间轴等
+  - **适用场景**：快速理解技术栈全貌和演进逻辑
+- [`../algebra_view.md`](../algebra_view.md) ⭐ - 从代数解构上看虚拟化容器化沙盒
+  化
+  - **内容**：使用代数结构（算子、公理、复合运算）解构虚拟化、容器化、沙盒化
+  - **适用场景**：理解技术的数学本质和组合规律
+
+**目录文档**：
+
 - `COGNITIVE/00-knowledge-map/` - 认知图谱和学习路径
 - `COGNITIVE/01-overview/` - 技术栈总览和决策框架
 - `COGNITIVE/02-principles/` - 云原生核心理念
 - `COGNITIVE/07-formal-theory/` - 形式化理论模型
 - `COGNITIVE/08-category-theory/` - 范畴论视角
 - `COGNITIVE/09-matrix-perspective/` - 矩阵力学模型
+- `COGNITIVE/11-algebraic-structure/` - 算子理论与代数结构（与 `algebra_view.md`
+  相关）
 
 #### 2. 🏗️ 架构视图文档（Architecture View Documents）
 
@@ -43,10 +55,22 @@
 - 提供**多视角架构视图**（虚拟化、容器化、沙盒化、Service Mesh）
 - 包含**分层架构模型**、**组合模式**、**案例研究**
 
-**主要文档**：
+**核心视角文档**（位于项目根目录）：
 
-- `ARCHITECTURE/01-views/` - 多视角架构视图
+- [`../architecture_view.md`](../architecture_view.md) ⭐ v2.0 - 从软件架构的视
+  角看待虚拟化容器化沙盒化
+  - **内容**：统一中层模型 ℳ、架构拆解与组合、四层抽象、网络服务、策略治理、形式
+    化论证
+  - **状态**：已重构（v2.0），压缩比 71%，结构清晰
+  - **适用场景**：深入理解架构设计原理和组合模式
+
+**目录文档**：
+
+- `ARCHITECTURE/01-views/` - 多视角架构视图（快捷入口）
+- `ARCHITECTURE/architecture-view/` - 架构视图文档集（详细文档，推荐）
 - `ARCHITECTURE/02-layers/` - 分层架构模型
+- `ARCHITECTURE/00-theory/` - 理论论证（纯形式化）
+- `ARCHITECTURE/01-implementation/` - 实现细节（纯技术）
 - `ARCHITECTURE/03-composition/` - 组合模式与实践
 - `ARCHITECTURE/05-trends-2025/` - 2025 年技术趋势
 - `ARCHITECTURE/07-case-studies/` - 案例研究
@@ -89,21 +113,39 @@
 
 **新手推荐路径**：
 
-1. 先阅读**认知模型文档**（如 `ai_view.md`）建立整体认知框架
-2. 再阅读**架构视图文档**（如 `ARCHITECTURE/`）理解架构设计视角
+1. 先阅读**认知模型文档**（如 [`../ai_view.md`](../ai_view.md)）建立整体认知框架
+2. 再阅读**架构视图文档**（如
+   [`../architecture_view.md`](../architecture_view.md)）理解架构设计视角
 3. 最后查阅**技术参考文档**深入学习具体技术
 
 **按需查阅**：
 
 - 需要**理解理念**和**演进逻辑** → 查阅认知模型文档
+  - 快速概览：`../ai_view.md`
+  - 代数解构：`../algebra_view.md`
 - 需要**架构设计**和**组合模式** → 查阅架构视图文档
+  - 核心文档：`../architecture_view.md`
+  - 详细文档：`ARCHITECTURE/architecture-view/`
 - 需要**技术细节**和**实践指导** → 查阅技术参考文档
+  - 技术规范：`TECHNICAL/` 目录
 
 **三类文档的关系**：
 
-- 认知模型文档提供**"为什么"**（Why）和**"是什么"**（What）
-- 架构视图文档提供**"如何设计"**（How to Design）和**"架构模式"**（Patterns）
-- 技术参考文档提供**"怎么做"**（How）和**"具体细节"**（Details）
+- **认知模型文档**提供**"为什么"**（Why）和**"是什么"**（What）
+  - `ai_view.md`：技术演进主线和认知框架
+  - `algebra_view.md`：技术的数学本质和组合规律
+- **架构视图文档**提供**"如何设计"**（How to Design）和**"架构模式
+  "**（Patterns）
+  - `architecture_view.md`：统一中层模型 ℳ 和架构拆解与组合
+  - `ARCHITECTURE/`：多视角架构视图和详细文档
+- **技术参考文档**提供**"怎么做"**（How）和**"具体细节"**（Details）
+  - `TECHNICAL/`：技术规格和实践指南
+
+**文档关联**：
+
+- `ai_view.md` ↔ `COGNITIVE/` - 认知模型文档集
+- `algebra_view.md` ↔ `COGNITIVE/11-algebraic-structure/` - 代数结构文档
+- `architecture_view.md` ↔ `ARCHITECTURE/` - 架构视图文档集
 
 ---
 
@@ -111,12 +153,15 @@
 
 ### 新手入门
 
-1. **[总览](COGNITIVE/01-overview/overview.md)** - 了解技术栈全貌和核心理念
-2. **[认知图谱](COGNITIVE/00-knowledge-map/knowledge-map.md)** - 快速理解知识结
+1. **[认知视角](../ai_view.md)** ⭐ - 云原生技术栈认知视图，快速理解技术演进主线
+2. **[总览](COGNITIVE/01-overview/overview.md)** - 了解技术栈全貌和核心理念
+3. **[认知图谱](COGNITIVE/00-knowledge-map/knowledge-map.md)** - 快速理解知识结
    构和学习路径
-3. **[架构视图](ARCHITECTURE/INDEX.md)** - 理解架构设计的多视角
-4. **[理念层](COGNITIVE/02-principles/principles.md)** - 理解云原生核心思想
-5. **[Docker 基础](TECHNICAL/00-docker/docker.md)** - 掌握容器技术基础
+4. **[架构视角](../architecture_view.md)** ⭐ - 从软件架构视角理解虚拟化、容器化
+   、沙盒化
+5. **[架构视图](ARCHITECTURE/INDEX.md)** - 理解架构设计的多视角
+6. **[理念层](COGNITIVE/02-principles/principles.md)** - 理解云原生核心思想
+7. **[Docker 基础](TECHNICAL/00-docker/docker.md)** - 掌握容器技术基础
 
 ### 进阶学习
 
@@ -127,6 +172,15 @@
 
 ## 📚 文档结构
 
+### 核心视角文档（位于项目根目录）
+
+- **[ai_view.md](../ai_view.md)** ⭐ - 云原生技术栈认知视图：Docker → K8s/K3s →
+  WasmEdge → OPA
+- **[algebra_view.md](../algebra_view.md)** ⭐ - 从代数解构上看虚拟化容器化沙盒
+  化
+- **[architecture_view.md](../architecture_view.md)** ⭐ v2.0 - 从软件架构的视角
+  看待虚拟化容器化沙盒化
+
 ### 核心理念与架构
 
 - **[00. 认知图谱](COGNITIVE/00-knowledge-map/knowledge-map.md)** - 知识地图和学
@@ -135,6 +189,8 @@
 - **[02. 理念层](COGNITIVE/02-principles/principles.md)** - 云原生核心理念
 - **[03. 架构与对象模型](COGNITIVE/03-architecture/architecture.md)** - 系统架构
   设计
+- **[11. 代数结构](COGNITIVE/11-algebraic-structure/README.md)** - 算子理论与代
+  数结构（与 `algebra_view.md` 相关）
 
 ### 核心技术
 
@@ -306,10 +362,18 @@
 
 ## 🔗 快速链接
 
+### 核心视角文档（项目根目录）
+
+- **[ai_view.md](../ai_view.md)** ⭐ - 认知视角和技术演进主线
+- **[algebra_view.md](../algebra_view.md)** ⭐ - 代数解构视角
+- **[architecture_view.md](../architecture_view.md)** ⭐ v2.0 - 架构视角（已重构
+  ）
+
 ### 核心文档
 
 - [认知图谱](COGNITIVE/00-knowledge-map/knowledge-map.md) - 知识地图
 - [总览](COGNITIVE/01-overview/overview.md) - 技术栈总览
+- [架构视图索引](ARCHITECTURE/INDEX.md) - 架构视图文档索引
 - [文档索引](INDEX.md) - 完整文档索引
 - [主题清单](TECHNICAL/14-theme-inventory/theme-inventory.md) - 所有主题
 - [缩写词汇表](TECHNICAL/13-acronyms-glossary/acronyms-glossary.md) - 缩写查询
