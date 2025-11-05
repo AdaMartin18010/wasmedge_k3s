@@ -241,10 +241,10 @@ Type Topos：类型范畴
 
 ### 相关文档
 
-- **[计算结构分析](../01-computational-structure.md)** - 代数视角的计算结构
-- **[控制结构分析](../02-control-structure.md)** - 序视角的控制结构
-- **[结构交互与复合](../../03-structure-interaction/README.md)** - 结构的复合和
-  深层联系
+- **[计算结构分析](01-computational-structure.md)** - 代数视角的计算结构
+- **[控制结构分析](02-control-structure.md)** - 序视角的控制结构
+- **[结构交互与复合](../03-structure-interaction/README.md)** - 结构的复合和深层
+  联系
 - **[源文档](../../../../structure_view.md)** - 结构视角的完整论述
 
 ### 学术参考

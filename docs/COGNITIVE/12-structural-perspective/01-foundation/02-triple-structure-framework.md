@@ -182,21 +182,21 @@
 以下文档提供了三类结构的深入分析，包含详细的定义、典型实例、形式化工具和哲学意义
 ：
 
-1. **[计算结构详细分析](../../02-three-structures/01-computational-structure.md)** -
+1. **[计算结构详细分析](../02-three-structures/01-computational-structure.md)** -
    计算结构的深入分析
 
    - **内容**：定义与核心特征、典型实例（λ-演算、ADT、Monad、图灵机）、形式化工
      具（范畴论、幺半群、初始代数）、哲学意义
    - **适用场景**：理解计算结构的代数本质和可组合性
 
-2. **[控制结构详细分析](../../02-three-structures/02-control-structure.md)** -
-   控制结构的深入分析
+2. **[控制结构详细分析](../02-three-structures/02-control-structure.md)** - 控制
+   结构的深入分析
 
    - **内容**：定义与核心特征、典型实例（CFG、Happens-before、并发模型、事务隔离
      、死锁避免）、形式化工具（偏序集、事件结构、向量时钟）、哲学意义
    - **适用场景**：理解控制结构的序本质和时间维度
 
-3. **[信息结构详细分析](../../02-three-structures/03-information-structure.md)** -
+3. **[信息结构详细分析](../02-three-structures/03-information-structure.md)** -
    信息结构的深入分析
    - **内容**：定义与核心特征、典型实例（类型系统、抽象解释、容错计算、拓扑数据
      结构、Domain Theory、嵌入空间）、形式化工具（Domain Theory、度量空间

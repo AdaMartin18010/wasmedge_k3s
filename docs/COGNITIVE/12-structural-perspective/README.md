@@ -161,14 +161,14 @@
 
 ### 相关架构文档
 
-- **[架构视角文档](../../architecture_view.md)** ⭐ v2.0 - 从软件架构视角看虚拟化容器化沙盒化（已重构）
-- **[系统视角文档](../../system_view.md)** ⭐ - 从系统视角（7 层 4 域模型）梳理虚拟化、容器化、沙盒化
-- **[技术社会视角文档](../../tech_view.md)** ⭐ - 从技术和社会的视角（基础设施史、风险社会学、发展经济学、人类学）看虚拟化容器化沙盒化
+- **[架构视角文档](../../../architecture_view.md)** ⭐ v2.0 - 从软件架构视角看虚拟化容器化沙盒化（已重构）
+- **[系统视角文档](../../../system_view.md)** ⭐ - 从系统视角（7 层 4 域模型）梳理虚拟化、容器化、沙盒化
+- **[技术社会视角文档](../../../tech_view.md)** ⭐ - 从技术和社会的视角（基础设施史、风险社会学、发展经济学、人类学）看虚拟化容器化沙盒化
 
 ### 相关理论文档
 
-- **[ARCHITECTURE/00-theory/](../../ARCHITECTURE/00-theory/)** - 理论论证（纯形式化）
-- **[ARCHITECTURE/01-views/system-view-architecture.md](../../ARCHITECTURE/01-views/system-view-architecture.md)** - 系统视角架构视图
+- **[ARCHITECTURE/00-theory/](../../../ARCHITECTURE/00-theory/)** - 理论论证（纯形式化）
+- **[ARCHITECTURE/01-views/system-view-architecture.md](../../../ARCHITECTURE/01-views/system-view-architecture.md)** - 系统视角架构视图
 
 ---
 

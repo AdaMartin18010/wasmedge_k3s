@@ -208,10 +208,10 @@ m >>= return = m
 
 ### 相关文档
 
-- **[控制结构分析](../02-control-structure.md)** - 序视角的控制结构
-- **[信息结构分析](../03-information-structure.md)** - 拓扑/近似视角的信息结构
-- **[结构交互与复合](../../03-structure-interaction/README.md)** - 结构的复合和
-  深层联系
+- **[控制结构分析](02-control-structure.md)** - 序视角的控制结构
+- **[信息结构分析](03-information-structure.md)** - 拓扑/近似视角的信息结构
+- **[结构交互与复合](../03-structure-interaction/README.md)** - 结构的复合和深层
+  联系
 - **[源文档](../../../../structure_view.md)** - 结构视角的完整论述
 
 ### 学术参考
