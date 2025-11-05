@@ -21,15 +21,15 @@
   - [08.5.2 GPU 推理架构](#0852-gpu-推理架构)
   - [08.5.3 GPU 集成论证](#0853-gpu-集成论证)
 - [08.6 WasmEdge 0.14 + Llama2 实战方案（2025）](#086-wasmedge-014--llama2-实战方案2025)
-  - [08.6.0 2025-11-06 最新方案概览](#0860-2025-年最新方案概览)
+  - [08.6.0 2025-11-06 最新方案概览](#0860-2025-11-06-最新方案概览)
 - [08.7 技术场景分析](#087-技术场景分析)
   - [08.7.1 边缘 AI 推理场景](#0871-边缘-ai-推理场景)
   - [08.6.2 云端 AI 推理场景](#0862-云端-ai-推理场景)
   - [08.6.3 混合 AI 推理场景](#0863-混合-ai-推理场景)
 - [08.8 决策依据与思路](#088-决策依据与思路)
-  - [08.8.1 AI 推理场景决策树（2025 年更新）](#0881-ai-推理场景决策树2025-年更新)
-  - [08.8.2 模型选择决策树（2025 年更新）](#0882-模型选择决策树2025-年更新)
-  - [08.8.3 GPU 集成决策树（2025 年更新）](#0883-gpu-集成决策树2025-年更新)
+  - [08.8.1 AI 推理场景决策树（2025-11-06 更新）](#0881-ai-推理场景决策树2025-11-06-更新)
+  - [08.8.2 模型选择决策树（2025-11-06 更新）](#0882-模型选择决策树2025-11-06-更新)
+  - [08.8.3 GPU 集成决策树（2025-11-06 更新）](#0883-gpu-集成决策树2025-11-06-更新)
 - [08.9 形式化总结](#089-形式化总结)
   - [08.9.1 AI 推理延迟模型形式化](#0891-ai-推理延迟模型形式化)
   - [08.9.2 AI 推理成本模型形式化](#0892-ai-推理成本模型形式化)
@@ -39,7 +39,12 @@
   - [08.10.3 案例 3：模型 Wasm 化流程](#08103-案例-3模型-wasm-化流程)
 - [08.11 AI 推理故障排查](#0811-ai-推理故障排查)
   - [08.11.1 常见问题](#08111-常见问题)
-- [08.12 参考](#0812-参考)
+- [08.12 AI 推理最佳实践](#0812-ai-推理最佳实践)
+  - [08.12.1 模型 Wasm 化最佳实践](#08121-模型-wasm-化最佳实践)
+  - [08.12.2 GPU 集成最佳实践](#08122-gpu-集成最佳实践)
+  - [08.12.3 边缘 AI 推理最佳实践](#08123-边缘-ai-推理最佳实践)
+  - [08.12.4 AI 推理检查清单](#08124-ai-推理检查清单)
+- [08.13 参考](#0813-参考)
 
 ---
 
@@ -48,12 +53,13 @@
 本文档深入解析 WasmEdge 在 AI 推理场景中的应用，包括模型 Wasm 化、轻量插件方案和
 低延迟优化的技术原理、实现方式和最佳实践。
 
-**当前版本（2025）**：
+**当前版本（2025-11-06）**：
 
-- **WasmEdge 版本**：0.14.0（内置 Llama2/7B 插件）
+- **WasmEdge 版本**：0.14.0（内置 Llama2/7B 插件，2025-11-06）
 - **关键特性**：张量算子直接调用 GPU 驱动，推理延迟比 PyTorch 容器 ↓60%
 - **模型市场**：".wasm 模型镜像"格式，镜像体积仅为 Python 容器 1/10
-- **生产验证**：KubeCon 2025 中国议题，基于 WasmEdge + K8s 1.30，性能提升 300%
+- **生产验证**：KubeCon 2025 中国议题，基于 WasmEdge + K8s 1.30，性能提升
+  300%（2025-11-06）
 
 **文档结构**：
 
@@ -299,7 +305,7 @@ GPU 集成策略:
 
 ### 08.6.0 2025-11-06 最新方案概览
 
-**WasmEdge 0.14 + Llama2 方案**（2025 年已标准化）：
+**WasmEdge 0.14 + Llama2 方案**（2025-11-06 已标准化）：
 
 | 组件         | 版本/特性      | 状态     | 性能指标                    |
 | ------------ | -------------- | -------- | --------------------------- |
@@ -334,7 +340,7 @@ spec:
 EOF
 ```
 
-**2025 年生产案例**：
+**2025-11-06 生产案例**：
 
 - **KubeCon 2025 中国议题**："生成式 AI 工作负载的 Linux 技术栈优化"
   - **技术栈**：全部基于 WasmEdge 0.14 + K8s 1.30
@@ -425,10 +431,10 @@ EOF
 
 ## 08.8 决策依据与思路
 
-### 08.8.1 AI 推理场景决策树（2025 年更新）
+### 08.8.1 AI 推理场景决策树（2025-11-06 更新）
 
 ```yaml
-AI 推理场景决策（2025）:
+AI 推理场景决策（2025-11-06）:
   if 边缘 AI（低延迟）:
     选择: K3s 1.30 + WasmEdge 0.14 + Wasm 模型
     特性: --wasm flag 即开即用，冷启动 ≤6 ms
@@ -438,21 +444,21 @@ AI 推理场景决策（2025）:
   elif 混合 AI（边缘+云端）:
     选择: K3s + Kubernetes + WasmEdge 0.14
     特性: 统一模型格式（.wasm），镜像体积仅为 Python 1/10
-  elif Llama2 推理（2025 最新）:
+  elif Llama2 推理（2025-11-06最新）:
     选择: WasmEdge 0.14 + Llama2/7B 插件 + GPU
     特性: 推理延迟 ↓60%，内置 GPU 支持
   else:
     选择: K3s 1.30 + WasmEdge 0.14（默认组合）
 ```
 
-### 08.8.2 模型选择决策树（2025 年更新）
+### 08.8.2 模型选择决策树（2025-11-06 更新）
 
 ```yaml
-模型选择决策（2025）:
+模型选择决策（2025-11-06）:
   if 资源受限:
     选择: Wasm 模型（体积小、资源占用低）
     格式: .wasm 模型镜像（仅为 Python 1/10）
-  elif Llama2 推理（2025最新）:
+  elif Llama2 推理（2025-11-06最新）:
     选择: WasmEdge 0.14 + Llama2/7B 插件
     特性: 内置 GPU 支持，推理延迟 ↓60%
   elif 边缘 AI:
@@ -462,11 +468,11 @@ AI 推理场景决策（2025）:
   else: 传统模型（可选）
 ```
 
-### 08.8.3 GPU 集成决策树（2025 年更新）
+### 08.8.3 GPU 集成决策树（2025-11-06 更新）
 
 ```yaml
-GPU 集成决策（2025）:
-  if Llama2 推理（2025最新） and 有 GPU:
+GPU 集成决策（2025-11-06）:
+  if Llama2 推理（2025-11-06最新） and 有 GPU:
     选择: WasmEdge 0.14 + Llama2/7B 插件 + GPU
     特性: 推理延迟 ↓60%，内置 GPU 支持
   elif 低延迟需求 and 有 GPU:
@@ -518,13 +524,13 @@ $$\min_{W} C_{\text{total}} = \min_{W} (C_{\text{storage}} \downarrow + C_{\text
 # 1. 安装 WasmEdge（如果未安装）
 curl -sSf https://raw.githubusercontent.com/WasmEdge/WasmEdge/master/utils/install.sh | bash
 
-# 2. 创建 RuntimeClass
+# 2. 创建 RuntimeClass（K8s 1.30+ 原生支持）
 kubectl apply -f - <<EOF
 apiVersion: node.k8s.io/v1
 kind: RuntimeClass
 metadata:
-  name: wasmedge
-handler: wasmedge
+  name: wasm
+handler: crun
 EOF
 
 # 3. 部署 Llama2 推理 Pod
@@ -534,7 +540,7 @@ kind: Pod
 metadata:
   name: llama2-inference
 spec:
-  runtimeClassName: wasmedge
+  runtimeClassName: wasm
   containers:
     - name: llama2
       image: wasmedge/llama2:latest
@@ -557,7 +563,7 @@ kind: Pod
 metadata:
   name: llama2-gpu-inference
 spec:
-  runtimeClassName: wasmedge
+  runtimeClassName: wasm
   containers:
     - name: llama2
       image: wasmedge/llama2:latest
@@ -584,8 +590,19 @@ spec:
 curl -sSf https://raw.githubusercontent.com/WasmEdge/WasmEdge/master/utils/install.sh | bash
 
 # 2. 配置 K3s 使用 WasmEdge（K3s 1.30+）
-cat > /etc/rancher/k3s/config.yaml <<EOF
-runtime-class: wasmedge
+# 方法1：使用 --wasm flag（推荐）
+curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=v1.30.4+k3s1 \
+  sh -s - --wasm --write-kubeconfig-mode 644
+
+# 方法2：如果已安装 K3s，创建 RuntimeClass（K8s 1.30+）
+# 注意：K3s 1.30+ 使用 --wasm flag 会自动创建 RuntimeClass=wasm
+# 如果需要手动创建，确保 handler 为 crun
+kubectl apply -f - <<EOF
+apiVersion: node.k8s.io/v1
+kind: RuntimeClass
+metadata:
+  name: wasm
+handler: crun
 EOF
 
 # 3. 部署 AI 推理应用
@@ -604,7 +621,7 @@ spec:
       labels:
         app: ai-inference
     spec:
-      runtimeClassName: wasmedge
+      runtimeClassName: wasm
       containers:
         - name: inference
           image: myregistry.com/ai-model:latest
@@ -708,7 +725,116 @@ kubectl get pods -n kube-system | grep nvidia-device-plugin
 kubectl describe pod <pod-name> | grep -i gpu
 ```
 
-## 08.12 参考
+## 08.12 AI 推理最佳实践
+
+### 08.12.1 模型 Wasm 化最佳实践
+
+**模型选择**：
+
+- ✅ 优先选择轻量级模型（< 1GB）进行 Wasm 化
+- ✅ 使用 ONNX 格式模型，兼容性更好
+- ✅ 避免使用过大模型（> 5GB），Wasm 内存限制
+- ✅ 考虑模型精度和大小平衡
+
+**模型优化**：
+
+- ✅ 使用模型量化技术减少模型大小
+- ✅ 移除不必要的层和参数
+- ✅ 使用 WasmEdge TensorFlow Lite 插件优化推理
+- ✅ 测试不同优化级别，选择最佳平衡点
+
+**镜像构建**：
+
+- ✅ 使用多阶段构建减小镜像大小
+- ✅ 将模型文件单独层，支持缓存
+- ✅ 使用 `scratch` 基础镜像，最小化镜像体积
+- ✅ 添加 OCI 注释标识 Wasm 镜像
+
+### 08.12.2 GPU 集成最佳实践
+
+**GPU 资源管理**：
+
+- ✅ 使用 Node Feature Discovery 自动识别 GPU 节点
+- ✅ 配置 RuntimeClass 的 nodeSelector 调度到 GPU 节点
+- ✅ 合理设置 GPU 资源请求，避免资源浪费
+- ✅ 监控 GPU 使用率，优化资源分配
+
+**性能优化**：
+
+- ✅ 使用 WasmEdge GPU 插件加速推理
+- ✅ 配置 GPU 内存预分配，减少分配开销
+- ✅ 使用批处理减少 GPU 调用次数
+- ✅ 监控 GPU 温度和功耗，避免过热
+
+**兼容性**：
+
+- ✅ 检查 GPU 驱动版本兼容性
+- ✅ 测试不同 GPU 型号的兼容性
+- ✅ 提供 CPU fallback 方案
+- ✅ 文档化 GPU 要求和限制
+
+### 08.12.3 边缘 AI 推理最佳实践
+
+**资源规划**：
+
+- ✅ 根据边缘节点资源限制配置 Pod 资源
+- ✅ 使用 `runtimeClassName: wasm` 减少资源占用
+- ✅ 设置合理的副本数，避免资源耗尽
+- ✅ 使用本地存储，减少网络依赖
+
+**离线能力**：
+
+- ✅ 配置本地镜像仓库，支持离线部署
+- ✅ 模型文件存储在本地，避免网络拉取
+- ✅ 配置健康检查和自动重启策略
+- ✅ 测试离线场景下的推理能力
+
+**延迟优化**：
+
+- ✅ 使用 Wasm 运行时，冷启动 < 10ms
+- ✅ 预热模型减少首次推理延迟
+- ✅ 使用 GPU 加速（如果可用）
+- ✅ 监控推理延迟，优化模型和配置
+
+### 08.12.4 AI 推理检查清单
+
+**部署前检查**：
+
+- [ ] 模型文件已准备（ONNX/TFLite 格式）
+- [ ] WasmEdge 运行时已正确安装和配置
+- [ ] RuntimeClass `wasm` 已创建
+- [ ] GPU 节点标签已配置（如需要 GPU）
+- [ ] GPU Device Plugin 已安装（如需要 GPU）
+- [ ] 资源请求和限制已合理配置
+- [ ] 存储类配置完成（如需要持久化存储）
+
+**运行时检查**：
+
+- [ ] Pod 正常运行，无异常状态
+- [ ] 模型加载成功，无错误日志
+- [ ] 推理延迟符合预期（< 50ms）
+- [ ] GPU 使用正常（如使用 GPU）
+- [ ] 资源使用率在合理范围内
+- [ ] 监控指标正常收集
+
+**性能优化检查**：
+
+- [ ] 冷启动时间 < 10ms
+- [ ] 推理延迟 < 50ms（边缘场景）
+- [ ] GPU 利用率 > 50%（如使用 GPU）
+- [ ] 内存使用率 < 80%
+- [ ] CPU 使用率在合理范围内
+
+**故障排查准备**：
+
+- [ ] 日志收集配置完成
+- [ ] 监控告警规则配置完成
+- [ ] 备份和恢复策略已制定
+- [ ] 故障排查文档已准备
+
+---
+
+## 08.13 参考
 
 **关联文档**：
 

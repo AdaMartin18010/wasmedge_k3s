@@ -2,6 +2,7 @@
 
 ## 📑 目录
 
+- [📑 目录](#-目录)
 - [11.1 文档定位](#111-文档定位)
 - [11.2 WasmEdge 相关问题](#112-wasmedge-相关问题)
   - [11.2.1 kubectl logs 为空](#1121-kubectl-logs-为空)
@@ -167,7 +168,7 @@ metadata:
   annotations:
     module.wasm.image/variant: compat-smart
 spec:
-  runtimeClassName: crun-wasm
+  runtimeClassName: wasm
   containers:
     - name: app
       image: yourhub/hello-wasm:v1
@@ -213,7 +214,7 @@ kind: Pod
 metadata:
   name: hello-wasm
 spec:
-  runtimeClassName: crun-wasm
+  runtimeClassName: wasm
   containers:
     - name: app
       image: yourhub/hello-wasm:v1
@@ -292,7 +293,7 @@ kind: Pod
 metadata:
   name: hello-wasm
 spec:
-  runtimeClassName: crun-wasm
+  runtimeClassName: wasm
   containers:
     - name: app
       image: yourhub/hello-wasm:v1
@@ -600,7 +601,7 @@ kind: Pod
 metadata:
   name: hello-wasm
 spec:
-  runtimeClassName: crun-wasm
+  runtimeClassName: wasm
   containers:
     - name: app
       image: yourhub/hello-wasm:v1
@@ -638,7 +639,7 @@ kind: Pod
 metadata:
   name: hello-wasm
 spec:
-  runtimeClassName: crun-wasm
+  runtimeClassName: wasm
   containers:
     - name: app
       image: yourhub/hello-wasm:v1
@@ -685,12 +686,12 @@ kubectl get networkpolicies
 
 **常见原因与解决方案**：
 
-| 原因 | 解决方案 |
-|------|---------|
+| 原因                   | 解决方案                               |
+| ---------------------- | -------------------------------------- |
 | Service 没有 Endpoints | 检查 Pod 标签是否匹配 Service selector |
-| DNS 解析失败 | 检查 CoreDNS 是否正常运行 |
-| NetworkPolicy 阻止 | 检查 NetworkPolicy 规则 |
-| CNI 插件异常 | 重启 CNI 插件 Pod |
+| DNS 解析失败           | 检查 CoreDNS 是否正常运行              |
+| NetworkPolicy 阻止     | 检查 NetworkPolicy 规则                |
+| CNI 插件异常           | 重启 CNI 插件 Pod                      |
 
 ### 11.7.2 跨节点 Pod 通信失败
 
@@ -797,12 +798,12 @@ kubectl debug node/<node-name> -it --image=busybox -- mount | grep volume
 
 **常见原因与解决方案**：
 
-| 原因 | 解决方案 |
-|------|---------|
+| 原因                | 解决方案                      |
+| ------------------- | ----------------------------- |
 | StorageClass 不存在 | 创建或指定正确的 StorageClass |
-| CSI 驱动未安装 | 安装对应的 CSI 驱动 |
-| 节点资源不足 | 检查节点磁盘空间 |
-| 权限问题 | 检查 ServiceAccount 权限 |
+| CSI 驱动未安装      | 安装对应的 CSI 驱动           |
+| 节点资源不足        | 检查节点磁盘空间              |
+| 权限问题            | 检查 ServiceAccount 权限      |
 
 ### 11.8.2 存储性能问题
 

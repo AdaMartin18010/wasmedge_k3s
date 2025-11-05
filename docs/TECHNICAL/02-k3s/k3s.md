@@ -1166,7 +1166,7 @@ spec:
       labels:
         app: wasm-app
     spec:
-      runtimeClassName: wasmedge
+      runtimeClassName: wasm
       containers:
         - name: app
           image: wasm-app:latest

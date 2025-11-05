@@ -311,7 +311,7 @@ metadata:
   annotations:
     module.wasm.image/variant: compat-smart # 关键注释
 spec:
-  runtimeClassName: crun-wasm
+  runtimeClassName: wasm
   containers:
     - name: app
       image: yourhub/app-wasm:v1
@@ -330,15 +330,16 @@ spec:
 apiVersion: node.k8s.io/v1
 kind: RuntimeClass
 metadata:
-  name: crun-wasm
+  name: wasm
 handler: crun
 ```
 
 **RuntimeClass 论证**：
 
-- **handler: crun**：指定使用 crun 运行时
+- **handler: crun**：指定使用 crun 运行时（K8s 1.30+ 标准）
 - **自动识别**：crun 根据 OCI 注释自动识别 wasm 模块
 - **零改造**：无需修改 Pod YAML 结构
+- **标准名称**：K8s 1.30+ 原生支持 `RuntimeClass=wasm`
 
 ### 03.5.4 镜像构建
 
@@ -686,12 +687,12 @@ docker push yourhub/hello-wasm:v1
 # 1. 在 K3s 节点安装 WasmEdge 和 crun
 sudo apt install -y wasmedge crun
 
-# 2. 创建 RuntimeClass
+# 2. 创建 RuntimeClass（K8s 1.30+ 标准名称）
 kubectl apply -f - <<EOF
 apiVersion: node.k8s.io/v1
 kind: RuntimeClass
 metadata:
-  name: crun-wasm
+  name: wasm
 handler: crun
 EOF
 
@@ -704,7 +705,7 @@ metadata:
   annotations:
     module.wasm.image/variant: compat-smart
 spec:
-  runtimeClassName: crun-wasm
+  runtimeClassName: wasm
   containers:
     - name: app
       image: docker.io/yourhub/hello-wasm:v1
@@ -800,7 +801,7 @@ kind: Pod
 metadata:
   name: wasm-app
 spec:
-  runtimeClassName: crun-wasm
+  runtimeClassName: wasm
   containers:
     - name: app
       image: yourhub/app-wasm:v1
@@ -1070,22 +1071,22 @@ chmod +x /usr/local/bin/crun
 # 2. 配置 containerd 使用 crun
 cat >> /etc/containerd/config.toml <<EOF
 [plugins."io.containerd.grpc.v1.cri".containerd.runtimes]
-  [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.crun-wasm]
+  [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.crun]
     runtime_type = "io.containerd.runc.v2"
-    [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.crun-wasm.options]
+    [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.crun.options]
       BinaryName = "crun"
 EOF
 
 # 3. 重启 containerd
 systemctl restart containerd
 
-# 4. 创建 RuntimeClass
+# 4. 创建 RuntimeClass（K8s 1.30+ 标准名称）
 kubectl apply -f - <<EOF
 apiVersion: node.k8s.io/v1
 kind: RuntimeClass
 metadata:
-  name: crun-wasm
-handler: crun-wasm
+  name: wasm
+handler: crun
 EOF
 
 # 5. 构建带 OCI 注释的 Wasm 镜像
@@ -1103,7 +1104,7 @@ kind: Pod
 metadata:
   name: wasm-app
 spec:
-  runtimeClassName: crun-wasm
+  runtimeClassName: wasm
   containers:
     - name: app
       image: wasm-app:latest
@@ -1197,7 +1198,7 @@ spec:
       labels:
         app: myapp
     spec:
-      runtimeClassName: crun-wasm
+      runtimeClassName: wasm
       containers:
         - name: app
           image: myregistry.com/myapp:latest

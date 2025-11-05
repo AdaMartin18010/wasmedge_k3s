@@ -277,7 +277,7 @@ metadata:
   annotations:
     module.wasm.image/variant: compat-smart
 spec:
-  runtimeClassName: crun-wasm
+  runtimeClassName: wasm
   containers:
     - name: app
       image: yourhub/app-wasm:v1
@@ -309,7 +309,7 @@ kind: Pod
 metadata:
   name: wasm-app
 spec:
-  runtimeClassName: crun-wasm
+  runtimeClassName: wasm
   nodeSelector:
     wasm-runtime: enabled
   tolerations:
@@ -456,7 +456,7 @@ $$C = \{\text{ImageService}, \text{RuntimeService}, \text{Streaming}\}$$
 $$
 RC(P, N) = \begin{cases}
 \text{runc} & \text{if } P.\text{runtimeClassName} = \text{null} \lor P.\text{runtimeClassName} = \text{runc} \\
-\text{crun} & \text{if } P.\text{runtimeClassName} = \text{crun-wasm} \\
+\text{crun} & \text{if } P.\text{runtimeClassName} = \text{wasm} \\
 \text{runwasi} & \text{if } P.\text{runtimeClassName} = \text{runwasi-wasm}
 \end{cases}
 $$
@@ -477,20 +477,19 @@ cat > /etc/containerd/config.toml <<EOF
 [plugins."io.containerd.grpc.v1.cri".containerd.runtimes]
   [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
     runtime_type = "io.containerd.runc.v2"
-  [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.crun-wasm]
+  [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.crun]
     runtime_type = "io.containerd.runc.v2"
-    [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.crun-wasm.options]
+    [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.crun.options]
       BinaryName = "crun"
-      Root = "/run/containerd/crun-wasm"
 EOF
 
-# 2. 创建 RuntimeClass
+# 2. 创建 RuntimeClass（K8s 1.30+ 标准名称）
 kubectl apply -f - <<EOF
 apiVersion: node.k8s.io/v1
 kind: RuntimeClass
 metadata:
-  name: crun-wasm
-handler: crun-wasm
+  name: wasm
+handler: crun
 EOF
 
 # 3. 重启 containerd
@@ -517,7 +516,7 @@ kind: Pod
 metadata:
   name: wasm-pod
 spec:
-  runtimeClassName: crun-wasm
+  runtimeClassName: wasm
   containers:
     - name: app
       image: wasm-app:latest
@@ -537,32 +536,19 @@ chmod +x /usr/local/bin/crun
 # 2. 安装 WasmEdge
 curl -sSf https://raw.githubusercontent.com/WasmEdge/WasmEdge/master/utils/install.sh | bash
 
-# 3. 配置 K3s 使用 crun（支持 Wasm）
-cat > /etc/systemd/system/k3s.service.d/override.conf <<EOF
-[Service]
-ExecStart=
-ExecStart=/usr/local/bin/k3s \
-  server \
-  --container-runtime-endpoint=unix:///run/containerd/containerd.sock \
-  --runtime-class=crun-wasm
-EOF
+# 3. 配置 K3s 使用 WasmEdge（K3s 1.30+ 推荐方法）
+# 方法1：使用 --wasm flag（推荐，自动创建 RuntimeClass=wasm）
+curl -sfL https://get.k3s.io | INSTALL_K3S_VERSION=v1.30.4+k3s1 \
+  sh -s - --wasm --write-kubeconfig-mode 644
 
-# 4. 重启 K3s
-systemctl daemon-reload
-systemctl restart k3s
-```
-
-**创建 RuntimeClass**：
-
-```yaml
+# 方法2：如果已安装 K3s，手动创建 RuntimeClass
+kubectl apply -f - <<EOF
 apiVersion: node.k8s.io/v1
 kind: RuntimeClass
 metadata:
-  name: crun-wasm
-handler: crun-wasm
-scheduling:
-  nodeSelector:
-    kubernetes.io/arch: amd64
+  name: wasm
+handler: crun
+EOF
 ```
 
 ### 04.9.3 案例 3：节点标签和 RuntimeClass 调度
@@ -581,8 +567,8 @@ kubectl apply -f - <<EOF
 apiVersion: node.k8s.io/v1
 kind: RuntimeClass
 metadata:
-  name: crun-wasm
-handler: crun-wasm
+  name: wasm
+handler: crun
 scheduling:
   nodeSelector:
     runtime: wasm

@@ -39,7 +39,12 @@
   - [07.9.3 案例 3：离线自治边缘节点配置](#0793-案例-3离线自治边缘节点配置)
 - [07.10 边缘和 Serverless 故障排查](#0710-边缘和-serverless-故障排查)
   - [07.10.1 常见问题](#07101-常见问题)
-- [07.11 参考](#0711-参考)
+- [07.11 边缘和 Serverless 最佳实践](#0711-边缘和-serverless-最佳实践)
+  - [07.11.1 边缘部署最佳实践](#07111-边缘部署最佳实践)
+  - [07.11.2 Serverless 函数最佳实践](#07112-serverless-函数最佳实践)
+  - [07.11.3 GPU 集成最佳实践](#07113-gpu-集成最佳实践)
+  - [07.11.4 边缘和 Serverless 检查清单](#07114-边缘和-serverless-检查清单)
+- [07.12 参考](#0712-参考)
 
 ---
 
@@ -605,7 +610,7 @@ spec:
       labels:
         app: edge-app
     spec:
-      runtimeClassName: wasmedge
+      runtimeClassName: wasm
       containers:
         - name: app
           image: myregistry.com/edge-app:latest
@@ -642,7 +647,7 @@ spec:
       labels:
         app: serverless-function
     spec:
-      runtimeClassName: wasmedge
+      runtimeClassName: wasm
       containers:
         - name: function
           image: myregistry.com/function:latest
@@ -730,7 +735,7 @@ spec:
       labels:
         app: offline-app
     spec:
-      runtimeClassName: wasmedge
+      runtimeClassName: wasm
       containers:
         - name: app
           image: local-registry:5000/offline-app:latest
@@ -795,4 +800,121 @@ kubectl top pod <pod-name>
 kubectl get events --field-selector involvedObject.name=<hpa-name>
 ```
 
-## 07.11 参考
+## 07.11 边缘和 Serverless 最佳实践
+
+### 07.11.1 边缘部署最佳实践
+
+**资源规划**：
+
+- ✅ 根据边缘节点资源限制配置 Pod 资源请求和限制
+- ✅ 使用 `runtimeClassName: wasm` 减少资源占用
+- ✅ 设置合理的副本数，避免资源耗尽
+- ✅ 使用本地存储（Local Path Provisioner）减少网络依赖
+
+**离线能力**：
+
+- ✅ 配置本地镜像仓库，支持离线部署
+- ✅ 使用 `imagePullPolicy: IfNotPresent` 避免频繁拉取镜像
+- ✅ 配置健康检查和自动重启策略
+- ✅ 使用 K3s 内置存储（SQLite/etcd）支持单节点离线运行
+
+**网络优化**：
+
+- ✅ 边缘节点使用轻量级 CNI（如 Flannel）
+- ✅ 配置节点亲和性，将相关 Pod 调度到同一节点
+- ✅ 使用 Service 的 ClusterIP 类型，减少跨节点通信
+- ✅ 监控网络延迟和带宽使用
+
+### 07.11.2 Serverless 函数最佳实践
+
+**冷启动优化**：
+
+- ✅ 使用 Wasm 运行时，冷启动时间 < 10ms
+- ✅ 配置合理的资源请求，避免资源不足导致启动失败
+- ✅ 使用预启动 Pod（Pre-warming）减少冷启动影响
+- ✅ 监控冷启动时间，优化镜像大小
+
+**扩缩容配置**：
+
+- ✅ 配置 HPA 使用自定义指标（QPS、并发数）
+- ✅ 设置合理的 minReplicas 和 maxReplicas
+- ✅ 配置 scaleDownDelaySeconds 避免频繁扩缩容
+- ✅ 使用 KEDA 支持更丰富的扩缩容指标
+
+**资源管理**：
+
+- ✅ 为函数设置合理的资源请求和限制
+- ✅ 监控函数资源使用情况，优化资源分配
+- ✅ 使用 VPA（Vertical Pod Autoscaler）自动调整资源
+- ✅ 定期清理未使用的函数和镜像
+
+### 07.11.3 GPU 集成最佳实践
+
+**GPU 资源分配**：
+
+- ✅ 使用 Node Feature Discovery 识别 GPU 节点
+- ✅ 配置 RuntimeClass 的 nodeSelector 调度到 GPU 节点
+- ✅ 合理设置 GPU 资源请求，避免资源浪费
+- ✅ 监控 GPU 使用率，优化资源分配
+
+**性能优化**：
+
+- ✅ 使用 WasmEdge GPU 插件加速推理
+- ✅ 配置 GPU 内存预分配，减少分配开销
+- ✅ 使用批处理减少 GPU 调用次数
+- ✅ 监控 GPU 温度和功耗
+
+### 07.11.4 边缘和 Serverless 检查清单
+
+**部署前检查**：
+
+- [ ] 边缘节点资源充足（CPU、内存、存储）
+- [ ] WasmEdge 运行时已正确安装和配置
+- [ ] RuntimeClass `wasm` 已创建
+- [ ] 本地镜像仓库配置完成（如需要）
+- [ ] 网络连接正常（如需要连接中心集群）
+- [ ] 存储类配置完成
+
+**运行时检查**：
+
+- [ ] Pod 正常运行，无异常状态
+- [ ] 资源使用率在合理范围内
+- [ ] 冷启动时间符合预期（< 10ms）
+- [ ] HPA/KEDA 扩缩容正常工作
+- [ ] 监控指标正常收集
+
+**故障排查准备**：
+
+- [ ] 日志收集配置完成
+- [ ] 监控告警规则配置完成
+- [ ] 备份和恢复策略已制定
+- [ ] 故障排查文档已准备
+
+---
+
+## 07.12 参考
+
+**关联文档**：
+
+- **[02. K3s](../02-k3s/k3s.md)** - K3s 轻量级架构和边缘场景实践
+- **[03. WasmEdge](../03-wasm-edge/wasmedge.md)** - WasmEdge 运行时和 Wasm 容器
+  化
+- **[08. AI 推理](../08-ai-inference/ai-inference.md)** - AI 推理应用和 GPU 加速
+- **[10. 安装部署](../10-installation/installation.md)** - K3s + WasmEdge + OPA
+  完整安装指南
+- **[04. 编排运行时](../04-orchestration-runtime/orchestration-runtime.md)** -
+  CRI 和 RuntimeClass 配置
+
+**外部参考**：
+
+- [K3s 官方文档](https://docs.k3s.io/)
+- [WasmEdge 官方文档](https://wasmedge.org/docs/)
+- [Kubernetes Serverless 工作负载](https://kubernetes.io/docs/concepts/workloads/)
+- [Knative 官方文档](https://knative.dev/docs/)
+- [KEDA 官方文档](https://keda.sh/docs/)
+
+> 完整参考列表见 [REFERENCES.md](../REFERENCES.md)
+
+---
+
+**最后更新**：2025-11-06 **维护者**：项目团队

@@ -51,12 +51,12 @@
 本文档提供 K3s + WasmEdge + OPA 的完整安装和部署指南，包括单节点、多节点安装
 ，WasmEdge 集成，OPA Gatekeeper 配置和 Hello Wasm Pod 示例。
 
-**当前版本（2025）**：
+**当前版本（2025-11-06）**：
 
-- **K3s**：1.30.4+k3s1（内置 WasmEdge 驱动，`--wasm` flag）
-- **WasmEdge**：0.14.0（内置 Llama2/7B 插件）
-- **Gatekeeper**：v3.15.x（支持 Wasm 引擎）
-- **一键安装**：所有命令已验证（2025-10）
+- **K3s**：1.30.4+k3s1（内置 WasmEdge 驱动，`--wasm` flag，2025-11-06）
+- **WasmEdge**：0.14.0（内置 Llama2/7B 插件，2025-11-06）
+- **Gatekeeper**：v3.15.x（支持 Wasm 引擎，2025-11-06）
+- **一键安装**：所有命令已验证（2025-11-06）
 
 **文档结构**：
 
@@ -213,13 +213,13 @@ crun --version
 
 ### 10.4.3 配置 RuntimeClass
 
-**创建 RuntimeClass**：
+**创建 RuntimeClass**（K8s 1.30+ 标准名称）：
 
 ```yaml
 apiVersion: node.k8s.io/v1
 kind: RuntimeClass
 metadata:
-  name: crun-wasm
+  name: wasm
 handler: crun
 scheduling:
   nodeSelector:
@@ -233,13 +233,16 @@ kubectl apply -f - <<EOF
 apiVersion: node.k8s.io/v1
 kind: RuntimeClass
 metadata:
-  name: crun-wasm
+  name: wasm
 handler: crun
 EOF
 
 # 验证 RuntimeClass
 kubectl get runtimeclass
 ```
+
+> **注意**：K3s 1.30+ 使用 `--wasm` flag 会自动创建 `RuntimeClass=wasm`，无需手
+> 动创建。
 
 ## 10.5 安装 OPA Gatekeeper
 
@@ -438,7 +441,7 @@ metadata:
   annotations:
     module.wasm.image/variant: compat-smart
 spec:
-  runtimeClassName: crun-wasm
+  runtimeClassName: wasm
   containers:
     - name: app
       image: yourhub/hello-wasm:v1
@@ -456,7 +459,7 @@ metadata:
   annotations:
     module.wasm.image/variant: compat-smart
 spec:
-  runtimeClassName: crun-wasm
+  runtimeClassName: wasm
   containers:
     - name: app
       image: yourhub/hello-wasm:v1
@@ -498,7 +501,7 @@ crun --version
 
 # 测试 Wasm Pod
 kubectl run test-wasm --image=yourhub/hello-wasm:v1 \
-  --runtimeclass=crun-wasm \
+  --runtimeclass=wasm \
   --annotations=module.wasm.image/variant:compat-smart \
   --command -- ["hello-wasm.wasm"]
 kubectl logs test-wasm
@@ -648,13 +651,13 @@ else
     echo "请手动安装 crun >= 1.8.5"
 fi
 
-# 配置 RuntimeClass
+# 配置 RuntimeClass（K8s 1.30+ 标准名称）
 echo "步骤 4/5: 配置 RuntimeClass..."
 kubectl apply -f - <<EOF
 apiVersion: node.k8s.io/v1
 kind: RuntimeClass
 metadata:
-  name: crun-wasm
+  name: wasm
 handler: crun
 EOF
 
@@ -803,7 +806,7 @@ sudo make install
 
 ```bash
 # 检查 RuntimeClass 配置
-kubectl get runtimeclass crun-wasm -o yaml
+kubectl get runtimeclass wasm -o yaml
 
 # 检查 crun 配置
 cat /etc/containerd/config.toml | grep crun
@@ -941,7 +944,7 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.containers[*].resources}'
   WasmEdge:
     - [ ] wasmedge --version 显示正确版本
     - [ ] crun --version >= 1.8.5
-    - [ ] kubectl get runtimeclass crun-wasm 存在
+    - [ ] kubectl get runtimeclass wasm 存在
   OPA Gatekeeper:
     - [ ] kubectl get pods -n gatekeeper-system 运行正常
     - [ ] kubectl get constrainttemplates 可以列出

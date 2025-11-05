@@ -766,7 +766,7 @@ kubectl describe nodes | grep -A 5 "Allocated resources"
    metadata:
      name: wasm-app
    spec:
-     runtimeClassName: wasmedge
+      runtimeClassName: wasm
      containers:
        - name: app
          image: wasm-app:latest
@@ -1016,10 +1016,24 @@ docker images --format "{{.Repository}}:{{.Tag}} {{.Size}}" | sort -k2 -h | tail
 
 ## 24.10 参考
 
-- [Kubecost 官方文档](https://www.kubecost.com/docs/)
-- [OpenCost 官方文档](https://www.opencost.io/docs/)
-- [VPA 官方文档](https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler)
-- [Cluster Autoscaler 官方文档](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler)
+**关联文档**：
+
+- **[02. K3s](../02-k3s/k3s.md)** - K3s 轻量级架构和资源优化
+- **[08. AI 推理](../08-ai-inference/ai-inference.md)** - AI 推理资源优化
+- **[10. 安装部署](../10-installation/installation.md)** - 资源规划和容量规划
+- **[11. 故障排查](../11-troubleshooting/troubleshooting.md)** - 资源相关故障排
+  查
+- **[22. 升级迁移](../22-upgrade-migration/upgrade-migration.md)** - 资源迁移和
+  优化
+
+**外部参考**：
+
+- [Kubecost 官方文档](https://docs.kubecost.com/)
+- [Kubernetes Vertical Pod Autoscaler](https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler)
+- [Kubernetes Horizontal Pod Autoscaler](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)
+- [Kubernetes 资源管理最佳实践](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/)
+
+> 完整参考列表见 [REFERENCES.md](../REFERENCES.md)
 
 ---
 

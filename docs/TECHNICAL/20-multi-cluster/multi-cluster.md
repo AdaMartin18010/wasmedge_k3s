@@ -976,7 +976,7 @@ EOF
 
 ### 20.12.1 常见问题
 
-**问题 1：集群无法加入联邦**
+**问题 1：集群无法加入联邦**:
 
 ```bash
 # 检查网络连接
@@ -992,7 +992,7 @@ karmadactl get clusters --karmada-context=karmada-apiserver
 karmadactl describe cluster <cluster-name> --karmada-context=karmada-apiserver
 ```
 
-**问题 2：跨集群服务无法访问**
+**问题 2：跨集群服务无法访问**:
 
 ```bash
 # 检查服务发现配置
@@ -1009,7 +1009,7 @@ kubectl run test-pod --image=busybox --rm -it -- \
   wget -O- http://service.cluster2.svc.cluster.local:8080
 ```
 
-**问题 3：应用无法分发到成员集群**
+**问题 3：应用无法分发到成员集群**:
 
 ```bash
 # 检查 PropagationPolicy
@@ -1025,7 +1025,7 @@ kubectl get deployment myapp -n default --context=member-cluster-1
 kubectl describe propagationpolicy myapp-propagation --karmada-context=karmada-apiserver
 ```
 
-**问题 4：Fleet 无法同步到边缘集群**
+**问题 4：Fleet 无法同步到边缘集群**:
 
 ```bash
 # 检查 GitRepo 状态

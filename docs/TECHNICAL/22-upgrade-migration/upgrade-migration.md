@@ -658,7 +658,7 @@ metadata:
 spec:
   template:
     spec:
-      runtimeClassName: wasmedge
+      runtimeClassName: wasm
       containers:
       - name: app
         image: myapp:wasm
@@ -1556,7 +1556,7 @@ spec:
       annotations:
         module.wasm.image/variant: compat-smart
     spec:
-      runtimeClassName: crun-wasm
+      runtimeClassName: wasm
       containers:
       - name: app
         image: myregistry.com/myapp-wasm:v1.0.0

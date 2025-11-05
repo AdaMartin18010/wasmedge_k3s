@@ -30,7 +30,17 @@
 - [06.8 形式化总结](#068-形式化总结)
   - [06.8.1 策略模型形式化](#0681-策略模型形式化)
   - [06.8.2 Wasm 编译模型形式化](#0682-wasm-编译模型形式化)
-- [06.9 参考](#069-参考)
+- [06.9 实际部署案例](#069-实际部署案例)
+  - [06.9.1 案例 1：镜像签名验证策略](#0691-案例-1镜像签名验证策略)
+  - [06.9.2 案例 2：资源限制策略](#0692-案例-2资源限制策略)
+  - [06.9.3 案例 3：命名空间标签策略](#0693-案例-3命名空间标签策略)
+- [06.10 OPA 最佳实践](#0610-opa-最佳实践)
+  - [06.10.1 策略编写最佳实践](#06101-策略编写最佳实践)
+  - [06.10.2 Wasm 编译最佳实践](#06102-wasm-编译最佳实践)
+  - [06.10.3 部署最佳实践](#06103-部署最佳实践)
+- [06.11 OPA 故障排查](#0611-opa-故障排查)
+  - [06.11.1 常见问题](#06111-常见问题)
+- [06.12 参考](#0612-参考)
 
 ---
 
@@ -263,7 +273,7 @@ metadata:
   labels:
     app: policy-engine
 spec:
-  runtimeClassName: crun-wasm
+  runtimeClassName: wasm
   containers:
     - name: opa-wasm
       image: yourhub/admission-wasm:v1
@@ -274,7 +284,7 @@ spec:
 
 **部署论证**：
 
-- **RuntimeClass**：使用 `crun-wasm` RuntimeClass
+- **RuntimeClass**：使用 `wasm` RuntimeClass（K8s 1.30+ 标准）
 - **命令**：使用 `wasmedge` 命令运行 policy.wasm
 - **端口**：暴露 8080 端口用于策略评估
 
@@ -444,14 +454,271 @@ $$
 - $W$ = Wasm 二进制
 - $I$ = 输入
 
-## 06.9 参考
+## 06.9 实际部署案例
 
-- [37. 矩阵视角](../COGNITIVE/09-matrix-perspective/README.md) - 策略（P）概念矩
-  阵分析（OPA 技术链矩阵）
+### 06.9.1 案例 1：镜像签名验证策略
+
+**场景**：确保所有 Pod 使用的镜像都经过签名验证
+
+**策略文件**（`image-signature.rego`）：
+
+```rego
+package admission
+
+import rego.v1
+
+deny[msg] {
+    input.request.kind.kind == "Pod"
+    image := input.request.object.spec.containers[_].image
+    not startswith(image, "signed/")
+    msg := sprintf("镜像 %v 未签名", [image])
+}
+```
+
+**编译为 Wasm**：
+
+```bash
+opa build -t wasm -e admission/deny image-signature.rego
+```
+
+**部署到 Kubernetes**：
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: image-signature-policy
+spec:
+  runtimeClassName: wasm
+  containers:
+    - name: opa-wasm
+      image: yourhub/image-signature-policy:v1
+      command: ["wasmedge", "--dir", ".", "/policy.wasm"]
+      ports:
+        - containerPort: 8080
+```
+
+### 06.9.2 案例 2：资源限制策略
+
+**场景**：确保所有 Pod 都设置了资源限制
+
+**策略文件**（`resource-limits.rego`）：
+
+```rego
+package admission
+
+import rego.v1
+
+deny[msg] {
+    input.request.kind.kind == "Pod"
+    container := input.request.object.spec.containers[_]
+    not container.resources.limits
+    msg := sprintf("容器 %v 未设置资源限制", [container.name])
+}
+```
+
+**编译和部署**：
+
+```bash
+# 编译
+opa build -t wasm -e admission/deny resource-limits.rego
+
+# 构建镜像
+docker build -t yourhub/resource-limits-policy:v1 .
+
+# 部署
+kubectl apply -f policy-pod.yaml
+```
+
+### 06.9.3 案例 3：命名空间标签策略
+
+**场景**：确保特定命名空间的所有资源都有必要的标签
+
+**策略文件**（`namespace-labels.rego`）：
+
+```rego
+package admission
+
+import rego.v1
+
+deny[msg] {
+    input.request.object.metadata.namespace == "production"
+    not input.request.object.metadata.labels["environment"]
+    msg := "生产环境资源必须包含 environment 标签"
+}
+
+deny[msg] {
+    input.request.object.metadata.namespace == "production"
+    input.request.object.metadata.labels["environment"] != "prod"
+    msg := "生产环境必须使用 environment=prod 标签"
+}
+```
+
+**部署验证**：
+
+```bash
+# 测试策略
+kubectl run test-pod --image=nginx --namespace=production \
+  --labels="environment=prod"
+
+# 应该通过验证
+```
+
+## 06.10 OPA 最佳实践
+
+### 06.10.1 策略编写最佳实践
+
+**策略结构**：
+
+- ✅ 使用 `package` 组织策略，避免命名冲突
+- ✅ 使用 `import rego.v1` 启用新语法
+- ✅ 将复杂策略拆分为多个规则
+- ✅ 使用有意义的变量名和注释
+
+**性能优化**：
+
+- ✅ 避免使用 `all` 和 `any` 等集合操作
+- ✅ 使用早期返回（early return）减少计算
+- ✅ 缓存常用查询结果
+- ✅ 使用索引优化查找操作
+
+**可维护性**：
+
+- ✅ 为策略添加清晰的注释
+- ✅ 使用单元测试验证策略
+- ✅ 版本控制策略文件
+- ✅ 文档化策略的用途和影响
+
+### 06.10.2 Wasm 编译最佳实践
+
+**编译优化**：
+
+- ✅ 使用 `opa build -t wasm -O` 启用优化
+- ✅ 只编译需要的策略包
+- ✅ 使用 `-e` 指定入口点
+- ✅ 验证编译后的 Wasm 文件
+
+**镜像构建**：
+
+- ✅ 使用多阶段构建减小镜像大小
+- ✅ 将策略文件单独层，支持缓存
+- ✅ 使用 `scratch` 基础镜像，最小化体积
+- ✅ 添加 OCI 注释标识 Wasm 镜像
+
+**版本管理**：
+
+- ✅ 为策略版本打标签
+- ✅ 使用语义化版本控制
+- ✅ 保留历史版本以便回滚
+- ✅ 文档化版本变更
+
+### 06.10.3 部署最佳实践
+
+**资源规划**：
+
+- ✅ 为 OPA Pod 设置合理的资源请求和限制
+- ✅ 使用 `runtimeClassName: wasm` 减少资源占用
+- ✅ 监控策略评估性能
+- ✅ 根据负载调整副本数
+
+**高可用性**：
+
+- ✅ 部署多个 OPA Pod 实例
+- ✅ 使用 Service 负载均衡
+- ✅ 配置健康检查
+- ✅ 设置 PodDisruptionBudget
+
+**安全配置**：
+
+- ✅ 使用 RBAC 限制访问权限
+- ✅ 加密策略文件传输
+- ✅ 定期更新 OPA 版本
+- ✅ 审计策略变更
+
+## 06.11 OPA 故障排查
+
+### 06.11.1 常见问题
+
+**问题 1：策略编译失败**:
+
+```bash
+# 检查 Rego 语法
+opa check policy.rego
+
+# 验证策略逻辑
+opa test policy.rego
+
+# 检查编译选项
+opa build -t wasm -e admission/deny policy.rego --debug
+```
+
+**问题 2：策略评估返回错误**:
+
+```bash
+# 检查 Wasm 文件
+wasmedge --version
+
+# 测试策略评估
+opa eval -d policy.wasm -i input.json "data.admission.deny"
+
+# 查看详细日志
+kubectl logs <opa-pod-name>
+```
+
+**问题 3：Gatekeeper 无法加载 Wasm 策略**:
+
+```bash
+# 检查 Gatekeeper 配置
+kubectl get config -n gatekeeper-system
+
+# 检查 ConstraintTemplate
+kubectl get constrainttemplate
+
+# 检查 Wasm 镜像
+docker inspect <policy-image> | grep -i wasm
+
+# 检查 Gatekeeper 日志
+kubectl logs -n gatekeeper-system -l control-plane=controller-manager
+```
+
+**问题 4：策略性能问题**:
+
+```bash
+# 检查策略评估时间
+opa bench -d policy.wasm -i input.json
+
+# 检查资源使用
+kubectl top pod <opa-pod-name>
+
+# 优化策略
+# - 减少集合操作
+# - 使用索引
+# - 缓存结果
+```
+
+---
+
+## 06.12 参考
+
+**关联文档**：
+
+- **[09. 安全合规](../09-security-compliance/security-compliance.md)** - 安全与
+  合规最佳实践
+- **[03. WasmEdge](../03-wasm-edge/wasmedge.md)** - WasmEdge 运行时和 Wasm 容器
+  化
+- **[10. 安装部署](../10-installation/installation.md)** - K3s + WasmEdge + OPA
+  完整安装指南
+- **[04. 编排运行时](../04-orchestration-runtime/orchestration-runtime.md)** -
+  CRI 和 RuntimeClass 配置
+- [37. 矩阵视角](../../COGNITIVE/09-matrix-perspective/README.md) - 策略（P）概
+  念矩阵分析（OPA 技术链矩阵）
 
 **外部参考**：
 
-[^opa-docs]: [OPA Documentation](https://www.openpolicyagent.org/docs/)
+- [OPA 官方文档](https://www.openpolicyagent.org/docs/)
+- [Gatekeeper 官方文档](https://open-policy-agent.github.io/gatekeeper/)
+- [Rego 语言参考](https://www.openpolicyagent.org/docs/latest/policy-language/)
+- [OPA Wasm 支持](https://www.openpolicyagent.org/docs/latest/wasm/)
 
 > 完整参考列表见 [REFERENCES.md](../REFERENCES.md)
 
