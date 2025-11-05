@@ -142,32 +142,33 @@
 
 - **结构视角文档**：`structure_view.md` ⭐ - 从抽象结构视角看虚拟化容器化沙盒化
   - **位置**：`../../structure_view.md`
-  - **内容**：数学结构主义启示、三类结构深入分析、结构主义三棱镜、技术堆栈结构分
-    析
+  - **内容**：数学结构主义启示、三类结构深入分析、结构主义三棱镜、技术堆栈结构分析
+  - **状态**：结构视角的原始完整文档，包含所有核心思想
 
 ### 相关认知模型
 
-- **[代数结构视角](11-algebraic-structure/)** - 算子理论与代数结构（关注"如何组
-  合"）
+#### 代数结构视角
+
+- **[代数结构视角](11-algebraic-structure/)** - 算子理论与代数结构（关注"如何组合"）
+  - **区别**：代数结构视角关注**算子**和**运算**，通过算子组合来理解技术栈
+  - **互补性**：代数结构视角关注"如何组合"，结构视角关注"组合什么"
+
+#### 其他理论视角
+
 - **[形式化理论](07-formal-theory/)** - 结构同构和关系等价
 - **[范畴论视角](08-category-theory/)** - 对象、态射与函子
 - **[矩阵视角](09-matrix-perspective/)** - 矩阵力学模型
 
 ### 相关架构文档
 
-- **[架构视角文档](../../architecture_view.md)** - 从软件架构视角看虚拟化容器化
-  沙盒化
-- **[系统视角文档](../../system_view.md)** - 从系统视角（7 层 4 域模型）梳理虚拟
-  化、容器化、沙盒化
-- **[技术社会视角文档](../../tech_view.md)** - 从技术和社会的视角看虚拟化容器化
-  沙盒化
+- **[架构视角文档](../../architecture_view.md)** ⭐ v2.0 - 从软件架构视角看虚拟化容器化沙盒化（已重构）
+- **[系统视角文档](../../system_view.md)** ⭐ - 从系统视角（7 层 4 域模型）梳理虚拟化、容器化、沙盒化
+- **[技术社会视角文档](../../tech_view.md)** ⭐ - 从技术和社会的视角（基础设施史、风险社会学、发展经济学、人类学）看虚拟化容器化沙盒化
 
 ### 相关理论文档
 
-- **[ARCHITECTURE/00-theory/](../../ARCHITECTURE/00-theory/)** - 理论论证（纯形
-  式化）
-- **[ARCHITECTURE/01-views/system-view-architecture.md](../../ARCHITECTURE/01-views/system-view-architecture.md)** -
-  系统视角架构视图
+- **[ARCHITECTURE/00-theory/](../../ARCHITECTURE/00-theory/)** - 理论论证（纯形式化）
+- **[ARCHITECTURE/01-views/system-view-architecture.md](../../ARCHITECTURE/01-views/system-view-architecture.md)** - 系统视角架构视图
 
 ---
 

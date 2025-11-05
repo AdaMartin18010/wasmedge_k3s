@@ -6,49 +6,49 @@
 
 ## 📚 按编号索引
 
-| 编号 | 文档名称            | 路径                                                                                             | 核心内容                           | 分类 |
-| ---- | ------------------- | ------------------------------------------------------------------------------------------------ | ---------------------------------- | ---- |
-| 00   | 认知图谱            | [00-knowledge-map](COGNITIVE/00-knowledge-map/knowledge-map.md)                                  | 知识地图和学习路径                 | 导航 |
-| 01   | 总览                | [01-overview](COGNITIVE/01-overview/overview.md)                                                 | 技术栈定位和决策树                 | 导航 |
-| 02   | 理念层              | [02-principles](COGNITIVE/02-principles/principles.md)                                           | 云原生核心理念                     | 理念 |
-| 03   | 架构与对象模型      | [03-architecture](COGNITIVE/03-architecture/architecture.md)                                     | 系统架构设计                       | 架构 |
-| 04   | Docker              | [00-docker](TECHNICAL/00-docker/docker.md)                                                       | Docker 技术规范                    | 技术 |
-| 05   | Kubernetes          | [01-kubernetes](TECHNICAL/01-kubernetes/kubernetes.md)                                           | K8s 架构与实践                     | 技术 |
-| 06   | K3s                 | [02-k3s](TECHNICAL/02-k3s/k3s.md)                                                                | K3s 轻量级架构                     | 技术 |
-| 07   | WasmEdge            | [03-wasm-edge](TECHNICAL/03-wasm-edge/wasmedge.md)                                               | WasmEdge 集成指南                  | 技术 |
-| 08   | 编排运行时          | [04-orchestration-runtime](TECHNICAL/04-orchestration-runtime/orchestration-runtime.md)          | CRI 与 RuntimeClass                | 技术 |
-| 09   | OCI 供应链          | [05-oci-supply-chain](TECHNICAL/05-oci-supply-chain/oci-supply-chain.md)                         | OCI 与供应链安全                   | 安全 |
-| 10   | OPA 策略即代码      | [06-policy-opa](TECHNICAL/06-policy-opa/policy-opa.md)                                           | OPA 策略即代码                     | 技术 |
-| 11   | 边缘 Serverless     | [07-edge-serverless](TECHNICAL/07-edge-serverless/edge-serverless.md)                            | 边缘与 Serverless                  | 场景 |
-| 12   | AI 推理             | [08-ai-inference](TECHNICAL/08-ai-inference/ai-inference.md)                                     | AI 推理应用                        | 场景 |
-| 13   | 安全合规            | [09-security-compliance](TECHNICAL/09-security-compliance/security-compliance.md)                | 安全与合规最佳实践                 | 安全 |
-| 14   | 性能基准            | [04-benchmarks](COGNITIVE/04-benchmarks/benchmarks.md)                                           | 性能基线                           | 实践 |
-| 15   | 安装部署            | [10-installation](TECHNICAL/10-installation/installation.md)                                     | 安装和最小示例                     | 实践 |
-| 16   | 故障排查            | [11-troubleshooting](TECHNICAL/11-troubleshooting/troubleshooting.md)                            | 故障排查                           | 实践 |
-| 17   | 全局架构设计        | [17-architecture-design](COGNITIVE/05-architecture-design/architecture-design.md)                | 技术组合和架构决策                 | 设计 |
-| 18   | 问题解决方案        | [18-problem-solution-matrix](COGNITIVE/06-problem-solution-matrix/problem-solution-matrix.md)    | 技术问题分类和解决                 | 设计 |
-| 19   | 形式化理论          | [19-formal-theory](COGNITIVE/07-formal-theory/formal-theory.md)                                  | 结构同构和关系等价                 | 理论 |
-| 20   | 范畴论视角          | [20-category-theory](COGNITIVE/08-category-theory/category-theory.md)                            | 对象、态射与函子                   | 理论 |
-| 21   | 网络技术规格堆栈    | [21-network-stack](TECHNICAL/12-network-stack/network-stack.md)                                  | CNI、Service、Ingress 技术规范     | 规格 |
-| 22   | 缩写词汇表          | [22-acronyms-glossary](TECHNICAL/13-acronyms-glossary/acronyms-glossary.md)                      | 所有缩写词定义与关系               | 参考 |
-| 23   | 主题清单            | [23-theme-inventory](TECHNICAL/14-theme-inventory/theme-inventory.md)                            | 全面梳理所有主题与子主题           | 参考 |
-| 24   | 存储技术规格堆栈    | [24-storage-stack](TECHNICAL/15-storage-stack/storage-stack.md)                                  | CSI、PV/PVC、存储类型规格          | 规格 |
-| 25   | 监控与可观测性      | [25-observability](TECHNICAL/16-observability/observability.md)                                  | Metrics、Logging、Tracing 技术规范 | 规格 |
-| 26   | GitOps 和持续交付   | [26-gitops-cicd](TECHNICAL/17-gitops-cicd/gitops-cicd.md)                                        | GitOps/CI/CD 技术规范              | 规格 |
-| 27   | Operator 和 CRD     | [27-operator-crd](TECHNICAL/18-operator-crd/operator-crd.md)                                     | Operator/CRD 开发规范              | 规格 |
-| 28   | 架构框架            | [28-architecture-framework](TECHNICAL/28-architecture-framework/architecture-framework.md)       | 多维度架构体系与技术规范           | 架构 |
-| 29   | 服务网格            | [29-service-mesh](TECHNICAL/19-service-mesh/service-mesh.md)                                     | 服务网格技术规范（可选）           | 规格 |
-| 30   | 多集群管理          | [30-multi-cluster](TECHNICAL/20-multi-cluster/multi-cluster.md)                                  | 多集群管理技术规范（可选）         | 规格 |
-| 31   | 镜像仓库和镜像管理  | [31-image-registry](TECHNICAL/21-image-registry/image-registry.md)                               | 镜像仓库与管理技术规范             | 规格 |
-| 32   | 升级和迁移          | [32-upgrade-migration](TECHNICAL/22-upgrade-migration/upgrade-migration.md)                      | 升级和迁移技术规范                 | 规格 |
-| 33   | 开发和调试工具      | [33-dev-tools](TECHNICAL/23-dev-tools/dev-tools.md)                                              | 开发和调试工具规范                 | 实践 |
-| 34   | 成本优化            | [34-cost-optimization](TECHNICAL/24-cost-optimization/cost-optimization.md)                      | 成本优化技术规范（可选）           | 实践 |
-| 35   | 社区生态和最佳实践  | [35-community-best-practices](TECHNICAL/25-community-best-practices/community-best-practices.md) | 社区生态和最佳实践（可选）         | 参考 |
-| 36   | 文档体系分析与改进  | [36-analysis-improvement](TECHNICAL/26-analysis-improvement/analysis-improvement.md)             | 批判性分析和改进计划               | 参考 |
-| 37   | 2025 年技术趋势汇总 | [37-2025-trends](TECHNICAL/27-2025-trends/2025-trends.md)                                        | 2025 年最新技术趋势和版本信息      | 参考 |
-| 38   | 矩阵视角            | [38-matrix-perspective](COGNITIVE/09-matrix-perspective/README.md)                               | 云原生技术栈的矩阵力学             | 理论 |
-| 39   | 代数结构视角        | [39-algebraic-structure](COGNITIVE/11-algebraic-structure/README.md)                             | 算子理论与代数结构                 | 理论 |
-| 40   | 结构视角            | [40-structural-perspective](COGNITIVE/12-structural-perspective/README.md)                        | 计算结构、控制结构、信息结构（结构主义视角） | 理论 |
+| 编号 | 文档名称            | 路径                                                                                             | 核心内容                                     | 分类 |
+| ---- | ------------------- | ------------------------------------------------------------------------------------------------ | -------------------------------------------- | ---- |
+| 00   | 认知图谱            | [00-knowledge-map](COGNITIVE/00-knowledge-map/knowledge-map.md)                                  | 知识地图和学习路径                           | 导航 |
+| 01   | 总览                | [01-overview](COGNITIVE/01-overview/overview.md)                                                 | 技术栈定位和决策树                           | 导航 |
+| 02   | 理念层              | [02-principles](COGNITIVE/02-principles/principles.md)                                           | 云原生核心理念                               | 理念 |
+| 03   | 架构与对象模型      | [03-architecture](COGNITIVE/03-architecture/architecture.md)                                     | 系统架构设计                                 | 架构 |
+| 04   | Docker              | [00-docker](TECHNICAL/00-docker/docker.md)                                                       | Docker 技术规范                              | 技术 |
+| 05   | Kubernetes          | [01-kubernetes](TECHNICAL/01-kubernetes/kubernetes.md)                                           | K8s 架构与实践                               | 技术 |
+| 06   | K3s                 | [02-k3s](TECHNICAL/02-k3s/k3s.md)                                                                | K3s 轻量级架构                               | 技术 |
+| 07   | WasmEdge            | [03-wasm-edge](TECHNICAL/03-wasm-edge/wasmedge.md)                                               | WasmEdge 集成指南                            | 技术 |
+| 08   | 编排运行时          | [04-orchestration-runtime](TECHNICAL/04-orchestration-runtime/orchestration-runtime.md)          | CRI 与 RuntimeClass                          | 技术 |
+| 09   | OCI 供应链          | [05-oci-supply-chain](TECHNICAL/05-oci-supply-chain/oci-supply-chain.md)                         | OCI 与供应链安全                             | 安全 |
+| 10   | OPA 策略即代码      | [06-policy-opa](TECHNICAL/06-policy-opa/policy-opa.md)                                           | OPA 策略即代码                               | 技术 |
+| 11   | 边缘 Serverless     | [07-edge-serverless](TECHNICAL/07-edge-serverless/edge-serverless.md)                            | 边缘与 Serverless                            | 场景 |
+| 12   | AI 推理             | [08-ai-inference](TECHNICAL/08-ai-inference/ai-inference.md)                                     | AI 推理应用                                  | 场景 |
+| 13   | 安全合规            | [09-security-compliance](TECHNICAL/09-security-compliance/security-compliance.md)                | 安全与合规最佳实践                           | 安全 |
+| 14   | 性能基准            | [04-benchmarks](COGNITIVE/04-benchmarks/benchmarks.md)                                           | 性能基线                                     | 实践 |
+| 15   | 安装部署            | [10-installation](TECHNICAL/10-installation/installation.md)                                     | 安装和最小示例                               | 实践 |
+| 16   | 故障排查            | [11-troubleshooting](TECHNICAL/11-troubleshooting/troubleshooting.md)                            | 故障排查                                     | 实践 |
+| 17   | 全局架构设计        | [17-architecture-design](COGNITIVE/05-architecture-design/architecture-design.md)                | 技术组合和架构决策                           | 设计 |
+| 18   | 问题解决方案        | [18-problem-solution-matrix](COGNITIVE/06-problem-solution-matrix/problem-solution-matrix.md)    | 技术问题分类和解决                           | 设计 |
+| 19   | 形式化理论          | [19-formal-theory](COGNITIVE/07-formal-theory/formal-theory.md)                                  | 结构同构和关系等价                           | 理论 |
+| 20   | 范畴论视角          | [20-category-theory](COGNITIVE/08-category-theory/category-theory.md)                            | 对象、态射与函子                             | 理论 |
+| 21   | 网络技术规格堆栈    | [21-network-stack](TECHNICAL/12-network-stack/network-stack.md)                                  | CNI、Service、Ingress 技术规范               | 规格 |
+| 22   | 缩写词汇表          | [22-acronyms-glossary](TECHNICAL/13-acronyms-glossary/acronyms-glossary.md)                      | 所有缩写词定义与关系                         | 参考 |
+| 23   | 主题清单            | [23-theme-inventory](TECHNICAL/14-theme-inventory/theme-inventory.md)                            | 全面梳理所有主题与子主题                     | 参考 |
+| 24   | 存储技术规格堆栈    | [24-storage-stack](TECHNICAL/15-storage-stack/storage-stack.md)                                  | CSI、PV/PVC、存储类型规格                    | 规格 |
+| 25   | 监控与可观测性      | [25-observability](TECHNICAL/16-observability/observability.md)                                  | Metrics、Logging、Tracing 技术规范           | 规格 |
+| 26   | GitOps 和持续交付   | [26-gitops-cicd](TECHNICAL/17-gitops-cicd/gitops-cicd.md)                                        | GitOps/CI/CD 技术规范                        | 规格 |
+| 27   | Operator 和 CRD     | [27-operator-crd](TECHNICAL/18-operator-crd/operator-crd.md)                                     | Operator/CRD 开发规范                        | 规格 |
+| 28   | 架构框架            | [28-architecture-framework](TECHNICAL/28-architecture-framework/architecture-framework.md)       | 多维度架构体系与技术规范                     | 架构 |
+| 29   | 服务网格            | [29-service-mesh](TECHNICAL/19-service-mesh/service-mesh.md)                                     | 服务网格技术规范（可选）                     | 规格 |
+| 30   | 多集群管理          | [30-multi-cluster](TECHNICAL/20-multi-cluster/multi-cluster.md)                                  | 多集群管理技术规范（可选）                   | 规格 |
+| 31   | 镜像仓库和镜像管理  | [31-image-registry](TECHNICAL/21-image-registry/image-registry.md)                               | 镜像仓库与管理技术规范                       | 规格 |
+| 32   | 升级和迁移          | [32-upgrade-migration](TECHNICAL/22-upgrade-migration/upgrade-migration.md)                      | 升级和迁移技术规范                           | 规格 |
+| 33   | 开发和调试工具      | [33-dev-tools](TECHNICAL/23-dev-tools/dev-tools.md)                                              | 开发和调试工具规范                           | 实践 |
+| 34   | 成本优化            | [34-cost-optimization](TECHNICAL/24-cost-optimization/cost-optimization.md)                      | 成本优化技术规范（可选）                     | 实践 |
+| 35   | 社区生态和最佳实践  | [35-community-best-practices](TECHNICAL/25-community-best-practices/community-best-practices.md) | 社区生态和最佳实践（可选）                   | 参考 |
+| 36   | 文档体系分析与改进  | [36-analysis-improvement](TECHNICAL/26-analysis-improvement/analysis-improvement.md)             | 批判性分析和改进计划                         | 参考 |
+| 37   | 2025 年技术趋势汇总 | [37-2025-trends](TECHNICAL/27-2025-trends/2025-trends.md)                                        | 2025 年最新技术趋势和版本信息                | 参考 |
+| 38   | 矩阵视角            | [38-matrix-perspective](COGNITIVE/09-matrix-perspective/README.md)                               | 云原生技术栈的矩阵力学                       | 理论 |
+| 39   | 代数结构视角        | [39-algebraic-structure](COGNITIVE/11-algebraic-structure/README.md)                             | 算子理论与代数结构                           | 理论 |
+| 40   | 结构视角            | [40-structural-perspective](COGNITIVE/12-structural-perspective/README.md)                       | 计算结构、控制结构、信息结构（结构主义视角） | 理论 |
 
 **说明**：文档编号 28 为架构框架文档（多维度架构体系与技术规范）。文档编号 29-30
 为可选文档（服务网格、多集群管理），34 为可选文档（成本优化）。37 为趋势文档
@@ -131,7 +131,8 @@ COGNITIVE/09-matrix-perspective 目录下）。
   力学
 - [39. 代数结构视角](COGNITIVE/11-algebraic-structure/README.md) - 算子理论与代
   数结构
-- [40. 结构视角](COGNITIVE/12-structural-perspective/README.md) ⭐ - 计算结构、控制结构、信息结构（结构主义视角）
+- [40. 结构视角](COGNITIVE/12-structural-perspective/README.md) ⭐ - 计算结构、
+  控制结构、信息结构（结构主义视角）
 
 ### 规格类（9 个）
 
@@ -329,6 +330,10 @@ graph TB
    析
 3. [38. 矩阵视角](COGNITIVE/09-matrix-perspective/README.md) - 矩阵力学与数学建
    模
+4. [39. 代数结构视角](COGNITIVE/11-algebraic-structure/README.md) - 算子理论与代
+   数结构
+5. [40. 结构视角](COGNITIVE/12-structural-perspective/README.md) ⭐ - 计算结构、
+   控制结构、信息结构（结构主义视角）
 
 ### 参考查询
 
@@ -406,7 +411,8 @@ graph TB
 - **技术规范覆盖度**：100%（27/27 规范）
 - **文档分类**：11 大类（导航、理念、架构、技术、安全、场景、实践、设计、理论、
   规格、参考）
-- **理论类文档**：5 个（形式化理论、范畴论视角、矩阵视角、代数结构视角、结构视角）
+- **理论类文档**：5 个（形式化理论、范畴论视角、矩阵视角、代数结构视角、结构视角
+  ）
 
 ## 🔗 快速链接
 
