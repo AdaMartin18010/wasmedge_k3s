@@ -194,11 +194,28 @@ CAP 定理本质上是"序"与"信息一致性"的权衡：
 
 ### 相关文档
 
-- **[三类结构详细分析](../../02-three-structures/README.md)** - 计算结构、控制结
-  构、信息结构的深入分析
-- **[结构交互与复合](../../03-structure-interaction/README.md)** - 结构的复合和
-  深层联系
+#### 三类结构的深入分析
+
+- **[三类结构详细分析](../../02-three-structures/README.md)** - 计算结构、控制结构、信息结构的深入分析
+  - **内容**：三类结构的详细定义、核心特征、典型实例、形式化工具、哲学意义
+  - **包含文档**：
+    - [计算结构分析](../../02-three-structures/01-computational-structure.md) - 代数视角（λ-演算、Monad、图灵机）
+    - [控制结构分析](../../02-three-structures/02-control-structure.md) - 序视角（Happens-before、并发模型）
+    - [信息结构分析](../../02-three-structures/03-information-structure.md) - 拓扑/近似视角（类型系统、Domain Theory）
+
+#### 结构交互与复合
+
+- **[结构交互与复合](../../03-structure-interaction/README.md)** - 结构的复合和深层联系
+  - **内容**：复合结构分析（二元和三元复合）、结构间关系（Curry-Howard 同构、CAP 定理、神经网络可解释性）
+  - **包含文档**：
+    - [复合结构分析](../../03-structure-interaction/01-composite-structures.md) - 函数式并发、类型化 λ-演算等
+    - [结构间关系](../../03-structure-interaction/02-structure-relationships.md) - 深层联系和交叉应用
+
+#### 源文档
+
 - **[源文档](../../../../structure_view.md)** - 结构视角的完整论述
+  - **内容**：数学结构主义启示、三元结构框架、三类结构的深入分析、结构交互与复合、虚拟化容器化沙盒化的结构分析、技术堆栈结构分析
+  - **状态**：结构视角的原始完整文档
 
 ### 学术参考
 
