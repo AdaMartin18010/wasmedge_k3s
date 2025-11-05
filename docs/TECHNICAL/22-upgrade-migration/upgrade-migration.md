@@ -66,6 +66,9 @@
   - [22.13.1 升级常见问题](#22131-升级常见问题)
   - [22.13.2 迁移常见问题](#22132-迁移常见问题)
 - [22.14 参考](#2214-参考)
+  - [22.14.1 隔离栈相关文档](#22141-隔离栈相关文档)
+  - [22.14.2 运行时相关文档](#22142-运行时相关文档)
+  - [22.14.3 其他相关文档](#22143-其他相关文档)
 
 ---
 
@@ -1796,6 +1799,39 @@ diff old-config.yaml new-config.yaml
 ```
 
 ## 22.14 参考
+
+### 22.14.1 隔离栈相关文档
+
+- **[29. 隔离栈](../29-isolation-stack/isolation-stack.md)** - 完整的隔离栈技术
+  解析，包括 L-0 硬件辅助层、L-1 全虚拟化层、L-2 半虚拟化层、L-3 容器化层、L-4
+  沙盒化层
+- **[隔离层次总结合并对比文档](../29-isolation-stack/layers/isolation-comparison.md)** -
+  快速对比矩阵、技术选型决策树、应用场景匹配、混合部署策略、常见问题 FAQ
+- **[L-3 容器化层](../29-isolation-stack/layers/L-3-containerization.md)** -
+  runc、containerd、Docker、Podman 详细文档，包含实际部署案例和最佳实践
+- **[L-4 沙盒化层](../29-isolation-stack/layers/L-4-sandboxing.md)** -
+  gVisor、Firecracker、WASM、Windows Sandbox 详细文档，包含实际部署案例和最佳实
+  践
+- **[L-2 半虚拟化层](../29-isolation-stack/layers/L-2-paravirtualization.md)** -
+  Xen PV、virtio、Hyper-V Enlightenment 详细文档
+- **[L-1 全虚拟化层](../29-isolation-stack/layers/L-1-full-virtualization.md)** -
+  KVM、ESXi、Hyper-V、Xen HVM 详细文档
+
+### 22.14.2 运行时相关文档
+
+- **[00. Docker](../00-docker/docker.md)** - Docker 详细文档
+- **[03. WasmEdge](../03-wasm-edge/wasmedge.md)** - WebAssembly 运行时详细文档
+- **[01. Kubernetes](../01-kubernetes/kubernetes.md)** - Kubernetes 详细文档
+- **[02. K3s](../02-k3s/k3s.md)** - K3s 详细文档
+
+### 22.14.3 其他相关文档
+
+- **[11. 故障排查](../11-troubleshooting/troubleshooting.md)** - 通用故障排查方
+  法
+- **[16. 监控与可观测性](../16-observability/observability.md)** -
+  OpenTelemetry、eBPF 等技术
+- **[24. 成本优化](../24-cost-optimization/cost-optimization.md)** - 成本优化策
+  略和实践
 
 - [Kubernetes 升级文档](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/)
 - [K3s 升级文档](https://docs.k3s.io/upgrades)
