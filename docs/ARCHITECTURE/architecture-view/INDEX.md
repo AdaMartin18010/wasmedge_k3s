@@ -2,26 +2,27 @@
 
 ## 📑 目录
 
-- [📋 文档索引](#-文档索引)
-  - [1. 架构拆解与组合 (`01-decomposition-composition/`)](#1-架构拆解与组合-01-decomposition-composition)
-  - [2. 虚拟化容器化沙盒化 (`02-virtualization-containerization-sandboxing/`)](#2-虚拟化容器化沙盒化-02-virtualization-containerization-sandboxing)
-  - [3. 服务网格与网络服务网格 (`03-service-mesh-nsm/`)](#3-服务网格与网络服务网格-03-service-mesh-nsm)
-  - [4. OPA 策略治理 (`04-opa-policy-governance/`)](#4-opa-策略治理-04-opa-policy-governance)
-  - [5. 形式化论证 (`05-formal-proofs/`)](#5-形式化论证-05-formal-proofs)
-  - [6. 概念属性关系 (`06-concepts-properties-relations/`)](#6-概念属性关系-06-concepts-properties-relations)
-  - [7. 动态运维 (`07-dynamic-operations/`)](#7-动态运维-07-dynamic-operations)
-  - [8. 组合模式 (`08-composition-patterns/`)](#8-组合模式-08-composition-patterns)
-  - [9. 多视角分析 (`09-multi-perspectives/`)](#9-多视角分析-09-multi-perspectives)
-  - [10. 2025 年 11 月更新 ⚠️ 已删除（内容合并到 `05-trends-2025/`）](#10-2025-年-11-月更新-️-已删除内容合并到-05-trends-2025)
-- [🔗 相关文档](#-相关文档)
-  - [参考资源](#参考资源)
-  - [组合模式文档](#组合模式文档)
+- [📑 目录](#-目录)
+- [1. 文档索引](#1-文档索引)
+  - [1.1 架构拆解与组合 (`01-decomposition-composition/`)](#11-架构拆解与组合-01-decomposition-composition)
+  - [1.2 虚拟化容器化沙盒化 (`02-virtualization-containerization-sandboxing/`)](#12-虚拟化容器化沙盒化-02-virtualization-containerization-sandboxing)
+  - [1.3 服务网格与网络服务网格 (`03-service-mesh-nsm/`)](#13-服务网格与网络服务网格-03-service-mesh-nsm)
+  - [1.4 OPA 策略治理 (`04-opa-policy-governance/`)](#14-opa-策略治理-04-opa-policy-governance)
+  - [1.5 形式化论证 (`05-formal-proofs/`)](#15-形式化论证-05-formal-proofs)
+  - [1.6 概念属性关系 (`06-concepts-properties-relations/`)](#16-概念属性关系-06-concepts-properties-relations)
+  - [1.7 动态运维 (`07-dynamic-operations/`)](#17-动态运维-07-dynamic-operations)
+  - [1.8 组合模式 (`08-composition-patterns/`)](#18-组合模式-08-composition-patterns)
+  - [1.9 多视角分析 (`09-multi-perspectives/`)](#19-多视角分析-09-multi-perspectives)
+  - [1.10 2025 年 11 月更新 ⚠️ 已删除（内容合并到 `05-trends-2025/`）](#110-2025-年-11-月更新-️-已删除内容合并到-05-trends-2025)
+- [2. 相关文档](#2-相关文档)
+  - [2.1 参考资源](#21-参考资源)
+  - [2.2 组合模式文档](#22-组合模式文档)
 
 ---
 
-## 📋 文档索引
+## 1. 文档索引
 
-### 1. 架构拆解与组合 (`01-decomposition-composition/`)
+### 1.1 架构拆解与组合 (`01-decomposition-composition/`)
 
 - [01. 5 步拆分与组合流程](01-decomposition-composition/01-5-step-process.md)
 
@@ -63,7 +64,7 @@
 
 ---
 
-### 2. 虚拟化容器化沙盒化 (`02-virtualization-containerization-sandboxing/`)
+### 1.2 虚拟化容器化沙盒化 (`02-virtualization-containerization-sandboxing/`)
 
 - [01. 虚拟化抽象](02-virtualization-containerization-sandboxing/01-virtualization-abstraction.md)
 
@@ -97,7 +98,7 @@
 
 ---
 
-### 3. 服务网格与网络服务网格 (`03-service-mesh-nsm/`)
+### 1.3 服务网格与网络服务网格 (`03-service-mesh-nsm/`)
 
 - [01. Service Mesh 架构](03-service-mesh-nsm/01-service-mesh-architecture.md)
 
@@ -125,7 +126,7 @@
 
 ---
 
-### 4. OPA 策略治理 (`04-opa-policy-governance/`)
+### 1.4 OPA 策略治理 (`04-opa-policy-governance/`)
 
 - [01. OPA 架构](04-opa-policy-governance/01-opa-architecture.md)
 
@@ -147,16 +148,17 @@
 
 ---
 
-### 5. 形式化论证 (`05-formal-proofs/`)
+### 1.5 形式化论证 (`05-formal-proofs/`)
 
 > **注意**：本目录已删除，内容已合并到 `../../00-theory/` 目录。详细内容请参考：
 >
 > - [`../../00-theory/`](../../00-theory/) - 完整的理论论证文档集
-> - [`../../00-theory/README.md`](../../00-theory/README.md) - 理论论证文档集总览
+> - [`../../00-theory/README.md`](../../00-theory/README.md) - 理论论证文档集总
+>   览
 
 ---
 
-### 6. 概念属性关系 (`06-concepts-properties-relations/`)
+### 1.6 概念属性关系 (`06-concepts-properties-relations/`)
 
 - [01. 概念定义](06-concepts-properties-relations/01-concept-definitions.md)
 
@@ -184,7 +186,7 @@
 
 ---
 
-### 7. 动态运维 (`07-dynamic-operations/`)
+### 1.7 动态运维 (`07-dynamic-operations/`)
 
 - [01. GitOps](07-dynamic-operations/01-gitops.md)
 
@@ -206,7 +208,7 @@
 
 ---
 
-### 8. 组合模式 (`08-composition-patterns/`)
+### 1.8 组合模式 (`08-composition-patterns/`)
 
 - [01. Adapter / Bridge 模式](08-composition-patterns/01-adapter-bridge.md)
 
@@ -239,12 +241,13 @@
 
 **相关文档**：
 
-- [Service Aggregation 模式](../08-composition-patterns/05-nsm-pattern.md#service-aggregation) - Service Aggregation 模式（在 NSM 模式文档中）
+- [Service Aggregation 模式](../08-composition-patterns/05-nsm-pattern.md#service-aggregation) -
+  Service Aggregation 模式（在 NSM 模式文档中）
 - [组合模式文档集](../08-composition-patterns/README.md) - 组合模式文档集总览
 
 ---
 
-### 9. 多视角分析 (`09-multi-perspectives/`)
+### 1.9 多视角分析 (`09-multi-perspectives/`)
 
 - [01. 功能视角](09-multi-perspectives/01-functional-perspective.md)
 
@@ -283,7 +286,7 @@
 
 ---
 
-### 10. 2025 年 11 月更新 ⚠️ 已删除（内容合并到 `05-trends-2025/`）
+### 1.10 2025 年 11 月更新 ⚠️ 已删除（内容合并到 `05-trends-2025/`）
 
 > **注意**：`10-november-2025-updates/` 目录已删除，内容已合并到
 > `../../05-trends-2025/`。详细内容请参考：
@@ -300,22 +303,28 @@
 
 ---
 
-## 🔗 相关文档
+## 2. 相关文档
 
-### 参考资源
+### 2.1 参考资源
 
 - **`REFERENCES.md`** - 参考标准、框架、工具和资源
 - **`ACADEMIC-REFERENCES.md`** - Wikipedia、大学课程、学术论文等学术资源
 
-### 组合模式文档
+### 2.2 组合模式文档
 
-- **[组合模式文档集](../08-composition-patterns/README.md)** - 组合模式文档集总览
-- **[Adapter / Bridge 模式](../08-composition-patterns/01-adapter-bridge.md)** - Adapter/Bridge 模式
-- **[Facade / Gateway 模式](../08-composition-patterns/02-facade.md)** - Facade/Gateway 模式
-- **[Pipeline / Orchestration 模式](../08-composition-patterns/03-pipeline.md)** - Pipeline/Orchestration 模式
-- **[Service Mesh 模式](../08-composition-patterns/04-service-mesh-pattern.md)** - Service Mesh 模式
+- **[组合模式文档集](../08-composition-patterns/README.md)** - 组合模式文档集总
+  览
+- **[Adapter / Bridge 模式](../08-composition-patterns/01-adapter-bridge.md)** -
+  Adapter/Bridge 模式
+- **[Facade / Gateway 模式](../08-composition-patterns/02-facade.md)** -
+  Facade/Gateway 模式
+- **[Pipeline / Orchestration 模式](../08-composition-patterns/03-pipeline.md)** -
+  Pipeline/Orchestration 模式
+- **[Service Mesh 模式](../08-composition-patterns/04-service-mesh-pattern.md)** -
+  Service Mesh 模式
 - **[NSM 模式](../08-composition-patterns/05-nsm-pattern.md)** - NSM 模式
-- **[Service Aggregation 模式](../08-composition-patterns/05-nsm-pattern.md#service-aggregation)** - Service Aggregation 模式（在 NSM 模式文档中）
+- **[Service Aggregation 模式](../08-composition-patterns/05-nsm-pattern.md#service-aggregation)** -
+  Service Aggregation 模式（在 NSM 模式文档中）
 
 ---
 

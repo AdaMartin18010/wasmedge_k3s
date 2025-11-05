@@ -2,7 +2,6 @@
 
 ## 📑 目录
 
-- [📑 目录](#-目录)
 - [1. 核心思想回顾](#1-核心思想回顾)
 - [2. 拆解-组合-验证-迭代](#2-拆解-组合-验证-迭代)
 - [3. 实践建议](#3-实践建议)
@@ -20,17 +19,22 @@
 > **拆分 → 合成 → 验证 → 迭代**
 >
 > 1. **拆分**：按关切、领域、层次把系统拆成清晰的"组件"
-> 2. **合成**：用**组合模式**（Adapter, Facade, Composite, Pipeline, Service Mesh, API Gateway, Event Bus 等）把组件拼接
+> 2. **合成**：用**组合模式**（Adapter, Facade, Composite, Pipeline, Service
+>    Mesh, API Gateway, Event Bus 等）把组件拼接
 > 3. **验证**：通过**ADR、C4 模型、CI/CD、监控**证明组合后仍满足功能与非功能需求
-> 4. **迭代**：随业务变更、技术演进，持续拆分并重新组合，保持架构的弹性与可维护性
+> 4. **迭代**：随业务变更、技术演进，持续拆分并重新组合，保持架构的弹性与可维护
+>    性
 
 ### 1.2 架构剪裁思想
 
-> **通过分层抽象和组合模式，把"通用"与"平台"关注点从业务关注点中"切"出去，让架构师只需聚焦领域业务。所有非功能性能力（安全、性能、监控、合规）以可组合的基础设施语义被无缝集成。**
+> **通过分层抽象和组合模式，把"通用"与"平台"关注点从业务关注点中"切"出去，让架构
+> 师只需聚焦领域业务。所有非功能性能力（安全、性能、监控、合规）以可组合的基础设
+> 施语义被无缝集成。**
 
 ### 1.3 中层逻辑世界
 
-> **虚拟化-容器化-沙盒化 = 把"计算、资源、通信"从硅片里重新编译成一层可编程的"中间语言"—— 我们称之为 Cloud Intermediate Language，简称 ℳ。**
+> **虚拟化-容器化-沙盒化 = 把"计算、资源、通信"从硅片里重新编译成一层可编程的"中
+> 间语言"—— 我们称之为 Cloud Intermediate Language，简称 ℳ。**
 
 ---
 
@@ -43,12 +47,15 @@
 **关键活动**：
 
 1. **需求关切抽取**
+
    - 访谈、用户故事、服务契约
    - 技术约束、性能指标、合规需求
    - 工具：问题卡、业务地图、技术债务清单
 
 2. **结构化拆分**
-   - 按**关注点分离**拆分（Presentation, Application, Domain, Integration, Data, Infra, Security, Observability, Deployment）
+
+   - 按**关注点分离**拆分（Presentation, Application, Domain, Integration, Data,
+     Infra, Security, Observability, Deployment）
    - 按**Bounded Context**或**微服务**进一步拆分
    - 工具：C4/ArchiMate 模型、DDD 边界图、服务矩阵
 
@@ -63,15 +70,19 @@
 **关键活动**：
 
 1. **依赖注入 / Composition Root**
+
    - Spring DI / Guice, OSGi / CDI
 
 2. **适配器 / 桥接**（跨技术边界）
+
    - gRPC + REST, ODBC ↔ JDBC
 
 3. **Facade / Gateway**（聚合多服务）
+
    - Netflix Zuul, Kong, Ocelot, Spring Cloud Gateway
 
 4. **Pipeline / Orchestrator**（业务流程）
+
    - Camunda, Temporal, Argo Workflows
 
 5. **Service Mesh / API Gateway**（通信、流控）
@@ -84,12 +95,15 @@
 **关键活动**：
 
 1. **CI/CD**
+
    - Jenkins, GitHub Actions, ArgoCD
 
 2. **监控与追踪**
+
    - Prometheus/Tempo, OpenTelemetry
 
 3. **测试**
+
    - 单元测试、集成测试、契约测试、端到端测试
    - Chaos Monkey, 可靠性测试
 
@@ -103,9 +117,11 @@
 **关键活动**：
 
 1. **监控反馈**
+
    - 收集性能指标、错误日志、用户反馈
 
 2. **架构演进**
+
    - 根据反馈调整架构
    - 通过 ADR 记录决策过程
 
@@ -121,7 +137,8 @@
 
 #### 3.1.1 ADR 记录决策
 
-**建议**：每完成一次拆分/组合，都在**ADR**里写一条记录：`<Component> 采用 <Pattern> 以满足 <Constraint>`
+**建议**：每完成一次拆分/组合，都在**ADR**里写一条记录
+：`<Component> 采用 <Pattern> 以满足 <Constraint>`
 
 **ADR 模板**：
 
@@ -129,19 +146,24 @@
 # ADR-001: [标题]
 
 ## 状态
+
 [提案/已接受/已拒绝/已废弃]
 
 ## 上下文
+
 [背景信息]
 
 ## 决策
+
 [决策内容]
 
 ## 后果
+
 [正面/负面影响]
 ```
 
 **工具**：
+
 - `adr-tools`：命令行工具
 - `adr-log`：日志生成工具
 
@@ -150,15 +172,18 @@
 **建议**：采用**C4**的**上下文图**、**容器图**、**组件图**、**代码图**逐级描述
 
 **工具**：
+
 - Structurizr：C4 模型工具
 - Draw.io：在线图表工具
 - PlantUML：UML 图表生成
 
 #### 3.1.3 ArchiMate 记录非功能需求
 
-**建议**：用**ArchiMate**（或**UML 2.5**）记录**业务能力**、**技术能力**、**安全/合规**等非功能需求
+**建议**：用**ArchiMate**（或**UML 2.5**）记录**业务能力**、**技术能力**、**安全
+/合规**等非功能需求
 
 **工具**：
+
 - Archi：ArchiMate 工具
 - Enterprise Architect：UML 工具
 
@@ -169,6 +194,7 @@
 **建议**：选用**服务网格** + **API Gateway**，让"微服务"与"无服务器"可以无缝共存
 
 **技术栈**：
+
 - Service Mesh：Istio、Linkerd、Consul
 - API Gateway：Kong、Envoy Gateway
 
@@ -177,6 +203,7 @@
 **建议**：用**OpenTelemetry**统一监控；用**OPA**统一安全
 
 **技术栈**：
+
 - OpenTelemetry：统一遥测标准
 - Prometheus：指标采集
 - Grafana：可视化面板
@@ -187,6 +214,7 @@
 **建议**：自动化部署 & 监控，保证**持续交付**
 
 **技术栈**：
+
 - GitOps：ArgoCD、Flux
 - CI/CD：GitHub Actions、Jenkins
 - Infrastructure as Code：Terraform、Pulumi
@@ -233,35 +261,37 @@
 
 ### 4.1 架构设计工具
 
-| 工具 | 用途 | 链接 |
-|------|------|------|
-| **Structurizr** | C4 模型 | <https://structurizr.com> |
-| **Archi** | ArchiMate | <https://www.archimatetool.com> |
-| **PlantUML** | UML 图表 | <https://plantuml.com> |
-| **Draw.io** | 架构图 | <https://app.diagrams.net> |
+| 工具            | 用途      | 链接                            |
+| --------------- | --------- | ------------------------------- |
+| **Structurizr** | C4 模型   | <https://structurizr.com>       |
+| **Archi**       | ArchiMate | <https://www.archimatetool.com> |
+| **PlantUML**    | UML 图表  | <https://plantuml.com>          |
+| **Draw.io**     | 架构图    | <https://app.diagrams.net>      |
 
 ### 4.2 ADR 工具
 
-| 工具 | 用途 | 链接 |
-|------|------|------|
+| 工具          | 用途           | 链接                                  |
+| ------------- | -------------- | ------------------------------------- |
 | **adr-tools** | ADR 命令行工具 | <https://github.com/npryce/adr-tools> |
-| **adr-log** | ADR 日志生成 | <https://github.com/adr/adr-log> |
+| **adr-log**   | ADR 日志生成   | <https://github.com/adr/adr-log>      |
 
 ### 4.3 接口契约工具
 
-| 工具 | 用途 | 链接 |
-|------|------|------|
+| 工具                  | 用途         | 链接                             |
+| --------------------- | ------------ | -------------------------------- |
 | **OpenAPI Generator** | API 代码生成 | <https://openapi-generator.tech> |
-| **Postman** | API 测试 | <https://www.postman.com> |
-| **Pact** | 契约测试 | <https://docs.pact.io> |
+| **Postman**           | API 测试     | <https://www.postman.com>        |
+| **Pact**              | 契约测试     | <https://docs.pact.io>           |
 
 ### 4.4 模板与示例
 
 **项目模板**：
+
 - 微服务项目模板：包含 Service Mesh、OPA、监控配置
 - 架构文档模板：包含 ADR、C4 模型模板
 
 **示例项目**：
+
 - 支付网关：完整的多层架构示例
 - 电商平台：微服务架构示例
 
@@ -316,11 +346,13 @@
 ### 6.1 立即行动
 
 1. **阅读核心文档**
+
    - [架构拆解与组合：5 步流程](./architecture-view/01-decomposition-composition/01-5-step-process.md)
    - [分层拆解：9 层架构模型](./architecture-view/01-decomposition-composition/02-layered-decomposition.md)
    - [组合模式](./architecture-view/01-decomposition-composition/03-composition-patterns.md)
 
 2. **学习实践案例**
+
    - [支付网关案例](../07-case-studies/payment-gateway.md)
    - [电商平台案例](../07-case-studies/e-commerce-platform.md)
 
@@ -332,10 +364,12 @@
 ### 6.2 中期目标
 
 1. **应用到实际项目**
+
    - 选择一个实际项目应用架构设计方法
    - 记录 ADR，建立 C4 模型
 
 2. **建立最佳实践**
+
    - 总结项目经验
    - 形成团队最佳实践文档
 
@@ -346,10 +380,12 @@
 ### 6.3 长期目标
 
 1. **建立架构能力**
+
    - 培养架构设计能力
    - 建立架构评审机制
 
 2. **技术演进**
+
    - 跟踪新技术趋势
    - 评估技术升级的收益和成本
 
@@ -378,7 +414,8 @@
 
 ### 7.3 最终目标
 
-> **这样，你就拥有一个完整、可复用、可验证的"拆解-组合"工作流，可以用于任何规模的系统——从单体到微服务，从传统企业到云原生平台，再到边缘或无服务器架构。**
+> **这样，你就拥有一个完整、可复用、可验证的"拆解-组合"工作流，可以用于任何规模
+> 的系统——从单体到微服务，从传统企业到云原生平台，再到边缘或无服务器架构。**
 
 ---
 
@@ -395,5 +432,5 @@
 
 ---
 
-**更新时间**：2025-11-04 **版本**：v1.0 **参考**：`architecture_view.md` 第 210-235 行
-
+**更新时间**：2025-11-04 **版本**：v1.0 **参考**：`architecture_view.md` 第
+210-235 行
