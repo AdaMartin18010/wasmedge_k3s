@@ -5,7 +5,7 @@
 - **总文档数**：25 个 Markdown 文件（含 SUMMARY.md）
 - **目录结构**：7 个主要目录（含 README）
 - **创建时间**：2025-11-05
-- **版本**：v1.5
+- **版本**：v1.6
 
 ---
 
@@ -130,6 +130,10 @@ docs/COGNITIVE/12-structural-perspective/
   机制）
 - ✅ 修复了链接路径错误（`../../03-structure-interaction` →
   `../03-structure-interaction`）
+- ✅ 补充了横向对标分析的详细内容（KVM vs Xen、Docker vs LXC、gVisor vs
+  Firecracker、WASM vs JVM 的详细结构分析）
+- ✅ 补充了结构三角形位置分析的详细内容（虚拟化、容器化、沙盒化的结构重心和结构
+  洞察）
 
 ---
 
@@ -143,5 +147,5 @@ docs/COGNITIVE/12-structural-perspective/
 
 ---
 
-**更新时间**：2025-11-05 **版本**：v1.4 **状态**：✅ 完成（已修复所有链接路径错
-误）
+**更新时间**：2025-11-05 **版本**：v1.6 **状态**：✅ 完成（已全面检查并补充所有
+实质性内容，文档内容丰富完整）

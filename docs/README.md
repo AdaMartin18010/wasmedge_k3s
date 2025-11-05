@@ -181,7 +181,7 @@
 - `architecture_view.md` ↔ `ARCHITECTURE/` - 架构视图文档集
 - `system_view.md` ↔ `ARCHITECTURE/` - 系统视角文档集（7 层 4 域模型） ⭐
 - `structure_view.md` ↔
-  `ARCHITECTURE/architecture-view/09-multi-perspectives/` - 结构视角文档集 ⭐
+  `COGNITIVE/12-structural-perspective/` - 结构视角文档集 ⭐
 - `tech_view.md` ↔ `ARCHITECTURE/architecture-view/09-multi-perspectives/` - 技
   术社会视角文档集 ⭐
 
