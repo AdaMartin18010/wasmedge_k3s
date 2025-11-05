@@ -1557,4 +1557,4 @@ kubectl apply -f config/samples/database_v1_mysql.yaml --dry-run=server
 
 ---
 
-**最后更新**：2025-11-03 **维护者**：项目团队
+**最后更新**：2025-11-06 **维护者**：项目团队

@@ -2,6 +2,7 @@
 
 ## 📑 目录
 
+- [📑 目录](#-目录)
 - [19.1 文档定位](#191-文档定位)
 - [19.2 服务网格技术栈全景](#192-服务网格技术栈全景)
   - [19.2.1 服务网格定义](#1921-服务网格定义)
@@ -51,7 +52,13 @@
   - [19.10.1 核心要点](#19101-核心要点)
   - [19.10.2 核心理念](#19102-核心理念)
   - [19.10.3 2025 年选型建议](#19103-2025-年选型建议)
-- [19.11 参考](#1911-参考)
+- [19.11 实际部署案例](#1911-实际部署案例)
+  - [19.11.1 案例 1：Istio 基础部署](#19111-案例-1istio-基础部署)
+  - [19.11.2 案例 2：Linkerd 轻量级部署](#19112-案例-2linkerd-轻量级部署)
+  - [19.11.3 案例 3：Istio 金丝雀部署](#19113-案例-3istio-金丝雀部署)
+- [19.12 服务网格故障排查](#1912-服务网格故障排查)
+  - [19.12.1 常见问题](#19121-常见问题)
+- [19.13 参考](#1913-参考)
 
 ---
 
@@ -62,7 +69,7 @@
 
 **2025 年视角**：
 
-本文档基于 **2025 年最新技术趋势**，提供服务网格的**定义 → 架构 → 功能 → 价值 →
+本文档基于 **2025-11-06 最新技术趋势**，提供服务网格的**定义 → 架构 → 功能 → 价值 →
 演进 → 选型**六段式全面论证，可直接落地使用。
 
 **文档结构**：
@@ -1329,35 +1336,185 @@ data:
 
 ---
 
-## 19.11 参考
+## 19.11 实际部署案例
 
-- [Istio 官方文档](https://istio.io/docs/)
-- [Linkerd 官方文档](https://linkerd.io/docs/)
-- [Consul Connect 官方文档](https://www.consul.io/docs/connect)
-- [Envoy 官方文档](https://www.envoyproxy.io/docs/)
-- [WasmEdge 与 Istio 集成](https://wasmedge.org/docs/develop/mesh/istio/)
-- [Cilium Service Mesh 文档](https://docs.cilium.io/en/stable/network/service-mesh/)
-- [Istio Ambient Mesh 文档](https://istio.io/latest/docs/ambient/)
+### 19.11.1 案例 1：Istio 基础部署
 
+**场景**：在 Kubernetes 集群中部署 Istio 服务网格
+
+**部署步骤**：
+
+```bash
+# 1. 下载 Istio
+curl -L https://istio.io/downloadIstio | sh -
+cd istio-*
+
+# 2. 安装 Istio
+istioctl install --set values.defaultRevision=default
+
+# 3. 启用自动注入（可选）
+kubectl label namespace default istio-injection=enabled
+
+# 4. 验证部署
+kubectl get pods -n istio-system
+istioctl verify-install
+```
+
+**部署应用示例**：
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+        - name: app
+          image: myapp:v1.0.0
+          ports:
+            - containerPort: 8080
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp
+spec:
+  selector:
+    app: myapp
+  ports:
+    - port: 80
+      targetPort: 8080
+```
 
-> **使用指南**：
->
-> - **快速开始**：查看 [19.2 服务网格技术栈全景](#192-服务网格技术栈全景)
-> - **2025 年选型**：查看
->   [19.4.7 主流实现与选型速查](#1947-主流实现与选型速查2025q4)
-> - **能力矩阵**：查看
->   [19.4.4 能力矩阵：一张表看懂"网格能做什么"](#1944-能力矩阵一张表看懂网格能做什么)
-> - **价值论证**：查看
->   [19.4.5 价值论证：为什么"非侵入"是质变（2025 年视角）](#1945-价值论证为什么非侵入是质变2025-年视角)
-> - **技术演进**：查看
->   [19.4.6 技术演进时间线（2016→2025）](#1946-技术演进时间线20162025)
-> - **Wasm 集成**：查看
->   [19.5 Wasm 插件在服务网格中的应用](#195-wasm-插件在服务网格中的应用)
-> - **最佳实践**：查看 [19.9 服务网格最佳实践](#199-服务网格最佳实践)
-> - **核心要点**：查看
->   [19.10 小结：三句话记住 Service Mesh](#1910-小结三句话记住-service-mesh2025-年视角)
+### 19.11.2 案例 2：Linkerd 轻量级部署
 
+**场景**：部署轻量级 Linkerd 服务网格
+
+**部署步骤**：
+
+```bash
+# 1. 安装 Linkerd CLI
+curl -fsSL https://run.linkerd.io/install-edge | sh
+
+# 2. 检查前置条件
+linkerd check --pre
+
+# 3. 安装 Linkerd
+linkerd install | kubectl apply -f -
+
+# 4. 验证安装
+linkerd check
+
+# 5. 注入应用
+kubectl get deployment myapp -o yaml | linkerd inject - | kubectl apply -f -
+```
+
+### 19.11.3 案例 3：Istio 金丝雀部署
+
+**场景**：使用 Istio 实现金丝雀部署
+
+**配置步骤**：
+
+```yaml
+# 1. 创建 VirtualService 和 DestinationRule
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: myapp
+spec:
+  hosts:
+    - myapp
+  http:
+    - match:
+        - headers:
+            canary:
+              exact: "true"
+      route:
+        - destination:
+            host: myapp
+            subset: v2
+          weight: 100
+    - route:
+        - destination:
+            host: myapp
+            subset: v1
+          weight: 90
+        - destination:
+            host: myapp
+            subset: v2
+          weight: 10
 ---
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: myapp
+spec:
+  host: myapp
+  subsets:
+    - name: v1
+      labels:
+        version: v1
+    - name: v2
+      labels:
+        version: v2
+```
 
-**最后更新**：2025-11-03 **维护者**：项目团队
+## 19.12 服务网格故障排查
+
+### 19.12.1 常见问题
+
+**问题 1：Sidecar 未注入**:
+
+```bash
+# 检查命名空间标签
+kubectl get namespace default -o yaml | grep istio-injection
+
+# 检查 Pod 是否有 Sidecar
+kubectl get pod <pod-name> -o jsonpath='{.spec.containers[*].name}'
+
+# 手动注入 Sidecar
+kubectl get deployment myapp -o yaml | istioctl kube-inject -f - | kubectl apply -f -
+```
+
+**问题 2：mTLS 连接失败**:
+
+```bash
+# 检查 mTLS 策略
+kubectl get peerauthentication -A
+
+# 检查 DestinationRule
+kubectl get destinationrule -A
+
+# 检查 Sidecar 证书
+kubectl exec <pod-name> -c istio-proxy -- ls -la /etc/certs/
+
+# 查看 Envoy 配置
+istioctl proxy-config bootstrap <pod-name>
+```
+
+**问题 3：流量路由失败**:
+
+```bash
+# 检查 VirtualService
+kubectl get virtualservice -A
+
+# 检查 DestinationRule
+kubectl get destinationrule -A
+
+# 检查 Envoy 路由配置
+istioctl proxy-config route <pod-name>
+
+# 查看 Envoy 日志
+kubectl logs <pod-name> -c istio-proxy
+```
+
+## 19.13 参考

@@ -1302,4 +1302,4 @@ flux reconcile image repository my-app -n flux-system
 
 ---
 
-**最后更新**：2025-11-03 **维护者**：项目团队
+**最后更新**：2025-11-06 **维护者**：项目团队

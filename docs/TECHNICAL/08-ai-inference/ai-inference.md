@@ -2,6 +2,7 @@
 
 ## 📑 目录
 
+- [📑 目录](#-目录)
 - [08.1 文档定位](#081-文档定位)
 - [08.2 AI 推理场景](#082-ai-推理场景)
   - [08.2.1 边缘 AI 推理](#0821-边缘-ai-推理)
@@ -20,7 +21,7 @@
   - [08.5.2 GPU 推理架构](#0852-gpu-推理架构)
   - [08.5.3 GPU 集成论证](#0853-gpu-集成论证)
 - [08.6 WasmEdge 0.14 + Llama2 实战方案（2025）](#086-wasmedge-014--llama2-实战方案2025)
-  - [08.6.0 2025 年最新方案概览](#0860-2025-年最新方案概览)
+  - [08.6.0 2025-11-06 最新方案概览](#0860-2025-年最新方案概览)
 - [08.7 技术场景分析](#087-技术场景分析)
   - [08.7.1 边缘 AI 推理场景](#0871-边缘-ai-推理场景)
   - [08.6.2 云端 AI 推理场景](#0862-云端-ai-推理场景)
@@ -32,7 +33,13 @@
 - [08.9 形式化总结](#089-形式化总结)
   - [08.9.1 AI 推理延迟模型形式化](#0891-ai-推理延迟模型形式化)
   - [08.9.2 AI 推理成本模型形式化](#0892-ai-推理成本模型形式化)
-- [08.10 参考](#0810-参考)
+- [08.10 实际部署案例](#0810-实际部署案例)
+  - [08.10.1 案例 1：WasmEdge + Llama2 推理部署](#08101-案例-1wasmedge--llama2-推理部署)
+  - [08.10.2 案例 2：边缘 AI 推理部署](#08102-案例-2边缘-ai-推理部署)
+  - [08.10.3 案例 3：模型 Wasm 化流程](#08103-案例-3模型-wasm-化流程)
+- [08.11 AI 推理故障排查](#0811-ai-推理故障排查)
+  - [08.11.1 常见问题](#08111-常见问题)
+- [08.12 参考](#0812-参考)
 
 ---
 
@@ -290,7 +297,7 @@ GPU 集成策略:
 
 ## 08.6 WasmEdge 0.14 + Llama2 实战方案（2025）
 
-### 08.6.0 2025 年最新方案概览
+### 08.6.0 2025-11-06 最新方案概览
 
 **WasmEdge 0.14 + Llama2 方案**（2025 年已标准化）：
 
@@ -499,7 +506,209 @@ $$C_{\text{total}} = C_{\text{storage}} + C_{\text{compute}} + C_{\text{transfer
 **优化目标**：
 $$\min_{W} C_{\text{total}} = \min_{W} (C_{\text{storage}} \downarrow + C_{\text{compute}} \downarrow + C_{\text{transfer}} \downarrow)$$
 
-## 08.10 参考
+## 08.10 实际部署案例
+
+### 08.10.1 案例 1：WasmEdge + Llama2 推理部署
+
+**场景**：在 Kubernetes 集群中部署 WasmEdge + Llama2 推理服务
+
+**部署步骤**：
+
+```bash
+# 1. 安装 WasmEdge（如果未安装）
+curl -sSf https://raw.githubusercontent.com/WasmEdge/WasmEdge/master/utils/install.sh | bash
+
+# 2. 创建 RuntimeClass
+kubectl apply -f - <<EOF
+apiVersion: node.k8s.io/v1
+kind: RuntimeClass
+metadata:
+  name: wasmedge
+handler: wasmedge
+EOF
+
+# 3. 部署 Llama2 推理 Pod
+kubectl apply -f - <<EOF
+apiVersion: v1
+kind: Pod
+metadata:
+  name: llama2-inference
+spec:
+  runtimeClassName: wasmedge
+  containers:
+    - name: llama2
+      image: wasmedge/llama2:latest
+      command: ["wasmedge", "--dir", ".", "/llama2.wasm"]
+      resources:
+        requests:
+          memory: "4Gi"
+          cpu: "2"
+        limits:
+          memory: "8Gi"
+          cpu: "4"
+EOF
+```
+
+**GPU 加速配置**（如果有 GPU）：
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: llama2-gpu-inference
+spec:
+  runtimeClassName: wasmedge
+  containers:
+    - name: llama2
+      image: wasmedge/llama2:latest
+      command: ["wasmedge", "--dir", ".", "/llama2.wasm"]
+      resources:
+        requests:
+          memory: "4Gi"
+          cpu: "2"
+          nvidia.com/gpu: 1
+        limits:
+          memory: "8Gi"
+          cpu: "4"
+          nvidia.com/gpu: 1
+```
+
+### 08.10.2 案例 2：边缘 AI 推理部署
+
+**场景**：在 K3s 边缘节点部署 AI 推理服务
+
+**部署步骤**：
+
+```bash
+# 1. 在 K3s 节点上安装 WasmEdge
+curl -sSf https://raw.githubusercontent.com/WasmEdge/WasmEdge/master/utils/install.sh | bash
+
+# 2. 配置 K3s 使用 WasmEdge（K3s 1.30+）
+cat > /etc/rancher/k3s/config.yaml <<EOF
+runtime-class: wasmedge
+EOF
+
+# 3. 部署 AI 推理应用
+kubectl apply -f - <<EOF
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-inference
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ai-inference
+  template:
+    metadata:
+      labels:
+        app: ai-inference
+    spec:
+      runtimeClassName: wasmedge
+      containers:
+        - name: inference
+          image: myregistry.com/ai-model:latest
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "500m"
+            limits:
+              memory: "1Gi"
+              cpu: "1"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ai-inference
+spec:
+  selector:
+    app: ai-inference
+  ports:
+    - port: 8080
+      targetPort: 8080
+EOF
+```
+
+### 08.10.3 案例 3：模型 Wasm 化流程
+
+**场景**：将 ONNX 模型转换为 Wasm 格式
+
+**转换步骤**：
+
+```bash
+# 1. 安装模型转换工具
+pip install onnxruntime-wasm
+
+# 2. 转换 ONNX 模型到 Wasm
+onnx2wasm model.onnx -o model.wasm
+
+# 3. 构建包含模型的 OCI 镜像
+cat > Dockerfile <<EOF
+FROM scratch
+COPY model.wasm /model.wasm
+EOF
+
+docker build -t myregistry.com/ai-model:v1.0.0 .
+
+# 4. 推送镜像
+docker push myregistry.com/ai-model:v1.0.0
+```
+
+## 08.11 AI 推理故障排查
+
+### 08.11.1 常见问题
+
+**问题 1：Wasm 模型加载失败**:
+
+```bash
+# 检查 WasmEdge 版本
+wasmedge --version
+
+# 检查模型文件
+file model.wasm
+
+# 检查 Pod 日志
+kubectl logs <pod-name>
+
+# 检查模型格式
+wasmedge --version
+```
+
+**问题 2：推理延迟过高**:
+
+```bash
+# 检查资源使用
+kubectl top pod <pod-name>
+
+# 检查节点资源
+kubectl describe node <node-name>
+
+# 检查 GPU 使用（如果有 GPU）
+nvidia-smi
+
+# 优化建议：
+# - 使用 GPU 加速
+# - 优化模型大小
+# - 增加资源限制
+```
+
+**问题 3：GPU 无法使用**:
+
+```bash
+# 检查 GPU 节点标签
+kubectl get nodes -l nvidia.com/gpu.present=true
+
+# 检查 GPU 驱动
+nvidia-smi
+
+# 检查 Device Plugin
+kubectl get pods -n kube-system | grep nvidia-device-plugin
+
+# 检查 Pod GPU 请求
+kubectl describe pod <pod-name> | grep -i gpu
+```
+
+## 08.12 参考
 
 **关联文档**：
 
@@ -520,4 +729,4 @@ $$\min_{W} C_{\text{total}} = \min_{W} (C_{\text{storage}} \downarrow + C_{\text
 
 ---
 
-**最后更新**：2025-11-03 **维护者**：项目团队
+**最后更新**：2025-11-06 **维护者**：项目团队

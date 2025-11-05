@@ -2,6 +2,7 @@
 
 ## 📑 目录
 
+- [📑 目录](#-目录)
 - [01.1 文档定位](#011-文档定位)
 - [01.2 Kubernetes 架构](#012-kubernetes-架构)
   - [01.2.1 系统架构全景](#0121-系统架构全景)
@@ -56,7 +57,13 @@
   - [01.13.1 对象模型形式化](#01131-对象模型形式化)
   - [01.13.2 调度决策函数](#01132-调度决策函数)
   - [01.13.3 控制循环收敛定理](#01133-控制循环收敛定理)
-- [01.14 参考](#0114-参考)
+- [01.14 实际部署案例](#0114-实际部署案例)
+  - [01.14.1 案例 1：使用 kubeadm 部署 Kubernetes 集群](#01141-案例-1使用-kubeadm-部署-kubernetes-集群)
+  - [01.14.2 案例 2：部署应用和服务](#01142-案例-2部署应用和服务)
+  - [01.14.3 案例 3：配置 ConfigMap 和 Secret](#01143-案例-3配置-configmap-和-secret)
+- [01.15 Kubernetes 故障排查](#0115-kubernetes-故障排查)
+  - [01.15.1 常见问题](#01151-常见问题)
+- [01.16 参考](#0116-参考)
 
 ---
 
@@ -1383,7 +1390,210 @@ $$\lim_{t \to \infty} |T_t - S| = 0$$
 **证明**：参考
 [2.5.2 控制循环收敛定理](../COGNITIVE/02-principles/principles.md#252-控制循环收敛定理)
 
-## 01.14 参考
+## 01.14 实际部署案例
+
+### 01.14.1 案例 1：使用 kubeadm 部署 Kubernetes 集群
+
+**场景**：使用 kubeadm 部署生产级 Kubernetes 集群
+
+**部署步骤**：
+
+```bash
+# 1. 初始化主节点
+kubeadm init \
+  --pod-network-cidr=10.244.0.0/16 \
+  --apiserver-advertise-address=192.168.1.100
+
+# 2. 配置 kubectl
+mkdir -p $HOME/.kube
+cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+chown $(id -u):$(id -g) $HOME/.kube/config
+
+# 3. 安装网络插件（Flannel）
+kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
+
+# 4. 加入工作节点
+kubeadm join 192.168.1.100:6443 \
+  --token <token> \
+  --discovery-token-ca-cert-hash sha256:<hash>
+```
+
+### 01.14.2 案例 2：部署应用和服务
+
+**场景**：部署完整的应用栈（Deployment + Service + Ingress）
+
+**部署配置**：
+
+```yaml
+# deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+        - name: app
+          image: nginx:alpine
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
+---
+# service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp
+spec:
+  selector:
+    app: myapp
+  ports:
+    - port: 80
+      targetPort: 80
+  type: ClusterIP
+---
+# ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: myapp-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: myapp.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: myapp
+                port:
+                  number: 80
+```
+
+### 01.14.3 案例 3：配置 ConfigMap 和 Secret
+
+**场景**：使用 ConfigMap 和 Secret 管理配置和敏感信息
+
+**配置示例**：
+
+```yaml
+# configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  app.properties: |
+    server.port=8080
+    app.name=myapp
+    app.env=production
+---
+# secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: app-secret
+type: Opaque
+data:
+  username: YWRtaW4= # base64 encoded
+  password: cGFzc3dvcmQ= # base64 encoded
+---
+# pod-with-config.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-pod
+spec:
+  containers:
+    - name: app
+      image: myapp:latest
+      env:
+        - name: DB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: app-secret
+              key: username
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: app-secret
+              key: password
+      volumeMounts:
+        - name: config
+          mountPath: /etc/config
+  volumes:
+    - name: config
+      configMap:
+        name: app-config
+```
+
+## 01.15 Kubernetes 故障排查
+
+### 01.15.1 常见问题
+
+**问题 1：Pod 处于 Pending 状态**:
+
+```bash
+# 检查 Pod 状态
+kubectl get pods
+kubectl describe pod <pod-name>
+
+# 检查节点资源
+kubectl describe nodes
+kubectl top nodes
+
+# 检查调度器日志
+kubectl logs -n kube-system -l component=kube-scheduler
+```
+
+**问题 2：Pod 无法访问 Service**:
+
+```bash
+# 检查 Service 和 Endpoints
+kubectl get svc <service-name>
+kubectl get endpoints <service-name>
+
+# 检查 Pod 标签
+kubectl get pods --show-labels
+
+# 检查 DNS 解析
+kubectl run test-pod --image=busybox --rm -it -- nslookup <service-name>
+```
+
+**问题 3：节点 NotReady**:
+
+```bash
+# 检查节点状态
+kubectl get nodes
+kubectl describe node <node-name>
+
+# 检查 kubelet 状态
+systemctl status kubelet
+journalctl -u kubelet -f
+
+# 检查容器运行时
+systemctl status containerd
+# 或
+systemctl status docker
+```
+
+## 01.16 参考
 
 **关联文档**：
 
@@ -1423,4 +1633,4 @@ $$\lim_{t \to \infty} |T_t - S| = 0$$
 
 ---
 
-**最后更新**：2025-11-03 **维护者**：项目团队
+**最后更新**：2025-11-06 **维护者**：项目团队

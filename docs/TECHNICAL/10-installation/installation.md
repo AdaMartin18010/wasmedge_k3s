@@ -969,4 +969,4 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.containers[*].resources}'
 
 ---
 
-**最后更新**：2025-11-03 **维护者**：项目团队
+**最后更新**：2025-11-06 **维护者**：项目团队

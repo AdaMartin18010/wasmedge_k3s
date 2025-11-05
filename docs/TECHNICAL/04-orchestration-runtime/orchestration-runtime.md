@@ -2,6 +2,7 @@
 
 ## 📑 目录
 
+- [📑 目录](#-目录)
 - [04.1 文档定位](#041-文档定位)
 - [04.2 CRI：容器运行时接口](#042-cri容器运行时接口)
   - [04.2.1 CRI 架构](#0421-cri-架构)
@@ -29,7 +30,16 @@
 - [04.8 形式化总结](#048-形式化总结)
   - [04.8.1 CRI 模型形式化](#0481-cri-模型形式化)
   - [04.8.2 RuntimeClass 模型形式化](#0482-runtimeclass-模型形式化)
-- [04.9 参考](#049-参考)
+- [04.9 实际部署案例](#049-实际部署案例)
+  - [04.9.1 案例 1：混合工作负载配置（Linux + Wasm）](#0491-案例-1混合工作负载配置linux--wasm)
+  - [04.9.2 案例 2：K3s 配置 WasmEdge 运行时](#0492-案例-2k3s-配置-wasmedge-运行时)
+  - [04.9.3 案例 3：节点标签和 RuntimeClass 调度](#0493-案例-3节点标签和-runtimeclass-调度)
+- [04.10 故障排查](#0410-故障排查)
+  - [04.10.1 常见问题](#04101-常见问题)
+- [04.11 最佳实践](#0411-最佳实践)
+  - [04.11.1 RuntimeClass 配置最佳实践](#04111-runtimeclass-配置最佳实践)
+  - [04.11.2 多运行时管理最佳实践](#04112-多运行时管理最佳实践)
+- [04.12 参考](#0412-参考)
 
 ---
 
@@ -453,7 +463,222 @@ $$
 
 其中 $P$ 是 Pod，$N$ 是节点。
 
-## 04.9 参考
+## 04.9 实际部署案例
+
+### 04.9.1 案例 1：混合工作负载配置（Linux + Wasm）
+
+**场景**：集群中同时运行传统 Linux 容器和 Wasm 容器
+
+**配置步骤**：
+
+```bash
+# 1. 配置 containerd 支持多个运行时
+cat > /etc/containerd/config.toml <<EOF
+[plugins."io.containerd.grpc.v1.cri".containerd.runtimes]
+  [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+    runtime_type = "io.containerd.runc.v2"
+  [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.crun-wasm]
+    runtime_type = "io.containerd.runc.v2"
+    [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.crun-wasm.options]
+      BinaryName = "crun"
+      Root = "/run/containerd/crun-wasm"
+EOF
+
+# 2. 创建 RuntimeClass
+kubectl apply -f - <<EOF
+apiVersion: node.k8s.io/v1
+kind: RuntimeClass
+metadata:
+  name: crun-wasm
+handler: crun-wasm
+EOF
+
+# 3. 重启 containerd
+systemctl restart containerd
+```
+
+**使用示例**：
+
+```yaml
+# Linux 容器 Pod（默认）
+apiVersion: v1
+kind: Pod
+metadata:
+  name: linux-pod
+spec:
+  containers:
+    - name: app
+      image: nginx:latest
+
+---
+# Wasm 容器 Pod（指定 RuntimeClass）
+apiVersion: v1
+kind: Pod
+metadata:
+  name: wasm-pod
+spec:
+  runtimeClassName: crun-wasm
+  containers:
+    - name: app
+      image: wasm-app:latest
+```
+
+### 04.9.2 案例 2：K3s 配置 WasmEdge 运行时
+
+**场景**：在 K3s 集群中配置 WasmEdge 运行时
+
+**配置步骤**：
+
+```bash
+# 1. 安装 crun（支持 Wasm）
+curl -fsSL https://github.com/containers/crun/releases/download/1.9/crun-1.9-linux-amd64 -o /usr/local/bin/crun
+chmod +x /usr/local/bin/crun
+
+# 2. 安装 WasmEdge
+curl -sSf https://raw.githubusercontent.com/WasmEdge/WasmEdge/master/utils/install.sh | bash
+
+# 3. 配置 K3s 使用 crun（支持 Wasm）
+cat > /etc/systemd/system/k3s.service.d/override.conf <<EOF
+[Service]
+ExecStart=
+ExecStart=/usr/local/bin/k3s \
+  server \
+  --container-runtime-endpoint=unix:///run/containerd/containerd.sock \
+  --runtime-class=crun-wasm
+EOF
+
+# 4. 重启 K3s
+systemctl daemon-reload
+systemctl restart k3s
+```
+
+**创建 RuntimeClass**：
+
+```yaml
+apiVersion: node.k8s.io/v1
+kind: RuntimeClass
+metadata:
+  name: crun-wasm
+handler: crun-wasm
+scheduling:
+  nodeSelector:
+    kubernetes.io/arch: amd64
+```
+
+### 04.9.3 案例 3：节点标签和 RuntimeClass 调度
+
+**场景**：根据节点标签选择不同的运行时
+
+**配置步骤**：
+
+```bash
+# 1. 给节点打标签
+kubectl label node node1 runtime=wasm
+kubectl label node node2 runtime=linux
+
+# 2. 创建 Wasm RuntimeClass（只调度到 wasm 节点）
+kubectl apply -f - <<EOF
+apiVersion: node.k8s.io/v1
+kind: RuntimeClass
+metadata:
+  name: crun-wasm
+handler: crun-wasm
+scheduling:
+  nodeSelector:
+    runtime: wasm
+EOF
+
+# 3. 创建 Linux RuntimeClass（只调度到 linux 节点）
+kubectl apply -f - <<EOF
+apiVersion: node.k8s.io/v1
+kind: RuntimeClass
+metadata:
+  name: runc-linux
+handler: runc
+scheduling:
+  nodeSelector:
+    runtime: linux
+EOF
+```
+
+## 04.10 故障排查
+
+### 04.10.1 常见问题
+
+**问题 1：RuntimeClass 未找到**:
+
+```bash
+# 检查 RuntimeClass 是否存在
+kubectl get runtimeclass
+
+# 检查节点是否支持该运行时
+kubectl describe node <node-name> | grep runtime
+
+# 检查 containerd 配置
+cat /etc/containerd/config.toml | grep -A 10 runtimes
+```
+
+**问题 2：Wasm Pod 启动失败**:
+
+```bash
+# 检查 crun 是否安装
+which crun
+crun --version
+
+# 检查 WasmEdge 是否安装
+which wasmedge
+wasmedge --version
+
+# 检查 Pod 事件
+kubectl describe pod <pod-name> | grep -A 10 Events
+
+# 检查 containerd 日志
+journalctl -u containerd -f
+```
+
+**问题 3：运行时切换失败**:
+
+```bash
+# 检查 containerd 配置
+cat /etc/containerd/config.toml
+
+# 检查 RuntimeClass 配置
+kubectl get runtimeclass -o yaml
+
+# 重启 containerd
+systemctl restart containerd
+
+# 验证运行时
+crictl info | grep runtime
+```
+
+## 04.11 最佳实践
+
+### 04.11.1 RuntimeClass 配置最佳实践
+
+**配置建议**：
+
+- ✅ 生产环境使用明确的 RuntimeClass 名称
+- ✅ 为不同运行时设置节点选择器
+- ✅ 定期检查运行时配置
+- ✅ 文档化运行时选择策略
+
+**性能优化**：
+
+- ✅ Wasm 容器使用 crun 运行时（性能更好）
+- ✅ 传统容器使用 runc 运行时（兼容性好）
+- ✅ 根据工作负载选择合适的运行时
+
+### 04.11.2 多运行时管理最佳实践
+
+**管理策略**：
+
+- ✅ 使用节点标签区分运行时
+- ✅ 使用 RuntimeClass 明确指定运行时
+- ✅ 监控不同运行时的资源使用
+- ✅ 定期评估运行时的性能
+
+## 04.12 参考
 
 **关联文档**：
 
@@ -474,4 +699,4 @@ $$
 
 ---
 
-**最后更新**：2025-11-03 **维护者**：项目团队
+**最后更新**：2025-11-06 **维护者**：项目团队

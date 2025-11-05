@@ -2,6 +2,7 @@
 
 ## 📑 目录
 
+- [📑 目录](#-目录)
 - [03.1 文档定位](#031-文档定位)
 - [03.2 核心定位](#032-核心定位)
   - [03.2.1 WasmEdge 是什么？](#0321-wasmedge-是什么)
@@ -61,7 +62,13 @@
   - [03.14.1 路线模型形式化](#03141-路线模型形式化)
   - [03.14.2 性能模型形式化](#03142-性能模型形式化)
   - [03.14.3 路线性能对比模型](#03143-路线性能对比模型)
-- [03.15 参考](#0315-参考)
+- [03.15 实际部署案例](#0315-实际部署案例)
+  - [03.15.1 案例 1：使用 crun 部署 Wasm 应用（生产推荐）](#03151-案例-1使用-crun-部署-wasm-应用生产推荐)
+  - [03.15.2 案例 2：使用 runwasi 部署 Wasm 应用（K8s 1.30+）](#03152-案例-2使用-runwasi-部署-wasm-应用k8s-130)
+  - [03.15.3 案例 3：Rust 应用编译为 Wasm 并部署](#03153-案例-3rust-应用编译为-wasm-并部署)
+- [03.16 WasmEdge 故障排查](#0316-wasmedge-故障排查)
+  - [03.16.1 常见问题](#03161-常见问题)
+- [03.17 参考](#0317-参考)
 
 ---
 
@@ -70,12 +77,12 @@
 本文档深入解析 WasmEdge 与 Docker/K8s/K3s 的集成方式、技术原理和最佳实践，以及不
 同技术场景下的决策依据和决策思路。
 
-**当前版本（2025）**：
+**当前版本（2025-11-06）**：
 
-- **WasmEdge 版本**：0.14.0（2024-12 发布，2025 年稳定版）
+- **WasmEdge 版本**：0.14.0（2024-12 发布，2025-11-06 稳定版）
 - **关键特性**：内置 Llama2/7B 插件，GPU 加速推理，推理延迟比 PyTorch 容器 ↓60%
 - **集成支持**：K8s 1.30 RuntimeClass=wasm 原生支持，K3s 1.30 --wasm flag
-- **生产验证**：浪潮云 10 万台边缘节点，冷启动 ≤6 ms
+- **生产验证**：浪潮云 10 万台边缘节点，冷启动 ≤6 ms（2025-11-06）
 
 **文档结构**：
 
@@ -1047,7 +1054,212 @@ $$
 
 其中性能指标为 {体积, 启动时间, 内存, 密度}。
 
-## 03.15 参考
+## 03.15 实际部署案例
+
+### 03.15.1 案例 1：使用 crun 部署 Wasm 应用（生产推荐）
+
+**场景**：在生产环境使用 crun 自动识别 Wasm 镜像
+
+**部署步骤**：
+
+```bash
+# 1. 安装 crun（支持 Wasm）
+curl -fsSL https://github.com/containers/crun/releases/download/1.9/crun-1.9-linux-amd64 -o /usr/local/bin/crun
+chmod +x /usr/local/bin/crun
+
+# 2. 配置 containerd 使用 crun
+cat >> /etc/containerd/config.toml <<EOF
+[plugins."io.containerd.grpc.v1.cri".containerd.runtimes]
+  [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.crun-wasm]
+    runtime_type = "io.containerd.runc.v2"
+    [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.crun-wasm.options]
+      BinaryName = "crun"
+EOF
+
+# 3. 重启 containerd
+systemctl restart containerd
+
+# 4. 创建 RuntimeClass
+kubectl apply -f - <<EOF
+apiVersion: node.k8s.io/v1
+kind: RuntimeClass
+metadata:
+  name: crun-wasm
+handler: crun-wasm
+EOF
+
+# 5. 构建带 OCI 注释的 Wasm 镜像
+cat > Dockerfile <<EOF
+FROM scratch
+COPY app.wasm /app.wasm
+EOF
+
+docker build --annotation "module.wasm.image/variant=compat-smart" -t wasm-app:latest .
+
+# 6. 部署 Wasm Pod
+kubectl apply -f - <<EOF
+apiVersion: v1
+kind: Pod
+metadata:
+  name: wasm-app
+spec:
+  runtimeClassName: crun-wasm
+  containers:
+    - name: app
+      image: wasm-app:latest
+      command: ["/app.wasm"]
+EOF
+```
+
+### 03.15.2 案例 2：使用 runwasi 部署 Wasm 应用（K8s 1.30+）
+
+**场景**：在 Kubernetes 1.30+ 集群中使用 runwasi 部署 Wasm 应用
+
+**部署步骤**：
+
+```bash
+# 1. 安装 containerd-shim-runwasi
+wget https://github.com/containerd/runwasi/releases/download/v0.4.0/containerd-shim-runwasi-v0.4.0-linux-amd64.tar.gz
+tar -xzf containerd-shim-runwasi-v0.4.0-linux-amd64.tar.gz
+sudo mv containerd-shim-runwasi-v0.4.0-linux-amd64 /usr/local/bin/containerd-shim-runwasi-v1
+sudo chmod +x /usr/local/bin/containerd-shim-runwasi-v1
+
+# 2. 配置 containerd
+cat >> /etc/containerd/config.toml <<EOF
+[plugins."io.containerd.grpc.v1.cri".containerd.runtimes]
+  [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runwasi-wasm]
+    runtime_type = "io.containerd.runwasi.v1"
+EOF
+
+systemctl restart containerd
+
+# 3. 创建 RuntimeClass
+kubectl apply -f - <<EOF
+apiVersion: node.k8s.io/v1
+kind: RuntimeClass
+metadata:
+  name: runwasi-wasm
+handler: runwasi-wasm
+EOF
+
+# 4. 部署 Wasm Pod（K8s 1.30+ 原生支持）
+kubectl apply -f - <<EOF
+apiVersion: v1
+kind: Pod
+metadata:
+  name: wasm-app
+spec:
+  runtimeClassName: runwasi-wasm
+  containers:
+    - name: app
+      image: wasm-app:latest
+EOF
+```
+
+### 03.15.3 案例 3：Rust 应用编译为 Wasm 并部署
+
+**场景**：将 Rust 应用编译为 Wasm 并部署到 Kubernetes
+
+**编译步骤**：
+
+```bash
+# 1. 安装 Rust 和 wasm32-wasi target
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+rustup target add wasm32-wasi
+
+# 2. 编译 Rust 应用
+cargo build --target wasm32-wasi --release
+
+# 3. 构建 OCI 镜像
+cat > Dockerfile <<EOF
+FROM scratch
+COPY target/wasm32-wasi/release/myapp.wasm /myapp.wasm
+EOF
+
+docker build --annotation "module.wasm.image/variant=compat-smart" -t myregistry.com/myapp:latest .
+
+# 4. 推送镜像
+docker push myregistry.com/myapp:latest
+
+# 5. 部署到 Kubernetes
+kubectl apply -f - <<EOF
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      runtimeClassName: crun-wasm
+      containers:
+        - name: app
+          image: myregistry.com/myapp:latest
+          command: ["/myapp.wasm"]
+EOF
+```
+
+## 03.16 WasmEdge 故障排查
+
+### 03.16.1 常见问题
+
+**问题 1：Wasm Pod 无法启动**:
+
+```bash
+# 检查 RuntimeClass
+kubectl get runtimeclass
+
+# 检查 Pod 事件
+kubectl describe pod <pod-name>
+
+# 检查 WasmEdge 安装
+wasmedge --version
+
+# 检查 containerd 配置
+cat /etc/containerd/config.toml | grep -A 10 runtimes
+
+# 检查 crun 或 runwasi
+which crun
+crun --version
+# 或
+which containerd-shim-runwasi-v1
+```
+
+**问题 2：镜像无法识别为 Wasm**:
+
+```bash
+# 检查镜像 OCI 注释
+docker inspect <image-name> | grep -i wasm
+
+# 检查镜像格式
+docker inspect <image-name> | jq '.[0].Config.Labels'
+
+# 确保使用正确的 OCI 注释
+docker build --annotation "module.wasm.image/variant=compat-smart" -t <image-name> .
+```
+
+**问题 3：Wasm 应用性能问题**:
+
+```bash
+# 检查资源使用
+kubectl top pod <pod-name>
+
+# 检查 WasmEdge 版本（确保使用最新版本）
+wasmedge --version
+
+# 优化建议：
+# - 使用 WasmEdge 0.14.0+
+# - 优化 Wasm 字节码大小
+# - 使用 GPU 加速（如果需要）
+```
+
+## 03.17 参考
 
 **关联文档**：
 
@@ -1073,6 +1285,6 @@ $$
 
 ---
 
-**最后更新**：2025-11-03 **维护者**：项目团队
+**最后更新**：2025-11-06 **维护者**：项目团队
 
 <!-- cSpell:ignore wasmedge WasmEdge runc crun runwasi containerd WASI OCI Kubernetes K8s K3s RuntimeClass wasm wasm32 -->

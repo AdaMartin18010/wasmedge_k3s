@@ -2,6 +2,7 @@
 
 ## 📑 目录
 
+- [📑 目录](#-目录)
 - [07.1 文档定位](#071-文档定位)
 - [07.2 边缘计算场景](#072-边缘计算场景)
   - [07.2.1 5G MEC 场景（2025 年生产案例：浪潮云）](#0721-5g-mec-场景2025-年生产案例浪潮云)
@@ -32,7 +33,13 @@
 - [07.8 形式化总结](#078-形式化总结)
   - [07.8.1 边缘场景模型形式化](#0781-边缘场景模型形式化)
   - [07.8.2 Serverless 场景模型形式化](#0782-serverless-场景模型形式化)
-- [07.9 参考](#079-参考)
+- [07.9 实际部署案例](#079-实际部署案例)
+  - [07.9.1 案例 1：5G MEC 边缘节点部署](#0791-案例-15g-mec-边缘节点部署)
+  - [07.9.2 案例 2：Serverless 函数部署](#0792-案例-2serverless-函数部署)
+  - [07.9.3 案例 3：离线自治边缘节点配置](#0793-案例-3离线自治边缘节点配置)
+- [07.10 边缘和 Serverless 故障排查](#0710-边缘和-serverless-故障排查)
+  - [07.10.1 常见问题](#07101-常见问题)
+- [07.11 参考](#0711-参考)
 
 ---
 
@@ -567,25 +574,225 @@ $$
 - $D$ = 部署密度（Density）
 - $A$ = 自动扩缩容（Auto-scaling）
 
-## 07.9 参考
+## 07.9 实际部署案例
 
-**关联文档**：
+### 07.9.1 案例 1：5G MEC 边缘节点部署
 
-- **[10. 技术决策模型](../../COGNITIVE/10-decision-models/decision-models.md)** -
-  技术选型决策框架
-- **[10. 快速参考指南](../../COGNITIVE/10-decision-models/QUICK-REFERENCE.md)** -
-  设备访问（USB/PCI/GPU）和内核特性决策快速参考
-- **[10. 一致性检查报告](../../COGNITIVE/10-decision-models/CONSISTENCY-REPORT.md)** -
-  文档一致性检查与 Wikipedia 标准对齐
-- **[28. 架构框架](../28-architecture-framework/architecture-framework.md)** -
-  多维度架构体系与技术规范（场景架构、业务架构等）
-- **[12. AI 推理](../08-ai-inference/ai-inference.md)** - AI 推理应用
-- **[02. K3s](../02-k3s/k3s.md)** - K3s 轻量级架构
-- **[03. WasmEdge](../03-wasm-edge/wasmedge.md)** - WasmEdge 集成指南
-- **[15. 安装部署](../10-installation/installation.md)** - 安装和部署指南
+**场景**：在 5G MEC 边缘节点部署 K3s + WasmEdge
 
-> 完整参考列表见 [REFERENCES.md](../REFERENCES.md)
+**部署步骤**：
 
+```bash
+# 1. 安装 K3s（带 Wasm 支持）
+curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--wasm" sh -
+
+# 2. 验证 WasmEdge 运行时
+kubectl get runtimeclass
+
+# 3. 部署边缘应用
+kubectl apply -f - <<EOF
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: edge-app
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: edge-app
+  template:
+    metadata:
+      labels:
+        app: edge-app
+    spec:
+      runtimeClassName: wasmedge
+      containers:
+        - name: app
+          image: myregistry.com/edge-app:latest
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
+EOF
+```
+
+### 07.9.2 案例 2：Serverless 函数部署
+
+**场景**：部署 Serverless 函数，支持自动扩缩容
+
+**部署步骤**：
+
+```bash
+# 1. 部署函数应用
+kubectl apply -f - <<EOF
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: serverless-function
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: serverless-function
+  template:
+    metadata:
+      labels:
+        app: serverless-function
+    spec:
+      runtimeClassName: wasmedge
+      containers:
+        - name: function
+          image: myregistry.com/function:latest
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: serverless-function
+spec:
+  selector:
+    app: serverless-function
+  ports:
+    - port: 8080
+      targetPort: 8080
+---
+# HPA 自动扩缩容
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: serverless-function-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: serverless-function
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: 80
+EOF
+```
 
-**最后更新**：2025-11-03 **维护者**：项目团队
+### 07.9.3 案例 3：离线自治边缘节点配置
+
+**场景**：配置边缘节点支持离线自治
+
+**配置步骤**：
+
+```bash
+# 1. 配置 K3s 使用本地存储（sqlite）
+cat > /etc/rancher/k3s/config.yaml <<EOF
+datastore-endpoint: sqlite:///var/lib/rancher/k3s/server/db/state.db
+flannel-backend: vxlan
+EOF
+
+# 2. 配置本地镜像缓存
+cat > /etc/rancher/k3s/registries.yaml <<EOF
+mirrors:
+  docker.io:
+    endpoint:
+      - "http://local-registry:5000"
+EOF
+
+# 3. 部署离线应用
+kubectl apply -f - <<EOF
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: offline-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: offline-app
+  template:
+    metadata:
+      labels:
+        app: offline-app
+    spec:
+      runtimeClassName: wasmedge
+      containers:
+        - name: app
+          image: local-registry:5000/offline-app:latest
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "200m"
+EOF
+```
+
+## 07.10 边缘和 Serverless 故障排查
+
+### 07.10.1 常见问题
+
+**问题 1：Wasm Pod 冷启动失败**:
+
+```bash
+# 检查 WasmEdge 运行时
+kubectl get runtimeclass
+
+# 检查 Pod 事件
+kubectl describe pod <pod-name>
+
+# 检查 WasmEdge 安装
+wasmedge --version
+
+# 检查镜像格式
+docker inspect <image-name> | grep -i wasm
+```
+
+**问题 2：边缘节点离线后无法工作**:
+
+```bash
+# 检查 K3s 存储配置
+cat /etc/rancher/k3s/config.yaml | grep datastore
+
+# 检查 etcd/sqlite 状态
+kubectl get pods -n kube-system | grep -E 'etcd|sqlite'
+
+# 检查网络连接
+ping <central-cluster-api-server>
+
+# 验证离线能力
+# 断开网络后，检查 Pod 是否仍然运行
+```
+
+**问题 3：Serverless 函数扩缩容不工作**:
+
+```bash
+# 检查 HPA 状态
+kubectl get hpa
+kubectl describe hpa <hpa-name>
+
+# 检查 Metrics Server
+kubectl get pods -n kube-system | grep metrics-server
+
+# 检查资源使用
+kubectl top pod <pod-name>
+
+# 检查 HPA 事件
+kubectl get events --field-selector involvedObject.name=<hpa-name>
+```
+
+## 07.11 参考

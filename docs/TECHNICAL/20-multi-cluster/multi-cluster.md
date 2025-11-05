@@ -1061,4 +1061,4 @@ kubectl logs -n fleet-system deployment/fleet-controller -f
 
 ---
 
-**最后更新**：2025-11-03 **维护者**：项目团队
+**最后更新**：2025-11-06 **维护者**：项目团队

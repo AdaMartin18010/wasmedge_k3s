@@ -2,6 +2,7 @@
 
 ## 📑 目录
 
+- [📑 目录](#-目录)
 - [12.1 文档定位](#121-文档定位)
 - [12.2 网络技术栈全景](#122-网络技术栈全景)
   - [12.2.1 网络层次结构](#1221-网络层次结构)
@@ -63,7 +64,13 @@
   - [12.13.1 CNI 接口规范](#12131-cni-接口规范)
   - [12.13.2 Service API 规范](#12132-service-api-规范)
   - [12.13.3 Ingress API 规范](#12133-ingress-api-规范)
-- [12.14 参考](#1214-参考)
+- [12.14 实际部署案例](#1214-实际部署案例)
+  - [12.14.1 案例 1：K3s 部署 Flannel CNI](#12141-案例-1k3s-部署-flannel-cni)
+  - [12.14.2 案例 2：配置 Nginx Ingress Controller](#12142-案例-2配置-nginx-ingress-controller)
+  - [12.14.3 案例 3：配置 NetworkPolicy 网络隔离](#12143-案例-3配置-networkpolicy-网络隔离)
+- [12.15 网络故障排查](#1215-网络故障排查)
+  - [12.15.1 常见问题](#12151-常见问题)
+- [12.16 参考](#1216-参考)
 
 ---
 
@@ -1171,7 +1178,203 @@ graph TB
 | **Ingress**      | networking.k8s.io/v1 | HTTP/HTTPS 路由    |
 | **IngressClass** | networking.k8s.io/v1 | Ingress 控制器类型 |
 
-## 12.14 参考
+## 12.14 实际部署案例
+
+### 12.14.1 案例 1：K3s 部署 Flannel CNI
+
+**场景**：在 K3s 集群中部署 Flannel CNI
+
+**部署步骤**：
+
+```bash
+# 1. K3s 默认自带 Flannel，但可以手动配置
+cat > /etc/rancher/k3s/config.yaml <<EOF
+flannel-backend: vxlan
+EOF
+
+# 2. 重启 K3s
+systemctl restart k3s
+
+# 3. 验证 Flannel 部署
+kubectl get pods -n kube-system | grep flannel
+kubectl get nodes -o wide
+```
+
+**Flannel 配置示例**：
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kube-flannel-cfg
+  namespace: kube-system
+data:
+  cni-conf.json: |
+    {
+      "name": "cbr0",
+      "cniVersion": "0.3.1",
+      "plugins": [
+        {
+          "type": "flannel",
+          "delegate": {
+            "hairpinMode": true,
+            "isDefaultGateway": true
+          }
+        },
+        {
+          "type": "portmap",
+          "capabilities": {
+            "portMappings": true
+          }
+        }
+      ]
+    }
+```
+
+### 12.14.2 案例 2：配置 Nginx Ingress Controller
+
+**场景**：在集群中部署 Nginx Ingress Controller
+
+**部署步骤**：
+
+```bash
+# 1. 使用 Helm 部署 Nginx Ingress
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm repo update
+
+helm install ingress-nginx ingress-nginx/ingress-nginx \
+  --namespace ingress-nginx \
+  --create-namespace \
+  --set controller.service.type=LoadBalancer
+
+# 2. 验证部署
+kubectl get pods -n ingress-nginx
+kubectl get svc -n ingress-nginx
+
+# 3. 创建 Ingress 资源
+kubectl apply -f - <<EOF
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: myapp-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: myapp.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: myapp
+                port:
+                  number: 80
+EOF
+```
+
+### 12.14.3 案例 3：配置 NetworkPolicy 网络隔离
+
+**场景**：使用 NetworkPolicy 实现 Pod 网络隔离
+
+**NetworkPolicy 配置**：
+
+```yaml
+# 允许所有 Pod 访问 CoreDNS
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-dns
+spec:
+  podSelector: {}
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              name: kube-system
+      ports:
+        - protocol: UDP
+          port: 53
+
+---
+# 只允许特定 Pod 访问数据库
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: db-access
+spec:
+  podSelector:
+    matchLabels:
+      app: database
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: backend
+      ports:
+        - protocol: TCP
+          port: 5432
+```
+
+## 12.15 网络故障排查
+
+### 12.15.1 常见问题
+
+**问题 1：Pod 无法访问 Service**:
+
+```bash
+# 检查 Service 和 Endpoints
+kubectl get svc myapp
+kubectl get endpoints myapp
+
+# 检查 Pod 标签是否匹配
+kubectl get pods -l app=myapp
+
+# 检查 DNS 解析
+kubectl run test-pod --image=busybox --rm -it -- nslookup myapp.default.svc.cluster.local
+
+# 检查网络策略
+kubectl get networkpolicy -A
+```
+
+**问题 2：跨节点 Pod 通信失败**:
+
+```bash
+# 检查 CNI 插件状态
+kubectl get pods -n kube-system | grep -E 'flannel|calico|cilium'
+
+# 检查节点路由表
+ip route show
+
+# 检查 CNI 配置
+cat /etc/cni/net.d/*.conf
+
+# 检查 Pod 网络接口
+kubectl exec <pod-name> -- ip addr
+```
+
+**问题 3：Ingress 无法访问**:
+
+```bash
+# 检查 Ingress Controller
+kubectl get pods -n ingress-nginx
+kubectl logs -n ingress-nginx deployment/ingress-nginx-controller
+
+# 检查 Ingress 资源
+kubectl describe ingress myapp-ingress
+
+# 检查 Service
+kubectl get svc -n ingress-nginx
+
+# 检查防火墙规则
+iptables -L -n | grep ingress
+```
+
+## 12.16 参考
 
 **关联文档**：
 
@@ -1219,4 +1422,4 @@ graph TB
 
 ---
 
-**最后更新**：2025-11-03 **维护者**：项目团队
+**最后更新**：2025-11-06 **维护者**：项目团队

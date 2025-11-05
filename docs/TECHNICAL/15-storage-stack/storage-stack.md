@@ -2,6 +2,7 @@
 
 ## 📑 目录
 
+- [📑 目录](#-目录)
 - [15.1 文档定位](#151-文档定位)
 - [15.2 存储技术栈全景](#152-存储技术栈全景)
   - [15.2.1 存储层次结构](#1521-存储层次结构)
@@ -56,7 +57,13 @@
   - [15.11.1 CSI 接口规范](#15111-csi-接口规范)
   - [15.11.2 Storage API 规范](#15112-storage-api-规范)
   - [15.11.3 VolumeSnapshot API 规范](#15113-volumesnapshot-api-规范)
-- [15.12 参考](#1512-参考)
+- [15.12 实际部署案例](#1512-实际部署案例)
+  - [15.12.1 案例 1：K3s 配置本地存储](#15121-案例-1k3s-配置本地存储)
+  - [15.12.2 案例 2：配置 NFS 存储](#15122-案例-2配置-nfs-存储)
+  - [15.12.3 案例 3：配置 Ceph RBD 存储](#15123-案例-3配置-ceph-rbd-存储)
+- [15.13 存储故障排查](#1513-存储故障排查)
+  - [15.13.1 常见问题](#15131-常见问题)
+- [15.14 参考](#1514-参考)
 
 ---
 
@@ -1139,27 +1146,192 @@ driver: rbd.csi.ceph.com
 deletionPolicy: Delete
 ```
 
-## 15.12 参考
+## 15.12 实际部署案例
 
-**关联文档**：
+### 15.12.1 案例 1：K3s 配置本地存储
 
-- **[28. 架构框架](../28-architecture-framework/architecture-framework.md)** -
-  多维度架构体系与技术规范（技术架构、数据架构等）
-- **[01. Kubernetes](../01-kubernetes/kubernetes.md)** - Kubernetes 架构与实践
+**场景**：在 K3s 集群中配置本地存储（Local Path Provisioner）
 
-**外部参考**：
+**部署步骤**：
 
-- [Kubernetes 存储文档](https://kubernetes.io/docs/concepts/storage/)
-- [CSI 规范](https://github.com/container-storage-interface/spec)
-- [NFS CSI Driver](https://github.com/kubernetes-csi/csi-driver-nfs)
-- [Ceph CSI Driver](https://github.com/ceph/ceph-csi)
-- [Longhorn 文档](https://longhorn.io/docs/)
-- [Local Path Provisioner](https://github.com/rancher/local-path-provisioner)
-- [AWS EBS CSI Driver](https://github.com/kubernetes-sigs/aws-ebs-csi-driver)
+```bash
+# 1. K3s 自带 Local Path Provisioner，可以直接使用
+kubectl get storageclass
 
-- [Azure Disk CSI Driver](https://github.com/kubernetes-sigs/azuredisk-csi-driver)
-- [GCP PD CSI Driver](https://github.com/kubernetes-sigs/gcp-compute-persistent-disk-csi-driver)
+# 2. 创建使用本地存储的 PVC
+kubectl apply -f - <<EOF
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: local-pvc
+spec:
+  storageClassName: local-path
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+EOF
 
----
+# 3. 在 Pod 中使用 PVC
+kubectl apply -f - <<EOF
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-with-storage
+spec:
+  containers:
+    - name: app
+      image: nginx:latest
+      volumeMounts:
+        - name: data
+          mountPath: /data
+  volumes:
+    - name: data
+      persistentVolumeClaim:
+        claimName: local-pvc
+EOF
+```
 
-**最后更新**：2025-11-03 **维护者**：项目团队
+### 15.12.2 案例 2：配置 NFS 存储
+
+**场景**：在集群中配置 NFS CSI 驱动
+
+**部署步骤**：
+
+```bash
+# 1. 安装 NFS CSI Driver
+helm repo add csi-driver-nfs https://raw.githubusercontent.com/kubernetes-csi/csi-driver-nfs/master/charts
+helm repo update
+
+helm install csi-driver-nfs csi-driver-nfs/csi-driver-nfs \
+  --namespace kube-system \
+  --set kubeletDir=/var/lib/rancher/k3s/agent/kubelet
+
+# 2. 创建 StorageClass
+kubectl apply -f - <<EOF
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: nfs-csi
+provisioner: nfs.csi.k8s.io
+parameters:
+  server: nfs-server.example.com
+  share: /exports
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+EOF
+
+# 3. 创建 PVC
+kubectl apply -f - <<EOF
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-pvc
+spec:
+  storageClassName: nfs-csi
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 100Gi
+EOF
+```
+
+### 15.12.3 案例 3：配置 Ceph RBD 存储
+
+**场景**：在集群中配置 Ceph RBD CSI 驱动
+
+**部署步骤**：
+
+```bash
+# 1. 创建 Ceph 认证 Secret
+kubectl create secret generic csi-rbd-secret \
+  --from-literal=userID=admin \
+  --from-literal=userKey=$(ceph auth get-key client.admin) \
+  --type=kubernetes.io/rbd
+
+# 2. 部署 Ceph CSI Driver
+kubectl apply -f https://raw.githubusercontent.com/ceph/ceph-csi/master/deploy/rbd/kubernetes/csi-rbdplugin.yaml
+
+# 3. 创建 StorageClass
+kubectl apply -f - <<EOF
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ceph-rbd
+provisioner: rbd.csi.ceph.com
+parameters:
+  clusterID: ceph-cluster
+  pool: rbd
+  imageFormat: "2"
+  imageFeatures: layering
+  csi.storage.k8s.io/provisioner-secret-name: csi-rbd-secret
+  csi.storage.k8s.io/provisioner-secret-namespace: default
+  csi.storage.k8s.io/controller-expand-secret-name: csi-rbd-secret
+  csi.storage.k8s.io/controller-expand-secret-namespace: default
+  csi.storage.k8s.io/node-stage-secret-name: csi-rbd-secret
+  csi.storage.k8s.io/node-stage-secret-namespace: default
+reclaimPolicy: Delete
+allowVolumeExpansion: true
+volumeBindingMode: Immediate
+EOF
+```
+
+## 15.13 存储故障排查
+
+### 15.13.1 常见问题
+
+**问题 1：PVC 无法绑定**:
+
+```bash
+# 检查 PVC 状态
+kubectl get pvc
+kubectl describe pvc <pvc-name>
+
+# 检查 PV 状态
+kubectl get pv
+kubectl describe pv <pv-name>
+
+# 检查 StorageClass
+kubectl get storageclass
+kubectl describe storageclass <storageclass-name>
+
+# 检查 CSI Driver
+kubectl get pods -n kube-system | grep csi
+kubectl logs -n kube-system <csi-driver-pod>
+```
+
+**问题 2：Pod 无法挂载卷**:
+
+```bash
+# 检查 Pod 状态
+kubectl describe pod <pod-name>
+
+# 检查卷挂载
+kubectl get pod <pod-name> -o yaml | grep -A 10 volumes
+
+# 检查节点上的挂载点
+kubectl debug node/<node-name> -it --image=busybox -- mount | grep kubelet
+
+# 检查 CSI Driver 日志
+kubectl logs -n kube-system <csi-node-pod> -c csi-driver
+```
+
+**问题 3：存储性能问题**:
+
+```bash
+# 检查存储 IO 性能
+kubectl exec <pod-name> -- fio --name=randwrite --ioengine=libaio --iodepth=16 \
+  --rw=randwrite --bs=4k --size=1G --filename=/data/test
+
+# 检查存储后端性能
+# 如果是 NFS，检查 NFS 服务器性能
+# 如果是 Ceph，检查 Ceph 集群健康状态
+ceph health
+
+# 检查存储使用情况
+kubectl exec <pod-name> -- df -h /data
+```
+
+## 15.14 参考

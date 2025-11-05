@@ -37,7 +37,15 @@
 - [05.9 形式化总结](#059-形式化总结)
   - [05.9.1 签名模型形式化](#0591-签名模型形式化)
   - [05.9.2 SBOM 模型形式化](#0592-sbom-模型形式化)
-- [05.10 参考](#0510-参考)
+- [05.10 实际部署案例](#0510-实际部署案例)
+  - [05.10.1 案例 1：CI/CD 流程中集成镜像签名和 SBOM](#05101-案例-1cicd-流程中集成镜像签名和-sbom)
+  - [05.10.2 案例 2：Kubernetes 准入控制验证镜像签名](#05102-案例-2kubernetes-准入控制验证镜像签名)
+  - [05.10.3 案例 3：SBOM 漏洞扫描和报告](#05103-案例-3sbom-漏洞扫描和报告)
+- [05.11 最佳实践](#0511-最佳实践)
+  - [05.11.1 镜像签名最佳实践](#05111-镜像签名最佳实践)
+  - [05.11.2 SBOM 生成最佳实践](#05112-sbom-生成最佳实践)
+  - [05.11.3 供应链安全最佳实践](#05113-供应链安全最佳实践)
+- [05.12 参考](#0512-参考)
 
 ---
 
@@ -559,7 +567,245 @@ $$
 - $C_i$ = 组件（Component）
 - $D_j$ = 依赖（Dependency）
 
-## 05.10 参考
+## 05.10 实际部署案例
+
+### 05.10.1 案例 1：CI/CD 流程中集成镜像签名和 SBOM
+
+**场景**：在 CI/CD 流水线中自动签名镜像和生成 SBOM
+
+**CI/CD 集成脚本**：
+
+```bash
+#!/bin/bash
+# build-sign-sbom.sh
+
+set -e
+
+IMAGE="myapp"
+VERSION="${1:-latest}"
+REGISTRY="registry.example.com"
+
+# 1. 构建镜像
+docker build -t ${IMAGE}:${VERSION} .
+
+# 2. 生成 SBOM
+echo "Generating SBOM..."
+syft ${IMAGE}:${VERSION} -o spdx-json > sbom.json
+
+# 3. 扫描漏洞
+echo "Scanning vulnerabilities..."
+trivy image --exit-code 1 --severity HIGH,CRITICAL ${IMAGE}:${VERSION}
+
+# 4. 签名镜像
+echo "Signing image..."
+cosign sign --key cosign.key ${IMAGE}:${VERSION}
+
+# 5. 签名 SBOM
+echo "Signing SBOM..."
+cosign attest --key cosign.key \
+  --predicate sbom.json \
+  --type spdx \
+  ${IMAGE}:${VERSION}
+
+# 6. 推送镜像和签名
+docker tag ${IMAGE}:${VERSION} ${REGISTRY}/${IMAGE}:${VERSION}
+docker push ${REGISTRY}/${IMAGE}:${VERSION}
+cosign copy ${IMAGE}:${VERSION} ${REGISTRY}/${IMAGE}:${VERSION}
+```
+
+**GitHub Actions 工作流**：
+
+```yaml
+name: Build, Sign, and Push
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build image
+        run: |
+          docker build -t myapp:${{ github.sha }} .
+
+      - name: Generate SBOM
+        run: |
+          syft myapp:${{ github.sha }} -o spdx-json > sbom.json
+
+      - name: Scan vulnerabilities
+        run: |
+          trivy image --exit-code 1 --severity HIGH,CRITICAL myapp:${{ github.sha }}
+
+      - name: Sign image
+        run: |
+          cosign sign --key cosign.key myapp:${{ github.sha }}
+        env:
+          COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
+
+      - name: Sign SBOM
+        run: |
+          cosign attest --key cosign.key \
+            --predicate sbom.json \
+            --type spdx \
+            myapp:${{ github.sha }}
+```
+
+### 05.10.2 案例 2：Kubernetes 准入控制验证镜像签名
+
+**场景**：使用 Kyverno 验证镜像签名
+
+**Kyverno Policy**：
+
+```yaml
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: verify-image-signature
+spec:
+  validationFailureAction: enforce
+  rules:
+    - name: verify-image
+      match:
+        resources:
+          kinds:
+            - Pod
+      verifyImages:
+        - imageReferences:
+            - "registry.example.com/*"
+          attestors:
+            - count: 1
+              entries:
+                - keys:
+                    publicKeys: |
+                      -----BEGIN PUBLIC KEY-----
+                      ...
+                      -----END PUBLIC KEY-----
+```
+
+**Gatekeeper ConstraintTemplate**：
+
+```yaml
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: k8sverifyimagesignature
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sVerifyImageSignature
+      validation:
+        openAPIV3Schema:
+          type: object
+          properties:
+            requiredSignatures:
+              type: array
+              items:
+                type: string
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package k8sverifyimagesignature
+        violation[{"msg": msg}] {
+          container := input.review.object.spec.containers[_]
+          not verify_signature(container.image)
+          msg := sprintf("Image %v signature verification failed", [container.image])
+        }
+        verify_signature(image) {
+          # 验证镜像签名逻辑
+        }
+```
+
+### 05.10.3 案例 3：SBOM 漏洞扫描和报告
+
+**场景**：基于 SBOM 进行漏洞扫描和生成报告
+
+**扫描脚本**：
+
+```bash
+#!/bin/bash
+# scan-sbom-vulnerabilities.sh
+
+set -e
+
+IMAGE="myapp:latest"
+SBOM_FILE="sbom.json"
+
+# 1. 生成 SBOM
+echo "Generating SBOM..."
+syft ${IMAGE} -o spdx-json > ${SBOM_FILE}
+
+# 2. 扫描 SBOM 中的组件漏洞
+echo "Scanning vulnerabilities..."
+trivy sbom ${SBOM_FILE} --format json > vulnerabilities.json
+
+# 3. 生成报告
+echo "Generating report..."
+jq -r '.Results[] | "\(.Target) - \(.Vulnerabilities[]?.Severity) - \(.Vulnerabilities[]?.Title)"' \
+  vulnerabilities.json > report.txt
+
+# 4. 发送告警（如果有关键漏洞）
+CRITICAL_COUNT=$(jq '[.Results[].Vulnerabilities[]? | select(.Severity == "CRITICAL")] | length' vulnerabilities.json)
+if [ "$CRITICAL_COUNT" -gt 0 ]; then
+  echo "Found $CRITICAL_COUNT critical vulnerabilities!"
+  # 发送告警邮件或 Slack 通知
+fi
+```
+
+## 05.11 最佳实践
+
+### 05.11.1 镜像签名最佳实践
+
+**签名密钥管理**：
+
+- ✅ 使用 Sigstore 密钥轮换
+- ✅ 密钥存储在安全位置（如 Kubernetes Secrets、HashiCorp Vault）
+- ✅ 定期轮换密钥
+- ✅ 使用密钥版本管理
+
+**签名策略**：
+
+- ✅ 生产环境必须签名所有镜像
+- ✅ 开发环境建议签名镜像
+- ✅ 使用统一的签名密钥管理
+- ✅ 记录所有签名操作
+
+### 05.11.2 SBOM 生成最佳实践
+
+**SBOM 格式选择**：
+
+- ✅ 生产环境使用 SPDX 格式（标准化）
+- ✅ 开发环境可以使用 CycloneDX 格式
+- ✅ 确保 SBOM 包含完整的依赖信息
+
+**SBOM 存储**：
+
+- ✅ 将 SBOM 存储为 OCI Artifact
+- ✅ 使用 SBOM 签名验证
+- ✅ 定期更新 SBOM
+
+### 05.11.3 供应链安全最佳实践
+
+**完整流程**：
+
+1. **构建阶段**：生成 SBOM，扫描漏洞
+2. **签名阶段**：签名镜像和 SBOM
+3. **验证阶段**：Kubernetes 准入控制验证签名
+4. **监控阶段**：持续监控漏洞，更新 SBOM
+
+**安全检查清单**：
+
+- ✅ 镜像必须签名
+- ✅ SBOM 必须生成
+- ✅ 漏洞必须扫描
+- ✅ 签名必须验证
+- ✅ 审计日志必须记录
+
+## 05.12 参考
 
 - [OCI Artifact](https://github.com/opencontainers/artifacts)
 
@@ -567,4 +813,4 @@ $$
 
 ---
 
-**最后更新**：2025-11-03 **维护者**：项目团队
+**最后更新**：2025-11-06 **维护者**：项目团队

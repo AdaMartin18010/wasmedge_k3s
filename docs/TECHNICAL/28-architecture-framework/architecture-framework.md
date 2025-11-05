@@ -116,7 +116,7 @@
 
 ### 28.2.1 架构维度体系
 
-根据 **CNCF 云原生架构定义**和 **Wikipedia 企业架构标准**（2025-11-03），架构体
+根据 **CNCF 云原生架构定义**和 **Wikipedia 企业架构标准**（2025-11-06），架构体
 系包含以下七个核心维度：
 
 ```mermaid
@@ -171,7 +171,7 @@ graph TB
 
 ### 28.2.3 CNCF 架构定义
 
-**CNCF 对云原生架构的定义**（根据 CNCF 官方文档，2025-11-03）：
+**CNCF 对云原生架构的定义**（根据 CNCF 官方文档，2025-11-06）：
 
 > 云原生计算使用开源软件栈将应用程序部署为微服务，将每个部分打包到自己的容器中，
 > 并动态编排这些容器以优化资源利用率。云原生技术使组织能够在现代动态环境（如公共
@@ -203,7 +203,7 @@ graph TB
 
 ### 28.3.2 Wikipedia 定义
 
-**Wikipedia - Technical Architecture**（2025-11-03）：
+**Wikipedia - Technical Architecture**（2025-11-06）：
 
 > Technical architecture describes the technical infrastructure of a system,
 > including hardware, software, network components, and their relationships and
@@ -337,7 +337,7 @@ graph LR
 
 ### 28.4.2 Wikipedia 定义
 
-**Wikipedia - Conceptual Architecture**（2025-11-03）：
+**Wikipedia - Conceptual Architecture**（2025-11-06）：
 
 > Conceptual architecture provides a high-level view of a system, defining the
 > main components, functions, and their relationships, without detailing
@@ -464,7 +464,7 @@ graph LR
 
 ### 28.5.2 Wikipedia 定义
 
-**Wikipedia - Data Architecture**（2025-11-03）：
+**Wikipedia - Data Architecture**（2025-11-06）：
 
 > Data architecture defines the structure, storage, management, and use of data,
 > including data models, database design, data flows, and data governance.
@@ -578,7 +578,7 @@ graph LR
 
 ### 28.6.2 Wikipedia 定义
 
-**Wikipedia - Business Architecture**（2025-11-03）：
+**Wikipedia - Business Architecture**（2025-11-06）：
 
 > Business architecture describes the business strategy, governance,
 > organizational structure, and key business processes of an organization,
@@ -692,7 +692,7 @@ graph TB
 
 ### 28.7.2 Wikipedia 定义
 
-**Wikipedia - Software Architecture**（2025-11-03）：
+**Wikipedia - Software Architecture**（2025-11-06）：
 
 > Software architecture defines the high-level structure of a software system,
 > including components, modules, interfaces, and their interactions, ensuring
@@ -815,7 +815,7 @@ graph TB
 
 ### 28.8.2 Wikipedia 定义
 
-**Wikipedia - Application Architecture**（2025-11-03）：
+**Wikipedia - Application Architecture**（2025-11-06）：
 
 > Application architecture describes the structure of a specific application,
 > including frontend, backend, data storage, and external integrations, ensuring
@@ -933,7 +933,7 @@ graph LR
 
 ### 28.9.2 Wikipedia 定义
 
-**Wikipedia - Scenario Architecture**（2025-11-03）：
+**Wikipedia - Scenario Architecture**（2025-11-06）：
 
 > Scenario architecture describes the system architecture designed for specific
 > use scenarios, meeting particular requirements and constraints, ensuring the
@@ -1036,7 +1036,7 @@ graph TB
 
 ### 28.10.1 架构对齐原则
 
-**架构对齐核心原则**（基于 CNCF 和 Wikipedia 标准，2025-11-03）：
+**架构对齐核心原则**（基于 CNCF 和 Wikipedia 标准，2025-11-06）：
 
 1. **一致性原则**（Consistency Principle）
 
@@ -1138,4 +1138,4 @@ graph TB
 
 ---
 
-**最后更新**：2025-11-03 **维护者**：项目团队
+**最后更新**：2025-11-06 **维护者**：项目团队
