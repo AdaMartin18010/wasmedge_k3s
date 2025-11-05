@@ -14,9 +14,9 @@
 - [5. Facade / API Gateway 模式](#5-facade--api-gateway-模式)
   - [5.1 聚合多服务](#51-聚合多服务)
   - [5.2 典型案例](#52-典型案例)
-- [5. Composite 模式](#5-composite-模式)
-  - [5.1 递归聚合](#51-递归聚合)
-  - [5.2 典型案例](#52-典型案例-1)
+- [6. Composite 模式](#6-composite-模式)
+  - [6.1 递归聚合](#61-递归聚合)
+  - [6.2 典型案例](#62-典型案例)
 - [7. Pipeline / Orchestration 模式](#7-pipeline--orchestration-模式)
   - [7.1 流程编排](#71-流程编排)
   - [7.2 典型案例](#72-典型案例)
@@ -153,9 +153,9 @@ spec:
         - api.example.com
 ```
 
-## 5. Composite 模式
+## 6. Composite 模式
 
-### 5.1 递归聚合
+### 6.1 递归聚合
 
 **场景**：服务网格组合、聚合微服务
 
@@ -171,7 +171,7 @@ Service Mesh (Istio) + NSM (vWire) + OPA (策略)
 - **NSM**：网络服务聚合
 - **OPA**：策略决策
 
-### 5.2 典型案例
+### 6.2 典型案例
 
 **多层组合**：
 

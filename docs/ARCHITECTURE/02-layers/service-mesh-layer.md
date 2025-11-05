@@ -2,14 +2,25 @@
 
 ## 📑 目录
 
----
+- [1. 概述](#1-概述)
+- [2. 核心职责](#2-核心职责)
+- [3. 架构层次](#3-架构层次)
+- [4. 技术实现](#4-技术实现)
+- [5. Service Mesh 对比矩阵](#5-service-mesh-对比矩阵)
+- [6. 安全模型](#6-安全模型)
+- [7. 与 Network Service Mesh 的关系](#7-与-network-service-mesh-的关系)
+- [8. 节点聚合：从物理地址到身份驱动拓扑](#8-节点聚合从物理地址到身份驱动拓扑)
+- [9. 服务组合：从跨服务流到可编排的本地函数](#9-服务组合从跨服务流到可编排的本地函数)
+- [10. 架构设计范式重塑](#10-架构设计范式重塑)
+- [11. 最佳实践](#11-最佳实践)
+- [12. 参考资源](#12-参考资源)
 
-## 📋 概述
+## 1. 概述
 
 Service Mesh 层是在应用层之下，提供网络服务治理的中间层。它通过 Sidecar 代理模式
 ，将网络功能从业务代码中剥离，实现流量治理、安全、可观测性的统一管理。
 
-## 🎯 核心职责
+## 2. 核心职责
 
 ### 1. 流量治理
 
@@ -38,7 +49,7 @@ Service Mesh 层是在应用层之下，提供网络服务治理的中间层。�
 - **配置管理**：统一配置中心
 - **版本管理**：灰度发布、金丝雀部署
 
-## 🏗️ 架构层次
+## 3. 架构层次
 
 ```text
 ┌─────────────────────────────────────┐
@@ -69,7 +80,7 @@ Service Mesh 层是在应用层之下，提供网络服务治理的中间层。�
 └─────────────────────────────────────┘
 ```
 
-## 🔧 技术实现
+## 4. 技术实现
 
 ### 1. Istio
 
@@ -116,7 +127,7 @@ Service Mesh 层是在应用层之下，提供网络服务治理的中间层。�
 - 服务发现集成
 - 丰富的生态
 
-## 📊 Service Mesh 对比矩阵
+## 5. Service Mesh 对比矩阵
 
 | 属性         | Istio            | Linkerd        | Consul Connect | Kuma         |
 | ------------ | ---------------- | -------------- | -------------- | ------------ |
@@ -128,7 +139,7 @@ Service Mesh 层是在应用层之下，提供网络服务治理的中间层。�
 | **生态**     | 丰富             | 中等           | 丰富           | 中等         |
 | **适用场景** | 企业级、复杂场景 | 简单场景、边缘 | 多数据中心     | 多云         |
 
-## 🔐 安全模型
+## 6. 安全模型
 
 ### 1. 身份驱动拓扑
 
@@ -165,7 +176,7 @@ Service Mesh 层是在应用层之下，提供网络服务治理的中间层。�
 - 最小权限原则
 - 持续验证
 
-## 🔗 与 Network Service Mesh 的关系
+## 7. 与 Network Service Mesh 的关系
 
 ### Service Mesh 作为 Network Service
 
@@ -185,7 +196,7 @@ nsmctl ns create istio-namespace --namespace=istio-system
 nsmctl client create orders-vwire --service=orders --endpoint=vm-endpoint
 ```
 
-## 📈 节点聚合：从物理地址到身份驱动拓扑
+## 8. 节点聚合：从物理地址到身份驱动拓扑
 
 ### 传统模型 vs Service Mesh 模型
 
@@ -243,7 +254,7 @@ spec:
           weight: 10
 ```
 
-## 📊 服务组合：从跨服务流到可编排的本地函数
+## 9. 服务组合：从跨服务流到可编排的本地函数
 
 ### Envoy Filter Chain
 
@@ -275,7 +286,7 @@ Service Mesh 时代：
 Request → [JWT|RBAC|RateLimit|Circuit|Retry|Transform] → Upstream
 ```
 
-## 🔄 架构设计范式重塑
+## 10. 架构设计范式重塑
 
 ### 1. "先定接口，再定部署" → "先定流量，再定接口"
 
@@ -292,7 +303,7 @@ Request → [JWT|RBAC|RateLimit|Circuit|Retry|Transform] → Upstream
 - **弹性**：超时、重试、Hedging、SlowStart 都是 Envoy 参数，可被 SLO 驱动地自动
   调优
 
-## 🎯 最佳实践
+## 11. 最佳实践
 
 ### 1. 渐进式采用
 
@@ -318,7 +329,7 @@ Request → [JWT|RBAC|RateLimit|Circuit|Retry|Transform] → Upstream
 - 实施零信任网络
 - 定期审计策略
 
-## 📚 参考资源
+## 12. 参考资源
 
 - **Istio**：<https://istio.io/>
 - **Linkerd**：<https://linkerd.io/>

@@ -3,32 +3,32 @@
 ## 📑 目录
 
 - [1. 概述](#1-概述)
-- [🎯 核心模式](#-核心模式)
-  - [1. Service Mesh 作为 Network Service](#1-service-mesh-作为-network-service)
-  - [2. 多 Service Mesh 叠加模式](#2-多-service-mesh-叠加模式)
-  - [3. 跨域网络聚合模式](#3-跨域网络聚合模式)
-- [🔧 技术实现](#-技术实现)
-  - [1. 注册 Service Mesh 为 Network Service](#1-注册-service-mesh-为-network-service)
-  - [2. 创建 vWire 连接](#2-创建-vwire-连接)
-  - [3. 多集群 Federation](#3-多集群-federation)
-- [📊 模式对比矩阵](#-模式对比矩阵)
-- [🔗 组合模式](#-组合模式)
-  - [1. Service Mesh + NSM 组合](#1-service-mesh--nsm-组合)
-  - [2. 多租户 SaaS 模式](#2-多租户-saas-模式)
-  - [3. 边缘计算模式](#3-边缘计算模式)
-- [🔐 安全模式](#-安全模式)
-  - [1. 统一身份认证](#1-统一身份认证)
-  - [2. 策略统一治理](#2-策略统一治理)
-- [📈 演进路径](#-演进路径)
+- [2. 核心模式](#2-核心模式)
+  - [2.1 Service Mesh 作为 Network Service](#21-service-mesh-作为-network-service)
+  - [2.2 多 Service Mesh 叠加模式](#22-多-service-mesh-叠加模式)
+  - [2.3 跨域网络聚合模式](#23-跨域网络聚合模式)
+- [3. 技术实现](#3-技术实现)
+  - [3.1 注册 Service Mesh 为 Network Service](#31-注册-service-mesh-为-network-service)
+  - [3.2 创建 vWire 连接](#32-创建-vwire-连接)
+  - [3.3 多集群 Federation](#33-多集群-federation)
+- [4. 模式对比矩阵](#4-模式对比矩阵)
+- [5. 组合模式](#5-组合模式)
+  - [5.1 Service Mesh + NSM 组合](#51-service-mesh--nsm-组合)
+  - [5.2 多租户 SaaS 模式](#52-多租户-saas-模式)
+  - [5.3 边缘计算模式](#53-边缘计算模式)
+- [6. 安全模式](#6-安全模式)
+  - [6.1 统一身份认证](#61-统一身份认证)
+  - [6.2 策略统一治理](#62-策略统一治理)
+- [7. 演进路径](#7-演进路径)
   - [第一阶段：单集群 Service Mesh（2017-2020）](#第一阶段单集群-service-mesh2017-2020)
   - [第二阶段：Multi-cluster Service Mesh（2020-2023）](#第二阶段multi-cluster-service-mesh2020-2023)
   - [第三阶段：Network Service Mesh（2023-2025）](#第三阶段network-service-mesh2023-2025)
   - [第四阶段：边缘计算集成（2025-）](#第四阶段边缘计算集成2025-)
-- [🎯 最佳实践](#-最佳实践)
-  - [1. 渐进式采用](#1-渐进式采用)
-  - [2. 统一配置管理](#2-统一配置管理)
-  - [3. 可观测性优先](#3-可观测性优先)
-  - [4. 安全策略](#4-安全策略)
+- [8. 最佳实践](#8-最佳实践)
+  - [8.1 渐进式采用](#81-渐进式采用)
+  - [8.2 统一配置管理](#82-统一配置管理)
+  - [8.3 可观测性优先](#83-可观测性优先)
+  - [8.4 安全策略](#84-安全策略)
 - [9. 参考资源](#9-参考资源)
   - [相关文档](#相关文档)
   - [学术资源](#学术资源)
@@ -41,9 +41,9 @@ Network Service Mesh (NSM) 模式提供了一种将 Service Mesh 作为网络服
 架构模式。它通过 vWire（虚拟连线）和 vL3（虚拟 L3 网络）实现跨域网络服务的聚合，
 支持 Pod、VM、物理机之间的统一网络治理。
 
-## 🎯 核心模式
+## 2. 核心模式
 
-### 1. Service Mesh 作为 Network Service
+### 2.1 Service Mesh 作为 Network Service
 
 **模式描述**：
 
@@ -75,7 +75,7 @@ Network Service Mesh (NSM) 模式提供了一种将 Service Mesh 作为网络服
 └─────────────────────────────────────┘
 ```
 
-### 2. 多 Service Mesh 叠加模式
+### 2.2 多 Service Mesh 叠加模式
 
 **模式描述**：
 
@@ -98,7 +98,7 @@ nsmctl client create multi-mesh-vwire \
   --service=linkerd-namespace
 ```
 
-### 3. 跨域网络聚合模式
+### 2.3 跨域网络聚合模式
 
 **模式描述**：
 
@@ -116,9 +116,9 @@ Cluster A (K8s) ──NSM Federation── Cluster B (K8s)
                     Physical Server ────┘
 ```
 
-## 🔧 技术实现
+## 3. 技术实现
 
-### 1. 注册 Service Mesh 为 Network Service
+### 3.1 注册 Service Mesh 为 Network Service
 
 ```bash
 # 创建 NSM Network Service
@@ -128,7 +128,7 @@ nsmctl ns create istio-mesh \
   --labels=app=istio,version=v1.15
 ```
 
-### 2. 创建 vWire 连接
+### 3.2 创建 vWire 连接
 
 ```bash
 # 客户端请求 vWire
@@ -138,7 +138,7 @@ nsmctl client create orders-vwire \
   --labels=env=prod,version=v2
 ```
 
-### 3. 多集群 Federation
+### 3.3 多集群 Federation
 
 ```bash
 # 创建 Federation
@@ -147,7 +147,7 @@ nsmctl federation create multi-cluster-federation \
   --namespace=istio-system
 ```
 
-## 📊 模式对比矩阵
+## 4. 模式对比矩阵
 
 | 模式         | 传统 Service Mesh | NSM 模式               |
 | ------------ | ----------------- | ---------------------- |
@@ -157,9 +157,9 @@ nsmctl federation create multi-cluster-federation \
 | **治理范围** | 集群内            | 跨域统一治理           |
 | **适用场景** | 单集群微服务      | 多云、混合云、边缘计算 |
 
-## 🔗 组合模式
+## 5. 组合模式
 
-### 1. Service Mesh + NSM 组合
+### 5.1 Service Mesh + NSM 组合
 
 **模式**：Adapter/Bridge 模式
 
@@ -178,7 +178,7 @@ Pod (Cluster A) ──Istio Sidecar──> NSM vWire ──> Pod (Cluster B)
                                           └──> Physical Server (Edge)
 ```
 
-### 2. 多租户 SaaS 模式
+### 5.2 多租户 SaaS 模式
 
 **模式**：Facade 模式
 
@@ -217,7 +217,7 @@ nsmctl client create tenant-a-vwire \
   --labels=tenant=tenant-a
 ```
 
-### 3. 边缘计算模式
+### 5.3 边缘计算模式
 
 **模式**：Gateway 模式
 
@@ -235,9 +235,9 @@ Edge Device ──Edge NSM Node──> Cloud NSM ──> Service Mesh
                                     └──> Cloud Services
 ```
 
-## 🔐 安全模式
+## 6. 安全模式
 
-### 1. 统一身份认证
+### 6.1 统一身份认证
 
 **模式**：SPIFFE/SPIRE 集成
 
@@ -260,7 +260,7 @@ spec:
   spiffeId: spiffe://cluster-a/ns/default/sa/istio
 ```
 
-### 2. 策略统一治理
+### 6.2 策略统一治理
 
 **模式**：OPA + NSM 组合
 
@@ -285,7 +285,7 @@ allow {
 }
 ```
 
-## 📈 演进路径
+## 7. 演进路径
 
 ### 第一阶段：单集群 Service Mesh（2017-2020）
 
@@ -307,27 +307,27 @@ allow {
 - **特点**：边缘设备、IoT 设备接入
 - **趋势**：边缘自治、离线能力
 
-## 🎯 最佳实践
+## 8. 最佳实践
 
-### 1. 渐进式采用
+### 8.1 渐进式采用
 
 - 从单集群开始
 - 逐步扩展到多集群
 - 最后集成 VM 和物理机
 
-### 2. 统一配置管理
+### 8.2 统一配置管理
 
 - 使用 GitOps 管理配置
 - 版本化配置变更
 - 自动化测试
 
-### 3. 可观测性优先
+### 8.3 可观测性优先
 
 - 部署前建立可观测性
 - 分布式追踪、指标、日志全覆盖
 - 建立告警机制
 
-### 4. 安全策略
+### 8.4 安全策略
 
 - 启用统一身份认证（SPIFFE）
 - 实施零信任网络

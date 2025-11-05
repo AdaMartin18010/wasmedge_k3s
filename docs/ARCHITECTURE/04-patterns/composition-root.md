@@ -2,30 +2,29 @@
 
 ## 📑 目录
 
-- [📑 目录](#-目录)
 - [1. 概述](#1-概述)
   - [1.1 核心思想](#11-核心思想)
 - [2. 目标与定义](#2-目标与定义)
-- [2. 模式结构](#2-模式结构)
-  - [2.1 基本结构](#21-基本结构)
-  - [2.2 在云原生架构中的应用](#22-在云原生架构中的应用)
-- [3. 在云原生架构中的应用](#3-在云原生架构中的应用)
-  - [3.1 Kubernetes 中的 Composition Root](#31-kubernetes-中的-composition-root)
-  - [3.2 Service Mesh 中的 Composition Root](#32-service-mesh-中的-composition-root)
-  - [3.3 OPA 中的 Composition Root](#33-opa-中的-composition-root)
-- [4. Composition Root 的优势](#4-composition-root-的优势)
-  - [4.1 依赖关系清晰](#41-依赖关系清晰)
-  - [4.2 可测试性](#42-可测试性)
-  - [4.3 可维护性](#43-可维护性)
-- [5. Composition Root 的最佳实践](#5-composition-root-的最佳实践)
-  - [5.1 单一入口点](#51-单一入口点)
-  - [5.2 延迟创建](#52-延迟创建)
-  - [5.3 生命周期管理](#53-生命周期管理)
-- [6. 在云原生架构中的实践](#6-在云原生架构中的实践)
-  - [6.1 Kubernetes Deployment](#61-kubernetes-deployment)
-  - [6.2 Istio VirtualService](#62-istio-virtualservice)
-  - [6.3 OPA Policy Bundle](#63-opa-policy-bundle)
-- [7. 总结](#7-总结)
+- [3. 模式结构](#3-模式结构)
+  - [3.1 基本结构](#31-基本结构)
+  - [3.2 在云原生架构中的应用](#32-在云原生架构中的应用)
+- [4. 在云原生架构中的应用](#4-在云原生架构中的应用)
+  - [4.1 Kubernetes 中的 Composition Root](#41-kubernetes-中的-composition-root)
+  - [4.2 Service Mesh 中的 Composition Root](#42-service-mesh-中的-composition-root)
+  - [4.3 OPA 中的 Composition Root](#43-opa-中的-composition-root)
+- [5. Composition Root 的优势](#5-composition-root-的优势)
+  - [5.1 依赖关系清晰](#51-依赖关系清晰)
+  - [5.2 可测试性](#52-可测试性)
+  - [5.3 可维护性](#53-可维护性)
+- [6. Composition Root 的最佳实践](#6-composition-root-的最佳实践)
+  - [6.1 单一入口点](#61-单一入口点)
+  - [6.2 延迟创建](#62-延迟创建)
+  - [6.3 生命周期管理](#63-生命周期管理)
+- [7. 在云原生架构中的实践](#7-在云原生架构中的实践)
+  - [7.1 Kubernetes Deployment](#71-kubernetes-deployment)
+  - [7.2 Istio VirtualService](#72-istio-virtualservice)
+  - [7.3 OPA Policy Bundle](#73-opa-policy-bundle)
+- [8. 总结](#8-总结)
   - [核心价值](#核心价值)
   - [一句话归纳](#一句话归纳)
 - [9. 参考资源](#9-参考资源)
@@ -55,9 +54,9 @@ Kubernetes、Service Mesh、OPA 等场景。
 
 ---
 
-## 2. 模式结构
+## 3. 模式结构
 
-### 2.1 基本结构
+### 3.1 基本结构
 
 ```text
 Application Entry Point (Composition Root)
@@ -67,7 +66,7 @@ Application Entry Point (Composition Root)
     └─ 启动应用程序
 ```
 
-### 2.2 在云原生架构中的应用
+### 3.2 在云原生架构中的应用
 
 | 层次       | Composition Root 应用                 | 典型实现           |
 | ---------- | ------------------------------------- | ------------------ |
@@ -78,9 +77,9 @@ Application Entry Point (Composition Root)
 
 ---
 
-## 3. 在云原生架构中的应用
+## 4. 在云原生架构中的应用
 
-### 3.1 Kubernetes 中的 Composition Root
+### 4.1 Kubernetes 中的 Composition Root
 
 在 Kubernetes 中，**Pod 定义** 就是 Composition Root：
 
@@ -108,7 +107,7 @@ spec:
 - 配置环境变量和资源限制
 - 注入 sidecar（如 Istio proxy）
 
-### 3.2 Service Mesh 中的 Composition Root
+### 4.2 Service Mesh 中的 Composition Root
 
 在 Service Mesh 中，**VirtualService** 和 **DestinationRule** 就是 Composition
 Root：
@@ -139,7 +138,7 @@ spec:
 - 配置流量分发策略
 - 注入策略（如重试、超时、熔断）
 
-### 3.3 OPA 中的 Composition Root
+### 4.3 OPA 中的 Composition Root
 
 在 OPA 中，**Policy Bundle** 就是 Composition Root：
 
@@ -163,9 +162,9 @@ allow {
 
 ---
 
-## 4. Composition Root 的优势
+## 5. Composition Root 的优势
 
-### 4.1 依赖关系清晰
+### 5.1 依赖关系清晰
 
 **问题**：依赖关系分散在应用程序的各个地方，难以追踪和管理
 
@@ -185,7 +184,7 @@ allow {
     └─ Service C → Message Queue
 ```
 
-### 4.2 可测试性
+### 5.2 可测试性
 
 **问题**：依赖关系硬编码，难以进行单元测试
 
@@ -199,7 +198,7 @@ allow {
 └─ Service → Test DB (Mock)
 ```
 
-### 4.3 可维护性
+### 5.3 可维护性
 
 **问题**：依赖关系变更需要修改多个地方
 
@@ -213,9 +212,9 @@ allow {
 
 ---
 
-## 5. Composition Root 的最佳实践
+## 6. Composition Root 的最佳实践
 
-### 5.1 单一入口点
+### 6.1 单一入口点
 
 **原则**：在应用程序的单一入口点组合所有依赖关系
 
@@ -228,7 +227,7 @@ Application Entry Point
     └─ Application Logic
 ```
 
-### 5.2 延迟创建
+### 6.2 延迟创建
 
 **原则**：在需要时才创建依赖对象，而不是在启动时创建所有对象
 
@@ -238,7 +237,7 @@ Lazy Composition Root
     └─ 创建依赖对象（使用时）
 ```
 
-### 5.3 生命周期管理
+### 6.3 生命周期管理
 
 **原则**：在 Composition Root 中管理依赖对象的生命周期
 
@@ -251,9 +250,9 @@ Lifecycle Management
 
 ---
 
-## 6. 在云原生架构中的实践
+## 7. 在云原生架构中的实践
 
-### 6.1 Kubernetes Deployment
+### 7.1 Kubernetes Deployment
 
 ```yaml
 apiVersion: apps/v1
@@ -281,7 +280,7 @@ spec:
                   key: mesh-addr
 ```
 
-### 6.2 Istio VirtualService
+### 7.2 Istio VirtualService
 
 ```yaml
 apiVersion: networking.istio.io/v1beta1
@@ -313,7 +312,7 @@ spec:
           weight: 10
 ```
 
-### 6.3 OPA Policy Bundle
+### 7.3 OPA Policy Bundle
 
 ```rego
 package authz
@@ -340,7 +339,7 @@ allow {
 
 ---
 
-## 7. 总结
+## 8. 总结
 
 ### 核心价值
 

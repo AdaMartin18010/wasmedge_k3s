@@ -3,33 +3,33 @@
 ## 📑 目录
 
 - [1. 概述](#1-概述)
-- [🎯 核心模式](#-核心模式)
-  - [1. 策略即代码模式（Policy as Code）](#1-策略即代码模式policy-as-code)
-  - [2. 分层策略模式（Layered Policy）](#2-分层策略模式layered-policy)
-  - [3. 统一决策点模式（Unified Decision Point）](#3-统一决策点模式unified-decision-point)
-- [🔧 技术实现](#-技术实现)
-  - [1. Service Mesh 集成](#1-service-mesh-集成)
-  - [2. Kubernetes Admission Control](#2-kubernetes-admission-control)
-  - [3. 容器沙盒策略](#3-容器沙盒策略)
-- [📊 模式对比矩阵](#-模式对比矩阵)
-- [🔐 安全模式](#-安全模式)
-  - [1. 能力闭包模式（Capability Closure）](#1-能力闭包模式capability-closure)
-  - [2. 最小权限模式（Least Privilege）](#2-最小权限模式least-privilege)
-  - [3. 可证明安全模式（Provable Security）](#3-可证明安全模式provable-security)
-- [🔗 组合模式](#-组合模式)
-  - [1. OPA + Service Mesh](#1-opa--service-mesh)
-  - [2. OPA + NSM](#2-opa--nsm)
-  - [3. OPA + GitOps](#3-opa--gitops)
-- [📈 演进路径](#-演进路径)
+- [2. 核心模式](#2-核心模式)
+  - [2.1 策略即代码模式（Policy as Code）](#21-策略即代码模式policy-as-code)
+  - [2.2 分层策略模式（Layered Policy）](#22-分层策略模式layered-policy)
+  - [2.3 统一决策点模式（Unified Decision Point）](#23-统一决策点模式unified-decision-point)
+- [3. 技术实现](#3-技术实现)
+  - [3.1 Service Mesh 集成](#31-service-mesh-集成)
+  - [3.2 Kubernetes Admission Control](#32-kubernetes-admission-control)
+  - [3.3 容器沙盒策略](#33-容器沙盒策略)
+- [4. 模式对比矩阵](#4-模式对比矩阵)
+- [5. 安全模式](#5-安全模式)
+  - [5.1 能力闭包模式（Capability Closure）](#51-能力闭包模式capability-closure)
+  - [5.2 最小权限模式（Least Privilege）](#52-最小权限模式least-privilege)
+  - [5.3 可证明安全模式（Provable Security）](#53-可证明安全模式provable-security)
+- [6. 组合模式](#6-组合模式)
+  - [6.1 OPA + Service Mesh](#61-opa--service-mesh)
+  - [6.2 OPA + NSM](#62-opa--nsm)
+  - [6.3 OPA + GitOps](#63-opa--gitops)
+- [7. 演进路径](#7-演进路径)
   - [第一阶段：分散策略（2010-2015）](#第一阶段分散策略2010-2015)
   - [第二阶段：策略引擎（2015-2020）](#第二阶段策略引擎2015-2020)
   - [第三阶段：策略即代码（2020-2025）](#第三阶段策略即代码2020-2025)
   - [第四阶段：可证明安全（2025-）](#第四阶段可证明安全2025-)
-- [🎯 最佳实践](#-最佳实践)
-  - [1. 策略分层](#1-策略分层)
-  - [2. 策略测试](#2-策略测试)
-  - [3. 策略版本化](#3-策略版本化)
-  - [4. 决策审计](#4-决策审计)
+- [8. 最佳实践](#8-最佳实践)
+  - [8.1 策略分层](#81-策略分层)
+  - [8.2 策略测试](#82-策略测试)
+  - [8.3 策略版本化](#83-策略版本化)
+  - [8.4 决策审计](#84-决策审计)
 - [9. 参考资源](#9-参考资源)
   - [学术资源](#学术资源)
 
@@ -41,9 +41,9 @@ OPA (Open Policy Agent) 策略治理模式提供了一种"策略即代码"的治
 略从业务代码中剥离，通过 Rego 语言定义策略，实现统一决策、版本化治理、可证明安全
 性。
 
-## 🎯 核心模式
+## 2. 核心模式
 
-### 1. 策略即代码模式（Policy as Code）
+### 2.1 策略即代码模式（Policy as Code）
 
 **模式描述**：
 
@@ -75,7 +75,7 @@ OPA (Open Policy Agent) 策略治理模式提供了一种"策略即代码"的治
 └─────────────────────────────────────┘
 ```
 
-### 2. 分层策略模式（Layered Policy）
+### 2.2 分层策略模式（Layered Policy）
 
 **模式描述**：
 
@@ -102,7 +102,7 @@ OPA (Open Policy Agent) 策略治理模式提供了一种"策略即代码"的治
 └─────────────────────────────────────┘
 ```
 
-### 3. 统一决策点模式（Unified Decision Point）
+### 2.3 统一决策点模式（Unified Decision Point）
 
 **模式描述**：
 
@@ -133,9 +133,9 @@ allow = true {
 }
 ```
 
-## 🔧 技术实现
+## 3. 技术实现
 
-### 1. Service Mesh 集成
+### 3.1 Service Mesh 集成
 
 **Istio + OPA**：
 
@@ -169,7 +169,7 @@ allow {
 }
 ```
 
-### 2. Kubernetes Admission Control
+### 3.2 Kubernetes Admission Control
 
 **Gatekeeper + OPA**：
 
@@ -194,7 +194,7 @@ spec:
         }
 ```
 
-### 3. 容器沙盒策略
+### 3.3 容器沙盒策略
 
 **seccomp + OPA**：
 
@@ -213,7 +213,7 @@ allow_syscall = true {
 }
 ```
 
-## 📊 模式对比矩阵
+## 4. 模式对比矩阵
 
 | 模式         | 传统方式         | OPA 模式              |
 | ------------ | ---------------- | --------------------- |
@@ -225,9 +225,9 @@ allow_syscall = true {
 | **策略回滚** | 手动回滚         | Git 回滚              |
 | **决策延迟** | 不定             | < 5 ms (P99)          |
 
-## 🔐 安全模式
+## 5. 安全模式
 
-### 1. 能力闭包模式（Capability Closure）
+### 5.1 能力闭包模式（Capability Closure）
 
 **模式描述**：
 
@@ -259,7 +259,7 @@ allow_capability = true {
 }
 ```
 
-### 2. 最小权限模式（Least Privilege）
+### 5.2 最小权限模式（Least Privilege）
 
 **模式描述**：
 
@@ -281,7 +281,7 @@ allow {
 }
 ```
 
-### 3. 可证明安全模式（Provable Security）
+### 5.3 可证明安全模式（Provable Security）
 
 **模式描述**：
 
@@ -302,9 +302,9 @@ opa eval --format=pretty \
 opa test policy.rego
 ```
 
-## 🔗 组合模式
+## 6. 组合模式
 
-### 1. OPA + Service Mesh
+### 6.1 OPA + Service Mesh
 
 **模式**：Adapter 模式
 
@@ -322,7 +322,7 @@ Request ──> Envoy Sidecar ──> OPA Agent ──> Decision
                                       └──> Allow/Deny
 ```
 
-### 2. OPA + NSM
+### 6.2 OPA + NSM
 
 **模式**：Bridge 模式
 
@@ -347,7 +347,7 @@ allow_connection {
 }
 ```
 
-### 3. OPA + GitOps
+### 6.3 OPA + GitOps
 
 **模式**：Facade 模式
 
@@ -365,7 +365,7 @@ Policy.rego (Git) ──> CI/CD ──> OPA Bundle ──> OPA Agent
                                       └──> Decision Log (Git)
 ```
 
-## 📈 演进路径
+## 7. 演进路径
 
 ### 第一阶段：分散策略（2010-2015）
 
@@ -387,28 +387,28 @@ Policy.rego (Git) ──> CI/CD ──> OPA Bundle ──> OPA Agent
 - **特点**：策略可形式化验证
 - **趋势**：自动验证、自动优化
 
-## 🎯 最佳实践
+## 8. 最佳实践
 
-### 1. 策略分层
+### 8.1 策略分层
 
 - **基础设施层**：资源配额、部署约束
 - **运行时层**：系统调用、资源限制
 - **网络层**：路由、限流、mTLS
 - **应用层**：业务规则、数据访问
 
-### 2. 策略测试
+### 8.2 策略测试
 
 - **单元测试**：`opa test`
 - **集成测试**：CI/CD 中自动测试
 - **回归测试**：策略变更自动验证
 
-### 3. 策略版本化
+### 8.3 策略版本化
 
 - **Git 管理**：策略存储在 Git 仓库
 - **版本标签**：策略版本与代码版本对齐
 - **回滚机制**：策略变更可快速回滚
 
-### 4. 决策审计
+### 8.4 决策审计
 
 - **决策日志**：记录所有策略决策
 - **审计分析**：定期分析决策日志

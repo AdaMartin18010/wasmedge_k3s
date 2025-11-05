@@ -7,16 +7,16 @@
   - [1.1 核心思想](#11-核心思想)
   - [1.2 文档结构](#12-文档结构)
 - [2. 核心概念](#2-核心概念)
-  - [1. 虚拟化（Virtualization）](#1-虚拟化virtualization)
-  - [2. 容器化（Containerization）](#2-容器化containerization)
-  - [3. 沙盒化（Sandboxing）](#3-沙盒化sandboxing)
-  - [4. Service Mesh](#4-service-mesh)
-  - [5. Network Service Mesh (NSM)](#5-network-service-mesh-nsm)
-  - [6. OPA (Open Policy Agent)](#6-opa-open-policy-agent)
+  - [2.1 虚拟化（Virtualization）](#21-虚拟化virtualization)
+  - [2.2 容器化（Containerization）](#22-容器化containerization)
+  - [2.3 沙盒化（Sandboxing）](#23-沙盒化sandboxing)
+  - [2.4 Service Mesh](#24-service-mesh)
+  - [2.5 Network Service Mesh (NSM)](#25-network-service-mesh-nsm)
+  - [2.6 OPA (Open Policy Agent)](#26-opa-open-policy-agent)
 - [3. 概念关系](#3-概念关系)
-  - [1. 虚拟化 ⊃ 容器化 ⊃ 沙盒化](#1-虚拟化--容器化--沙盒化)
-  - [2. Service Mesh ↔ NSM](#2-service-mesh--nsm)
-  - [3. OPA ↔ Service Mesh](#3-opa--service-mesh)
+  - [3.1 虚拟化 ⊃ 容器化 ⊃ 沙盒化](#31-虚拟化--容器化--沙盒化)
+  - [3.2 Service Mesh ↔ NSM](#32-service-mesh--nsm)
+  - [3.3 OPA ↔ Service Mesh](#33-opa--service-mesh)
 - [4. 概念属性矩阵](#4-概念属性矩阵)
   - [4.1 隔离级别属性矩阵](#41-隔离级别属性矩阵)
   - [4.2 资源开销属性矩阵](#42-资源开销属性矩阵)
@@ -66,7 +66,7 @@ Mesh、NSM、OPA 等云原生架构技术的定义、属性、关系和应用场
 
 ## 2. 核心概念
 
-### 1. 虚拟化（Virtualization）
+### 2.1 虚拟化（Virtualization）
 
 **定义**：将物理硬件抽象为虚拟机资源池，提供资源隔离、快照、迁移等功能。
 
@@ -83,7 +83,7 @@ Mesh、NSM、OPA 等云原生架构技术的定义、属性、关系和应用场
 VM = ⟨vCPU, vMEM, vIO, Hypervisor⟩
 ```
 
-### 2. 容器化（Containerization）
+### 2.2 容器化（Containerization）
 
 **定义**：将操作系统抽象为轻量级容器，共享内核，提供进程隔离和资源限制。
 
@@ -100,7 +100,7 @@ VM = ⟨vCPU, vMEM, vIO, Hypervisor⟩
 Container = ⟨processes, namespaces, cgroups, image⟩
 ```
 
-### 3. 沙盒化（Sandboxing）
+### 2.3 沙盒化（Sandboxing）
 
 **定义**：对容器内进程进行细粒度安全限制，通过系统调用过滤、文件系统隔离等技术实
 现最小权限原则。
@@ -118,7 +118,7 @@ Container = ⟨processes, namespaces, cgroups, image⟩
 Sandbox = ⟨filters, eBPF programs, capabilities⟩
 ```
 
-### 4. Service Mesh
+### 2.4 Service Mesh
 
 **定义**：在应用层之下提供网络服务治理的中间层，通过 Sidecar 代理模式实现流量治
 理、安全、可观测性。
@@ -136,7 +136,7 @@ Sandbox = ⟨filters, eBPF programs, capabilities⟩
 ServiceMesh = ⟨dataPlane, controlPlane, policies, observability⟩
 ```
 
-### 5. Network Service Mesh (NSM)
+### 2.5 Network Service Mesh (NSM)
 
 **定义**：将 Service Mesh 作为网络服务进行组合的架构模式，通过 vWire 实现跨域网
 络服务的聚合。
@@ -153,7 +153,7 @@ ServiceMesh = ⟨dataPlane, controlPlane, policies, observability⟩
 NSM = ⟨vL3, vWire, endpoints, federation⟩
 ```
 
-### 6. OPA (Open Policy Agent)
+### 2.6 OPA (Open Policy Agent)
 
 **定义**：提供"策略即代码"的治理范式，通过 Rego 语言定义策略，实现统一决策、版本
 化治理。
@@ -175,7 +175,7 @@ OPA = ⟨policy, data, decision, audit⟩
 
 ## 3. 概念关系
 
-### 1. 虚拟化 ⊃ 容器化 ⊃ 沙盒化
+### 3.1 虚拟化 ⊃ 容器化 ⊃ 沙盒化
 
 **关系**：包含关系（⊃）
 
@@ -191,7 +191,7 @@ OPA = ⟨policy, data, decision, audit⟩
 VM ⊃ Container ⊃ Sandbox
 ```
 
-### 2. Service Mesh ↔ NSM
+### 3.2 Service Mesh ↔ NSM
 
 **关系**：组合关系（↔）
 
@@ -207,7 +207,7 @@ VM ⊃ Container ⊃ Sandbox
 ServiceMesh ∘ NSM = UnifiedNetworkGovernance
 ```
 
-### 3. OPA ↔ Service Mesh
+### 3.3 OPA ↔ Service Mesh
 
 **关系**：组合关系（↔）
 

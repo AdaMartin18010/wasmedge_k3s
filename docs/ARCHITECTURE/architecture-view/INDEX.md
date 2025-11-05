@@ -2,7 +2,6 @@
 
 ## 📑 目录
 
-- [📑 目录](#-目录)
 - [1. 文档索引](#1-文档索引)
   - [1.1 架构拆解与组合 (`01-decomposition-composition/`)](#11-架构拆解与组合-01-decomposition-composition)
   - [1.2 虚拟化容器化沙盒化 (`02-virtualization-containerization-sandboxing/`)](#12-虚拟化容器化沙盒化-02-virtualization-containerization-sandboxing)

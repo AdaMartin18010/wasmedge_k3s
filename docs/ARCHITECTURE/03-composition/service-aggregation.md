@@ -543,9 +543,11 @@ data:
 
 ### 11.1 相关文档
 
-- **Facade/Gateway 模式**：`architecture-view/08-composition-patterns/02-facade.md`
+- **Facade/Gateway 模
+  式**：`architecture-view/08-composition-patterns/02-facade.md`
 - **Pipeline/Orchestration**：`architecture-view/08-composition-patterns/03-pipeline.md`
-- **Service Mesh 模式**：`architecture-view/08-composition-patterns/04-service-mesh-pattern.md`
+- **Service Mesh 模
+  式**：`architecture-view/08-composition-patterns/04-service-mesh-pattern.md`
 
 ### 11.2 外部资源
 

@@ -347,7 +347,8 @@ Adapter 与 OPA 集成，提供统一的策略控制：
 - `architecture-view/08-composition-patterns/01-adapter-bridge.md` -
   Adapter/Bridge 模式详细说明
 - `architecture-view/08-composition-patterns/README.md` - 组合模式总览
-- `architecture-view/08-composition-patterns/05-nsm-pattern.md#service-aggregation` - Service Aggregation 模式详细说明
+- `architecture-view/08-composition-patterns/05-nsm-pattern.md#service-aggregation` -
+  Service Aggregation 模式详细说明
 
 ### 学术资源
 
