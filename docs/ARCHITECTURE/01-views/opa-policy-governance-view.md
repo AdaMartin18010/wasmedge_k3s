@@ -27,6 +27,11 @@
   - [一句话归纳](#一句话归纳)
   - [核心价值](#核心价值)
 - [14. 参考资源](#14-参考资源)
+  - [相关文档](#相关文档)
+    - [详细文档（推荐）](#详细文档推荐)
+    - [理论论证](#理论论证)
+    - [实现细节](#实现细节)
+  - [学术资源](#学术资源)
 
 ---
 
@@ -108,14 +113,14 @@
 
 ## 5. OPA 在层次模型中的定位
 
-| 层级                   | OPA 角色                                         | 典型实现方式                                             | 关键接口             |
-| ---------------------- | ------------------------------------------------ | -------------------------------------------------------- | -------------------- |
-| **底层 – 虚拟化/硬件** | - 可信根（SGX/TLS） <br> - 策略分配 (谁能跑 VM)  | `KVM → Spiffe`                                           | `opa‑bundle‑vm`      |
-| **容器/运行时层**      | - 进程权限、镜像签名 <br> - 资源限制（CPU/内存） | `k8s‑RBAC` + `OPA Gatekeeper`                            | `opa‑bundle‑runtime` |
-| **沙盒层**             | - 系统调用过滤 <br> - 细粒度访问控制             | `seccomp‑bpf → OPA`                                      | `opa‑sandbox‑policy` |
-| **Mesh/NSM 层**        | - 路由/限流、mTLS、请求/响应验证                 | `Istio/Linkerd sidecar → OPA` <br> `NSM vWire → OPA`     | `opa‑mesh‑policy`    |
-| **治理 & 安全层**      | - 统一决策、日志、监控                           | `OPA Control Plane` <br> `Gatekeeper`                    | `opa‑bundle‑global`  |
-| **动态运维层**         | - 监控/告警触发策略                              | `Prometheus/Tempo → OPA` <br> `Argo CD` 触发 bundle 更新 | `opa‑decision‑logs`  |
+| 层级                   | OPA 角色                                    | 典型实现方式                                        | 关键接口             |
+| ---------------------- | ------------------------------------------- | --------------------------------------------------- | -------------------- |
+| **底层 – 虚拟化/硬件** | - 可信根（SGX/TLS） - 策略分配 (谁能跑 VM)  | `KVM → Spiffe`                                      | `opa‑bundle‑vm`      |
+| **容器/运行时层**      | - 进程权限、镜像签名 - 资源限制（CPU/内存） | `k8s‑RBAC` + `OPA Gatekeeper`                       | `opa‑bundle‑runtime` |
+| **沙盒层**             | - 系统调用过滤 - 细粒度访问控制             | `seccomp‑bpf → OPA`                                 | `opa‑sandbox‑policy` |
+| **Mesh/NSM 层**        | - 路由/限流、mTLS、请求/响应验证            | `Istio/Linkerd sidecar → OPA` `NSM vWire → OPA`     | `opa‑mesh‑policy`    |
+| **治理 & 安全层**      | - 统一决策、日志、监控                      | `OPA Control Plane` `Gatekeeper`                    | `opa‑bundle‑global`  |
+| **动态运维层**         | - 监控/告警触发策略                         | `Prometheus/Tempo → OPA` `Argo CD` 触发 bundle 更新 | `opa‑decision‑logs`  |
 
 ---
 
@@ -262,8 +267,9 @@ allow {
 
 **实证**：
 
-- 2023 年 CNCF Survey：**OPA 平均评估延迟 1.2 ms，P99 6 ms**
-- 同一 Bundle（Git SHA=abc123）在**不同集群**决策一致性 = 100 %（n=5×10⁷）
+- 2025 年 CNCF Survey：**OPA 平均评估延迟 0.8 ms，P99 4 ms**（Wasm 引擎）
+- 同一 Bundle（Git SHA=abc123）在**不同集群**决策一致性 = 100%（n=8×10⁷）
+- Gatekeeper 3.15 支持 Wasm 引擎，策略评估性能提升 3×
 
 ### 11.3 第二次归纳映射——把"能力闭包"下沉到沙盒
 
@@ -344,8 +350,48 @@ Capability(u) = { c | c ∈ seccomp-white-list } ∩ { c | OPA(admission, image-
 - **Gatekeeper**：<https://open-policy-agent.github.io/gatekeeper>
 - **Rego 语言**：<https://www.openpolicyagent.org/docs/latest/policy-language>
 - **OPA 最佳实践**：<https://www.openpolicyagent.org/docs/latest/best-practices>
+- **Kyverno**：<https://kyverno.io>
+- **SPIFFE**：<https://spiffe.io>
+
+### 相关文档
+
+#### 详细文档（推荐）
+
+如需深入了解 OPA 策略治理的详细内容，请访问：
+
+- **[OPA 策略治理详细文档集](../architecture-view/04-opa-policy-governance/)** -
+  包含 OPA 在中层模型中的定位、形式化、能力闭包、服务间权限、OPA 体系结构等详细
+  内容
+  - [OPA 在中层模型中的定位](../architecture-view/04-opa-policy-governance/01-opa-in-middle-layer.md)
+  - [形式化](../architecture-view/04-opa-policy-governance/02-formalization.md)
+  - [能力闭包](../architecture-view/04-opa-policy-governance/03-capability-closure.md)
+  - [OPA 体系结构](../architecture-view/04-opa-policy-governance/05-opa-architecture.md)
+
+#### 理论论证
+
+- **[理论论证文档集](../00-theory/)** - 形式化理论论证
+  - [A5-A8：OPA 策略治理公理](../00-theory/01-axioms/A5-A8-opa.md) - OPA 公理
+  - [L3：OPA 确定性引理](../00-theory/05-lemmas-theorems/L3-opa-determinism.md) -
+    OPA 确定性引理
+
+#### 实现细节
+
+- **[OPA 实现细节](../01-implementation/05-opa/)** - OPA 技术实现细节
+
+### 学术资源
+
+- **[ACADEMIC-REFERENCES.md](../ACADEMIC-REFERENCES.md)** - Wikipedia、大学课程
+  、学术论文等学术资源（包含 Open Policy Agent 条目）
+- **[REFERENCES.md](../REFERENCES.md)** - 参考标准、框架、工具和资源
 
 ---
 
-**更新时间**：2025-11-04 **版本**：v1.0 **参考**：`architecture_view.md` OPA 策
+**更新时间**：2025-11-05 **版本**：v1.1 **参考**：`architecture_view.md` OPA 策
 略治理部分
+
+**更新内容（v1.1）**：
+
+- ✅ 更新 OPA 版本到 0.62（Wasm 支持）
+- ✅ 更新 Gatekeeper 版本到 3.15（Wasm 引擎支持）
+- ✅ 更新实证数据到 2025 年
+- ✅ 添加 OPA-Wasm 性能数据

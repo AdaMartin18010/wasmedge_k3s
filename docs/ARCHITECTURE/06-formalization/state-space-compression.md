@@ -422,10 +422,12 @@
 - **容器化技术**：<https://www.docker.com/resources/what-container>
 - **沙盒化技术**：<https://gvisor.dev/>
 - **相关文档**：
-  - `06-formalization/induction-proof.md` - 归纳证明
-  - `06-formalization/category-theory.md` - 范畴论视角
-  - `05-formal-proofs/04-state-space-compression.md` - 状态空间压缩详细版
+  - `00-theory/02-induction-proof/induction-proof-complete.md` - 归纳证明
+  - `00-theory/03-category-theory/category-theory-complete.md` - 范畴论视角
+  - `00-theory/04-state-compression/state-space-compression-complete.md` - 状态
+    空间压缩详细版
 
 ---
 
-**更新时间**：2025-11-04 **版本**：v1.0 **参考**：`architecture_view.md` 状态空间压缩部分
+**更新时间**：2025-11-04 **版本**：v1.0 **参考**：`architecture_view.md` 状态空
+间压缩部分

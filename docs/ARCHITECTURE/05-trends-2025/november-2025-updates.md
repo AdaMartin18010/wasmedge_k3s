@@ -498,8 +498,7 @@
 - **Kubernetes 博客**：<https://kubernetes.io/blog>
 - **Istio 博客**：<https://istio.io/latest/news>
 - **OPA 博客**：<https://www.openpolicyagent.org/blog>
-- **生产环境数据**：`09-november-2025-special/04-empirical-analysis/` - 生产环境
-  数据实证分析
+- **生产环境数据**：`november-2025-special/04-empirical-analysis/` - 生产环境数据实证分析
 
 ---
 

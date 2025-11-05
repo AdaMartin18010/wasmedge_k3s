@@ -292,8 +292,44 @@ Request → [JWT|RBAC|RateLimit|Circuit|Retry|Transform] → upstream
 
 - **Network Service Mesh**：<https://networkservicemesh.io>
 - **Istio**：<https://istio.io>
-- **OpenTelemetry**：<https://opentelemetry.io>
-- **Spiffe**：<https://spiffe.io>
+- **NSM 文档**：<https://networkservicemesh.io/docs>
+
+### 相关文档
+
+### 详细文档（推荐）
+
+如需深入了解 Network Service Mesh 的详细内容，请访问：
+
+- **[NSM 架构详细文档](../architecture-view/03-service-mesh-nsm/04-nsm-architecture.md)** -
+  NSM 架构的详细说明
+- **[Service Mesh 详细文档集](../architecture-view/03-service-mesh-nsm/)** -
+  Service Mesh 和 NSM 的完整文档集
+
+### 理论论证
+
+- **[理论论证文档集](../00-theory/)** - 形式化理论论证
+
+### 实现细节
+
+- **[Service Mesh 实现细节](../01-implementation/04-service-mesh/)** - Service
+  Mesh 和 NSM 技术实现细节
+
+### 学术资源
+
+- **[ACADEMIC-REFERENCES.md](../ACADEMIC-REFERENCES.md)** - Wikipedia、大学课程
+  、学术论文等学术资源
+- **[REFERENCES.md](../REFERENCES.md)** - 参考标准、框架、工具和资源
+
+- `03-service-mesh-nsm/04-nsm-architecture.md` - NSM 架构详细说明
+- `03-service-mesh-nsm/05-use-cases.md` - NSM 典型用例
+- `architecture-view/08-composition-patterns/05-nsm-pattern.md` - NSM 模式详细说明
+- `architecture-view/08-composition-patterns/05-nsm-pattern.md#service-aggregation` - Service Aggregation 模式详细说明
+
+### 学术资源 1
+
+- **[ACADEMIC-REFERENCES.md](../ACADEMIC-REFERENCES.md)** - Wikipedia、大学课程
+  、学术论文等学术资源
+- **[REFERENCES.md](../REFERENCES.md)** - 参考标准、框架、工具和资源
 
 ---
 

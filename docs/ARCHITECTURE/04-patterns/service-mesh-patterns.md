@@ -28,6 +28,7 @@
   - [核心价值](#核心价值)
   - [一句话归纳](#一句话归纳)
 - [9. 参考资源](#9-参考资源)
+  - [学术资源](#学术资源)
 
 ---
 
@@ -393,9 +394,15 @@ allow {
 - **Service Mesh 模
   式**：<https://www.oreilly.com/library/view/service-mesh-patterns/>
 - **相关文档**：
-  - `04-patterns/nsm-patterns.md` - NSM 模式
-  - `04-patterns/opa-patterns.md` - OPA 模式
+  - `architecture-view/08-composition-patterns/05-nsm-pattern.md` - NSM 模式
+  - `architecture-view/04-opa-policy-governance/` - OPA 模式
   - `03-service-mesh-nsm/` - Service Mesh 和 NSM 详细文档
+
+### 学术资源
+
+- **[ACADEMIC-REFERENCES.md](../ACADEMIC-REFERENCES.md)** - Wikipedia、大学课程
+  、学术论文等学术资源（包含 Service Mesh、Istio 等条目）
+- **[REFERENCES.md](../REFERENCES.md)** - 参考标准、框架、工具和资源
 
 ---
 

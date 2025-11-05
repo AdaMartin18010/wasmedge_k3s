@@ -395,10 +395,15 @@ Performance(VM → Container → Sandbox) = Performance(VM) + Performance(Contai
 
 - **性能对比**：<https://www.benchmark.com/>
 - **安全评估**：<https://www.security.com/>
-- **属性分析**：`08-concepts-relations/concept-properties-matrix.md` - 概念属性
-  关系矩阵
-- **概念定义**：`08-concepts-relations/concept-definitions.md` - 概念定义
-- **关系图谱**：`08-concepts-relations/relationship-graph.md` - 关系图谱
+- **属性分
+  析**：`architecture-view/06-concepts-properties-relations/concept-properties-matrix.md` -
+  概念属性关系矩阵
+- **关系图
+  谱**：`architecture-view/06-concepts-properties-relations/relationship-graph.md` -
+  关系图谱
+- **概念定
+  义**：`architecture-view/06-concepts-properties-relations/concept-definitions.md` -
+  概念定义
 
 ---
 

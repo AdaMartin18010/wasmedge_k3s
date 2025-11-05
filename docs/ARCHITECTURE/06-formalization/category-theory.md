@@ -434,9 +434,10 @@ cost 是转换成本（如启动时间、资源开销等）
 - **自然变换**：<https://en.wikipedia.org/wiki/Natural_transformation>
 - **同构**：<https://en.wikipedia.org/wiki/Isomorphism>
 - **相关文档**：
-  - `06-formalization/induction-proof.md` - 归纳证明
-  - `06-formalization/state-space-compression.md` - 状态空间压缩
-  - `08-composition-patterns/` - 组合模式
+  - `00-theory/02-induction-proof/induction-proof-complete.md` - 归纳证明
+  - `00-theory/04-state-compression/state-space-compression-complete.md` - 状态
+    空间压缩
+  - `architecture-view/08-composition-patterns/` - 组合模式
 
 ---
 

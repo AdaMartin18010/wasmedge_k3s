@@ -347,9 +347,12 @@ Hardware Metrics
 - **关系图谱**：C4 Model 架构图
 - **形式化定义**：范畴论和类型论
 - **相关文档**：
-  - `08-concepts-relations/concept-definitions.md` - 概念定义
-  - `08-concepts-relations/property-relations.md` - 属性关系
-  - `08-concepts-relations/relationship-graph.md` - 关系图谱
+  - `architecture-view/06-concepts-properties-relations/concept-definitions.md` -
+    概念定义
+  - `architecture-view/06-concepts-properties-relations/property-relations.md` -
+    属性关系
+  - `architecture-view/06-concepts-properties-relations/relationship-graph.md` -
+    关系图谱
 
 ---
 

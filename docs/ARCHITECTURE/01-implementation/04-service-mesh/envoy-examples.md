@@ -1,0 +1,341 @@
+# Envoy 配置示例
+
+## 📑 目录
+
+- [1. 概述](#1-概述)
+- [2. Envoy 配置文件格式](#2-envoy-配置文件格式)
+- [3. Listener 配置](#3-listener-配置)
+- [4. Cluster 配置](#4-cluster-配置)
+- [5. Route 配置](#5-route-配置)
+- [6. Filter 配置](#6-filter-配置)
+- [7. 相关文档](#7-相关文档)
+
+---
+
+## 1. 概述
+
+本文档提供 **Envoy 代理的实际配置示例**，展示如何配置 Envoy 实现流量管理和策略执
+行。
+
+### 1.1 理论基础
+
+Envoy 配置基于以下理论论证：
+
+- **公理 A3（网络异步交付）**：消息传递语义 ≥ 共享内存语义
+- **归纳映射 Ψ₄（网络抽象层）**：将 IP:Port 抽象为 ServiceName
+- **定理 T1（身份-路由等价）**：身份-路由等价，路由函数 R(e) = v 是双射
+
+**详细理论论证**：参见 [`../../00-theory/`](../../00-theory/)
+
+---
+
+## 2. Envoy 配置文件格式
+
+### 2.1 基础配置结构
+
+```yaml
+# envoy.yaml
+static_resources:
+  listeners:
+    - name: listener_0
+      address:
+        socket_address:
+          address: 0.0.0.0
+          port_value: 8080
+      filter_chains:
+        - filters:
+            - name: envoy.filters.network.http_connection_manager
+              typed_config:
+                "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+                stat_prefix: ingress_http
+                route_config:
+                  name: local_route
+                  virtual_hosts:
+                    - name: local_service
+                      domains: ["*"]
+                      routes:
+                        - match:
+                            prefix: "/"
+                          route:
+                            cluster: service_cluster
+                http_filters:
+                  - name: envoy.filters.http.router
+                    typed_config:
+                      "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
+  clusters:
+    - name: service_cluster
+      connect_timeout: 0.25s
+      type: LOGICAL_DNS
+      lb_policy: ROUND_ROBIN
+      load_assignment:
+        cluster_name: service_cluster
+        endpoints:
+          - lb_endpoints:
+              - endpoint:
+                  address:
+                    socket_address:
+                      address: 127.0.0.1
+                      port_value: 8080
+```
+
+### 2.2 Admin 接口配置
+
+```yaml
+admin:
+  address:
+    socket_address:
+      address: 127.0.0.1
+      port_value: 9901
+```
+
+---
+
+## 3. Listener 配置
+
+### 3.1 HTTP Listener
+
+```yaml
+listeners:
+  - name: http_listener
+    address:
+      socket_address:
+        address: 0.0.0.0
+        port_value: 8080
+    filter_chains:
+      - filters:
+          - name: envoy.filters.network.http_connection_manager
+            typed_config:
+              "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+              stat_prefix: ingress_http
+              codec_type: AUTO
+              route_config:
+                name: local_route
+                virtual_hosts:
+                  - name: local_service
+                    domains: ["*"]
+                    routes:
+                      - match:
+                          prefix: "/"
+                        route:
+                          cluster: backend_service
+              http_filters:
+                - name: envoy.filters.http.router
+                  typed_config:
+                    "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
+```
+
+### 3.2 TCP Listener
+
+```yaml
+listeners:
+  - name: tcp_listener
+    address:
+      socket_address:
+        address: 0.0.0.0
+        port_value: 3306
+    filter_chains:
+      - filters:
+          - name: envoy.filters.network.tcp_proxy
+            typed_config:
+              "@type": type.googleapis.com/envoy.extensions.filters.network.tcp_proxy.v3.TcpProxy
+              stat_prefix: tcp_stats
+              cluster: mysql_cluster
+```
+
+---
+
+## 4. Cluster 配置
+
+### 4.1 静态 Cluster
+
+```yaml
+clusters:
+  - name: backend_service
+    connect_timeout: 0.25s
+    type: STATIC
+    lb_policy: ROUND_ROBIN
+    load_assignment:
+      cluster_name: backend_service
+      endpoints:
+        - lb_endpoints:
+            - endpoint:
+                address:
+                  socket_address:
+                    address: 10.0.0.1
+                    port_value: 8080
+            - endpoint:
+                address:
+                  socket_address:
+                    address: 10.0.0.2
+                    port_value: 8080
+```
+
+### 4.2 DNS Cluster
+
+```yaml
+clusters:
+  - name: dns_service
+    connect_timeout: 0.25s
+    type: LOGICAL_DNS
+    lb_policy: ROUND_ROBIN
+    load_assignment:
+      cluster_name: dns_service
+      endpoints:
+        - lb_endpoints:
+            - endpoint:
+                address:
+                  socket_address:
+                    address: service.example.com
+                    port_value: 8080
+```
+
+### 4.3 EDS Cluster
+
+```yaml
+clusters:
+  - name: eds_service
+    connect_timeout: 0.25s
+    type: EDS
+    lb_policy: ROUND_ROBIN
+    eds_cluster_config:
+      eds_config:
+        api_config_source:
+          api_type: GRPC
+          grpc_services:
+            - envoy_grpc:
+                cluster_name: xds_cluster
+```
+
+---
+
+## 5. Route 配置
+
+### 5.1 路径匹配
+
+```yaml
+routes:
+  - match:
+      prefix: "/api"
+    route:
+      cluster: api_service
+  - match:
+      prefix: "/static"
+    route:
+      cluster: static_service
+```
+
+### 5.2 Header 匹配
+
+```yaml
+routes:
+  - match:
+      prefix: "/"
+      headers:
+        - name: x-version
+          exact_match: "v2"
+    route:
+      cluster: v2_service
+  - match:
+      prefix: "/"
+    route:
+      cluster: v1_service
+```
+
+### 5.3 权重路由
+
+```yaml
+routes:
+  - match:
+      prefix: "/"
+    route:
+      weighted_clusters:
+        clusters:
+          - name: v1_service
+            weight: 90
+          - name: v2_service
+            weight: 10
+```
+
+---
+
+## 6. Filter 配置
+
+### 6.1 CORS Filter
+
+```yaml
+http_filters:
+  - name: envoy.filters.http.cors
+    typed_config:
+      "@type": type.googleapis.com/envoy.extensions.filters.http.cors.v3.Cors
+  - name: envoy.filters.http.router
+    typed_config:
+      "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
+```
+
+### 6.2 Rate Limit Filter
+
+```yaml
+http_filters:
+  - name: envoy.filters.http.ratelimit
+    typed_config:
+      "@type": type.googleapis.com/envoy.extensions.filters.http.ratelimit.v3.RateLimit
+      domain: rate_limit_domain
+      rate_limit_service:
+        grpc_service:
+          envoy_grpc:
+            cluster_name: rate_limit_service
+  - name: envoy.filters.http.router
+    typed_config:
+      "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
+```
+
+### 6.3 JWT Filter
+
+```yaml
+http_filters:
+  - name: envoy.filters.http.jwt_authn
+    typed_config:
+      "@type": type.googleapis.com/envoy.extensions.filters.http.jwt_authn.v3.JwtAuthentication
+      providers:
+        provider1:
+          issuer: https://example.com
+          audiences:
+            - api.example.com
+          remote_jwks:
+            http_uri:
+              uri: https://example.com/.well-known/jwks.json
+              cluster: jwks_cluster
+            cache_duration: 300s
+      rules:
+        - match:
+            prefix: "/"
+          requires:
+            provider_name: provider1
+  - name: envoy.filters.http.router
+    typed_config:
+      "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
+```
+
+---
+
+## 7. 相关文档
+
+### 7.1 理论论证
+
+- **`../../00-theory/02-induction-proof/psi4-network.md`** - 网络抽象层归纳映射
+- **`../../00-theory/01-axioms/A3-network-async.md`** - 网络异步交付公理
+- **`../../00-theory/05-lemmas-theorems/T1-identity-routing.md`** - 身份-路由等
+  价定理
+
+### 7.2 架构视角
+
+- **`../../01-views/service-mesh-view.md`** - Service Mesh 架构视角
+
+### 7.3 技术文档
+
+- **`../../../TECHNICAL/19-service-mesh/service-mesh.md`** - Service Mesh 技术文
+  档
+
+---
+
+**更新时间**：2025-11-04 **版本**：v1.0 **状态**：✅ 基础示例已创建

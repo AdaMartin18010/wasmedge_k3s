@@ -26,6 +26,7 @@
   - [9.2 资源管理](#92-资源管理)
   - [9.3 安全策略](#93-安全策略)
 - [10. 参考资源](#10-参考资源)
+  - [学术资源](#学术资源)
 
 ---
 
@@ -190,6 +191,14 @@ VM → Container → Service Mesh (Istio)
     虚拟化抽象详细说明
   - `02-layers/hypervisor-kernel-layer.md` - Hypervisor/Kernel 层详细说明
   - `07-case-studies/payment-gateway.md` - 支付网关案例（包含虚拟化实践）
+  - **[实现细节文档](../01-implementation/01-virtualization/)** - KVM、QEMU、虚
+    拟机代码示例
+
+### 学术资源
+
+- **[ACADEMIC-REFERENCES.md](../ACADEMIC-REFERENCES.md)** - Wikipedia、大学课程
+  、学术论文等学术资源（包含 Virtualization、Hypervisor、Xen、KVM 等条目）
+- **[REFERENCES.md](../REFERENCES.md)** - 参考标准、框架、工具和资源
 
 ---
 

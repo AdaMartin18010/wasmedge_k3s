@@ -135,7 +135,8 @@
 - **`docs/ARCHITECTURE/`** - 架构视角文档集
   - [多视角架构视图](../01-views/) - 从不同视角理解架构
   - [分层架构模型](../02-layers/) - 从硬件到业务的分层抽象
-  - [组合模式与实践](../03-composition/) - 架构组合的核心模式
+  - [组合模式与实践](../architecture-view/08-composition-patterns/) - 架构组合的
+    核心模式
   - [形式化理论](../06-formalization/) - 数学基础与理论
   - [概念属性关系](../08-concepts-relations/) - 概念、属性、关系的系统梳理
 

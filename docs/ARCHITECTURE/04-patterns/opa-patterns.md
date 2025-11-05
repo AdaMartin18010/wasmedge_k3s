@@ -32,6 +32,7 @@
   - [3. 策略版本化](#3-策略版本化)
   - [4. 决策审计](#4-决策审计)
 - [9. 参考资源](#9-参考资源)
+  - [学术资源](#学术资源)
 
 ---
 
@@ -421,9 +422,16 @@ Policy.rego (Git) ──> CI/CD ──> OPA Bundle ──> OPA Agent
 - **Rego 语言**：<https://www.openpolicyagent.org/docs/latest/policy-language/>
 - **策略即代码**：<https://www.openpolicyagent.org/docs/latest/policy-as-code/>
 - **相关文档**：
-  - `04-patterns/service-mesh-patterns.md` - Service Mesh 模式
+  - `architecture-view/08-composition-patterns/04-service-mesh-pattern.md` -
+    Service Mesh 模式
   - `04-opa-policy-governance/` - OPA 策略治理详细文档
   - `07-case-studies/financial-system.md` - 金融系统案例（包含 OPA 策略）
+
+### 学术资源
+
+- **[ACADEMIC-REFERENCES.md](../ACADEMIC-REFERENCES.md)** - Wikipedia、大学课程
+  、学术论文等学术资源（包含 Open Policy Agent 条目）
+- **[REFERENCES.md](../REFERENCES.md)** - 参考标准、框架、工具和资源
 
 ---
 

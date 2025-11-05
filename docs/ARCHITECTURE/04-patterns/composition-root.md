@@ -29,6 +29,7 @@
   - [核心价值](#核心价值)
   - [一句话归纳](#一句话归纳)
 - [9. 参考资源](#9-参考资源)
+  - [学术资源](#学术资源)
 
 ---
 
@@ -362,9 +363,16 @@ allow {
 - **Istio**：<https://istio.io>
 - **OPA**：<https://www.openpolicyagent.org>
 - **相关文档**：
-  - `04-patterns/service-mesh-patterns.md` - Service Mesh 模式
-  - `04-patterns/opa-patterns.md` - OPA 模式
-  - `03-composition/composition-patterns.md` - 组合模式概述
+  - `architecture-view/08-composition-patterns/04-service-mesh-pattern.md` -
+    Service Mesh 模式
+  - `architecture-view/04-opa-policy-governance/` - OPA 模式
+  - `architecture-view/08-composition-patterns/README.md` - 组合模式概述
+
+### 学术资源
+
+- **[ACADEMIC-REFERENCES.md](../ACADEMIC-REFERENCES.md)** - Wikipedia、大学课程
+  、学术论文等学术资源
+- **[REFERENCES.md](../REFERENCES.md)** - 参考标准、框架、工具和资源
 
 ---
 

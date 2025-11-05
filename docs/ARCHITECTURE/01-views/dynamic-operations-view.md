@@ -495,10 +495,34 @@ spec:
 
 - **Argo CD**：<https://argoproj.github.io/argo-cd>
 - **Flux**：<https://fluxcd.io>
-- **OpenTelemetry**：<https://opentelemetry.io>
 - **Prometheus**：<https://prometheus.io>
-- **Kubernetes
-  HPA**：<https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale>
+- **OpenTelemetry**：<https://opentelemetry.io>
+- **Grafana**：<https://grafana.com>
+
+### 相关文档
+
+#### 详细文档（推荐）
+
+如需深入了解动态运维的详细内容，请访问：
+
+- **[动态运维详细文档集](../architecture-view/07-dynamic-operations/)** - 包含
+  GitOps、可观测性、弹性伸缩、CI/CD、混沌工程等详细内容
+  - [GitOps](../architecture-view/07-dynamic-operations/01-gitops.md)
+  - [可观测性](../architecture-view/07-dynamic-operations/02-observability.md)
+  - [弹性伸缩](../architecture-view/07-dynamic-operations/03-autoscaling.md)
+  - [CI/CD](../architecture-view/07-dynamic-operations/04-ci-cd.md)
+  - [混沌工程](../architecture-view/07-dynamic-operations/05-chaos-engineering.md)
+
+#### 实现细节
+
+- **[GitOps 实现细节](../01-implementation/04-service-mesh/)** - GitOps 和 CI/CD
+  技术实现细节
+
+### 学术资源
+
+- **[ACADEMIC-REFERENCES.md](../ACADEMIC-REFERENCES.md)** - Wikipedia、大学课程
+  、学术论文等学术资源
+- **[REFERENCES.md](../REFERENCES.md)** - 参考标准、框架、工具和资源
 
 ---
 

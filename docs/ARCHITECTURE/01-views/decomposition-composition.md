@@ -22,6 +22,8 @@
   - [9.2 组合趋势](#92-组合趋势)
   - [9.3 工具趋势](#93-工具趋势)
 - [10. 参考资源](#10-参考资源)
+  - [相关文档](#相关文档)
+  - [学术资源](#学术资源)
 
 ---
 
@@ -192,10 +194,18 @@ Category_Arch = ⟨Objects, Morphisms, Composition⟩
   Fowler)**：<https://martinfowler.com/books/eaa.html>
 - **"C4 Model" (Simon Brown)**：<https://c4model.com/>
 - **ArchiMate / UML**：<https://www.opengroup.org/archimate>
-- **相关文档**：
-  - `01-decomposition-composition/01-5-step-process.md` - 5 步流程详细说明
-  - `03-composition/composition-patterns.md` - 组合模式详细说明
-  - `08-composition-patterns/` - 组合模式详细文档
+
+### 相关文档
+
+- `01-decomposition-composition/01-5-step-process.md` - 5 步流程详细说明
+- `architecture-view/08-composition-patterns/` - 组合模式详细文档（⚠️
+  `03-composition/` 已删除）
+
+### 学术资源
+
+- **[ACADEMIC-REFERENCES.md](../ACADEMIC-REFERENCES.md)** - Wikipedia、大学课程
+  、学术论文等学术资源
+- **[REFERENCES.md](../REFERENCES.md)** - 参考标准、框架、工具和资源
 
 ---
 

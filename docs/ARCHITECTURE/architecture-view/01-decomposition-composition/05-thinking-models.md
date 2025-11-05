@@ -48,7 +48,7 @@
 
 ### 2.2 层次结构
 
-```
+```text
 ┌─────────────────────────────────┐
 │  外层（表现层）                  │
 │  - SPA、移动 App、WebAPI        │
@@ -518,7 +518,7 @@ OpenTelemetry ──> OPA ──> ArgoCD
 
 #### 10.1.1 层次化
 
-```
+```text
 表现层（SPA、移动 App）
     ↓
 应用层（业务服务）
@@ -561,7 +561,7 @@ OpenTelemetry ──> OPA ──> ArgoCD
 
 #### 10.2.1 层次化
 
-```
+```text
 表现层（Web API）
     ↓
 应用层（交易服务、风险服务、合规服务）
@@ -629,5 +629,5 @@ OpenTelemetry ──> OPA ──> ArgoCD
 
 - [架构拆解与组合：5 步流程](./01-5-step-process.md)
 - [分层拆解：9 层架构模型](./02-layered-decomposition.md)
-- [组合模式](./03-composition-patterns.md)
+- [组合模式](../08-composition-patterns/)
 - [接口与契约](./04-interfaces-contracts.md)

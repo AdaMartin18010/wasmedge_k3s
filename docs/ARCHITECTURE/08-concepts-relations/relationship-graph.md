@@ -346,9 +346,9 @@ A → B := ∀x ∈ A: ∃y ∈ B: x depends on y
 
 - **关系图谱**：<https://www.graphviz.org/>
 - **架构关系**：<https://www.c4model.com/>
-- **关系分析**：`08-concepts-relations/concept-properties-matrix.md` - 概念属性
-  关系矩阵
-- **概念定义**：`08-concepts-relations/concept-definitions.md` - 概念定义
+- **关系分析**：`architecture-view/06-concepts-properties-relations/concept-properties-matrix.md` - 概念属性关系矩阵
+- **属性关系**：`architecture-view/06-concepts-properties-relations/property-relations.md` - 属性关系详细分析
+- **概念定义**：`architecture-view/06-concepts-properties-relations/concept-definitions.md` - 概念定义
 
 ---
 

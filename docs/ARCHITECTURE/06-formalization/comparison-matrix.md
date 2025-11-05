@@ -275,8 +275,8 @@
 - **安全评估**：CIS Kubernetes Benchmark
 - **成本分析**：云服务成本计算器
 - **相关文档**：
-  - `06-formalization/state-space-compression.md` - 状态空间压缩
-  - `08-concepts-relations/concept-properties-matrix.md` - 概念属性关系矩阵
+  - `00-theory/04-state-compression/state-space-compression-complete.md` - 状态空间压缩
+  - `architecture-view/06-concepts-properties-relations/concept-properties-matrix.md` - 概念属性关系矩阵
   - `05-trends-2025/november-2025-updates.md` - 2025 年 11 月技术趋势
 
 ---

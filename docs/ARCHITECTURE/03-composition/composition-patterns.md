@@ -422,11 +422,17 @@ data:
 - **Istio 文档**：<https://istio.io/latest/docs/>
 - **Temporal 文档**：<https://docs.temporal.io/>
 - **相关文档**：
-  - `03-composition/adapter-bridge-pattern.md` - Adapter/Bridge 模式详细说明
-  - `03-composition/facade-gateway-pattern.md` - Facade/Gateway 模式详细说明
-  - `03-composition/pipeline-orchestration.md` - Pipeline/Orchestration 模式详细
-    说明
+  - `architecture-view/08-composition-patterns/01-adapter-bridge.md` -
+    Adapter/Bridge 模式详细说明
+  - `architecture-view/08-composition-patterns/02-facade.md` - Facade/Gateway 模
+    式详细说明
+  - `architecture-view/08-composition-patterns/03-pipeline.md` -
+    Pipeline/Orchestration 模式详细说明
+  - `architecture-view/08-composition-patterns/05-nsm-pattern.md#service-aggregation` -
+    Service Aggregation 模式详细说明
   - `08-composition-patterns/` - 组合模式详细文档
+- **学术资源**：
+  - `ACADEMIC-REFERENCES.md` - Wikipedia、大学课程、学术论文等学术资源
 
 ---
 

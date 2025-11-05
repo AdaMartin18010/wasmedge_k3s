@@ -9,7 +9,8 @@
 - [5. Service Mesh 模式优势](#5-service-mesh-模式优势)
 - [6. Service Mesh 模式与其他模式](#6-service-mesh-模式与其他模式)
 - [7. 形式化定义](#7-形式化定义)
-- [8. 总结](#8-总结)
+- [8. 相关文档](#8-相关文档)
+- [9. 总结](#9-总结)
 
 ---
 
@@ -307,7 +308,22 @@ Control Plane C = ⟨config, discovery, security, observability⟩
 - observability: 可观测性管理
 ```
 
-## 8. 总结
+## 8. 相关文档
+
+### 8.1 组合模式文档
+
+- **[组合模式文档集](README.md)** - 组合模式文档集说明
+- **[Service Mesh Patterns](./04-service-mesh-pattern.md)** - Service Mesh 模式（本文件）
+- **[Service Aggregation 模式](./05-nsm-pattern.md#service-aggregation)** - Service Aggregation 模式（在本目录中）
+- **[Service Mesh 与 NSM](../03-service-mesh-nsm/)** - Service Mesh 和 NSM 的组合模式
+
+### 8.2 参考资源
+
+- **[REFERENCES.md](../../REFERENCES.md)** - 参考标准、框架、工具和资源
+- **[ACADEMIC-REFERENCES.md](../../ACADEMIC-REFERENCES.md)** - Wikipedia、大学课
+  程、学术论文等学术资源
+
+## 9. 总结
 
 通过**Service Mesh 模式**，我们实现了：
 
@@ -316,6 +332,8 @@ Control Plane C = ⟨config, discovery, security, observability⟩
 3. **配置驱动**：通过 CRD 配置流量治理，无需修改代码
 4. **可观测性**：自动注入遥测数据，实现统一可观测性
 5. **安全性**：通过 mTLS 和 AuthorizationPolicy 实现安全治理
+
+**相关模式**：Service Mesh 模式可以与 Service Aggregation 模式结合使用，Service Mesh 负责流量治理，Service Aggregation 负责服务聚合。详细内容请参考 [Service Aggregation 模式](./05-nsm-pattern.md#service-aggregation)。
 
 ---
 

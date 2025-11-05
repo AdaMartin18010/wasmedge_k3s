@@ -220,7 +220,7 @@ Service Mesh (Istio) + NSM (vWire) + OPA (策略)
   - `02-layers/sandbox-layer.md` - 沙盒层详细说明
   - `02-layers/service-mesh-layer.md` - Service Mesh 层详细说明
   - `02-layers/application-layer.md` - 应用层详细说明
-  - `06-formalization/state-space-compression.md` - 状态空间压缩形式化证明
+  - `00-theory/04-state-compression/state-space-compression-complete.md` - 状态空间压缩形式化证明
 
 ---
 

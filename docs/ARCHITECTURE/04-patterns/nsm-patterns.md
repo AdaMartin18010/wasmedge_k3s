@@ -31,6 +31,8 @@
   - [3. 可观测性优先](#3-可观测性优先)
   - [4. 安全策略](#4-安全策略)
 - [9. 参考资源](#9-参考资源)
+  - [相关文档](#相关文档)
+  - [学术资源](#学术资源)
 
 ---
 
@@ -335,14 +337,22 @@ allow {
 ## 9. 参考资源
 
 - **Network Service Mesh**：<https://networkservicemesh.io/>
-- **Istio
-  Multi-cluster**：<https://istio.io/latest/docs/setup/install/multicluster/>
-- **Linkerd Multi-cluster**：<https://linkerd.io/2/features/multicluster/>
-- **SPIFFE**：<https://spiffe.io/>
-- **相关文档**：
-  - `04-patterns/service-mesh-patterns.md` - Service Mesh 模式
-  - `03-service-mesh-nsm/04-nsm-architecture.md` - NSM 架构
-  - `07-case-studies/multi-cloud-hybrid.md` - 多云混合架构案例
+- **Istio**：<https://istio.io>
+- **NSM 文档**：<https://networkservicemesh.io/docs>
+
+### 相关文档
+
+- `architecture-view/08-composition-patterns/05-nsm-pattern.md` - NSM 模式详细说
+  明
+- `01-views/network-service-mesh-view.md` - Network Service Mesh 视角文档
+- `architecture-view/08-composition-patterns/05-nsm-pattern.md#service-aggregation` -
+  Service Aggregation 模式详细说明
+
+### 学术资源
+
+- **[ACADEMIC-REFERENCES.md](../ACADEMIC-REFERENCES.md)** - Wikipedia、大学课程
+  、学术论文等学术资源
+- **[REFERENCES.md](../REFERENCES.md)** - 参考标准、框架、工具和资源
 
 ---
 

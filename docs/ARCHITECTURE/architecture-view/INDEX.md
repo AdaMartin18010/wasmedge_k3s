@@ -13,7 +13,10 @@
   - [7. 动态运维 (`07-dynamic-operations/`)](#7-动态运维-07-dynamic-operations)
   - [8. 组合模式 (`08-composition-patterns/`)](#8-组合模式-08-composition-patterns)
   - [9. 多视角分析 (`09-multi-perspectives/`)](#9-多视角分析-09-multi-perspectives)
-  - [10. 2025 年 11 月更新 (`10-november-2025-updates/`)](#10-2025-年-11-月更新-10-november-2025-updates)
+  - [10. 2025 年 11 月更新 ⚠️ 已删除（内容合并到 `05-trends-2025/`）](#10-2025-年-11-月更新-️-已删除内容合并到-05-trends-2025)
+- [🔗 相关文档](#-相关文档)
+  - [参考资源](#参考资源)
+  - [组合模式文档](#组合模式文档)
 
 ---
 
@@ -44,243 +47,203 @@
   - Pipeline / Orchestrator
 
 - [04. 接口与契约](01-decomposition-composition/04-interfaces-contracts.md)
+
   - API 文档
   - gRPC/Protobuf
   - 事件 Schema
   - 数据模型
 
+- [05. 思维模型](01-decomposition-composition/05-thinking-models.md)
+
+  - 层次化
+  - 领域边界
+  - 接口契约
+  - 组合模式
+  - 技术栈
+  - 可持续
+
+---
+
 ### 2. 虚拟化容器化沙盒化 (`02-virtualization-containerization-sandboxing/`)
 
 - [01. 虚拟化抽象](02-virtualization-containerization-sandboxing/01-virtualization-abstraction.md)
 
-  - VM 资源池抽象
+  - 硬件抽象
+  - VM 资源池
   - Hypervisor 层
-  - 资源隔离与调度
 
 - [02. 容器化抽象](02-virtualization-containerization-sandboxing/02-containerization-abstraction.md)
 
-  - 轻量容器抽象
-  - 运行时环境
-  - 镜像管理
+  - OS 抽象
+  - 轻量容器
+  - 共享内核
 
 - [03. 沙盒化抽象](02-virtualization-containerization-sandboxing/03-sandboxing-abstraction.md)
 
-  - 系统调用过滤
-  - 文件系统隔离
-  - 最小权限模型
+  - 进程抽象
+  - 安全进程
+  - 隔离边界
 
-- [04. 递进抽象论证](02-virtualization-containerization-sandboxing/04-progressive-abstraction.md)
+- [04. 递进抽象](02-virtualization-containerization-sandboxing/04-progressive-abstraction.md)
 
-  - 三层抽象的形式化
-  - 状态空间压缩证明
-  - 动态性论证
+  - 抽象层次
+  - 状态压缩
+  - 形式化映射
 
-- [05. 矩阵对比](02-virtualization-containerization-sandboxing/05-comparison-matrix.md)
-  - 隔离级别对比
-  - 资源开销对比
-  - 启动时间对比
-  - 安全模型对比
+- [05. 对比矩阵](02-virtualization-containerization-sandboxing/05-comparison-matrix.md)
+
+  - 技术对比
+  - 性能对比
+  - 安全对比
+
+---
 
 ### 3. 服务网格与网络服务网格 (`03-service-mesh-nsm/`)
 
-- [01. 节点聚合](03-service-mesh-nsm/01-node-aggregation.md)
+- [01. Service Mesh 架构](03-service-mesh-nsm/01-service-mesh-architecture.md)
 
-  - 从"物理地址"到"身份-驱动拓扑"
-  - 拓扑动态生成
-  - 负载均衡算法
+  - Sidecar 模式
+  - 控制平面
+  - 数据平面
 
-- [02. 服务组合](03-service-mesh-nsm/02-service-composition.md)
+- [02. Network Service Mesh 架构](03-service-mesh-nsm/02-nsm-architecture.md)
 
-  - 从"跨服务流"到"可编排的本地函数"
-  - Filter Chain
-  - 灰度发布
+  - vWire 连接
+  - 跨域网络
+  - 统一网络抽象
 
-- [03. 范式重塑](03-service-mesh-nsm/03-paradigm-reshaping.md)
+- [03. 流量治理](03-service-mesh-nsm/03-traffic-governance.md)
 
-  - "先定接口，再定部署" → "先定流量，再定接口"
-  - "分层图" → "过滤器图"
-  - 非功能性从"后期治理"变为"设计期可组合元素"
+  - 流量路由
+  - 负载均衡
+  - 熔断降级
 
 - [04. NSM 架构](03-service-mesh-nsm/04-nsm-architecture.md)
 
-  - vL3 / vWire
-  - Client / Endpoint
-  - 多集群 Federation
+  - vWire 连接
+  - 跨域聚合
+  - 网络服务组合
 
-- [05. 典型用例](03-service-mesh-nsm/05-use-cases.md)
-  - 混合云
-  - 多租户 SaaS
-  - 边缘计算
-  - 混合身份
+---
 
 ### 4. OPA 策略治理 (`04-opa-policy-governance/`)
 
-- [01. OPA 在中层模型中的定位](04-opa-policy-governance/01-opa-in-middle-layer.md)
+- [01. OPA 架构](04-opa-policy-governance/01-opa-architecture.md)
 
-  - ℳ = ⟨U, G, P⟩
-  - OPA 负责 security 策略
-  - 从"人读基线"到"机读可验证约束"
+  - 策略即代码
+  - 统一决策
+  - 版本治理
 
-- [02. 安全形式化](04-opa-policy-governance/02-formalization.md)
+- [02. 策略语言](04-opa-policy-governance/02-policy-language.md)
 
-  - 能力闭包（A5）
-  - 最小权限（A6）
-  - 可证明性（A7）
-  - 版本一致性（A8）
+  - Rego 语言
+  - 策略规则
+  - 策略测试
 
-- [03. 能力闭包](04-opa-policy-governance/03-capability-closure.md)
+- [03. 策略执行](04-opa-policy-governance/03-policy-execution.md)
 
-  - gVisor + OPA
-  - 双层闸门
-  - 编译期 + 运行期
+  - 决策点
+  - 执行点
+  - 策略分发
 
-- [04. 服务间权限](04-opa-policy-governance/04-service-permissions.md)
-
-  - Service Mesh + OPA
-  - SPIFFE ID
-  - Rego 策略
-
-- [05. OPA 体系结构](04-opa-policy-governance/05-opa-architecture.md)
-  - PDP / PEP / OCP
-  - Bundle
-  - Decision Log
+---
 
 ### 5. 形式化论证 (`05-formal-proofs/`)
 
-- [01. 公理层](05-formal-proofs/01-axioms.md)
+> **注意**：本目录已删除，内容已合并到 `../../00-theory/` 目录。详细内容请参考：
+>
+> - [`../../00-theory/`](../../00-theory/) - 完整的理论论证文档集
+> - [`../../00-theory/README.md`](../../00-theory/README.md) - 理论论证文档集总览
 
-  - A1: 冯·诺依曼等价
-  - A2: OS 资源封闭
-  - A3: 网络异步交付
-  - A4: 分层可抽象
-
-- [02. 归纳证明](05-formal-proofs/02-induction-proof.md)
-
-  - 基础归纳步（n=0）
-  - 第一次归纳映射（Ψ₁）
-  - 第二次归纳映射（Ψ₂）
-  - 第三次归纳映射（Ψ₃）
-  - 网络抽象归纳（Ψ₄）
-
-- [03. 范畴论视角](05-formal-proofs/03-category-theory.md)
-
-  - 对象/算子集合
-  - 函子与态射
-  - 组合运算
-  - 同态映射
-
-- [04. 状态空间压缩](05-formal-proofs/04-state-space-compression.md)
-
-  - 状态压缩比
-  - 状态向量定义
-  - 差分进化
-
-- [05. 封闭证明](05-formal-proofs/05-closure-proof.md)
-  - 待证命题 P(n)
-  - 基础步
-  - 归纳步
-  - 结论
+---
 
 ### 6. 概念属性关系 (`06-concepts-properties-relations/`)
 
 - [01. 概念定义](06-concepts-properties-relations/01-concept-definitions.md)
 
-  - VM / Container / Sandbox
-  - Service Mesh / NSM
-  - OPA / Policy
+  - 核心概念
+  - 概念分类
+  - 概念关系
 
-- [02. 属性矩阵](06-concepts-properties-relations/02-property-matrix.md)
+- [02. 属性关系](06-concepts-properties-relations/02-property-relations.md)
 
-  - 隔离级别
-  - 资源开销
-  - 启动时间
-  - 安全模型
+  - 属性定义
+  - 属性分类
+  - 属性关系
 
-- [03. 关系图](06-concepts-properties-relations/03-relationship-graph.md)
+- [03. 关系图谱](06-concepts-properties-relations/03-relationship-graph.md)
 
-  - 虚拟化 ⊃ 容器化
-  - 容器化 ⊃ 沙盒化
-  - 沙盒化 ↔ 服务网格
-  - 服务网格 ↔ NSM
+  - 关系定义
+  - 关系分类
+  - 关系图谱
 
-- [04. 拓展](06-concepts-properties-relations/04-extensions.md)
+- [04. 拓展场景](06-concepts-properties-relations/04-extensions.md)
 
-  - 边缘计算
-  - 无服务器
-  - AI 推理
-  - 多租户
+  - 拓展概念
+  - 拓展属性
+  - 拓展关系
 
-- [05. 形式化映射](06-concepts-properties-relations/05-formal-mapping.md)
-  - 对象 → 范畴
-  - 算子 → 函子
-  - 组合 → 态射
-  - 同态 → 性能/安全/观测
+---
 
 ### 7. 动态运维 (`07-dynamic-operations/`)
 
 - [01. GitOps](07-dynamic-operations/01-gitops.md)
 
-  - ArgoCD
-  - Flux
-  - Git 仓库即真相源
+  - Git 驱动
+  - 自动化部署
+  - 版本控制
 
-- [02. 可观测性](07-dynamic-operations/02-observability.md)
+- [02. Observability](07-dynamic-operations/02-observability.md)
 
-  - OpenTelemetry
-  - Prometheus
-  - Tempo / Jaeger
-  - Grafana
+  - 监控
+  - 日志
+  - 追踪
 
-- [03. 弹性伸缩](07-dynamic-operations/03-autoscaling.md)
+- [03. Autoscaling](07-dynamic-operations/03-autoscaling.md)
 
   - HPA
   - VPA
-  - Knative
-  - Argo Rollouts
+  - 集群扩缩容
 
-- [04. CI/CD](07-dynamic-operations/04-ci-cd.md)
-
-  - GitHub Actions
-  - Jenkins
-  - Tekton
-  - 自动化构建测试部署
-
-- [05. 混沌工程](07-dynamic-operations/05-chaos-engineering.md)
-  - Chaos Monkey
-  - Litmus
-  - 故障注入
-  - 可靠性测试
+---
 
 ### 8. 组合模式 (`08-composition-patterns/`)
 
-- [01. 适配器/桥接](08-composition-patterns/01-adapter-bridge.md)
+- [01. Adapter / Bridge 模式](08-composition-patterns/01-adapter-bridge.md)
 
-  - gRPC ↔ REST
-  - Docker ↔ K8s
   - 跨技术边界
+  - 协议转换
+  - 运行时适配
 
-- [02. Facade 模式](08-composition-patterns/02-facade.md)
+- [02. Facade / Gateway 模式](08-composition-patterns/02-facade.md)
 
   - 统一接口
-  - 隐藏复杂性
-  - 简化客户端使用
+  - 服务聚合
+  - API Gateway
 
-- [03. Pipeline 模式](08-composition-patterns/03-pipeline.md)
+- [03. Pipeline / Orchestration 模式](08-composition-patterns/03-pipeline.md)
 
-  - 顺序执行
+  - 流程编排
   - 数据流
-  - 独立处理
+  - 步骤组合
 
 - [04. Service Mesh 模式](08-composition-patterns/04-service-mesh-pattern.md)
 
-  - Sidecar
-  - Control Plane
-  - Data Plane
+  - Sidecar 模式
+  - 流量治理
+  - mTLS
 
 - [05. NSM 模式](08-composition-patterns/05-nsm-pattern.md)
-  - Sidecar
-  - Control Plane
-  - Data Plane
+  - vWire 连接
+  - 跨域网络聚合
+  - 多 Mesh 叠加
+
+**相关文档**：
+
+- [Service Aggregation 模式](../08-composition-patterns/05-nsm-pattern.md#service-aggregation) - Service Aggregation 模式（在 NSM 模式文档中）
+- [组合模式文档集](../08-composition-patterns/README.md) - 组合模式文档集总览
+
+---
 
 ### 9. 多视角分析 (`09-multi-perspectives/`)
 
@@ -319,29 +282,42 @@
   - 日志
   - 追踪
 
-### 10. 2025 年 11 月更新 (`10-november-2025-updates/`)
+---
 
-- [01. 2025 年 11 月趋势](10-november-2025-updates/01-trends-november-2025.md)
+### 10. 2025 年 11 月更新 ⚠️ 已删除（内容合并到 `05-trends-2025/`）
 
-  - 虚拟化趋势
-  - 容器化趋势
-  - 服务网格趋势
-  - 策略治理趋势
-
-- [02. 技术更新](10-november-2025-updates/02-technology-updates.md)
-
-  - 技术动态
-  - 技术趋势
-  - 技术选择建议
-
-- [03. 最佳实践](10-november-2025-updates/03-best-practices.md)
-  - 虚拟化最佳实践
-  - 容器化最佳实践
-  - 沙盒化最佳实践
-  - Service Mesh 最佳实践
-  - OPA 最佳实践
-  - 动态运维最佳实践
+> **注意**：`10-november-2025-updates/` 目录已删除，内容已合并到
+> `../../05-trends-2025/`。详细内容请参考：
+>
+> - [`../../05-trends-2025/trends-november-2025.md`](../../05-trends-2025/trends-november-2025.md) -
+>   2025 年 11 月趋势（合并自
+>   `10-november-2025-updates/01-trends-november-2025.md`）
+> - [`../../05-trends-2025/technology-updates.md`](../../05-trends-2025/technology-updates.md) -
+>   技术更新（合并自 `10-november-2025-updates/02-technology-updates.md`）
+> - [`../../05-trends-2025/best-practices.md`](../../05-trends-2025/best-practices.md) -
+>   最佳实践（合并自 `10-november-2025-updates/03-best-practices.md`）
+> - [`../../05-trends-2025/README.md`](../../05-trends-2025/README.md) - 趋势文
+>   档总览
 
 ---
 
-**更新时间**：2025-11-04 **版本**：v1.0
+## 🔗 相关文档
+
+### 参考资源
+
+- **`REFERENCES.md`** - 参考标准、框架、工具和资源
+- **`ACADEMIC-REFERENCES.md`** - Wikipedia、大学课程、学术论文等学术资源
+
+### 组合模式文档
+
+- **[组合模式文档集](../08-composition-patterns/README.md)** - 组合模式文档集总览
+- **[Adapter / Bridge 模式](../08-composition-patterns/01-adapter-bridge.md)** - Adapter/Bridge 模式
+- **[Facade / Gateway 模式](../08-composition-patterns/02-facade.md)** - Facade/Gateway 模式
+- **[Pipeline / Orchestration 模式](../08-composition-patterns/03-pipeline.md)** - Pipeline/Orchestration 模式
+- **[Service Mesh 模式](../08-composition-patterns/04-service-mesh-pattern.md)** - Service Mesh 模式
+- **[NSM 模式](../08-composition-patterns/05-nsm-pattern.md)** - NSM 模式
+- **[Service Aggregation 模式](../08-composition-patterns/05-nsm-pattern.md#service-aggregation)** - Service Aggregation 模式（在 NSM 模式文档中）
+
+---
+
+**更新时间**：2025-11-05 **版本**：v1.1（更新引用）

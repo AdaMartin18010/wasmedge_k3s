@@ -35,7 +35,10 @@ architecture-view/
 │   ├── 01-5-step-process.md         # 5步拆分与组合流程
 │   ├── 02-layered-decomposition.md  # 分层拆解
 │   ├── 03-composition-patterns.md  # 组合模式
-│   └── 04-interfaces-contracts.md  # 接口与契约
+│   ├── 04-interfaces-contracts.md  # 接口与契约
+│   ├── 05-thinking-models.md        # 思维模型
+│   ├── 06-architecture-focus.md     # 架构关注领域聚焦
+│   └── 07-conclusion-practices.md  # 结语与实践建议
 ├── 02-virtualization-containerization-sandboxing/  # 三层抽象
 │   ├── 01-virtualization-abstraction.md          # 虚拟化抽象
 │   ├── 02-containerization-abstraction.md         # 容器化抽象
@@ -73,6 +76,7 @@ architecture-view/
 │   ├── 04-ci-cd.md                  # CI/CD
 │   └── 05-chaos-engineering.md       # 混沌工程
 ├── 08-composition-patterns/         # 组合模式
+│   ├── README.md                     # 组合模式文档集说明
 │   ├── 01-adapter-bridge.md         # 适配器/桥接
 │   ├── 02-facade.md                  # Facade 模式
 │   ├── 03-pipeline.md                # Pipeline 模式

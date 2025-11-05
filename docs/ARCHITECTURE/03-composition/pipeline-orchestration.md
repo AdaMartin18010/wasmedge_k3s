@@ -616,6 +616,27 @@ Pipeline / Orchestration 组合模式提供了：
 通过这些特性，Pipeline / Orchestration 组合模式实现了复杂业务流程的自动化编排，
 为云原生应用提供了强大的工作流管理能力。
 
+## 11. 参考资源
+
+- **Temporal**：<https://temporal.io>
+- **Argo Workflows**：<https://argoproj.github.io/argo-workflows>
+- **Apache Airflow**：<https://airflow.apache.org>
+- **Saga Pattern**：分布式事务模式
+
+### 相关文档
+
+- `architecture-view/08-composition-patterns/03-pipeline.md` - Pipeline 模式详细
+  说明
+- `architecture-view/08-composition-patterns/README.md` - 组合模式总览
+- `architecture-view/08-composition-patterns/05-nsm-pattern.md#service-aggregation` -
+  Service Aggregation 模式详细说明
+
+### 学术资源
+
+- **[ACADEMIC-REFERENCES.md](../ACADEMIC-REFERENCES.md)** - Wikipedia、大学课程
+  、学术论文等学术资源
+- **[REFERENCES.md](../REFERENCES.md)** - 参考标准、框架、工具和资源
+
 ---
 
 **更新时间**：2025-11-04 **版本**：v1.0 **参考**：`architecture_view.md` 第 4 节

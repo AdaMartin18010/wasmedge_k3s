@@ -322,6 +322,18 @@ Facade/Gateway 与 OPA 集成，提供统一的策略控制：
 - **Istio Gateway**：Istio 网关文档
 - **Kong Gateway**：Kong API 网关文档
 
+### 相关文档
+
+- `architecture-view/08-composition-patterns/02-facade.md` - Facade 模式详细说明
+- `architecture-view/08-composition-patterns/README.md` - 组合模式总览
+- `architecture-view/08-composition-patterns/05-nsm-pattern.md#service-aggregation` - Service Aggregation 模式详细说明
+
+### 学术资源
+
+- **[ACADEMIC-REFERENCES.md](../ACADEMIC-REFERENCES.md)** - Wikipedia、大学课程
+  、学术论文等学术资源
+- **[REFERENCES.md](../REFERENCES.md)** - 参考标准、框架、工具和资源
+
 ---
 
 **更新时间**：2025-11-04 **版本**：v1.0 **参考**：`architecture_view.md`

@@ -37,7 +37,7 @@ Kubernetes → K3s → WasmEdge → OPA** 的完整技术栈，包含理念、�
 
 **核心文档**：
 
-- [`ai_view.md`](ai_view.md) - 认知视角和技术演进主线
+- [`docs/ARCHIVE/standalone-themes/ai_view.md`](docs/ARCHIVE/standalone-themes/ai_view.md) - 认知视角和技术演进主线（已归档）
 - [`docs/COGNITIVE/00-knowledge-map/`](docs/COGNITIVE/00-knowledge-map/) - 认知
   图谱和学习路径
 - [`docs/COGNITIVE/01-overview/`](docs/COGNITIVE/01-overview/) - 技术栈总览和决
@@ -48,6 +48,8 @@ Kubernetes → K3s → WasmEdge → OPA** 的完整技术栈，包含理念、�
   技术决策模型与架构选择
 - [`docs/COGNITIVE/29-isolation-stack/`](docs/TECHNICAL/29-isolation-stack/) -
   隔离栈理论模型（认知层）
+
+**注意**：`ai_view.md` 和 `algebra_view.md` 已归档到 `docs/ARCHIVE/standalone-themes/`，因为它们与云原生架构主题无关。
 
 **完整列表**：详见 [`docs/COGNITIVE/README.md`](docs/COGNITIVE/README.md)
 
@@ -84,7 +86,7 @@ Kubernetes → K3s → WasmEdge → OPA** 的完整技术栈，包含理念、�
 2. **[认知图谱](docs/COGNITIVE/00-knowledge-map/knowledge-map.md)** - 快速理解知
    识结构和学习路径
 3. **[理念层](docs/COGNITIVE/02-principles/principles.md)** - 理解云原生核心思想
-4. **[认知视角](ai_view.md)** - 掌握技术演进主线和认知框架
+4. **[认知视角](docs/ARCHIVE/standalone-themes/ai_view.md)** - 掌握技术演进主线和认知框架（已归档）
 5. **[Docker 基础](docs/TECHNICAL/00-docker/docker.md)** - 掌握容器技术基础
 
 ### 进阶学习路径
@@ -114,7 +116,7 @@ Kubernetes → K3s → WasmEdge → OPA** 的完整技术栈，包含理念、�
 
 **新手推荐**：
 
-1. 先阅读**认知模型文档**（如 `ai_view.md`）建立整体认知框架
+1. 先阅读**认知模型文档**（如 [`docs/ARCHIVE/standalone-themes/ai_view.md`](docs/ARCHIVE/standalone-themes/ai_view.md)）建立整体认知框架
 2. 再根据需要查阅**技术参考文档**深入学习具体技术
 
 **按需查阅**：
@@ -246,6 +248,6 @@ Kubernetes → K3s → WasmEdge → OPA** 的完整技术栈，包含理念、�
 
 ---
 
-**最后更新**：2025-11-03 **维护者**：项目团队
+**最后更新**：2025-11-05 **维护者**：项目团队
 
 **文档集完整目录**：详见 [`docs/README.md`](docs/README.md)

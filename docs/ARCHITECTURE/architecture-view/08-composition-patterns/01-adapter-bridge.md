@@ -9,7 +9,8 @@
 - [5. 容器运行时适配器](#5-容器运行时适配器)
 - [6. 网络适配器](#6-网络适配器)
 - [7. 最佳实践](#7-最佳实践)
-- [8. 总结](#8-总结)
+- [8. 相关文档](#8-相关文档)
+- [9. 总结](#9-总结)
 
 ---
 
@@ -227,7 +228,23 @@ spec:
 3. **可扩展性**：支持多种实现
 4. **性能考虑**：减少桥接开销
 
-## 8. 总结
+## 8. 相关文档
+
+### 8.1 组合模式文档
+
+- **[组合模式文档集](README.md)** - 组合模式文档集说明
+- **[Adapter / Bridge 模式](./01-adapter-bridge.md)** - Adapter/Bridge 模式（本
+  文件）
+- **[Service Aggregation 模式](./05-nsm-pattern.md#service-aggregation)** -
+  Service Aggregation 模式（在本目录中）
+
+### 8.2 参考资源
+
+- **[REFERENCES.md](../../REFERENCES.md)** - 参考标准、框架、工具和资源
+- **[ACADEMIC-REFERENCES.md](../../ACADEMIC-REFERENCES.md)** - Wikipedia、大学课
+  程、学术论文等学术资源
+
+## 9. 总结
 
 适配器/桥接模式通过**跨技术边界**实现了：
 

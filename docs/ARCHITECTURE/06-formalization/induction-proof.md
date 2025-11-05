@@ -325,8 +325,8 @@ VM 镜像 1~10 GB，启动 10~60 s，**颗粒度仍太重**→ 需第二次映�
 - **图灵完备性**：<https://en.wikipedia.org/wiki/Turing_completeness>
 - **状态空间压缩**：<https://en.wikipedia.org/wiki/State_space_compression>
 - **相关文档**：
-  - `06-formalization/category-theory.md` - 范畴论视角
-  - `06-formalization/state-space-compression.md` - 状态空间压缩
+  - `00-theory/03-category-theory/category-theory-complete.md` - 范畴论视角
+  - `00-theory/04-state-compression/state-space-compression-complete.md` - 状态空间压缩
   - `05-formal-proofs/02-induction-proof.md` - 归纳证明详细版
 
 ---

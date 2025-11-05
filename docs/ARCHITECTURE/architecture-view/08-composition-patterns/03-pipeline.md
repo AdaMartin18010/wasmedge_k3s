@@ -9,7 +9,8 @@
 - [5. Pipeline 模式优势](#5-pipeline-模式优势)
 - [6. Pipeline 模式变体](#6-pipeline-模式变体)
 - [7. 形式化定义](#7-形式化定义)
-- [8. 总结](#8-总结)
+- [8. 相关文档](#8-相关文档)
+- [9. 总结](#9-总结)
 
 ---
 
@@ -329,7 +330,23 @@ Pipeline 连接 C = ⟨source, target, condition⟩
 - condition: 连接条件
 ```
 
-## 8. 总结
+## 8. 相关文档
+
+### 8.1 组合模式文档
+
+- **[组合模式文档集](README.md)** - 组合模式文档集说明
+- **[Pipeline / Orchestration 模式](./03-pipeline.md)** - Pipeline/Orchestration
+  模式（本文件）
+- **[Service Aggregation 模式](./05-nsm-pattern.md#service-aggregation)** -
+  Service Aggregation 模式（在本目录中）
+
+### 8.2 参考资源
+
+- **[REFERENCES.md](../../REFERENCES.md)** - 参考标准、框架、工具和资源
+- **[ACADEMIC-REFERENCES.md](../../ACADEMIC-REFERENCES.md)** - Wikipedia、大学课
+  程、学术论文等学术资源
+
+## 9. 总结
 
 通过**Pipeline 模式**，我们实现了：
 
@@ -338,6 +355,10 @@ Pipeline 连接 C = ⟨source, target, condition⟩
 3. **独立处理**：每个步骤独立处理，易于测试和扩展
 4. **可组合**：步骤可以组合和重用，提高可复用性
 5. **可观测**：可以追踪和监控每个步骤的执行
+
+**相关模式**：Pipeline 模式与 Service Aggregation 模式可以结合使用，Pipeline 负
+责流程编排，Service Aggregation 负责服务聚合。详细内容请参考
+[Service Aggregation 模式](./05-nsm-pattern.md#service-aggregation)。
 
 ---
 

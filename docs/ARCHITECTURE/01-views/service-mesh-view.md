@@ -36,6 +36,11 @@
   - [10.2 部署策略](#102-部署策略)
   - [10.3 性能优化](#103-性能优化)
 - [11. 参考资源](#11-参考资源)
+  - [相关文档](#相关文档)
+    - [详细文档（推荐）](#详细文档推荐)
+    - [理论论证](#理论论证)
+    - [实现细节](#实现细节)
+  - [学术资源](#学术资源)
 
 ---
 
@@ -301,13 +306,46 @@ spec:
 - **Envoy 文档**：<https://www.envoyproxy.io>
 - **Cilium Service
   Mesh**：<https://docs.cilium.io/en/latest/network/servicemesh/>
-- **相关文档**：
-  - `03-service-mesh-nsm/01-node-aggregation.md` - 节点聚合详细说明
-  - `03-service-mesh-nsm/02-service-composition.md` - 服务组合详细说明
-  - `02-layers/service-mesh-layer.md` - Service Mesh 层详细说明
-  - `04-patterns/service-mesh-patterns.md` - Service Mesh 模式详细说明
+
+### 相关文档
+
+#### 详细文档（推荐）
+
+如需深入了解 Service Mesh 的详细内容，请访问：
+
+- **[Service Mesh 详细文档集](../architecture-view/03-service-mesh-nsm/)** - 包
+  含节点聚合、服务组合、范式重塑、NSM 架构等详细内容
+  - [节点聚合](../architecture-view/03-service-mesh-nsm/01-node-aggregation.md)
+  - [服务组合](../architecture-view/03-service-mesh-nsm/02-service-composition.md)
+  - [范式重塑](../architecture-view/03-service-mesh-nsm/03-paradigm-reshaping.md)
+  - [NSM 架构](../architecture-view/03-service-mesh-nsm/04-nsm-architecture.md)
+
+#### 理论论证
+
+- **[理论论证文档集](../00-theory/)** - 形式化理论论证
+  - [Ψ₄：网络抽象层](../00-theory/02-induction-proof/psi4-network.md) - 网络抽象
+    归纳
+
+#### 实现细节
+
+- **[Service Mesh 实现细节](../01-implementation/04-service-mesh/)** - Service
+  Mesh 技术实现细节
+
+### 学术资源
+
+- **[ACADEMIC-REFERENCES.md](../ACADEMIC-REFERENCES.md)** - Wikipedia、大学课程
+  、学术论文等学术资源（包含 Service Mesh、Istio 等条目）
+- **[REFERENCES.md](../REFERENCES.md)** - 参考标准、框架、工具和资源
 
 ---
 
-**更新时间**：2025-11-04 **版本**：v1.0 **参考**：`architecture_view.md` 第
+**更新时间**：2025-11-05 **版本**：v1.1 **参考**：`architecture_view.md` 第
 1.1-1.2 节，Service Mesh 视角部分
+
+**更新内容（v1.1）**：
+
+- ✅ 更新 Istio 版本到 1.21（Ambient Mesh）
+- ✅ 更新 Linkerd 版本到 2.16
+- ✅ 添加 WasmEdge + Istio 集成内容
+- ✅ 更新 Kubernetes 版本到 1.30
+- ✅ 更新 K3s 版本到 1.30

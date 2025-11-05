@@ -342,6 +342,19 @@ Adapter 与 OPA 集成，提供统一的策略控制：
 - **grpc-gateway**：gRPC 到 REST 的网关
 - **Docker Multi-arch**：Docker 多架构支持
 
+### 相关文档
+
+- `architecture-view/08-composition-patterns/01-adapter-bridge.md` -
+  Adapter/Bridge 模式详细说明
+- `03-composition/composition-patterns.md` - 组合模式总览
+- `03-composition/service-aggregation.md` - Service Aggregation 模式详细说明
+
+### 学术资源
+
+- **[ACADEMIC-REFERENCES.md](../ACADEMIC-REFERENCES.md)** - Wikipedia、大学课程
+  、学术论文等学术资源
+- **[REFERENCES.md](../REFERENCES.md)** - 参考标准、框架、工具和资源
+
 ---
 
 **更新时间**：2025-11-04 **版本**：v1.0 **参考**：`architecture_view.md`

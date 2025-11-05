@@ -10,7 +10,8 @@
 - [6. NSM 模式优势](#6-nsm-模式优势)
 - [7. NSM 模式与其他模式](#7-nsm-模式与其他模式)
 - [8. 形式化定义](#8-形式化定义)
-- [9. 总结](#9-总结)
+- [9. 相关文档](#9-相关文档)
+- [10. 总结](#10-总结)
 
 ---
 
@@ -309,7 +310,26 @@ Endpoint E = ⟨name, address, port, service⟩
 - service: 所属服务
 ```
 
-## 9. 总结
+## 9. 相关文档
+
+### 9.1 组合模式文档
+
+- **[组合模式文档集](README.md)** - 组合模式文档集说明
+- **[NSM 模式](./05-nsm-pattern.md)** - NSM 模式（本文件）
+- **[Service Aggregation 模式](./05-nsm-pattern.md#service-aggregation)** -
+  Service Aggregation 模式（在本文件中）
+- **[Service Mesh 与 NSM](../03-service-mesh-nsm/)** - Service Mesh 和 NSM 的组
+  合模式
+- **[Network Service Mesh 视角](../../01-views/network-service-mesh-view.md)** -
+  Network Service Mesh 视角文档
+
+### 9.2 参考资源
+
+- **[REFERENCES.md](../../REFERENCES.md)** - 参考标准、框架、工具和资源
+- **[ACADEMIC-REFERENCES.md](../../ACADEMIC-REFERENCES.md)** - Wikipedia、大学课
+  程、学术论文等学术资源
+
+## 10. 总结
 
 通过**NSM 模式**，我们实现了：
 
@@ -318,6 +338,10 @@ Endpoint E = ⟨name, address, port, service⟩
 3. **细粒度治理**：通过 vWire 实现细粒度流量治理
 4. **多 Mesh 叠加**：支持多个 Service Mesh 叠加，灵活组合
 5. **透明连接**：透明的跨域连接，简化网络配置
+
+**相关模式**：NSM 模式与 Service Aggregation 模式可以结合使用，NSM 负责跨域网络
+聚合，Service Aggregation 负责服务聚合。详细内容请参考
+[Service Aggregation 模式](./05-nsm-pattern.md#service-aggregation)。
 
 ---
 

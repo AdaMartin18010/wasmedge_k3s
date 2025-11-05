@@ -28,6 +28,7 @@
   - [3. 配置管理](#3-配置管理)
   - [4. 安全实践](#4-安全实践)
 - [8. 参考资源](#8-参考资源)
+  - [学术资源](#学术资源)
 
 ---
 
@@ -343,7 +344,13 @@ spec:
 - **相关文档**：
   - `07-dynamic-operations/01-gitops.md` - GitOps 详细文档
   - `07-case-studies/e-commerce-platform.md` - 电商平台案例（包含 GitOps 实践）
-  - `04-patterns/opa-patterns.md` - OPA 模式（GitOps 集成）
+  - `architecture-view/04-opa-policy-governance/` - OPA 模式（GitOps 集成）
+
+### 学术资源
+
+- **[ACADEMIC-REFERENCES.md](../ACADEMIC-REFERENCES.md)** - Wikipedia、大学课程
+  、学术论文等学术资源
+- **[REFERENCES.md](../REFERENCES.md)** - 参考标准、框架、工具和资源
 
 ---
 

@@ -47,6 +47,11 @@
   - [12.2 安全策略](#122-安全策略)
   - [12.3 实施步骤](#123-实施步骤)
 - [13. 参考资源](#13-参考资源)
+  - [相关文档](#相关文档)
+    - [详细文档（推荐）](#详细文档推荐)
+    - [理论论证](#理论论证)
+    - [实现细节](#实现细节)
+  - [学术资源](#学术资源)
 
 ---
 
@@ -310,6 +315,35 @@ spec:
 
 ## 13. 参考资源
 
+### 相关文档
+
+#### 详细文档（推荐）
+
+如需深入了解沙盒化的详细内容，请访问：
+
+- **[沙盒化抽象详细文档](../architecture-view/02-virtualization-containerization-sandboxing/03-sandboxing-abstraction.md)** -
+  沙盒化的详细形式化论证
+- **[递进抽象论证](../architecture-view/02-virtualization-containerization-sandboxing/04-progressive-abstraction.md)** -
+  虚拟化-容器化-沙盒化-WebAssembly 的递进抽象
+- **[对比矩阵](../architecture-view/02-virtualization-containerization-sandboxing/05-comparison-matrix.md)** -
+  虚拟化、容器化、沙盒化、WebAssembly 对比
+
+#### 理论论证
+
+- **[理论论证文档集](../00-theory/)** - 形式化理论论证
+  - [Ψ₃：沙盒化层](../00-theory/02-induction-proof/psi3-sandboxing.md) - 第三次
+    归纳映射
+
+#### 实现细节
+
+- **[沙盒化实现细节](../01-implementation/03-sandboxing/)** - 沙盒化技术实现细节
+
+### 学术资源
+
+- **[ACADEMIC-REFERENCES.md](../ACADEMIC-REFERENCES.md)** - Wikipedia、大学课程
+  、学术论文等学术资源
+- **[REFERENCES.md](../REFERENCES.md)** - 参考标准、框架、工具和资源
+
 - **seccomp**：<https://www.kernel.org/doc/Documentation/prctl/seccomp_filter.txt>
 - **AppArmor**：<https://apparmor.net/>
 - **SELinux**：<https://selinuxproject.org/>
@@ -323,6 +357,8 @@ spec:
     沙盒化抽象详细说明
   - `02-layers/sandbox-layer.md` - 沙盒层详细说明
   - `04-opa-policy-governance/03-capability-closure.md` - 能力闭包详细说明
+  - **[实现细节文档](../01-implementation/03-sandboxing/)** -
+    seccomp、gVisor、Firecracker 配置示例
 
 ---
 
