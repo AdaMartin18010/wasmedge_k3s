@@ -103,6 +103,8 @@
 
 **相关文档**：
 
+- **[31. eBPF 技术堆栈](../31-ebpf-stack/ebpf-stack.md)** - eBPF 内核可编程技术
+  堆栈，网络加速、可观测性应用（2025-11-07）
 - **[29. 隔离栈 - 网络定位专题](../29-isolation-stack/isolation-stack.md#29612-网络定位专题横向生命线)** -
   网络作为横向生命线的定位方法，OTLP + eBPF 联合网络问题定位，网络在三栈里的"切
   片"视图，网络定位五步法
@@ -1529,6 +1531,8 @@ iptables -L -n | grep ingress
 
 **网络定位与故障排查**：
 
+- **[31. eBPF 技术堆栈](../31-ebpf-stack/ebpf-stack.md)** - eBPF 内核可编程技术
+  堆栈，网络加速、可观测性应用（2025-11-07）
 - **[29. 隔离栈 - 网络定位专题](../29-isolation-stack/isolation-stack.md#29612-网络定位专题横向生命线)** -
   网络作为横向生命线的定位方法，OTLP + eBPF 联合网络问题定位
   - [网络在三栈里的"切片"视图](../29-isolation-stack/isolation-stack.md#296121-网络在三栈里的切片视图) -

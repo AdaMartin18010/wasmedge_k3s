@@ -1067,6 +1067,11 @@ docker images --format "{{.Repository}}:{{.Tag}} {{.Size}}" | sort -k2 -h | tail
   技术规格
 - **[虚拟化与容器化存储对比分析](../15-storage-stack/virtualization-comparison.md)** -
   存储性能对比、成本分析（2025-11-07）
+- **[31. eBPF 技术堆栈](../31-ebpf-stack/ebpf-stack.md)** - eBPF 内核可编程技术
+  堆栈
+  - eBPF 成本效益分析（ROI 212.5%，3.8 个月回收期）
+  - 资源占用对比（Sidecar vs eBPF：90%+ 内存节省，80%+ CPU 节省）
+  - 技术选型决策过程（决策流程图、决策矩阵、实际案例）（2025-11-07）
 
 ### 24.10.4 其他相关文档
 

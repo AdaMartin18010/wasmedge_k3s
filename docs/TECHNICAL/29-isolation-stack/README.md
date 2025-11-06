@@ -154,6 +154,8 @@
   词定义
 - **[16. 监控与可观测性](../16-observability/observability.md)** -
   OTLP、OpenTelemetry、Jaeger 等技术规范
+- **[31. eBPF 技术堆栈](../31-ebpf-stack/ebpf-stack.md)** - eBPF 内核可编程技术
+  堆栈，网络加速、可观测性应用（2025-11-07）
 - **[11. 故障排查](../11-troubleshooting/troubleshooting.md)** - 常见故障排查方
   法
 - **[12. 虚拟化/半虚拟化/容器化/沙盒化严格定义](../../COGNITIVE/10-decision-models/06-technical-concepts/12-virtualization-paravirtualization-containerization-sandboxing-strict-definition.md)** -
@@ -163,4 +165,4 @@
 
 ---
 
-**最后更新**：2025-11-06 **维护者**：项目团队
+**最后更新**：2025-11-07 **维护者**：项目团队

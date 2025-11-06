@@ -101,7 +101,7 @@
 2. **[存储技术规格](15-storage-stack/storage-stack.md)** - CSI、PV/PVC
    - **[虚拟化与容器化存储对比分析](15-storage-stack/virtualization-comparison.md)** -
      范式转换、架构对比、性能分析（2025-11-07）
-3. **[eBPF 技术堆栈](31-ebpf-stack/ebpf-stack.md)** - 内核可编程技术堆栈（1361
+3. **[eBPF 技术堆栈](31-ebpf-stack/ebpf-stack.md)** - 内核可编程技术堆栈（1481
    行）
    - **文档目录**：[README.md](31-ebpf-stack/README.md) - 完整的文档结构说明和快
      速导航
@@ -423,14 +423,14 @@
 - **[虚拟化与容器化存储对比分析](15-storage-stack/virtualization-comparison.md)** -
   范式转换、架构对比、性能分析（1036 行）
 - **[eBPF 技术堆栈](31-ebpf-stack/ebpf-stack.md)** - 内核可编程技术堆栈，网络加
-  速、可观测性、服务网格、安全应用（1361 行，深度论证和分析）
+  速、可观测性、服务网格、安全应用（1481 行，深度论证和分析）
 
 **文档整合**：
 
 - 将 `network_view.md` 和 `storage_view.md` 整合到技术文档体系
 - 创建 eBPF 技术堆栈完整文档，对齐 2025-11-07 技术栈状态
 - 建立与技术规格文档的互补关系
-- 完善交叉引用体系，与 35+ 个相关文档建立关联
+- 完善交叉引用体系，与 44+ 个相关文档建立关联
 
 **文档内容补充**（2025-11-07 后续更新）：
 
@@ -454,7 +454,14 @@
   （Fleet Wasm 策略）
 - **[镜像仓库](21-image-registry/image-registry.md)**：新增 1 处交叉引用（OCI
   Artifact v1.1）
-- **总计**：9 处交叉引用，提升文档可导航性和完整性
+- **[网络技术规格](12-network-stack/network-stack.md)**：新增 2 处 eBPF 技术堆栈
+  引用
+- **[隔离栈对比文档](29-isolation-stack/layers/isolation-comparison.md)**：日期
+  同步，eBPF 引用已存在
+- **[隔离栈 README](29-isolation-stack/README.md)**：新增 1 处 eBPF 技术堆栈引用
+- **[成本优化](24-cost-optimization/cost-optimization.md)**：新增 eBPF 技术堆栈
+  引用（双向）
+- **总计**：17+ 处交叉引用，提升文档可导航性和完整性
 
 **适用场景**：
 

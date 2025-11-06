@@ -2216,7 +2216,8 @@ graph TB
   网络范式转换、架构对比、性能分析（2025-11-07）
 - **[虚拟化与容器化存储对比分析](../15-storage-stack/virtualization-comparison.md)** -
   存储范式转换、架构对比、性能分析（2025-11-07）
-- **[31. eBPF 技术堆栈](../31-ebpf-stack/ebpf-stack.md)** - eBPF 内核可编程技术堆栈
+- **[31. eBPF 技术堆栈](../31-ebpf-stack/ebpf-stack.md)** - eBPF 内核可编程技术
+  堆栈
   - 可观测性：OTLP + eBPF 横纵耦合定位（横向请求链 + 纵向隔离栈）
   - 概念关系：eBPF 在概念关系矩阵中的应用和关系分析
   - 技术选型：eBPF 技术选型决策和性能对比（2025-11-07）
