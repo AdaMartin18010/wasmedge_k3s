@@ -217,7 +217,22 @@ spec:
 4. **持续改进**：根据实验结果持续改进系统
 5. **自动化**：通过工具自动化混沌实验
 
+### 7.1 相关文档
+
+**扩展阅读**：
+
+- **[eBPF/OTLP 架构视角](../09-multi-perspectives/07-ebpf-otlp-perspective.md)**
+  ⭐ - 横纵耦合的可观测性驱动架构
+  - **自我治愈：从发现到恢复的闭环**（5.3 章节）
+  - 故障模式的内核态检测（内存泄漏、死锁、DNS 解析超时、容器逃逸）
+  - OTLP 驱动的自愈编排（事件驱动的自愈工作流）
+  - 自愈能力分级模型（L1-L4：局部隔离、服务重启、流量调度、架构降级）
+- **[可观测性文档](../07-dynamic-operations/02-observability.md)** - 统一遥测与
+  监控
+- **[32. eBPF/OTLP 扩展技术分析](../../../TECHNICAL/32-ebpf-otlp-analysis/ebpf-otlp-analysis.md)**
+  ⭐ - eBPF/OTLP 扩展技术分析文档
+
 ---
 
-**更新时间**：2025-11-04 **版本**：v1.0 **参考**：`architecture_view.md` 第 30
+**更新时间**：2025-11-07 **版本**：v1.1 **参考**：`architecture_view.md` 第 30
 行，混沌工程部分

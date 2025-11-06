@@ -29,6 +29,7 @@
 3. **Service Mesh / Network Service Mesh**：网络服务的聚合与组合
 4. **OPA (Open Policy Agent)**：策略即代码的治理范式
 5. **动态运维**：GitOps、Observability、Autoscaling
+6. **eBPF/OTLP 架构视角**：横纵耦合的可观测性驱动架构 ⭐
 
 ### 2. 文档结构
 
@@ -110,17 +111,28 @@ ARCHITECTURE/
     ├── 06-concepts-properties-relations/
     ├── 07-dynamic-operations/
     ├── 08-composition-patterns/
-    ├── 09-multi-perspectives/
-    └── 10-november-2025-updates/
+    ├── 09-multi-perspectives/           # 多视角分析
+    │   ├── README.md                     # 多视角文档集说明
+    │   ├── 01-functional-perspective.md  # 功能视角
+    │   ├── 02-structural-perspective.md  # 结构视角
+    │   ├── 03-behavioral-perspective.md  # 行为视角
+    │   ├── 04-data-perspective.md        # 数据视角
+    │   ├── 05-security-perspective.md    # 安全视角
+    │   ├── 06-observability-perspective.md # 可观测视角
+    │   └── 07-ebpf-otlp-perspective.md  # eBPF/OTLP 视角 ⭐ 新增
+    └── 10-november-2025-updates/        # ⚠️ 已删除（内容合并到 05-trends-2025/）
 ```
 
 ### 3. 相关文档
 
 #### 3.1 文档一致性
 
-- **[文档一致性分析报告](../DOCUMENTATION-CONSISTENCY-ANALYSIS.md)** ⭐ - 文档一致性全面分析报告（2025-11-07）
-- **[文档一致性总结](../DOCUMENTATION-CONSISTENCY-SUMMARY.md)** - 文档一致性修复完成总结（2025-11-07）
-- **[文档一致性检查清单](../DOCUMENTATION-CONSISTENCY-CHECKLIST.md)** ⭐ - 文档一致性检查清单（快速参考）
+- **[文档一致性分析报告](../DOCUMENTATION-CONSISTENCY-ANALYSIS.md)** ⭐ - 文档一
+  致性全面分析报告（2025-11-07）
+- **[文档一致性总结](../DOCUMENTATION-CONSISTENCY-SUMMARY.md)** - 文档一致性修复
+  完成总结（2025-11-07）
+- **[文档一致性检查清单](../DOCUMENTATION-CONSISTENCY-CHECKLIST.md)** ⭐ - 文档
+  一致性检查清单（快速参考）
 
 #### 3.2 其他文档目录
 
@@ -141,7 +153,17 @@ ARCHITECTURE/
     展**：[07-case-studies/system-view-cases-analysis.md](07-case-studies/system-view-cases-analysis.md)
     ⭐ 新增
 - **技术文档**：`docs/TECHNICAL/` - 技术实现细节
+  - **[32. eBPF/OTLP 扩展技术分析](../TECHNICAL/32-ebpf-otlp-analysis/ebpf-otlp-analysis.md)**
+    ⭐ - eBPF/OTLP 扩展技术分析文档
+  - **[31. eBPF 技术堆栈](../TECHNICAL/31-ebpf-stack/ebpf-stack.md)** - eBPF 技
+    术堆栈完整技术参考文档
+  - **[29. 隔离栈](../TECHNICAL/29-isolation-stack/isolation-stack.md)** - 问题
+    定位模型、横纵耦合定位方法
 - **认知模型**：`docs/COGNITIVE/` - 认知框架和理论模型
+  - **[13. eBPF/OTLP 认知视角](../COGNITIVE/13-ebpf-otlp-perspective/ebpf-otlp-perspective.md)**
+    ⭐ - eBPF/OTLP 认知视角分析文档
+- **多视角文档**：`../../ebpf_otlp_view.md` ⭐ - eBPF/OTLP 视角完整文档（1438 行
+  ）
 - **参考资源**：[REFERENCES.md](REFERENCES.md) - 参考标准、框架、工具和资源
 - **学术资源**：[ACADEMIC-REFERENCES.md](ACADEMIC-REFERENCES.md) - Wikipedia、大
   学课程、学术论文等学术资源
@@ -169,10 +191,11 @@ ARCHITECTURE/
 视图文档集，包含：
 
 - ✅ 10 个主要目录
-- ✅ 53 个详细文档
+- ✅ 54 个详细文档（新增 eBPF/OTLP 架构视角）
 - ✅ 统一的格式和结构
 - ✅ 完整的索引和总结
 - ✅ 最新的技术动态（2025 年 11 月）
+- ✅ 多视角分析（7 个视角，新增 eBPF/OTLP 视角）⭐
 
 **其他目录**：`01-views/` 提供快捷入口，`02-layers/` 提供分层模型
 ，`07-case-studies/` 提供案例研究。
@@ -193,15 +216,19 @@ ARCHITECTURE/
 - **[格式统一](FORMAT-UNIFIED-2025-11-04.md)** - 格式统一完成情况
 - **[重构完成报告](REFACTORING-COMPLETE-V2-2025-11-04.md)** ⭐ -
   `architecture_view.md` v2.0 重构完成报告
+- **[更新总结（2025-11-07）](UPDATE-2025-11-07.md)** ⭐ 新增 - eBPF/OTLP 架构视
+  角文档整合总结
 
 **对齐统计**：
 
-- ✅ **114 个文档**已全部对齐（新增 3 个文档）
+- ✅ **115 个文档**已全部对齐（新增 eBPF/OTLP 架构视角文档）
 - ✅ **100% 对齐度**，所有核心内容都已覆盖
 - ✅ **文档结构**统一，格式规范
-- ✅ **交叉引用**完整，链接有效（20+ 个理论论证文档链接）
+- ✅ **交叉引用**完整，链接有效（20+ 个理论论证文档链接，新增 eBPF/OTLP 相关引用
+  ）
 - ✅ **学术资源**对齐到 Wikipedia 和著名大学课程
 - ✅ **源文档重构**：`architecture_view.md` v2.0 已完成（压缩比 71%，结构清晰）
+- ✅ **多视角完善**：新增 eBPF/OTLP 架构视角，多视角分析文档达到 7 个
 - 📋 **实现细节文档**：`01-implementation/` 目录结构已创建，待完善内容
 
 ## 📋 文档重构情况

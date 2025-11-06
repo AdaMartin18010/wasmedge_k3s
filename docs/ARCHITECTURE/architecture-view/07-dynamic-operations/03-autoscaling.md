@@ -397,7 +397,23 @@ VPA = ⟨target, updateMode, resourcePolicy⟩
 4. **渐进式交付**：通过 Argo Rollouts 实现安全的部署和回滚
 5. **组合使用**：HPA + VPA + Argo Rollouts 组合使用
 
+### 10.1 相关文档
+
+**扩展阅读**：
+
+- **[eBPF/OTLP 架构视角](../09-multi-perspectives/07-ebpf-otlp-perspective.md)**
+  ⭐ - 横纵耦合的可观测性驱动架构
+  - **自动伸缩：从响应式到预测式的演进**（5.2 章节）
+  - 细粒度指标驱动（Socket 队列积压、goroutine 阻塞数、JVM 老年代分配速率、TCP
+    重传率）
+  - 实时反馈控制回路（eBPF 采集 → OTLP Metrics → HPA 决策）
+  - 智能容量规划（基于 eBPF 的记帐机制 + OTLP 成本关联模型）
+- **[可观测性文档](../07-dynamic-operations/02-observability.md)** - 统一遥测与
+  监控
+- **[32. eBPF/OTLP 扩展技术分析](../../../TECHNICAL/32-ebpf-otlp-analysis/ebpf-otlp-analysis.md)**
+  ⭐ - eBPF/OTLP 扩展技术分析文档
+
 ---
 
-**更新时间**：2025-11-04 **版本**：v1.0 **参考**：`architecture_view.md` 第
+**更新时间**：2025-11-07 **版本**：v1.1 **参考**：`architecture_view.md` 第
 1320-1330 行，弹性伸缩部分

@@ -765,6 +765,10 @@ Dynamic Software World
 ### 10.2 架构视角文档
 
 - **[多视角架构视图](docs/ARCHITECTURE/01-views/)** - 不同视角的架构视图
+- **[多视角架构分析](docs/ARCHITECTURE/architecture-view/09-multi-perspectives/)** -
+  功能、结构、行为、数据、安全、可观测性、eBPF/OTLP 等多视角分析
+  - **[eBPF/OTLP 架构视角](docs/ARCHITECTURE/architecture-view/09-multi-perspectives/07-ebpf-otlp-perspective.md)**
+    ⭐ - 横纵耦合的可观测性驱动架构
 - **[分层架构模型](docs/ARCHITECTURE/02-layers/)** - 从硬件到业务的分层抽象
 - **[组合模式与实践](docs/ARCHITECTURE/03-composition/)** - 架构组合的核心模式
 

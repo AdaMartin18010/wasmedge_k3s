@@ -353,7 +353,25 @@ Application Layer
 4. **自动化**：通过 sidecar 自动注入遥测
 5. **弹性调优**：通过指标支持弹性调优和故障排查
 
+### 11.1 相关文档
+
+**扩展阅读**：
+
+- **[eBPF/OTLP 架构视角](../09-multi-perspectives/07-ebpf-otlp-perspective.md)**
+  ⭐ - 横纵耦合的可观测性驱动架构
+  - 横纵耦合问题定位模型（OTLP 横向 + eBPF 纵向）
+  - 智能系统能力架构（自我感知、自动伸缩、自我治愈）
+  - 技术规范与语义模型对齐
+- **[可观测性视角](../09-multi-perspectives/06-observability-perspective.md)** -
+  传统可观测性视角
+- **[32. eBPF/OTLP 扩展技术分析](../../../TECHNICAL/32-ebpf-otlp-analysis/ebpf-otlp-analysis.md)**
+  ⭐ - eBPF/OTLP 扩展技术分析文档
+- **[31. eBPF 技术堆栈](../../../TECHNICAL/31-ebpf-stack/ebpf-stack.md)** - eBPF
+  技术堆栈完整技术参考文档
+- **[29. 隔离栈](../../../TECHNICAL/29-isolation-stack/isolation-stack.md)** -
+  问题定位模型、横纵耦合定位方法
+
 ---
 
-**更新时间**：2025-11-04 **版本**：v1.0 **参考**：`architecture_view.md` 第
+**更新时间**：2025-11-07 **版本**：v1.1 **参考**：`architecture_view.md` 第
 1320-1330 行，可观测性部分

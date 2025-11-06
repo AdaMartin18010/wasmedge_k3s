@@ -272,7 +272,23 @@ Grafana
 4. **统一可观测性**：统一的可观测性架构
 5. **可视化**：数据的可视化展示
 
+### 11.1 相关文档
+
+**扩展阅读**：
+
+- **[eBPF/OTLP 架构视角](07-ebpf-otlp-perspective.md)** ⭐ - 横纵耦合的可观测性
+  驱动架构
+  - 横纵耦合问题定位模型（OTLP 横向 + eBPF 纵向）
+  - 智能系统能力架构（自我感知、自动伸缩、自我治愈）
+  - 技术规范与语义模型对齐
+- **[32. eBPF/OTLP 扩展技术分析](../../../../TECHNICAL/32-ebpf-otlp-analysis/ebpf-otlp-analysis.md)**
+  ⭐ - eBPF/OTLP 扩展技术分析文档
+- **[31. eBPF 技术堆栈](../../../../TECHNICAL/31-ebpf-stack/ebpf-stack.md)** -
+  eBPF 技术堆栈完整技术参考文档
+- **[29. 隔离栈](../../../../TECHNICAL/29-isolation-stack/isolation-stack.md)** -
+  问题定位模型、横纵耦合定位方法
+
 ---
 
-**更新时间**：2025-11-04 **版本**：v1.0 **参考**：`architecture_view.md` 可观测
+**更新时间**：2025-11-07 **版本**：v1.1 **参考**：`architecture_view.md` 可观测
 性视角部分

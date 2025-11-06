@@ -24,7 +24,7 @@
 4. **OPA (Open Policy Agent)**：策略即代码的治理范式
 5. **动态运维**：GitOps、Observability、Autoscaling
 6. **组合模式**：Adapter、Facade、Composite、Pipeline、Service Mesh
-7. **多视角分析**：功能、结构、行为、数据、安全、可观测
+7. **多视角分析**：功能、结构、行为、数据、安全、可观测、eBPF/OTLP ⭐
 8. **形式化论证**：归纳证明、范畴论、状态空间压缩
 
 ### 1.2 文档结构
@@ -83,12 +83,14 @@ architecture-view/
 │   ├── 04-service-mesh-pattern.md   # Service Mesh 模式
 │   └── 05-nsm-pattern.md             # NSM 模式
 ├── 09-multi-perspectives/           # 多视角分析
+│   ├── README.md                     # 多视角文档集说明
 │   ├── 01-functional-perspective.md  # 功能视角
 │   ├── 02-structural-perspective.md  # 结构视角
 │   ├── 03-behavioral-perspective.md  # 行为视角
 │   ├── 04-data-perspective.md        # 数据视角
 │   ├── 05-security-perspective.md    # 安全视角
-│   └── 06-observability-perspective.md # 可观测视角
+│   ├── 06-observability-perspective.md # 可观测视角
+│   └── 07-ebpf-otlp-perspective.md  # eBPF/OTLP 视角 ⭐ 新增
 └── 10-november-2025-updates/        # ⚠️ 已删除（内容合并到 05-trends-2025/）
     ├── README.md                     # 重定向说明
     └── (内容已合并到 ../../05-trends-2025/)
@@ -107,7 +109,17 @@ architecture-view/
   - **架构视
     图**：[`../01-views/system-view-architecture.md`](../01-views/system-view-architecture.md)
 - **技术文档**：`docs/TECHNICAL/` - 技术实现细节
+  - **[32. eBPF/OTLP 扩展技术分析](../../TECHNICAL/32-ebpf-otlp-analysis/ebpf-otlp-analysis.md)**
+    ⭐ - eBPF/OTLP 扩展技术分析文档
+  - **[31. eBPF 技术堆栈](../../TECHNICAL/31-ebpf-stack/ebpf-stack.md)** - eBPF
+    技术堆栈完整技术参考文档
+  - **[29. 隔离栈](../../TECHNICAL/29-isolation-stack/isolation-stack.md)** - 问
+    题定位模型、横纵耦合定位方法
 - **认知模型**：`docs/COGNITIVE/` - 认知框架和理论模型
+  - **[13. eBPF/OTLP 认知视角](../../COGNITIVE/13-ebpf-otlp-perspective/ebpf-otlp-perspective.md)**
+    ⭐ - eBPF/OTLP 认知视角分析文档
+- **多视角文档**：`../../ebpf_otlp_view.md` ⭐ - eBPF/OTLP 视角完整文档（1438 行
+  ）
 
 ### 1.4 阅读路径
 
@@ -127,5 +139,5 @@ architecture-view/
 
 ---
 
-**更新时间**：2025-11-04 **版本**：v1.0 **参考**：基于 `architecture_view.md` 内
-容扩展
+**更新时间**：2025-11-07 **版本**：v1.1 **参考**：基于 `architecture_view.md` 内
+容扩展，新增 eBPF/OTLP 架构视角
