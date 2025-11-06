@@ -60,9 +60,10 @@
 - [19.13 服务网格故障排查](#1913-服务网格故障排查)
   - [19.13.1 常见问题](#19131-常见问题)
 - [19.14 参考](#1914-参考)
-  - [19.14.1 隔离栈相关文档](#19141-隔离栈相关文档)
-  - [19.14.2 服务网格相关文档](#19142-服务网格相关文档)
-  - [19.14.3 外部参考](#19143-外部参考)
+  - [19.14.1 2025 年最新更新（2025-11-06）](#19141-2025-年最新更新2025-11-06)
+  - [19.14.2 隔离栈相关文档](#19142-隔离栈相关文档)
+  - [19.14.3 服务网格相关文档](#19143-服务网格相关文档)
+  - [19.14.4 外部参考](#19144-外部参考)
 
 ---
 
@@ -1612,7 +1613,23 @@ kubectl logs <pod-name> -c istio-proxy
 
 ## 19.14 参考
 
-### 19.14.1 隔离栈相关文档
+### 19.14.1 2025 年最新更新（2025-11-06）
+
+- **[27. 2025 趋势 - 2025-11-06 最新更新](../27-2025-trends/2025-trends.md#2714-2025-年-11-月-6-日最新更新)** -
+  技术版本更新、生产环境最佳实践、已知问题与解决方案
+  - **OpenTelemetry 0.103.0**：OTLP 协议 v1.3.0 支持，新增 eBPF 自动注入
+  - **OTLP 与 Service Mesh 互补实践**：2025 年最佳实践，网格与 OTLP 互补而非互斥
+  - **网络定位专题**：OTLP + eBPF 联合网络问题定位，横向请求链 + 纵向隔离栈
+
+**服务网格最佳实践（2025-11-06）**：
+
+- **OTLP 与 Service Mesh 互补**：OTLP 提供语义+时间，Service Mesh 提供网络调用，
+  两者互补
+- **网络可观测性**：使用 OTLP Trace 提供请求链路的完整视图，Service Mesh 提供 L7
+  流量管理
+- **Wasm 插件**：使用 WasmEdge 0.14+ 运行 Wasm 插件，提供快速执行和低资源占用
+
+### 19.14.2 隔离栈相关文档
 
 - **[29. 隔离栈](../29-isolation-stack/isolation-stack.md)** - 完整的隔离栈技术
   解析，包括服务网格 Sidecar 代理
@@ -1623,17 +1640,20 @@ kubectl logs <pod-name> -c istio-proxy
 - **[隔离层次对比文档](../29-isolation-stack/layers/isolation-comparison.md)** -
   运行时性能对比和技术选型
 
-### 19.14.2 服务网格相关文档
+### 19.14.3 服务网格相关文档
 
 - **[01. Kubernetes](../01-kubernetes/kubernetes.md)** - Kubernetes 详细文档
 - **[03. WasmEdge](../03-wasm-edge/wasmedge.md)** - WasmEdge 运行时详细文档
   （Wasm 插件）
 - **[12. 网络栈](../12-network-stack/network-stack.md)** - 网络技术规格
+- **[16. 监控与可观测性](../16-observability/observability.md)** - OTLP + eBPF
+  可观测性
 
-### 19.14.3 外部参考
+### 19.14.4 外部参考
 
 - [Istio 官方文档](https://istio.io/latest/docs/)
 - [Linkerd 官方文档](https://linkerd.io/2/tasks/)
+- [OpenTelemetry 官方文档](https://opentelemetry.io/docs/)
 - [Consul Connect 官方文档](https://www.consul.io/docs/connect)
 - [Envoy 官方文档](https://www.envoyproxy.io/docs)
 - [WasmEdge 官方文档](https://wasmedge.org/docs/)

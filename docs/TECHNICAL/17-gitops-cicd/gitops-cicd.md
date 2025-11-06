@@ -55,9 +55,10 @@
   - [17.11.2 Flux 常见问题](#17112-flux-常见问题)
 - [17.12 GitOps 最佳实践检查清单](#1712-gitops-最佳实践检查清单)
 - [17.13 参考](#1713-参考)
-  - [17.13.1 隔离栈相关文档](#17131-隔离栈相关文档)
-  - [17.13.2 GitOps 和 CI/CD 相关文档](#17132-gitops-和-cicd-相关文档)
-  - [17.13.3 外部参考](#17133-外部参考)
+  - [17.13.1 2025 年最新更新（2025-11-06）](#17131-2025-年最新更新2025-11-06)
+  - [17.13.2 隔离栈相关文档](#17132-隔离栈相关文档)
+  - [17.13.3 GitOps 和 CI/CD 相关文档](#17133-gitops-和-cicd-相关文档)
+  - [17.13.4 外部参考](#17134-外部参考)
 
 ---
 
@@ -1294,7 +1295,25 @@ flux reconcile image repository my-app -n flux-system
 
 ## 17.13 参考
 
-### 17.13.1 隔离栈相关文档
+### 17.13.1 2025 年最新更新（2025-11-06）
+
+- **[27. 2025 趋势 - 2025-11-06 最新更新](../27-2025-trends/2025-trends.md#2714-2025-年-11-月-6-日最新更新)** -
+  技术版本更新、生产环境最佳实践、已知问题与解决方案
+  - **版本信息**：Kubernetes 1.30.5、K3s 1.30.4+k3s2、containerd 1.7.1 等最新版
+    本
+  - **生产环境最佳实践**：K3s + WasmEdge 混部方案、OPA-Wasm 策略优化
+  - **已知问题**：K3s WasmEdge 驱动偶发超时、OPA-Wasm 策略内存泄漏等（已提供解决
+    方案）
+  - **性能基准测试**：边缘节点性能对比数据（runc vs WasmEdge vs gVisor）
+  - **安全更新**：CVE 修复列表和安全建议
+
+**GitOps 相关更新**：
+
+- **Rancher Fleet + GitOps Wasm 策略**：2025 模板已默认带 `policy.wasm` 签名验证
+- **镜像签名**：所有镜像必须使用 cosign 签名验证（Sigstore CNCF 毕业）
+- **Wasm 策略模块**：必须包含 SBOM（Software Bill of Materials）
+
+### 17.13.2 隔离栈相关文档
 
 - **[29. 隔离栈](../29-isolation-stack/isolation-stack.md)** - 完整的隔离栈技术
   解析，包括部署和运行时
@@ -1305,15 +1324,17 @@ flux reconcile image repository my-app -n flux-system
 - **[隔离层次对比文档](../29-isolation-stack/layers/isolation-comparison.md)** -
   运行时性能对比和技术选型
 
-### 17.13.2 GitOps 和 CI/CD 相关文档
+### 17.13.3 GitOps 和 CI/CD 相关文档
 
 - **[10. 安装部署](../10-installation/installation.md)** - 安装和部署指南
 - **[22. 升级和迁移](../22-upgrade-migration/upgrade-migration.md)** - 升级和迁
   移策略
 - **[21. 镜像仓库和镜像管理](../21-image-registry/image-registry.md)** - 镜像仓
   库和镜像管理
+- **[06. OPA 策略即代码](../06-policy-opa/policy-opa.md)** - OPA-Wasm 策略管理和
+  部署
 
-### 17.13.3 外部参考
+### 17.13.4 外部参考
 
 - [ArgoCD 官方文档](https://argo-cd.readthedocs.io/)
 - [Flux 官方文档](https://fluxcd.io/docs/)
@@ -1323,6 +1344,7 @@ flux reconcile image repository my-app -n flux-system
 - [GitHub Actions 文档](https://docs.github.com/en/actions)
 - [GitLab CI 文档](https://docs.gitlab.com/ee/ci/)
 - [Tekton 官方文档](https://tekton.dev/docs/)
+- [Sigstore 官方文档](https://www.sigstore.dev/) - 镜像签名和验证
 
 ---
 

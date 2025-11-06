@@ -41,9 +41,10 @@
   - [04.11.2 多运行时管理最佳实践](#04112-多运行时管理最佳实践)
   - [04.11.3 编排运行时检查清单](#04113-编排运行时检查清单)
 - [04.12 参考](#0412-参考)
-  - [04.12.1 隔离栈相关文档](#04121-隔离栈相关文档)
-  - [04.12.2 运行时相关文档](#04122-运行时相关文档)
-  - [04.12.3 其他相关文档](#04123-其他相关文档)
+  - [04.12.1 2025 年最新更新（2025-11-06）](#04121-2025-年最新更新2025-11-06)
+  - [04.12.2 隔离栈相关文档](#04122-隔离栈相关文档)
+  - [04.12.3 运行时相关文档](#04123-运行时相关文档)
+  - [04.12.4 其他相关文档](#04124-其他相关文档)
 
 ---
 
@@ -721,7 +722,24 @@ crictl info | grep runtime
 
 ## 04.12 参考
 
-### 04.12.1 隔离栈相关文档
+### 04.12.1 2025 年最新更新（2025-11-06）
+
+- **[27. 2025 趋势 - 2025-11-06 最新更新](../27-2025-trends/2025-trends.md#2714-2025-年-11-月-6-日最新更新)** -
+  技术版本更新、生产环境最佳实践、已知问题与解决方案
+  - **containerd 1.7.1**：shim v2 连接池优化，减少资源占用 20%
+  - **crun 1.8.6**：Wasm 镜像自动识别优化，启动延迟降低 15%
+  - **Kubernetes 1.30.5**：修复 RuntimeClass 内存泄漏问题
+  - **已知问题**：K3s WasmEdge 驱动偶发超时（已提供解决方案和临时方案）
+  - **性能基准测试**：边缘节点性能对比数据（runc vs WasmEdge vs gVisor）
+
+**RuntimeClass 最佳实践（2025-11-06）**：
+
+- **K3s + WasmEdge 混部方案**：通过 RuntimeClass 自动调度，无需手动选择
+- **K3s `--wasm` flag**：一键启用 WasmEdge 驱动，自动创建 RuntimeClass
+- **containerd 配置优化**：设置 `shim_max_concurrent_requests=100` 避免连接池耗
+  尽
+
+### 04.12.2 隔离栈相关文档
 
 - **[29. 隔离栈](../29-isolation-stack/isolation-stack.md)** - 完整的隔离栈技术
   解析，包括运行时层次
@@ -732,14 +750,14 @@ crictl info | grep runtime
 - **[隔离层次对比文档](../29-isolation-stack/layers/isolation-comparison.md)** -
   运行时性能对比和选型指南
 
-### 04.12.2 运行时相关文档
+### 04.12.3 运行时相关文档
 
 - **[00. Docker](../00-docker/docker.md)** - Docker 详细文档
 - **[03. WasmEdge](../03-wasm-edge/wasmedge.md)** - WebAssembly 运行时详细文档
 - **[01. Kubernetes](../01-kubernetes/kubernetes.md)** - Kubernetes 详细文档
 - **[02. K3s](../02-k3s/k3s.md)** - K3s 详细文档
 
-### 04.12.3 其他相关文档
+### 04.12.4 其他相关文档
 
 - **[11. 故障排查](../11-troubleshooting/troubleshooting.md)** - 运行时故障排查
   方法
@@ -757,8 +775,7 @@ crictl info | grep runtime
 
 **外部参考**：
 
-[^cri-spec]:
-    [Container Runtime Interface](https://github.com/kubernetes/cri-api)
+[cri-spec]: [Container Runtime Interface](https://github.com/kubernetes/cri-api)
 
 > 完整参考列表见 [REFERENCES.md](../REFERENCES.md)
 

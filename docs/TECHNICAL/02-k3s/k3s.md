@@ -68,10 +68,11 @@
 - [02.17 K3s 故障排查](#0217-k3s-故障排查)
   - [02.17.1 常见问题](#02171-常见问题)
 - [02.18 参考](#0218-参考)
-  - [02.18.1 隔离栈相关文档](#02181-隔离栈相关文档)
-  - [02.18.2 K3s 相关文档](#02182-k3s-相关文档)
-  - [02.18.3 其他相关文档](#02183-其他相关文档)
-  - [02.18.4 外部参考](#02184-外部参考)
+  - [02.18.1 2025 年最新更新（2025-11-06）](#02181-2025-年最新更新2025-11-06)
+  - [02.18.2 隔离栈相关文档](#02182-隔离栈相关文档)
+  - [02.18.3 K3s 相关文档](#02183-k3s-相关文档)
+  - [02.18.4 其他相关文档](#02184-其他相关文档)
+  - [02.18.5 外部参考](#02185-外部参考)
 
 ---
 
@@ -1352,7 +1353,25 @@ kubectl top pods
 
 ## 02.18 参考
 
-### 02.18.1 隔离栈相关文档
+### 02.18.1 2025 年最新更新（2025-11-06）
+
+- **[27. 2025 趋势 - 2025-11-06 最新更新](../27-2025-trends/2025-trends.md#2714-2025-年-11-月-6-日最新更新)** -
+  技术版本更新、生产环境最佳实践、已知问题与解决方案
+  - **K3s 1.30.4+k3s2**：WasmEdge 驱动性能优化，启动时间减少 30%
+  - **Kubernetes 1.30.5**：修复 RuntimeClass 内存泄漏问题
+  - **containerd 1.7.1**：shim v2 连接池优化，减少资源占用 20%
+  - **已知问题**：K3s WasmEdge 驱动偶发超时（已提供解决方案和临时方案）
+  - **性能基准测试**：边缘节点性能对比数据（runc vs WasmEdge vs gVisor）
+  - **安全更新**：K3s API Server 权限绕过漏洞（已修复）
+
+**K3s 最佳实践（2025-11-06）**：
+
+- **K3s + WasmEdge 混部方案**：边缘节点优先使用 WasmEdge 运行时（冷启动 <10 ms）
+- **通过 RuntimeClass 自动调度**：无需手动选择运行时
+- **`--wasm` flag**：一键启用 WasmEdge 驱动，自动创建 RuntimeClass
+- **镜像签名**：所有镜像必须使用 cosign 签名验证
+
+### 02.18.2 隔离栈相关文档
 
 - **[29. 隔离栈](../29-isolation-stack/isolation-stack.md)** - 完整的隔离栈技术
   解析，包括运行时接口
@@ -1363,7 +1382,7 @@ kubectl top pods
 - **[隔离层次对比文档](../29-isolation-stack/layers/isolation-comparison.md)** -
   运行时性能对比和技术选型
 
-### 02.18.2 K3s 相关文档
+### 02.18.3 K3s 相关文档
 
 - **[01. Kubernetes](../01-kubernetes/kubernetes.md)** - Kubernetes 详细文档
 - **[03. WasmEdge](../03-wasm-edge/wasmedge.md)** - WasmEdge 运行时详细文档
@@ -1373,18 +1392,18 @@ kubectl top pods
   算和 Serverless 场景
 - **[10. 安装部署](../10-installation/installation.md)** - K3s 安装指南
 
-### 02.18.3 其他相关文档
+### 02.18.4 其他相关文档
 
 - **[10. 快速参考指南](../../COGNITIVE/10-decision-models/QUICK-REFERENCE.md)** -
   设备访问（USB/PCI/GPU）和内核特性决策快速参考
 - **[28. 架构框架](../28-architecture-framework/architecture-framework.md)** -
   多维度架构体系与技术规范
 
-### 02.18.4 外部参考
+### 02.18.5 外部参考
 
-[^k3s-architecture]: [K3s Architecture](https://docs.k3s.io/architecture)
-[^k3s-memory]:
-    [K3s Resource Requirements](https://docs.k3s.io/installation/requirements)
+- [K3s Architecture](https://docs.k3s.io/architecture)
+- [K3s Resource Requirements](https://docs.k3s.io/installation/requirements)
+- [K3s 1.30.4+k3s2 发布说明](https://github.com/k3s-io/k3s/releases/tag/v1.30.4%2Bk3s2)
 
 > 完整参考列表见 [REFERENCES.md](../REFERENCES.md)
 

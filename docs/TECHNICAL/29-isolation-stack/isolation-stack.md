@@ -2340,6 +2340,23 @@ lsns -t net -p $(pgrep -f container)
 
 ### 29.10.1 相关文档
 
+**文档关联性**：
+
+- **[文档关联性完善总结报告](../DOCUMENTATION-ISOLATION-STACK-CROSS-REFERENCES.md)** -
+  所有技术文档与隔离栈文档的关联关系总结
+  - 27 个技术文档的关联性完善记录
+  - 关联点统计和分析
+  - 文档关联性体系价值说明
+
+**2025 年最新更新**：
+
+- **[27. 2025 趋势 - 2025-11-06 最新更新](../27-2025-trends/2025-trends.md#2714-2025-年-11-月-6-日最新更新)** -
+  技术版本更新、生产环境最佳实践、已知问题与解决方案、性能基准测试、安全更新
+  - 包含 WasmEdge、K3s、containerd、OPA、Gatekeeper 等最新版本信息
+  - 边缘节点性能对比数据（runc vs WasmEdge vs gVisor）
+  - 已知问题和解决方案（K3s WasmEdge 驱动超时、OPA-Wasm 内存泄漏、eBPF 探针兼容
+    性）
+
 **理论基础**：
 
 - **[12. 虚拟化/半虚拟化/容器化/沙盒化严格定义](../../COGNITIVE/10-decision-models/06-technical-concepts/12-virtualization-paravirtualization-containerization-sandboxing-strict-definition.md)** -

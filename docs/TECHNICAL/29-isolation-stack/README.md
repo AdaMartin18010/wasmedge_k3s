@@ -90,6 +90,16 @@
 
 ## 5. 相关文档
 
+### 5.1 文档关联性
+
+- **[文档关联性完善总结报告](../DOCUMENTATION-ISOLATION-STACK-CROSS-REFERENCES.md)** -
+  所有技术文档与隔离栈文档的关联关系总结
+  - 27 个技术文档的关联性完善记录
+  - 关联点统计和分析
+  - 文档关联性体系价值说明
+
+### 5.2 技术文档
+
 - **[13. 缩写词汇表](../13-acronyms-glossary/acronyms-glossary.md)** - 技术缩写
   词定义
 - **[16. 监控与可观测性](../16-observability/observability.md)** -

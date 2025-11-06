@@ -46,9 +46,10 @@
   - [05.11.2 SBOM 生成最佳实践](#05112-sbom-生成最佳实践)
   - [05.11.3 供应链安全最佳实践](#05113-供应链安全最佳实践)
 - [05.12 参考](#0512-参考)
-  - [05.12.1 隔离栈相关文档](#05121-隔离栈相关文档)
-  - [05.12.2 OCI 和供应链相关文档](#05122-oci-和供应链相关文档)
-  - [05.12.3 外部参考](#05123-外部参考)
+  - [05.12.1 2025 年最新更新（2025-11-06）](#05121-2025-年最新更新2025-11-06)
+  - [05.12.2 隔离栈相关文档](#05122-隔离栈相关文档)
+  - [05.12.3 OCI 和供应链相关文档](#05123-oci-和供应链相关文档)
+  - [05.12.4 外部参考](#05124-外部参考)
 
 ---
 
@@ -820,7 +821,23 @@ fi
 
 ## 05.12 参考
 
-### 05.12.1 隔离栈相关文档
+### 05.12.1 2025 年最新更新（2025-11-06）
+
+- **[27. 2025 趋势 - 2025-11-06 最新更新](../27-2025-trends/2025-trends.md#2714-2025-年-11-月-6-日最新更新)** -
+  技术版本更新、生产环境最佳实践、已知问题与解决方案
+  - **OCI Artifact v1.1**：Wasm 模块签名、SBOM 支持
+  - **Sigstore + Cosign CNCF 毕业**：2025 年 7 月成为 CNCF 毕业项目
+  - **强制签名**：wasm 模块强制签名写入 Kubernetes 1.30 安全基线
+  - **SBOM 要求**：所有镜像必须包含 SBOM（Software Bill of Materials）
+
+**OCI 供应链安全最佳实践（2025-11-06）**：
+
+- **镜像签名**：所有镜像必须使用 cosign 签名验证（Sigstore CNCF 毕业）
+- **Wasm 模块签名**：wasm 模块强制签名写入 Kubernetes 1.30 安全基线
+- **SBOM 要求**：所有镜像必须包含 SBOM，支持漏洞扫描和依赖追踪
+- **OCI Artifact v1.1**：支持 Wasm 模块签名和 SBOM 存储
+
+### 05.12.2 隔离栈相关文档
 
 - **[29. 隔离栈](../29-isolation-stack/isolation-stack.md)** - 完整的隔离栈技术
   解析，包括容器镜像和 WASM 构建
@@ -831,15 +848,19 @@ fi
 - **[隔离层次对比文档](../29-isolation-stack/layers/isolation-comparison.md)** -
   镜像构建和部署对比
 
-### 05.12.2 OCI 和供应链相关文档
+### 05.12.3 OCI 和供应链相关文档
 
 - **[09. 安全合规](../09-security-compliance/security-compliance.md)** - 镜像签
   名和供应链安全最佳实践
 - **[06. OPA 策略](../06-policy-opa/policy-opa.md)** - OPA 策略详细文档（包含镜
   像验证策略）
+- **[21. 镜像仓库和镜像管理](../21-image-registry/image-registry.md)** - 镜像
+  仓库和镜像管理
 
-### 05.12.3 外部参考
+### 05.12.4 外部参考
 
 - [OCI Artifact](https://github.com/opencontainers/artifacts)
+- [Sigstore 官方文档](https://www.sigstore.dev/) - 镜像签名和验证
+- [Cosign 官方文档](https://docs.sigstore.dev/cosign/overview/) - 镜像签名工具
 
 > 完整参考列表见 [REFERENCES.md](../REFERENCES.md)

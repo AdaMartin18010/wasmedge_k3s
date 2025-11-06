@@ -66,9 +66,10 @@
   - [22.13.1 升级常见问题](#22131-升级常见问题)
   - [22.13.2 迁移常见问题](#22132-迁移常见问题)
 - [22.14 参考](#2214-参考)
-  - [22.14.1 隔离栈相关文档](#22141-隔离栈相关文档)
-  - [22.14.2 运行时相关文档](#22142-运行时相关文档)
-  - [22.14.3 其他相关文档](#22143-其他相关文档)
+  - [22.14.1 2025 年最新更新（2025-11-06）](#22141-2025-年最新更新2025-11-06)
+  - [22.14.2 隔离栈相关文档](#22142-隔离栈相关文档)
+  - [22.14.3 运行时相关文档](#22143-运行时相关文档)
+  - [22.14.4 其他相关文档](#22144-其他相关文档)
 
 ---
 
@@ -1812,7 +1813,25 @@ diff old-config.yaml new-config.yaml
 
 ## 22.14 参考
 
-### 22.14.1 隔离栈相关文档
+### 22.14.1 2025 年最新更新（2025-11-06）
+
+- **[27. 2025 趋势 - 2025-11-06 最新更新](../27-2025-trends/2025-trends.md#2714-2025-年-11-月-6-日最新更新)** -
+  技术版本更新、生产环境最佳实践、已知问题与解决方案
+  - **Kubernetes 1.30.5**：修复 RuntimeClass 内存泄漏问题
+  - **K3s 1.30.4+k3s2**：WasmEdge 驱动性能优化，启动时间减少 30%
+  - **containerd 1.7.1**：shim v2 连接池优化，减少资源占用 20%
+  - **升级兼容性**：Kubernetes 1.29 → 1.30 升级路径已验证，支持
+    RuntimeClass=wasm
+  - **迁移最佳实践**：传统容器到 Wasm 迁移方案已优化
+
+**升级和迁移最佳实践（2025-11-06）**：
+
+- **K3s 升级**：使用 `--wasm` flag 保持 WasmEdge 驱动支持
+- **运行时迁移**：从 runc 迁移到 crun/WasmEdge，通过 RuntimeClass 自动调度
+- **版本兼容性**：确保升级前验证 RuntimeClass 配置兼容性
+- **已知问题**：K3s WasmEdge 驱动偶发超时（升级 containerd 1.7.1+ 可解决）
+
+### 22.14.2 隔离栈相关文档
 
 - **[29. 隔离栈](../29-isolation-stack/isolation-stack.md)** - 完整的隔离栈技术
   解析，包括 L-0 硬件辅助层、L-1 全虚拟化层、L-2 半虚拟化层、L-3 容器化层、L-4
@@ -1829,14 +1848,14 @@ diff old-config.yaml new-config.yaml
 - **[L-1 全虚拟化层](../29-isolation-stack/layers/L-1-full-virtualization.md)** -
   KVM、ESXi、Hyper-V、Xen HVM 详细文档
 
-### 22.14.2 运行时相关文档
+### 22.14.3 运行时相关文档
 
 - **[00. Docker](../00-docker/docker.md)** - Docker 详细文档
 - **[03. WasmEdge](../03-wasm-edge/wasmedge.md)** - WebAssembly 运行时详细文档
 - **[01. Kubernetes](../01-kubernetes/kubernetes.md)** - Kubernetes 详细文档
 - **[02. K3s](../02-k3s/k3s.md)** - K3s 详细文档
 
-### 22.14.3 其他相关文档
+### 22.14.4 其他相关文档
 
 - **[11. 故障排查](../11-troubleshooting/troubleshooting.md)** - 通用故障排查方
   法
@@ -1844,6 +1863,9 @@ diff old-config.yaml new-config.yaml
   OpenTelemetry、eBPF 等技术
 - **[24. 成本优化](../24-cost-optimization/cost-optimization.md)** - 成本优化策
   略和实践
+- **[10. 安装部署](../10-installation/installation.md)** - 安装和部署指南
+
+**外部参考**：
 
 - [Kubernetes 升级文档](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/)
 - [K3s 升级文档](https://docs.k3s.io/upgrades)

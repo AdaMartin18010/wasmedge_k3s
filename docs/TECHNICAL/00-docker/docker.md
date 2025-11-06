@@ -66,10 +66,11 @@
 - [00.16 Docker 故障排查](#0016-docker-故障排查)
   - [00.16.1 常见问题](#00161-常见问题)
 - [00.17 参考](#0017-参考)
-  - [00.17.1 隔离栈相关文档](#00171-隔离栈相关文档)
-  - [00.17.2 Docker 相关文档](#00172-docker-相关文档)
-  - [00.17.3 其他相关文档](#00173-其他相关文档)
-  - [00.17.4 外部参考](#00174-外部参考)
+  - [00.17.1 2025 年最新更新（2025-11-06）](#00171-2025-年最新更新2025-11-06)
+  - [00.17.2 隔离栈相关文档](#00172-隔离栈相关文档)
+  - [00.17.3 Docker 相关文档](#00173-docker-相关文档)
+  - [00.17.4 其他相关文档](#00174-其他相关文档)
+  - [00.17.5 外部参考](#00175-外部参考)
 
 ---
 
@@ -1433,7 +1434,23 @@ docker exec <container-id> iperf3 -c <target>
 
 ## 00.17 参考
 
-### 00.17.1 隔离栈相关文档
+### 00.17.1 2025 年最新更新（2025-11-06）
+
+- **[27. 2025 趋势 - 2025-11-06 最新更新](../27-2025-trends/2025-trends.md#2714-2025-年-11-月-6-日最新更新)** -
+  技术版本更新、生产环境最佳实践、已知问题与解决方案
+  - **Docker Desktop 2025 Q2 GA**：内置 WasmEdge 运行时
+  - **containerd 1.7.1**：shim v2 连接池优化，减少资源占用 20%
+  - **BuildKit 0.13+**：Wasm-native 构建支持
+  - **OCI Artifact v1.1**：Wasm 模块签名、SBOM 支持
+
+**Docker 最佳实践（2025-11-06）**：
+
+- **运行时迁移**：从 Docker 迁移到 containerd，使用 shim v2 连接池优化
+- **Wasm 支持**：Docker Desktop 2025 Q2 GA 内置 WasmEdge 运行时
+- **镜像签名**：所有镜像必须使用 cosign 签名验证（Sigstore CNCF 毕业）
+- **SBOM 要求**：所有镜像必须包含 SBOM（Software Bill of Materials）
+
+### 00.17.2 隔离栈相关文档
 
 - **[29. 隔离栈](../29-isolation-stack/isolation-stack.md)** - 完整的隔离栈技术
   解析，包括 Docker 和 runc
@@ -1442,13 +1459,15 @@ docker exec <container-id> iperf3 -c <target>
 - **[隔离层次对比文档](../29-isolation-stack/layers/isolation-comparison.md)** -
   容器化层性能对比和技术选型
 
-### 00.17.2 Docker 相关文档
+### 00.17.3 Docker 相关文档
 
 - **[01. Kubernetes](../01-kubernetes/kubernetes.md)** - Kubernetes 架构与实践
 - **[04. 编排运行时](../04-orchestration-runtime/orchestration-runtime.md)** -
   CRI 和 RuntimeClass 配置
+- **[22. 升级和迁移](../22-upgrade-migration/upgrade-migration.md)** - Docker 到
+  containerd 迁移指南
 
-### 00.17.3 其他相关文档
+### 00.17.4 其他相关文档
 
 - **[10. 技术决策模型](../../COGNITIVE/10-decision-models/decision-models.md)** -
   技术选型决策框架
@@ -1457,7 +1476,7 @@ docker exec <container-id> iperf3 -c <target>
 - **[28. 架构框架](../28-architecture-framework/architecture-framework.md)** -
   多维度架构体系与技术规范
 
-### 00.17.4 外部参考
+### 00.17.5 外部参考
 
 [^docker-architecture]:
     [Docker Architecture](https://docs.docker.com/get-started/overview/)

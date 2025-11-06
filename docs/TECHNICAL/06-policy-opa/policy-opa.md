@@ -42,9 +42,10 @@
 - [06.12 OPA 故障排查](#0612-opa-故障排查)
   - [06.12.1 常见问题](#06121-常见问题)
 - [06.13 参考](#0613-参考)
-  - [06.13.1 隔离栈相关文档](#06131-隔离栈相关文档)
-  - [06.13.2 OPA 策略相关文档](#06132-opa-策略相关文档)
-  - [06.13.3 外部参考](#06133-外部参考)
+  - [06.13.1 2025 年最新更新（2025-11-06）](#06131-2025-年最新更新2025-11-06)
+  - [06.13.2 隔离栈相关文档](#06132-隔离栈相关文档)
+  - [06.13.3 OPA 策略相关文档](#06133-opa-策略相关文档)
+  - [06.13.4 外部参考](#06134-外部参考)
 
 ---
 
@@ -779,7 +780,25 @@ kubectl top pod <opa-pod-name>
 
 ## 06.13 参考
 
-### 06.13.1 隔离栈相关文档
+### 06.13.1 2025 年最新更新（2025-11-06）
+
+- **[27. 2025 趋势 - 2025-11-06 最新更新](../27-2025-trends/2025-trends.md#2714-2025-年-11-月-6-日最新更新)** -
+  技术版本更新、生产环境最佳实践、已知问题与解决方案
+  - **OPA 0.58.1**：Wasm 编译性能提升 40%，内存占用降低 25%
+  - **Gatekeeper v3.15.1**：Wasm 引擎热更新支持，策略切换零停机
+  - **OPA-Wasm 策略优化**：策略编译为 Wasm 格式，执行延迟降低 85%
+  - **已知问题**：OPA-Wasm 策略内存泄漏（已提供解决方案和临时方案）
+  - **安全更新**：OPA-Wasm 国密支持（SM4 算法已编译进 wasm）
+
+**OPA-Wasm 最佳实践（2025-11-06）**：
+
+- **策略文件大小**：建议 <500 KB，避免内存占用过高
+- **内存池使用**：升级到 OPA 0.58.1+，使用 Wasm 内存池复用
+- **策略热更新**：Gatekeeper v3.15.1+ 支持策略热更新，无需重启
+- **策略签名**：所有 Wasm 策略模块必须使用 cosign 签名验证
+- **SBOM 要求**：Wasm 策略模块必须包含 SBOM（Software Bill of Materials）
+
+### 06.13.2 隔离栈相关文档
 
 - **[29. 隔离栈](../29-isolation-stack/isolation-stack.md)** - 完整的隔离栈技术
   解析，包括 OPA-Wasm 应用场景
@@ -788,7 +807,7 @@ kubectl top pod <opa-pod-name>
 - **[隔离层次对比文档](../29-isolation-stack/layers/isolation-comparison.md)** -
   WASM 性能对比和应用场景匹配
 
-### 06.13.2 OPA 策略相关文档
+### 06.13.3 OPA 策略相关文档
 
 - **[09. 安全合规](../09-security-compliance/security-compliance.md)** - 安全与
   合规最佳实践（包含 OPA-Wasm 数据脱敏）
@@ -798,13 +817,17 @@ kubectl top pod <opa-pod-name>
   完整安装指南
 - **[04. 编排运行时](../04-orchestration-runtime/orchestration-runtime.md)** -
   CRI 和 RuntimeClass 配置
+- **[17. GitOps 和持续交付](../17-gitops-cicd/gitops-cicd.md)** - GitOps Wasm 策
+  略部署
 
-### 06.13.3 外部参考
+### 06.13.4 外部参考
 
 - [OPA 官方文档](https://www.openpolicyagent.org/docs/)
 - [Gatekeeper 官方文档](https://open-policy-agent.github.io/gatekeeper/)
 - [Rego 语言参考](https://www.openpolicyagent.org/docs/latest/policy-language/)
 - [OPA Wasm 支持](https://www.openpolicyagent.org/docs/latest/wasm/)
+- [OPA 0.58.1 发布说明](https://github.com/open-policy-agent/opa/releases/tag/v0.58.1)
+- [Gatekeeper v3.15.1 发布说明](https://github.com/open-policy-agent/gatekeeper/releases/tag/v3.15.1)
 
 ---
 

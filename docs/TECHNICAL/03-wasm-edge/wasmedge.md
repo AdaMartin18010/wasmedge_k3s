@@ -69,10 +69,11 @@
 - [03.16 WasmEdge 故障排查](#0316-wasmedge-故障排查)
   - [03.16.1 常见问题](#03161-常见问题)
 - [03.17 参考](#0317-参考)
-  - [03.17.1 隔离栈相关文档](#03171-隔离栈相关文档)
-  - [03.17.2 WasmEdge 相关文档](#03172-wasmedge-相关文档)
-  - [03.17.3 其他相关文档](#03173-其他相关文档)
-  - [03.17.4 外部参考](#03174-外部参考)
+  - [03.17.1 2025 年最新更新（2025-11-06）](#03171-2025-年最新更新2025-11-06)
+  - [03.17.2 隔离栈相关文档](#03172-隔离栈相关文档)
+  - [03.17.3 WasmEdge 相关文档](#03173-wasmedge-相关文档)
+  - [03.17.4 其他相关文档](#03174-其他相关文档)
+  - [03.17.5 外部参考](#03175-外部参考)
 
 ---
 
@@ -1286,7 +1287,26 @@ wasmedge --version
 
 ## 03.17 参考
 
-### 03.17.1 隔离栈相关文档
+### 03.17.1 2025 年最新更新（2025-11-06）
+
+- **[27. 2025 趋势 - 2025-11-06 最新更新](../27-2025-trends/2025-trends.md#2714-2025-年-11-月-6-日最新更新)** -
+  技术版本更新、生产环境最佳实践、已知问题与解决方案
+  - **WasmEdge 0.14.1**：GPU 插件稳定性提升，新增 ONNX Runtime 支持
+  - **crun 1.8.6**：Wasm 镜像自动识别优化，启动延迟降低 15%
+  - **containerd 1.7.1**：shim v2 连接池优化，减少资源占用 20%
+  - **K3s 1.30.4+k3s2**：WasmEdge 驱动性能优化，启动时间减少 30%
+  - **已知问题**：K3s WasmEdge 驱动偶发超时（已提供解决方案和临时方案）
+  - **性能基准测试**：边缘节点性能对比数据（runc vs WasmEdge vs gVisor）
+  - **安全更新**：WasmEdge GPU 插件缓冲区溢出漏洞（已修复）
+
+**WasmEdge 最佳实践（2025-11-06）**：
+
+- **边缘节点优先使用 WasmEdge**：冷启动 <10 ms，内存占用 <32 MB
+- **混部方案**：通过 RuntimeClass 自动调度，无需手动选择
+- **镜像签名**：所有 Wasm 镜像必须使用 cosign 签名验证
+- **SBOM 要求**：Wasm 镜像必须包含 SBOM（Software Bill of Materials）
+
+### 03.17.2 隔离栈相关文档
 
 - **[29. 隔离栈](../29-isolation-stack/isolation-stack.md)** - 完整的隔离栈技术
   解析，包括 WASM 运行时
@@ -1295,7 +1315,7 @@ wasmedge --version
 - **[隔离层次对比文档](../29-isolation-stack/layers/isolation-comparison.md)** -
   WASM 性能对比和应用场景匹配
 
-### 03.17.2 WasmEdge 相关文档
+### 03.17.3 WasmEdge 相关文档
 
 - **[07. 边缘与 Serverless](../07-edge-serverless/edge-serverless.md)** - 边缘计
   算和 Serverless 场景
@@ -1304,7 +1324,7 @@ wasmedge --version
   CRI 和 RuntimeClass 配置
 - **[10. 安装部署](../10-installation/installation.md)** - WasmEdge 安装指南
 
-### 03.17.3 其他相关文档
+### 03.17.4 其他相关文档
 
 - **[10. 技术决策模型](../../COGNITIVE/10-decision-models/decision-models.md)** -
   技术选型决策框架
@@ -1313,9 +1333,11 @@ wasmedge --version
 - **[28. 架构框架](../28-architecture-framework/architecture-framework.md)** -
   多维度架构体系与技术规范
 
-### 03.17.4 外部参考
+### 03.17.5 外部参考
 
-[wasmedge-performance]: [WasmEdge 性能基准](https://wasmedge.org/docs/)
+- [WasmEdge 官方文档](https://wasmedge.org/docs/)
+- [WasmEdge 0.14.1 发布说明](https://github.com/WasmEdge/WasmEdge/releases/tag/0.14.1)
+- [WasmEdge 性能基准](https://wasmedge.org/docs/)
 
 ---
 

@@ -59,9 +59,10 @@
 - [18.13 Operator 故障排查](#1813-operator-故障排查)
   - [18.13.1 常见问题](#18131-常见问题)
 - [18.14 参考](#1814-参考)
-  - [18.14.1 隔离栈相关文档](#18141-隔离栈相关文档)
-  - [18.14.2 Operator 和 CRD 相关文档](#18142-operator-和-crd-相关文档)
-  - [18.14.3 外部参考](#18143-外部参考)
+  - [18.14.1 2025 年最新更新（2025-11-06）](#18141-2025-年最新更新2025-11-06)
+  - [18.14.2 隔离栈相关文档](#18142-隔离栈相关文档)
+  - [18.14.3 Operator 和 CRD 相关文档](#18143-operator-和-crd-相关文档)
+  - [18.14.4 外部参考](#18144-外部参考)
 
 ---
 
@@ -1612,7 +1613,21 @@ kubectl apply -f config/samples/database_v1_mysql.yaml --dry-run=server
 
 ## 18.14 参考
 
-### 18.14.1 隔离栈相关文档
+### 18.14.1 2025 年最新更新（2025-11-06）
+
+- **[27. 2025 趋势 - 2025-11-06 最新更新](../27-2025-trends/2025-trends.md#2714-2025-年-11-月-6-日最新更新)** -
+  技术版本更新、生产环境最佳实践、已知问题与解决方案
+  - **Kubernetes 1.30.5**：修复 RuntimeClass 内存泄漏问题
+  - **CRD 扩展**：支持 Wasm 运行时自定义资源，RuntimeClass=wasm 原生支持
+  - **Operator 开发**：Operator SDK 支持 Wasm 运行时开发
+
+**Operator 和 CRD 最佳实践（2025-11-06）**：
+
+- **CRD 设计**：使用 RuntimeClass=wasm 支持 Wasm 运行时自定义资源
+- **Operator 开发**：利用 Kubernetes 1.30.x RuntimeClass 原生支持简化开发
+- **Wasm Operator**：开发支持 Wasm 运行时的 Operator，利用 WasmEdge 性能优势
+
+### 18.14.2 隔离栈相关文档
 
 - **[29. 隔离栈](../29-isolation-stack/isolation-stack.md)** - 完整的隔离栈技术
   解析，包括 Operator 运行时
@@ -1621,14 +1636,14 @@ kubectl apply -f config/samples/database_v1_mysql.yaml --dry-run=server
 - **[隔离层次对比文档](../29-isolation-stack/layers/isolation-comparison.md)** -
   运行时性能对比和技术选型
 
-### 18.14.2 Operator 和 CRD 相关文档
+### 18.14.3 Operator 和 CRD 相关文档
 
 - **[01. Kubernetes](../01-kubernetes/kubernetes.md)** - Kubernetes 详细文档
 - **[04. 编排运行时](../04-orchestration-runtime/orchestration-runtime.md)** -
   CRI 和 RuntimeClass 配置
 - **[10. 安装部署](../10-installation/installation.md)** - Operator 安装指南
 
-### 18.14.3 外部参考
+### 18.14.4 外部参考
 
 - [Kubernetes CRD 文档](https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/)
 - [Operator SDK 文档](https://sdk.operatorframework.io/)

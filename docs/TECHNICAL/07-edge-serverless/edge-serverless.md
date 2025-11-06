@@ -45,9 +45,10 @@
   - [07.11.3 GPU 集成最佳实践](#07113-gpu-集成最佳实践)
   - [07.11.4 边缘和 Serverless 检查清单](#07114-边缘和-serverless-检查清单)
 - [07.12 参考](#0712-参考)
-  - [07.12.1 隔离栈相关文档](#07121-隔离栈相关文档)
-  - [07.12.2 边缘和 Serverless 相关文档](#07122-边缘和-serverless-相关文档)
-  - [07.12.3 外部参考](#07123-外部参考)
+  - [07.12.1 2025 年最新更新（2025-11-06）](#07121-2025-年最新更新2025-11-06)
+  - [07.12.2 隔离栈相关文档](#07122-隔离栈相关文档)
+  - [07.12.3 边缘和 Serverless 相关文档](#07123-边缘和-serverless-相关文档)
+  - [07.12.4 外部参考](#07124-外部参考)
 
 ---
 
@@ -907,7 +908,24 @@ kubectl get events --field-selector involvedObject.name=<hpa-name>
 
 ## 07.12 参考
 
-### 07.12.1 隔离栈相关文档
+### 07.12.1 2025 年最新更新（2025-11-06）
+
+- **[27. 2025 趋势 - 2025-11-06 最新更新](../27-2025-trends/2025-trends.md#2714-2025-年-11-月-6-日最新更新)** -
+  技术版本更新、生产环境最佳实践、已知问题与解决方案
+  - **K3s 1.30.4+k3s2**：WasmEdge 驱动性能优化，启动时间减少 30%
+  - **WasmEdge 0.14.1**：GPU 插件稳定性提升，新增 ONNX Runtime 支持
+  - **性能基准测试**：边缘节点性能对比数据（runc vs WasmEdge vs gVisor）
+    - **WasmEdge**：冷启动 6 ms，内存占用 32 MB，镜像大小 2 MB，CPU 抖动极低
+  - **生产案例**：5G MEC 商业级方案、工业 IoT 离线自治、在线游戏 Serverless
+
+**边缘和 Serverless 最佳实践（2025-11-06）**：
+
+- **K3s + WasmEdge 混部方案**：边缘节点优先使用 WasmEdge 运行时（冷启动 <10 ms）
+- **通过 RuntimeClass 自动调度**：无需手动选择运行时
+- **离线自治能力**：网络断连 30 天仍可自治运行，Wasm 沙箱内存 <50 MB
+- **镜像签名**：所有镜像必须使用 cosign 签名验证
+
+### 07.12.2 隔离栈相关文档
 
 - **[29. 隔离栈](../29-isolation-stack/isolation-stack.md)** - 完整的隔离栈技术
   解析，包括边缘计算和 Serverless 应用场景
@@ -916,7 +934,7 @@ kubectl get events --field-selector involvedObject.name=<hpa-name>
 - **[隔离层次对比文档](../29-isolation-stack/layers/isolation-comparison.md)** -
   WASM 性能对比和应用场景匹配
 
-### 07.12.2 边缘和 Serverless 相关文档
+### 07.12.3 边缘和 Serverless 相关文档
 
 - **[02. K3s](../02-k3s/k3s.md)** - K3s 轻量级架构和边缘场景实践
 - **[03. WasmEdge](../03-wasm-edge/wasmedge.md)** - WasmEdge 运行时和 Wasm 容器
@@ -927,13 +945,14 @@ kubectl get events --field-selector involvedObject.name=<hpa-name>
 - **[04. 编排运行时](../04-orchestration-runtime/orchestration-runtime.md)** -
   CRI 和 RuntimeClass 配置
 
-### 07.12.3 外部参考
+### 07.12.4 外部参考
 
 - [K3s 官方文档](https://docs.k3s.io/)
 - [WasmEdge 官方文档](https://wasmedge.org/docs/)
 - [Kubernetes Serverless 工作负载](https://kubernetes.io/docs/concepts/workloads/)
 - [Knative 官方文档](https://knative.dev/docs/)
 - [KEDA 官方文档](https://keda.sh/docs/)
+- [WasmEdge 0.14.1 发布说明](https://github.com/WasmEdge/WasmEdge/releases/tag/0.14.1)
 
 > 完整参考列表见 [REFERENCES.md](../REFERENCES.md)
 

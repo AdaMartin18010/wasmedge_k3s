@@ -50,9 +50,10 @@
 - [21.11 镜像仓库故障排查](#2111-镜像仓库故障排查)
   - [21.11.1 常见问题](#21111-常见问题)
 - [21.12 参考](#2112-参考)
-  - [21.12.1 隔离栈相关文档](#21121-隔离栈相关文档)
-  - [21.12.2 镜像仓库相关文档](#21122-镜像仓库相关文档)
-  - [21.12.3 外部参考](#21123-外部参考)
+  - [21.12.1 2025 年最新更新（2025-11-06）](#21121-2025-年最新更新2025-11-06)
+  - [21.12.2 隔离栈相关文档](#21122-隔离栈相关文档)
+  - [21.12.3 镜像仓库相关文档](#21123-镜像仓库相关文档)
+  - [21.12.4 外部参考](#21124-外部参考)
 
 ---
 
@@ -1217,7 +1218,23 @@ curl -X POST -u admin:password \
 
 ## 21.12 参考
 
-### 21.12.1 隔离栈相关文档
+### 21.12.1 2025 年最新更新（2025-11-06）
+
+- **[27. 2025 趋势 - 2025-11-06 最新更新](../27-2025-trends/2025-trends.md#2714-2025-年-11-月-6-日最新更新)** -
+  技术版本更新、生产环境最佳实践、已知问题与解决方案
+  - **OCI Artifact v1.1**：Wasm 模块签名、SBOM 支持
+  - **Sigstore + Cosign CNCF 毕业**：2025 年 7 月成为 CNCF 毕业项目
+  - **强制签名**：wasm 模块强制签名写入 Kubernetes 1.30 安全基线
+  - **SBOM 要求**：所有镜像必须包含 SBOM（Software Bill of Materials）
+
+**镜像管理最佳实践（2025-11-06）**：
+
+- **镜像签名**：所有镜像必须使用 cosign 签名验证（Sigstore CNCF 毕业）
+- **Wasm 模块签名**：wasm 模块强制签名写入 Kubernetes 1.30 安全基线
+- **SBOM 要求**：所有镜像必须包含 SBOM，支持漏洞扫描和依赖追踪
+- **镜像扫描**：集成 Trivy 等工具进行镜像漏洞扫描
+
+### 21.12.2 隔离栈相关文档
 
 - **[29. 隔离栈](../29-isolation-stack/isolation-stack.md)** - 完整的隔离栈技术
   解析，包括镜像格式和运行时
@@ -1228,20 +1245,22 @@ curl -X POST -u admin:password \
 - **[隔离层次对比文档](../29-isolation-stack/layers/isolation-comparison.md)** -
   镜像格式对比和技术选型
 
-### 21.12.2 镜像仓库相关文档
+### 21.12.3 镜像仓库相关文档
 
 - **[00. Docker](../00-docker/docker.md)** - Docker 技术规范
 - **[05. OCI 供应链](../05-oci-supply-chain/oci-supply-chain.md)** - OCI 标准和
   供应链安全
 - **[09. 安全合规](../09-security-compliance/security-compliance.md)** - 镜像签
   名和供应链安全最佳实践
+- **[10. 安装部署](../10-installation/installation.md)** - 镜像签名和推送指南
 
-### 21.12.3 外部参考
+### 21.12.4 外部参考
 
 - [Docker Registry 文档](https://docs.docker.com/registry/)
 - [Harbor 官方文档](https://goharbor.io/docs/)
 - [Trivy 官方文档](https://aquasecurity.github.io/trivy/)
 - [Cosign 官方文档](https://docs.sigstore.dev/cosign/)
+- [Sigstore 官方文档](https://www.sigstore.dev/) - 镜像签名和验证
 - [OCI Distribution 规范](https://github.com/opencontainers/distribution-spec)
 - [AWS ECR 文档](https://docs.aws.amazon.com/ecr/)
 - [Azure ACR 文档](https://docs.microsoft.com/azure/container-registry/)
