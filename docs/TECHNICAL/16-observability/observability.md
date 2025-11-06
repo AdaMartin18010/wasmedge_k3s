@@ -1975,6 +1975,12 @@ exporters:
   - eBPF 在可观测性中的应用深度分析
   - eBPF 与 OpenTelemetry 集成
   - eBPF 工具生态和性能对比（2025-11-07）
+- **[32. eBPF/OTLP 扩展技术分析](../32-ebpf-otlp-analysis/ebpf-otlp-analysis.md)**
+  ⭐ - eBPF/OTLP 扩展技术分析文档
+  - 技术规范与语义模型对齐（eBPF 字节码规范与 OTLP 协议规范映射）
+  - OTLP 列式编码（Arrow Flight）集成、Profile 信号 GA 支持
+  - 性能基准测试、优化策略（内核态预聚合、列式编码、批处理）
+  - 部署架构、安全与权限管理、故障排查、最佳实践（2025-11-07）
 
 ---
 

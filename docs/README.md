@@ -317,6 +317,9 @@
   CSI、PV/PVC、存储类型规格
 - **[16. 监控与可观测性](TECHNICAL/16-observability/observability.md)** -
   Metrics、Logging、Tracing 技术规范
+- **[32. eBPF/OTLP 扩展技术分析](TECHNICAL/32-ebpf-otlp-analysis/ebpf-otlp-analysis.md)**
+  ⭐ - eBPF/OTLP 扩展技术分析；架构设计、性能分析、实践指南；技术规范对齐、虚拟
+  化/容器化/沙盒化架构（2025-11-07）
 - **[17. GitOps 和持续交付](TECHNICAL/17-gitops-cicd/gitops-cicd.md)** -
   GitOps/CI/CD 技术规范
 - **[18. Operator 和 CRD](TECHNICAL/18-operator-crd/operator-crd.md)** -
@@ -392,6 +395,8 @@
 - [10. 安装部署](TECHNICAL/10-installation/installation.md)
 - [11. 故障排查](TECHNICAL/11-troubleshooting/troubleshooting.md)
 - [16. 监控与可观测性](TECHNICAL/16-observability/observability.md)
+- [32. eBPF/OTLP 扩展技术分析](TECHNICAL/32-ebpf-otlp-analysis/ebpf-otlp-analysis.md)
+  ⭐ - 故障排查、部署架构、最佳实践
 - [17. GitOps 和持续交付](TECHNICAL/17-gitops-cicd/gitops-cicd.md)
 - [22. 升级和迁移](TECHNICAL/22-upgrade-migration/upgrade-migration.md)
 

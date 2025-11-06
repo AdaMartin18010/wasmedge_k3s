@@ -72,6 +72,7 @@
 | 隔离栈             | `29-isolation-stack/`          | 四层隔离栈：虚拟化 → 半虚拟化 → 容器化 → 沙盒化；横纵耦合问题定位模型（OTLP + eBPF）；观测系统作为第四大基础设施；网络定位专题                    |
 | 概念关系矩阵       | `30-concept-relations-matrix/` | 2025 技术堆栈概念关系矩阵与多维关系分析；二维、三维、多维关系矩阵；思维导图；形式化定义；快速参考指南；使用指南；概念索引；与故障排查文档深度集成 |
 | eBPF 技术堆栈      | `31-ebpf-stack/`               | eBPF 内核可编程技术堆栈；网络加速、可观测性、服务网格、安全应用；工具生态；2025-11-07 技术栈状态                                                  |
+| eBPF/OTLP 扩展分析 | `32-ebpf-otlp-analysis/`       | eBPF/OTLP 扩展技术分析；架构设计、性能分析、实践指南；技术规范对齐、虚拟化/容器化/沙盒化架构；2025-11-07 技术栈状态 ⭐                            |
 
 ## 3. 快速开始
 
@@ -109,9 +110,16 @@
    - 工具生态、性能对比、选型决策（2025-11-07）
    - 深度论证和分析：性能基准测试、Verifier 机制、2025 技术趋势、成本效益分析、
      故障排查指南
-4. **[监控与可观测性](16-observability/observability.md)** -
+4. **[eBPF/OTLP 扩展技术分析](32-ebpf-otlp-analysis/)** ⭐ - 扩展技术分析文档
+   - **文档目录**：[README.md](32-ebpf-otlp-analysis/README.md) - 完整的文档结构
+     说明和快速导航
+   - 技术规范与语义模型对齐、虚拟化/容器化/沙盒化架构视角
+   - 思维导图、知识图谱、多维矩阵视角
+   - 性能基准测试、优化策略、部署架构、安全与权限管理
+   - 故障排查、最佳实践、最新技术栈前沿（2025-11-07）
+5. **[监控与可观测性](16-observability/observability.md)** -
    Metrics、Logging、Tracing
-5. **[隔离栈](29-isolation-stack/isolation-stack.md)** - 四层隔离栈：虚拟化 → 半
+6. **[隔离栈](29-isolation-stack/isolation-stack.md)** - 四层隔离栈：虚拟化 → 半
    虚拟化 → 容器化 → 沙盒化，横纵耦合问题定位模型
    - **文档目录**：[README.md](29-isolation-stack/README.md) - 完整的文档结构说
      明
@@ -119,6 +127,9 @@
      文档
    - **问题定位文档**：[troubleshooting/](29-isolation-stack/troubleshooting/) -
      问题定位模型独立文档
+   - **扩展技术分
+     析**：[32. eBPF/OTLP 扩展技术分析](32-ebpf-otlp-analysis/ebpf-otlp-analysis.md)
+     ⭐ - 横纵耦合问题定位模型、技术规范对齐、性能分析、实践指南（2025-11-07）
 
 ### 3.5 概念关系与故障排查
 
@@ -250,6 +261,8 @@
   - [文档目录](29-isolation-stack/README.md) - 完整的文档结构说明和快速导航
   - [各层次文档](29-isolation-stack/layers/) - 每个隔离层次的独立文档
   - [问题定位文档](29-isolation-stack/troubleshooting/) - 问题定位模型独立文档
+  - [扩展技术分析](32-ebpf-otlp-analysis/ebpf-otlp-analysis.md) ⭐ - eBPF/OTLP
+    扩展技术分析（2025-11-07）
 - [30. 概念关系矩阵](30-concept-relations-matrix/concept-relations-matrix.md) -
   2025 技术堆栈概念关系矩阵与多维关系分析
 - **[虚拟化与容器化网络对比分析](12-network-stack/virtualization-comparison.md)** -
@@ -279,8 +292,10 @@
 
 ## 7. 文档统计
 
-- **总文档数**：30 个核心技术参考文档（含架构框架、隔离栈和概念关系矩阵）
+- **总文档数**：31 个核心技术参考文档（含架构框架、隔离栈、概念关系矩阵和
+  eBPF/OTLP 扩展分析）
 - **覆盖范围**：容器编排、运行时、策略、实践指南、技术规格、架构框架、隔离栈
+  、eBPF/OTLP 技术栈
 - **文档类型**：技术参考文档
 
 ## 8. 架构框架与隔离栈
@@ -299,6 +314,9 @@
   - **问题定位模型**：横纵耦合定位（OTLP + eBPF）
   - **观测系统**：观测系统作为第四大基础设施
   - **网络定位**：网络作为横向生命线的定位方法
+  - **扩展技术分
+    析**：[32. eBPF/OTLP 扩展技术分析](32-ebpf-otlp-analysis/ebpf-otlp-analysis.md)
+    ⭐ - 横纵耦合问题定位模型、技术规范对齐、性能分析、实践指南（2025-11-07）
   - **各层次独立文档**：[layers/](29-isolation-stack/layers/) - 每个隔离层次的独
     立文档，便于检索和对比
   - **问题定位文档**：[troubleshooting/](29-isolation-stack/troubleshooting/) -

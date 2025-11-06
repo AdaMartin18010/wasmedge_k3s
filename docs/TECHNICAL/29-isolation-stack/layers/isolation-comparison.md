@@ -656,20 +656,33 @@ graph TB
 ### 11.2 主文档相关章节
 
 - **[隔离栈主文档](../isolation-stack.md)** - 完整的隔离栈技术解析
-- **[故障排查章节](../isolation-stack.md#29-隔离栈)** - 故障排查方法和工具
+- **[问题定位模型](../isolation-stack.md#296-问题定位模型横向请求链--纵向隔离栈)** -
+  横纵耦合问题定位方法，OTLP + eBPF 联合定位
 - **[快速索引](../isolation-stack.md#297-快速索引与常见问题)** - 问题类型快速索
   引
 
 ### 11.3 其他技术文档
 
-- **[可观测性文档](../../16-observability/observability.md)** -
-  OpenTelemetry、eBPF 等技术
-- **[eBPF 技术堆栈](../../31-ebpf-stack/ebpf-stack.md)** - eBPF 内核可编程技术堆
-  栈，网络加速、可观测性、服务网格、安全应用（2025-11-07）
-- **[故障排查文档](../../11-troubleshooting/troubleshooting.md)** - 通用故障排查
+**可观测性相关**：
+
+- **[16. 监控与可观测性](../../16-observability/observability.md)** -
+  OTLP、OpenTelemetry、eBPF 等技术规范
+- **[31. eBPF 技术堆栈](../../31-ebpf-stack/ebpf-stack.md)** - eBPF 内核可编程技
+  术堆栈，网络加速、可观测性、服务网格、安全应用（2025-11-07）
+- **[32. eBPF/OTLP 扩展技术分析](../../32-ebpf-otlp-analysis/ebpf-otlp-analysis.md)**
+  ⭐ - eBPF/OTLP 扩展技术分析文档
+  - 横纵耦合问题定位模型（OTLP 横向 + eBPF 纵向）
+  - 技术规范对齐、性能分析、实践指南（2025-11-07）
+
+**故障排查相关**：
+
+- **[11. 故障排查](../../11-troubleshooting/troubleshooting.md)** - 通用故障排查
   方法
-- **[网络技术规格](../../12-network-stack/network-stack.md)** - 网络技术和 CNI
-  插件
+
+**网络相关**：
+
+- **[12. 网络技术规格](../../12-network-stack/network-stack.md)** - 网络技术和
+  CNI 插件
 
 ---
 

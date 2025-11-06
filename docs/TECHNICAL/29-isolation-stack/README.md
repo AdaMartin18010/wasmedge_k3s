@@ -131,16 +131,16 @@
 - **[文档使用指南](isolation-stack.md#299-文档使用指南)** - 使用策略、阅读技巧、
   常见问题快速定位
 
-## 4. 使用场景
+## 5. 使用场景
 
 - **技术选型**：快速定位组件所属层级
 - **故障排查**：根据日志关键词定位问题层级，结合 OTLP + eBPF 进行横向和纵向定位
 - **面试/技术交流**：快速理解隔离栈结构
 - **问题定位**：使用"横向请求链 + 纵向隔离栈"模型进行系统性问题定位
 
-## 5. 相关文档
+## 6. 相关文档
 
-### 5.1 文档关联性
+### 6.1 文档关联性
 
 - **[文档关联性完善总结报告](../DOCUMENTATION-ISOLATION-STACK-CROSS-REFERENCES.md)** -
   所有技术文档与隔离栈文档的关联关系总结
@@ -148,20 +148,37 @@
   - 关联点统计和分析
   - 文档关联性体系价值说明
 
-### 5.2 技术文档
+### 6.2 技术文档
 
-- **[13. 缩写词汇表](../13-acronyms-glossary/acronyms-glossary.md)** - 技术缩写
-  词定义
+**可观测性相关**：
+
 - **[16. 监控与可观测性](../16-observability/observability.md)** -
   OTLP、OpenTelemetry、Jaeger 等技术规范
 - **[31. eBPF 技术堆栈](../31-ebpf-stack/ebpf-stack.md)** - eBPF 内核可编程技术
   堆栈，网络加速、可观测性应用（2025-11-07）
+- **[32. eBPF/OTLP 扩展技术分析](../32-ebpf-otlp-analysis/ebpf-otlp-analysis.md)**
+  ⭐ - eBPF/OTLP 扩展技术分析文档
+  - 横纵耦合问题定位模型（OTLP 横向 + eBPF 纵向）
+  - 技术规范对齐、性能分析、实践指南
+  - 智能系统能力架构（自我感知、自动伸缩、自我治愈）
+  - 故障排查、最佳实践（2025-11-07）
+
+**故障排查相关**：
+
 - **[11. 故障排查](../11-troubleshooting/troubleshooting.md)** - 常见故障排查方
   法
+
+**理论基础**：
+
 - **[12. 虚拟化/半虚拟化/容器化/沙盒化严格定义](../../COGNITIVE/10-decision-models/06-technical-concepts/12-virtualization-paravirtualization-containerization-sandboxing-strict-definition.md)** -
   技术范式的严格定义
 - **[02. 隔离模型](../../COGNITIVE/10-decision-models/01-theory-models/02-isolation-models.md)** -
   隔离层次理论模型
+
+**其他技术文档**：
+
+- **[13. 缩写词汇表](../13-acronyms-glossary/acronyms-glossary.md)** - 技术缩写
+  词定义
 
 ---
 

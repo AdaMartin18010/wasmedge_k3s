@@ -732,6 +732,14 @@ graph TB
 
 ### 31.6.5 eBPF 与 OpenTelemetry 集成
 
+> 📋 **扩展阅读**：详细的 eBPF/OTLP 技术分析和实践指南，请参考：
+> **[32. eBPF/OTLP 扩展技术分析](../32-ebpf-otlp-analysis/ebpf-otlp-analysis.md)**
+> ⭐
+>
+> - 技术规范与语义模型对齐（eBPF 字节码规范与 OTLP 协议规范精密映射）
+> - 性能基准测试、优化策略（内核态预聚合、列式编码、批处理）
+> - 部署架构、安全与权限管理、故障排查、最佳实践
+
 **OpenTelemetry eBPF Exporter**：
 
 - **数据采集**：eBPF 程序采集内核数据
@@ -749,6 +757,11 @@ graph TB
 ```
 
 #### 31.6.5.1 横纵耦合定位模型
+
+> 📋 **详细分析**：横纵耦合定位模型的完整技术分析和实践案例，请参考：
+> **[32.12 智能系统能力架构](../32-ebpf-otlp-analysis/ebpf-otlp-analysis.md#3212-智能系统能力架构从观测到自治的技术演进)**
+> 和
+> **[32.10 故障排查](../32-ebpf-otlp-analysis/ebpf-otlp-analysis.md#3210-故障排查常见问题与解决方案)**
 
 **OTLP + eBPF 联合定位**：
 
@@ -1467,6 +1480,12 @@ graph TB
   术栈、资源成本分析、成本优化策略、ROI 计算（eBPF 成本效益分析相关）
 - **[29. 隔离栈](../29-isolation-stack/isolation-stack.md)** - eBPF 网络显微镜和
   问题定位
+- **[32. eBPF/OTLP 扩展技术分析](../32-ebpf-otlp-analysis/ebpf-otlp-analysis.md)**
+  ⭐ - eBPF/OTLP 扩展技术分析文档
+  - 技术规范与语义模型对齐、虚拟化/容器化/沙盒化架构视角
+  - 性能基准测试、优化策略、部署架构、安全与权限管理
+  - 智能系统能力架构（系统自我感知、自动伸缩、自我治愈）
+  - 故障排查、最佳实践、最新技术栈前沿（2025-11-07）
 
 ### 31.12.2 外部参考
 

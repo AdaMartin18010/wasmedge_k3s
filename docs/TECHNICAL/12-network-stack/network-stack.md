@@ -105,6 +105,11 @@
 
 - **[31. eBPF 技术堆栈](../31-ebpf-stack/ebpf-stack.md)** - eBPF 内核可编程技术
   堆栈，网络加速、可观测性应用（2025-11-07）
+- **[32. eBPF/OTLP 扩展技术分析](../32-ebpf-otlp-analysis/ebpf-otlp-analysis.md)**
+  ⭐ - eBPF/OTLP 扩展技术分析文档
+  - 网络场景性能基准测试（XDP/TC/Socket 映射性能数据）
+  - 网络优化策略（内核态预聚合、列式编码）
+  - 网络故障排查和最佳实践（2025-11-07）
 - **[29. 隔离栈 - 网络定位专题](../29-isolation-stack/isolation-stack.md#29612-网络定位专题横向生命线)** -
   网络作为横向生命线的定位方法，OTLP + eBPF 联合网络问题定位，网络在三栈里的"切
   片"视图，网络定位五步法

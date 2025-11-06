@@ -144,6 +144,8 @@ COGNITIVE/09-matrix-perspective 目录下）。
   CSI、PV/PVC、存储类型规格
 - [25. 监控与可观测性](TECHNICAL/16-observability/observability.md) -
   Metrics、Logging、Tracing 技术规范
+- [32. eBPF/OTLP 扩展技术分析](TECHNICAL/32-ebpf-otlp-analysis/ebpf-otlp-analysis.md)
+  ⭐ - eBPF/OTLP 扩展技术分析；架构设计、性能分析、实践指南（2025-11-07）
 - [26. GitOps 和持续交付](TECHNICAL/17-gitops-cicd/gitops-cicd.md) -
   GitOps/CI/CD 技术规范
 - [27. Operator 和 CRD](TECHNICAL/18-operator-crd/operator-crd.md) -
@@ -154,8 +156,13 @@ COGNITIVE/09-matrix-perspective 目录下）。
   规范（可选）
 - [31. 镜像仓库和镜像管理](TECHNICAL/21-image-registry/image-registry.md) - 镜像
   仓库与管理技术规范
+- [31. eBPF 技术堆栈](TECHNICAL/31-ebpf-stack/ebpf-stack.md) ⭐ - eBPF 内核可编
+  程技术堆栈；网络加速、可观测性、服务网格、安全应用（2025-11-07）
 - [32. 升级和迁移](TECHNICAL/22-upgrade-migration/upgrade-migration.md) - 升级和
   迁移技术规范
+- [32. eBPF/OTLP 扩展技术分析](TECHNICAL/32-ebpf-otlp-analysis/ebpf-otlp-analysis.md)
+  ⭐ - eBPF/OTLP 扩展技术分析；架构设计、性能分析、实践指南；技术规范对齐、虚拟
+  化/容器化/沙盒化架构（2025-11-07）
 
 ### 参考类（5 个）
 
@@ -306,6 +313,8 @@ graph TB
 
 1. [25. 监控与可观测性](TECHNICAL/16-observability/observability.md) -
    Metrics、Logging、Tracing
+2. [32. eBPF/OTLP 扩展技术分析](TECHNICAL/32-ebpf-otlp-analysis/ebpf-otlp-analysis.md)
+   ⭐ - eBPF/OTLP 扩展技术分析；架构设计、性能分析、实践指南（2025-11-07）
 
 #### 交付
 
