@@ -293,12 +293,14 @@ spec:
 - ✅ 轻量级部署
 - ✅ 配置漂移检测
 - ✅ 批量部署
+- ✅ Wasm 策略支持（2025 年新增）
 
 **版本信息**：
 
 - **最新版本**：v0.10.0+（2024）
 - **GitHub Stars**：500+
 - **生产验证**：✅ 多集群场景使用
+- **2025 年更新**：2025 模板已默认带 `policy.wasm` 签名验证
 
 **适用场景**：
 
@@ -306,6 +308,15 @@ spec:
 - ✅ 边缘集群管理
 - ✅ K3s 集群管理
 - ✅ 大规模集群部署
+- ✅ GitOps Wasm 策略工作流（2025 年新增）
+
+> 📋 **详细文档**：Rancher Fleet + GitOps Wasm 策略工作流的完整配置、Cosign 签名
+> 验证流程和最佳实践，请参考：
+>
+> - **[06.9.4 案例 4：Rancher Fleet + GitOps Wasm 策略工作流（2025-11-07）](../06-policy-opa/policy-opa.md#0694-案例-4rancher-fleet--gitops-wasm-策略工作流2025-11-07)** -
+>   完整工作流程（策略开发 → 编译 → 签名 → Git 推送 → Fleet 同步 → 策略生效）、
+>   配置示例（GitRepo、Bundle、Gatekeeper ConstraintTemplate）、Cosign 签名验证
+>   、优势分析和回滚策略
 
 ### 17.3.4 GitOps 工具对比
 

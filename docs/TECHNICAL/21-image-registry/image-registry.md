@@ -1228,6 +1228,13 @@ curl -X POST -u admin:password \
   - **强制签名**：wasm 模块强制签名写入 Kubernetes 1.30 安全基线
   - **SBOM 要求**：所有镜像必须包含 SBOM（Software Bill of Materials）
 
+> 📋 **详细文档**：OCI Artifact v1.1 的完整新特性说明、代码示例、性能提升数据和
+> 迁移指南，请参考：
+>
+> - **[05.2.3 OCI Artifact v1.1 新特性（2025-11-07）](../05-oci-supply-chain/oci-supply-chain.md#0523-oci-artifact-v11-新特性2025-11-07)** -
+>   Wasm 模块签名、SBOM 关联、增强发现机制、批量操作、元数据扩展、性能提升（批量
+>   签名 ↑3×，发现查询 ↑5×）和兼容性说明
+
 **镜像管理最佳实践（2025-11-06）**：
 
 - **镜像签名**：所有镜像必须使用 cosign 签名验证（Sigstore CNCF 毕业）

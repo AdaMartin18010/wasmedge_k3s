@@ -103,6 +103,8 @@
      范式转换、架构对比、性能分析（2025-11-07）
 3. **[eBPF 技术堆栈](31-ebpf-stack/ebpf-stack.md)** - 内核可编程技术堆栈（1361
    行）
+   - **文档目录**：[README.md](31-ebpf-stack/README.md) - 完整的文档结构说明和快
+     速导航
    - 网络加速、可观测性、服务网格、安全应用
    - 工具生态、性能对比、选型决策（2025-11-07）
    - 深度论证和分析：性能基准测试、Verifier 机制、2025 技术趋势、成本效益分析、
@@ -430,12 +432,37 @@
 - 建立与技术规格文档的互补关系
 - 完善交叉引用体系，与 35+ 个相关文档建立关联
 
+**文档内容补充**（2025-11-07 后续更新）：
+
+- **[K3s](02-k3s/k3s.md)**：ARM64 边缘盒子单节点 3000 Pod 生产验证案例
+- **[编排运行时](04-orchestration-runtime/orchestration-runtime.md)**：HPA 按
+  Runtime 维度分组（K8s 1.30+）
+- **[AI 推理](08-ai-inference/ai-inference.md)**：
+  - KubeCon 2025 中国议题详细说明（08.6.1）
+  - .wasm 模型镜像格式详细说明（08.6.2）
+  - GPU 加速推理详细性能数据（08.5.3）
+- **[OPA 策略](06-policy-opa/policy-opa.md)**：Rancher Fleet + GitOps Wasm 策略
+  工作流（06.9.4）
+- **[供应链安全](05-oci-supply-chain/oci-supply-chain.md)**：OCI Artifact v1.1
+  新特性详细说明（05.2.3）
+
+**文档交叉引用完善**（2025-11-07 后续更新）：
+
+- **[2025 年技术趋势](27-2025-trends/2025-trends.md)**：新增 7 处交叉引用，链接
+  到详细技术文档
+- **[GitOps 和持续交付](17-gitops-cicd/gitops-cicd.md)**：新增 1 处交叉引用
+  （Fleet Wasm 策略）
+- **[镜像仓库](21-image-registry/image-registry.md)**：新增 1 处交叉引用（OCI
+  Artifact v1.1）
+- **总计**：9 处交叉引用，提升文档可导航性和完整性
+
 **适用场景**：
 
 - 需要深入理解虚拟化与容器化技术差异
 - 进行技术选型和架构决策
 - 性能优化和瓶颈分析
 - 混合架构设计
+- 生产环境部署和验证
 
 ### 9.1 2025 年 11 月 6 日技术更新
 

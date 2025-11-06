@@ -34,6 +34,7 @@
   - [06.9.1 案例 1：镜像签名验证策略](#0691-案例-1镜像签名验证策略)
   - [06.9.2 案例 2：资源限制策略](#0692-案例-2资源限制策略)
   - [06.9.3 案例 3：命名空间标签策略](#0693-案例-3命名空间标签策略)
+  - [06.9.4 案例 4：Rancher Fleet + GitOps Wasm 策略工作流（2025-11-07）](#0694-案例-4rancher-fleet--gitops-wasm-策略工作流2025-11-07)
 - [06.10 OPA 最佳实践](#0610-opa-最佳实践)
   - [06.10.1 策略编写最佳实践](#06101-策略编写最佳实践)
   - [06.10.2 Wasm 编译最佳实践](#06102-wasm-编译最佳实践)
@@ -578,6 +579,167 @@ kubectl run test-pod --image=nginx --namespace=production \
   --labels="environment=prod"
 
 # 应该通过验证
+```
+
+### 06.9.4 案例 4：Rancher Fleet + GitOps Wasm 策略工作流（2025-11-07）
+
+**2025 年状态**：Rancher Fleet + GitOps 2025 模板已默认带 `policy.wasm` 签名验证
+，推送即生效。
+
+**工作流概述**：
+
+Rancher Fleet 通过 GitOps 方式管理 Wasm 策略，实现策略的版本控制、签名验证和自动
+部署。
+
+**工作流程**：
+
+1. **策略开发**：在 Git 仓库中编写 Rego 策略
+2. **编译 Wasm**：使用 `opa build` 编译策略为 `policy.wasm`
+3. **签名验证**：使用 `cosign` 对 `policy.wasm` 进行签名
+4. **Git 推送**：将策略推送到 Git 仓库
+5. **Fleet 同步**：Rancher Fleet 自动同步策略到集群
+6. **策略生效**：Gatekeeper 加载 Wasm 策略并生效
+
+**配置示例**：
+
+**1. Git 仓库结构**：
+
+```text
+policies/
+├── image-signature/
+│   ├── policy.rego
+│   ├── policy.wasm
+│   └── cosign.pub
+└── fleet.yaml
+```
+
+**2. Fleet GitRepo 配置**：
+
+```yaml
+apiVersion: fleet.cattle.io/v1alpha1
+kind: GitRepo
+metadata:
+  name: wasm-policies
+  namespace: fleet-default
+spec:
+  repo: https://github.com/yourorg/policies.git
+  branch: main
+  paths:
+    - policies/image-signature
+  syncInterval: 30s
+```
+
+**3. Fleet Bundle 配置**：
+
+```yaml
+apiVersion: fleet.cattle.io/v1alpha1
+kind: Bundle
+metadata:
+  name: image-signature-policy
+  namespace: fleet-default
+spec:
+  targets:
+    - clusterSelector:
+        matchLabels:
+          environment: production
+  resources:
+    - name: policy-wasm
+      content: |
+        apiVersion: v1
+        kind: ConfigMap
+        metadata:
+          name: policy-wasm
+        data:
+          policy.wasm: |
+            # Base64 编码的 policy.wasm 内容
+```
+
+**4. Gatekeeper ConstraintTemplate（Wasm 引擎）**：
+
+```yaml
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: k8srequiredimagesignature
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sRequiredImageSignature
+      validation:
+        openAPIV3Schema:
+          type: object
+          properties:
+            imagePattern:
+              type: string
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        # Wasm 策略通过 ConfigMap 挂载
+        package k8srequiredimagesignature
+        violation[{"msg": msg}] {
+          # Wasm 策略逻辑
+        }
+      libs:
+        - name: wasm
+          source: ConfigMap:policy-wasm:policy.wasm
+```
+
+**5. Cosign 签名验证**：
+
+```bash
+# 编译策略
+opa build -t wasm -e admission/deny policy.rego
+
+# 提取 policy.wasm
+tar xzf bundle.tar.gz policy.wasm
+
+# 签名 policy.wasm
+cosign sign-blob --key cosign.key policy.wasm > policy.wasm.sig
+
+# 验证签名
+cosign verify-blob --key cosign.pub --signature policy.wasm.sig policy.wasm
+```
+
+**6. GitOps 工作流**：
+
+```bash
+# 1. 开发策略
+vim policy.rego
+
+# 2. 编译为 Wasm
+opa build -t wasm -e admission/deny policy.rego
+tar xzf bundle.tar.gz policy.wasm
+
+# 3. 签名 Wasm
+cosign sign-blob --key cosign.key policy.wasm > policy.wasm.sig
+
+# 4. 提交到 Git
+git add policy.rego policy.wasm policy.wasm.sig
+git commit -m "Add image signature policy"
+git push origin main
+
+# 5. Fleet 自动同步（30 秒内）
+# 6. Gatekeeper 自动加载策略
+```
+
+**优势**：
+
+- ✅ **版本控制**：策略以代码形式存储在 Git 中，支持版本管理和回滚
+- ✅ **签名验证**：`policy.wasm` 必须经过签名验证，确保策略完整性
+- ✅ **自动部署**：Git 推送后，Fleet 自动同步策略到集群
+- ✅ **零停机**：策略更新无需重启，Gatekeeper 自动热加载
+- ✅ **多集群管理**：Fleet 支持多集群策略分发和管理
+
+**回滚策略**：
+
+```bash
+# Git 回滚
+git revert HEAD
+git push origin main
+
+# Fleet 自动同步回滚后的策略
+# Gatekeeper 自动加载旧策略
 ```
 
 ## 06.10 OPA 最佳实践

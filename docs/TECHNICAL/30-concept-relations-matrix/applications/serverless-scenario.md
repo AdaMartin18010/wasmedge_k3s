@@ -2,7 +2,8 @@
 
 **最后更新**: 2025-11-06 **维护者**: 项目团队
 
-> 📋 **主文档链接**：[30.13.3 Serverless 场景](../concept-relations-matrix.md#30133-serverless-场景)
+> 📋 **主文档链
+> 接**：[30.13.3 Serverless 场景](../concept-relations-matrix.md#30133-serverless-场景)
 
 ## 场景描述
 
@@ -55,11 +56,11 @@ K3s+Knative (X=2, Serverless编排) + WasmEdge (Y=4, 沙盒隔离) + KEDA (弹�
 
 ## 参考文档
 
-- [07. 边缘 Serverless](../../07-edge-serverless/edge-serverless.md) - 边缘计算和 Serverless
+- [07. 边缘 Serverless](../../07-edge-serverless/edge-serverless.md) - 边缘计算
+  和 Serverless
 - [03. WasmEdge](../../03-wasm-edge/wasmedge.md) - WasmEdge 技术规范
 - [27.14.5.3 大规模 Serverless 平台案例](../../27-2025-trends/2025-trends.md#271453-大规模-serverless-平台案例)
 
 ---
 
 **最后更新**：2025-11-06 **维护者**：项目团队
-

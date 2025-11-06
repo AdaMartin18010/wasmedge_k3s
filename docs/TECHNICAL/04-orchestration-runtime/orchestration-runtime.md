@@ -34,18 +34,23 @@
   - [04.9.1 案例 1：混合工作负载配置（Linux + Wasm）](#0491-案例-1混合工作负载配置linux--wasm)
   - [04.9.2 案例 2：K3s 配置 WasmEdge 运行时](#0492-案例-2k3s-配置-wasmedge-运行时)
   - [04.9.3 案例 3：节点标签和 RuntimeClass 调度](#0493-案例-3节点标签和-runtimeclass-调度)
-- [04.10 故障排查](#0410-故障排查)
-  - [04.10.1 常见问题](#04101-常见问题)
-- [04.11 最佳实践](#0411-最佳实践)
-  - [04.11.1 RuntimeClass 配置最佳实践](#04111-runtimeclass-配置最佳实践)
-  - [04.11.2 多运行时管理最佳实践](#04112-多运行时管理最佳实践)
-  - [04.11.3 编排运行时检查清单](#04113-编排运行时检查清单)
-- [04.12 参考](#0412-参考)
-  - [04.12.1 2025 年最新更新（2025-11-06）](#04121-2025-年最新更新2025-11-06)
-  - [04.12.2 隔离栈相关文档](#04122-隔离栈相关文档)
-  - [04.12.3 运行时相关文档](#04123-运行时相关文档)
-  - [04.12.3 网络和存储相关文档](#04123-网络和存储相关文档)
-  - [04.12.4 其他相关文档](#04124-其他相关文档)
+- [04.10 HPA 按 Runtime 维度分组（K8s 1.30+）](#0410-hpa-按-runtime-维度分组k8s-130)
+  - [04.10.1 HPA Runtime 维度分组概述](#04101-hpa-runtime-维度分组概述)
+  - [04.10.2 HPA Runtime 维度分组配置](#04102-hpa-runtime-维度分组配置)
+  - [04.10.3 HPA Runtime 维度分组优势](#04103-hpa-runtime-维度分组优势)
+  - [04.10.4 HPA Runtime 维度分组最佳实践](#04104-hpa-runtime-维度分组最佳实践)
+- [04.11 故障排查](#0411-故障排查)
+  - [04.11.1 常见问题](#04111-常见问题)
+- [04.12 最佳实践](#0412-最佳实践)
+  - [04.12.1 RuntimeClass 配置最佳实践](#04121-runtimeclass-配置最佳实践)
+  - [04.12.2 多运行时管理最佳实践](#04122-多运行时管理最佳实践)
+  - [04.12.3 编排运行时检查清单](#04123-编排运行时检查清单)
+- [04.13 参考](#0413-参考)
+  - [04.13.1 2025 年最新更新（2025-11-06）](#04131-2025-年最新更新2025-11-06)
+  - [04.13.2 隔离栈相关文档](#04132-隔离栈相关文档)
+  - [04.13.3 运行时相关文档](#04133-运行时相关文档)
+  - [04.13.4 网络和存储相关文档](#04134-网络和存储相关文档)
+  - [04.13.5 其他相关文档](#04135-其他相关文档)
 
 ---
 
@@ -605,9 +610,196 @@ scheduling:
 EOF
 ```
 
-## 04.10 故障排查
+## 04.10 HPA 按 Runtime 维度分组（K8s 1.30+）
 
-### 04.10.1 常见问题
+### 04.10.1 HPA Runtime 维度分组概述
+
+**2025 年状态**：Kubernetes 1.30+ 支持 HPA 按 runtime 维度分组，实现不同运行时的
+独立扩缩容。
+
+**核心特性**：
+
+- **Runtime 维度分组**：HPA 可以按 `runtimeClassName` 维度分组，实现不同运行时的
+  独立扩缩容
+- **混部场景支持**：支持 `runtimeClassName: runc` 和 `runtimeClassName: wasm` 混
+  部场景
+- **独立扩缩容**：不同运行时的 Pod 可以独立设置扩缩容策略
+
+### 04.10.2 HPA Runtime 维度分组配置
+
+**配置示例**：
+
+```yaml
+# 1. 创建 Linux 容器 Deployment（使用 runc）
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: linux-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: linux-app
+  template:
+    metadata:
+      labels:
+        app: linux-app
+        runtime: runc # 运行时标签
+    spec:
+      runtimeClassName: runc
+      containers:
+        - name: app
+          image: nginx:latest
+---
+# 2. 创建 Wasm 容器 Deployment（使用 wasm）
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wasm-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: wasm-app
+  template:
+    metadata:
+      labels:
+        app: wasm-app
+        runtime: wasm # 运行时标签
+    spec:
+      runtimeClassName: wasm
+      containers:
+        - name: app
+          image: wasm-app:latest
+---
+# 3. 创建 HPA（按 runtime 维度分组）
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: linux-app-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: linux-app
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 300
+      policies:
+        - type: Pods
+          value: 1
+          periodSeconds: 60
+    scaleUp:
+      stabilizationWindowSeconds: 0
+      policies:
+        - type: Pods
+          value: 2
+          periodSeconds: 60
+---
+# 4. 创建 Wasm HPA（独立扩缩容策略）
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: wasm-app-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: wasm-app
+  minReplicas: 1
+  maxReplicas: 100 # Wasm Pod 可以扩展到更多副本
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 80
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 60 # Wasm Pod 可以更快缩容
+      policies:
+        - type: Pods
+          value: 5
+          periodSeconds: 30
+    scaleUp:
+      stabilizationWindowSeconds: 0
+      policies:
+        - type: Pods
+          value: 10 # Wasm Pod 可以更快扩容
+          periodSeconds: 30
+```
+
+### 04.10.3 HPA Runtime 维度分组优势
+
+**优势分析**：
+
+1. **独立扩缩容**：
+
+   - Linux 容器和 Wasm 容器可以独立设置扩缩容策略
+   - Wasm Pod 可以设置更激进的扩缩容策略（更快扩容、更快缩容）
+
+2. **资源优化**：
+
+   - Wasm Pod 资源占用小，可以设置更高的 `maxReplicas`
+   - Linux 容器资源占用大，可以设置更保守的扩缩容策略
+
+3. **性能优化**：
+   - Wasm Pod 冷启动快（≤6 ms），可以设置更短的 `stabilizationWindowSeconds`
+   - Linux 容器冷启动慢（800 ms），需要更长的稳定窗口
+
+### 04.10.4 HPA Runtime 维度分组最佳实践
+
+**最佳实践**：
+
+1. **标签管理**：
+
+   - 为每个 Deployment 添加 `runtime` 标签，便于按运行时维度管理
+   - 使用 `runtime: runc` 和 `runtime: wasm` 标签区分不同运行时
+
+2. **扩缩容策略**：
+
+   - **Wasm Pod**：设置更激进的扩缩容策略（更快扩容、更快缩容）
+   - **Linux 容器**：设置更保守的扩缩容策略（更慢扩容、更慢缩容）
+
+3. **监控指标**：
+
+   - 使用 Prometheus 监控不同运行时的 Pod 数量和资源使用
+   - 设置告警规则，监控扩缩容行为
+
+4. **混部场景**：
+   - 在混部场景下，确保不同运行时的 Pod 可以独立扩缩容
+   - 避免不同运行时的 Pod 相互影响
+
+**配置示例**：
+
+```yaml
+# Prometheus 监控配置（按 runtime 维度分组）
+- alert: HighWasmPodCount
+  expr: count(kube_pod_info{runtime="wasm"}) > 1000
+  annotations:
+    summary: "Wasm Pod 数量过多"
+    description: "当前 Wasm Pod 数量为 {{ $value }}，超过阈值 1000"
+
+- alert: HighLinuxPodCount
+  expr: count(kube_pod_info{runtime="runc"}) > 100
+  annotations:
+    summary: "Linux Pod 数量过多"
+    description: "当前 Linux Pod 数量为 {{ $value }}，超过阈值 100"
+```
+
+## 04.11 故障排查
+
+### 04.11.1 常见问题
 
 **问题 1：RuntimeClass 未找到**:
 
@@ -656,9 +848,9 @@ systemctl restart containerd
 crictl info | grep runtime
 ```
 
-## 04.11 最佳实践
+## 04.12 最佳实践
 
-### 04.11.1 RuntimeClass 配置最佳实践
+### 04.12.1 RuntimeClass 配置最佳实践
 
 **配置建议**：
 
@@ -673,7 +865,7 @@ crictl info | grep runtime
 - ✅ 传统容器使用 runc 运行时（兼容性好）
 - ✅ 根据工作负载选择合适的运行时
 
-### 04.11.2 多运行时管理最佳实践
+### 04.12.2 多运行时管理最佳实践
 
 **管理策略**：
 
@@ -682,7 +874,7 @@ crictl info | grep runtime
 - ✅ 监控不同运行时的资源使用
 - ✅ 定期评估运行时的性能
 
-### 04.11.3 编排运行时检查清单
+### 04.12.3 编排运行时检查清单
 
 **运行时配置检查**：
 
@@ -721,9 +913,9 @@ crictl info | grep runtime
 - [ ] Pod 事件显示正确的运行时选择
 - [ ] 运行时性能指标在合理范围内
 
-## 04.12 参考
+## 04.13 参考
 
-### 04.12.1 2025 年最新更新（2025-11-06）
+### 04.13.1 2025 年最新更新（2025-11-06）
 
 - **[27. 2025 趋势 - 2025-11-06 最新更新](../27-2025-trends/2025-trends.md#2714-2025-年-11-月-6-日最新更新)** -
   技术版本更新、生产环境最佳实践、已知问题与解决方案
@@ -740,7 +932,7 @@ crictl info | grep runtime
 - **containerd 配置优化**：设置 `shim_max_concurrent_requests=100` 避免连接池耗
   尽
 
-### 04.12.2 隔离栈相关文档
+### 04.13.2 隔离栈相关文档
 
 - **[29. 隔离栈](../29-isolation-stack/isolation-stack.md)** - 完整的隔离栈技术
   解析，包括运行时层次
@@ -751,14 +943,14 @@ crictl info | grep runtime
 - **[隔离层次对比文档](../29-isolation-stack/layers/isolation-comparison.md)** -
   运行时性能对比和选型指南
 
-### 04.12.3 运行时相关文档
+### 04.13.3 运行时相关文档
 
 - **[00. Docker](../00-docker/docker.md)** - Docker 详细文档
 - **[03. WasmEdge](../03-wasm-edge/wasmedge.md)** - WebAssembly 运行时详细文档
 - **[01. Kubernetes](../01-kubernetes/kubernetes.md)** - Kubernetes 详细文档
 - **[02. K3s](../02-k3s/k3s.md)** - K3s 详细文档
 
-### 04.12.3 网络和存储相关文档
+### 04.13.4 网络和存储相关文档
 
 - **[12. 网络技术规格](../12-network-stack/network-stack.md)** -
   CNI、Service、Ingress 等技术规格
@@ -769,7 +961,7 @@ crictl info | grep runtime
 - **[虚拟化与容器化存储对比分析](../15-storage-stack/virtualization-comparison.md)** -
   存储范式转换、架构对比、性能分析（2025-11-07）
 
-### 04.12.4 其他相关文档
+### 04.13.5 其他相关文档
 
 - **[11. 故障排查](../11-troubleshooting/troubleshooting.md)** - 运行时故障排查
   方法

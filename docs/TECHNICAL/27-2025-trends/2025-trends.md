@@ -202,6 +202,13 @@ cosign sign --yes --registry-username=xxx yourhub/app.wasm
 cosign verify --registry yourhub/app.wasm
 ```
 
+> 📋 **详细文档**：OCI Artifact v1.1 的完整新特性说明、代码示例、性能提升数据和
+> 迁移指南，请参考：
+>
+> - **[05.2.3 OCI Artifact v1.1 新特性（2025-11-07）](../05-oci-supply-chain/oci-supply-chain.md#0523-oci-artifact-v11-新特性2025-11-07)** -
+>   Wasm 模块签名、SBOM 关联、增强发现机制、批量操作、元数据扩展、性能提升和兼容
+>   性说明
+
 ### 27.4.2 BuildKit 0.13 Wasm-Native 构建
 
 **2025 年状态**：
@@ -237,6 +244,13 @@ COPY app.wasm /app.wasm
   **runtimeClassName: runc** 混部
 - **HPA 支持**：HPA 可按 runtime 维度分组
 
+> 📋 **详细文档**：HPA 按 Runtime 维度分组的完整配置示例、优势分析和最佳实践，请
+> 参考：
+>
+> - **[04.10 HPA 按 Runtime 维度分组（K8s 1.30+）](../04-orchestration-runtime/orchestration-runtime.md#0410-hpa-按-runtime-维度分组k8s-130)** -
+>   HPA Runtime 维度分组概述、配置示例（Linux + Wasm 混部场景）、优势分析和最佳
+>   实践
+
 **混部示例**：
 
 ```yaml
@@ -267,6 +281,13 @@ spec:
 - **K3s 版本**：1.30.4+k3s1
 - **内置支持**：`--wasm` 安装 flag 即开即用
 - **生产验证**：ARM64 边缘盒子单节点 3000 Pod 实测稳定
+
+> 📋 **详细文档**：ARM64 边缘盒子单节点 3000 Pod 生产验证案例的完整性能指标、资
+> 源利用率和适用场景，请参考：
+>
+> - **[02.16.2 边缘场景最佳实践 - 生产验证案例（2025-11-07）](../02-k3s/k3s.md#02162-边缘场景最佳实践)** -
+>   ARM64 边缘盒子单节点 3000 Pod 实测稳定、性能指标（冷启动 ≤6 ms、内存占用 32
+>   MB/Pod）、资源利用率（内存 >90%、CPU >85%、存储 >95%）
 
 **安装命令**：
 
@@ -310,13 +331,62 @@ helm install ge gatekeeper/gatekeeper \
 - **集成方式**：2025 模板已默认带 `policy.wasm` 签名验证
 - **工作流**：推送即生效，回滚只需 `git revert`
 
+> 📋 **详细文档**：完整的 Rancher Fleet + GitOps Wasm 策略工作流配置、Cosign 签
+> 名验证流程和最佳实践，请参考：
+>
+> - **[06.9.4 案例 4：Rancher Fleet + GitOps Wasm 策略工作流（2025-11-07）](../06-policy-opa/policy-opa.md#0694-案例-4rancher-fleet--gitops-wasm-策略工作流2025-11-07)** -
+>   完整工作流程、配置示例、优势分析和回滚策略
+
 ### 27.6.3 Kyverno Wasm 分支
 
 **2025 年状态**：
 
-- **版本**：**kyverno-wasm** 分支
+- **版本**：**kyverno-wasm** 分支（实验性）
 - **共存性**：与 Gatekeeper 并存，用户可按 namespace 选择引擎
 - **适用场景**：需要灵活选择策略引擎的场景
+- **技术特点**：
+  - 支持 Rego 策略编译为 Wasm 格式
+  - 与 Kyverno 原生策略引擎共存
+  - 支持按 namespace 级别选择策略引擎
+  - 性能优势：Wasm 策略执行延迟低于原生 Go 策略
+
+**使用示例**：
+
+```yaml
+# Kyverno Wasm 策略配置
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: require-image-signature-wasm
+spec:
+  validationFailureAction: enforce
+  rules:
+    - name: check-image-signature
+      match:
+        resources:
+          kinds:
+            - Pod
+      validate:
+        # Wasm 策略通过 ConfigMap 挂载
+        wasm:
+          configMap: policy-wasm-signature
+```
+
+**与 Gatekeeper 对比**：
+
+| 特性         | Gatekeeper Wasm | Kyverno Wasm 分支 |
+| ------------ | --------------- | ----------------- |
+| **成熟度**   | ⭐⭐⭐⭐⭐      | ⭐⭐⭐（实验性）  |
+| **性能**     | P99 0.07 ms     | 待验证            |
+| **共存性**   | ✅ 支持         | ✅ 支持           |
+| **生产就绪** | ✅ 是           | ⚠️ 实验性         |
+| **推荐场景** | 生产环境        | 实验和测试环境    |
+
+**技术选型建议**：
+
+- ✅ **生产环境**：优先使用 Gatekeeper Wasm 引擎（成熟、稳定、性能已验证）
+- ⚠️ **实验环境**：可以尝试 Kyverno Wasm 分支（功能丰富，但稳定性待验证）
+- ✅ **混部场景**：两个引擎可以共存，按 namespace 选择策略引擎
 
 ## 27.7 边缘与 Serverless 趋势
 
@@ -369,6 +439,12 @@ wasmedge --dir .:/path/to/model \
   --prompt "Hello, AI!"
 ```
 
+> 📋 **详细文档**：KubeCon 2025 中国议题详细说明、技术栈组成、性能提升数据（300%
+> vs 传统容器化 PyTorch）和技术突破点，请参考：
+>
+> - **[08.6.1 KubeCon 2025 中国议题详细说明](../08-ai-inference/ai-inference.md#0861-kubecon-2025-中国议题详细说明)** -
+>   议题背景、技术栈组成、性能提升数据、技术突破点、实际应用场景和技术选型建议
+
 ### 27.8.2 模型 Wasm-化市场
 
 **2025 年状态**：
@@ -383,6 +459,13 @@ wasmedge --dir .:/path/to/model \
 - **技术栈**：全部基于 **WasmEdge + K8s 1.30**
 - **性能提升**：300%
 
+> 📋 **详细文档**：.wasm 模型镜像格式的完整定义、特点、镜像体积对比、构建和使用
+> 流程、模型市场现状，请参考：
+>
+> - **[08.6.2 .wasm 模型镜像格式详细说明](../08-ai-inference/ai-inference.md#0862-wasm-模型镜像格式详细说明)** -
+>   格式定义和特点（标准化、轻量级、可签名、可 SBOM、跨平台）、镜像体积对比
+>   （↓90%）、构建和使用流程、模型市场现状（1000+ 模型，下载量同比增长 500%）
+
 ### 27.8.3 GPU 加速推理
 
 **2025 年状态**：
@@ -390,6 +473,14 @@ wasmedge --dir .:/path/to/model \
 - **WasmEdge GPU Plugin**：支持 CUDA、OpenCL 后端
 - **性能提升**：推理延迟比容器化 PyTorch ↓60%
 - **适用场景**：边缘 AI、实时推理
+
+> 📋 **详细文档**：GPU 加速推理的完整性能对比数据、GPU 加速原理、配置示例和最佳
+> 实践，请参考：
+>
+> - **[08.5.3 GPU 加速推理详细性能数据（2025-11-07）](../08-ai-inference/ai-inference.md#0853-gpu-加速推理详细性能数据2025-11-07)** -
+>   性能对比数据（推理延迟 ↓60%，GPU 利用率 85%）、GPU 加速原理（WasmEdge GPU
+>   Plugin、CUDA/OpenCL 后端）、配置示例（Kubernetes GPU 资源管理）、GPU 加速最
+>   佳实践（资源管理、批处理优化、模型量化、预热策略）
 
 ## 27.9 安全与合规趋势
 
