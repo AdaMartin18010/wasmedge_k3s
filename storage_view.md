@@ -7,7 +7,7 @@
 >
 > 请使用新位置的文档，本文档保留作为历史参考。
 
-**最后更新**: 2025-11-06 **维护者**: 项目团队
+**最后更新**: 2025-11-07 **维护者**: 项目团队
 
 > 📋 **文档说明**：本文档系统化梳理虚拟化与容器化存储的技术差异，包含范式转换、
 > 技术实现、性能对比、选型决策等完整内容。
@@ -1019,12 +1019,13 @@ graph TB
 
 ## 参考
 
-- [网络视图](./network_view.md) - 虚拟化与容器化网络技术对比
-- [19. 服务网格](../TECHNICAL/19-service-mesh/service-mesh.md) - 服务网格技术详
-  解
-- [30. 概念关系矩阵](../TECHNICAL/30-concept-relations-matrix/concept-relations-matrix.md) -
+- [虚拟化与容器化网络对比分析](docs/TECHNICAL/12-network-stack/virtualization-comparison.md) -
+  虚拟化与容器化网络技术对比（已迁移）
+- [19. 服务网格](docs/TECHNICAL/19-service-mesh/service-mesh.md) - 服务网格技术
+  详解
+- [30. 概念关系矩阵](docs/TECHNICAL/30-concept-relations-matrix/concept-relations-matrix.md) -
   概念关系矩阵
 
 ---
 
-**最后更新**：2025-11-06 **维护者**：项目团队
+**最后更新**：2025-11-07 **维护者**：项目团队

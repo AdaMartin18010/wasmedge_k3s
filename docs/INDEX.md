@@ -78,7 +78,9 @@ COGNITIVE/09-matrix-perspective 目录下）。
 - [结构视角文档](../structure_view.md) ⭐ - 从抽象结构（计算结构、控制结构、信息
   结构）视角看虚拟化容器化沙盒化
 - [技术社会视角文档](../tech_view.md) ⭐ - 从技术和社会的视角（基础设施史、风险
-  社会学、发展经济学、人类学）看虚拟化容器化沙盒化
+  社会学、发展经济学、人类学）
+- [eBPF/OTLP 视角文档](../ebpf_otlp_view.md) ⭐ - 从 eBPF 和 OTLP 的视角看虚拟化
+  容器化（横纵耦合定位模型、智能系统能力架构）
 
 ### 技术类（6 个）
 
@@ -340,7 +342,12 @@ graph TB
 1. [22. 缩写词汇表](TECHNICAL/13-acronyms-glossary/acronyms-glossary.md) - 缩写
    查询
 2. [23. 主题清单](TECHNICAL/14-theme-inventory/theme-inventory.md) - 主题查询
-3. [REFERENCES.md](REFERENCES.md) - 参考资源
+3. [文档一致性分析](DOCUMENTATION-CONSISTENCY-ANALYSIS.md) - 文档一致性分析报告
+4. [文档一致性总结](DOCUMENTATION-CONSISTENCY-SUMMARY.md) - 文档一致性修复完成总
+   结
+5. [文档一致性检查清单](DOCUMENTATION-CONSISTENCY-CHECKLIST.md) ⭐ - 文档一致性
+   检查清单（快速参考）
+6. [REFERENCES.md](REFERENCES.md) - 参考资源
 
 ## 🎯 按角色索引
 
@@ -426,4 +433,4 @@ graph TB
 
 ---
 
-**最后更新**：2025-11-05 **维护者**：项目团队
+**最后更新**：2025-11-07 **维护者**：项目团队

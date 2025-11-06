@@ -50,10 +50,15 @@
     - [实现细节](#实现细节)
     - [案例研究](#案例研究)
     - [技术趋势](#技术趋势)
+    - [多视角文档](#多视角文档)
 
 ---
 
 ## 1. 概念与历史年表
+
+> 📋 **概念定义参考**：虚拟化、半虚拟化、容器化、沙盒化的严格定义和技术层级分析
+> 请参考
+> [严格定义文档](docs/COGNITIVE/10-decision-models/06-technical-concepts/12-virtualization-paravirtualization-containerization-sandboxing-strict-definition.md)。
 
 ### 1.1 技术演进时间线
 
@@ -558,6 +563,17 @@ ID，并给出自动故障注入、根因定位、补救动作。**
 #### 技术趋势
 
 - **[2025 年技术趋势](docs/ARCHITECTURE/05-trends-2025/)** - 最新技术动态
+
+#### 多视角文档
+
+- **[认知视角](ai_view.md)** - 云原生技术栈认知视图：Docker → K8s/K3s → WasmEdge
+  → OPA
+- **[代数视角](algebra_view.md)** - 从代数解构上看虚拟化容器化沙盒化
+- **[架构视角](architecture_view.md)** - 从软件架构的视角看待虚拟化容器化沙盒化
+- **[结构视角](structure_view.md)** - 从抽象结构的视角看虚拟化容器化沙盒化
+- **[技术社会视角](tech_view.md)** - 从社会技术类比的视角看待虚拟化容器化沙盒化
+- **[eBPF/OTLP 视角](ebpf_otlp_view.md)** - 从 eBPF 和 OTLP 的视角看虚拟化容器化
+  （横纵耦合定位模型、智能系统能力架构）
 
 ---
 

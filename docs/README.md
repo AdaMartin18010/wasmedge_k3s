@@ -180,8 +180,8 @@
 - `algebra_view.md` ↔ `COGNITIVE/11-algebraic-structure/` - 代数结构文档
 - `architecture_view.md` ↔ `ARCHITECTURE/` - 架构视图文档集
 - `system_view.md` ↔ `ARCHITECTURE/` - 系统视角文档集（7 层 4 域模型） ⭐
-- `structure_view.md` ↔
-  `COGNITIVE/12-structural-perspective/` - 结构视角文档集 ⭐
+- `structure_view.md` ↔ `COGNITIVE/12-structural-perspective/` - 结构视角文档集
+  ⭐
 - `tech_view.md` ↔ `ARCHITECTURE/architecture-view/09-multi-perspectives/` - 技
   术社会视角文档集 ⭐
 
@@ -423,21 +423,25 @@
   构、信息结构）
 - **[tech_view.md](../tech_view.md)** ⭐ - 技术社会视角（基础设施史、风险社会学
   、发展经济学、人类学）
+- **[ebpf_otlp_view.md](../ebpf_otlp_view.md)** ⭐ - eBPF/OTLP 视角（横纵耦合定
+  位模型、智能系统能力架构）
 
 ### 多视角导航
 
 本文档集提供多个视角来理解云原生技术栈，每个视角都有对应的文档：
 
-| 视角 | 文档 | 核心内容 | 适用场景 |
-|------|------|---------|---------|
-| **认知视角** | [`../ai_view.md`](../ai_view.md) | 技术演进主线、理念层、知识结构 | 快速理解技术栈全貌 |
-| **代数视角** | [`../algebra_view.md`](../algebra_view.md) | 算子、公理、复合运算表 | 理解技术的数学本质 |
-| **架构视角** | [`../architecture_view.md`](../architecture_view.md) | 统一中层模型 ℳ、架构拆解与组合 | 深入理解架构设计原理 |
-| **系统视角** | [`../system_view.md`](../system_view.md) | 7 层 4 域模型、隔离维度对比 | 技术选型和架构决策 |
-| **结构视角** | [`../structure_view.md`](../structure_view.md) | 计算-控制-信息三元结构 | 理解技术的结构特征 |
-| **技术社会视角** | [`../tech_view.md`](../tech_view.md) | 基础设施史、风险社会学 | 理解技术的社会意义 |
+| 视角               | 文档                                                 | 核心内容                           | 适用场景                   |
+| ------------------ | ---------------------------------------------------- | ---------------------------------- | -------------------------- |
+| **认知视角**       | [`../ai_view.md`](../ai_view.md)                     | 技术演进主线、理念层、知识结构     | 快速理解技术栈全貌         |
+| **代数视角**       | [`../algebra_view.md`](../algebra_view.md)           | 算子、公理、复合运算表             | 理解技术的数学本质         |
+| **架构视角**       | [`../architecture_view.md`](../architecture_view.md) | 统一中层模型 ℳ、架构拆解与组合     | 深入理解架构设计原理       |
+| **系统视角**       | [`../system_view.md`](../system_view.md)             | 7 层 4 域模型、隔离维度对比        | 技术选型和架构决策         |
+| **结构视角**       | [`../structure_view.md`](../structure_view.md)       | 计算-控制-信息三元结构             | 理解技术的结构特征         |
+| **技术社会视角**   | [`../tech_view.md`](../tech_view.md)                 | 基础设施史、风险社会学             | 理解技术的社会意义         |
+| **eBPF/OTLP 视角** | [`../ebpf_otlp_view.md`](../ebpf_otlp_view.md)       | 横纵耦合定位模型、智能系统能力架构 | 理解可观测性驱动的自治系统 |
 
 **多视角关系**：
+
 - 各视角相互补充，从不同维度理解同一技术栈
 - 每个视角文档都包含指向其他视角的交叉引用
 - 建议先阅读认知视角，再根据需求深入其他视角
@@ -451,6 +455,10 @@
 - [主题清单](TECHNICAL/14-theme-inventory/theme-inventory.md) - 所有主题
 - [缩写词汇表](TECHNICAL/13-acronyms-glossary/acronyms-glossary.md) - 缩写查询
 - [文档一致性分析](DOCUMENTATION-CONSISTENCY-ANALYSIS.md) - 文档一致性分析报告
+- [文档一致性总结](DOCUMENTATION-CONSISTENCY-SUMMARY.md) - 文档一致性修复完成总
+  结
+- [文档一致性检查清单](DOCUMENTATION-CONSISTENCY-CHECKLIST.md) ⭐ - 文档一致性检
+  查清单（快速参考）
 
 ### 技术规格
 
@@ -547,7 +555,7 @@
 
 ---
 
-**最后更新**：2025-11-03
+**最后更新**：2025-11-07
 
 **文档版本**：v1.0
 

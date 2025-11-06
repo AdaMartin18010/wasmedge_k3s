@@ -2,7 +2,8 @@
 
 > **本文档已重构：分类压缩、合并重复、补充完善**
 >
-> **文档版本**：v2.0 **最后更新**：2025-11-07 **维护者**：项目团队 **来源**：基于 `architecture_view.md` 重构
+> **文档版本**：v2.0 **最后更新**：2025-11-07 **维护者**：项目团队 **来源**：基
+> 于 `architecture_view.md` 重构
 
 ---
 
@@ -30,6 +31,9 @@
 > 议**统一**压缩成一张可版本化、可单元测试、可动态差分的 YAML 图谱**——我们称之
 > 为**"Cloud 的中间语言"ℳ**，自此**架构师只须在领域层写策略**，而**所有非功能性
 > 已被证明等价于一段可验证的代码**。
+>
+> 📋 **概念定义参考**：虚拟化、容器化、沙盒化的严格定义和技术层级分析请参考
+> [严格定义文档](docs/COGNITIVE/10-decision-models/06-technical-concepts/12-virtualization-paravirtualization-containerization-sandboxing-strict-definition.md)。
 
 ### 1.2 统一中层模型 ℳ
 
@@ -811,6 +815,18 @@ Dynamic Software World
 
 - **[形式化理论](docs/COGNITIVE/07-formal-theory/)** - 形式化理论模型
 - **[范畴论](docs/COGNITIVE/08-category-theory/)** - 范畴论视角
+
+### 10.7 多视角文档
+
+- **[认知视角](ai_view.md)** - 云原生技术栈认知视图：Docker → K8s/K3s → WasmEdge
+  → OPA
+- **[代数视角](algebra_view.md)** - 从代数解构上看虚拟化容器化沙盒化
+- **[系统视角](system_view.md)** - 从系统的视角看虚拟化容器化沙盒化（7 层 4 域模
+  型）
+- **[结构视角](structure_view.md)** - 从抽象结构的视角看虚拟化容器化沙盒化
+- **[技术社会视角](tech_view.md)** - 从社会技术类比的视角看待虚拟化容器化沙盒化
+- **[eBPF/OTLP 视角](ebpf_otlp_view.md)** - 从 eBPF 和 OTLP 的视角看虚拟化容器化
+  （横纵耦合定位模型、智能系统能力架构）
 
 ---
 

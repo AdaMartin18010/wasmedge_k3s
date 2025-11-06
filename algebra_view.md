@@ -177,6 +177,9 @@
 
 ## 3. 算子定义
 
+> 📋 **概念定义参考**：虚拟化、容器化、沙盒化的严格定义和技术层级分析请参考
+> [严格定义文档](docs/COGNITIVE/10-decision-models/06-technical-concepts/12-virtualization-paravirtualization-containerization-sandboxing-strict-definition.md)。
+
 ### 3.1 20 个一元算子（O₁–O₂₀）
 
 > **选择准则**
@@ -882,11 +885,15 @@ print('metric:', phi(simplify(seq)))
 
 ### 16.1 多视角文档
 
-- **[认知视角](ai_view.md)** - 云原生技术栈认知视图：Docker → K8s/K3s → WasmEdge → OPA
+- **[认知视角](ai_view.md)** - 云原生技术栈认知视图：Docker → K8s/K3s → WasmEdge
+  → OPA
 - **[架构视角](architecture_view.md)** - 从软件架构的视角看待虚拟化容器化沙盒化
-- **[系统视角](system_view.md)** - 从系统的视角看虚拟化容器化沙盒化（7 层 4 域模型）
+- **[系统视角](system_view.md)** - 从系统的视角看虚拟化容器化沙盒化（7 层 4 域模
+  型）
 - **[结构视角](structure_view.md)** - 从抽象结构的视角看虚拟化容器化沙盒化
 - **[技术社会视角](tech_view.md)** - 从社会技术类比的视角看待虚拟化容器化沙盒化
+- **[eBPF/OTLP 视角](ebpf_otlp_view.md)** - 从 eBPF 和 OTLP 的视角看虚拟化容器化
+  （横纵耦合定位模型、智能系统能力架构）
 
 ### 16.2 文档目录
 
@@ -897,5 +904,6 @@ print('metric:', phi(simplify(seq)))
 
 ### 16.3 代数结构相关文档
 
-- **[算子理论与代数结构](docs/COGNITIVE/11-algebraic-structure/)** - 代数结构的详细文档
+- **[算子理论与代数结构](docs/COGNITIVE/11-algebraic-structure/)** - 代数结构的
+  详细文档
 - **[矩阵力学模型](docs/COGNITIVE/09-matrix-perspective/)** - 矩阵视角的详细文档

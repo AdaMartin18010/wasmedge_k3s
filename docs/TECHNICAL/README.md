@@ -204,6 +204,12 @@
   设备访问（USB/PCI/GPU）和内核特性决策快速参考
 - **[10. 一致性检查报告](../COGNITIVE/10-decision-models/CONSISTENCY-REPORT.md)** -
   文档一致性检查与 Wikipedia 标准对齐
+- **[文档一致性分析报告](../DOCUMENTATION-CONSISTENCY-ANALYSIS.md)** ⭐ - 文档一
+  致性全面分析报告（2025-11-07）
+- **[文档一致性总结](../DOCUMENTATION-CONSISTENCY-SUMMARY.md)** - 文档一致性修复
+  完成总结（2025-11-07）
+- **[文档一致性检查清单](../DOCUMENTATION-CONSISTENCY-CHECKLIST.md)** ⭐ - 文档
+  一致性检查清单（快速参考）
 
 ## 6. 按角色选择文档
 
@@ -466,6 +472,20 @@
 - **[虚拟化与容器化网络对比](12-network-stack/virtualization-comparison.md)**：
   新增 1 处 eBPF 技术深度解析引用
 - **总计**：22+ 处交叉引用，提升文档可导航性和完整性
+
+**文档一致性修复**（2025-11-07 后续更新）：
+
+- **元数据和日期统一**：统一了 11 个文档的元数据格式和日期（2025-11-07）
+- **交叉引用建立**：建立了 48+ 处交叉引用（视图文档之间 30+ 处，视图文档与 docs
+  目录 18+ 处）
+- **多视角导航**：在 `docs/README.md` 中添加多视角导航表格，覆盖 8 个视角
+- **概念定义统一**：在所有视图文档中添加 6 处权威定义引用
+- **创建的文档**：
+  - [文档一致性分析报告](../DOCUMENTATION-CONSISTENCY-ANALYSIS.md)（447 行）
+  - [文档一致性总结](../DOCUMENTATION-CONSISTENCY-SUMMARY.md)（197 行）
+  - [文档一致性检查清单](../DOCUMENTATION-CONSISTENCY-CHECKLIST.md)（194 行）⭐
+- **详细更新记录**：请参考
+  [UPDATE-2025-11-07.md](UPDATE-2025-11-07.md#312-文档一致性修复2025-11-07-后续更新)
 
 **适用场景**：
 

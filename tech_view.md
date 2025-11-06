@@ -70,6 +70,9 @@
 
 ## 引言：为何需要社会技术视角？
 
+> 📋 **概念定义参考**：虚拟化、容器化、沙盒化的严格定义和技术层级分析请参考
+> [严格定义文档](docs/COGNITIVE/10-decision-models/06-technical-concepts/12-virtualization-paravirtualization-containerization-sandboxing-strict-definition.md)。
+
 好，我们**把镜头整个换掉**—— 不再用"计算-控制-信息"这把手术刀，而是**把虚拟化/容
 器化/沙盒化当成一次"社会-技术"现象**，用**人类学、经济学、基础设施史、风险社会学
 、制度经济学、组织行为学、技术社会学**的视角**重看一遍**。
@@ -964,6 +967,8 @@ Mary Douglas 的核心论断：
 - **[结构视角](structure_view.md)** - 从抽象结构的视角看虚拟化容器化沙盒化
 - **[技术社会视角](tech_view.md)** - 从社会技术类比的视角看待虚拟化容器化沙盒化
   （本文档）
+- **[eBPF/OTLP 视角](ebpf_otlp_view.md)** - 从 eBPF 和 OTLP 的视角看虚拟化容器化
+  （横纵耦合定位模型、智能系统能力架构）
 
 ### 文档目录
 
