@@ -915,7 +915,8 @@ vault kv put secret/cosign-key \
   - **Sigstore + Cosign CNCF 毕业**：2025 年 7 月成为 CNCF 毕业项目
   - **强制签名**：wasm 模块强制签名写入 Kubernetes 1.30 安全基线
   - **WasmEdge FIPS-140-3 预审**：WasmEdge 沙箱通过 FIPS-140-3 预审
-  - **OPA-Wasm 国密支持**：OPA-Wasm 政策支持细粒度字段脱敏，国密 SM4 算法已编译进 wasm
+  - **OPA-Wasm 国密支持**：OPA-Wasm 政策支持细粒度字段脱敏，国密 SM4 算法已编译
+    进 wasm
   - **安全更新**：CVE 修复列表和安全建议
 
 **安全与合规最佳实践（2025-11-06）**：
@@ -953,4 +954,4 @@ vault kv put secret/cosign-key \
 
 ---
 
-**最后更新**：2025-11-06 **维护者**：项目团队
+**最后更新**：2025-11-07 **维护者**：项目团队

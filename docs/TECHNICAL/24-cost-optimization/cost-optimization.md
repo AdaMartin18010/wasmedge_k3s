@@ -45,6 +45,7 @@
   - [24.10.1 2025 年最新更新（2025-11-06）](#24101-2025-年最新更新2025-11-06)
   - [24.10.2 隔离栈相关文档](#24102-隔离栈相关文档)
   - [24.10.3 资源优化相关文档](#24103-资源优化相关文档)
+  - [24.10.4 其他相关文档](#24104-其他相关文档)
 
 ---
 
@@ -1058,6 +1059,17 @@ docker images --format "{{.Repository}}:{{.Tag}} {{.Size}}" | sort -k2 -h | tail
 
 ### 24.10.3 资源优化相关文档
 
+- **[12. 网络技术规格](../12-network-stack/network-stack.md)** -
+  CNI、Service、Ingress 等技术规格
+- **[虚拟化与容器化网络对比分析](../12-network-stack/virtualization-comparison.md)** -
+  网络性能对比、成本分析（2025-11-07）
+- **[15. 存储技术规格](../15-storage-stack/storage-stack.md)** - CSI、PV/PVC 等
+  技术规格
+- **[虚拟化与容器化存储对比分析](../15-storage-stack/virtualization-comparison.md)** -
+  存储性能对比、成本分析（2025-11-07）
+
+### 24.10.4 其他相关文档
+
 - **[02. K3s](../02-k3s/k3s.md)** - K3s 轻量级架构和资源优化
 - **[08. AI 推理](../08-ai-inference/ai-inference.md)** - AI 推理资源优化
 - **[10. 安装部署](../10-installation/installation.md)** - 资源规划和容量规划
@@ -1086,4 +1098,4 @@ docker images --format "{{.Repository}}:{{.Tag}} {{.Size}}" | sort -k2 -h | tail
 
 ---
 
-**最后更新**：2025-11-06 **维护者**：项目团队
+**最后更新**：2025-11-07 **维护者**：项目团队

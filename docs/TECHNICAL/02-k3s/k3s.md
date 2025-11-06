@@ -72,6 +72,7 @@
   - [02.18.2 隔离栈相关文档](#02182-隔离栈相关文档)
   - [02.18.3 K3s 相关文档](#02183-k3s-相关文档)
   - [02.18.4 其他相关文档](#02184-其他相关文档)
+  - [02.18.4 网络和存储相关文档](#02184-网络和存储相关文档)
   - [02.18.5 外部参考](#02185-外部参考)
 
 ---
@@ -1395,6 +1396,17 @@ kubectl top pods
 - **[28. 架构框架](../28-architecture-framework/architecture-framework.md)** -
   多维度架构体系与技术规范
 
+### 02.18.4 网络和存储相关文档
+
+- **[12. 网络技术规格](../12-network-stack/network-stack.md)** -
+  CNI、Service、Ingress 等技术规格
+- **[虚拟化与容器化网络对比分析](../12-network-stack/virtualization-comparison.md)** -
+  网络范式转换、架构对比、性能分析（2025-11-07）
+- **[15. 存储技术规格](../15-storage-stack/storage-stack.md)** - CSI、PV/PVC 等
+  技术规格
+- **[虚拟化与容器化存储对比分析](../15-storage-stack/virtualization-comparison.md)** -
+  存储范式转换、架构对比、性能分析（2025-11-07）
+
 ### 02.18.5 外部参考
 
 - [K3s Architecture](https://docs.k3s.io/architecture)
@@ -1405,4 +1417,4 @@ kubectl top pods
 
 ---
 
-**最后更新**：2025-11-06 **维护者**：项目团队
+**最后更新**：2025-11-07 **维护者**：项目团队

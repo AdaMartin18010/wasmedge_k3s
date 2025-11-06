@@ -44,6 +44,7 @@
   - [04.12.1 2025 年最新更新（2025-11-06）](#04121-2025-年最新更新2025-11-06)
   - [04.12.2 隔离栈相关文档](#04122-隔离栈相关文档)
   - [04.12.3 运行时相关文档](#04123-运行时相关文档)
+  - [04.12.3 网络和存储相关文档](#04123-网络和存储相关文档)
   - [04.12.4 其他相关文档](#04124-其他相关文档)
 
 ---
@@ -757,6 +758,17 @@ crictl info | grep runtime
 - **[01. Kubernetes](../01-kubernetes/kubernetes.md)** - Kubernetes 详细文档
 - **[02. K3s](../02-k3s/k3s.md)** - K3s 详细文档
 
+### 04.12.3 网络和存储相关文档
+
+- **[12. 网络技术规格](../12-network-stack/network-stack.md)** -
+  CNI、Service、Ingress 等技术规格
+- **[虚拟化与容器化网络对比分析](../12-network-stack/virtualization-comparison.md)** -
+  网络范式转换、架构对比、性能分析（2025-11-07）
+- **[15. 存储技术规格](../15-storage-stack/storage-stack.md)** - CSI、PV/PVC 等
+  技术规格
+- **[虚拟化与容器化存储对比分析](../15-storage-stack/virtualization-comparison.md)** -
+  存储范式转换、架构对比、性能分析（2025-11-07）
+
 ### 04.12.4 其他相关文档
 
 - **[11. 故障排查](../11-troubleshooting/troubleshooting.md)** - 运行时故障排查
@@ -781,4 +793,4 @@ crictl info | grep runtime
 
 ---
 
-**最后更新**：2025-11-06 **维护者**：项目团队
+**最后更新**：2025-11-07 **维护者**：项目团队

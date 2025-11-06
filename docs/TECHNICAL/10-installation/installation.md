@@ -986,6 +986,14 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.containers[*].resources}'
   RuntimeClass 配置文档
 - **[11. 故障排查](../11-troubleshooting/troubleshooting.md)** - 安装和运行时故
   障排查
+- **[12. 网络技术规格](../12-network-stack/network-stack.md)** -
+  CNI、Service、Ingress 等技术规格
+- **[虚拟化与容器化网络对比分析](../12-network-stack/virtualization-comparison.md)** -
+  网络范式转换、架构对比、性能分析（2025-11-07）
+- **[15. 存储技术规格](../15-storage-stack/storage-stack.md)** - CSI、PV/PVC 等
+  技术规格
+- **[虚拟化与容器化存储对比分析](../15-storage-stack/virtualization-comparison.md)** -
+  存储范式转换、架构对比、性能分析（2025-11-07）
 
 ### 10.12.3 其他相关文档
 
@@ -994,4 +1002,4 @@ kubectl get pod <pod-name> -o jsonpath='{.spec.containers[*].resources}'
 
 ---
 
-**最后更新**：2025-11-06 **维护者**：项目团队
+**最后更新**：2025-11-07 **维护者**：项目团队

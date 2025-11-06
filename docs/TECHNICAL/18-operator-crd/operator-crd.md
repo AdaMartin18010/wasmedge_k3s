@@ -62,6 +62,7 @@
   - [18.14.1 2025 年最新更新（2025-11-06）](#18141-2025-年最新更新2025-11-06)
   - [18.14.2 隔离栈相关文档](#18142-隔离栈相关文档)
   - [18.14.3 Operator 和 CRD 相关文档](#18143-operator-和-crd-相关文档)
+  - [18.14.3 网络和存储相关文档](#18143-网络和存储相关文档)
   - [18.14.4 外部参考](#18144-外部参考)
 
 ---
@@ -1642,6 +1643,17 @@ kubectl apply -f config/samples/database_v1_mysql.yaml --dry-run=server
 - **[04. 编排运行时](../04-orchestration-runtime/orchestration-runtime.md)** -
   CRI 和 RuntimeClass 配置
 - **[10. 安装部署](../10-installation/installation.md)** - Operator 安装指南
+
+### 18.14.3 网络和存储相关文档
+
+- **[12. 网络技术规格](../12-network-stack/network-stack.md)** -
+  CNI、Service、Ingress 等技术规格
+- **[虚拟化与容器化网络对比分析](../12-network-stack/virtualization-comparison.md)** -
+  网络范式转换、架构对比、性能分析（2025-11-07）
+- **[15. 存储技术规格](../15-storage-stack/storage-stack.md)** - CSI、PV/PVC 等
+  技术规格
+- **[虚拟化与容器化存储对比分析](../15-storage-stack/virtualization-comparison.md)** -
+  存储范式转换、架构对比、性能分析（2025-11-07）
 
 ### 18.14.4 外部参考
 

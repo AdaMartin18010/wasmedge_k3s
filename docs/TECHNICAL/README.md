@@ -52,10 +52,10 @@
 
 | 文档               | 路径                           | 核心内容                                                                                                                                          |
 | ------------------ | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 网络技术规格       | `12-network-stack/`            | CNI、Service、Ingress                                                                                                                             |
+| 网络技术规格       | `12-network-stack/`            | CNI、Service、Ingress；虚拟化与容器化网络对比分析（2025-11-07）                                                                                   |
 | 缩写词汇表         | `13-acronyms-glossary/`        | 所有缩写词定义与关系                                                                                                                              |
 | 主题清单           | `14-theme-inventory/`          | 全面梳理所有主题与子主题                                                                                                                          |
-| 存储技术规格       | `15-storage-stack/`            | CSI、PV/PVC                                                                                                                                       |
+| 存储技术规格       | `15-storage-stack/`            | CSI、PV/PVC；虚拟化与容器化存储对比分析（2025-11-07）                                                                                             |
 | 监控与可观测性     | `16-observability/`            | Metrics、Logging、Tracing                                                                                                                         |
 | GitOps 和持续交付  | `17-gitops-cicd/`              | GitOps/CI/CD 技术规范                                                                                                                             |
 | Operator 和 CRD    | `18-operator-crd/`             | Operator/CRD 开发规范                                                                                                                             |
@@ -71,6 +71,7 @@
 | 架构框架           | `28-architecture-framework/`   | 多维度架构体系与技术规范                                                                                                                          |
 | 隔离栈             | `29-isolation-stack/`          | 四层隔离栈：虚拟化 → 半虚拟化 → 容器化 → 沙盒化；横纵耦合问题定位模型（OTLP + eBPF）；观测系统作为第四大基础设施；网络定位专题                    |
 | 概念关系矩阵       | `30-concept-relations-matrix/` | 2025 技术堆栈概念关系矩阵与多维关系分析；二维、三维、多维关系矩阵；思维导图；形式化定义；快速参考指南；使用指南；概念索引；与故障排查文档深度集成 |
+| eBPF 技术堆栈      | `31-ebpf-stack/`               | eBPF 内核可编程技术堆栈；网络加速、可观测性、服务网格、安全应用；工具生态；2025-11-07 技术栈状态                                                  |
 
 ## 3. 快速开始
 
@@ -95,10 +96,20 @@
 ### 3.4 技术规格深入
 
 1. **[网络技术规格](12-network-stack/network-stack.md)** - CNI、Service、Ingress
+   - **[虚拟化与容器化网络对比分析](12-network-stack/virtualization-comparison.md)** -
+     范式转换、架构对比、性能分析（2025-11-07）
 2. **[存储技术规格](15-storage-stack/storage-stack.md)** - CSI、PV/PVC
-3. **[监控与可观测性](16-observability/observability.md)** -
+   - **[虚拟化与容器化存储对比分析](15-storage-stack/virtualization-comparison.md)** -
+     范式转换、架构对比、性能分析（2025-11-07）
+3. **[eBPF 技术堆栈](31-ebpf-stack/ebpf-stack.md)** - 内核可编程技术堆栈（1361
+   行）
+   - 网络加速、可观测性、服务网格、安全应用
+   - 工具生态、性能对比、选型决策（2025-11-07）
+   - 深度论证和分析：性能基准测试、Verifier 机制、2025 技术趋势、成本效益分析、
+     故障排查指南
+4. **[监控与可观测性](16-observability/observability.md)** -
    Metrics、Logging、Tracing
-4. **[隔离栈](29-isolation-stack/isolation-stack.md)** - 四层隔离栈：虚拟化 → 半
+5. **[隔离栈](29-isolation-stack/isolation-stack.md)** - 四层隔离栈：虚拟化 → 半
    虚拟化 → 容器化 → 沙盒化，横纵耦合问题定位模型
    - **文档目录**：[README.md](29-isolation-stack/README.md) - 完整的文档结构说
      明
@@ -233,6 +244,10 @@
   - [问题定位文档](29-isolation-stack/troubleshooting/) - 问题定位模型独立文档
 - [30. 概念关系矩阵](30-concept-relations-matrix/concept-relations-matrix.md) -
   2025 技术堆栈概念关系矩阵与多维关系分析
+- **[虚拟化与容器化网络对比分析](12-network-stack/virtualization-comparison.md)** -
+  范式转换、架构对比、性能分析（2025-11-07）
+- **[虚拟化与容器化存储对比分析](15-storage-stack/virtualization-comparison.md)** -
+  范式转换、架构对比、性能分析（2025-11-07）
   - [文档目录](30-concept-relations-matrix/README.md) - 完整的文档结构说明和快速
     导航
   - [关系矩阵](30-concept-relations-matrix/matrices/) - 3 个独立文档（二维、三维
@@ -391,10 +406,36 @@
   - **文档目录导航**：[README.md](30-concept-relations-matrix/README.md) - 完整
     的文档结构说明和快速导航
 
-## 9. 最新更新（2025-11-06）
+## 9. 最新更新
 
 > 📋 **更新总结文档**：详细的更新内容、进度跟踪和统计信息请参考
 > [UPDATE-2025-11-06.md](UPDATE-2025-11-06.md) 文档。
+> [UPDATE-2025-11-07.md](UPDATE-2025-11-07.md) 文档。
+
+### 9.0 2025 年 11 月 7 日文档整合更新
+
+**新增文档**：
+
+- **[虚拟化与容器化网络对比分析](12-network-stack/virtualization-comparison.md)** -
+  范式转换、架构对比、性能分析（1169 行）
+- **[虚拟化与容器化存储对比分析](15-storage-stack/virtualization-comparison.md)** -
+  范式转换、架构对比、性能分析（1036 行）
+- **[eBPF 技术堆栈](31-ebpf-stack/ebpf-stack.md)** - 内核可编程技术堆栈，网络加
+  速、可观测性、服务网格、安全应用（1361 行，深度论证和分析）
+
+**文档整合**：
+
+- 将 `network_view.md` 和 `storage_view.md` 整合到技术文档体系
+- 创建 eBPF 技术堆栈完整文档，对齐 2025-11-07 技术栈状态
+- 建立与技术规格文档的互补关系
+- 完善交叉引用体系，与 35+ 个相关文档建立关联
+
+**适用场景**：
+
+- 需要深入理解虚拟化与容器化技术差异
+- 进行技术选型和架构决策
+- 性能优化和瓶颈分析
+- 混合架构设计
 
 ### 9.1 2025 年 11 月 6 日技术更新
 
@@ -433,5 +474,5 @@
 
 ---
 
-**最后更新**：2025-11-06 **维护者**：项目团队 **参
+**最后更新**：2025-11-07 **维护者**：项目团队 **参
 考**：[文档类型说明](../META/DOCUMENT-TYPES.md)

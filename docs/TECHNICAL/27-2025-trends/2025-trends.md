@@ -1279,6 +1279,12 @@ cat /proc/config.gz | gunzip | grep CONFIG_BPF
   批判性分析
 - **[29. 隔离栈](../29-isolation-stack/isolation-stack.md)** - 四层隔离栈技术文
   档
+- **[虚拟化与容器化网络对比分析](../12-network-stack/virtualization-comparison.md)** -
+  网络范式转换、架构对比、性能分析（2025-11-07）
+- **[虚拟化与容器化存储对比分析](../15-storage-stack/virtualization-comparison.md)** -
+  存储范式转换、架构对比、性能分析（2025-11-07）
+- **[31. eBPF 技术堆栈](../31-ebpf-stack/ebpf-stack.md)** - eBPF 内核可编程技术
+  堆栈，2025 年技术趋势和工具生态（2025-11-07）
 
 ### 27.15.3 外部参考
 
@@ -1294,5 +1300,5 @@ cat /proc/config.gz | gunzip | grep CONFIG_BPF
 
 ---
 
-**最后更新**：2025-11-06 **维护者**：项目团队 **参
+**最后更新**：2025-11-07 **维护者**：项目团队 **参
 考**：[文档类型说明](../../META/DOCUMENT-TYPES.md)

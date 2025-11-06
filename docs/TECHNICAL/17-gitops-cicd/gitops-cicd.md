@@ -58,6 +58,7 @@
   - [17.13.1 2025 年最新更新（2025-11-06）](#17131-2025-年最新更新2025-11-06)
   - [17.13.2 隔离栈相关文档](#17132-隔离栈相关文档)
   - [17.13.3 GitOps 和 CI/CD 相关文档](#17133-gitops-和-cicd-相关文档)
+  - [17.13.3 网络和存储相关文档](#17133-网络和存储相关文档)
   - [17.13.4 外部参考](#17134-外部参考)
 
 ---
@@ -1334,6 +1335,17 @@ flux reconcile image repository my-app -n flux-system
 - **[06. OPA 策略即代码](../06-policy-opa/policy-opa.md)** - OPA-Wasm 策略管理和
   部署
 
+### 17.13.3 网络和存储相关文档
+
+- **[12. 网络技术规格](../12-network-stack/network-stack.md)** -
+  CNI、Service、Ingress 等技术规格
+- **[虚拟化与容器化网络对比分析](../12-network-stack/virtualization-comparison.md)** -
+  网络范式转换、架构对比、性能分析（2025-11-07）
+- **[15. 存储技术规格](../15-storage-stack/storage-stack.md)** - CSI、PV/PVC 等
+  技术规格
+- **[虚拟化与容器化存储对比分析](../15-storage-stack/virtualization-comparison.md)** -
+  存储范式转换、架构对比、性能分析（2025-11-07）
+
 ### 17.13.4 外部参考
 
 - [ArgoCD 官方文档](https://argo-cd.readthedocs.io/)
@@ -1348,4 +1360,4 @@ flux reconcile image repository my-app -n flux-system
 
 ---
 
-**最后更新**：2025-11-06 **维护者**：项目团队
+**最后更新**：2025-11-07 **维护者**：项目团队

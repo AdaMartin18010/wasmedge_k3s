@@ -1864,6 +1864,10 @@ diff old-config.yaml new-config.yaml
 - **[24. 成本优化](../24-cost-optimization/cost-optimization.md)** - 成本优化策
   略和实践
 - **[10. 安装部署](../10-installation/installation.md)** - 安装和部署指南
+- **[虚拟化与容器化网络对比分析](../12-network-stack/virtualization-comparison.md)** -
+  网络迁移策略、范式转换分析（2025-11-07）
+- **[虚拟化与容器化存储对比分析](../15-storage-stack/virtualization-comparison.md)** -
+  存储迁移策略、范式转换分析（2025-11-07）
 
 **外部参考**：
 
@@ -1875,4 +1879,4 @@ diff old-config.yaml new-config.yaml
 
 ---
 
-**最后更新**：2025-11-06 **维护者**：项目团队
+**最后更新**：2025-11-07 **维护者**：项目团队

@@ -51,6 +51,7 @@
   - [20.14.1 2025 年最新更新（2025-11-06）](#20141-2025-年最新更新2025-11-06)
   - [20.14.2 隔离栈相关文档](#20142-隔离栈相关文档)
   - [20.14.3 多集群相关文档](#20143-多集群相关文档)
+  - [20.14.3 网络和存储相关文档](#20143-网络和存储相关文档)
   - [20.14.4 外部参考](#20144-外部参考)
 
 ---
@@ -1145,5 +1146,16 @@ kubectl logs -n fleet-system deployment/fleet-controller -f
   CI/CD 文档
 - **[19. 服务网格](../19-service-mesh/service-mesh.md)** - 服务网格文档（跨集群
   服务发现）
+
+### 20.14.3 网络和存储相关文档
+
+- **[12. 网络技术规格](../12-network-stack/network-stack.md)** -
+  CNI、Service、Ingress 等技术规格
+- **[虚拟化与容器化网络对比分析](../12-network-stack/virtualization-comparison.md)** -
+  网络范式转换、架构对比、性能分析（2025-11-07）
+- **[15. 存储技术规格](../15-storage-stack/storage-stack.md)** - CSI、PV/PVC 等
+  技术规格
+- **[虚拟化与容器化存储对比分析](../15-storage-stack/virtualization-comparison.md)** -
+  存储范式转换、架构对比、性能分析（2025-11-07）
 
 ### 20.14.4 外部参考

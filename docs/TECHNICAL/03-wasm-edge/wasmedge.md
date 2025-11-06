@@ -73,6 +73,7 @@
   - [03.17.2 隔离栈相关文档](#03172-隔离栈相关文档)
   - [03.17.3 WasmEdge 相关文档](#03173-wasmedge-相关文档)
   - [03.17.4 其他相关文档](#03174-其他相关文档)
+  - [03.17.4 网络和存储相关文档](#03174-网络和存储相关文档)
   - [03.17.5 外部参考](#03175-外部参考)
 
 ---
@@ -1335,6 +1336,17 @@ wasmedge --version
 - **[28. 架构框架](../28-architecture-framework/architecture-framework.md)** -
   多维度架构体系与技术规范
 
+### 03.17.4 网络和存储相关文档
+
+- **[12. 网络技术规格](../12-network-stack/network-stack.md)** -
+  CNI、Service、Ingress 等技术规格
+- **[虚拟化与容器化网络对比分析](../12-network-stack/virtualization-comparison.md)** -
+  网络范式转换、架构对比、性能分析（2025-11-07）
+- **[15. 存储技术规格](../15-storage-stack/storage-stack.md)** - CSI、PV/PVC 等
+  技术规格
+- **[虚拟化与容器化存储对比分析](../15-storage-stack/virtualization-comparison.md)** -
+  存储范式转换、架构对比、性能分析（2025-11-07）
+
 ### 03.17.5 外部参考
 
 - [WasmEdge 官方文档](https://wasmedge.org/docs/)
@@ -1343,6 +1355,6 @@ wasmedge --version
 
 ---
 
-**最后更新**：2025-11-06 **维护者**：项目团队
+**最后更新**：2025-11-07 **维护者**：项目团队
 
 <!-- cSpell:ignore wasmedge WasmEdge runc crun runwasi containerd WASI OCI Kubernetes K8s K3s RuntimeClass wasm wasm32 -->

@@ -2,6 +2,7 @@
 
 ## 📑 目录
 
+- [📑 目录](#-目录)
 - [13.1 文档定位](#131-文档定位)
 - [13.2 编排与容器类缩写](#132-编排与容器类缩写)
   - [13.2.1 Kubernetes 相关](#1321-kubernetes-相关)
@@ -515,6 +516,14 @@
   用架构、场景架构）
 - **[17. 全局架构设计](../../COGNITIVE/05-architecture-design/architecture-design.md)** -
   技术组合和架构决策（文档编号 17）
+- **[12. 网络技术规格](../12-network-stack/network-stack.md)** -
+  CNI、Service、Ingress 等技术规格
+- **[虚拟化与容器化网络对比分析](../12-network-stack/virtualization-comparison.md)** -
+  网络范式转换、架构对比、性能分析（2025-11-07）
+- **[15. 存储技术规格](../15-storage-stack/storage-stack.md)** - CSI、PV/PVC 等
+  技术规格
+- **[虚拟化与容器化存储对比分析](../15-storage-stack/virtualization-comparison.md)** -
+  存储范式转换、架构对比、性能分析（2025-11-07）
 
 **外部参考**：
 
@@ -532,4 +541,4 @@
 
 ---
 
-**最后更新**：2025-11-06 **维护者**：项目团队
+**最后更新**：2025-11-07 **维护者**：项目团队

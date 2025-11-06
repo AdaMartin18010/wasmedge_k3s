@@ -1646,6 +1646,10 @@ kubectl logs <pod-name> -c istio-proxy
 - **[03. WasmEdge](../03-wasm-edge/wasmedge.md)** - WasmEdge 运行时详细文档
   （Wasm 插件）
 - **[12. 网络栈](../12-network-stack/network-stack.md)** - 网络技术规格
+- **[虚拟化与容器化网络对比分析](../12-network-stack/virtualization-comparison.md)** -
+  网络范式转换、Service Mesh 深度分析、性能对比（2025-11-07）
+- **[31. eBPF 技术堆栈](../31-ebpf-stack/ebpf-stack.md)** - eBPF 内核可编程技术
+  堆栈，Cilium Service Mesh 技术详解（2025-11-07）
 - **[16. 监控与可观测性](../16-observability/observability.md)** - OTLP + eBPF
   可观测性
 
@@ -1660,4 +1664,4 @@ kubectl logs <pod-name> -c istio-proxy
 
 ---
 
-**最后更新**：2025-11-06 **维护者**：项目团队
+**最后更新**：2025-11-07 **维护者**：项目团队

@@ -49,6 +49,7 @@
   - [08.13.2 隔离栈相关文档](#08132-隔离栈相关文档)
   - [08.13.3 AI 推理相关文档](#08133-ai-推理相关文档)
   - [08.13.4 其他相关文档](#08134-其他相关文档)
+  - [08.13.4 其他相关文档](#08134-其他相关文档-1)
 
 ---
 
@@ -880,6 +881,17 @@ kubectl describe pod <pod-name> | grep -i gpu
 
 ### 08.13.3 AI 推理相关文档
 
+- **[12. 网络技术规格](../12-network-stack/network-stack.md)** -
+  CNI、Service、Ingress 等技术规格
+- **[虚拟化与容器化网络对比分析](../12-network-stack/virtualization-comparison.md)** -
+  网络性能对比、AI 推理网络优化（2025-11-07）
+- **[15. 存储技术规格](../15-storage-stack/storage-stack.md)** - CSI、PV/PVC 等
+  技术规格
+- **[虚拟化与容器化存储对比分析](../15-storage-stack/virtualization-comparison.md)** -
+  存储性能对比、AI 推理存储优化（2025-11-07）
+
+### 08.13.4 其他相关文档
+
 - **[03. WasmEdge](../03-wasm-edge/wasmedge.md)** - WasmEdge 技术规范
 - **[07. 边缘与 Serverless](../07-edge-serverless/edge-serverless.md)** - 边缘计
   算和 Serverless 场景
@@ -894,4 +906,4 @@ kubectl describe pod <pod-name> | grep -i gpu
 
 ---
 
-**最后更新**：2025-11-06 **维护者**：项目团队
+**最后更新**：2025-11-07 **维护者**：项目团队

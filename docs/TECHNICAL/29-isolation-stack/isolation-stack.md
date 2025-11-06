@@ -1860,6 +1860,8 @@ lsns -t net -p $(pgrep -f container)
 
 - **[16. 监控与可观测性](../16-observability/observability.md)** -
   OTLP、OpenTelemetry、Jaeger 等技术规范
+- **[31. eBPF 技术堆栈](../31-ebpf-stack/ebpf-stack.md)** - eBPF 内核可编程技术
+  堆栈，eBPF 工具生态和性能分析（2025-11-07）
 - **[11. 故障排查](../11-troubleshooting/troubleshooting.md)** - 常见故障排查方
   法
 - **[13. 缩写词汇表](../13-acronyms-glossary/acronyms-glossary.md)** -
@@ -2387,8 +2389,19 @@ lsns -t net -p $(pgrep -f container)
 
 - **[12. 网络技术规格](../12-network-stack/network-stack.md)** -
   CNI、Service、Ingress 等技术规格，网络栈的完整实现
+- **[虚拟化与容器化网络对比分析](../12-network-stack/virtualization-comparison.md)** -
+  网络范式转换、架构对比、性能分析（2025-11-07）
+- **[31. eBPF 技术堆栈](../31-ebpf-stack/ebpf-stack.md)** - eBPF 内核可编程技术
+  堆栈，网络加速、可观测性应用（2025-11-07）
 - **[29.6.12 网络定位专题](#29612-网络定位专题横向生命线)** - 网络作为横向生命线
   的定位方法
+
+**存储相关**：
+
+- **[15. 存储技术规格](../15-storage-stack/storage-stack.md)** - CSI、PV/PVC 等
+  技术规格，存储栈的完整实现
+- **[虚拟化与容器化存储对比分析](../15-storage-stack/virtualization-comparison.md)** -
+  存储范式转换、架构对比、性能分析（2025-11-07）
 
 **运行时相关**：
 
@@ -2503,5 +2516,5 @@ lsns -t net -p $(pgrep -f container)
 
 ---
 
-**最后更新**：2025-11-06 **维护者**：项目团队 **参
+**最后更新**：2025-11-07 **维护者**：项目团队 **参
 考**：[文档类型说明](../META/DOCUMENT-TYPES.md)

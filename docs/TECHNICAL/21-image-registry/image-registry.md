@@ -53,6 +53,7 @@
   - [21.12.1 2025 年最新更新（2025-11-06）](#21121-2025-年最新更新2025-11-06)
   - [21.12.2 隔离栈相关文档](#21122-隔离栈相关文档)
   - [21.12.3 镜像仓库相关文档](#21123-镜像仓库相关文档)
+  - [21.12.3 网络和存储相关文档](#21123-网络和存储相关文档)
   - [21.12.4 外部参考](#21124-外部参考)
 
 ---
@@ -1253,6 +1254,17 @@ curl -X POST -u admin:password \
 - **[09. 安全合规](../09-security-compliance/security-compliance.md)** - 镜像签
   名和供应链安全最佳实践
 - **[10. 安装部署](../10-installation/installation.md)** - 镜像签名和推送指南
+
+### 21.12.3 网络和存储相关文档
+
+- **[12. 网络技术规格](../12-network-stack/network-stack.md)** -
+  CNI、Service、Ingress 等技术规格
+- **[虚拟化与容器化网络对比分析](../12-network-stack/virtualization-comparison.md)** -
+  网络范式转换、架构对比、性能分析（2025-11-07）
+- **[15. 存储技术规格](../15-storage-stack/storage-stack.md)** - CSI、PV/PVC 等
+  技术规格
+- **[虚拟化与容器化存储对比分析](../15-storage-stack/virtualization-comparison.md)** -
+  存储范式转换、架构对比、性能分析（2025-11-07）
 
 ### 21.12.4 外部参考
 

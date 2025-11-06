@@ -48,6 +48,7 @@
   - [07.12.1 2025 年最新更新（2025-11-06）](#07121-2025-年最新更新2025-11-06)
   - [07.12.2 隔离栈相关文档](#07122-隔离栈相关文档)
   - [07.12.3 边缘和 Serverless 相关文档](#07123-边缘和-serverless-相关文档)
+  - [07.12.3 网络和存储相关文档](#07123-网络和存储相关文档)
   - [07.12.4 外部参考](#07124-外部参考)
 
 ---
@@ -947,6 +948,17 @@ kubectl get events --field-selector involvedObject.name=<hpa-name>
 - **[04. 编排运行时](../04-orchestration-runtime/orchestration-runtime.md)** -
   CRI 和 RuntimeClass 配置
 
+### 07.12.3 网络和存储相关文档
+
+- **[12. 网络技术规格](../12-network-stack/network-stack.md)** -
+  CNI、Service、Ingress 等技术规格
+- **[虚拟化与容器化网络对比分析](../12-network-stack/virtualization-comparison.md)** -
+  网络范式转换、架构对比、性能分析（2025-11-07）
+- **[15. 存储技术规格](../15-storage-stack/storage-stack.md)** - CSI、PV/PVC 等
+  技术规格
+- **[虚拟化与容器化存储对比分析](../15-storage-stack/virtualization-comparison.md)** -
+  存储范式转换、架构对比、性能分析（2025-11-07）
+
 ### 07.12.4 外部参考
 
 - [K3s 官方文档](https://docs.k3s.io/)
@@ -960,4 +972,4 @@ kubectl get events --field-selector involvedObject.name=<hpa-name>
 
 ---
 
-**最后更新**：2025-11-06 **维护者**：项目团队
+**最后更新**：2025-11-07 **维护者**：项目团队

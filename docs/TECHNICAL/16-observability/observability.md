@@ -67,6 +67,7 @@
   - [16.13.2 隔离栈相关文档](#16132-隔离栈相关文档)
   - [16.13.3 可观测性相关文档](#16133-可观测性相关文档)
   - [16.13.4 架构相关文档](#16134-架构相关文档)
+  - [16.13.4 eBPF 技术堆栈相关文档](#16134-ebpf-技术堆栈相关文档)
 
 ---
 
@@ -1943,6 +1944,12 @@ exporters:
   据进行故障排查
 - **[12. 网络栈](../12-network-stack/network-stack.md)** - 网络技术规格，包括网
   络性能监控
+- **[虚拟化与容器化网络对比分析](../12-network-stack/virtualization-comparison.md)** -
+  网络性能对比、eBPF 可观测性应用（2025-11-07）
+- **[15. 存储技术规格](../15-storage-stack/storage-stack.md)** - 存储技术规格，
+  包括存储性能监控
+- **[虚拟化与容器化存储对比分析](../15-storage-stack/virtualization-comparison.md)** -
+  存储性能对比、可观测性矩阵（2025-11-07）
 
 ### 16.13.4 架构相关文档
 
@@ -1961,6 +1968,14 @@ exporters:
 - [Fluent Bit 官方文档](https://docs.fluentbit.io/)
 - [ELK Stack 官方文档](https://www.elastic.co/guide/)
 
+### 16.13.4 eBPF 技术堆栈相关文档
+
+- **[31. eBPF 技术堆栈](../31-ebpf-stack/ebpf-stack.md)** - eBPF 内核可编程技术
+  堆栈
+  - eBPF 在可观测性中的应用深度分析
+  - eBPF 与 OpenTelemetry 集成
+  - eBPF 工具生态和性能对比（2025-11-07）
+
 ---
 
-**最后更新**：2025-11-06 **维护者**：项目团队
+**最后更新**：2025-11-07 **维护者**：项目团队
