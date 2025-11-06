@@ -461,7 +461,11 @@
 - **[隔离栈 README](29-isolation-stack/README.md)**：新增 1 处 eBPF 技术堆栈引用
 - **[成本优化](24-cost-optimization/cost-optimization.md)**：新增 eBPF 技术堆栈
   引用（双向）
-- **总计**：17+ 处交叉引用，提升文档可导航性和完整性
+- **[服务网格](19-service-mesh/service-mesh.md)**：新增 2 处 Cilium Service Mesh
+  eBPF 引用
+- **[虚拟化与容器化网络对比](12-network-stack/virtualization-comparison.md)**：
+  新增 1 处 eBPF 技术深度解析引用
+- **总计**：22+ 处交叉引用，提升文档可导航性和完整性
 
 **适用场景**：
 

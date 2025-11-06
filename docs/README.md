@@ -424,6 +424,24 @@
 - **[tech_view.md](../tech_view.md)** ⭐ - 技术社会视角（基础设施史、风险社会学
   、发展经济学、人类学）
 
+### 多视角导航
+
+本文档集提供多个视角来理解云原生技术栈，每个视角都有对应的文档：
+
+| 视角 | 文档 | 核心内容 | 适用场景 |
+|------|------|---------|---------|
+| **认知视角** | [`../ai_view.md`](../ai_view.md) | 技术演进主线、理念层、知识结构 | 快速理解技术栈全貌 |
+| **代数视角** | [`../algebra_view.md`](../algebra_view.md) | 算子、公理、复合运算表 | 理解技术的数学本质 |
+| **架构视角** | [`../architecture_view.md`](../architecture_view.md) | 统一中层模型 ℳ、架构拆解与组合 | 深入理解架构设计原理 |
+| **系统视角** | [`../system_view.md`](../system_view.md) | 7 层 4 域模型、隔离维度对比 | 技术选型和架构决策 |
+| **结构视角** | [`../structure_view.md`](../structure_view.md) | 计算-控制-信息三元结构 | 理解技术的结构特征 |
+| **技术社会视角** | [`../tech_view.md`](../tech_view.md) | 基础设施史、风险社会学 | 理解技术的社会意义 |
+
+**多视角关系**：
+- 各视角相互补充，从不同维度理解同一技术栈
+- 每个视角文档都包含指向其他视角的交叉引用
+- 建议先阅读认知视角，再根据需求深入其他视角
+
 ### 核心文档
 
 - [认知图谱](COGNITIVE/00-knowledge-map/knowledge-map.md) - 知识地图
@@ -432,6 +450,7 @@
 - [文档索引](INDEX.md) - 完整文档索引
 - [主题清单](TECHNICAL/14-theme-inventory/theme-inventory.md) - 所有主题
 - [缩写词汇表](TECHNICAL/13-acronyms-glossary/acronyms-glossary.md) - 缩写查询
+- [文档一致性分析](DOCUMENTATION-CONSISTENCY-ANALYSIS.md) - 文档一致性分析报告
 
 ### 技术规格
 
