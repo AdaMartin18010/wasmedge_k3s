@@ -2,6 +2,7 @@
 
 ## 📑 目录
 
+- [📑 目录](#-目录)
 - [1. 论证目标与结构](#1-论证目标与结构)
   - [1.1 论证目标](#11-论证目标)
   - [1.2 论证结构](#12-论证结构)
@@ -605,8 +606,10 @@ Latencyᵢ(s) = Hᵢⱼ(s)·Loadⱼ(s)
 ### 10.1 理论参考
 
 - **`architecture_view.md`**：架构视图核心理论
-- **`../../00-theory/02-induction-proof/induction-proof-complete.md`**：归纳证明详细说明
-- **`../../00-theory/04-state-compression/state-space-compression-complete.md`**：状态空间压缩证明
+- **`../../00-theory/02-induction-proof/induction-proof-complete.md`**：归纳证明
+  详细说明
+- **`../../00-theory/04-state-compression/state-space-compression-complete.md`**：
+  状态空间压缩证明
 
 ### 10.2 实证参考
 

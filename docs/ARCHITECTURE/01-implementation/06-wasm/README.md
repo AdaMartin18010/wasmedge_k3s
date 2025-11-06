@@ -2,20 +2,31 @@
 
 ## 📑 目录
 
+- [📑 目录](#-目录)
 - [1. 概述](#1-概述)
+  - [1.1 核心思想](#11-核心思想)
+  - [1.2 实现目标](#12-实现目标)
 - [2. 文档结构](#2-文档结构)
 - [3. 核心概念](#3-核心概念)
+  - [3.1 WasmEdge 0.14](#31-wasmedge-014)
+  - [3.2 WASI Preview 2](#32-wasi-preview-2)
+  - [3.3 WebAssembly 编译](#33-webassembly-编译)
 - [4. 相关文档](#4-相关文档)
+  - [4.1 架构视角文档](#41-架构视角文档)
+  - [4.2 理论文档](#42-理论文档)
+  - [4.3 源文档](#43-源文档)
 
 ---
 
 ## 1. 概述
 
-本目录包含 **WebAssembly** 实现细节文档，包括 WasmEdge 运行时配置、WASI 接口使用、Wasm 编译示例等。
+本目录包含 **WebAssembly** 实现细节文档，包括 WasmEdge 运行时配置、WASI 接口使用
+、Wasm 编译示例等。
 
 ### 1.1 核心思想
 
-> **通过 WebAssembly 运行时和 WASI 接口，实现平台无关、内存安全、极轻量的计算单元**
+> **通过 WebAssembly 运行时和 WASI 接口，实现平台无关、内存安全、极轻量的计算单
+> 元**
 
 ### 1.2 实现目标
 
@@ -74,18 +85,22 @@
 
 ### 4.1 架构视角文档
 
-- [`../../01-views/webassembly-view.md`](../../01-views/webassembly-view.md) - WebAssembly 架构视角
+- [`../../01-views/webassembly-view.md`](../../01-views/webassembly-view.md) -
+  WebAssembly 架构视角
 
 ### 4.2 理论文档
 
-- [`../../00-theory/02-induction-proof/psi5-wasm.md`](../../00-theory/02-induction-proof/psi5-wasm.md) - Ψ₅：第五次归纳映射
-- [`../../00-theory/05-lemmas-theorems/L4-wasm-memory-safety.md`](../../00-theory/05-lemmas-theorems/L4-wasm-memory-safety.md) - L4：Wasm 内存安全引理
+- [`../../00-theory/02-induction-proof/psi5-wasm.md`](../../00-theory/02-induction-proof/psi5-wasm.md) -
+  Ψ₅：第五次归纳映射
+- [`../../00-theory/05-lemmas-theorems/L4-wasm-memory-safety.md`](../../00-theory/05-lemmas-theorems/L4-wasm-memory-safety.md) -
+  L4：Wasm 内存安全引理
 
 ### 4.3 源文档
 
-- [`../../architecture_view.md`](../../architecture_view.md) - 架构视角的核心论述
+- [`../../architecture_view.md`](../../architecture_view.md) - 架构视角的核心论
+  述
 
 ---
 
-**更新时间**：2025-11-05 **版本**：v1.0 **参考**：`architecture_view.md` WebAssembly 抽象层部分
-
+**更新时间**：2025-11-05 **版本**：v1.0 **参考**：`architecture_view.md`
+WebAssembly 抽象层部分
