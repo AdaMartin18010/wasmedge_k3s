@@ -2,14 +2,33 @@
 
 ## 📑 目录
 
+- [📑 目录](#-目录)
 - [1. 概述](#1-概述)
+  - [1.1 核心思想](#11-核心思想)
 - [2. Service Mesh 模式定义](#2-service-mesh-模式定义)
+  - [2.1 Service Mesh 模式概念](#21-service-mesh-模式概念)
+  - [2.2 Service Mesh 模式结构](#22-service-mesh-模式结构)
+  - [2.3 Service Mesh 模式特点](#23-service-mesh-模式特点)
 - [3. 架构中的应用](#3-架构中的应用)
+  - [3.1 Istio Service Mesh](#31-istio-service-mesh)
+  - [3.2 Linkerd Service Mesh](#32-linkerd-service-mesh)
 - [4. Service Mesh 模式实现](#4-service-mesh-模式实现)
+  - [4.1 Istio 配置示例](#41-istio-配置示例)
+  - [4.2 Linkerd 配置示例](#42-linkerd-配置示例)
 - [5. Service Mesh 模式优势](#5-service-mesh-模式优势)
+  - [5.1 透明治理](#51-透明治理)
+  - [5.2 统一控制](#52-统一控制)
+  - [5.3 可观测性](#53-可观测性)
 - [6. Service Mesh 模式与其他模式](#6-service-mesh-模式与其他模式)
+  - [6.1 Service Mesh vs API Gateway](#61-service-mesh-vs-api-gateway)
+  - [6.2 Service Mesh vs Sidecar](#62-service-mesh-vs-sidecar)
 - [7. 形式化定义](#7-形式化定义)
+  - [7.1 Service Mesh 模式定义](#71-service-mesh-模式定义)
+  - [7.2 Sidecar 定义](#72-sidecar-定义)
+  - [7.3 Control Plane 定义](#73-control-plane-定义)
 - [8. 相关文档](#8-相关文档)
+  - [8.1 组合模式文档](#81-组合模式文档)
+  - [8.2 参考资源](#82-参考资源)
 - [9. 总结](#9-总结)
 
 ---
@@ -313,9 +332,12 @@ Control Plane C = ⟨config, discovery, security, observability⟩
 ### 8.1 组合模式文档
 
 - **[组合模式文档集](README.md)** - 组合模式文档集说明
-- **[Service Mesh Patterns](./04-service-mesh-pattern.md)** - Service Mesh 模式（本文件）
-- **[Service Aggregation 模式](./05-nsm-pattern.md#service-aggregation)** - Service Aggregation 模式（在本目录中）
-- **[Service Mesh 与 NSM](../03-service-mesh-nsm/)** - Service Mesh 和 NSM 的组合模式
+- **[Service Mesh Patterns](./04-service-mesh-pattern.md)** - Service Mesh 模式
+  （本文件）
+- **[Service Aggregation 模式](./05-nsm-pattern.md#service-aggregation)** -
+  Service Aggregation 模式（在本目录中）
+- **[Service Mesh 与 NSM](../03-service-mesh-nsm/)** - Service Mesh 和 NSM 的组
+  合模式
 
 ### 8.2 参考资源
 
@@ -333,7 +355,9 @@ Control Plane C = ⟨config, discovery, security, observability⟩
 4. **可观测性**：自动注入遥测数据，实现统一可观测性
 5. **安全性**：通过 mTLS 和 AuthorizationPolicy 实现安全治理
 
-**相关模式**：Service Mesh 模式可以与 Service Aggregation 模式结合使用，Service Mesh 负责流量治理，Service Aggregation 负责服务聚合。详细内容请参考 [Service Aggregation 模式](./05-nsm-pattern.md#service-aggregation)。
+**相关模式**：Service Mesh 模式可以与 Service Aggregation 模式结合使用，Service
+Mesh 负责流量治理，Service Aggregation 负责服务聚合。详细内容请参考
+[Service Aggregation 模式](./05-nsm-pattern.md#service-aggregation)。
 
 ---
 
