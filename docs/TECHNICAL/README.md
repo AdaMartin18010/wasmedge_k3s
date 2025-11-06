@@ -145,14 +145,23 @@
 
 **30. 概念关系矩阵**：
 
-- 主文档：`concept-relations-matrix.md`（完整概念关系矩阵）
-- 关系矩阵：`matrices/` 目录（二维、三维、多维关系矩阵）
-- 关系图谱：`graphs/` 目录（概念关系图谱）
-- 属性矩阵：`properties/` 目录（性能、安全属性矩阵）
-- 应用案例：`applications/` 目录（实际应用场景）
-- 决策树：`decision-trees/` 目录（技术选型决策树）
-- 分析部分：`analysis/` 目录（结构关系、动态演进、范畴论视角）
-- 快速参考：`reference/` 目录（概念索引和快速参考）
+- 主文档：`concept-relations-matrix.md`（完整概念关系矩阵，包含所有章节内容）
+- **独立文档目录**（27 个独立文档，内容已从主文档提取，支持双向导航）：
+  - 关系矩阵：`matrices/` 目录（3 个文档：二维关系矩阵、三维关系空间、多维关系网
+    络）
+  - 关系图谱：`graphs/` 目录（4 个文档：包含、组合、依赖、实现关系图谱）
+  - 属性矩阵：`properties/` 目录（4 个文档：性能、安全、可扩展性、可观测性属性矩
+    阵）
+  - 应用案例：`applications/` 目录（4 个文档：边缘计算、AI 推理、Serverless、微
+    服务场景）
+  - 决策树：`decision-trees/` 目录（3 个文档：运行时、编排平台、策略引擎选型决策
+    ）
+  - 分析部分：`analysis/` 目录（6 个文档：结构关系、属性传递、动态演进、范畴论、
+    传递规则、形式化定义）
+  - 快速参考：`reference/` 目录（3 个文档：快速参考指南、概念索引、隔离层次对比
+    ）
+- **导航特性**：主文档各章节开头包含独立文档引用提示，独立文档包含主文档链接，支
+  持双向导航
 
 > 📂 **导航提示**：每个分层文档目录都包含 `README.md` 导航文档，提供完整的文档结
 > 构说明和快速导航。
@@ -226,12 +235,21 @@
   2025 技术堆栈概念关系矩阵与多维关系分析
   - [文档目录](30-concept-relations-matrix/README.md) - 完整的文档结构说明和快速
     导航
-  - [关系矩阵](30-concept-relations-matrix/matrices/) - 二维、三维、多维关系矩阵
-  - [关系图谱](30-concept-relations-matrix/graphs/) - 概念关系图谱
-  - [属性矩阵](30-concept-relations-matrix/properties/) - 性能、安全属性矩阵
-  - [应用案例](30-concept-relations-matrix/applications/) - 实际应用场景
-  - [决策树](30-concept-relations-matrix/decision-trees/) - 技术选型决策树
-  - [快速参考](30-concept-relations-matrix/reference/) - 概念索引和快速参考
+  - [关系矩阵](30-concept-relations-matrix/matrices/) - 3 个独立文档（二维、三维
+    、多维关系矩阵）
+  - [关系图谱](30-concept-relations-matrix/graphs/) - 4 个独立文档（包含、组合、
+    依赖、实现关系图谱）
+  - [属性矩阵](30-concept-relations-matrix/properties/) - 4 个独立文档（性能、安
+    全、可扩展性、可观测性属性矩阵）
+  - [应用案例](30-concept-relations-matrix/applications/) - 4 个独立文档（边缘计
+    算、AI 推理、Serverless、微服务场景）
+  - [决策树](30-concept-relations-matrix/decision-trees/) - 3 个独立文档（运行时
+    、编排平台、策略引擎选型决策）
+  - [分析部分](30-concept-relations-matrix/analysis/) - 6 个独立文档（结构关系、
+    属性传递、动态演进、范畴论等）
+  - [快速参考](30-concept-relations-matrix/reference/) - 3 个独立文档（快速参考
+    指南、概念索引、隔离层次对比）
+  - **总计**：27 个独立文档 + 8 个 README + 1 个主文档 = 36 个 markdown 文件
 - [00. Docker](00-docker/docker.md) - 容器化引擎技术规范
 - [01. Kubernetes](01-kubernetes/kubernetes.md) - 集群编排架构与实践
 - [02. K3s](02-k3s/k3s.md) - 轻量级 Kubernetes 架构

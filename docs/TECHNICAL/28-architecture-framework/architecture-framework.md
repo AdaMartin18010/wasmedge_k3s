@@ -1173,6 +1173,25 @@ graph TB
 
 - **[30. 概念关系矩阵](../30-concept-relations-matrix/concept-relations-matrix.md)** -
   技术堆栈概念关系矩阵
+  - **[文档目录](../30-concept-relations-matrix/README.md)** - 完整的文档结构说
+    明和快速导航
+  - **[独立文档目录](../30-concept-relations-matrix/README.md#2-文档列表)** - 27
+    个独立文档（关系矩阵、关系图谱、属性矩阵、应用案例、决策树、分析部分、快速参
+    考）
+  - **[关系矩阵](../30-concept-relations-matrix/matrices/)** - 3 个独立文档（二
+    维、三维、多维关系矩阵）
+  - **[关系图谱](../30-concept-relations-matrix/graphs/)** - 4 个独立文档（包含
+    、组合、依赖、实现关系图谱）
+  - **[属性矩阵](../30-concept-relations-matrix/properties/)** - 4 个独立文档（
+    性能、安全、可扩展性、可观测性属性矩阵）
+  - **[应用案例](../30-concept-relations-matrix/applications/)** - 4 个独立文档
+    （边缘计算、AI 推理、Serverless、微服务场景）
+  - **[决策树](../30-concept-relations-matrix/decision-trees/)** - 3 个独立文档
+    （运行时、编排平台、策略引擎选型决策）
+  - **[分析部分](../30-concept-relations-matrix/analysis/)** - 6 个独立文档（结
+    构关系、属性传递、动态演进、范畴论、传递规则、形式化定义）
+  - **[快速参考](../30-concept-relations-matrix/reference/)** - 3 个独立文档（快
+    速参考指南、概念索引、隔离层次对比）
 - **[00. Docker](../00-docker/docker.md)** - 容器化引擎技术规范
 - **[01. Kubernetes](../01-kubernetes/kubernetes.md)** - 集群编排架构与实践
 - **[02. K3s](../02-k3s/k3s.md)** - 轻量级 Kubernetes 架构
