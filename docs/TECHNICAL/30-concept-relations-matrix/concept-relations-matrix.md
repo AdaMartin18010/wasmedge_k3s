@@ -356,7 +356,8 @@ eBPF ∘ OTLP = 横纵耦合定位
 ## 30.4 二维关系矩阵
 
 > 📂 **独立文档**：本节内容已提取为独立文档，方便查阅：
-> [二维关系矩阵](../matrices/2d-matrices.md) | [三维关系空间](../matrices/3d-space.md) |
+> [二维关系矩阵](../matrices/2d-matrices.md) |
+> [三维关系空间](../matrices/3d-space.md) |
 > [多维关系网络](../matrices/multi-dimensional-network.md)
 
 ### 30.4.1 技术栈层级矩阵
@@ -513,6 +514,9 @@ graph TB
 
 ## 30.6 多维关系网络
 
+> 📂 **独立文档**：本节内容已提取为独立文档：
+> [多维关系网络](../matrices/multi-dimensional-network.md)
+
 ### 30.6.1 四层隔离栈维度
 
 **维度定义**：L-0 到 L-4 的隔离层级
@@ -597,8 +601,10 @@ K3s+WasmEdge+OPA = f(
 ## 30.7 概念关系图谱
 
 > 📂 **独立文档**：本节内容已提取为独立文档，方便查阅：
-> [包含关系图谱](../graphs/containment-relations.md) | [组合关系图谱](../graphs/composition-relations.md) |
-> [依赖关系图谱](../graphs/dependency-relations.md) | [实现关系图谱](../graphs/implementation-relations.md)
+> [包含关系图谱](../graphs/containment-relations.md) |
+> [组合关系图谱](../graphs/composition-relations.md) |
+> [依赖关系图谱](../graphs/dependency-relations.md) |
+> [实现关系图谱](../graphs/implementation-relations.md)
 
 ### 30.7.1 包含关系图谱
 
@@ -699,8 +705,10 @@ graph LR
 ## 30.8 属性关系矩阵
 
 > 📂 **独立文档**：本节内容已提取为独立文档，方便查阅：
-> [性能属性矩阵](../properties/performance-properties.md) | [安全属性矩阵](../properties/security-properties.md) |
-> [可扩展性属性矩阵](../properties/scalability-properties.md) | [可观测性属性矩阵](../properties/observability-properties.md)
+> [性能属性矩阵](../properties/performance-properties.md) |
+> [安全属性矩阵](../properties/security-properties.md) |
+> [可扩展性属性矩阵](../properties/scalability-properties.md) |
+> [可观测性属性矩阵](../properties/observability-properties.md)
 
 ### 30.8.1 性能属性矩阵
 
@@ -1007,6 +1015,9 @@ WasmEdge ∘ OPA = Wasm策略
 
 ## 30.12 形式化定义
 
+> 📂 **独立文档**：本节内容已提取为独立文档：
+> [形式化定义](../analysis/formal-definitions.md)
+
 ### 30.12.1 概念集合定义
 
 **定义**：U = {u | u 是技术概念}
@@ -1059,8 +1070,10 @@ K3s+WasmEdge+OPA = f(
 ## 30.13 实际应用案例
 
 > 📂 **独立文档**：本节内容已提取为独立文档，方便查阅：
-> [边缘计算场景](../applications/edge-computing-scenario.md) | [AI 推理场景](../applications/ai-inference-scenario.md) |
-> [Serverless 场景](../applications/serverless-scenario.md) | [微服务场景](../applications/microservices-scenario.md)
+> [边缘计算场景](../applications/edge-computing-scenario.md) |
+> [AI 推理场景](../applications/ai-inference-scenario.md) |
+> [Serverless 场景](../applications/serverless-scenario.md) |
+> [微服务场景](../applications/microservices-scenario.md)
 
 ### 30.13.1 边缘计算场景
 
@@ -1163,6 +1176,11 @@ K8s (X=1, 集群编排) + Istio (服务网格) + WasmEdge (Y=4, 沙盒隔离) + 
 
 ## 30.14 技术选型决策树
 
+> 📂 **独立文档**：本节内容已提取为独立文档，方便查阅：
+> [运行时选型决策](../decision-trees/runtime-selection.md) |
+> [编排平台选型决策](../decision-trees/orchestration-selection.md) |
+> [策略引擎选型决策](../decision-trees/policy-engine-selection.md)
+
 ### 30.14.1 运行时选型决策
 
 ```mermaid
@@ -1252,6 +1270,9 @@ graph TD
 
 ## 30.15 关系属性传递分析
 
+> 📂 **独立文档**：本节内容已提取为独立文档：
+> [关系属性传递分析](../analysis/relation-property-transfer.md)
+
 ### 30.15.1 隔离属性传递
 
 **传递规则**：隔离属性沿包含关系传递
@@ -1331,6 +1352,9 @@ K3s(性能=4) ∘ WasmEdge(性能=5) = 边缘Wasm编排(性能=5)
 ---
 
 ## 30.16 动态演进分析
+
+> 📂 **独立文档**：本节内容已提取为独立文档：
+> [动态演进分析](../analysis/dynamic-evolution.md)
 
 ### 30.16.1 技术演进路径
 
@@ -1422,6 +1446,9 @@ graph LR
 
 ## 30.17 范畴论视角
 
+> 📂 **独立文档**：本节内容已提取为独立文档：
+> [范畴论视角](../analysis/category-theory.md)
+
 ### 30.17.1 对象与态射
 
 **范畴定义**：C = (Obj(C), Mor(C), ∘)
@@ -1499,6 +1526,11 @@ graph TB
 ---
 
 ## 30.18 快速参考指南
+
+> 📂 **独立文档**：本节内容已提取为独立文档，方便查阅：
+> [快速参考指南](../reference/quick-reference.md) |
+> [概念索引](../reference/concept-index.md) |
+> [隔离层次全面对比分析](../reference/isolation-comparison.md)
 
 ### 30.18.1 概念快速查找
 
@@ -1581,6 +1613,9 @@ graph TB
 ---
 
 ## 30.19 概念索引
+
+> 📂 **独立文档**：本节内容已提取为独立文档：
+> [概念索引](../reference/concept-index.md)
 
 ### 30.19.1 核心概念索引
 
