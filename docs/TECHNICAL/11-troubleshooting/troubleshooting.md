@@ -1222,6 +1222,18 @@ K3s(性能=4) ∘ WasmEdge(性能=5) = 边缘Wasm编排(性能=5)
 
 - **[30. 概念关系矩阵](../30-concept-relations-matrix/concept-relations-matrix.md)** -
   技术堆栈概念关系梳理
+  - **[文档目录](../30-concept-relations-matrix/README.md)** - 完整的文档结构说
+    明和快速导航
+  - **[关系矩阵](../30-concept-relations-matrix/matrices/)** - 二维、三维、多维
+    关系矩阵
+  - **[关系图谱](../30-concept-relations-matrix/graphs/)** - 概念关系图谱
+  - **[属性矩阵](../30-concept-relations-matrix/properties/)** - 性能、安全属性
+    矩阵
+  - **[应用案例](../30-concept-relations-matrix/applications/)** - 实际应用场景
+  - **[决策树](../30-concept-relations-matrix/decision-trees/)** - 技术选型决策
+    树
+  - **[快速参考](../30-concept-relations-matrix/reference/)** - 概念索引和快速参
+    考
   - [30.19.1 核心概念索引](../30-concept-relations-matrix/concept-relations-matrix.md#30191-核心概念索引) -
     快速查找概念
   - [30.20.3 问题定位使用](../30-concept-relations-matrix/concept-relations-matrix.md#30203-问题定位使用) -
@@ -1256,6 +1268,10 @@ K3s(性能=4) ∘ WasmEdge(性能=5) = 边缘Wasm编排(性能=5)
 
 - **[29. 隔离栈](../29-isolation-stack/isolation-stack.md)** - 完整的隔离栈技术
   解析
+  - **[文档目录](../29-isolation-stack/README.md)** - 完整的文档结构说明和快速导
+    航
+  - **[问题定位模型文档目录](../29-isolation-stack/troubleshooting/README.md)** -
+    问题定位模型独立文档目录
 - **[L-3 容器化层](../29-isolation-stack/layers/L-3-containerization.md)** - 容
   器故障排查相关内容
 - **[L-4 沙盒化层](../29-isolation-stack/layers/L-4-sandboxing.md)** - WASM 故障

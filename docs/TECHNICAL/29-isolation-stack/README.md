@@ -11,6 +11,7 @@
 | ---------------------------------------- | -------------------------------------------------------------------- |
 | [isolation-stack.md](isolation-stack.md) | 四层隔离栈完整技术文档，包含各层级概念、机制、组件、黑话和一句话解释 |
 | [layers/](layers/)                       | 各隔离层次独立文档目录，便于检索和对比                               |
+| [troubleshooting/](troubleshooting/)     | 问题定位模型独立文档目录                                             |
 
 ### 2.1 各层次独立文档
 
@@ -23,9 +24,58 @@
 | [L-4 沙盒化层](layers/L-4-sandboxing.md)               | gVisor、Firecracker、WASM、Windows Sandbox 详细文档（包括 WebAssembly） |
 | [隔离层次总结合并对比](layers/isolation-comparison.md) | 五层隔离栈总结合并对比文档                                              |
 
-## 3. 快速导航
+## 3. 文档结构
 
-### 3.1 按层次导航
+### 3.1 主文档结构
+
+主文档 `isolation-stack.md` 包含以下主要章节：
+
+- **29.1 文档定位** - 文档概述和定位
+- **29.2 四层隔离栈总览** - 总体架构概览
+- **29.3 逐层展开** - 各层级详细解析（L-0 到 L-4）
+- **29.4 技术架构图** - 架构图可视化
+- **29.5 快速诊断口诀** - 日志关键词快速定位和故障排查流程
+- **29.6 问题定位模型** - 横向请求链 + 纵向隔离栈定位方法（重要章节，包含大量内
+  容）
+  - 29.6.0 观测系统作为第四大基础设施
+  - 29.6.1-29.6.10 定位模型详细内容
+  - 29.6.12 网络定位专题
+  - 29.6.13 实战案例总结
+- **29.7 快速索引与常见问题** - 按问题类型快速索引和 FAQ
+- **29.8 文档总结与核心观点** - 核心观点总结和方法论
+- **29.9 文档使用指南** - 如何使用本文档
+- **29.10 参考** - 相关文档和外部资源
+
+### 3.2 分层文档（layers/ 目录）
+
+各隔离层次的独立文档：
+
+- **[L-0 硬件辅助层](layers/L-0-hardware-assist.md)** - VT-x、AMD-V、SEV、TPM
+- **[L-1 全虚拟化层](layers/L-1-full-virtualization.md)** -
+  KVM、ESXi、Hyper-V、Xen HVM
+- **[L-2 半虚拟化层](layers/L-2-paravirtualization.md)** - Xen
+  PV、virtio、Hyper-V Enlightenment
+- **[L-3 容器化层](layers/L-3-containerization.md)** -
+  runc、containerd、Docker、Podman
+- **[L-4 沙盒化层](layers/L-4-sandboxing.md)** -
+  gVisor、Firecracker、WASM、Windows Sandbox（包括 WebAssembly）
+- **[隔离层次总结合并对比](layers/isolation-comparison.md)** - 五层隔离栈总结合
+  并对比文档
+
+### 3.3 问题定位文档（troubleshooting/ 目录）
+
+问题定位模型相关文档：
+
+- **[问题定位模型概述](troubleshooting/README.md)** - 横向请求链 + 纵向隔离栈定
+  位方法
+  - 观测系统作为第四大基础设施
+  - 网络定位专题
+  - 实战案例总结
+  - 最佳实践与注意事项
+
+## 4. 快速导航
+
+### 4.1 按层次导航
 
 - **[L-0 硬件辅助层](layers/L-0-hardware-assist.md)** - VT-x、AMD-V、SEV、TPM
 - **[L-1 全虚拟化层](layers/L-1-full-virtualization.md)** -
@@ -37,7 +87,7 @@
 - **[L-4 沙盒化层](layers/L-4-sandboxing.md)** -
   gVisor、Firecracker、WASM、Windows Sandbox（包括 WebAssembly）
 
-### 3.2 总结合并对比
+### 4.2 总结合并对比
 
 - **[隔离层次总结合并对比](layers/isolation-comparison.md)** - 五层隔离栈总结合
   并对比文档
@@ -46,7 +96,7 @@
   - 应用场景匹配
   - 混合部署策略
 
-### 3.3 完整文档导航
+### 4.3 完整文档导航
 
 - **[L-0 硬件辅助层](isolation-stack.md#2931-l-0-硬件辅助层cpu-虚拟化指令集)** -
   VT-x、AMD-V、SEV、TPM
