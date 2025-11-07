@@ -48,6 +48,9 @@ ARCHITECTURE/
 ├── 01-views/              # 多视角架构视图
 │   ├── decomposition-composition.md
 │   ├── virtualization-view.md
+│   ├── webassembly-view.md ⭐ 新增
+│   ├── ai-ml-architecture-view.md ⭐ 新增（2025-11-07）
+│   ├── edge-computing-view.md ⭐ 新增（2025-11-07）
 │   ├── containerization-view.md
 │   ├── sandboxing-view.md
 │   ├── service-mesh-view.md
