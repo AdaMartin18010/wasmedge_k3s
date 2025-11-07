@@ -31,8 +31,15 @@
 
 ## 1. 概述
 
-API 文档生成规范定义了 API 在文档生成场景下的设计和实现，从文档类型到文档生成工
-具，从文档格式到文档版本管理。
+API 文档生成规范定义了 API 在文档生成场景下的设计和实现，从文档类型到文档生成工具，从文档格式到文档版本管理。本文档基于形式化方法，提供严格的数学定义和推理论证，分析 API 文档生成的理论基础和实践方法。
+
+**参考标准**：
+
+- [OpenAPI Specification](https://swagger.io/specification/) - OpenAPI 规范
+- [gRPC Documentation](https://grpc.io/docs/) - gRPC 文档规范
+- [WIT Documentation](https://github.com/WebAssembly/component-model/blob/main/design/mvp/WIT.md) - WIT 文档规范
+- [Docs-as-Code](https://www.writethedocs.org/guide/docs-as-code/) - 文档即代码
+- [API Documentation Best Practices](https://swagger.io/resources/articles/adopting-an-api-first-approach/) - API 文档最佳实践
 
 ### 1.1 文档生成架构
 
