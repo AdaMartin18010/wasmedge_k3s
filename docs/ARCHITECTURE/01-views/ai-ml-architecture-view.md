@@ -373,6 +373,8 @@
 
 #### 详细文档（推荐）
 
+- [`../../architecture_view.md`](../../architecture_view.md) ⭐ - 架构视角核心文
+  档（WebAssembly 第四层抽象）
 - [`architecture-view/`](../architecture-view/) - 架构视图详细文档集
 - [`01-implementation/07-ai-ml/`](../01-implementation/07-ai-ml/) - AI/ML 实现细
   节

@@ -36,6 +36,7 @@
   - [11.3 部署实践](#113-部署实践)
 - [12. 参考资源](#12-参考资源)
   - [相关文档](#相关文档)
+    - [架构视角文档](#架构视角文档)
     - [详细文档（推荐）](#详细文档推荐)
     - [理论论证](#理论论证)
     - [实现细节](#实现细节)
@@ -436,6 +437,13 @@ kubectl apply -f wasm-deployment.yaml
 ## 12. 参考资源
 
 ### 相关文档
+
+#### 架构视角文档
+
+- [`ai-ml-architecture-view.md`](./ai-ml-architecture-view.md) ⭐ 新增
+  （2025-11-07） - AI/ML 架构视角（模型 Wasm 化，WasmEdge + Llama2）
+- [`edge-computing-view.md`](./edge-computing-view.md) ⭐ 新增（2025-11-07） -
+  边缘计算架构视角（WasmEdge 边缘部署，K3s + WasmEdge）
 
 #### 详细文档（推荐）
 

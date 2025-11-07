@@ -281,9 +281,10 @@ Kubernetes → K3s → WasmEdge → OPA** 的完整技术栈，包含理念、�
 ### 文档数量
 
 - **认知模型文档**：14+ 个核心认知模型文档（含 6 个根目录视角文档）
-- **架构视图文档**：100+ 个架构视图文档（含理论论证、实现细节、案例研究）
+- **架构视图文档**：102+ 个架构视图文档（含理论论证、实现细节、案例研究，新增
+  AI/ML、边缘计算视角）
 - **技术参考文档**：33 个核心技术参考文档（含架构框架、隔离栈、eBPF/OTLP 分析）
-- **总文档数**：150+ 个核心文档
+- **总文档数**：152+ 个核心文档（新增 AI/ML、边缘计算架构视角文档）
 
 ### 覆盖范围
 
@@ -453,6 +454,18 @@ Kubernetes → K3s → WasmEdge → OPA** 的完整技术栈，包含理念、�
 
 ### 重要更新
 
+- **WebAssembly 第四层抽象增强**：在
+  [`architecture_view.md`](architecture_view.md) 中增强 Wasm 抽象层讨论，添加范
+  式转换意义、应用场景、GPU 加速等内容 ⭐ 新增（2025-11-07）
+- **AI/ML 架构视角文档**：新增
+  [`docs/ARCHITECTURE/01-views/ai-ml-architecture-view.md`](docs/ARCHITECTURE/01-views/ai-ml-architecture-view.md)
+  ⭐ - LLM 推理与容器编排集成（395 行）
+- **边缘计算架构视角文档**：新增
+  [`docs/ARCHITECTURE/01-views/edge-computing-view.md`](docs/ARCHITECTURE/01-views/edge-computing-view.md)
+  ⭐ - 5G MEC 架构、离线自治、热更新（390 行）
+- **文档索引更新**：文档总数从 41 个增加到 43 个核心文档，新增文档编号 41、42
+- **文档交叉引用完善**：更新理论文档和实现细节文档的交叉引用，建立完整的文档关联
+  体系
 - **eBPF/OTLP 视角文档**：新增 [`ebpf_otlp_view.md`](ebpf_otlp_view.md) ⭐ - 横
   纵耦合问题定位模型、智能系统能力架构（1434 行）
 - **eBPF 技术堆栈文档**：新增

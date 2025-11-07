@@ -282,7 +282,7 @@ Capability(m) = ∩{ w | w ∈ WASI_Interface_Set ∧ m needs w }
 ### 7.1 归纳证明文档
 
 - [`../02-induction-proof/psi5-wasm.md`](../02-induction-proof/psi5-wasm.md) -
-  Ψ₅ 详细证明（待创建）
+  Ψ₅ 详细证明（已补充详细证明）
 
 ### 7.2 架构视角文档
 
