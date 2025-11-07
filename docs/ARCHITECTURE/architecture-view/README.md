@@ -19,7 +19,7 @@
 ### 🎯 核心主题
 
 1. **架构拆解与组合**：从硬件到业务的多层抽象
-2. **虚拟化 → 容器化 → 沙盒化**：计算范式的递进抽象
+2. **虚拟化 → 容器化 → 沙盒化 → WebAssembly** ⭐ 更新：计算范式的递进抽象
 3. **Service Mesh / Network Service Mesh**：网络服务的聚合与组合
 4. **OPA (Open Policy Agent)**：策略即代码的治理范式
 5. **动态运维**：GitOps、Observability、Autoscaling
@@ -39,12 +39,13 @@ architecture-view/
 │   ├── 05-thinking-models.md        # 思维模型
 │   ├── 06-architecture-focus.md     # 架构关注领域聚焦
 │   └── 07-conclusion-practices.md  # 结语与实践建议
-├── 02-virtualization-containerization-sandboxing/  # 三层抽象
+├── 02-virtualization-containerization-sandboxing/  # 四层抽象 ⭐ 更新
 │   ├── 01-virtualization-abstraction.md          # 虚拟化抽象
 │   ├── 02-containerization-abstraction.md         # 容器化抽象
 │   ├── 03-sandboxing-abstraction.md               # 沙盒化抽象
 │   ├── 04-progressive-abstraction.md              # 递进抽象论证
-│   └── 05-comparison-matrix.md                    # 矩阵对比
+│   ├── 05-comparison-matrix.md                    # 矩阵对比
+│   └── 06-webassembly-abstraction.md              # WebAssembly 抽象 ⭐ 新增（2025-11-07）
 ├── 03-service-mesh-nsm/             # 服务网格与网络服务网格
 │   ├── 01-node-aggregation.md      # 节点聚合
 │   ├── 02-service-composition.md   # 服务组合
@@ -125,8 +126,8 @@ architecture-view/
 
 1. **入门路径**：从 `01-decomposition-composition/` 开始，理解 5 步拆分与组合流
    程
-2. **深入路径**：进入 `02-virtualization-containerization-sandboxing/`，掌握三层
-   抽象
+2. **深入路径**：进入 `02-virtualization-containerization-sandboxing/`，掌握四层
+   抽象（虚拟化 → 容器化 → 沙盒化 → WebAssembly）⭐ 更新
 3. **网络路径**：查看 `03-service-mesh-nsm/`，理解网络聚合与服务组合
 4. **治理路径**：研读 `04-opa-policy-governance/`，理解策略即代码
 5. **理论路径**：查看 `05-formal-proofs/`，理解形式化论证

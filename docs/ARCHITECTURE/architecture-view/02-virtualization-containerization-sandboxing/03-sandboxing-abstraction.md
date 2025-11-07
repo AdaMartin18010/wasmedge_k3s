@@ -312,5 +312,17 @@ Capability(u) = { c | c ∈ seccomp-white-list } ∩ { c | OPA(admission, image-
 
 ---
 
-**更新时间**：2025-11-04 **版本**：v1.0 **参考**：`architecture_view.md` 第
+**更新时间**：2025-11-07 **版本**：v1.0 **参考**：`architecture_view.md` 第
 1836-1854 行，沙盒化部分
+
+**相关文档**：
+
+- [`01-virtualization-abstraction.md`](01-virtualization-abstraction.md) - 虚拟
+  化抽象
+- [`02-containerization-abstraction.md`](02-containerization-abstraction.md) -
+  容器化抽象
+- [`06-webassembly-abstraction.md`](06-webassembly-abstraction.md) ⭐ 新增
+  （2025-11-07） - WebAssembly 抽象
+- [`04-progressive-abstraction.md`](04-progressive-abstraction.md) - 递进抽象论
+  证
+- [`05-comparison-matrix.md`](05-comparison-matrix.md) - 矩阵对比

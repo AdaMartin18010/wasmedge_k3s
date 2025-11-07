@@ -271,5 +271,16 @@ VM 提供完整 OS，容器在其上共享内核
 
 ---
 
-**更新时间**：2025-11-04 **版本**：v1.0 **参考**：`architecture_view.md` 第
+**更新时间**：2025-11-07 **版本**：v1.0 **参考**：`architecture_view.md` 第
 247-284 行，虚拟化部分
+
+**相关文档**：
+
+- [`02-containerization-abstraction.md`](02-containerization-abstraction.md) -
+  容器化抽象
+- [`03-sandboxing-abstraction.md`](03-sandboxing-abstraction.md) - 沙盒化抽象
+- [`06-webassembly-abstraction.md`](06-webassembly-abstraction.md) ⭐ 新增
+  （2025-11-07） - WebAssembly 抽象
+- [`04-progressive-abstraction.md`](04-progressive-abstraction.md) - 递进抽象论
+  证
+- [`05-comparison-matrix.md`](05-comparison-matrix.md) - 矩阵对比
