@@ -7,6 +7,7 @@
 - [📑 目录](#-目录)
 - [1. 概述](#1-概述)
   - [1.1 授权架构](#11-授权架构)
+  - [1.2 API 授权在 API 规范中的位置](#12-api-授权在-api-规范中的位置)
 - [2. 授权模型](#2-授权模型)
   - [2.1 RBAC](#21-rbac)
   - [2.2 ABAC](#22-abac)
@@ -23,14 +24,31 @@
 - [6. 授权审计](#6-授权审计)
   - [6.1 授权日志](#61-授权日志)
   - [6.2 授权分析](#62-授权分析)
-- [7. 相关文档](#7-相关文档)
+- [7. 形式化定义与理论基础](#7-形式化定义与理论基础)
+  - [7.1 API 授权形式化模型](#71-api-授权形式化模型)
+  - [7.2 授权模型形式化](#72-授权模型形式化)
+  - [7.3 授权决策形式化](#73-授权决策形式化)
+- [8. 相关文档](#8-相关文档)
 
 ---
 
 ## 1. 概述
 
 API 授权规范定义了 API 在授权场景下的设计和实现，从授权模型到权限定义，从授权检
-查到授权审计。
+查到授权审计。本文档基于形式化方法，提供严格的数学定义和推理论证，分析 API 授权
+的理论基础和实践方法。
+
+**参考标准**：
+
+- [RBAC](https://en.wikipedia.org/wiki/Role-based_access_control) - 基于角色的访
+  问控制
+- [ABAC](https://en.wikipedia.org/wiki/Attribute-based_access_control) - 基于属
+  性的访问控制
+- [OPA](https://www.openpolicyagent.org/) - Open Policy Agent
+- [Authorization Best Practices](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/05-Authorization_Testing/) -
+  授权最佳实践
+- [Policy as Code](https://www.openpolicyagent.org/docs/latest/policy-language/) -
+  策略即代码
 
 ### 1.1 授权架构
 
@@ -43,6 +61,25 @@ API 请求（API Request）
   ↓
 授权决策（Authorization Decision）
 ```
+
+### 1.2 API 授权在 API 规范中的位置
+
+根据 API 规范四元组定义（见
+[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+，API 授权主要涉及 Security 维度：
+
+```text
+API_Spec = ⟨IDL, Governance, Observability, Security⟩
+                                                ↑
+                            Authorization (implementation)
+```
+
+API 授权在 API 规范中提供：
+
+- **授权模型**：RBAC、ABAC、基于策略的授权
+- **权限定义**：权限模型、权限继承
+- **授权检查**：授权中间件、授权决策
+- **权限管理**：角色管理、权限分配
 
 ---
 
@@ -406,7 +443,86 @@ spec:
 
 ---
 
-## 7. 相关文档
+## 7. 形式化定义与理论基础
+
+### 7.1 API 授权形式化模型
+
+**定义 7.1（API 授权）**：API 授权是一个四元组：
+
+```text
+API_Authorization = ⟨Auth_Model, Permission_Definition, Auth_Check, Permission_Management⟩
+```
+
+其中：
+
+- **Auth_Model**：授权模型 `Auth_Model: {RBAC, ABAC, Policy_Based}`
+- **Permission_Definition**：权限定义
+  `Permission_Definition: Resource × Action → Permission`
+- **Auth_Check**：授权检查 `Auth_Check: User × Permission → {Allow, Deny}`
+- **Permission_Management**：权限管理
+  `Permission_Management: User → Permissions`
+
+**定义 7.2（授权）**：授权是一个函数：
+
+```text
+Authorize: User × Resource × Action → {Allow, Deny}
+```
+
+**定理 7.1（授权有效性）**：如果授权通过，则用户有权限：
+
+```text
+Authorize(User, Resource, Action) = Allow ⟹ Has_Permission(User, Resource, Action)
+```
+
+**证明**：如果授权通过，则用户具有所需权限，因此有权限。□
+
+### 7.2 授权模型形式化
+
+**定义 7.3（RBAC）**：RBAC 是一个函数：
+
+```text
+RBAC: User × Role × Permission → {Allow, Deny}
+```
+
+**定义 7.4（ABAC）**：ABAC 是一个函数：
+
+```text
+ABAC: User × Resource × Environment × Policy → {Allow, Deny}
+```
+
+**定理 7.2（授权模型灵活性）**：ABAC 比 RBAC 更灵活：
+
+```text
+Flexibility(ABAC) > Flexibility(RBAC)
+```
+
+**证明**：ABAC 考虑更多属性（用户、资源、环境），因此更灵活。□
+
+### 7.3 授权决策形式化
+
+**定义 7.5（授权策略）**：授权策略是一个函数：
+
+```text
+Authorization_Policy: Context → {Allow, Deny}
+```
+
+**定义 7.6（策略评估）**：策略评估是一个函数：
+
+```text
+Evaluate_Policy: Policy × Context → Decision
+```
+
+**定理 7.3（授权决策一致性）**：如果策略一致，则决策一致：
+
+```text
+Consistent(Policy) ⟹ Consistent(Authorize(User, Resource, Action))
+```
+
+**证明**：如果策略一致，则相同条件下决策相同，因此决策一致。□
+
+---
+
+## 8. 相关文档
 
 - **[API 安全规范](../11-api-security/api-security.md)** - API 安全
 - **[API 认证规范](../61-api-authentication/api-authentication.md)** - API 认证

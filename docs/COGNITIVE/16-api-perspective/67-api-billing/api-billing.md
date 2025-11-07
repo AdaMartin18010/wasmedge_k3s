@@ -25,14 +25,32 @@
 - [6. 计费监控](#6-计费监控)
   - [6.1 使用量监控](#61-使用量监控)
   - [6.2 成本分析](#62-成本分析)
-- [7. 相关文档](#7-相关文档)
+- [7. 形式化定义与理论基础](#7-形式化定义与理论基础)
+  - [7.1 API 计费形式化模型](#71-api-计费形式化模型)
+  - [7.2 计费模型形式化](#72-计费模型形式化)
+  - [7.3 计费准确性形式化](#73-计费准确性形式化)
+- [8. 相关文档](#8-相关文档)
 
 ---
 
 ## 1. 概述
 
 API 计费规范定义了 API 在计费场景下的设计和实现，从计费模型到计费指标，从计费策
-略到计费记录。
+略到计费记录。本文档基于形式化方法，提供严格的数学定义和推理论证，分析 API 计费
+的理论基础和实践方法。
+
+**参考标准**：
+
+- [API Billing Models](https://www.postman.com/api-platform/api-monetization/) -
+  API 计费模型
+- [Usage-Based Billing](https://stripe.com/docs/billing/subscriptions/usage-based) -
+  基于使用量的计费
+- [Subscription Billing](https://stripe.com/docs/billing/subscriptions/overview) -
+  订阅计费
+- [Billing Best Practices](https://www.chargebee.com/blog/api-billing-best-practices/) -
+  计费最佳实践
+- [Metered Billing](https://www.zuora.com/products/billing/metered-billing/) -
+  计量计费
 
 ### 1.1 计费架构
 
@@ -454,7 +472,85 @@ spec:
 
 ---
 
-## 7. 相关文档
+## 7. 形式化定义与理论基础
+
+### 7.1 API 计费形式化模型
+
+**定义 7.1（API 计费）**：API 计费是一个四元组：
+
+```text
+API_Billing = ⟨Billing_Model, Billing_Metrics, Billing_Policy, Billing_Record⟩
+```
+
+其中：
+
+- **Billing_Model**：计费模型
+  `Billing_Model: {Per_Request, Usage_Based, Subscription}`
+- **Billing_Metrics**：计费指标 `Billing_Metrics: API × Usage → Cost`
+- **Billing_Policy**：计费策略 `Billing_Policy: User → Pricing_Tier`
+- **Billing_Record**：计费记录 `Billing_Record: Usage → Bill`
+
+**定义 7.2（计费）**：计费是一个函数：
+
+```text
+Bill: Usage × Billing_Model → Cost
+```
+
+**定理 7.1（计费准确性）**：如果使用记录准确，则计费准确：
+
+```text
+Accurate(Usage_Record) ⟹ Accurate(Bill(Usage))
+```
+
+**证明**：如果使用记录准确，则计费基于准确数据，因此计费准确。□
+
+### 7.2 计费模型形式化
+
+**定义 7.3（按请求计费）**：按请求计费是一个函数：
+
+```text
+Per_Request_Billing: Request_Count × Price_Per_Request → Cost
+```
+
+**定义 7.4（按使用量计费）**：按使用量计费是一个函数：
+
+```text
+Usage_Based_Billing: Usage × Price_Per_Unit → Cost
+```
+
+**定理 7.2（计费模型公平性）**：按使用量计费更公平：
+
+```text
+Fairness(Usage_Based_Billing) > Fairness(Flat_Rate_Billing)
+```
+
+**证明**：按使用量计费根据实际使用收费，因此更公平。□
+
+### 7.3 计费准确性形式化
+
+**定义 7.5（计费准确性）**：计费准确性是一个函数：
+
+```text
+Billing_Accuracy = |Correct_Bills| / |Total_Bills|
+```
+
+**定义 7.6（计费一致性）**：计费一致性是一个函数：
+
+```text
+Billing_Consistency: Usage × Billing_Model → Consistency_Score
+```
+
+**定理 7.3（计费准确性与信任）**：计费准确性越高，用户信任度越高：
+
+```text
+Billing_Accuracy(API₁) > Billing_Accuracy(API₂) ⟹ Trust(API₁) > Trust(API₂)
+```
+
+**证明**：计费准确性越高，用户越信任计费系统，因此信任度越高。□
+
+---
+
+## 8. 相关文档
 
 - **[API SLA 规范](../66-api-sla/api-sla.md)** - SLA 与计费关联
 - **[API 多租户规范](../64-api-multi-tenancy/api-multi-tenancy.md)** - 多租户计

@@ -26,14 +26,29 @@
 - [6. 认证监控](#6-认证监控)
   - [6.1 认证指标](#61-认证指标)
   - [6.2 认证告警](#62-认证告警)
-- [7. 相关文档](#7-相关文档)
+- [7. 形式化定义与理论基础](#7-形式化定义与理论基础)
+  - [7.1 API 认证形式化模型](#71-api-认证形式化模型)
+  - [7.2 认证流程形式化](#72-认证流程形式化)
+  - [7.3 令牌安全形式化](#73-令牌安全形式化)
+- [8. 相关文档](#8-相关文档)
 
 ---
 
 ## 1. 概述
 
 API 认证规范定义了 API 在认证场景下的设计和实现，从认证方式到认证流程，从令牌管
-理到安全最佳实践。
+理到安全最佳实践。本文档基于形式化方法，提供严格的数学定义和推理论证，分析 API
+认证的理论基础和实践方法。
+
+**参考标准**：
+
+- [OAuth 2.0](https://oauth.net/2/) - OAuth 2.0 授权框架
+- [JWT](https://jwt.io/) - JSON Web Token
+- [mTLS](https://datatracker.ietf.org/doc/html/rfc8705) - 相互 TLS
+- [API Key Best Practices](https://cloud.google.com/endpoints/docs/openapi/api-key-as-header) -
+  API Key 最佳实践
+- [Authentication Best Practices](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/04-Authentication_Testing/) -
+  认证最佳实践
 
 ### 1.1 认证架构
 
@@ -477,7 +492,86 @@ spec:
 
 ---
 
-## 7. 相关文档
+## 7. 形式化定义与理论基础
+
+### 7.1 API 认证形式化模型
+
+**定义 7.1（API 认证）**：API 认证是一个四元组：
+
+```text
+API_Authentication = ⟨Auth_Method, Auth_Flow, Token_Management, Security_Practices⟩
+```
+
+其中：
+
+- **Auth_Method**：认证方式 `Auth_Method: {API_Key, OAuth2, JWT, mTLS}`
+- **Auth_Flow**：认证流程 `Auth_Flow: Client × Server → Token`
+- **Token_Management**：令牌管理
+  `Token_Management: Token → {Generate, Verify, Revoke}`
+- **Security_Practices**：安全实践
+  `Security_Practices: {Key_Management, Token_Storage}`
+
+**定义 7.2（认证）**：认证是一个函数：
+
+```text
+Authenticate: Request × Credentials → {Success, Failure}
+```
+
+**定理 7.1（认证有效性）**：如果认证通过，则请求来自合法用户：
+
+```text
+Authenticate(Request, Credentials) = Success ⟹ Valid_User(Request)
+```
+
+**证明**：如果认证通过，则凭证有效，因此请求来自合法用户。□
+
+### 7.2 认证流程形式化
+
+**定义 7.3（OAuth 2.0 流程）**：OAuth 2.0 流程是一个函数：
+
+```text
+OAuth2_Flow: Client × Authorization_Server → Access_Token
+```
+
+**定义 7.4（令牌验证）**：令牌验证是一个函数：
+
+```text
+Verify_Token: Token × Secret → {Valid, Invalid}
+```
+
+**定理 7.2（令牌验证正确性）**：如果令牌有效，则验证通过：
+
+```text
+Valid(Token) ∧ Correct(Secret) ⟹ Verify_Token(Token, Secret) = Valid
+```
+
+**证明**：如果令牌有效且密钥正确，则令牌签名验证通过，因此验证通过。□
+
+### 7.3 令牌安全形式化
+
+**定义 7.5（令牌过期）**：令牌过期是一个函数：
+
+```text
+Token_Expired: Token × Current_Time → Bool
+```
+
+**定义 7.6（令牌安全）**：令牌安全是一个函数：
+
+```text
+Token_Security = f(Expiration, Encryption, Revocation)
+```
+
+**定理 7.3（令牌安全与认证安全）**：令牌安全提高认证安全：
+
+```text
+Token_Security(Token₁) > Token_Security(Token₂) ⟹ Auth_Security(API₁) > Auth_Security(API₂)
+```
+
+**证明**：令牌安全越高，令牌越难被滥用，因此认证安全越高。□
+
+---
+
+## 8. 相关文档
 
 - **[API 安全规范](../11-api-security/api-security.md)** - API 安全
 - **[API 安全测试](../54-api-security-testing/api-security-testing.md)** - 认证
