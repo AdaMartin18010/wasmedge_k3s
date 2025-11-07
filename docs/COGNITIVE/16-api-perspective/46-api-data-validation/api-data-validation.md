@@ -30,15 +30,19 @@
 
 ## 1. 概述
 
-API 数据验证规范定义了 API 在数据验证场景下的设计和实现，从输入验证到业务规则验证，从验证错误处理到性能优化。本文档基于形式化方法，提供严格的数学定义和推理论证，分析 API 数据验证的理论基础和实践方法。
+API 数据验证规范定义了 API 在数据验证场景下的设计和实现，从输入验证到业务规则验
+证，从验证错误处理到性能优化。本文档基于形式化方法，提供严格的数学定义和推理论证
+，分析 API 数据验证的理论基础和实践方法。
 
 **参考标准**：
 
 - [JSON Schema](https://json-schema.org/) - JSON Schema 验证规范
 - [OpenAPI Validation](https://swagger.io/specification/) - OpenAPI 验证
-- [Data Validation Best Practices](https://www.owasp.org/index.php/Input_Validation_Cheat_Sheet) - 数据验证最佳实践
+- [Data Validation Best Practices](https://www.owasp.org/index.php/Input_Validation_Cheat_Sheet) -
+  数据验证最佳实践
 - [Schema Validation](https://ajv.js.org/) - Ajv JSON Schema 验证器
-- [Input Sanitization](https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html) - 输入清理
+- [Input Sanitization](https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html) -
+  输入清理
 
 ### 1.1 数据验证架构
 
@@ -54,7 +58,9 @@ API 请求（API Request）
 
 ### 1.2 API 数据验证在 API 规范中的位置
 
-根据 API 规范四元组定义（见 [API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)），API 数据验证主要涉及 IDL 和 Security 维度：
+根据 API 规范四元组定义（见
+[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+，API 数据验证主要涉及 IDL 和 Security 维度：
 
 ```text
 API_Spec = ⟨IDL, Governance, Observability, Security⟩

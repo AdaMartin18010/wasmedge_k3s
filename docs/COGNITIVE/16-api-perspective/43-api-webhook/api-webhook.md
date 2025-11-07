@@ -29,15 +29,20 @@
 
 ## 1. 概述
 
-API Webhook 规范定义了 API 在 Webhook 架构下的设计和实现，从 Webhook 注册到事件触发，从签名验证到重试机制。本文档基于形式化方法，提供严格的数学定义和推理论证，分析 API Webhook 的理论基础和实践方法。
+API Webhook 规范定义了 API 在 Webhook 架构下的设计和实现，从 Webhook 注册到事件
+触发，从签名验证到重试机制。本文档基于形式化方法，提供严格的数学定义和推理论证，
+分析 API Webhook 的理论基础和实践方法。
 
 **参考标准**：
 
 - [Webhook Best Practices](https://webhooks.fyi/) - Webhook 最佳实践
-- [GitHub Webhooks](https://docs.github.com/en/developers/webhooks-and-events/webhooks) - GitHub Webhook 规范
+- [GitHub Webhooks](https://docs.github.com/en/developers/webhooks-and-events/webhooks) -
+  GitHub Webhook 规范
 - [Stripe Webhooks](https://stripe.com/docs/webhooks) - Stripe Webhook 规范
-- [Webhook Security](https://www.ietf.org/archive/id/draft-ietf-httpapi-message-signatures-12.html) - Webhook 安全签名
-- [Event-Driven Architecture](https://martinfowler.com/articles/201701-event-driven.html) - 事件驱动架构
+- [Webhook Security](https://www.ietf.org/archive/id/draft-ietf-httpapi-message-signatures-12.html) -
+  Webhook 安全签名
+- [Event-Driven Architecture](https://martinfowler.com/articles/201701-event-driven.html) -
+  事件驱动架构
 
 ### 1.1 Webhook API 架构
 
@@ -53,7 +58,9 @@ Webhook 调度器（Webhook Dispatcher）
 
 ### 1.2 API Webhook 在 API 规范中的位置
 
-根据 API 规范四元组定义（见 [API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)），API Webhook 主要涉及 Governance 和 Security 维度：
+根据 API 规范四元组定义（见
+[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+，API Webhook 主要涉及 Governance 和 Security 维度：
 
 ```text
 API_Spec = ⟨IDL, Governance, Observability, Security⟩

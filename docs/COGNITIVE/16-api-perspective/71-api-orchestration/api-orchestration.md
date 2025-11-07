@@ -7,6 +7,7 @@
 - [📑 目录](#-目录)
 - [1. 概述](#1-概述)
   - [1.1 编排架构](#11-编排架构)
+  - [1.2 API 编排在 API 规范中的位置](#12-api-编排在-api-规范中的位置)
 - [2. 编排模式](#2-编排模式)
   - [2.1 顺序编排](#21-顺序编排)
   - [2.2 并行编排](#22-并行编排)
@@ -58,6 +59,25 @@ API 调用（API Calls）
   ↓
 结果聚合（Result Aggregation）
 ```
+
+### 1.2 API 编排在 API 规范中的位置
+
+根据 API 规范四元组定义（见
+[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+，API 编排主要涉及 Governance 维度：
+
+```text
+API_Spec = ⟨IDL, Governance, Observability, Security⟩
+                    ↑
+        Orchestration (implementation)
+```
+
+API 编排在 API 规范中提供：
+
+- **编排模式**：顺序编排、并行编排、条件编排
+- **编排引擎**：工作流定义、执行引擎
+- **错误处理**：重试机制、补偿机制
+- **状态管理**：状态存储、状态恢复
 
 ---
 

@@ -7,6 +7,7 @@
 - [📑 目录](#-目录)
 - [1. 概述](#1-概述)
   - [1.1 推荐架构](#11-推荐架构)
+  - [1.2 API 推荐在 API 规范中的位置](#12-api-推荐在-api-规范中的位置)
 - [2. 推荐算法](#2-推荐算法)
   - [2.1 协同过滤](#21-协同过滤)
   - [2.2 内容推荐](#22-内容推荐)
@@ -62,6 +63,25 @@ API 推荐规范定义了 API 在推荐场景下的设计和实现，从推荐�
   ↓
 推荐结果（Recommendation Results）
 ```
+
+### 1.2 API 推荐在 API 规范中的位置
+
+根据 API 规范四元组定义（见
+[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+，API 推荐主要涉及 Governance 和 Observability 维度：
+
+```text
+API_Spec = ⟨IDL, Governance, Observability, Security⟩
+                    ↑            ↑
+        Recommendations (implementation)
+```
+
+API 推荐在 API 规范中提供：
+
+- **推荐算法**：协同过滤、内容推荐、混合推荐
+- **推荐特征**：用户特征、API 特征、上下文特征
+- **推荐生成**：实时推荐、批量推荐
+- **推荐评估**：准确性指标、多样性指标
 
 ---
 

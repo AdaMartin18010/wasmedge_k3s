@@ -34,15 +34,22 @@
 
 ## 1. 概述
 
-API SLA 规范定义了 API 在服务级别协议（SLA）场景下的设计和实现，从 SLA 指标到 SLA 等级，从 SLA 监控到 SLA 报告。本文档基于形式化方法，提供严格的数学定义和推理论证，分析 API SLA 的理论基础和实践方法。
+API SLA 规范定义了 API 在服务级别协议（SLA）场景下的设计和实现，从 SLA 指标到
+SLA 等级，从 SLA 监控到 SLA 报告。本文档基于形式化方法，提供严格的数学定义和推理
+论证，分析 API SLA 的理论基础和实践方法。
 
 **参考标准**：
 
-- [SLA Best Practices](https://www.cio.com/article/274851/outsourcing-sla-definitions-and-solutions.html) - SLA 最佳实践
-- [Service Level Objectives](https://sre.google/workbook/slo-document/) - 服务级别目标
-- [SLA Monitoring](https://www.datadoghq.com/knowledge-center/service-level-objective/) - SLA 监控
-- [SLA Metrics](https://www.atlassian.com/incident-management/kpis/sla-metrics) - SLA 指标
-- [Service Level Agreements](https://en.wikipedia.org/wiki/Service-level_agreement) - 服务级别协议
+- [SLA Best Practices](https://www.cio.com/article/274851/outsourcing-sla-definitions-and-solutions.html) -
+  SLA 最佳实践
+- [Service Level Objectives](https://sre.google/workbook/slo-document/) - 服务级
+  别目标
+- [SLA Monitoring](https://www.datadoghq.com/knowledge-center/service-level-objective/) -
+  SLA 监控
+- [SLA Metrics](https://www.atlassian.com/incident-management/kpis/sla-metrics) -
+  SLA 指标
+- [Service Level Agreements](https://en.wikipedia.org/wiki/Service-level_agreement) -
+  服务级别协议
 
 ### 1.1 SLA 架构
 
@@ -535,7 +542,8 @@ API_SLA = ⟨SLA_Metrics, SLA_Level, SLA_Monitoring, SLA_Reporting⟩
 
 其中：
 
-- **SLA_Metrics**：SLA 指标 `SLA_Metrics = ⟨Availability, Performance, Error_Rate⟩`
+- **SLA_Metrics**：SLA 指标
+  `SLA_Metrics = ⟨Availability, Performance, Error_Rate⟩`
 - **SLA_Level**：SLA 等级 `SLA_Level: {Basic, Standard, Premium}`
 - **SLA_Monitoring**：SLA 监控 `SLA_Monitoring: API × Time → SLA_Metrics`
 - **SLA_Reporting**：SLA 报告 `SLA_Reporting: SLA_Metrics → Report`
@@ -574,7 +582,8 @@ Performance_SLA = ⟨P50_Latency, P95_Latency, P99_Latency⟩
 Availability(API) = 1 - Error_Rate(API)
 ```
 
-**证明**：可用性等于正常运行时间比例，错误率等于错误时间比例，因此可用性等于 1 减去错误率。□
+**证明**：可用性等于正常运行时间比例，错误率等于错误时间比例，因此可用性等于 1
+减去错误率。□
 
 ### 7.3 SLA 违反形式化
 

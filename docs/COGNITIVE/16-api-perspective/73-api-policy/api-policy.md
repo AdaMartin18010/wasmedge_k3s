@@ -7,6 +7,7 @@
 - [📑 目录](#-目录)
 - [1. 概述](#1-概述)
   - [1.1 策略架构](#11-策略架构)
+  - [1.2 API 策略在 API 规范中的位置](#12-api-策略在-api-规范中的位置)
 - [2. 策略类型](#2-策略类型)
   - [2.1 安全策略](#21-安全策略)
   - [2.2 性能策略](#22-性能策略)
@@ -60,6 +61,25 @@ API 策略规范定义了 API 在策略场景下的设计和实现，从策略�
   ↓
 策略执行（Policy Enforcement）
 ```
+
+### 1.2 API 策略在 API 规范中的位置
+
+根据 API 规范四元组定义（见
+[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+，API 策略主要涉及 Governance 和 Security 维度：
+
+```text
+API_Spec = ⟨IDL, Governance, Observability, Security⟩
+                    ↑                            ↑
+        Policy (implementation)
+```
+
+API 策略在 API 规范中提供：
+
+- **策略类型**：安全策略、性能策略、访问策略
+- **策略定义**：策略 DSL、策略规则
+- **策略执行**：策略引擎、策略评估
+- **策略管理**：策略版本、策略部署
 
 ---
 

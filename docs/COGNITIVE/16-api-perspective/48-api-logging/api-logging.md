@@ -33,15 +33,19 @@
 
 ## 1. 概述
 
-API 日志规范定义了 API 在日志场景下的设计和实现，从日志格式到日志级别，从日志采集到日志查询。本文档基于形式化方法，提供严格的数学定义和推理论证，分析 API 日志的理论基础和实践方法。
+API 日志规范定义了 API 在日志场景下的设计和实现，从日志格式到日志级别，从日志采
+集到日志查询。本文档基于形式化方法，提供严格的数学定义和推理论证，分析 API 日志
+的理论基础和实践方法。
 
 **参考标准**：
 
 - [Structured Logging](https://www.structuredlogs.org/) - 结构化日志规范
 - [Log Levels](https://en.wikipedia.org/wiki/Log_level) - 日志级别标准
-- [OTLP Logs](https://opentelemetry.io/docs/specs/otel/logs/) - OpenTelemetry 日志规范
+- [OTLP Logs](https://opentelemetry.io/docs/specs/otel/logs/) - OpenTelemetry 日
+  志规范
 - [Loki](https://grafana.com/docs/loki/latest/) - Loki 日志聚合
-- [Logging Best Practices](https://www.loggly.com/ultimate-guide/node-logging-basics/) - 日志最佳实践
+- [Logging Best Practices](https://www.loggly.com/ultimate-guide/node-logging-basics/) -
+  日志最佳实践
 
 ### 1.1 日志架构
 
@@ -59,7 +63,9 @@ API 请求（API Request）
 
 ### 1.2 API 日志在 API 规范中的位置
 
-根据 API 规范四元组定义（见 [API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)），API 日志主要涉及 Observability 维度：
+根据 API 规范四元组定义（见
+[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+，API 日志主要涉及 Observability 维度：
 
 ```text
 API_Spec = ⟨IDL, Governance, Observability, Security⟩

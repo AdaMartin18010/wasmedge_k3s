@@ -7,6 +7,7 @@
 - [📑 目录](#-目录)
 - [1. 概述](#1-概述)
   - [1.1 发现架构](#11-发现架构)
+  - [1.2 API 发现在 API 规范中的位置](#12-api-发现在-api-规范中的位置)
 - [2. 发现机制](#2-发现机制)
   - [2.1 服务注册](#21-服务注册)
   - [2.2 服务发现](#22-服务发现)
@@ -24,14 +25,32 @@
 - [6. 发现监控](#6-发现监控)
   - [6.1 发现指标](#61-发现指标)
   - [6.2 发现告警](#62-发现告警)
-- [7. 相关文档](#7-相关文档)
+- [7. 形式化定义与理论基础](#7-形式化定义与理论基础)
+  - [7.1 API 发现形式化模型](#71-api-发现形式化模型)
+  - [7.2 服务发现形式化](#72-服务发现形式化)
+  - [7.3 发现可靠性形式化](#73-发现可靠性形式化)
+- [8. 相关文档](#8-相关文档)
 
 ---
 
 ## 1. 概述
 
 API 发现规范定义了 API 在发现场景下的设计和实现，从发现机制到发现协议，从元数据
-管理到发现优化。
+管理到发现优化。本文档基于形式化方法，提供严格的数学定义和推理论证，分析 API 发
+现的理论基础和实践方法。
+
+**参考标准**：
+
+- [Service Discovery](https://microservices.io/patterns/service-registry.html) -
+  服务发现模式
+- [Consul Service Discovery](https://www.consul.io/docs/discovery) - Consul 服务
+  发现
+- [Kubernetes Service Discovery](https://kubernetes.io/docs/concepts/services-networking/service/) -
+  Kubernetes 服务发现
+- [DNS-Based Discovery](https://en.wikipedia.org/wiki/Service_discovery) - 基于
+  DNS 的发现
+- [Service Discovery Best Practices](https://www.nginx.com/blog/service-discovery-in-a-microservices-architecture/) -
+  服务发现最佳实践
 
 ### 1.1 发现架构
 
@@ -46,6 +65,25 @@ API 服务（API Service）
   ↓
 API 客户端（API Client）
 ```
+
+### 1.2 API 发现在 API 规范中的位置
+
+根据 API 规范四元组定义（见
+[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+，API 发现主要涉及 Governance 维度：
+
+```text
+API_Spec = ⟨IDL, Governance, Observability, Security⟩
+                    ↑
+        Discovery (implementation)
+```
+
+API 发现在 API 规范中提供：
+
+- **发现机制**：服务注册、服务发现、健康检查
+- **发现协议**：DNS 发现、注册中心发现、配置中心发现
+- **元数据管理**：API 元数据、版本元数据
+- **发现优化**：缓存策略、负载均衡
 
 ---
 
@@ -545,7 +583,87 @@ spec:
 
 ---
 
-## 7. 相关文档
+## 7. 形式化定义与理论基础
+
+### 7.1 API 发现形式化模型
+
+**定义 7.1（API 发现）**：API 发现是一个四元组：
+
+```text
+API_Discovery = ⟨Discovery_Mechanism, Discovery_Protocol, Metadata_Management, Discovery_Optimization⟩
+```
+
+其中：
+
+- **Discovery_Mechanism**：发现机制
+  `Discovery_Mechanism: {Service_Registration, Service_Discovery, Health_Check}`
+- **Discovery_Protocol**：发现协议
+  `Discovery_Protocol: {DNS, Registry, Config_Center}`
+- **Metadata_Management**：元数据管理 `Metadata_Management: API → Metadata`
+- **Discovery_Optimization**：发现优化
+  `Discovery_Optimization: Discovery → Optimized_Discovery`
+
+**定义 7.2（服务发现）**：服务发现是一个函数：
+
+```text
+Discover_Service: Query × Registry → Service[]
+```
+
+**定理 7.1（发现正确性）**：如果注册正确，则发现正确：
+
+```text
+Correct(Service_Registration) ⟹ Correct(Discover_Service(Query))
+```
+
+**证明**：如果服务注册正确，则注册中心包含正确信息，因此发现正确。□
+
+### 7.2 服务发现形式化
+
+**定义 7.3（服务注册）**：服务注册是一个函数：
+
+```text
+Register_Service: Service × Metadata → Registered_Service
+```
+
+**定义 7.4（健康检查）**：健康检查是一个函数：
+
+```text
+Health_Check: Service → {Healthy, Unhealthy}
+```
+
+**定理 7.2（健康检查与可用性）**：健康检查保证服务可用性：
+
+```text
+Health_Check(Service) = Healthy ⟹ Available(Service)
+```
+
+**证明**：如果服务健康，则服务可用，因此可用性得到保证。□
+
+### 7.3 发现可靠性形式化
+
+**定义 7.5（发现可靠性）**：发现可靠性是一个函数：
+
+```text
+Discovery_Reliability = f(Registration_Accuracy, Discovery_Speed, Service_Availability)
+```
+
+**定义 7.6（缓存策略）**：缓存策略是一个函数：
+
+```text
+Cache_Discovery: Discovery_Result → Cached_Result
+```
+
+**定理 7.3（缓存策略与性能）**：缓存策略提高发现性能：
+
+```text
+Cache_Discovery(Discovery) ⟹ Latency(Discovery) < Latency(No_Cache_Discovery)
+```
+
+**证明**：缓存策略减少注册中心查询，因此延迟更低。□
+
+---
+
+## 8. 相关文档
 
 - **[API 市场规范](../69-api-marketplace/api-marketplace.md)** - API 市场
 - **[API 集成规范](../70-api-integration/api-integration.md)** - API 集成

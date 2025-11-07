@@ -34,15 +34,20 @@
 
 ## 1. 概述
 
-API gRPC 规范定义了 API 在 gRPC 架构下的设计和实现，从 Protocol Buffers 定义到服务实现，从流式处理到性能优化。本文档基于形式化方法，提供严格的数学定义和推理论证，分析 API gRPC 的理论基础和实践方法。
+API gRPC 规范定义了 API 在 gRPC 架构下的设计和实现，从 Protocol Buffers 定义到服
+务实现，从流式处理到性能优化。本文档基于形式化方法，提供严格的数学定义和推理论证
+，分析 API gRPC 的理论基础和实践方法。
 
 **参考标准**：
 
 - [gRPC Documentation](https://grpc.io/docs/) - gRPC 官方文档
-- [Protocol Buffers](https://developers.google.com/protocol-buffers) - Protocol Buffers 规范
-- [gRPC Best Practices](https://grpc.io/docs/guides/best-practices/) - gRPC 最佳实践
+- [Protocol Buffers](https://developers.google.com/protocol-buffers) - Protocol
+  Buffers 规范
+- [gRPC Best Practices](https://grpc.io/docs/guides/best-practices/) - gRPC 最佳
+  实践
 - [gRPC Performance](https://grpc.io/docs/guides/performance/) - gRPC 性能优化
-- [Service Mesh Integration](https://istio.io/latest/docs/ops/integrations/) - 服务网格集成
+- [Service Mesh Integration](https://istio.io/latest/docs/ops/integrations/) -
+  服务网格集成
 
 ### 1.1 gRPC API 架构
 
@@ -58,7 +63,9 @@ gRPC 服务（gRPC Service）
 
 ### 1.2 API gRPC 在 API 规范中的位置
 
-根据 API 规范四元组定义（见 [API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)），API gRPC 主要涉及 IDL 和 Governance 维度：
+根据 API 规范四元组定义（见
+[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+，API gRPC 主要涉及 IDL 和 Governance 维度：
 
 ```text
 API_Spec = ⟨IDL, Governance, Observability, Security⟩
@@ -376,8 +383,10 @@ API_gRPC = ⟨Protobuf_Schema, Service_Definition, Interceptors, Client_Stub⟩
 
 其中：
 
-- **Protobuf_Schema**：Protocol Buffers Schema `Protobuf_Schema: Message_Definition[]`
-- **Service_Definition**：服务定义 `Service_Definition: Service × Method → Signature`
+- **Protobuf_Schema**：Protocol Buffers Schema
+  `Protobuf_Schema: Message_Definition[]`
+- **Service_Definition**：服务定义
+  `Service_Definition: Service × Method → Signature`
 - **Interceptors**：拦截器 `Interceptors: Interceptor[]`
 - **Client_Stub**：客户端存根 `Client_Stub: Service → Client`
 

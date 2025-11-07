@@ -498,7 +498,8 @@ API_Multi_Tenancy = ⟨Tenant_Isolation, Tenant_Identification, Tenant_Managemen
 
 - **Tenant_Isolation**：租户隔离 `Tenant_Isolation: Tenant → Isolated_Resources`
 - **Tenant_Identification**：租户识别 `Tenant_Identification: Request → Tenant`
-- **Tenant_Management**：租户管理 `Tenant_Management: Tenant → {Create, Configure, Delete}`
+- **Tenant_Management**：租户管理
+  `Tenant_Management: Tenant → {Create, Configure, Delete}`
 - **Resource_Quota**：资源配额 `Resource_Quota: Tenant → Quota`
 
 **定义 7.2（租户隔离）**：租户隔离是一个函数：
