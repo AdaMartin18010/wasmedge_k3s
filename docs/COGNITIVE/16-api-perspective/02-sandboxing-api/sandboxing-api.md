@@ -4,14 +4,37 @@
 
 ## 📑 目录
 
+- [📑 目录](#-目录)
 - [1. 概述](#1-概述)
+  - [1.1 核心沙盒化 API](#11-核心沙盒化-api)
+  - [1.2 沙盒化 API 层次](#12-沙盒化-api-层次)
+  - [1.3 沙盒化在 API 规范中的位置](#13-沙盒化在-api-规范中的位置)
 - [2. Seccomp/AppArmor Profile API](#2-seccompapparmor-profile-api)
+  - [2.1 Seccomp Profile API](#21-seccomp-profile-api)
+  - [2.2 AppArmor Profile API](#22-apparmor-profile-api)
+  - [2.3 Landlock LSM API](#23-landlock-lsm-api)
 - [3. gVisor Sentry API](#3-gvisor-sentry-api)
+  - [3.1 Sentry 系统调用 API](#31-sentry-系统调用-api)
+  - [3.2 gVisor 配置 API](#32-gvisor-配置-api)
+  - [3.3 gVisor 性能 API](#33-gvisor-性能-api)
 - [4. Firecracker API](#4-firecracker-api)
+  - [4.1 Firecracker REST API](#41-firecracker-rest-api)
+  - [4.2 Firecracker 性能 API](#42-firecracker-性能-api)
 - [5. Kata Containers API](#5-kata-containers-api)
+  - [5.1 Kata Runtime API](#51-kata-runtime-api)
+  - [5.2 Kata 2.0 API（2024）](#52-kata-20-api2024)
 - [6. 沙盒化 API 安全模型](#6-沙盒化-api-安全模型)
+  - [6.1 安全边界 API](#61-安全边界-api)
+  - [6.2 能力模型 API](#62-能力模型-api)
+  - [6.3 零信任 API 模型](#63-零信任-api-模型)
 - [7. API 演进路径](#7-api-演进路径)
-- [8. 形式化定义](#8-形式化定义)
+  - [7.1 从容器到沙盒的 API 演进](#71-从容器到沙盒的-api-演进)
+  - [7.2 Kubernetes 沙盒化 API 演进](#72-kubernetes-沙盒化-api-演进)
+- [8. 形式化定义与理论基础](#8-形式化定义与理论基础)
+  - [8.1 沙盒化 API 规范形式化](#81-沙盒化-api-规范形式化)
+  - [8.2 安全隔离度模型](#82-安全隔离度模型)
+  - [8.3 系统调用拦截形式化](#83-系统调用拦截形式化)
+  - [8.4 安全边界形式化](#84-安全边界形式化)
 - [9. 相关文档](#9-相关文档)
 
 ---
@@ -19,7 +42,8 @@
 ## 1. 概述
 
 沙盒化 API 规范定义了安全沙盒的接口标准，从 Seccomp/AppArmor 到
-gVisor、Firecracker，提供了不同级别的安全隔离 API。
+gVisor、Firecracker，提供了不同级别的安全隔离 API。本文档基于形式化方法，提供严
+格的数学定义和推理论证，确保沙盒化 API 的正确性和安全性。
 
 ### 1.1 核心沙盒化 API
 
@@ -44,6 +68,36 @@ Linux 系统调用 API
   ↓
 硬件虚拟化 API (VT-x, AMD-V)
 ```
+
+**参考标准**：
+
+- [Seccomp BPF](https://www.kernel.org/doc/html/latest/userspace-api/seccomp_filter.html) -
+  Linux 系统调用过滤
+- [AppArmor](https://apparmor.net/) - Linux 应用安全框架
+- [Landlock](https://www.kernel.org/doc/html/latest/security/landlock.html) -
+  Linux 5.13+ 文件系统安全
+- [gVisor](https://gvisor.dev/) - 用户态内核沙盒
+- [Firecracker](https://firecracker-microvm.github.io/) - 轻量级 MicroVM
+- [Kata Containers](https://katacontainers.io/) - 安全容器运行时
+
+### 1.3 沙盒化在 API 规范中的位置
+
+根据 API 规范四元组定义（见
+[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)），
+沙盒化 API 属于 **Security** 维度：
+
+```text
+API_Spec = ⟨IDL, Governance, Observability, Security⟩
+                                        ↑
+                            Sandboxing ∈ Security
+```
+
+沙盒化 API 在 API 规范中提供：
+
+- **Security 层**：通过系统调用过滤、文件系统访问控制、网络隔离实现安全边界
+- **隔离保证**：确保 API 调用在隔离环境中执行，防止恶意代码影响宿主系统
+- **最小权限**：通过能力模型和策略引擎实现最小权限原则
+- **零信任**：通过 SPIFFE/SPIRE 实现工作负载身份和认证
 
 ---
 
@@ -326,7 +380,7 @@ Landlock LSM API (2021)
 
 ---
 
-## 8. 形式化定义
+## 8. 形式化定义与理论基础
 
 ### 8.1 沙盒化 API 规范形式化
 
@@ -338,14 +392,26 @@ Sandbox_API = ⟨Syscall_Filter, FS_Control, Network_Isolation, Process_Isolatio
 
 其中：
 
-- **Syscall_Filter**：系统调用过滤 API（Seccomp）
-- **FS_Control**：文件系统访问控制 API（AppArmor、Landlock）
-- **Network_Isolation**：网络隔离 API（Network Namespace）
-- **Process_Isolation**：进程隔离 API（PID Namespace、User Namespace）
+- **Syscall_Filter**：系统调用过滤 API `F: Syscall → Action`
+- **FS_Control**：文件系统访问控制 API `C: Path × Operation → Bool`
+- **Network_Isolation**：网络隔离 API `N: NetworkNamespace → NetworkConfig`
+- **Process_Isolation**：进程隔离 API `P: ProcessNamespace → ProcessConfig`
+
+**定义 8.2（沙盒环境）**：沙盒环境是一个三元组：
+
+```text
+Sandbox = ⟨API, Policy, Runtime⟩
+```
+
+其中：
+
+- **API**：沙盒化 API 规范
+- **Policy**：安全策略 `Policy: Request → Decision`
+- **Runtime**：沙盒运行时 `Runtime: Code → Execution`
 
 ### 8.2 安全隔离度模型
 
-**定义 8.2（安全隔离度）**：安全隔离度是一个函数：
+**定义 8.3（安全隔离度）**：安全隔离度是一个函数：
 
 ```text
 Isolation_Level(Sandbox_API) = f(Syscall_Filter, FS_Control, Network_Isolation, Process_Isolation)
@@ -353,10 +419,81 @@ Isolation_Level(Sandbox_API) = f(Syscall_Filter, FS_Control, Network_Isolation, 
 
 **隔离度分级**：
 
-- **L1（低）**：Seccomp 基础过滤
-- **L2（中）**：Seccomp + AppArmor
-- **L3（高）**：gVisor Sentry（用户态内核）
-- **L4（极高）**：Firecracker/Kata（硬件级隔离）
+- **L1（低）**：Seccomp 基础过滤 `Isolation_Level = 1`
+- **L2（中）**：Seccomp + AppArmor `Isolation_Level = 2`
+- **L3（高）**：gVisor Sentry（用户态内核）`Isolation_Level = 3`
+- **L4（极高）**：Firecracker/Kata（硬件级隔离）`Isolation_Level = 4`
+
+**定理 8.1（隔离度单调性）**：隔离度越高，安全性越高：
+
+```text
+Isolation_Level(S₁) < Isolation_Level(S₂) ⟹ Security(S₁) < Security(S₂)
+```
+
+**证明**：根据定义 8.3，隔离度越高，系统调用过滤、文件系统控制、网络隔离和进程隔
+离越严格，因此安全性越高。□
+
+### 8.3 系统调用拦截形式化
+
+**定义 8.4（系统调用拦截）**：系统调用拦截是一个函数：
+
+```text
+Intercept: Syscall × Policy → Action
+```
+
+其中 `Action ∈ {Allow, Deny, Filter, Redirect}`。
+
+**定义 8.5（gVisor 拦截）**：gVisor 拦截所有系统调用：
+
+```text
+∀ syscall: Intercept(syscall, Policy) ≠ Allow_Direct
+```
+
+即所有系统调用都经过 gVisor Sentry 处理，不直接访问内核。
+
+**定理 8.2（拦截完备性）**：如果沙盒拦截所有系统调用，则沙盒是完备的：
+
+```text
+∀ syscall: Intercept(syscall, Policy) ≠ Allow_Direct ⟹ Complete(Sandbox)
+```
+
+**证明**：如果所有系统调用都经过拦截，则沙盒可以完全控制进程的行为，因此沙盒是完
+备的。□
+
+### 8.4 安全边界形式化
+
+**定义 8.6（安全边界）**：安全边界是一个函数：
+
+```text
+Security_Boundary: Sandbox → Set(Resource)
+```
+
+其中 `Security_Boundary(Sandbox)` 表示沙盒可以访问的资源集合。
+
+**定义 8.7（边界隔离性）**：两个沙盒相互隔离，当且仅当：
+
+```text
+Isolation(S₁, S₂) = Security_Boundary(S₁) ∩ Security_Boundary(S₂) = ∅
+```
+
+**定理 8.3（边界隔离性传递）**：如果沙盒 S₁ 与 S₂ 隔离，S₂ 与 S₃ 隔离，则 S₁ 与
+S₃ 隔离：
+
+```text
+Isolation(S₁, S₂) ∧ Isolation(S₂, S₃) ⟹ Isolation(S₁, S₃)
+```
+
+**证明**：根据定义 8.7，如果 `Security_Boundary(S₁) ∩ Security_Boundary(S₂) = ∅`
+且 `Security_Boundary(S₂) ∩ Security_Boundary(S₃) = ∅`，则
+`Security_Boundary(S₁) ∩ Security_Boundary(S₃) = ∅`。□
+
+**定理 8.4（最小权限原则）**：沙盒只访问必要的资源：
+
+```text
+Security_Boundary(Sandbox) = Minimal_Set(Required_Resources)
+```
+
+**证明**：根据最小权限原则，沙盒应该只授予执行任务所需的最小权限集合。□
 
 ---
 

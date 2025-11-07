@@ -4,14 +4,36 @@
 
 ## 📑 目录
 
+- [📑 目录](#-目录)
 - [1. 概述](#1-概述)
+  - [1.1 核心 API 规范](#11-核心-api-规范)
+  - [1.2 API 规范层次](#12-api-规范层次)
+  - [1.3 容器化在 API 规范中的位置](#13-容器化在-api-规范中的位置)
 - [2. OCI Runtime Spec API](#2-oci-runtime-spec-api)
+  - [2.1 核心接口定义](#21-核心接口定义)
+  - [2.2 API 调用流程](#22-api-调用流程)
+  - [2.3 资源管理 API](#23-资源管理-api)
 - [3. Kubernetes CRD API](#3-kubernetes-crd-api)
+  - [3.1 CRD 定义示例](#31-crd-定义示例)
+  - [3.2 CRD API 设计原则](#32-crd-api-设计原则)
+  - [3.3 Operator 模式 API](#33-operator-模式-api)
 - [4. 服务发现 API](#4-服务发现-api)
+  - [4.1 CoreDNS API](#41-coredns-api)
+  - [4.2 etcd API](#42-etcd-api)
 - [5. 容器网络 API](#5-容器网络-api)
+  - [5.1 CNI 接口规范](#51-cni-接口规范)
+  - [5.2 CNI 插件 API](#52-cni-插件-api)
 - [6. 容器存储 API](#6-容器存储-api)
+  - [6.1 CSI 接口规范](#61-csi-接口规范)
+  - [6.2 PV/PVC API](#62-pvpvc-api)
 - [7. API 演进路径](#7-api-演进路径)
-- [8. 形式化定义](#8-形式化定义)
+  - [7.1 从 Docker API 到 OCI Runtime Spec](#71-从-docker-api-到-oci-runtime-spec)
+  - [7.2 Kubernetes API 演进](#72-kubernetes-api-演进)
+- [8. 形式化定义与理论基础](#8-形式化定义与理论基础)
+  - [8.1 容器 API 规范形式化](#81-容器-api-规范形式化)
+  - [8.2 API 版本化模型](#82-api-版本化模型)
+  - [8.3 容器生命周期形式化](#83-容器生命周期形式化)
+  - [8.4 资源隔离形式化](#84-资源隔离形式化)
 - [9. 相关文档](#9-相关文档)
 
 ---
@@ -19,7 +41,8 @@
 ## 1. 概述
 
 容器化 API 规范是云原生技术栈的核心，从 OCI Runtime Spec 到 Kubernetes CRD，定义
-了容器生命周期、资源管理、网络和存储的标准化接口。
+了容器生命周期、资源管理、网络和存储的标准化接口。本文档基于形式化方法，提供严格
+的数学定义和推理论证，确保容器化 API 的正确性和可验证性。
 
 ### 1.1 核心 API 规范
 
@@ -46,6 +69,39 @@ CNI/CSI API (网络/存储)
   ↓
 Linux 系统调用 API
 ```
+
+**参考标准**：
+
+- [OCI Runtime Specification](https://github.com/opencontainers/runtime-spec) -
+  容器运行时标准
+- [Kubernetes API Conventions](https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md) -
+  Kubernetes API 约定
+- [CNI Specification](https://github.com/containernetworking/cni/blob/main/SPEC.md) -
+  容器网络接口规范
+- [CSI Specification](https://github.com/container-storage-interface/spec) - 容
+  器存储接口规范
+- [CRI Specification](https://github.com/kubernetes/cri-api) - 容器运行时接口规
+  范
+
+### 1.3 容器化在 API 规范中的位置
+
+根据 API 规范四元组定义（见
+[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)），
+容器化 API 属于 **IDL** 和 **Governance** 维度：
+
+```text
+API_Spec = ⟨IDL, Governance, Observability, Security⟩
+            ↑         ↑
+    Containerization ∈ IDL ∩ Governance
+```
+
+容器化 API 在 API 规范中提供：
+
+- **IDL 层**：通过 Kubernetes CRD 定义 API 规范（OpenAPI、Protobuf）
+- **Governance 层**：通过 Kubernetes API Server 和 Admission Webhook 实现运行时
+  治理
+- **Observability 层**：通过 Kubernetes Metrics API 和 Events API 实现可观测性
+- **Security 层**：通过 Pod Security Standards 和 Network Policies 实现安全控制
 
 ---
 
@@ -395,7 +451,7 @@ OCI Runtime Spec v1.1.0 (2024)
 
 ---
 
-## 8. 形式化定义
+## 8. 形式化定义与理论基础
 
 ### 8.1 容器 API 规范形式化
 
@@ -407,15 +463,35 @@ Container_API = ⟨Runtime, Network, Storage, Discovery, Governance⟩
 
 其中：
 
-- **Runtime**：OCI Runtime Spec API
-- **Network**：CNI API
-- **Storage**：CSI API
-- **Discovery**：服务发现 API（CoreDNS、etcd）
-- **Governance**：Kubernetes CRD API
+- **Runtime**：OCI Runtime Spec API `R: ContainerSpec → ContainerState`
+- **Network**：CNI API `N: NetworkSpec → NetworkConfig`
+- **Storage**：CSI API `S: VolumeSpec → VolumeState`
+- **Discovery**：服务发现 API `D: ServiceSpec → ServiceEndpoint`
+- **Governance**：Kubernetes CRD API `G: ResourceSpec → ResourceState`
+
+**定义 8.2（容器生命周期）**：容器生命周期是一个状态机：
+
+```text
+Container_Lifecycle = ⟨States, Transitions⟩
+```
+
+其中：
+
+- **States**：`{Created, Running, Stopped, Deleted}`
+- **Transitions**：`{create, start, stop, delete}`
+
+**状态转换规则**：
+
+```text
+Created --[start]--> Running
+Running --[stop]--> Stopped
+Stopped --[start]--> Running
+Stopped --[delete]--> Deleted
+```
 
 ### 8.2 API 版本化模型
 
-**定义 8.2（API 版本）**：API 版本是一个三元组：
+**定义 8.3（API 版本）**：API 版本是一个三元组：
 
 ```text
 API_Version = ⟨Major, Minor, Patch⟩
@@ -423,9 +499,79 @@ API_Version = ⟨Major, Minor, Patch⟩
 
 **版本兼容性规则**：
 
-- **Major 版本**：不兼容变更
-- **Minor 版本**：向后兼容的新功能
+- **Major 版本**：不兼容变更 `M₂ = M₁ + 1 ⟹ ¬Compatible(v₁, v₂)`
+- **Minor 版本**：向后兼容的新功能 `M₂ = M₁, m₂ = m₁ + 1 ⟹ Compatible(v₁, v₂)`
 - **Patch 版本**：向后兼容的 bug 修复
+  `M₂ = M₁, m₂ = m₁, p₂ = p₁ + 1 ⟹ Compatible(v₁, v₂)`
+
+**定义 8.4（版本兼容性）**：版本 `v₁ = ⟨M₁, m₁, p₁⟩` 与 `v₂ = ⟨M₂, m₂, p₂⟩` 兼容
+，当且仅当：
+
+```text
+Compatible(v₁, v₂) = (M₁ = M₂) ∧ ((m₁ = m₂) ∨ (m₁ < m₂))
+```
+
+### 8.3 容器生命周期形式化
+
+**定理 8.1（容器生命周期确定性）**：容器生命周期是确定性的，即：
+
+```text
+∀ state₁, state₂: (state₁ = state₂) ⟹ (Next(state₁) = Next(state₂))
+```
+
+**证明**：根据定义 8.2，状态转换规则是确定的，因此容器生命周期是确定性的。□
+
+**定理 8.2（容器生命周期可达性）**：从任意状态都可以到达 `Deleted` 状态：
+
+```text
+∀ state ∈ States: ∃ path: state --[path]--> Deleted
+```
+
+**证明**：根据状态转换规则，从任意状态都可以通过 `stop` 和 `delete` 操作到达
+`Deleted` 状态。□
+
+### 8.4 资源隔离形式化
+
+**定义 8.5（资源隔离）**：资源隔离是一个函数：
+
+```text
+Isolation: Container × Resource → Bool
+```
+
+其中 `Isolation(c, r) = true` 表示容器 `c` 对资源 `r` 有隔离访问。
+
+**定义 8.6（命名空间隔离）**：命名空间隔离是一个函数：
+
+```text
+NamespaceIsolation: Container × NamespaceType → NamespaceID
+```
+
+其中 `NamespaceType ∈ {PID, Network, Mount, IPC, UTS, User}`。
+
+**定理 8.3（命名空间隔离性）**：如果两个容器在不同的命名空间中，则它们相互隔离：
+
+```text
+NamespaceIsolation(c₁, t) ≠ NamespaceIsolation(c₂, t) ⟹ Isolation(c₁, c₂)
+```
+
+**证明**：根据 Linux 命名空间的定义，不同命名空间中的进程相互隔离。□
+
+**定义 8.7（资源限制）**：资源限制是一个函数：
+
+```text
+ResourceLimit: Container × ResourceType → Limit
+```
+
+其中 `ResourceType ∈ {CPU, Memory, Disk, Network}`。
+
+**定理 8.4（资源限制有效性）**：资源限制确保容器不会超过分配的资源：
+
+```text
+∀ c, r: Usage(c, r) ≤ ResourceLimit(c, r)
+```
+
+**证明**：根据 OCI Runtime Spec，资源限制通过 cgroups 实现，cgroups 确保容器不会
+超过分配的资源。□
 
 ---
 

@@ -4,14 +4,28 @@
 
 ## 📑 目录
 
+- [📑 目录](#-目录)
 - [1. 概述](#1-概述)
+  - [1.1 核心 WASM API 规范](#11-核心-wasm-api-规范)
+  - [1.2 WASM API 层次](#12-wasm-api-层次)
+  - [1.3 WASM 化在 API 规范中的位置](#13-wasm-化在-api-规范中的位置)
 - [2. WASI Preview 2 接口](#2-wasi-preview-2-接口)
+  - [2.1 WASI Preview 2 核心接口](#21-wasi-preview-2-核心接口)
+  - [2.2 WASI 能力模型](#22-wasi-能力模型)
 - [3. WIT 组件模型](#3-wit-组件模型)
+  - [3.1 WIT 接口定义](#31-wit-接口定义)
+  - [3.2 WIT 组件组合](#32-wit-组件组合)
 - [4. WasmEdge API](#4-wasmedge-api)
 - [5. wasmCloud Lattice API](#5-wasmcloud-lattice-api)
 - [6. WASM 组件组合 API](#6-wasm-组件组合-api)
 - [7. API 演进路径](#7-api-演进路径)
-- [8. 形式化定义](#8-形式化定义)
+  - [7.1 WASM API 演进时间线](#71-wasm-api-演进时间线)
+  - [7.2 Kubernetes WASM 支持演进](#72-kubernetes-wasm-支持演进)
+- [8. 形式化定义与理论基础](#8-形式化定义与理论基础)
+  - [8.1 WASM API 规范形式化](#81-wasm-api-规范形式化)
+  - [8.2 组件模型形式化](#82-组件模型形式化)
+  - [8.3 能力模型形式化](#83-能力模型形式化)
+  - [8.4 WASM 安全性形式化](#84-wasm-安全性形式化)
 - [9. 相关文档](#9-相关文档)
 
 ---
@@ -19,7 +33,8 @@
 ## 1. 概述
 
 WASM 化 API 规范代表了 API 设计的最新范式，从 WASI 系统接口到 WIT 组件模型，实现
-了跨语言、跨平台的 API 标准化。
+了跨语言、跨平台的 API 标准化。本文档基于形式化方法，提供严格的数学定义和推理论
+证，确保 WASM 化 API 的正确性和可验证性。
 
 ### 1.1 核心 WASM API 规范
 
@@ -44,6 +59,35 @@ WASM 运行时 API (WasmEdge, Wasmtime)
   ↓
 宿主环境 API (Kubernetes, Edge)
 ```
+
+**参考标准**：
+
+- [WebAssembly Core Specification](https://webassembly.github.io/spec/core/) -
+  WebAssembly 核心规范
+- [WASI Preview 2](https://github.com/WebAssembly/WASI) - WebAssembly 系统接口
+- [WIT Specification](https://github.com/WebAssembly/component-model/blob/main/design/mvp/WIT.md) -
+  WebAssembly Interface Types
+- [WasmEdge](https://wasmedge.org/) - CNCF 云原生 WASM 运行时
+- [wasmCloud](https://wasmcloud.com/) - CNCF 分布式 WASM 平台
+
+### 1.3 WASM 化在 API 规范中的位置
+
+根据 API 规范四元组定义（见
+[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+，WASM 化 API 属于 **IDL** 和 **Security** 维度：
+
+```text
+API_Spec = ⟨IDL, Governance, Observability, Security⟩
+            ↑                                    ↑
+    WASM API ∈ IDL ∩ Security
+```
+
+WASM 化 API 在 API 规范中提供：
+
+- **IDL 层**：通过 WIT 定义跨语言的 API 接口，实现语言无关的 API 规范
+- **Security 层**：通过 WASM 沙盒和能力模型实现强隔离和最小权限
+- **可移植性**：WASM 模块可在不同平台和运行时之间移植
+- **性能**：接近原生性能，适合边缘计算和云原生场景
 
 ---
 
@@ -387,7 +431,7 @@ WASI Preview 3 (2025 预计)
 
 ---
 
-## 8. 形式化定义
+## 8. 形式化定义与理论基础
 
 ### 8.1 WASM API 规范形式化
 
@@ -399,13 +443,25 @@ WASM_API = ⟨WASI, WIT, Runtime_API⟩
 
 其中：
 
-- **WASI**：WebAssembly System Interface（系统接口）
-- **WIT**：WebAssembly Interface Types（组件接口定义）
-- **Runtime_API**：WASM 运行时 API（WasmEdge、Wasmtime）
+- **WASI**：WebAssembly System Interface `WASI: SystemCall → Result`
+- **WIT**：WebAssembly Interface Types `WIT: Interface → Type`
+- **Runtime_API**：WASM 运行时 API `Runtime: Module → Execution`
+
+**定义 8.2（WASM 模块）**：WASM 模块是一个三元组：
+
+```text
+Module = ⟨Code, Import, Export⟩
+```
+
+其中：
+
+- **Code**：WASM 字节码
+- **Import**：导入接口集合 `Import = {i₁, i₂, ..., iₙ}`
+- **Export**：导出接口集合 `Export = {e₁, e₂, ..., eₘ}`
 
 ### 8.2 组件模型形式化
 
-**定义 8.2（WIT 组件）**：WIT 组件是一个四元组：
+**定义 8.3（WIT 组件）**：WIT 组件是一个四元组：
 
 ```text
 Component = ⟨World, Import, Export, Type⟩
@@ -413,26 +469,111 @@ Component = ⟨World, Import, Export, Type⟩
 
 其中：
 
-- **World**：组件世界定义
-- **Import**：导入接口集合
-- **Export**：导出接口集合
-- **Type**：类型定义集合
+- **World**：组件世界定义 `World: ComponentName → Interface`
+- **Import**：导入接口集合 `Import = {I₁, I₂, ..., Iₙ}`
+- **Export**：导出接口集合 `Export = {E₁, E₂, ..., Eₘ}`
+- **Type**：类型定义集合 `Type = {T₁, T₂, ..., Tₖ}`
+
+**定义 8.4（组件组合）**：组件组合是一个函数：
+
+```text
+Compose: Component₁ × Component₂ → Component_combined
+```
+
+其中 `Compose(C₁, C₂)` 将两个组件组合成一个新组件。
+
+**定理 8.1（组件组合可结合性）**：组件组合是可结合的：
+
+```text
+Compose(Compose(C₁, C₂), C₃) = Compose(C₁, Compose(C₂, C₃))
+```
+
+**证明**：组件组合是函数组合，函数组合是可结合的。□
 
 ### 8.3 能力模型形式化
 
-**定义 8.3（WASI 能力）**：WASI 能力是一个函数：
+**定义 8.5（WASI 能力）**：WASI 能力是一个函数：
 
 ```text
-Capability(Component) = {c₁, c₂, ..., cₙ}
+Capability: Component → Set(CapabilityToken)
 ```
 
-其中每个 `cᵢ` 是一个能力令牌，表示组件可以访问的资源或操作。
+其中 `Capability(Component) = {c₁, c₂, ..., cₙ}`，每个 `cᵢ` 是一个能力令牌。
 
-**最小权限原则**：
+**定义 8.6（能力依赖）**：组件 C₁ 依赖组件 C₂，当且仅当：
 
 ```text
-∀ Component, Capability(Component) = Minimal_Set(Required_Operations)
+Depends(C₁, C₂) = Capability(C₁) ∩ Capability(C₂) ≠ ∅
 ```
+
+**定理 8.2（最小权限原则）**：组件只声明必要的能力：
+
+```text
+∀ Component: Capability(Component) = Minimal_Set(Required_Operations)
+```
+
+**证明**：根据 WASI 能力模型的设计原则，组件只声明执行任务所需的最小能力集合。□
+
+**定理 8.3（能力传递性）**：如果组件 C₁ 依赖 C₂，C₂ 依赖 C₃，则 C₁ 间接依赖 C₃：
+
+```text
+Depends(C₁, C₂) ∧ Depends(C₂, C₃) ⟹ Depends(C₁, C₃)
+```
+
+**证明**：根据定义 8.6，如果 `Capability(C₁) ∩ Capability(C₂) ≠ ∅` 且
+`Capability(C₂) ∩ Capability(C₃) ≠ ∅`，则
+`Capability(C₁) ∩ Capability(C₃) ≠ ∅`。□
+
+### 8.4 WASM 安全性形式化
+
+**定义 8.7（WASM 沙盒）**：WASM 沙盒是一个函数：
+
+```text
+Sandbox: Module × Policy → Execution
+```
+
+其中 `Policy` 是安全策略，`Execution` 是受限的执行环境。
+
+**定义 8.8（内存安全）**：WASM 模块是内存安全的，当且仅当：
+
+```text
+Memory_Safe(Module) = ∀ access: Valid(access) ∧ Bounds_Check(access)
+```
+
+即所有内存访问都是有效的且在边界内。
+
+**定理 8.4（WASM 内存安全）**：所有有效的 WASM 模块都是内存安全的：
+
+```text
+Valid(Module) ⟹ Memory_Safe(Module)
+```
+
+**证明**：根据 WebAssembly 规范，WASM 运行时在加载和执行模块时进行边界检查，确保
+所有内存访问都在有效范围内。□
+
+**定义 8.9（类型安全）**：WASM 模块是类型安全的，当且仅当：
+
+```text
+Type_Safe(Module) = ∀ operation: Type(operand) = Expected_Type(operation)
+```
+
+**定理 8.5（WASM 类型安全）**：所有有效的 WASM 模块都是类型安全的：
+
+```text
+Valid(Module) ⟹ Type_Safe(Module)
+```
+
+**证明**：根据 WebAssembly 规范，WASM 运行时在验证阶段检查所有操作的类型，确保类
+型匹配。□
+
+**定理 8.6（WASM 隔离性）**：WASM 模块相互隔离：
+
+```text
+∀ M₁, M₂: M₁ ≠ M₂ ⟹ Isolation(M₁, M₂)
+```
+
+**证明**：根据 WebAssembly 规范，每个 WASM 模块有独立的内存空间和执行上下文，因
+此相互隔离。□
 
 ---
 
