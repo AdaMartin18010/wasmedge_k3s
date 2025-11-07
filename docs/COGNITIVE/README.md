@@ -47,6 +47,7 @@
 | eBPF/OTLP 视角   | `13-ebpf-otlp-perspective/`   | eBPF/OTLP 认知视角分析（2025-11-07）⭐                                                                                                                                   |
 | 程序设计视角     | `14-programming-perspective/` | 从编程视角看 eBPF 与 OTLP，代码省却 95.7%、组件省却 69%、编程范式转变（2025-11-07）⭐                                                                                    |
 | 应用业务架构视角 | `15-application-perspective/` | 从应用业务架构视角看虚拟化容器化沙盒化，技术演进对业务架构的影响（2025-11-07）⭐<br/>✅ **已完成深度增强**：163+ 形式化定义、117+ 定理证明、500+ 数学公式、205+ 权威引用 |
+| API 规范视角     | `16-api-perspective/`         | 从 API 规范视角看虚拟化容器化沙盒化 WASM 化，程序 API 规范在云原生技术栈中的核心作用（2025-11-07）⭐<br/>✅ **重点领域**：容器化、沙盒化、WASM 化 API 规范               |
 | 决策模型         | `10-decision-models/`         | 技术决策模型与架构选择                                                                                                                                                   |
 
 ### 隔离栈理论实现
@@ -92,13 +93,15 @@
    算结构、控制结构、信息结构
 4. **[技术社会视角](../../tech_view.md)** ⭐ - 从基础设施史、风险社会学、发展经
    济学、人类学视角理解技术的社会意义
-5. **[问题解决方案](06-problem-solution-matrix/problem-solution-matrix.md)** -
+5. **[API 规范视角](16-api-perspective/)** ⭐ - 从 API 规范视角理解容器化、沙盒
+   化、WASM 化的 API 设计
+6. **[问题解决方案](06-problem-solution-matrix/problem-solution-matrix.md)** -
    掌握问题分类框架
-6. **[隔离模型](10-decision-models/01-theory-models/02-isolation-models.md)** -
+7. **[隔离模型](10-decision-models/01-theory-models/02-isolation-models.md)** -
    理解隔离层次理论模型
-7. **[隔离栈技术实现](../TECHNICAL/29-isolation-stack/isolation-stack.md)** - 掌
+8. **[隔离栈技术实现](../TECHNICAL/29-isolation-stack/isolation-stack.md)** - 掌
    握四层隔离栈技术实现和问题定位模型
-8. **[服务网格架构案例](10-decision-models/03-cases/04-service-mesh.md)** - 理解
+9. **[服务网格架构案例](10-decision-models/03-cases/04-service-mesh.md)** - 理解
    服务间通信治理和零信任安全场景的技术选择论证
 
 ## 4. 使用场景
