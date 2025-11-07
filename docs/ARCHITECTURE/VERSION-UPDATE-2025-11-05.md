@@ -144,27 +144,38 @@
 
 ### 高优先级（继续执行）
 
-1. ⏳ **验证现有链接有效性**
-   - 检查所有 Wikipedia 链接是否有效
-   - 检查所有大学课程链接是否有效
-   - 检查课程材料是否更新到 2025 年
+1. ⏳ **验证现有链接有效性**（进行中）
+   - ✅ 已完成核心 Wikipedia 链接格式验证
+   - ✅ 已完成核心大学课程链接格式验证
+   - ⏳ 待完成：手动访问验证内容有效性（受网络限制）
+   - ⏳ 待完成：检查课程材料是否更新到 2025 年版本
 
-### 中优先级（准备开始）
+### 中优先级（全部完成 ✅）
 
-1. 📋 **补充 WebAssembly 第四层抽象**
+1. ✅ **补充 WebAssembly 第四层抽象**（已完成 2025-11-07）
 
-   - 在 `architecture_view.md` 中增加 Wasm 抽象层讨论
-   - 创建 `01-implementation/06-wasm/` 目录
-   - 创建 Wasm 实现细节文档
+   - ✅ `architecture_view.md` 已包含 Wasm 抽象层讨论（第 3 节）
+   - ✅ `01-implementation/06-wasm/` 目录已存在，包含完整文档
+   - ✅ 已在 `architecture_view.md` 中增强 Wasm 抽象层讨论：
+     - 添加范式转换意义（4 个维度）
+     - 添加与前三层的关系说明
+     - 添加应用场景（边缘计算、AI 推理、Serverless、策略执行）
+     - 添加 GPU 加速相关内容
+     - 添加相关视角链接
+     - 增强"Wasm 化的独特价值"说明
 
-2. 📋 **补充 AI/ML 架构章节**
+2. ✅ **补充 AI/ML 架构章节**（已完成 2025-11-07）
 
-   - 创建 `01-views/ai-ml-architecture-view.md`
-   - 讨论 LLM 推理与容器编排集成
+   - ✅ 已创建 `01-views/ai-ml-architecture-view.md`
+   - ✅ 已讨论 LLM 推理与容器编排集成
+   - ✅ 已包含 WasmEdge + Llama2、Kubeflow、KServe、MLflow 等架构类型
+   - ✅ 已包含 2025 年 AI/ML 架构趋势和典型案例
 
-3. 📋 **补充边缘计算章节**
-   - 创建 `01-views/edge-computing-view.md`
-   - 讨论 5G MEC 架构
+3. ✅ **补充边缘计算章节**（已完成 2025-11-07）
+   - ✅ 已创建 `01-views/edge-computing-view.md`
+   - ✅ 已讨论 5G MEC 架构
+   - ✅ 已包含 K3s + WasmEdge、KubeEdge、OpenYurt、SuperEdge 等架构类型
+   - ✅ 已包含 2025 年边缘计算趋势和生产案例
 
 ---
 
@@ -209,8 +220,9 @@
 
 **下一步**：
 
-- 继续执行高优先级任务：验证链接有效性
-- 准备开始中优先级任务：补充 WebAssembly、AI/ML、边缘计算内容
+- ⏳ 继续执行高优先级任务：验证链接有效性（进行中，需要手动访问）
+- ✅ 中优先级任务已全部完成：WebAssembly 第四层抽象、AI/ML 架构、边缘计算章节
+  （2025-11-07）
 
 ---
 

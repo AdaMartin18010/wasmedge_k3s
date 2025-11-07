@@ -23,8 +23,8 @@
 | `network-service-mesh-view.md`  | [`architecture-view/03-service-mesh-nsm/04-nsm-architecture.md`](../architecture-view/03-service-mesh-nsm/04-nsm-architecture.md)                                                                             |
 | `opa-policy-governance-view.md` | [`architecture-view/04-opa-policy-governance/`](../architecture-view/04-opa-policy-governance/)                                                                                                               |
 | `dynamic-operations-view.md`    | [`architecture-view/07-dynamic-operations/`](../architecture-view/07-dynamic-operations/)                                                                                                                     |
-| `ai-ml-architecture-view.md`    | ⚠️ 待补充到 `architecture-view/`                                                                                                                                                                              |
-| `edge-computing-view.md`        | ⚠️ 待补充到 `architecture-view/`                                                                                                                                                                              |
+| `ai-ml-architecture-view.md`    | [`01-implementation/07-ai-ml/`](../01-implementation/07-ai-ml/) ⭐ 新增（2025-11-07）- AI/ML 架构视角                                                                                                         |
+| `edge-computing-view.md`        | [`01-implementation/08-edge/`](../01-implementation/08-edge/) ⭐ 新增（2025-11-07）- 边缘计算架构视角                                                                                                         |
 | `system-view-architecture.md`   | [`../00-theory/07-system-model/`](../00-theory/07-system-model/) ⭐ 新增 - 7 层 4 域模型架构视图                                                                                                              |
 
 ## 📚 推荐阅读路径
@@ -55,4 +55,9 @@
 
 ---
 
-**更新时间**：2025-11-05 **版本**：v1.0（快捷入口）
+**更新时间**：2025-11-07 **版本**：v1.1（快捷入口）
+
+**更新内容（v1.1）**：
+
+- ✅ 新增 `ai-ml-architecture-view.md` - AI/ML 架构视角（2025-11-07）
+- ✅ 新增 `edge-computing-view.md` - 边缘计算架构视角（2025-11-07）

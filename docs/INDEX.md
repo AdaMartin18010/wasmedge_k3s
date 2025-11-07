@@ -49,6 +49,8 @@
 | 38   | 矩阵视角            | [38-matrix-perspective](COGNITIVE/09-matrix-perspective/README.md)                               | 云原生技术栈的矩阵力学                       | 理论 |
 | 39   | 代数结构视角        | [39-algebraic-structure](COGNITIVE/11-algebraic-structure/README.md)                             | 算子理论与代数结构                           | 理论 |
 | 40   | 结构视角            | [40-structural-perspective](COGNITIVE/12-structural-perspective/README.md)                       | 计算结构、控制结构、信息结构（结构主义视角） | 理论 |
+| 41   | AI/ML 架构视角      | [41-ai-ml-architecture-view](ARCHITECTURE/01-views/ai-ml-architecture-view.md)                   | LLM 推理与容器编排集成                       | 架构 |
+| 42   | 边缘计算架构视角    | [42-edge-computing-view](ARCHITECTURE/01-views/edge-computing-view.md)                           | 5G MEC 架构、离线自治、热更新                | 架构 |
 
 **说明**：文档编号 28 为架构框架文档（多维度架构体系与技术规范）。文档编号 29-30
 为可选文档（服务网格、多集群管理），34 为可选文档（成本优化）。37 为趋势文档
@@ -66,7 +68,7 @@ COGNITIVE/09-matrix-perspective 目录下）。
 
 - [02. 理念层](COGNITIVE/02-principles/principles.md) - 云原生核心理念
 
-### 架构类（5 个）
+### 架构类（7 个）
 
 - [03. 架构与对象模型](COGNITIVE/03-architecture/architecture.md) - 系统架构设计
 - [28. 架构框架](TECHNICAL/28-architecture-framework/architecture-framework.md) -
@@ -81,6 +83,10 @@ COGNITIVE/09-matrix-perspective 目录下）。
   社会学、发展经济学、人类学）
 - [eBPF/OTLP 视角文档](../ebpf_otlp_view.md) ⭐ - 从 eBPF 和 OTLP 的视角看虚拟化
   容器化（横纵耦合定位模型、智能系统能力架构）
+- [41. AI/ML 架构视角](ARCHITECTURE/01-views/ai-ml-architecture-view.md) ⭐ 新增
+  （2025-11-07） - LLM 推理与容器编排集成
+- [42. 边缘计算架构视角](ARCHITECTURE/01-views/edge-computing-view.md) ⭐ 新增
+  （2025-11-07） - 5G MEC 架构、离线自治、热更新
 
 ### 技术类（6 个）
 
@@ -296,6 +302,10 @@ graph TB
    技术组合和决策
 9. [18. 问题解决方案](COGNITIVE/06-problem-solution-matrix/problem-solution-matrix.md) -
    问题分类和解决
+10. [41. AI/ML 架构视角](ARCHITECTURE/01-views/ai-ml-architecture-view.md) ⭐ 新
+    增（2025-11-07） - LLM 推理与容器编排集成
+11. [42. 边缘计算架构视角](ARCHITECTURE/01-views/edge-computing-view.md) ⭐ 新增
+    （2025-11-07） - 5G MEC 架构、离线自治、热更新
 
 ### 技术规格
 
@@ -422,7 +432,8 @@ graph TB
 
 ## 📊 文档统计
 
-- **总文档数**：41 个核心文档（含可选文档和分析文档，新增结构视角）
+- **总文档数**：43 个核心文档（含可选文档和分析文档，新增 AI/ML 架构视角、边缘计
+  算架构视角）
 - **主题覆盖度**：98.2%（113/115 主题）
 - **技术规范覆盖度**：100%（27/27 规范）
 - **文档分类**：11 大类（导航、理念、架构、技术、安全、场景、实践、设计、理论、

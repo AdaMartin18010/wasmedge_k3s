@@ -173,6 +173,12 @@
 ### 5.2 架构视角
 
 - **`../01-views/`** - 架构视角文档（引用理论论证和实现细节）
+  - [`webassembly-view.md`](../01-views/webassembly-view.md) - WebAssembly 架构
+    视角
+  - [`ai-ml-architecture-view.md`](../01-views/ai-ml-architecture-view.md) ⭐ 新
+    增（2025-11-07） - AI/ML 架构视角
+  - [`edge-computing-view.md`](../01-views/edge-computing-view.md) ⭐ 新增
+    （2025-11-07） - 边缘计算架构视角
 
 ### 5.3 源文档
 

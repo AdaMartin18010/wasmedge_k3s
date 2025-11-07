@@ -73,6 +73,7 @@
 │   ├── psi2-containerization.md   # Ψ₂：容器化层
 │   ├── psi3-sandboxing.md         # Ψ₃：沙盒化层
 │   ├── psi4-network.md            # Ψ₄：网络抽象
+│   ├── psi5-wasm.md               # Ψ₅：WebAssembly 抽象层 ⭐ 新增
 │   └── closure-proof.md           # 封闭证明
 ├── 03-category-theory/             # 范畴论视角
 │   ├── README.md
@@ -90,6 +91,7 @@
     ├── L1-container-interference.md  # L1：容器干扰引理
     ├── L2-capability-closure.md      # L2：能力闭包引理
     ├── L3-opa-determinism.md         # L3：OPA 确定性引理
+    ├── L4-wasm-memory-safety.md      # L4：Wasm 内存安全引理 ⭐ 新增
     └── T1-identity-routing.md         # T1：身份-路由等价定理
 ```
 
@@ -159,6 +161,7 @@
 - **L1**：容器干扰引理（线性时不变系统模型）
 - **L2**：能力闭包引理（最小权限原则）
 - **L3**：OPA 确定性引理（决策唯一性）
+- **L4**：Wasm 内存安全引理（内存安全保证）⭐ 新增
 - **T1**：身份-路由等价定理（Service Mesh 理论基础）
 
 ### 4.3 形式化定义
@@ -206,7 +209,13 @@
 
 ### 6.2 架构视角
 
-- **`../02-architecture-views/`** - 架构视角文档（引用理论论证和实现细节）
+- **`../01-views/`** - 架构视角文档（引用理论论证和实现细节）
+  - [`webassembly-view.md`](../01-views/webassembly-view.md) - WebAssembly 架构
+    视角
+  - [`ai-ml-architecture-view.md`](../01-views/ai-ml-architecture-view.md) ⭐ 新
+    增（2025-11-07） - AI/ML 架构视角
+  - [`edge-computing-view.md`](../01-views/edge-computing-view.md) ⭐ 新增
+    （2025-11-07） - 边缘计算架构视角
 
 ### 6.3 组合模式
 
@@ -251,4 +260,5 @@
 
 ---
 
-**更新时间**：2025-11-05 **版本**：v1.1（添加对比矩阵目录）
+**更新时间**：2025-11-07 **版本**：v1.2（添加 WebAssembly 抽象层、AI/ML 和边缘计
+算架构视角引用）

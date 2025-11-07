@@ -97,6 +97,10 @@
 
 - [`../../01-views/edge-computing-view.md`](../../01-views/edge-computing-view.md) -
   边缘计算架构视角
+- [`../../01-views/webassembly-view.md`](../../01-views/webassembly-view.md) -
+  WebAssembly 架构视角（WasmEdge 边缘部署）
+- [`../../01-views/ai-ml-architecture-view.md`](../../01-views/ai-ml-architecture-view.md)
+  ⭐ 新增（2025-11-07） - AI/ML 架构视角（边缘 AI 推理）
 
 ### 4.2 理论文档
 

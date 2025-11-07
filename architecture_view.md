@@ -171,7 +171,18 @@
 > - **虚拟化** 把"物理资源管理"抽象成"VM 资源池"
 > - **容器化** 把"完整操作系统"抽象成"运行时容器"
 > - **沙箱化** 把"容器内进程"抽象成"安全进程"
-> - **Wasm 化** 把"平台相关二进制"抽象成"平台无关指令集"
+> - **Wasm 化** 把"平台相关二进制"抽象成"平台无关指令集"，实现**极轻量（镜像 < 2
+>   MB）、毫秒级启动（< 1ms）、零 rootfs**的计算抽象
+
+**Wasm 化的独特价值**：
+
+1. **平台无关性**：同一 Wasm 模块可在不同操作系统和架构运行，实现"编译一次，到处
+   运行"
+2. **内存安全保证**：通过线性内存模型和类型系统，可证明内存安全，无需 seccomp 白
+   名单
+3. **极速启动**：冷启动 < 1ms，比容器快 1000×，满足边缘计算和 Serverless 需求
+4. **资源优化**：零 rootfs，镜像体积减少 90%+，边缘节点资源占用减少 60%
+5. **GPU 加速**：支持 GPU 直通和算子优化，AI 推理延迟 ↓60%，GPU 利用率 85-95%
 
 ### 3.3 统一对比矩阵
 
@@ -239,22 +250,47 @@
   - **内存安全**：线性内存模型，类型系统保证内存安全
   - **平台无关**：WASI 标准化系统调用接口
   - **零 rootfs**：无需操作系统镜像，仅需 Wasm 二进制
+  - **极速启动**：冷启动 < 1ms，比容器快 1000×
+  - **GPU 加速**：支持 GPU 直通和算子优化（WasmEdge GPU Plugin）
 - **关键引理 L4**：Wasm 运行时 = 可证明内存安全的图灵完备抽象，|Capability| ≤
   WASI 接口集
   - **详细说
     明**：[L4 引理](docs/ARCHITECTURE/00-theory/05-lemmas-theorems/L4-wasm-memory-safety.md)（
     待创建）
+- **范式转换意义**：
+  - **从"平台相关"到"平台无关"**：同一 Wasm 模块可在不同操作系统和架构运行
+  - **从"进程隔离"到"内存安全"**：通过类型系统和线性内存保证内存安全，无需
+    seccomp 白名单
+  - **从"镜像部署"到"二进制部署"**：零 rootfs，仅需 Wasm 二进制，镜像体积减少
+    90%+
+  - **从"秒级启动"到"毫秒启动"**：冷启动 < 1ms，满足边缘计算和 Serverless 需求
+- **与前三层的关系**：
+  - **虚拟化层**：Wasm 可在 VM 内运行，无需完整 OS，进一步减少资源占用
+  - **容器化层**：Wasm 可替代容器，零 rootfs，镜像体积减少 90%+
+  - **沙盒化层**：Wasm 通过 WASI 标准化系统调用，无需 seccomp 白名单，更安全
+- **应用场景**：
+  - **边缘计算**：K3s + WasmEdge，10 万台边缘节点，冷启动 ≤6 ms（浪潮云生产案例
+    ）
+  - **AI 推理**：WasmEdge 0.14 + Llama2，模型 Wasm-化，GPU 加速推理，延迟 ↓60%
+  - **Serverless**：极速冷启动 < 1ms，镜像 < 2 MB，成本优化
+  - **策略执行**：OPA-Wasm，策略评估性能提升 3×，Gatekeeper 3.15 Wasm 引擎支持
 - **实证**：
   - WasmEdge 0.14 冷启动 < 1ms，比容器快 1000×
   - 镜像体积 < 2 MB（vs 容器 10~100 MB）
   - Kubernetes 1.30 双运行时支持，边缘节点资源占用减少 60%
   - OPA-Wasm 策略评估性能提升 3×
+  - WasmEdge GPU Plugin，推理延迟比 PyTorch 容器 ↓60%，GPU 利用率 85-95%
 - **详细说
   明**：[Ψ₅ 详细证明](docs/ARCHITECTURE/00-theory/02-induction-proof/psi5-wasm.md)（
   待创建）
 - **架构视
   角**：[WebAssembly 视角](docs/ARCHITECTURE/01-views/webassembly-view.md) ⭐ 新
   增
+- **相关视角**：
+  - [AI/ML 架构视角](docs/ARCHITECTURE/01-views/ai-ml-architecture-view.md) ⭐
+    新增（2025-11-07）- LLM 推理与容器编排集成
+  - [边缘计算架构视角](docs/ARCHITECTURE/01-views/edge-computing-view.md) ⭐ 新
+    增（2025-11-07）- 5G MEC 架构
 
 **第四次归纳映射（Ψ₄）**：网络抽象层
 
@@ -531,19 +567,35 @@ Client Pod ──>  Istio Sidecar  ──>  OPA Agent (PDP)
 **第五次归纳映射（Ψ₅）**：WebAssembly 抽象层
 
 - **映射**：Ψ₅ : Σ₃ → Σ₄ = 〈WasmEdge 0.14, WASI Preview 2, WebAssembly Binary〉
-- **状态压缩比**：ρ₅ ≈ 10³
+- **状态压缩比**：ρ₅ ≈ 10³（镜像从 10~100 MB 降至 < 2 MB，启动时间从 < 1s 降至 <
+  1ms）
 - **关键引理 L4**：Wasm 运行时 = 可证明内存安全的图灵完备抽象
   - **详细说
     明**：[L4 引理](docs/ARCHITECTURE/00-theory/05-lemmas-theorems/L4-wasm-memory-safety.md)（
     待创建）
+- **范式转换意义**：
+  - **从"平台相关"到"平台无关"**：同一 Wasm 模块可在不同操作系统和架构运行
+  - **从"进程隔离"到"内存安全"**：通过类型系统和线性内存保证内存安全
+  - **从"镜像部署"到"二进制部署"**：零 rootfs，仅需 Wasm 二进制
+  - **从"秒级启动"到"毫秒启动"**：冷启动 < 1ms，满足边缘计算和 Serverless 需求
+- **应用场景**：
+  - **边缘计算**：K3s + WasmEdge，10 万台边缘节点，冷启动 ≤6 ms
+  - **AI 推理**：WasmEdge 0.14 + Llama2，模型 Wasm-化，GPU 加速推理
+  - **Serverless**：极速冷启动 < 1ms，镜像 < 2 MB
+  - **策略执行**：OPA-Wasm，策略评估性能提升 3×
 - **实证**：WasmEdge 0.14 冷启动 < 1ms；镜像体积 < 2 MB；Kubernetes 1.30 双运行
-  时支持
+  时支持，边缘节点资源占用减少 60%；WasmEdge GPU Plugin，推理延迟 ↓60%
 - **详细说
   明**：[Ψ₅ 详细证明](docs/ARCHITECTURE/00-theory/02-induction-proof/psi5-wasm.md)（
   待创建）
 - **架构视
   角**：[WebAssembly 视角](docs/ARCHITECTURE/01-views/webassembly-view.md) ⭐ 新
   增
+- **相关视角**：
+  - [AI/ML 架构视角](docs/ARCHITECTURE/01-views/ai-ml-architecture-view.md) ⭐
+    新增（2025-11-07）
+  - [边缘计算架构视角](docs/ARCHITECTURE/01-views/edge-computing-view.md) ⭐ 新
+    增（2025-11-07）
 
 **第四次归纳映射（Ψ₄）**：网络抽象层
 
@@ -604,8 +656,8 @@ Client Pod ──>  Istio Sidecar  ──>  OPA Agent (PDP)
 - **态射集合**：V (Virtualize), I (Image), C (Container), S (Sandbox), W (Wasm),
   M (Mesh), N (Network)
 - **函子**：Ψ₁ (虚拟化), Ψ₂ (容器化), Ψ₃ (沙盒化), Ψ₄ (网络抽象), Ψ₅ (Wasm 抽象)
-- **自然变换**：η₁ (VM → Container), η₂ (Container → Sandbox), η₃ (Sandbox →
-  Wasm), η₄ (IP → Service)
+- **自然变换**：η₁ (Hardware → VM), η₂ (VM → Container), η₃ (Container →
+  Sandbox), η₄ (IP → Service), η₅ (Sandbox → Wasm)
 
 **组合定律**：
 
