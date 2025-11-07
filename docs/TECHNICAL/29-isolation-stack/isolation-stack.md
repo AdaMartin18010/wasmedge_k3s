@@ -2374,6 +2374,13 @@ lsns -t net -p $(pgrep -f container)
   - 已知问题和解决方案（K3s WasmEdge 驱动超时、OPA-Wasm 内存泄漏、eBPF 探针兼容
     性）
 
+**系统分析相关**：
+
+- **[系统分析视角](../../../systems_view.md)** ⭐ - 从系统分析看虚拟化容器化沙盒
+  化 Wasm，多维度矩阵对比和形式化论证
+- **[系统视角文档](../../../system_view.md)** ⭐ - 从系统的视角看虚拟化容器化沙
+  盒化（7 层 4 域模型）
+
 **理论基础**：
 
 - **[12. 虚拟化/半虚拟化/容器化/沙盒化严格定义](../../COGNITIVE/10-decision-models/06-technical-concepts/12-virtualization-paravirtualization-containerization-sandboxing-strict-definition.md)** -

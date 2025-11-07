@@ -3265,14 +3265,21 @@ eBPF 与 OTLP 的融合，标志着可观测性从 **"数据采集工具"** 演�
 
 ## 32.16 相关文档
 
-### 32.16.1 视角文档
+### 32.16.1 系统分析文档
+
+- **[系统分析视角](../../../systems_view.md)** ⭐ - 从系统分析看虚拟化容器化沙盒
+  化 Wasm，多维度矩阵对比和形式化论证
+- **[系统视角文档](../../../system_view.md)** ⭐ - 从系统的视角看虚拟化容器化沙
+  盒化（7 层 4 域模型）
+
+### 32.16.2 视角文档
 
 - **[eBPF/OTLP 视角](../../../ebpf_otlp_view.md)** ⭐ - 从 eBPF 和 OTLP 的视角看
   虚拟化容器化（根目录）
 - **[13. eBPF/OTLP 认知视角](../../COGNITIVE/13-ebpf-otlp-perspective/ebpf-otlp-perspective.md)** -
   认知视角分析文档
 
-### 32.16.2 技术文档
+### 32.16.3 技术文档
 
 - **[31. eBPF 技术堆栈](../31-ebpf-stack/ebpf-stack.md)** - eBPF 技术堆栈完整技
   术参考文档
@@ -3283,7 +3290,7 @@ eBPF 与 OTLP 的融合，标志着可观测性从 **"数据采集工具"** 演�
 - **[12. 网络技术栈](../12-network-stack/network-stack.md)** -
   CNI、Service、Ingress 等技术规格
 
-### 32.16.3 认知模型文档
+### 32.16.4 认知模型文档
 
 - **[13. eBPF/OTLP 认知视角](../../COGNITIVE/13-ebpf-otlp-perspective/ebpf-otlp-perspective.md)** -
   认知视角分析文档
@@ -3291,7 +3298,7 @@ eBPF 与 OTLP 的融合，标志着可观测性从 **"数据采集工具"** 演�
 - **[09. 矩阵视角](../../COGNITIVE/09-matrix-perspective/README.md)** - 矩阵力学
   模型
 
-### 32.16.4 快速参考文档
+### 32.16.5 快速参考文档
 
 - **[QUICK-REFERENCE.md](QUICK-REFERENCE.md)** ⭐ - 快速参考指南
   - 按角色快速定位（架构师、性能工程师、运维工程师等）
