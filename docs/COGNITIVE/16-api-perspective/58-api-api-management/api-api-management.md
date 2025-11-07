@@ -28,8 +28,15 @@
 
 ## 1. 概述
 
-API 管理规范定义了 API 在管理场景下的设计和实现，从 API 注册到 API 发现，从 API
-发布到 API 监控。
+API 管理规范定义了 API 在管理场景下的设计和实现，从 API 注册到 API 发现，从 API 发布到 API 监控。本文档基于形式化方法，提供严格的数学定义和推理论证，分析 API 管理的理论基础和实践方法。
+
+**参考标准**：
+
+- [API Management Platforms](https://www.gartner.com/en/information-technology/glossary/api-management-platform) - API 管理平台
+- [API Gateway](https://www.nginx.com/blog/building-microservices-using-an-api-gateway/) - API 网关
+- [API Catalog](https://www.postman.com/api-platform/api-catalog/) - API 目录
+- [API Analytics](https://www.postman.com/api-platform/api-analytics/) - API 分析
+- [API Lifecycle Management](https://www.postman.com/api-platform/api-lifecycle/) - API 生命周期管理
 
 ### 1.1 API 管理架构
 
