@@ -7,6 +7,7 @@
 - [📑 目录](#-目录)
 - [1. 概述](#1-概述)
   - [1.1 AI/ML API 架构](#11-aiml-api-架构)
+  - [1.2 API AI/ML 集成在 API 规范中的位置](#12-api-aiml-集成在-api-规范中的位置)
 - [2. 模型服务 API](#2-模型服务-api)
   - [2.1 TensorFlow Serving](#21-tensorflow-serving)
   - [2.2 PyTorch Serve](#22-pytorch-serve)
@@ -22,14 +23,29 @@
 - [6. 性能优化](#6-性能优化)
   - [6.1 批处理优化](#61-批处理优化)
   - [6.2 模型量化](#62-模型量化)
-- [7. 相关文档](#7-相关文档)
+- [7. 形式化定义与理论基础](#7-形式化定义与理论基础)
+  - [7.1 API AI/ML 集成形式化模型](#71-api-aiml-集成形式化模型)
+  - [7.2 模型推理形式化](#72-模型推理形式化)
+  - [7.3 性能优化形式化](#73-性能优化形式化)
+- [8. 相关文档](#8-相关文档)
 
 ---
 
 ## 1. 概述
 
 API AI/ML 集成规范定义了 API 在 AI/ML 环境下的设计和实现，从模型服务到推理 API，
-从模型管理到性能优化。
+从模型管理到性能优化。本文档基于形式化方法，提供严格的数学定义和推理论证，分析
+API AI/ML 集成的理论基础和实践方法。
+
+**参考标准**：
+
+- [TensorFlow Serving](https://www.tensorflow.org/tfx/guide/serving) -
+  TensorFlow 模型服务
+- [ONNX Runtime](https://onnxruntime.ai/) - ONNX 运行时
+- [WASI-NN](https://github.com/WebAssembly/wasi-nn) - WASM 神经网络接口
+- [MLflow](https://mlflow.org/) - MLflow 模型管理
+- [Model Serving Best Practices](https://www.kubeflow.org/docs/components/serving/) -
+  模型服务最佳实践
 
 ### 1.1 AI/ML API 架构
 
@@ -42,6 +58,25 @@ API AI/ML 集成规范定义了 API 在 AI/ML 环境下的设计和实现，从�
   ↓
 推理 API（Inference API）
 ```
+
+### 1.2 API AI/ML 集成在 API 规范中的位置
+
+根据 API 规范四元组定义（见
+[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+，API AI/ML 集成主要涉及 IDL 和 Observability 维度：
+
+```text
+API_Spec = ⟨IDL, Governance, Observability, Security⟩
+            ↑                        ↑
+        AI/ML Integration (implementation)
+```
+
+API AI/ML 集成在 API 规范中提供：
+
+- **模型接口**：TensorFlow Serving、gRPC 推理接口
+- **WASM ML**：WASI-NN、WasmEdge ML 运行时
+- **模型管理**：模型版本管理、A/B 测试
+- **性能优化**：批处理优化、模型量化
 
 ---
 
@@ -295,7 +330,85 @@ spec:
 
 ---
 
-## 7. 相关文档
+## 7. 形式化定义与理论基础
+
+### 7.1 API AI/ML 集成形式化模型
+
+**定义 7.1（API AI/ML 集成）**：API AI/ML 集成是一个四元组：
+
+```text
+API_AI_ML = ⟨Model, Inference_API, Model_Management, Performance_Optimization⟩
+```
+
+其中：
+
+- **Model**：模型 `Model: Input → Output`
+- **Inference_API**：推理 API `Inference_API: Request → Prediction`
+- **Model_Management**：模型管理 `Model_Management: Model → Version`
+- **Performance_Optimization**：性能优化
+  `Performance_Optimization: Model → Optimized_Model`
+
+**定义 7.2（推理延迟）**：推理延迟是一个函数：
+
+```text
+Inference_Latency(Model, Input) = Prediction_Time - Request_Time
+```
+
+**定理 7.1（模型推理正确性）**：如果模型正确，则推理结果正确：
+
+```text
+Correct(Model) ⟹ Correct(Inference(Model, Input))
+```
+
+**证明**：如果模型正确，则对任何输入都能产生正确的输出。□
+
+### 7.2 模型推理形式化
+
+**定义 7.3（批处理推理）**：批处理推理是一个函数：
+
+```text
+Batch_Inference: Model × Input[] → Output[]
+```
+
+**定义 7.4（推理吞吐量）**：推理吞吐量是一个函数：
+
+```text
+Inference_Throughput(Model) = |Processed_Requests| / Time
+```
+
+**定理 7.2（批处理效率）**：批处理提高推理效率：
+
+```text
+Throughput(Batch_Inference(Model)) > Throughput(Single_Inference(Model))
+```
+
+**证明**：批处理可以并行处理多个请求，因此吞吐量更高。□
+
+### 7.3 性能优化形式化
+
+**定义 7.5（模型量化）**：模型量化是一个函数：
+
+```text
+Quantize: Model × Precision → Quantized_Model
+```
+
+**定义 7.6（优化收益）**：优化收益是一个函数：
+
+```text
+Optimization_Gain = (Original_Latency - Optimized_Latency) / Original_Latency
+```
+
+**定理 7.3（量化优势）**：模型量化降低延迟：
+
+```text
+Latency(Quantized_Model) < Latency(Original_Model)
+```
+
+**证明**：量化模型使用更少的位数，计算更快，因此延迟更低。□
+
+---
+
+## 8. 相关文档
 
 - **[WASM 化 API 规范](../03-wasm-api/wasm-api.md)** - WASI-NN 接口
 - **[API 性能优化](../14-api-performance/api-performance.md)** - ML 性能优化

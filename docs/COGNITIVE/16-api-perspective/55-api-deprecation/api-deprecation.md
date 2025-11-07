@@ -22,14 +22,30 @@
 - [6. 弃用回滚](#6-弃用回滚)
   - [6.1 回滚策略](#61-回滚策略)
   - [6.2 回滚流程](#62-回滚流程)
-- [7. 相关文档](#7-相关文档)
+- [7. 形式化定义与理论基础](#7-形式化定义与理论基础)
+  - [7.1 API 弃用策略形式化模型](#71-api-弃用策略形式化模型)
+  - [7.2 弃用时间表形式化](#72-弃用时间表形式化)
+  - [7.3 弃用迁移形式化](#73-弃用迁移形式化)
+- [8. 相关文档](#8-相关文档)
 
 ---
 
 ## 1. 概述
 
 API 弃用策略规范定义了 API 在弃用场景下的设计和实现，从弃用决策到弃用通知，从弃
-用迁移到弃用执行。
+用迁移到弃用执行。本文档基于形式化方法，提供严格的数学定义和推理论证，分析 API
+弃用策略的理论基础和实践方法。
+
+**参考标准**：
+
+- [API Deprecation Best Practices](https://cloud.google.com/apis/design/deprecation) -
+  Google API 弃用最佳实践
+- [Semantic Versioning](https://semver.org/) - 语义化版本
+- [API Lifecycle](https://www.postman.com/api-platform/api-lifecycle/) - API 生
+  命周期
+- [Deprecation Policy](https://docs.github.com/en/rest/overview/resources-in-the-rest-api#deprecation-policy) -
+  GitHub API 弃用策略
+- [API Versioning](https://restfulapi.net/versioning/) - API 版本控制
 
 ### 1.1 弃用策略架构
 
@@ -362,7 +378,86 @@ func RollbackDeprecation(ctx context.Context, api string) error {
 
 ---
 
-## 7. 相关文档
+## 7. 形式化定义与理论基础
+
+### 7.1 API 弃用策略形式化模型
+
+**定义 7.1（API 弃用策略）**：API 弃用策略是一个四元组：
+
+```text
+API_Deprecation = ⟨Deprecation_Decision, Deprecation_Notice, Migration_Guide, Deprecation_Execution⟩
+```
+
+其中：
+
+- **Deprecation_Decision**：弃用决策
+  `Deprecation_Decision: API → {Deprecate, Keep}`
+- **Deprecation_Notice**：弃用通知 `Deprecation_Notice: API → Notice`
+- **Migration_Guide**：迁移指南 `Migration_Guide: API → Guide`
+- **Deprecation_Execution**：弃用执行
+  `Deprecation_Execution: API × Timeline → Status`
+
+**定义 7.2（弃用状态）**：弃用状态是一个函数：
+
+```text
+Deprecation_Status: API → {Active, Deprecated, Removed}
+```
+
+**定理 7.1（弃用策略有效性）**：如果弃用策略正确，则迁移成功：
+
+```text
+Correct(Deprecation_Strategy) ⟹ Success(Migration)
+```
+
+**证明**：如果弃用策略正确，则提供充分的迁移时间和指南，因此迁移成功。□
+
+### 7.2 弃用时间表形式化
+
+**定义 7.3（弃用时间表）**：弃用时间表是一个函数：
+
+```text
+Deprecation_Timeline = ⟨Announcement_Date, Deprecation_Date, Removal_Date⟩
+```
+
+**定义 7.4（弃用周期）**：弃用周期是一个函数：
+
+```text
+Deprecation_Period = Removal_Date - Announcement_Date
+```
+
+**定理 7.2（弃用周期与迁移成功率）**：弃用周期越长，迁移成功率越高：
+
+```text
+Deprecation_Period(API₁) > Deprecation_Period(API₂) ⟹ Migration_Success_Rate(API₁) > Migration_Success_Rate(API₂)
+```
+
+**证明**：弃用周期越长，用户有更多时间迁移，因此迁移成功率越高。□
+
+### 7.3 弃用迁移形式化
+
+**定义 7.5（迁移完成度）**：迁移完成度是一个函数：
+
+```text
+Migration_Completion = |Migrated_Users| / |Total_Users|
+```
+
+**定义 7.6（迁移成功率）**：迁移成功率是一个函数：
+
+```text
+Migration_Success_Rate = |Successful_Migrations| / |Total_Migrations|
+```
+
+**定理 7.3（迁移完成度与移除安全性）**：迁移完成度越高，移除越安全：
+
+```text
+Migration_Completion(API) ≥ Threshold ⟹ Safe(Remove(API))
+```
+
+**证明**：迁移完成度越高，更多用户已迁移，因此移除越安全。□
+
+---
+
+## 8. 相关文档
 
 - **[API 版本管理](../23-api-versioning/api-versioning.md)** - API 版本控制
 - **[API 生命周期](../24-api-lifecycle/api-lifecycle.md)** - API 生命周期管理

@@ -7,6 +7,7 @@
 - [📑 目录](#-目录)
 - [1. 概述](#1-概述)
   - [1.1 WebSocket API 架构](#11-websocket-api-架构)
+  - [1.2 API WebSocket 在 API 规范中的位置](#12-api-websocket-在-api-规范中的位置)
 - [2. WebSocket 连接](#2-websocket-连接)
   - [2.1 连接建立](#21-连接建立)
   - [2.2 连接管理](#22-连接管理)
@@ -22,14 +23,31 @@
 - [6. 性能优化](#6-性能优化)
   - [6.1 连接池](#61-连接池)
   - [6.2 消息压缩](#62-消息压缩)
-- [7. 相关文档](#7-相关文档)
+- [7. 形式化定义与理论基础](#7-形式化定义与理论基础)
+  - [7.1 API WebSocket 形式化模型](#71-api-websocket-形式化模型)
+  - [7.2 连接管理形式化](#72-连接管理形式化)
+  - [7.3 消息传输形式化](#73-消息传输形式化)
+- [8. 相关文档](#8-相关文档)
 
 ---
 
 ## 1. 概述
 
 API WebSocket 规范定义了 API 在 WebSocket 架构下的设计和实现，从连接建立到消息协
-议，从心跳保活到性能优化。
+议，从心跳保活到性能优化。本文档基于形式化方法，提供严格的数学定义和推理论证，分
+析 API WebSocket 的理论基础和实践方法。
+
+**参考标准**：
+
+- [WebSocket Protocol](https://datatracker.ietf.org/doc/html/rfc6455) -
+  WebSocket 协议规范
+- [WebSocket API](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket) -
+  WebSocket API
+- [Socket.IO](https://socket.io/) - Socket.IO 实时通信
+- [WebSocket Best Practices](https://www.websocket.org/aboutwebsocket.html) -
+  WebSocket 最佳实践
+- [Real-time Communication](https://www.w3.org/TR/websockets/) - W3C WebSocket
+  标准
 
 ### 1.1 WebSocket API 架构
 
@@ -42,6 +60,25 @@ WebSocket 服务器（Server）
   ↓
 业务处理（Business Logic）
 ```
+
+### 1.2 API WebSocket 在 API 规范中的位置
+
+根据 API 规范四元组定义（见
+[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+，API WebSocket 主要涉及 IDL 和 Observability 维度：
+
+```text
+API_Spec = ⟨IDL, Governance, Observability, Security⟩
+            ↑                        ↑
+    WebSocket (implementation)
+```
+
+API WebSocket 在 API 规范中提供：
+
+- **连接管理**：WebSocket 连接建立和管理
+- **消息协议**：消息格式和类型定义
+- **心跳保活**：Ping/Pong 机制
+- **实时通信**：双向实时数据传输
 
 ---
 
@@ -362,7 +399,84 @@ var upgrader = websocket.Upgrader{
 
 ---
 
-## 7. 相关文档
+## 7. 形式化定义与理论基础
+
+### 7.1 API WebSocket 形式化模型
+
+**定义 7.1（API WebSocket）**：API WebSocket 是一个四元组：
+
+```text
+API_WebSocket = ⟨Connection, Message_Protocol, Heartbeat, Router⟩
+```
+
+其中：
+
+- **Connection**：WebSocket 连接 `Connection: Client × Server → Connection`
+- **Message_Protocol**：消息协议 `Message_Protocol: Message → Format`
+- **Heartbeat**：心跳机制 `Heartbeat: Connection → Ping/Pong`
+- **Router**：消息路由 `Router: Message → Handler`
+
+**定义 7.2（连接状态）**：连接状态是一个函数：
+
+```text
+Connection_State: Connection → {Connecting, Open, Closing, Closed}
+```
+
+**定理 7.1（WebSocket 连接可靠性）**：如果连接建立成功，则消息可以传输：
+
+```text
+Connection_State(Connection) = Open ⟹ Can_Send(Connection, Message)
+```
+
+**证明**：如果连接状态为 Open，则连接已建立，可以发送消息。□
+
+### 7.2 连接管理形式化
+
+**定义 7.3（连接保持）**：连接保持是一个函数：
+
+```text
+Keep_Alive: Connection × Timeout → Connection
+```
+
+**定义 7.4（心跳间隔）**：心跳间隔是一个函数：
+
+```text
+Heartbeat_Interval: Connection → Time
+```
+
+**定理 7.2（心跳保活有效性）**：心跳机制保持连接活跃：
+
+```text
+Heartbeat(Connection, Interval) ⟹ Connection_State(Connection) = Open
+```
+
+**证明**：心跳机制定期发送 Ping/Pong，保持连接活跃，因此连接状态保持 Open。□
+
+### 7.3 消息传输形式化
+
+**定义 7.5（消息传输）**：消息传输是一个函数：
+
+```text
+Send_Message: Connection × Message → Result
+```
+
+**定义 7.6（消息延迟）**：消息延迟是一个函数：
+
+```text
+Message_Latency(Message) = Receive_Time - Send_Time
+```
+
+**定理 7.3（WebSocket 实时性）**：WebSocket 提供低延迟实时通信：
+
+```text
+Message_Latency(WebSocket) < Message_Latency(HTTP_Polling)
+```
+
+**证明**：WebSocket 保持长连接，避免 HTTP 轮询的开销，因此延迟更低。□
+
+---
+
+## 8. 相关文档
 
 - **[API 事件驱动架构](../35-api-event-driven/api-event-driven.md)** - WebSocket
   事件

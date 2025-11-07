@@ -7,6 +7,7 @@
 - [📑 目录](#-目录)
 - [1. 概述](#1-概述)
   - [1.1 契约测试架构](#11-契约测试架构)
+  - [1.2 API 契约测试在 API 规范中的位置](#12-api-契约测试在-api-规范中的位置)
 - [2. 契约定义](#2-契约定义)
   - [2.1 OpenAPI 契约](#21-openapi-契约)
   - [2.2 gRPC 契约](#22-grpc-契约)
@@ -23,14 +24,31 @@
 - [6. 契约测试工具](#6-契约测试工具)
   - [6.1 Pact](#61-pact)
   - [6.2 Dredd](#62-dredd)
-- [7. 相关文档](#7-相关文档)
+- [7. 形式化定义与理论基础](#7-形式化定义与理论基础)
+  - [7.1 API 契约测试形式化模型](#71-api-契约测试形式化模型)
+  - [7.2 契约验证形式化](#72-契约验证形式化)
+  - [7.3 契约兼容性形式化](#73-契约兼容性形式化)
+- [8. 相关文档](#8-相关文档)
 
 ---
 
 ## 1. 概述
 
 API 契约测试规范定义了 API 在契约测试场景下的设计和实现，从契约定义到契约验证，
-从消费者驱动契约到契约版本管理。
+从消费者驱动契约到契约版本管理。本文档基于形式化方法，提供严格的数学定义和推理论
+证，分析 API 契约测试的理论基础和实践方法。
+
+**参考标准**：
+
+- [Pact](https://docs.pact.io/) - Pact 契约测试框架
+- [Consumer-Driven Contracts](https://martinfowler.com/articles/consumerDrivenContracts.html) -
+  消费者驱动契约
+- [Spring Cloud Contract](https://spring.io/projects/spring-cloud-contract) -
+  Spring Cloud Contract
+- [Contract Testing Best Practices](https://docs.pact.io/best_practices/) - 契约
+  测试最佳实践
+- [API Contract Testing](https://www.postman.com/api-platform/api-testing/) -
+  API 契约测试
 
 ### 1.1 契约测试架构
 
@@ -43,6 +61,25 @@ API 契约（API Contract）
   ↓
 契约测试（Contract Testing）
 ```
+
+### 1.2 API 契约测试在 API 规范中的位置
+
+根据 API 规范四元组定义（见
+[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+，API 契约测试主要涉及 IDL 维度：
+
+```text
+API_Spec = ⟨IDL, Governance, Observability, Security⟩
+            ↑
+    Contract Testing (implementation)
+```
+
+API 契约测试在 API 规范中提供：
+
+- **契约定义**：OpenAPI、gRPC、GraphQL 契约
+- **契约验证**：提供者验证、消费者验证
+- **版本管理**：契约版本兼容性、版本演进
+- **测试工具**：Pact、Dredd 等契约测试工具
 
 ---
 
@@ -492,7 +529,88 @@ spec:
 
 ---
 
-## 7. 相关文档
+## 7. 形式化定义与理论基础
+
+### 7.1 API 契约测试形式化模型
+
+**定义 7.1（API 契约测试）**：API 契约测试是一个四元组：
+
+```text
+API_Contract_Testing = ⟨Contract_Definition, Provider_Verification, Consumer_Verification, Version_Management⟩
+```
+
+其中：
+
+- **Contract_Definition**：契约定义 `Contract_Definition: API → Contract`
+- **Provider_Verification**：提供者验证
+  `Provider_Verification: Contract × Provider → Bool`
+- **Consumer_Verification**：消费者验证
+  `Consumer_Verification: Contract × Consumer → Bool`
+- **Version_Management**：版本管理 `Version_Management: Contract → Version`
+
+**定义 7.2（契约一致性）**：契约一致性是一个函数：
+
+```text
+Contract_Consistency: Contract × Implementation → Bool
+```
+
+**定理 7.1（契约测试有效性）**：如果契约测试通过，则实现符合契约：
+
+```text
+Pass(Contract_Test(Contract, Implementation)) ⟹ Consistent(Contract, Implementation)
+```
+
+**证明**：如果契约测试通过，则实现满足契约的所有要求，因此实现符合契约。□
+
+### 7.2 契约验证形式化
+
+**定义 7.3（提供者验证）**：提供者验证是一个函数：
+
+```text
+Verify_Provider: Contract × Provider_API → {Pass, Fail}
+```
+
+**定义 7.4（消费者验证）**：消费者验证是一个函数：
+
+```text
+Verify_Consumer: Contract × Consumer_Usage → {Pass, Fail}
+```
+
+**定理 7.2（契约验证完备性）**：提供者和消费者验证都通过，则契约完备：
+
+```text
+Verify_Provider(Contract, Provider) = Pass ∧ Verify_Consumer(Contract, Consumer) = Pass ⟹ Complete(Contract)
+```
+
+**证明**：如果提供者和消费者验证都通过，则契约满足双方需求，因此契约完备。□
+
+### 7.3 契约兼容性形式化
+
+**定义 7.5（契约兼容性）**：契约兼容性是一个函数：
+
+```text
+Contract_Compatibility: Contract₁ × Contract₂ → {Compatible, Incompatible}
+```
+
+**定义 7.6（向后兼容）**：向后兼容是一个函数：
+
+```text
+Backward_Compatible: Contract_Old × Contract_New → Bool
+```
+
+**定理 7.3（向后兼容性传递）**：如果 Contract₂ 向后兼容 Contract₁，Contract₃ 向
+后兼容 Contract₂，则 Contract₃ 向后兼容 Contract₁：
+
+```text
+Backward_Compatible(C₁, C₂) ∧ Backward_Compatible(C₂, C₃) ⟹ Backward_Compatible(C₁, C₃)
+```
+
+**证明**：向后兼容性具有传递性，因此如果 C₂ 兼容 C₁，C₃ 兼容 C₂，则 C₃ 兼容
+C₁。□
+
+---
+
+## 8. 相关文档
 
 - **[API 测试规范](../15-api-testing/api-testing.md)** - 契约测试
 - **[API 版本管理](../23-api-versioning/api-versioning.md)** - 契约版本管理

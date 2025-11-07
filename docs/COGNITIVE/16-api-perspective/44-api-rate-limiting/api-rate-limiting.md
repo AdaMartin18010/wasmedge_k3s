@@ -7,6 +7,7 @@
 - [📑 目录](#-目录)
 - [1. 概述](#1-概述)
   - [1.1 限流架构](#11-限流架构)
+  - [1.2 API 限流在 API 规范中的位置](#12-api-限流在-api-规范中的位置)
 - [2. 限流算法](#2-限流算法)
   - [2.1 令牌桶算法](#21-令牌桶算法)
   - [2.2 漏桶算法](#22-漏桶算法)
@@ -31,7 +32,20 @@
 ## 1. 概述
 
 API 限流规范定义了 API 在限流场景下的设计和实现，从限流算法到限流策略，从分布式
-限流到动态限流。
+限流到动态限流。本文档基于形式化方法，提供严格的数学定义和推理论证，分析 API 限
+流的理论基础和实践方法。
+
+**参考标准**：
+
+- [Rate Limiting Best Practices](https://cloud.google.com/architecture/rate-limiting-strategies-techniques) -
+  限流最佳实践
+- [Token Bucket Algorithm](https://en.wikipedia.org/wiki/Token_bucket) - 令牌桶
+  算法
+- [Leaky Bucket Algorithm](https://en.wikipedia.org/wiki/Leaky_bucket) - 漏桶算
+  法
+- [RFC 6585](https://tools.ietf.org/html/rfc6585) - HTTP 429 状态码
+- [Distributed Rate Limiting](https://redis.io/docs/manual/patterns/rate-limiting/) -
+  分布式限流
 
 ### 1.1 限流架构
 
@@ -44,6 +58,25 @@ API 请求（API Request）
   ↓
 限流存储（Rate Limit Store）
 ```
+
+### 1.2 API 限流在 API 规范中的位置
+
+根据 API 规范四元组定义（见
+[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+，API 限流主要涉及 Governance 维度：
+
+```text
+API_Spec = ⟨IDL, Governance, Observability, Security⟩
+                    ↑
+            Rate Limiting (implementation)
+```
+
+API 限流在 API 规范中提供：
+
+- **流量控制**：限制 API 请求速率
+- **资源保护**：防止 API 过载
+- **公平性**：确保资源公平分配
+- **动态调整**：根据负载动态调整限流策略
 
 ---
 

@@ -7,6 +7,7 @@
 - [📑 目录](#-目录)
 - [1. 概述](#1-概述)
   - [1.1 安全审计框架](#11-安全审计框架)
+  - [1.2 API 安全审计在 API 规范中的位置](#12-api-安全审计在-api-规范中的位置)
 - [2. 安全审计流程](#2-安全审计流程)
   - [2.1 审计阶段](#21-审计阶段)
   - [2.2 审计检查清单](#22-审计检查清单)
@@ -27,14 +28,31 @@
 - [7. 安全审计报告](#7-安全审计报告)
   - [7.1 漏洞报告格式](#71-漏洞报告格式)
   - [7.2 安全评分](#72-安全评分)
-- [8. 相关文档](#8-相关文档)
+- [8. 形式化定义与理论基础](#8-形式化定义与理论基础)
+  - [8.1 API 安全审计形式化模型](#81-api-安全审计形式化模型)
+  - [8.2 漏洞检测形式化](#82-漏洞检测形式化)
+  - [8.3 安全评分形式化](#83-安全评分形式化)
+- [9. 相关文档](#9-相关文档)
 
 ---
 
 ## 1. 概述
 
 API 安全审计规范定义了 API 在不同运行时环境下的安全审计流程和方法，从漏洞扫描到
-渗透测试，从安全配置审计到合规性检查。
+渗透测试，从安全配置审计到合规性检查。本文档基于形式化方法，提供严格的数学定义和
+推理论证，分析 API 安全审计的理论基础和实践方法。
+
+**参考标准**：
+
+- [OWASP API Security Top 10](https://owasp.org/www-project-api-security/) -
+  OWASP API 安全 Top 10
+- [NIST Cybersecurity Framework](https://www.nist.gov/cyberframework) - NIST 网
+  络安全框架
+- [CIS Benchmarks](https://www.cisecurity.org/cis-benchmarks/) - CIS 安全基准
+- [Security Audit Best Practices](https://www.sans.org/reading-room/whitepapers/auditing/security-audit-best-practices-33538) -
+  安全审计最佳实践
+- [Penetration Testing Standards](https://www.owasp.org/index.php/OWASP_Testing_Project) -
+  渗透测试标准
 
 ### 1.1 安全审计框架
 
@@ -49,6 +67,25 @@ API 安全审计规范定义了 API 在不同运行时环境下的安全审计�
   ↓
 安全审计报告（漏洞报告、修复建议）
 ```
+
+### 1.2 API 安全审计在 API 规范中的位置
+
+根据 API 规范四元组定义（见
+[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+，API 安全审计主要涉及 Security 维度：
+
+```text
+API_Spec = ⟨IDL, Governance, Observability, Security⟩
+                                                ↑
+                                    API Security Audit (implementation)
+```
+
+API 安全审计在 API 规范中提供：
+
+- **漏洞扫描**：静态代码分析、依赖漏洞扫描
+- **配置审计**：安全配置检查、权限审计
+- **渗透测试**：漏洞利用、攻击模拟
+- **合规性审计**：标准符合性、最佳实践检查
 
 ---
 
@@ -388,7 +425,87 @@ spec:
 
 ---
 
-## 8. 相关文档
+## 8. 形式化定义与理论基础
+
+### 8.1 API 安全审计形式化模型
+
+**定义 8.1（API 安全审计）**：API 安全审计是一个四元组：
+
+```text
+API_Security_Audit = ⟨Vulnerability_Scan, Config_Audit, Penetration_Test, Compliance_Check⟩
+```
+
+其中：
+
+- **Vulnerability_Scan**：漏洞扫描 `Vulnerability_Scan: API → Vulnerability[]`
+- **Config_Audit**：配置审计 `Config_Audit: API → Config_Issue[]`
+- **Penetration_Test**：渗透测试 `Penetration_Test: API → Security_Issue[]`
+- **Compliance_Check**：合规性检查
+  `Compliance_Check: API × Standard → Compliance_Result`
+
+**定义 8.2（安全审计结果）**：安全审计结果是一个函数：
+
+```text
+Security_Audit_Result(API) = ⟨Vulnerabilities, Config_Issues, Penetration_Issues, Compliance_Status⟩
+```
+
+**定理 8.1（安全审计完备性）**：如果所有审计维度都通过，则 API 安全：
+
+```text
+∀d ∈ {Vulnerability, Config, Penetration, Compliance}: Pass(Audit(API, d)) ⟹ Secure(API)
+```
+
+**证明**：如果所有审计维度都通过，则 API 在各个方面都安全，因此 API 安全。□
+
+### 8.2 漏洞检测形式化
+
+**定义 8.3（漏洞检测）**：漏洞检测是一个函数：
+
+```text
+Detect_Vulnerability: API × Vulnerability_Pattern → Bool
+```
+
+**定义 8.4（漏洞严重性）**：漏洞严重性是一个函数：
+
+```text
+Vulnerability_Severity: Vulnerability → {Critical, High, Medium, Low}
+```
+
+**定理 8.2（漏洞风险）**：漏洞严重性越高，风险越大：
+
+```text
+Severity(V₁) > Severity(V₂) ⟹ Risk(V₁) > Risk(V₂)
+```
+
+**证明**：漏洞严重性越高，对 API 安全的影响越大，因此风险越大。□
+
+### 8.3 安全评分形式化
+
+**定义 8.5（安全评分）**：安全评分是一个函数：
+
+```text
+Security_Score(API) = 1 - (Σ(Severity_Weight(v) × Count(v)) / Total_Weight)
+```
+
+其中 `Severity_Weight` 是严重性权重。
+
+**定义 8.6（安全等级）**：安全等级是一个函数：
+
+```text
+Security_Level(API) = f(Security_Score(API))
+```
+
+**定理 8.3（安全评分与等级）**：安全评分越高，安全等级越高：
+
+```text
+Security_Score(API₁) > Security_Score(API₂) ⟹ Security_Level(API₁) > Security_Level(API₂)
+```
+
+**证明**：安全评分越高，漏洞越少或严重性越低，因此安全等级越高。□
+
+---
+
+## 9. 相关文档
 
 - **[API 安全规范](../11-api-security/api-security.md)** - 安全实现规范
 - **[API 合规性规范](../22-api-compliance/api-compliance.md)** - 合规性要求

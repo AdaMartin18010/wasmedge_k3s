@@ -7,6 +7,7 @@
 - [📑 目录](#-目录)
 - [1. 概述](#1-概述)
   - [1.1 基准测试维度](#11-基准测试维度)
+  - [1.2 API 性能基准测试在 API 规范中的位置](#12-api-性能基准测试在-api-规范中的位置)
 - [2. 基准测试指标](#2-基准测试指标)
   - [2.1 延迟指标](#21-延迟指标)
   - [2.2 吞吐量指标](#22-吞吐量指标)
@@ -27,14 +28,30 @@
 - [7. 基准测试报告](#7-基准测试报告)
   - [7.1 性能对比报告](#71-性能对比报告)
   - [7.2 成本效率报告](#72-成本效率报告)
-- [8. 相关文档](#8-相关文档)
+- [8. 形式化定义与理论基础](#8-形式化定义与理论基础)
+  - [8.1 API 性能基准形式化模型](#81-api-性能基准形式化模型)
+  - [8.2 性能指标形式化](#82-性能指标形式化)
+  - [8.3 基准对比形式化](#83-基准对比形式化)
+- [9. 相关文档](#9-相关文档)
 
 ---
 
 ## 1. 概述
 
 API 性能基准测试规范定义了 API 在不同运行时环境下的性能基准测试方法和标准，从延
-迟到吞吐量，从资源使用到成本效率。
+迟到吞吐量，从资源使用到成本效率。本文档基于形式化方法，提供严格的数学定义和推理
+论证，分析 API 性能基准测试的理论基础和实践方法。
+
+**参考标准**：
+
+- [k6 Documentation](https://k6.io/docs/) - k6 性能测试工具
+- [Apache Bench](https://httpd.apache.org/docs/2.4/programs/ab.html) - Apache
+  Bench 工具
+- [wrk](https://github.com/wg/wrk) - wrk 高性能 HTTP 基准测试工具
+- [Performance Testing Best Practices](https://www.guru99.com/performance-testing.html) -
+  性能测试最佳实践
+- [Benchmarking Standards](https://www.ietf.org/rfc/rfc2544.txt) - RFC 2544 基准
+  测试标准
 
 ### 1.1 基准测试维度
 
@@ -47,6 +64,25 @@ API 性能基准测试规范定义了 API 在不同运行时环境下的性能�
   ↓
 成本效率（成本/QPS、成本/请求）
 ```
+
+### 1.2 API 性能基准测试在 API 规范中的位置
+
+根据 API 规范四元组定义（见
+[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+，API 性能基准测试主要涉及 Observability 和 Performance 维度：
+
+```text
+API_Spec = ⟨IDL, Governance, Observability, Security⟩
+                            ↑
+            API Benchmarks (implementation)
+```
+
+API 性能基准测试在 API 规范中提供：
+
+- **性能指标**：延迟、吞吐量、资源使用等性能指标
+- **基准对比**：不同运行时的性能对比
+- **成本效率**：性能与成本的比值分析
+- **性能优化**：基于基准测试的性能优化建议
 
 ---
 
@@ -296,7 +332,85 @@ wrk -t4 -c100 -d30s \
 
 ---
 
-## 8. 相关文档
+## 8. 形式化定义与理论基础
+
+### 8.1 API 性能基准形式化模型
+
+**定义 8.1（API 性能基准）**：API 性能基准是一个四元组：
+
+```text
+API_Benchmark = ⟨Latency, Throughput, Resource_Usage, Cost_Efficiency⟩
+```
+
+其中：
+
+- **Latency**：延迟指标 `Latency: ⟨P50, P95, P99⟩`
+- **Throughput**：吞吐量指标 `Throughput: QPS | TPS`
+- **Resource_Usage**：资源使用 `Resource_Usage: ⟨CPU, Memory, Network⟩`
+- **Cost_Efficiency**：成本效率 `Cost_Efficiency: Cost / Throughput`
+
+**定义 8.2（基准测试）**：基准测试是一个函数：
+
+```text
+Benchmark: API × Runtime × Workload → Benchmark_Result
+```
+
+**定理 8.1（基准测试可重复性）**：基准测试结果可重复：
+
+```text
+Benchmark(API, Runtime, Workload) = Result₁ ∧ Benchmark(API, Runtime, Workload) = Result₂ ⟹ Result₁ ≈ Result₂
+```
+
+**证明**：在相同条件下，基准测试应该产生相似的结果，因此结果可重复。□
+
+### 8.2 性能指标形式化
+
+**定义 8.3（延迟分布）**：延迟分布是一个函数：
+
+```text
+Latency_Distribution: API → ⟨P50, P95, P99⟩
+```
+
+**定义 8.4（吞吐量）**：吞吐量是一个函数：
+
+```text
+Throughput(API, Workload) = |Requests| / Duration
+```
+
+**定理 8.2（性能指标相关性）**：延迟和吞吐量相关：
+
+```text
+Latency(API) ↑ ⟹ Throughput(API) ↓
+```
+
+**证明**：延迟越高，单位时间内处理的请求越少，因此吞吐量越低。□
+
+### 8.3 基准对比形式化
+
+**定义 8.5（基准对比）**：基准对比是一个函数：
+
+```text
+Compare_Benchmarks: Benchmark₁ × Benchmark₂ → Comparison_Result
+```
+
+**定义 8.6（性能优势）**：性能优势是一个函数：
+
+```text
+Performance_Advantage(Benchmark₁, Benchmark₂) = Throughput(Benchmark₁) / Throughput(Benchmark₂)
+```
+
+**定理 8.3（性能优势传递性）**：如果 Benchmark₁ 优于 Benchmark₂，Benchmark₂ 优于
+Benchmark₃，则 Benchmark₁ 优于 Benchmark₃：
+
+```text
+Performance_Advantage(Benchmark₁, Benchmark₂) > 1 ∧ Performance_Advantage(Benchmark₂, Benchmark₃) > 1 ⟹ Performance_Advantage(Benchmark₁, Benchmark₃) > 1
+```
+
+**证明**：根据性能优势的定义和传递性，可以得出此结论。□
+
+---
+
+## 9. 相关文档
 
 - **[API 性能优化](../14-api-performance/api-performance.md)** - 性能优化策略
 - **[API 测试规范](../15-api-testing/api-testing.md)** - 性能测试方法

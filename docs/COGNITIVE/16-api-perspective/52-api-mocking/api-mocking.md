@@ -7,6 +7,7 @@
 - [📑 目录](#-目录)
 - [1. 概述](#1-概述)
   - [1.1 Mock 架构](#11-mock-架构)
+  - [1.2 API Mock 在 API 规范中的位置](#12-api-mock-在-api-规范中的位置)
 - [2. Mock 服务](#2-mock-服务)
   - [2.1 WireMock](#21-wiremock)
   - [2.2 MockServer](#22-mockserver)
@@ -24,14 +25,28 @@
 - [6. Mock 管理](#6-mock-管理)
   - [6.1 Mock 存储](#61-mock-存储)
   - [6.2 Mock 版本管理](#62-mock-版本管理)
-- [7. 相关文档](#7-相关文档)
+- [7. 形式化定义与理论基础](#7-形式化定义与理论基础)
+  - [7.1 API Mock 形式化模型](#71-api-mock-形式化模型)
+  - [7.2 Mock 数据生成形式化](#72-mock-数据生成形式化)
+  - [7.3 Mock 验证形式化](#73-mock-验证形式化)
+- [8. 相关文档](#8-相关文档)
 
 ---
 
 ## 1. 概述
 
 API 模拟/Mock 规范定义了 API 在 Mock 场景下的设计和实现，从 Mock 服务到 Mock 数
-据生成，从 Mock 场景到 Mock 验证。
+据生成，从 Mock 场景到 Mock 验证。本文档基于形式化方法，提供严格的数学定义和推理
+论证，分析 API Mock 的理论基础和实践方法。
+
+**参考标准**：
+
+- [WireMock](https://wiremock.org/) - WireMock Mock 服务
+- [MockServer](https://www.mock-server.com/) - MockServer Mock 服务
+- [Prism](https://stoplight.io/open-source/prism) - Prism OpenAPI Mock
+- [Mocking Best Practices](https://martinfowler.com/articles/mocksArentStubs.html) -
+  Mock 最佳实践
+- [Test Doubles](https://martinfowler.com/bliki/TestDouble.html) - 测试替身
 
 ### 1.1 Mock 架构
 
@@ -44,6 +59,25 @@ Mock 响应（Mock Response）
   ↓
 Mock 验证（Mock Verification）
 ```
+
+### 1.2 API Mock 在 API 规范中的位置
+
+根据 API 规范四元组定义（见
+[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+，API Mock 主要涉及 IDL 维度：
+
+```text
+API_Spec = ⟨IDL, Governance, Observability, Security⟩
+            ↑
+    Mocking (implementation)
+```
+
+API Mock 在 API 规范中提供：
+
+- **Mock 服务**：WireMock、MockServer、Prism
+- **Mock 数据**：数据生成器、模板引擎
+- **Mock 场景**：成功场景、错误场景、延迟场景
+- **Mock 验证**：请求验证、调用验证
 
 ---
 
@@ -413,7 +447,84 @@ spec:
 
 ---
 
-## 7. 相关文档
+## 7. 形式化定义与理论基础
+
+### 7.1 API Mock 形式化模型
+
+**定义 7.1（API Mock）**：API Mock 是一个四元组：
+
+```text
+API_Mock = ⟨Mock_Service, Data_Generator, Scenario_Manager, Verification⟩
+```
+
+其中：
+
+- **Mock_Service**：Mock 服务 `Mock_Service: Request → Mock_Response`
+- **Data_Generator**：数据生成器 `Data_Generator: Schema → Mock_Data`
+- **Scenario_Manager**：场景管理器 `Scenario_Manager: Scenario → Mock_Behavior`
+- **Verification**：验证 `Verification: Request × Mock_Service → Bool`
+
+**定义 7.2（Mock 响应）**：Mock 响应是一个函数：
+
+```text
+Mock_Response: Request × Scenario → Response
+```
+
+**定理 7.1（Mock 正确性）**：如果 Mock 符合契约，则 Mock 正确：
+
+```text
+Compliant(Mock, Contract) ⟹ Correct(Mock)
+```
+
+**证明**：如果 Mock 符合契约，则 Mock 响应满足契约要求，因此 Mock 正确。□
+
+### 7.2 Mock 数据生成形式化
+
+**定义 7.3（数据生成）**：数据生成是一个函数：
+
+```text
+Generate_Data: Schema × Constraints → Data
+```
+
+**定义 7.4（数据真实性）**：数据真实性是一个函数：
+
+```text
+Data_Realism: Mock_Data → [0, 1]
+```
+
+**定理 7.2（数据生成有效性）**：如果数据生成器正确，则生成的数据有效：
+
+```text
+Correct(Data_Generator) ⟹ Valid(Generate_Data(Schema))
+```
+
+**证明**：如果数据生成器正确，则生成的数据符合 Schema，因此数据有效。□
+
+### 7.3 Mock 验证形式化
+
+**定义 7.5（请求验证）**：请求验证是一个函数：
+
+```text
+Verify_Request: Request × Expected_Request → Bool
+```
+
+**定义 7.6（调用验证）**：调用验证是一个函数：
+
+```text
+Verify_Calls: Mock_Service × Expected_Calls → Bool
+```
+
+**定理 7.3（Mock 验证完备性）**：如果请求和调用验证都通过，则 Mock 使用正确：
+
+```text
+Verify_Request(Request) = Pass ∧ Verify_Calls(Mock) = Pass ⟹ Correct_Usage(Mock)
+```
+
+**证明**：如果请求和调用验证都通过，则 Mock 被正确使用，因此使用正确。□
+
+---
+
+## 8. 相关文档
 
 - **[API 测试规范](../15-api-testing/api-testing.md)** - Mock 测试
 - **[API 契约测试](../51-api-contract-testing/api-contract-testing.md)** - 契约

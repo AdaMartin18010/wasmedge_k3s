@@ -7,6 +7,7 @@
 - [📑 目录](#-目录)
 - [1. 概述](#1-概述)
   - [1.1 缓存架构](#11-缓存架构)
+  - [1.2 API 缓存在 API 规范中的位置](#12-api-缓存在-api-规范中的位置)
 - [2. 缓存策略](#2-缓存策略)
   - [2.1 HTTP 缓存](#21-http-缓存)
   - [2.2 应用层缓存](#22-应用层缓存)
@@ -31,7 +32,19 @@
 ## 1. 概述
 
 API 缓存规范定义了 API 在缓存场景下的设计和实现，从缓存策略到缓存键设计，从缓存
-失效到缓存一致性。
+失效到缓存一致性。本文档基于形式化方法，提供严格的数学定义和推理论证，分析 API
+缓存的理论基础和实践方法。
+
+**参考标准**：
+
+- [HTTP Caching](https://httpwg.org/specs/rfc7234.html) - HTTP 缓存规范
+- [Cache-Control Headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control) -
+  Cache-Control 头
+- [Redis Caching](https://redis.io/docs/manual/patterns/cache/) - Redis 缓存模式
+- [Cache Invalidation](https://martinfowler.com/bliki/CacheInvalidation.html) -
+  缓存失效策略
+- [CDN Caching](https://www.cloudflare.com/learning/cdn/what-is-caching/) - CDN
+  缓存
 
 ### 1.1 缓存架构
 
@@ -44,6 +57,25 @@ API 请求（API Request）
   ↓
 数据源（Data Source）
 ```
+
+### 1.2 API 缓存在 API 规范中的位置
+
+根据 API 规范四元组定义（见
+[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+，API 缓存主要涉及 Observability 和 Performance 维度：
+
+```text
+API_Spec = ⟨IDL, Governance, Observability, Security⟩
+                                ↑
+                    Caching (implementation)
+```
+
+API 缓存在 API 规范中提供：
+
+- **性能优化**：减少 API 响应时间
+- **资源节约**：减少后端负载
+- **可用性提升**：缓存失效时的降级方案
+- **一致性保证**：缓存一致性策略
 
 ---
 

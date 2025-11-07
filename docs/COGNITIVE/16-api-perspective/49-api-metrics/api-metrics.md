@@ -26,14 +26,30 @@
 - [6. 指标导出](#6-指标导出)
   - [6.1 Prometheus 导出](#61-prometheus-导出)
   - [6.2 OTLP 导出](#62-otlp-导出)
-- [7. 相关文档](#7-相关文档)
+- [7. 形式化定义与理论基础](#7-形式化定义与理论基础)
+  - [7.1 API 指标形式化模型](#71-api-指标形式化模型)
+  - [7.2 RED 指标形式化](#72-red-指标形式化)
+  - [7.3 USE 指标形式化](#73-use-指标形式化)
+- [8. 相关文档](#8-相关文档)
 
 ---
 
 ## 1. 概述
 
 API 指标规范定义了 API 在指标监控场景下的设计和实现，从指标类型到 RED/USE 指标，
-从业务指标到指标导出。
+从业务指标到指标导出。本文档基于形式化方法，提供严格的数学定义和推理论证，分析
+API 指标的理论基础和实践方法。
+
+**参考标准**：
+
+- [Prometheus Metrics](https://prometheus.io/docs/concepts/metric_types/) -
+  Prometheus 指标类型
+- [OpenMetrics](https://openmetrics.io/) - OpenMetrics 标准
+- [RED Method](https://www.weave.works/blog/the-red-method-key-metrics-for-microservices-architecture/) -
+  RED 方法
+- [USE Method](http://www.brendangregg.com/usemethod.html) - USE 方法
+- [OTLP Metrics](https://opentelemetry.io/docs/specs/otel/metrics/) -
+  OpenTelemetry 指标规范
 
 ### 1.1 指标架构
 
@@ -424,7 +440,86 @@ func setupOTLPMetrics() (*metric.MeterProvider, error) {
 
 ---
 
-## 7. 相关文档
+## 7. 形式化定义与理论基础
+
+### 7.1 API 指标形式化模型
+
+**定义 7.1（API 指标）**：API 指标是一个四元组：
+
+```text
+API_Metrics = ⟨Metric_Types, RED_Metrics, USE_Metrics, Business_Metrics⟩
+```
+
+其中：
+
+- **Metric_Types**：指标类型
+  `Metric_Types: {Counter, Gauge, Histogram, Summary}`
+- **RED_Metrics**：RED 指标 `RED_Metrics = ⟨Rate, Errors, Duration⟩`
+- **USE_Metrics**：USE 指标 `USE_Metrics = ⟨Utilization, Saturation, Errors⟩`
+- **Business_Metrics**：业务指标 `Business_Metrics: Business_Event → Metric`
+
+**定义 7.2（指标采集）**：指标采集是一个函数：
+
+```text
+Collect_Metrics: API × Time → Metrics
+```
+
+**定理 7.1（指标完备性）**：如果 RED 和 USE 指标都采集，则监控完备：
+
+```text
+RED_Metrics(API) ∧ USE_Metrics(API) ⟹ Complete_Monitoring(API)
+```
+
+**证明**：RED 和 USE 指标覆盖了 API 的关键方面，因此监控完备。□
+
+### 7.2 RED 指标形式化
+
+**定义 7.3（RED 指标）**：RED 指标是一个三元组：
+
+```text
+RED_Metrics = ⟨Rate, Errors, Duration⟩
+```
+
+其中：
+
+- **Rate**：速率 `Rate = |Requests| / Time`
+- **Errors**：错误数 `Errors = |Error_Requests|`
+- **Duration**：持续时间 `Duration = Response_Time`
+
+**定理 7.2（RED 指标相关性）**：错误率与速率相关：
+
+```text
+Error_Rate = Errors / Rate
+```
+
+**证明**：错误率是错误数除以总请求数，而速率是请求数除以时间，因此错误率等于错误
+数除以速率。□
+
+### 7.3 USE 指标形式化
+
+**定义 7.4（USE 指标）**：USE 指标是一个三元组：
+
+```text
+USE_Metrics = ⟨Utilization, Saturation, Errors⟩
+```
+
+其中：
+
+- **Utilization**：利用率 `Utilization = Used_Resources / Total_Resources`
+- **Saturation**：饱和度 `Saturation = Queue_Length`
+- **Errors**：错误数 `Errors = |Errors|`
+
+**定理 7.3（USE 指标预警）**：利用率和饱和度高时预警：
+
+```text
+Utilization > Threshold ∨ Saturation > Threshold ⟹ Alert(API)
+```
+
+**证明**：利用率和饱和度高时，系统接近容量上限，需要预警。□
+
+---
+
+## 8. 相关文档
 
 - **[API 可观测性规范](../12-api-observability/api-observability.md)** - 指标可
   观测性

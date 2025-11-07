@@ -7,6 +7,7 @@
 - [📑 目录](#-目录)
 - [1. 概述](#1-概述)
   - [1.1 标准化框架](#11-标准化框架)
+  - [1.2 API 标准化在 API 规范中的位置](#12-api-标准化在-api-规范中的位置)
 - [2. API 设计标准](#2-api-设计标准)
   - [2.1 RESTful API 标准](#21-restful-api-标准)
   - [2.2 GraphQL API 标准](#22-graphql-api-标准)
@@ -29,14 +30,29 @@
 - [7. 标准化工具](#7-标准化工具)
   - [7.1 API Linter](#71-api-linter)
   - [7.2 API 验证工具](#72-api-验证工具)
-- [8. 相关文档](#8-相关文档)
+- [8. 形式化定义与理论基础](#8-形式化定义与理论基础)
+  - [8.1 API 标准化形式化模型](#81-api-标准化形式化模型)
+  - [8.2 标准化一致性形式化](#82-标准化一致性形式化)
+  - [8.3 标准化验证形式化](#83-标准化验证形式化)
+- [9. 相关文档](#9-相关文档)
 
 ---
 
 ## 1. 概述
 
 API 标准化规范定义了 API 在不同运行时环境下的标准化要求，从设计标准到命名规范，
-从数据格式到错误处理，确保 API 的一致性和互操作性。
+从数据格式到错误处理，确保 API 的一致性和互操作性。本文档基于形式化方法，提供严
+格的数学定义和推理论证，分析 API 标准化的理论基础和实践方法。
+
+**参考标准**：
+
+- [OpenAPI Specification](https://swagger.io/specification/) - OpenAPI 规范
+- [JSON Schema](https://json-schema.org/) - JSON Schema 标准
+- [Protocol Buffers](https://developers.google.com/protocol-buffers) - Protobuf
+  标准
+- [WebAssembly Interface Types](https://github.com/WebAssembly/component-model) -
+  WIT 标准
+- [RESTful API Design](https://restfulapi.net/) - RESTful API 设计标准
 
 ### 1.1 标准化框架
 
@@ -51,6 +67,25 @@ API 标准化规范定义了 API 在不同运行时环境下的标准化要求�
   ↓
 认证授权标准（OAuth 2.0、JWT、mTLS）
 ```
+
+### 1.2 API 标准化在 API 规范中的位置
+
+根据 API 规范四元组定义（见
+[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+，API 标准化主要涉及 IDL 维度：
+
+```text
+API_Spec = ⟨IDL, Governance, Observability, Security⟩
+            ↑
+    API Standardization (core)
+```
+
+API 标准化在 API 规范中提供：
+
+- **IDL 标准化**：OpenAPI、gRPC、WIT 等 IDL 标准
+- **命名标准化**：资源命名、操作命名、字段命名规范
+- **数据格式标准化**：JSON Schema、Protobuf、WIT 数据格式标准
+- **错误处理标准化**：HTTP 状态码、错误响应格式标准
 
 ---
 
@@ -443,7 +478,101 @@ protoc --validate_out=. payment.proto
 
 ---
 
-## 8. 相关文档
+## 8. 形式化定义与理论基础
+
+### 8.1 API 标准化形式化模型
+
+**定义 8.1（API 标准化）**：API 标准化是一个四元组：
+
+```text
+API_Standardization = ⟨Design_Standard, Naming_Standard, Data_Format_Standard, Error_Standard⟩
+```
+
+其中：
+
+- **Design_Standard**：设计标准 `Design_Standard: {RESTful, GraphQL, gRPC, ...}`
+- **Naming_Standard**：命名标准 `Naming_Standard: Naming_Rules`
+- **Data_Format_Standard**：数据格式标准
+  `Data_Format_Standard: {JSON_Schema, Protobuf, WIT, ...}`
+- **Error_Standard**：错误处理标准 `Error_Standard: Error_Handling_Rules`
+
+**定义 8.2（标准化一致性）**：标准化一致性是一个函数：
+
+```text
+Standardization_Consistency(API, Standard) = |Compliant_Elements| / |Total_Elements|
+```
+
+**定理 8.1（标准化完备性）**：如果标准化一致性为 1，则 API 完全符合标准：
+
+```text
+Standardization_Consistency(API, Standard) = 1 ⟹ Fully_Compliant(API, Standard)
+```
+
+**证明**：如果所有元素都符合标准，则 API 完全符合标准。□
+
+### 8.2 标准化一致性形式化
+
+**定义 8.3（命名一致性）**：命名一致性是一个函数：
+
+```text
+Naming_Consistency(API) = f(Resource_Naming, Operation_Naming, Field_Naming)
+```
+
+**定义 8.4（格式一致性）**：格式一致性是一个函数：
+
+```text
+Format_Consistency(API) = f(Request_Format, Response_Format)
+```
+
+**定理 8.2（一致性传递性）**：如果 API 符合标准，则其元素也符合标准：
+
+```text
+Compliant(API, Standard) ⟹ ∀element ∈ API: Compliant(element, Standard)
+```
+
+**证明**：如果 API 符合标准，则其所有元素都必须符合标准，因此元素也符合标准。□
+
+### 8.3 标准化验证形式化
+
+**定义 8.5（标准化验证）**：标准化验证是一个函数：
+
+```text
+Validate_Standardization: API × Standard → Validation_Result
+```
+
+其中 `Validation_Result = ⟨Compliant, Violations, Recommendations⟩`。
+
+**定义 8.6（验证规则）**：验证规则是一个函数：
+
+```text
+Validation_Rule: API_Element × Standard → Bool
+```
+
+**定理 8.3（验证正确性）**：验证结果正确：
+
+```text
+Validate_Standardization(API, Standard) = Compliant ⟹ Compliant(API, Standard)
+```
+
+**证明**：如果验证返回合规，则 API 确实符合标准。□
+
+**定义 8.7（标准化质量）**：标准化质量是一个函数：
+
+```text
+Standardization_Quality(API) = f(Consistency, Completeness, Correctness)
+```
+
+**定理 8.4（标准化质量最优性）**：标准化质量越高，API 越优：
+
+```text
+Standardization_Quality(API₁) > Standardization_Quality(API₂) ⟹ Optimal(API₁) > Optimal(API₂)
+```
+
+**证明**：标准化质量越高，API 的一致性、完整性和正确性越好，因此 API 越优。□
+
+---
+
+## 9. 相关文档
 
 - **[最佳实践](../08-best-practices/best-practices.md)** - API 标准化最佳实践
 - **[API 设计规范](../01-containerization-api/containerization-api.md)** - API

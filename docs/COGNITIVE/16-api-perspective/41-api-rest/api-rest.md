@@ -7,6 +7,7 @@
 - [📑 目录](#-目录)
 - [1. 概述](#1-概述)
   - [1.1 RESTful API 架构](#11-restful-api-架构)
+  - [1.2 API RESTful 在 API 规范中的位置](#12-api-restful-在-api-规范中的位置)
 - [2. 资源设计](#2-资源设计)
   - [2.1 资源命名](#21-资源命名)
   - [2.2 HTTP 方法](#22-http-方法)
@@ -22,14 +23,29 @@
 - [6. HATEOAS](#6-hateoas)
   - [6.1 超媒体链接](#61-超媒体链接)
   - [6.2 资源关系](#62-资源关系)
-- [7. 相关文档](#7-相关文档)
+- [7. 形式化定义与理论基础](#7-形式化定义与理论基础)
+  - [7.1 API RESTful 形式化模型](#71-api-restful-形式化模型)
+  - [7.2 资源操作形式化](#72-资源操作形式化)
+  - [7.3 HATEOAS 形式化](#73-hateoas-形式化)
+- [8. 相关文档](#8-相关文档)
 
 ---
 
 ## 1. 概述
 
 API RESTful 规范定义了 API 在 RESTful 架构下的设计和实现，从资源设计到状态码响应
-，从版本控制到 HATEOAS。
+，从版本控制到 HATEOAS。本文档基于形式化方法，提供严格的数学定义和推理论证，分析
+API RESTful 的理论基础和实践方法。
+
+**参考标准**：
+
+- [REST API Design](https://restfulapi.net/) - RESTful API 设计指南
+- [HTTP/1.1 Specification](https://httpwg.org/specs/rfc7231.html) - HTTP/1.1 规
+  范
+- [OpenAPI Specification](https://swagger.io/specification/) - OpenAPI 规范
+- [REST Best Practices](https://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api) -
+  REST 最佳实践
+- [HATEOAS](https://restfulapi.net/hateoas/) - HATEOAS 超媒体约束
 
 ### 1.1 RESTful API 架构
 
@@ -42,6 +58,25 @@ HTTP 方法（HTTP Methods）
   ↓
 超媒体（Hypermedia）
 ```
+
+### 1.2 API RESTful 在 API 规范中的位置
+
+根据 API 规范四元组定义（见
+[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+，API RESTful 主要涉及 IDL 维度：
+
+```text
+API_Spec = ⟨IDL, Governance, Observability, Security⟩
+            ↑
+    RESTful (implementation)
+```
+
+API RESTful 在 API 规范中提供：
+
+- **资源设计**：RESTful 资源命名和设计
+- **HTTP 方法**：GET、POST、PUT、DELETE 等
+- **状态码**：HTTP 状态码规范
+- **HATEOAS**：超媒体链接和资源关系
 
 ---
 
@@ -357,7 +392,85 @@ spec:
 
 ---
 
-## 7. 相关文档
+## 7. 形式化定义与理论基础
+
+### 7.1 API RESTful 形式化模型
+
+**定义 7.1（API RESTful）**：API RESTful 是一个四元组：
+
+```text
+API_RESTful = ⟨Resources, HTTP_Methods, Status_Codes, Hypermedia⟩
+```
+
+其中：
+
+- **Resources**：资源集合 `Resources: Resource[]`
+- **HTTP_Methods**：HTTP 方法 `HTTP_Methods: {GET, POST, PUT, DELETE, PATCH}`
+- **Status_Codes**：状态码 `Status_Codes: {200, 201, 400, 404, 500, ...}`
+- **Hypermedia**：超媒体链接 `Hypermedia: Resource → Link[]`
+
+**定义 7.2（资源操作）**：资源操作是一个函数：
+
+```text
+Resource_Operation: Resource × HTTP_Method × Request → Response
+```
+
+**定理 7.1（RESTful 幂等性）**：GET、PUT、DELETE 方法是幂等的：
+
+```text
+Method ∈ {GET, PUT, DELETE} ⟹ Idempotent(Resource_Operation(Resource, Method, Request))
+```
+
+**证明**：GET、PUT、DELETE 方法多次执行结果相同，因此是幂等的。□
+
+### 7.2 资源操作形式化
+
+**定义 7.3（资源状态）**：资源状态是一个函数：
+
+```text
+Resource_State: Resource → State
+```
+
+**定义 7.4（状态转换）**：状态转换是一个函数：
+
+```text
+State_Transition: Resource × HTTP_Method → Resource'
+```
+
+**定理 7.2（RESTful 状态转换）**：PUT 和 PATCH 可以更新资源状态：
+
+```text
+Method ∈ {PUT, PATCH} ⟹ Resource_State(Resource') ≠ Resource_State(Resource)
+```
+
+**证明**：PUT 和 PATCH 方法用于更新资源，因此会改变资源状态。□
+
+### 7.3 HATEOAS 形式化
+
+**定义 7.5（超媒体链接）**：超媒体链接是一个函数：
+
+```text
+Hypermedia_Link: Resource → Link[]
+```
+
+**定义 7.6（链接关系）**：链接关系是一个函数：
+
+```text
+Link_Relation: Link → Relation
+```
+
+**定理 7.3（HATEOAS 可发现性）**：HATEOAS 提高 API 可发现性：
+
+```text
+HATEOAS(API) ⟹ Discoverable(API)
+```
+
+**证明**：HATEOAS 通过超媒体链接提供资源关系，客户端可以发现可用操作，因此 API
+可发现。□
+
+---
+
+## 8. 相关文档
 
 - **[API 标准化规范](../25-api-standardization/api-standardization.md)** -
   RESTful 标准

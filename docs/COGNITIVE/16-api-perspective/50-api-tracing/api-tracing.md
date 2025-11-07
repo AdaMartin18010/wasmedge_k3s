@@ -7,6 +7,7 @@
 - [📑 目录](#-目录)
 - [1. 概述](#1-概述)
   - [1.1 追踪架构](#11-追踪架构)
+  - [1.2 API 追踪在 API 规范中的位置](#12-api-追踪在-api-规范中的位置)
 - [2. 追踪上下文](#2-追踪上下文)
   - [2.1 Trace ID](#21-trace-id)
   - [2.2 Span ID](#22-span-id)
@@ -24,14 +25,29 @@
 - [6. 追踪导出](#6-追踪导出)
   - [6.1 OTLP 导出](#61-otlp-导出)
   - [6.2 Jaeger 导出](#62-jaeger-导出)
-- [7. 相关文档](#7-相关文档)
+- [7. 形式化定义与理论基础](#7-形式化定义与理论基础)
+  - [7.1 API 追踪形式化模型](#71-api-追踪形式化模型)
+  - [7.2 Span 操作形式化](#72-span-操作形式化)
+  - [7.3 分布式追踪形式化](#73-分布式追踪形式化)
+- [8. 相关文档](#8-相关文档)
 
 ---
 
 ## 1. 概述
 
 API 追踪规范定义了 API 在分布式追踪场景下的设计和实现，从追踪上下文到 Span 操作
-，从分布式追踪到追踪导出。
+，从分布式追踪到追踪导出。本文档基于形式化方法，提供严格的数学定义和推理论证，分
+析 API 追踪的理论基础和实践方法。
+
+**参考标准**：
+
+- [OpenTelemetry Tracing](https://opentelemetry.io/docs/specs/otel/trace/) -
+  OpenTelemetry 追踪规范
+- [W3C Trace Context](https://www.w3.org/TR/trace-context/) - W3C 追踪上下文
+- [Jaeger](https://www.jaegertracing.io/) - Jaeger 分布式追踪
+- [Zipkin](https://zipkin.io/) - Zipkin 分布式追踪
+- [Distributed Tracing Best Practices](https://opentelemetry.io/docs/specs/otel/trace/api/) -
+  分布式追踪最佳实践
 
 ### 1.1 追踪架构
 
@@ -44,6 +60,25 @@ Span 创建（Span Creation）
   ↓
 追踪导出（Trace Export）
 ```
+
+### 1.2 API 追踪在 API 规范中的位置
+
+根据 API 规范四元组定义（见
+[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+，API 追踪主要涉及 Observability 维度：
+
+```text
+API_Spec = ⟨IDL, Governance, Observability, Security⟩
+                                ↑
+                    Tracing (implementation)
+```
+
+API 追踪在 API 规范中提供：
+
+- **追踪上下文**：Trace ID、Span ID、Baggage
+- **Span 操作**：Span 创建、属性、事件
+- **分布式追踪**：上下文传播、跨服务追踪
+- **追踪采样**：采样策略、采样配置
 
 ---
 
@@ -404,7 +439,85 @@ func setupJaegerTracing() (*trace.TracerProvider, error) {
 
 ---
 
-## 7. 相关文档
+## 7. 形式化定义与理论基础
+
+### 7.1 API 追踪形式化模型
+
+**定义 7.1（API 追踪）**：API 追踪是一个四元组：
+
+```text
+API_Tracing = ⟨Trace_Context, Span_Operations, Context_Propagation, Sampling⟩
+```
+
+其中：
+
+- **Trace_Context**：追踪上下文 `Trace_Context = ⟨Trace_ID, Span_ID, Baggage⟩`
+- **Span_Operations**：Span 操作 `Span_Operations: Operation → Span`
+- **Context_Propagation**：上下文传播
+  `Context_Propagation: Trace_Context → Propagated_Context`
+- **Sampling**：采样 `Sampling: Trace → {Sample, Drop}`
+
+**定义 7.2（Trace）**：Trace 是一个函数：
+
+```text
+Trace: Request → Span_Tree
+```
+
+**定理 7.1（追踪完整性）**：如果上下文传播正确，则 Trace 完整：
+
+```text
+Context_Propagation(Trace) ⟹ Complete(Trace)
+```
+
+**证明**：如果上下文传播正确，则所有服务都会记录 Span，因此 Trace 完整。□
+
+### 7.2 Span 操作形式化
+
+**定义 7.3（Span）**：Span 是一个函数：
+
+```text
+Span = ⟨Name, Start_Time, End_Time, Attributes, Events⟩
+```
+
+**定义 7.4（Span 关系）**：Span 关系是一个函数：
+
+```text
+Span_Relation: Span × Span → {Child, Follows_From}
+```
+
+**定理 7.2（Span 树结构）**：Trace 形成树结构：
+
+```text
+Trace = Tree(Span_Root, Span_Children)
+```
+
+**证明**：每个 Span 有一个父 Span（根 Span 除外），因此 Trace 形成树结构。□
+
+### 7.3 分布式追踪形式化
+
+**定义 7.5（上下文传播）**：上下文传播是一个函数：
+
+```text
+Propagate_Context: Trace_Context × Service → Trace_Context'
+```
+
+**定义 7.6（追踪采样率）**：追踪采样率是一个函数：
+
+```text
+Sampling_Rate = |Sampled_Traces| / |Total_Traces|
+```
+
+**定理 7.3（采样率与存储成本）**：采样率越低，存储成本越低：
+
+```text
+Sampling_Rate(Tracing₁) < Sampling_Rate(Tracing₂) ⟹ Storage_Cost(Tracing₁) < Storage_Cost(Tracing₂)
+```
+
+**证明**：采样率越低，存储的 Trace 越少，因此存储成本越低。□
+
+---
+
+## 8. 相关文档
 
 - **[API 可观测性规范](../12-api-observability/api-observability.md)** - 追踪可
   观测性

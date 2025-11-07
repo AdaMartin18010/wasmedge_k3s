@@ -7,6 +7,7 @@
 - [📑 目录](#-目录)
 - [1. 概述](#1-概述)
   - [1.1 日志架构](#11-日志架构)
+  - [1.2 API 日志在 API 规范中的位置](#12-api-日志在-api-规范中的位置)
 - [2. 日志格式](#2-日志格式)
   - [2.1 结构化日志](#21-结构化日志)
   - [2.2 日志字段](#22-日志字段)
@@ -22,14 +23,25 @@
 - [6. 日志查询](#6-日志查询)
   - [6.1 查询语法](#61-查询语法)
   - [6.2 日志分析](#62-日志分析)
-- [7. 相关文档](#7-相关文档)
+- [7. 形式化定义与理论基础](#7-形式化定义与理论基础)
+  - [7.1 API 日志形式化模型](#71-api-日志形式化模型)
+  - [7.2 日志级别形式化](#72-日志级别形式化)
+  - [7.3 日志查询形式化](#73-日志查询形式化)
+- [8. 相关文档](#8-相关文档)
 
 ---
 
 ## 1. 概述
 
-API 日志规范定义了 API 在日志场景下的设计和实现，从日志格式到日志级别，从日志采
-集到日志查询。
+API 日志规范定义了 API 在日志场景下的设计和实现，从日志格式到日志级别，从日志采集到日志查询。本文档基于形式化方法，提供严格的数学定义和推理论证，分析 API 日志的理论基础和实践方法。
+
+**参考标准**：
+
+- [Structured Logging](https://www.structuredlogs.org/) - 结构化日志规范
+- [Log Levels](https://en.wikipedia.org/wiki/Log_level) - 日志级别标准
+- [OTLP Logs](https://opentelemetry.io/docs/specs/otel/logs/) - OpenTelemetry 日志规范
+- [Loki](https://grafana.com/docs/loki/latest/) - Loki 日志聚合
+- [Logging Best Practices](https://www.loggly.com/ultimate-guide/node-logging-basics/) - 日志最佳实践
 
 ### 1.1 日志架构
 
@@ -44,6 +56,23 @@ API 请求（API Request）
   ↓
 日志查询（Log Query）
 ```
+
+### 1.2 API 日志在 API 规范中的位置
+
+根据 API 规范四元组定义（见 [API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)），API 日志主要涉及 Observability 维度：
+
+```text
+API_Spec = ⟨IDL, Governance, Observability, Security⟩
+                                ↑
+                    Logging (implementation)
+```
+
+API 日志在 API 规范中提供：
+
+- **日志格式**：结构化日志、日志字段
+- **日志级别**：DEBUG、INFO、WARN、ERROR
+- **日志采集**：容器日志、应用日志
+- **日志查询**：日志检索、日志分析
 
 ---
 
@@ -450,7 +479,84 @@ spec:
 
 ---
 
-## 7. 相关文档
+## 7. 形式化定义与理论基础
+
+### 7.1 API 日志形式化模型
+
+**定义 7.1（API 日志）**：API 日志是一个四元组：
+
+```text
+API_Logging = ⟨Log_Format, Log_Level, Log_Collection, Log_Storage⟩
+```
+
+其中：
+
+- **Log_Format**：日志格式 `Log_Format: Event → Structured_Log`
+- **Log_Level**：日志级别 `Log_Level: {DEBUG, INFO, WARN, ERROR}`
+- **Log_Collection**：日志采集 `Log_Collection: Log → Collected_Log`
+- **Log_Storage**：日志存储 `Log_Storage: Log → Stored_Log`
+
+**定义 7.2（日志记录）**：日志记录是一个函数：
+
+```text
+Log_Record: Event × Level × Context → Log
+```
+
+**定理 7.1（日志完整性）**：如果日志级别正确，则日志完整：
+
+```text
+Appropriate_Level(Event) ⟹ Complete(Log_Record(Event))
+```
+
+**证明**：如果日志级别正确，则重要事件都会被记录，因此日志完整。□
+
+### 7.2 日志级别形式化
+
+**定义 7.3（日志级别序）**：日志级别序关系：
+
+```text
+DEBUG < INFO < WARN < ERROR
+```
+
+**定义 7.4（日志过滤）**：日志过滤是一个函数：
+
+```text
+Filter_Logs: Log[] × Level → Log[]
+```
+
+**定理 7.2（日志级别过滤）**：日志级别过滤保留重要日志：
+
+```text
+Filter_Logs(Logs, Level) = {log | Log_Level(log) ≥ Level}
+```
+
+**证明**：日志级别过滤保留级别大于等于阈值的日志，因此保留重要日志。□
+
+### 7.3 日志查询形式化
+
+**定义 7.5（日志查询）**：日志查询是一个函数：
+
+```text
+Query_Logs: Query × Log_Store → Log[]
+```
+
+**定义 7.6（查询效率）**：查询效率是一个函数：
+
+```text
+Query_Efficiency = |Matching_Logs| / |Scanned_Logs|
+```
+
+**定理 7.3（索引提高查询效率）**：索引提高日志查询效率：
+
+```text
+Indexed(Log_Store) ⟹ Query_Efficiency(Query_Logs) ↑
+```
+
+**证明**：索引可以快速定位匹配的日志，减少扫描范围，因此查询效率提高。□
+
+---
+
+## 8. 相关文档
 
 - **[API 可观测性规范](../12-api-observability/api-observability.md)** - 日志可
   观测性
