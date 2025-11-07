@@ -7,6 +7,7 @@
 - [📑 目录](#-目录)
 - [1. 概述](#1-概述)
   - [1.1 错误处理架构](#11-错误处理架构)
+  - [1.2 API 错误处理在 API 规范中的位置](#12-api-错误处理在-api-规范中的位置)
 - [2. 错误分类](#2-错误分类)
   - [2.1 HTTP 状态码](#21-http-状态码)
   - [2.2 业务错误码](#22-业务错误码)
@@ -39,6 +40,38 @@ API 错误处理规范定义了 API 在错误处理场景下的设计和实现�
 式，从错误处理策略到错误监控。本文档基于形式化方法，提供严格的数学定义和推理论证
 ，分析 API 错误处理的理论基础和实践方法。
 
+### 1.1 错误处理架构
+
+```text
+API 调用（API Call）
+  ↓
+错误检测（Error Detection）
+  ↓
+错误分类（Error Classification）
+  ↓
+错误响应（Error Response）
+  ↓
+错误处理（Error Handling）
+```
+
+### 1.2 API 错误处理在 API 规范中的位置
+
+API 错误处理在 API 规范四元组 `⟨IDL, Governance, Observability, Security⟩` 中主
+要涉及 **IDL** 和 **Observability** 维度：
+
+```text
+API_Spec = ⟨IDL, Governance, Observability, Security⟩
+            ↑                        ↑
+    API 错误处理涉及 IDL 和 Observability
+```
+
+API 错误处理在 API 规范中提供：
+
+- **错误分类**：HTTP 状态码、业务错误码、错误严重性
+- **错误响应**：标准错误格式、错误详情、错误追踪
+- **错误策略**：重试、降级、恢复
+- **错误监控**：错误指标、错误告警
+
 **参考标准**：
 
 - [HTTP Status Codes](https://httpwg.org/specs/rfc7231.html#status.codes) - HTTP
@@ -50,18 +83,6 @@ API 错误处理规范定义了 API 在错误处理场景下的设计和实现�
 - [Structured Error Responses](https://jsonapi.org/format/#errors) - JSON API 错
   误格式
 - [Error Tracking](https://sentry.io/) - Sentry 错误追踪
-
-### 1.1 错误处理架构
-
-```text
-API 请求（API Request）
-  ↓
-错误检测（Error Detection）
-  ↓
-错误分类（Error Classification）
-  ↓
-错误响应（Error Response）
-```
 
 ---
 

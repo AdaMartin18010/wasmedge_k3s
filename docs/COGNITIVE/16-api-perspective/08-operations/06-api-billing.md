@@ -7,6 +7,7 @@
 - [📑 目录](#-目录)
 - [1. 概述](#1-概述)
   - [1.1 计费架构](#11-计费架构)
+  - [1.2 API 计费在 API 规范中的位置](#12-api-计费在-api-规范中的位置)
 - [2. 计费模型](#2-计费模型)
   - [2.1 按请求计费](#21-按请求计费)
   - [2.2 按使用量计费](#22-按使用量计费)
@@ -39,6 +40,36 @@ API 计费规范定义了 API 在计费场景下的设计和实现，从计费�
 略到计费记录。本文档基于形式化方法，提供严格的数学定义和推理论证，分析 API 计费
 的理论基础和实践方法。
 
+### 1.1 计费架构
+
+```text
+API 使用（API Usage）
+  ↓
+使用量采集（Usage Collection）
+  ↓
+计费计算（Billing Calculation）
+  ↓
+账单生成（Bill Generation）
+```
+
+### 1.2 API 计费在 API 规范中的位置
+
+API 计费在 API 规范四元组 `⟨IDL, Governance, Observability, Security⟩` 中主要涉
+及 **Observability** 和 **Governance** 维度：
+
+```text
+API_Spec = ⟨IDL, Governance, Observability, Security⟩
+                    ↑                        ↑
+        API 计费涉及 Governance 和 Observability
+```
+
+API 计费在 API 规范中提供：
+
+- **计费模型**：按请求、按使用量、订阅
+- **计费指标**：API 调用次数、数据传输量、计算资源
+- **计费策略**：免费额度、分层定价、动态定价
+- **计费监控**：使用量监控、成本分析
+
 **参考标准**：
 
 - [API Billing Models](https://www.postman.com/api-platform/api-monetization/) -
@@ -51,18 +82,6 @@ API 计费规范定义了 API 在计费场景下的设计和实现，从计费�
   计费最佳实践
 - [Metered Billing](https://www.zuora.com/products/billing/metered-billing/) -
   计量计费
-
-### 1.1 计费架构
-
-```text
-API 调用（API Call）
-  ↓
-使用量记录（Usage Recording）
-  ↓
-计费计算（Billing Calculation）
-  ↓
-账单生成（Invoice Generation）
-```
 
 ---
 

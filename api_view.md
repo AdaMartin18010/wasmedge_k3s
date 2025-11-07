@@ -1159,78 +1159,78 @@ message SmartClause {
 
 #### 理论基础文档
 
-- **[API 理论基础](docs/COGNITIVE/16-api-perspective/79-api-theoretical-foundation/api-theoretical-foundation.md)**
+- **[API 理论基础](docs/COGNITIVE/16-api-perspective/00-foundation/02-theoretical-foundation.md)**
   ⭐ - 形式化证明、概念矩阵、思维导图、知识图谱
-- **[API 规范形式化定义](docs/COGNITIVE/16-api-perspective/07-formalization/formalization.md)**
+- **[API 规范形式化定义](docs/COGNITIVE/16-api-perspective/00-foundation/01-formalization.md)**
   ⭐ - API 规范形式化基础
 
 #### 核心基础文档（01-07）
 
-- **[容器化 API 规范](docs/COGNITIVE/16-api-perspective/01-containerization-api/containerization-api.md)** -
+- **[容器化 API 规范](docs/COGNITIVE/16-api-perspective/01-runtime/01-containerization.md)** -
   OCI Runtime Spec、Kubernetes CRD
-- **[沙盒化 API 规范](docs/COGNITIVE/16-api-perspective/02-sandboxing-api/sandboxing-api.md)** -
+- **[沙盒化 API 规范](docs/COGNITIVE/16-api-perspective/01-runtime/02-sandboxing.md)** -
   Seccomp、gVisor、Firecracker
-- **[WASM 化 API 规范](docs/COGNITIVE/16-api-perspective/03-wasm-api/wasm-api.md)** -
+- **[WASM 化 API 规范](docs/COGNITIVE/16-api-perspective/01-runtime/03-wasm.md)** -
   WASI、WIT 组件模型
-- **[2025 技术生态](docs/COGNITIVE/16-api-perspective/04-2025-ecosystem/2025-ecosystem.md)** -
+- **[2025 技术生态](docs/COGNITIVE/16-api-perspective/00-foundation/06-2025-ecosystem.md)** -
   Kubernetes 1.30+、OTLP、eBPF
-- **[技术对比矩阵](docs/COGNITIVE/16-api-perspective/05-comparison-matrix/comparison-matrix.md)** -
+- **[技术对比矩阵](docs/COGNITIVE/16-api-perspective/00-foundation/03-comparison-matrix.md)** -
   多维度技术对比
-- **[API 演进路径](docs/COGNITIVE/16-api-perspective/06-api-evolution/api-evolution.md)** -
+- **[API 演进路径](docs/COGNITIVE/16-api-perspective/00-foundation/04-api-evolution.md)** -
   API 演进模型和迁移路径
-- **[形式化定义](docs/COGNITIVE/16-api-perspective/07-formalization/formalization.md)** -
+- **[形式化定义](docs/COGNITIVE/16-api-perspective/00-foundation/01-formalization.md)** -
   API 规范形式化表达
 
 #### 实践与增强文档（08-18）
 
-- **[最佳实践](docs/COGNITIVE/16-api-perspective/08-best-practices/best-practices.md)** -
+- **[最佳实践](docs/COGNITIVE/16-api-perspective/00-foundation/05-best-practices.md)** -
   容器化、沙盒化、WASM 化最佳实践
-- **[Kubernetes 1.30+ API](docs/COGNITIVE/16-api-perspective/09-kubernetes-130-api/kubernetes-130-api.md)** -
+- **[Kubernetes 1.30+ API](docs/COGNITIVE/16-api-perspective/01-runtime/04-kubernetes-130.md)** -
   RuntimeClass、HPA、ValidatingAdmissionPolicy
-- **[实际案例研究](docs/COGNITIVE/16-api-perspective/10-case-studies/case-studies.md)** -
+- **[实际案例研究](docs/COGNITIVE/16-api-perspective/00-foundation/07-case-studies.md)** -
   5 个实际案例
-- **[API 安全规范](docs/COGNITIVE/16-api-perspective/11-api-security/api-security.md)** -
+- **[API 安全规范](docs/COGNITIVE/16-api-perspective/05-security/01-api-security.md)** -
   RBAC、Seccomp、WASI 能力模型
-- **[API 可观测性规范](docs/COGNITIVE/16-api-perspective/12-api-observability/api-observability.md)** -
+- **[API 可观测性规范](docs/COGNITIVE/16-api-perspective/04-observability/01-api-observability.md)** -
   OTLP、eBPF、WASI Tracing
-- **[API 治理规范](docs/COGNITIVE/16-api-perspective/13-api-governance/api-governance.md)** -
+- **[API 治理规范](docs/COGNITIVE/16-api-perspective/03-governance/05-api-governance.md)** -
   Admission Webhook、OPA、Service Mesh
-- **[API 性能优化](docs/COGNITIVE/16-api-perspective/14-api-performance/api-performance.md)** -
+- **[API 性能优化](docs/COGNITIVE/16-api-perspective/07-performance/01-api-performance.md)** -
   序列化、网络、缓存优化
-- **[API 测试规范](docs/COGNITIVE/16-api-perspective/15-api-testing/api-testing.md)** -
+- **[API 测试规范](docs/COGNITIVE/16-api-perspective/06-quality/01-api-testing.md)** -
   契约测试、集成测试、性能测试
-- **[API 文档生成](docs/COGNITIVE/16-api-perspective/16-api-documentation/api-documentation.md)** -
+- **[API 文档生成](docs/COGNITIVE/16-api-perspective/10-tooling/02-api-documentation.md)** -
   OpenAPI、gRPC、WIT 文档生成
-- **[API 网关](docs/COGNITIVE/16-api-perspective/17-api-gateway/api-gateway.md)** -
+- **[API 网关](docs/COGNITIVE/16-api-perspective/10-tooling/03-api-gateway.md)** -
   Kubernetes Ingress、Istio Gateway、WASM 插件
-- **[API 故障排查](docs/COGNITIVE/16-api-perspective/18-api-troubleshooting/api-troubleshooting.md)** -
+- **[API 故障排查](docs/COGNITIVE/16-api-perspective/04-observability/06-api-troubleshooting.md)** -
   容器化、沙盒化、WASM 故障排查
 
 #### 管理与优化文档（19-30）
 
-- **[API 迁移指南](docs/COGNITIVE/16-api-perspective/19-api-migration/api-migration.md)** -
+- **[API 迁移指南](docs/COGNITIVE/16-api-perspective/08-operations/01-api-migration.md)** -
   迁移策略、风险评估、回滚计划
-- **[API 监控告警](docs/COGNITIVE/16-api-perspective/20-api-monitoring/api-monitoring.md)** -
+- **[API 监控告警](docs/COGNITIVE/16-api-perspective/04-observability/05-api-monitoring.md)** -
   Prometheus、Grafana、Alertmanager
-- **[API 成本优化](docs/COGNITIVE/16-api-perspective/21-api-cost-optimization/api-cost-optimization.md)** -
+- **[API 成本优化](docs/COGNITIVE/16-api-perspective/07-performance/03-api-cost-optimization.md)** -
   资源优化、运行时对比、混部策略
-- **[API 合规性规范](docs/COGNITIVE/16-api-perspective/22-api-compliance/api-compliance.md)** -
+- **[API 合规性规范](docs/COGNITIVE/16-api-perspective/05-security/07-api-compliance.md)** -
   ISO 27001、GDPR、SOC 2
-- **[API 版本管理](docs/COGNITIVE/16-api-perspective/23-api-versioning/api-versioning.md)** -
+- **[API 版本管理](docs/COGNITIVE/16-api-perspective/03-governance/01-api-versioning.md)** -
   语义化版本、兼容性、迁移
-- **[API 生命周期管理](docs/COGNITIVE/16-api-perspective/24-api-lifecycle/api-lifecycle.md)** -
+- **[API 生命周期管理](docs/COGNITIVE/16-api-perspective/03-governance/02-api-lifecycle.md)** -
   设计、开发、测试、部署、运营、退役
-- **[API 标准化规范](docs/COGNITIVE/16-api-perspective/25-api-standardization/api-standardization.md)** -
+- **[API 标准化规范](docs/COGNITIVE/16-api-perspective/03-governance/03-api-standardization.md)** -
   设计标准、命名规范、数据格式
-- **[API 生态系统集成](docs/COGNITIVE/16-api-perspective/26-api-ecosystem/api-ecosystem.md)** -
+- **[API 生态系统集成](docs/COGNITIVE/16-api-perspective/03-governance/04-api-ecosystem.md)** -
   Service Mesh、可观测性、CI/CD
-- **[API 性能基准测试](docs/COGNITIVE/16-api-perspective/27-api-benchmarks/api-benchmarks.md)** -
+- **[API 性能基准测试](docs/COGNITIVE/16-api-perspective/06-quality/06-api-benchmarks.md)** -
   延迟、吞吐量、资源使用、成本效率
-- **[API 安全审计](docs/COGNITIVE/16-api-perspective/28-api-security-audit/api-security-audit.md)** -
+- **[API 安全审计](docs/COGNITIVE/16-api-perspective/05-security/05-api-security-audit.md)** -
   漏洞扫描、渗透测试、合规性审计
-- **[API 质量保证](docs/COGNITIVE/16-api-perspective/29-api-quality-assurance/api-quality-assurance.md)** -
+- **[API 质量保证](docs/COGNITIVE/16-api-perspective/06-quality/05-api-quality-assurance.md)** -
   代码质量、API 质量、文档质量
-- **[API 开发工具链](docs/COGNITIVE/16-api-perspective/30-api-dev-toolchain/api-dev-toolchain.md)** -
+- **[API 开发工具链](docs/COGNITIVE/16-api-perspective/10-tooling/01-api-dev-toolchain.md)** -
   设计工具、代码生成、测试工具
 
 > **完整文档列表**：更多专题文档请参考

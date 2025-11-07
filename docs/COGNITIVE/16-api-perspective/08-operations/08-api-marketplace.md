@@ -7,6 +7,7 @@
 - [📑 目录](#-目录)
 - [1. 概述](#1-概述)
   - [1.1 市场架构](#11-市场架构)
+  - [1.2 API 市场在 API 规范中的位置](#12-api-市场在-api-规范中的位置)
 - [2. API 发布](#2-api-发布)
   - [2.1 API 注册](#21-api-注册)
   - [2.2 API 分类](#22-api-分类)
@@ -38,6 +39,34 @@ API 市场规范定义了 API 在市场场景下的设计和实现，从 API 发
 订阅到 API 使用。本文档基于形式化方法，提供严格的数学定义和推理论证，分析 API 市
 场的理论基础和实践方法。
 
+### 1.1 市场架构
+
+```text
+API 提供者（API Provider）
+  ↓
+API 市场（API Marketplace）
+  ↓
+API 消费者（API Consumer）
+```
+
+### 1.2 API 市场在 API 规范中的位置
+
+API 市场在 API 规范四元组 `⟨IDL, Governance, Observability, Security⟩` 中主要涉
+及 **Governance** 维度：
+
+```text
+API_Spec = ⟨IDL, Governance, Observability, Security⟩
+                    ↑
+        API 市场属于 Governance 维度
+```
+
+API 市场在 API 规范中提供：
+
+- **API 发布**：API 注册、分类、定价
+- **API 发现**：搜索、推荐、评分
+- **API 订阅**：订阅流程、订阅管理
+- **市场治理**：API 审核、质量保证
+
 **参考标准**：
 
 - [API Marketplace](https://www.postman.com/api-platform/api-network/) - API 市
@@ -49,18 +78,6 @@ API 市场规范定义了 API 在市场场景下的设计和实现，从 API 发
 - [Marketplace Best Practices](https://www.gartner.com/en/documents/3883166) -
   市场最佳实践
 - [API Catalog](https://www.postman.com/api-platform/api-catalog/) - API 目录
-
-### 1.1 市场架构
-
-```text
-API 提供者（API Provider）
-  ↓
-API 发布（API Publishing）
-  ↓
-API 市场（API Marketplace）
-  ↓
-API 消费者（API Consumer）
-```
 
 ---
 

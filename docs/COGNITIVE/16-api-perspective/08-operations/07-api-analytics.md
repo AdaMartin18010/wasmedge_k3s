@@ -7,6 +7,7 @@
 - [📑 目录](#-目录)
 - [1. 概述](#1-概述)
   - [1.1 分析架构](#11-分析架构)
+  - [1.2 API 分析在 API 规范中的位置](#12-api-分析在-api-规范中的位置)
 - [2. 分析类型](#2-分析类型)
   - [2.1 使用分析](#21-使用分析)
   - [2.2 性能分析](#22-性能分析)
@@ -37,6 +38,36 @@ API 分析规范定义了 API 在分析场景下的设计和实现，从分析�
 析到分析报告。本文档基于形式化方法，提供严格的数学定义和推理论证，分析 API 分析
 的理论基础和实践方法。
 
+### 1.1 分析架构
+
+```text
+API 调用（API Calls）
+  ↓
+数据收集（Data Collection）
+  ↓
+数据分析（Data Analysis）
+  ↓
+分析报告（Analytics Report）
+```
+
+### 1.2 API 分析在 API 规范中的位置
+
+API 分析在 API 规范四元组 `⟨IDL, Governance, Observability, Security⟩` 中主要涉
+及 **Observability** 维度：
+
+```text
+API_Spec = ⟨IDL, Governance, Observability, Security⟩
+                        ↑
+        API 分析属于 Observability 维度
+```
+
+API 分析在 API 规范中提供：
+
+- **分析类型**：使用分析、性能分析、错误分析
+- **数据收集**：事件收集、指标收集
+- **数据分析**：聚合分析、趋势分析
+- **分析报告**：实时报告、历史报告
+
 **参考标准**：
 
 - [API Analytics](https://www.postman.com/api-platform/api-analytics/) - API 分
@@ -49,20 +80,6 @@ API 分析规范定义了 API 在分析场景下的设计和实现，从分析�
   实时分析
 - [Analytics Visualization](https://www.tableau.com/learn/articles/data-visualization) -
   分析可视化
-
-### 1.1 分析架构
-
-```text
-API 事件（API Events）
-  ↓
-数据收集（Data Collection）
-  ↓
-数据处理（Data Processing）
-  ↓
-数据分析（Data Analysis）
-  ↓
-分析报告（Analytics Reports）
-```
 
 ---
 

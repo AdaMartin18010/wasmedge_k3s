@@ -7,6 +7,7 @@
 - [📑 目录](#-目录)
 - [1. 概述](#1-概述)
   - [1.1 API 管理架构](#11-api-管理架构)
+  - [1.2 API 管理在 API 规范中的位置](#12-api-管理在-api-规范中的位置)
 - [2. API 注册](#2-api-注册)
   - [2.1 API 注册流程](#21-api-注册流程)
   - [2.2 API 元数据](#22-api-元数据)
@@ -36,6 +37,40 @@ API 管理规范定义了 API 在管理场景下的设计和实现，从 API 注
 发布到 API 监控。本文档基于形式化方法，提供严格的数学定义和推理论证，分析 API 管
 理的理论基础和实践方法。
 
+### 1.1 API 管理架构
+
+```text
+API 管理平台（API Management Platform）
+  ↓
+API 注册（API Registration）
+  ↓
+API 目录（API Catalog）
+  ↓
+API 发布（API Publishing）
+  ↓
+API 监控（API Monitoring）
+  ↓
+API 分析（API Analytics）
+```
+
+### 1.2 API 管理在 API 规范中的位置
+
+API 管理在 API 规范四元组 `⟨IDL, Governance, Observability, Security⟩` 中主要涉
+及 **Governance** 维度：
+
+```text
+API_Spec = ⟨IDL, Governance, Observability, Security⟩
+            ↑
+    API 管理属于 Governance 维度
+```
+
+API 管理在 API 规范中提供：
+
+- **注册管理**：API 注册、元数据管理、版本管理
+- **发现机制**：API 目录、搜索、分类
+- **发布流程**：API 发布、版本控制、生命周期管理
+- **监控分析**：使用监控、性能监控、趋势分析
+
 **参考标准**：
 
 - [API Management Platforms](https://www.gartner.com/en/information-technology/glossary/api-management-platform) -
@@ -47,18 +82,6 @@ API 管理规范定义了 API 在管理场景下的设计和实现，从 API 注
   析
 - [API Lifecycle Management](https://www.postman.com/api-platform/api-lifecycle/) -
   API 生命周期管理
-
-### 1.1 API 管理架构
-
-```text
-API 注册（API Registration）
-  ↓
-API 发现（API Discovery）
-  ↓
-API 发布（API Publishing）
-  ↓
-API 监控（API Monitoring）
-```
 
 ---
 

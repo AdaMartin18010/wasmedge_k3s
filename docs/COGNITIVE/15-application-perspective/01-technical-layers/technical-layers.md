@@ -9,10 +9,10 @@
 - [一、四层演进模型](#一四层演进模型)
   - [1.0 形式化定义](#10-形式化定义)
   - [1.1 层次说明](#11-层次说明)
-    - [L₄：业务应用层（Application Layer）](#l业务应用层application-layer)
-    - [L₃：运行时管理层（Runtime Management Layer）](#l运行时管理层runtime-management-layer)
-    - [L₂：沙箱技术层（Sandbox Technology Layer）](#l沙箱技术层sandbox-technology-layer)
-    - [L₁：硬件基础设施层（Hardware Infrastructure Layer）](#l硬件基础设施层hardware-infrastructure-layer)
+    - [L4：业务应用层（Application Layer）](#l4业务应用层application-layer)
+    - [L3：运行时管理层（Runtime Management Layer）](#l3运行时管理层runtime-management-layer)
+    - [L2：沙箱技术层（Sandbox Technology Layer）](#l2沙箱技术层sandbox-technology-layer)
+    - [L1：硬件基础设施层（Hardware Infrastructure Layer）](#l1硬件基础设施层hardware-infrastructure-layer)
 - [二、各层技术栈详解](#二各层技术栈详解)
   - [2.1 业务应用层（L4）](#21-业务应用层l4)
   - [2.2 运行时管理层（L3）](#22-运行时管理层l3)
@@ -165,7 +165,7 @@ Granularity(L₄) < Granularity(L₃) < Granularity(L₂) < Granularity(L₁)
 
 ### 1.1 层次说明
 
-#### L₄：业务应用层（Application Layer）
+#### L4：业务应用层（Application Layer）
 
 **形式化定义**：
 
@@ -197,7 +197,7 @@ Monolithic → Microservices → Serverless
   Granularity(App_monolithic) > Granularity(App_microservices) > Granularity(App_serverless)
 ```
 
-#### L₃：运行时管理层（Runtime Management Layer）
+#### L3：运行时管理层（Runtime Management Layer）
 
 **形式化定义**：
 
@@ -232,7 +232,7 @@ L₃ = {RT | RT ∈ RuntimeManagers ∧ ∃g: RT → L₂ ∧ ∃h: L₄ → RT}
 
 **证明**：由接口抽象的定义，只要接口一致，应用行为一致。□
 
-#### L₂：沙箱技术层（Sandbox Technology Layer）
+#### L2：沙箱技术层（Sandbox Technology Layer）
 
 **形式化定义**：
 
@@ -285,7 +285,7 @@ Isolation(WASM) ≥ Isolation(Container) ≥ Isolation(VM)
 
 因此不等式成立。□
 
-#### L₁：硬件基础设施层（Hardware Infrastructure Layer）
+#### L1：硬件基础设施层（Hardware Infrastructure Layer）
 
 **形式化定义**：
 

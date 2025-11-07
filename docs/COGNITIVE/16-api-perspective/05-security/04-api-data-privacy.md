@@ -7,6 +7,7 @@
 - [📑 目录](#-目录)
 - [1. 概述](#1-概述)
   - [1.1 数据隐私架构](#11-数据隐私架构)
+  - [1.2 API 数据隐私在 API 规范中的位置](#12-api-数据隐私在-api-规范中的位置)
 - [2. 隐私法规](#2-隐私法规)
   - [2.1 GDPR](#21-gdpr)
   - [2.2 CCPA](#22-ccpa)
@@ -39,16 +40,6 @@ API 数据隐私规范定义了 API 在数据隐私场景下的设计和实现�
 从隐私保护到用户权利。本文档基于形式化方法，提供严格的数学定义和推理论证，分析
 API 数据隐私的理论基础和实践方法。
 
-**参考标准**：
-
-- [GDPR](https://gdpr.eu/) - 通用数据保护条例
-- [CCPA](https://oag.ca.gov/privacy/ccpa) - 加州消费者隐私法案
-- [HIPAA](https://www.hhs.gov/hipaa/index.html) - 健康保险流通与责任法案
-- [Data Privacy Best Practices](https://www.privacypolicies.com/blog/privacy-by-design/) -
-  数据隐私最佳实践
-- [Privacy by Design](https://www.ipc.on.ca/wp-content/uploads/Resources/7foundationalprinciples.pdf) -
-  隐私设计原则
-
 ### 1.1 数据隐私架构
 
 ```text
@@ -58,8 +49,36 @@ API 数据隐私的理论基础和实践方法。
   ↓
 隐私保护（Privacy Protection）
   ↓
-数据访问（Data Access）
+合规检查（Compliance Check）
 ```
+
+### 1.2 API 数据隐私在 API 规范中的位置
+
+API 数据隐私在 API 规范四元组 `⟨IDL, Governance, Observability, Security⟩` 中主
+要涉及 **Security** 维度：
+
+```text
+API_Spec = ⟨IDL, Governance, Observability, Security⟩
+                                    ↑
+            API 数据隐私属于 Security 维度
+```
+
+API 数据隐私在 API 规范中提供：
+
+- **隐私法规**：GDPR、CCPA、HIPAA 等法规遵循
+- **数据分类**：数据敏感度、分类标签
+- **隐私保护**：数据脱敏、加密、匿名化
+- **用户权利**：数据访问权、删除权、可移植权
+
+**参考标准**：
+
+- [GDPR](https://gdpr.eu/) - 通用数据保护条例
+- [CCPA](https://oag.ca.gov/privacy/ccpa) - 加州消费者隐私法案
+- [HIPAA](https://www.hhs.gov/hipaa/index.html) - 健康保险流通与责任法案
+- [Data Privacy Best Practices](https://www.privacypolicies.com/blog/privacy-by-design/) -
+  数据隐私最佳实践
+- [Privacy by Design](https://www.ipc.on.ca/wp-content/uploads/Resources/7foundationalprinciples.pdf) -
+  隐私设计原则
 
 ---
 

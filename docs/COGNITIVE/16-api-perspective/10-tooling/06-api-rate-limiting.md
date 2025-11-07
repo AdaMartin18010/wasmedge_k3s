@@ -25,7 +25,11 @@
 - [6. 动态限流](#6-动态限流)
   - [6.1 自适应限流](#61-自适应限流)
   - [6.2 熔断器集成](#62-熔断器集成)
-- [7. 相关文档](#7-相关文档)
+- [7. 形式化定义与理论基础](#7-形式化定义与理论基础)
+  - [7.1 API 限流形式化模型](#71-api-限流形式化模型)
+  - [7.2 限流算法形式化](#72-限流算法形式化)
+  - [7.3 限流公平性形式化](#73-限流公平性形式化)
+- [8. 相关文档](#8-相关文档)
 
 ---
 
@@ -442,7 +446,91 @@ spec:
 
 ---
 
-## 7. 相关文档
+## 7. 形式化定义与理论基础
+
+### 7.1 API 限流形式化模型
+
+**定义 7.1（API 限流）**：API 限流是一个四元组：
+
+```text
+API_Rate_Limiting = ⟨Rate_Limit_Algorithm, Rate_Limit_Strategy, Distributed_Rate_Limiting, Dynamic_Rate_Limiting⟩
+```
+
+其中：
+
+- **Rate_Limit_Algorithm**：限流算法
+  `Rate_Limit_Algorithm: {Token_Bucket, Leaky_Bucket, Sliding_Window}`
+- **Rate_Limit_Strategy**：限流策略
+  `Rate_Limit_Strategy: Request → {Allow, Deny}`
+- **Distributed_Rate_Limiting**：分布式限流
+  `Distributed_Rate_Limiting: Request × Redis → Rate_Limit_Result`
+- **Dynamic_Rate_Limiting**：动态限流
+  `Dynamic_Rate_Limiting: System_Load → Rate_Limit`
+
+**定义 7.2（限流检查）**：限流检查是一个函数：
+
+```text
+Rate_Limit_Check: Request × Rate_Limit → {Allow, Deny}
+```
+
+**定理 7.1（限流有效性）**：限流保护系统不被过载：
+
+```text
+Rate_Limit_Check(Request, Rate_Limit) = Deny ⟹ System_Load(System) < Max_Load
+```
+
+**证明**：限流拒绝超过限制的请求，因此系统负载不会超过最大负载。□
+
+### 7.2 限流算法形式化
+
+**定义 7.3（令牌桶算法）**：令牌桶是一个函数：
+
+```text
+Token_Bucket: Request × Tokens × Rate → {Allow, Deny}
+```
+
+**定义 7.4（漏桶算法）**：漏桶是一个函数：
+
+```text
+Leaky_Bucket: Request × Queue × Rate → {Allow, Deny}
+```
+
+**定理 7.2（令牌桶公平性）**：令牌桶算法保证公平性：
+
+```text
+Token_Bucket(Request₁, Tokens, Rate) = Allow ∧
+Token_Bucket(Request₂, Tokens, Rate) = Allow ⟹
+  Fair(Request₁, Request₂)
+```
+
+**证明**：令牌桶按固定速率分配令牌，所有请求公平竞争令牌。□
+
+### 7.3 限流公平性形式化
+
+**定义 7.5（限流公平性）**：限流公平性是一个函数：
+
+```text
+Rate_Limit_Fairness = f(Equal_Access, No_Starvation)
+```
+
+**定义 7.6（分布式限流一致性）**：分布式限流一致性是一个函数：
+
+```text
+Distributed_Rate_Limit_Consistent: Request × Nodes → Consistent_Rate_Limit
+```
+
+**定理 7.3（分布式限流与一致性）**：一致性哈希保证分布式限流一致性：
+
+```text
+Consistent_Hash(Request, Nodes) ⟹
+  Distributed_Rate_Limit_Consistent(Request, Nodes)
+```
+
+**证明**：一致性哈希将相同请求路由到相同节点，因此限流状态一致。□
+
+---
+
+## 8. 相关文档
 
 - **[API 安全规范](../11-api-security/api-security.md)** - 限流安全
 - **[API 性能优化](../14-api-performance/api-performance.md)** - 限流性能优化

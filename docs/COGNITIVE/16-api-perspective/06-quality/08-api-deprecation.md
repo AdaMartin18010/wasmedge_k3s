@@ -7,6 +7,7 @@
 - [📑 目录](#-目录)
 - [1. 概述](#1-概述)
   - [1.1 弃用策略架构](#11-弃用策略架构)
+  - [1.2 API 弃用策略在 API 规范中的位置](#12-api-弃用策略在-api-规范中的位置)
 - [2. 弃用决策](#2-弃用决策)
   - [2.1 弃用原因](#21-弃用原因)
   - [2.2 弃用评估](#22-弃用评估)
@@ -36,6 +37,38 @@ API 弃用策略规范定义了 API 在弃用场景下的设计和实现，从�
 用迁移到弃用执行。本文档基于形式化方法，提供严格的数学定义和推理论证，分析 API
 弃用策略的理论基础和实践方法。
 
+### 1.1 弃用策略架构
+
+```text
+API 版本（API Version）
+  ↓
+弃用决策（Deprecation Decision）
+  ↓
+弃用通知（Deprecation Notice）
+  ↓
+弃用迁移（Deprecation Migration）
+  ↓
+弃用执行（Deprecation Execution）
+```
+
+### 1.2 API 弃用策略在 API 规范中的位置
+
+API 弃用策略在 API 规范四元组 `⟨IDL, Governance, Observability, Security⟩` 中主
+要涉及 **Governance** 维度：
+
+```text
+API_Spec = ⟨IDL, Governance, Observability, Security⟩
+                    ↑
+        API 弃用策略属于 Governance 维度
+```
+
+API 弃用策略在 API 规范中提供：
+
+- **弃用决策**：弃用原因、弃用评估
+- **弃用通知**：弃用声明、弃用时间表
+- **弃用迁移**：迁移指南、迁移工具
+- **弃用执行**：弃用阶段、弃用监控
+
 **参考标准**：
 
 - [API Deprecation Best Practices](https://cloud.google.com/apis/design/deprecation) -
@@ -46,18 +79,6 @@ API 弃用策略规范定义了 API 在弃用场景下的设计和实现，从�
 - [Deprecation Policy](https://docs.github.com/en/rest/overview/resources-in-the-rest-api#deprecation-policy) -
   GitHub API 弃用策略
 - [API Versioning](https://restfulapi.net/versioning/) - API 版本控制
-
-### 1.1 弃用策略架构
-
-```text
-弃用决策（Deprecation Decision）
-  ↓
-弃用通知（Deprecation Notice）
-  ↓
-弃用迁移（Deprecation Migration）
-  ↓
-弃用执行（Deprecation Execution）
-```
 
 ---
 

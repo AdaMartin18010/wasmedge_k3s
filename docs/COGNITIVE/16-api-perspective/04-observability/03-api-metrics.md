@@ -7,6 +7,7 @@
 - [📑 目录](#-目录)
 - [1. 概述](#1-概述)
   - [1.1 指标架构](#11-指标架构)
+  - [1.2 API 指标在 API 规范中的位置](#12-api-指标在-api-规范中的位置)
 - [2. 指标类型](#2-指标类型)
   - [2.1 计数器（Counter）](#21-计数器counter)
   - [2.2 仪表盘（Gauge）](#22-仪表盘gauge)
@@ -40,6 +41,38 @@ API 指标规范定义了 API 在指标监控场景下的设计和实现，从�
 从业务指标到指标导出。本文档基于形式化方法，提供严格的数学定义和推理论证，分析
 API 指标的理论基础和实践方法。
 
+### 1.1 指标架构
+
+```text
+API 调用（API Calls）
+  ↓
+指标采集（Metrics Collection）
+  ↓
+指标存储（Metrics Storage）
+  ↓
+指标查询（Metrics Query）
+  ↓
+指标可视化（Metrics Visualization）
+```
+
+### 1.2 API 指标在 API 规范中的位置
+
+API 指标在 API 规范四元组 `⟨IDL, Governance, Observability, Security⟩` 中主要涉
+及 **Observability** 维度：
+
+```text
+API_Spec = ⟨IDL, Governance, Observability, Security⟩
+                        ↑
+        API 指标属于 Observability 维度
+```
+
+API 指标在 API 规范中提供：
+
+- **指标类型**：计数器、仪表盘、直方图、摘要
+- **RED 指标**：速率、错误、持续时间
+- **USE 指标**：利用率、饱和度、错误
+- **业务指标**：业务相关的自定义指标
+
 **参考标准**：
 
 - [Prometheus Metrics](https://prometheus.io/docs/concepts/metric_types/) -
@@ -50,18 +83,6 @@ API 指标的理论基础和实践方法。
 - [USE Method](http://www.brendangregg.com/usemethod.html) - USE 方法
 - [OTLP Metrics](https://opentelemetry.io/docs/specs/otel/metrics/) -
   OpenTelemetry 指标规范
-
-### 1.1 指标架构
-
-```text
-API 请求（API Request）
-  ↓
-指标采集（Metrics Collection）
-  ↓
-指标存储（Metrics Storage）
-  ↓
-指标查询（Metrics Query）
-```
 
 ---
 

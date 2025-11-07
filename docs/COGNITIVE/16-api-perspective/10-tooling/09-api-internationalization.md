@@ -7,6 +7,7 @@
 - [📑 目录](#-目录)
 - [1. 概述](#1-概述)
   - [1.1 国际化架构](#11-国际化架构)
+  - [1.2 API 国际化在 API 规范中的位置](#12-api-国际化在-api-规范中的位置)
 - [2. 语言支持](#2-语言支持)
   - [2.1 语言检测](#21-语言检测)
   - [2.2 语言切换](#22-语言切换)
@@ -37,16 +38,6 @@ API 国际化规范定义了 API 在国际化场景下的设计和实现，从�
 协商到时区处理。本文档基于形式化方法，提供严格的数学定义和推理论证，分析 API 国
 际化的理论基础和实践方法。
 
-**参考标准**：
-
-- [RFC 5646](https://tools.ietf.org/html/rfc5646) - 语言标签
-- [Unicode](https://www.unicode.org/) - Unicode 字符编码
-- [i18n Best Practices](https://www.w3.org/International/techniques/developing-specs) -
-  国际化最佳实践
-- [Locale Data](https://www.unicode.org/cldr/) - CLDR 本地化数据
-- [Content Negotiation](https://developer.mozilla.org/en-US/docs/Web/HTTP/Content_negotiation) -
-  内容协商
-
 ### 1.1 国际化架构
 
 ```text
@@ -56,8 +47,36 @@ API 请求（API Request）
   ↓
 内容本地化（Content Localization）
   ↓
-API 响应（API Response）
+本地化响应（Localized Response）
 ```
+
+### 1.2 API 国际化在 API 规范中的位置
+
+API 国际化在 API 规范四元组 `⟨IDL, Governance, Observability, Security⟩` 中主要
+涉及 **IDL** 维度：
+
+```text
+API_Spec = ⟨IDL, Governance, Observability, Security⟩
+            ↑
+    API 国际化属于 IDL 维度
+```
+
+API 国际化在 API 规范中提供：
+
+- **语言支持**：语言检测、语言切换
+- **本地化**：文本、日期时间、数字格式
+- **内容协商**：Accept-Language、Content-Language
+- **时区处理**：时区检测、时区转换
+
+**参考标准**：
+
+- [RFC 5646](https://tools.ietf.org/html/rfc5646) - 语言标签
+- [Unicode](https://www.unicode.org/) - Unicode 字符编码
+- [i18n Best Practices](https://www.w3.org/International/techniques/developing-specs) -
+  国际化最佳实践
+- [Locale Data](https://www.unicode.org/cldr/) - CLDR 本地化数据
+- [Content Negotiation](https://developer.mozilla.org/en-US/docs/Web/HTTP/Content_negotiation) -
+  内容协商
 
 ---
 

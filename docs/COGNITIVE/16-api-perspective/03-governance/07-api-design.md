@@ -7,6 +7,7 @@
 - [📑 目录](#-目录)
 - [1. 概述](#1-概述)
   - [1.1 API 设计原则](#11-api-设计原则)
+  - [1.2 API 设计在 API 规范中的位置](#12-api-设计在-api-规范中的位置)
 - [2. 资源设计](#2-资源设计)
   - [2.1 资源命名](#21-资源命名)
   - [2.2 资源关系](#22-资源关系)
@@ -36,17 +37,6 @@ API 设计规范定义了 API 在设计阶段的原则和最佳实践，从资�
 模型到错误处理。本文档基于形式化方法，提供严格的数学定义和推理论证，分析 API 设
 计的理论基础和实践方法。
 
-**参考标准**：
-
-- [RESTful API Design](https://restfulapi.net/) - RESTful API 设计指南
-- [API Design Best Practices](https://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api) -
-  API 设计最佳实践
-- [OpenAPI Specification](https://swagger.io/specification/) - OpenAPI 规范
-- [GraphQL Best Practices](https://graphql.org/learn/best-practices/) - GraphQL
-  最佳实践
-- [API Design Principles](https://cloud.google.com/apis/design) - Google API 设
-  计原则
-
 ### 1.1 API 设计原则
 
 ```text
@@ -58,6 +48,35 @@ API 设计规范定义了 API 在设计阶段的原则和最佳实践，从资�
   ↓
 可维护性（Maintainability）
 ```
+
+### 1.2 API 设计在 API 规范中的位置
+
+API 设计在 API 规范四元组 `⟨IDL, Governance, Observability, Security⟩` 中主要涉
+及 **IDL** 和 **Governance** 维度：
+
+```text
+API_Spec = ⟨IDL, Governance, Observability, Security⟩
+            ↑         ↑
+    API 设计涉及 IDL 和 Governance
+```
+
+API 设计在 API 规范中提供：
+
+- **IDL 设计**：接口定义语言的设计和规范
+- **资源设计**：RESTful 资源、GraphQL Schema、gRPC Service
+- **操作设计**：HTTP 方法、GraphQL Query/Mutation、gRPC RPC
+- **治理设计**：版本策略、错误处理、文档规范
+
+**参考标准**：
+
+- [RESTful API Design](https://restfulapi.net/) - RESTful API 设计指南
+- [API Design Best Practices](https://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api) -
+  API 设计最佳实践
+- [OpenAPI Specification](https://swagger.io/specification/) - OpenAPI 规范
+- [GraphQL Best Practices](https://graphql.org/learn/best-practices/) - GraphQL
+  最佳实践
+- [API Design Principles](https://cloud.google.com/apis/design) - Google API 设
+  计原则
 
 ---
 

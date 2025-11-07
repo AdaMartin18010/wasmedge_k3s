@@ -7,6 +7,7 @@
 - [📑 目录](#-目录)
 - [1. 概述](#1-概述)
   - [1.1 认证架构](#11-认证架构)
+  - [1.2 API 认证在 API 规范中的位置](#12-api-认证在-api-规范中的位置)
 - [2. 认证方式](#2-认证方式)
   - [2.1 API Key](#21-api-key)
   - [2.2 OAuth 2.0](#22-oauth-20)
@@ -40,6 +41,38 @@ API 认证规范定义了 API 在认证场景下的设计和实现，从认证�
 理到安全最佳实践。本文档基于形式化方法，提供严格的数学定义和推理论证，分析 API
 认证的理论基础和实践方法。
 
+### 1.1 认证架构
+
+```text
+客户端（Client）
+  ↓
+认证请求（Authentication Request）
+  ↓
+认证服务（Authentication Service）
+  ↓
+令牌生成（Token Generation）
+  ↓
+API 调用（API Call with Token）
+```
+
+### 1.2 API 认证在 API 规范中的位置
+
+API 认证在 API 规范四元组 `⟨IDL, Governance, Observability, Security⟩` 中主要涉
+及 **Security** 维度：
+
+```text
+API_Spec = ⟨IDL, Governance, Observability, Security⟩
+                                    ↑
+            API 认证属于 Security 维度
+```
+
+API 认证在 API 规范中提供：
+
+- **认证方式**：API Key、OAuth 2.0、JWT、mTLS
+- **认证流程**：客户端凭证、授权码、刷新令牌
+- **令牌管理**：令牌生成、验证、撤销
+- **安全实践**：密钥管理、令牌存储、安全监控
+
 **参考标准**：
 
 - [OAuth 2.0](https://oauth.net/2/) - OAuth 2.0 授权框架
@@ -49,18 +82,6 @@ API 认证规范定义了 API 在认证场景下的设计和实现，从认证�
   API Key 最佳实践
 - [Authentication Best Practices](https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/04-Authentication_Testing/) -
   认证最佳实践
-
-### 1.1 认证架构
-
-```text
-API 客户端（API Client）
-  ↓
-认证服务（Authentication Service）
-  ↓
-令牌颁发（Token Issuance）
-  ↓
-API 服务（API Service）
-```
 
 ---
 

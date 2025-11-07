@@ -7,6 +7,7 @@
 - [📑 目录](#-目录)
 - [1. 概述](#1-概述)
   - [1.1 多租户架构](#11-多租户架构)
+  - [1.2 API 多租户在 API 规范中的位置](#12-api-多租户在-api-规范中的位置)
 - [2. 租户隔离](#2-租户隔离)
   - [2.1 数据隔离](#21-数据隔离)
   - [2.2 计算隔离](#22-计算隔离)
@@ -38,6 +39,36 @@ API 多租户规范定义了 API 在多租户场景下的设计和实现，从�
 户管理到资源配额。本文档基于形式化方法，提供严格的数学定义和推理论证，分析 API
 多租户的理论基础和实践方法。
 
+### 1.1 多租户架构
+
+```text
+租户 A（Tenant A）
+  ↓
+租户隔离层（Tenant Isolation Layer）
+  ↓
+共享资源（Shared Resources）
+  ↓
+租户 B（Tenant B）
+```
+
+### 1.2 API 多租户在 API 规范中的位置
+
+API 多租户在 API 规范四元组 `⟨IDL, Governance, Observability, Security⟩` 中主要
+涉及 **Security** 和 **Governance** 维度：
+
+```text
+API_Spec = ⟨IDL, Governance, Observability, Security⟩
+                    ↑                                    ↑
+        API 多租户涉及 Governance 和 Security
+```
+
+API 多租户在 API 规范中提供：
+
+- **租户隔离**：数据隔离、计算隔离、网络隔离
+- **租户识别**：租户标识、租户上下文
+- **租户管理**：租户创建、配置、删除
+- **资源配额**：配额定义、配额执行
+
 **参考标准**：
 
 - [Multi-Tenancy Architecture](https://docs.microsoft.com/en-us/azure/architecture/guide/multitenant/overview) -
@@ -50,20 +81,6 @@ API 多租户规范定义了 API 在多租户场景下的设计和实现，从�
   多租户最佳实践
 - [SaaS Architecture](https://martinfowler.com/bliki/MultiTenancy.html) - SaaS
   架构
-
-### 1.1 多租户架构
-
-```text
-API 请求（API Request）
-  ↓
-租户识别（Tenant Identification）
-  ↓
-租户隔离（Tenant Isolation）
-  ↓
-资源配额（Resource Quota）
-  ↓
-API 处理（API Processing）
-```
 
 ---
 

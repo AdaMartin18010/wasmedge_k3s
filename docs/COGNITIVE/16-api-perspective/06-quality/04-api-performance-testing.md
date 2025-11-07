@@ -7,6 +7,7 @@
 - [📑 目录](#-目录)
 - [1. 概述](#1-概述)
   - [1.1 性能测试架构](#11-性能测试架构)
+  - [1.2 API 性能测试在 API 规范中的位置](#12-api-性能测试在-api-规范中的位置)
 - [2. 性能测试类型](#2-性能测试类型)
   - [2.1 负载测试](#21-负载测试)
   - [2.2 压力测试](#22-压力测试)
@@ -41,6 +42,36 @@ API 性能测试规范定义了 API 在性能测试场景下的设计和实现�
 标，从性能测试工具到性能优化。本文档基于形式化方法，提供严格的数学定义和推理论证
 ，分析 API 性能测试的理论基础和实践方法。
 
+### 1.1 性能测试架构
+
+```text
+API 调用（API Calls）
+  ↓
+性能测试工具（Performance Testing Tool）
+  ↓
+性能指标采集（Metrics Collection）
+  ↓
+性能分析（Performance Analysis）
+```
+
+### 1.2 API 性能测试在 API 规范中的位置
+
+API 性能测试在 API 规范四元组 `⟨IDL, Governance, Observability, Security⟩` 中主
+要涉及 **Observability** 和 **Quality** 维度：
+
+```text
+API_Spec = ⟨IDL, Governance, Observability, Security⟩
+                        ↑
+        API 性能测试属于 Observability 维度
+```
+
+API 性能测试在 API 规范中提供：
+
+- **性能测试类型**：负载测试、压力测试、容量测试、稳定性测试
+- **性能指标**：延迟、吞吐量、资源使用
+- **测试工具**：k6、Apache Bench、wrk
+- **性能优化**：瓶颈分析、优化策略
+
 **参考标准**：
 
 - [k6 Documentation](https://k6.io/docs/) - k6 性能测试工具
@@ -50,18 +81,6 @@ API 性能测试规范定义了 API 在性能测试场景下的设计和实现�
   测试指南
 - [JMeter](https://jmeter.apache.org/) - Apache JMeter
 - [Gatling](https://gatling.io/) - Gatling 性能测试
-
-### 1.1 性能测试架构
-
-```text
-性能测试工具（Performance Testing Tool）
-  ↓
-API 服务（API Service）
-  ↓
-性能指标采集（Metrics Collection）
-  ↓
-性能分析（Performance Analysis）
-```
 
 ---
 

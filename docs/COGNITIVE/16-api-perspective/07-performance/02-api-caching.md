@@ -25,7 +25,11 @@
 - [6. 缓存一致性](#6-缓存一致性)
   - [6.1 一致性模型](#61-一致性模型)
   - [6.2 缓存更新策略](#62-缓存更新策略)
-- [7. 相关文档](#7-相关文档)
+- [7. 形式化定义与理论基础](#7-形式化定义与理论基础)
+  - [7.1 API 缓存形式化模型](#71-api-缓存形式化模型)
+  - [7.2 缓存命中率形式化](#72-缓存命中率形式化)
+  - [7.3 缓存一致性形式化](#73-缓存一致性形式化)
+- [8. 相关文档](#8-相关文档)
 
 ---
 
@@ -465,7 +469,89 @@ func (wbs *WriteBehindStrategy) Update(ctx context.Context, key string, value in
 
 ---
 
-## 7. 相关文档
+## 7. 形式化定义与理论基础
+
+### 7.1 API 缓存形式化模型
+
+**定义 7.1（API 缓存）**：API 缓存是一个四元组：
+
+```text
+API_Cache = ⟨Cache_Strategy, Cache_Key_Design, Cache_Invalidation, Cache_Consistency⟩
+```
+
+其中：
+
+- **Cache_Strategy**：缓存策略
+  `Cache_Strategy: {HTTP_Cache, Application_Cache, Distributed_Cache}`
+- **Cache_Key_Design**：缓存键设计 `Cache_Key_Design: Request → Cache_Key`
+- **Cache_Invalidation**：缓存失效
+  `Cache_Invalidation: Event → Invalidate(Cache_Key)`
+- **Cache_Consistency**：缓存一致性
+  `Cache_Consistency: {Strong, Eventual, Weak}`
+
+**定义 7.2（缓存查找）**：缓存查找是一个函数：
+
+```text
+Cache_Lookup: Cache_Key × Cache → {Hit, Miss}
+```
+
+**定理 7.1（缓存性能）**：缓存命中减少 API 响应时间：
+
+```text
+Cache_Lookup(Key, Cache) = Hit ⟹ Latency(API_Request) < Latency(No_Cache_Request)
+```
+
+**证明**：缓存命中直接从缓存读取数据，无需访问后端，因此响应时间更短。□
+
+### 7.2 缓存命中率形式化
+
+**定义 7.3（缓存命中率）**：缓存命中率是一个函数：
+
+```text
+Cache_Hit_Rate = |Cache_Hits| / (|Cache_Hits| + |Cache_Misses|)
+```
+
+**定义 7.4（缓存预热）**：缓存预热是一个函数：
+
+```text
+Warm_Cache: Popular_Keys → Preload(Cache)
+```
+
+**定理 7.2（预热与命中率）**：缓存预热提高命中率：
+
+```text
+Warm_Cache(Popular_Keys) ⟹ Cache_Hit_Rate(Cache) > Cache_Hit_Rate(No_Warm_Cache)
+```
+
+**证明**：预热将热门数据加载到缓存，因此热门请求更容易命中缓存。□
+
+### 7.3 缓存一致性形式化
+
+**定义 7.5（缓存一致性）**：缓存一致性是一个函数：
+
+```text
+Cache_Consistent: Cache × Database → Bool
+```
+
+**定义 7.6（最终一致性）**：最终一致性是一个函数：
+
+```text
+Eventually_Consistent(Cache, Database) ⟺
+  ∃t: ∀t' > t, Cache_Consistent(Cache(t'), Database(t'))
+```
+
+**定理 7.3（失效与一致性）**：主动失效保证缓存一致性：
+
+```text
+Invalidate(Cache, Key) ⟹ Cache_Consistent(Cache, Database)
+```
+
+**证明**：失效后缓存被清除，下次请求从数据库加载最新数据，因此缓存与数据库一致
+。□
+
+---
+
+## 8. 相关文档
 
 - **[API 性能优化](../14-api-performance/api-performance.md)** - 缓存性能优化
 - **[API 网关](../17-api-gateway/api-gateway.md)** - 网关缓存

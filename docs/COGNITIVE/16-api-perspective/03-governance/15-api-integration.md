@@ -7,6 +7,7 @@
 - [📑 目录](#-目录)
 - [1. 概述](#1-概述)
   - [1.1 集成架构](#11-集成架构)
+  - [1.2 API 集成在 API 规范中的位置](#12-api-集成在-api-规范中的位置)
 - [2. 集成模式](#2-集成模式)
   - [2.1 点对点集成](#21-点对点集成)
   - [2.2 中心化集成](#22-中心化集成)
@@ -39,6 +40,34 @@ API 集成规范定义了 API 在集成场景下的设计和实现，从集成�
 换到错误处理。本文档基于形式化方法，提供严格的数学定义和推理论证，分析 API 集成
 的理论基础和实践方法。
 
+### 1.1 集成架构
+
+```text
+API 服务 A（API Service A）
+  ↓
+集成层（Integration Layer）
+  ↓
+API 服务 B（API Service B）
+```
+
+### 1.2 API 集成在 API 规范中的位置
+
+API 集成在 API 规范四元组 `⟨IDL, Governance, Observability, Security⟩` 中主要涉
+及 **Governance** 维度：
+
+```text
+API_Spec = ⟨IDL, Governance, Observability, Security⟩
+                    ↑
+        API 集成属于 Governance 维度
+```
+
+API 集成在 API 规范中提供：
+
+- **集成模式**：点对点、中心化、事件驱动
+- **协议转换**：REST、gRPC、GraphQL 之间的转换
+- **数据转换**：数据映射、验证、转换
+- **错误处理**：重试策略、降级策略
+
 **参考标准**：
 
 - [API Integration Patterns](https://www.enterpriseintegrationpatterns.com/) -
@@ -49,16 +78,6 @@ API 集成规范定义了 API 在集成场景下的设计和实现，从集成�
   成
 - [Integration Best Practices](https://www.mulesoft.com/resources/api/integration-best-practices) -
   集成最佳实践
-
-### 1.1 集成架构
-
-```text
-API A（API A）
-  ↓
-集成层（Integration Layer）
-  ↓
-API B（API B）
-```
 
 ---
 

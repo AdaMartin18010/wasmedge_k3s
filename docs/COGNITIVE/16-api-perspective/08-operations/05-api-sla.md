@@ -7,6 +7,7 @@
 - [📑 目录](#-目录)
 - [1. 概述](#1-概述)
   - [1.1 SLA 架构](#11-sla-架构)
+  - [1.2 API SLA 在 API 规范中的位置](#12-api-sla-在-api-规范中的位置)
 - [2. SLA 指标](#2-sla-指标)
   - [2.1 可用性](#21-可用性)
   - [2.2 性能](#22-性能)
@@ -38,6 +39,38 @@ API SLA 规范定义了 API 在服务级别协议（SLA）场景下的设计和�
 SLA 等级，从 SLA 监控到 SLA 报告。本文档基于形式化方法，提供严格的数学定义和推理
 论证，分析 API SLA 的理论基础和实践方法。
 
+### 1.1 SLA 架构
+
+```text
+API 服务（API Service）
+  ↓
+SLA 指标采集（SLA Metrics Collection）
+  ↓
+SLA 计算（SLA Calculation）
+  ↓
+SLA 监控（SLA Monitoring）
+  ↓
+SLA 报告（SLA Reporting）
+```
+
+### 1.2 API SLA 在 API 规范中的位置
+
+API SLA 在 API 规范四元组 `⟨IDL, Governance, Observability, Security⟩` 中主要涉
+及 **Observability** 和 **Governance** 维度：
+
+```text
+API_Spec = ⟨IDL, Governance, Observability, Security⟩
+                    ↑                        ↑
+        API SLA 涉及 Governance 和 Observability
+```
+
+API SLA 在 API 规范中提供：
+
+- **SLA 指标**：可用性、性能、错误率
+- **SLA 等级**：基础、标准、高级
+- **SLA 监控**：指标收集、指标计算
+- **SLA 报告**：报告生成、报告分析
+
 **参考标准**：
 
 - [SLA Best Practices](https://www.cio.com/article/274851/outsourcing-sla-definitions-and-solutions.html) -
@@ -50,20 +83,6 @@ SLA 等级，从 SLA 监控到 SLA 报告。本文档基于形式化方法，提
   SLA 指标
 - [Service Level Agreements](https://en.wikipedia.org/wiki/Service-level_agreement) -
   服务级别协议
-
-### 1.1 SLA 架构
-
-```text
-API 服务（API Service）
-  ↓
-SLA 指标收集（SLA Metrics Collection）
-  ↓
-SLA 指标计算（SLA Metrics Calculation）
-  ↓
-SLA 违反检测（SLA Violation Detection）
-  ↓
-SLA 报告（SLA Reporting）
-```
 
 ---
 
