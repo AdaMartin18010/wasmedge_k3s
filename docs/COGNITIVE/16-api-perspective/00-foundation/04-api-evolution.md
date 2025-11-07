@@ -72,7 +72,7 @@ API 演进路径描述了从传统 API 到云原生 API 的演进过程，包括
 ### 1.2 API 演进在 API 规范中的位置
 
 根据 API 规范四元组定义（见
-[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+[API 规范形式化定义](../00-foundation/01-formalization.md#21-api-规范四元组)）
 ，API 演进覆盖所有四个维度：
 
 ```text
@@ -359,11 +359,9 @@ Success_Rate(Gradual_Migration) > Success_Rate(Big_Bang_Migration)
 
 ## 7. 相关文档
 
-- **[容器化 API 规范](../01-containerization-api/containerization-api.md)** - 容
-  器化 API 演进
-- **[沙盒化 API 规范](../02-sandboxing-api/sandboxing-api.md)** - 沙盒化 API 演
-  进
-- **[WASM 化 API 规范](../03-wasm-api/wasm-api.md)** - WASM 化 API 演进
+- **[容器化 API 规范](../01-runtime/01-containerization.md)** - 容器化 API 演进
+- **[沙盒化 API 规范](../01-runtime/02-sandboxing.md)** - 沙盒化 API 演进
+- **[WASM 化 API 规范](../01-runtime/03-wasm.md)** - WASM 化 API 演进
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述
 
 ---

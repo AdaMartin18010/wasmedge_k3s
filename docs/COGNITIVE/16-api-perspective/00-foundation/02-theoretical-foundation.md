@@ -51,9 +51,8 @@
 ## 1. 概述
 
 本文档提供 API 规范的理论基础，包括形式化证明体系、多维概念对比矩阵、概念思维导
-图和知识图谱。本文档是对
-[API 规范形式化定义](../07-formalization/formalization.md) 的扩展和深化，为 API
-规范的理论研究和实践应用提供全面的理论支撑。
+图和知识图谱。本文档是对 [API 规范形式化定义](01-formalization.md) 的扩展和深化
+，为 API 规范的理论研究和实践应用提供全面的理论支撑。
 
 **参考标准**：
 
@@ -66,8 +65,8 @@
 ### 1.1 理论基础在 API 规范中的位置
 
 根据 API 规范四元组定义（见
-[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)），
-理论基础贯穿所有维度：
+[API 规范形式化定义](01-formalization.md#21-api-规范四元组)），理论基础贯穿所有
+维度：
 
 ```text
 API_Spec = ⟨IDL, Governance, Observability, Security⟩
@@ -1055,15 +1054,11 @@ graph TD
 
 ## 6. 相关文档
 
-- **[API 规范形式化定义](../07-formalization/formalization.md)** ⭐ - API 规范形
-  式化基础
+- **[API 规范形式化定义](01-formalization.md)** ⭐ - API 规范形式化基础
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述
-- **[技术对比矩阵](../05-comparison-matrix/comparison-matrix.md)** - 技术对比分
-  析
-- **[API 演进路径](../06-api-evolution/api-evolution.md)** - API 演进模型
-- **[最佳实践](../08-best-practices/best-practices.md)** - API 规范最佳实践
-- **[技术对比矩阵](../05-comparison-matrix/comparison-matrix.md)** - 详细技术对
-  比
+- **[技术对比矩阵](03-comparison-matrix.md)** - 技术对比分析
+- **[API 演进路径](04-api-evolution.md)** - API 演进模型
+- **[最佳实践](05-best-practices.md)** - API 规范最佳实践
 
 **最后更新**：2025-11-07 **维护者**：项目团队
 

@@ -68,7 +68,7 @@ WASM 能力安全（WASI 能力令牌）
 ### 1.2 API 安全在 API 规范中的位置
 
 根据 API 规范四元组定义（见
-[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+[API 规范形式化定义](../00-foundation/01-formalization.md#21-api-规范四元组)）
 ，API 安全是 Security 维度的核心：
 
 ```text
@@ -506,7 +506,7 @@ Security_Boundary(p₁) ∩ Security_Boundary(p₂) = ∅ ⟹ Isolation(p₁, p�
 - **[沙盒化 API 规范](../02-sandboxing-api/sandboxing-api.md)** - 沙盒化 API 安
   全详解
 - **[WASM 化 API 规范](../03-wasm-api/wasm-api.md)** - WASI 能力模型详解
-- **[最佳实践](../08-best-practices/best-practices.md)** - API 安全最佳实践
+- **[最佳实践](../00-foundation/05-best-practices.md)** - API 安全最佳实践
 - **[OPA 策略治理](../../ARCHITECTURE/architecture-view/04-opa-policy-governance/)** -
   OPA 安全策略
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述

@@ -66,7 +66,7 @@ API 社区和贡献指南定义了 API 项目的社区结构、贡献流程和�
 ### 1.2 API 社区在 API 规范中的位置
 
 根据 API 规范四元组定义（见
-[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+[API 规范形式化定义](../00-foundation/01-formalization.md#21-api-规范四元组)）
 ，API 社区主要涉及 Governance 维度：
 
 ```text
@@ -486,7 +486,7 @@ Consensus_Level(Decision₁) > Consensus_Level(Decision₂) ⟹ Effective(Decisi
 
 ## 9. 相关文档
 
-- **[最佳实践](../08-best-practices/best-practices.md)** - 贡献最佳实践
+- **[最佳实践](../00-foundation/05-best-practices.md)** - 贡献最佳实践
 - **[API 标准化规范](../25-api-standardization/api-standardization.md)** - 代码
   规范
 - **[API 质量保证](../29-api-quality-assurance/api-quality-assurance.md)** - 质

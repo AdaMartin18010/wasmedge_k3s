@@ -69,7 +69,7 @@ API 监控告警规范定义了 API 在不同运行时环境下的监控指标�
 ### 1.2 API 监控在 API 规范中的位置
 
 根据 API 规范四元组定义（见
-[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+[API 规范形式化定义](../00-foundation/01-formalization.md#21-api-规范四元组)）
 ，API 监控是 Observability 维度的实现：
 
 ```text
@@ -554,7 +554,7 @@ Alert_Timeliness = 1 - (Detection_Time / Incident_Duration)
   性技术实现
 - **[API 故障排查](../18-api-troubleshooting/api-troubleshooting.md)** - 故障诊
   断
-- **[最佳实践](../08-best-practices/best-practices.md)** - 监控最佳实践
+- **[最佳实践](../00-foundation/05-best-practices.md)** - 监控最佳实践
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述
 
 ---

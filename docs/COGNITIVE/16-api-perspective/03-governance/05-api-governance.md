@@ -70,7 +70,7 @@ WASM 层治理（WASI 能力、策略插件）
 ### 1.2 API 治理在 API 规范中的位置
 
 根据 API 规范四元组定义（见
-[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+[API 规范形式化定义](../00-foundation/01-formalization.md#21-api-规范四元组)）
 ，API 治理是 Governance 维度的核心：
 
 ```text
@@ -706,7 +706,7 @@ Version_Compatible(v₁, v₂) ∧ Version_Compatible(v₂, v₃) ⟹ Version_Co
 
 - **[容器化 API 规范](../01-containerization-api/containerization-api.md)** -
   Kubernetes CRD API 治理
-- **[最佳实践](../08-best-practices/best-practices.md)** - API 治理最佳实践
+- **[最佳实践](../00-foundation/05-best-practices.md)** - API 治理最佳实践
 - **[API 安全规范](../11-api-security/api-security.md)** - API 安全治理
 - **[OPA 策略治理](../../ARCHITECTURE/architecture-view/04-opa-policy-governance/)** -
   OPA 详细文档

@@ -71,7 +71,7 @@ API 标准化规范定义了 API 在不同运行时环境下的标准化要求�
 ### 1.2 API 标准化在 API 规范中的位置
 
 根据 API 规范四元组定义（见
-[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+[API 规范形式化定义](../00-foundation/01-formalization.md#21-api-规范四元组)）
 ，API 标准化主要涉及 IDL 维度：
 
 ```text
@@ -574,10 +574,10 @@ Standardization_Quality(API₁) > Standardization_Quality(API₂) ⟹ Optimal(AP
 
 ## 9. 相关文档
 
-- **[最佳实践](../08-best-practices/best-practices.md)** - API 标准化最佳实践
-- **[API 设计规范](../01-containerization-api/containerization-api.md)** - API
+- **[最佳实践](../00-foundation/05-best-practices.md)** - API 标准化最佳实践
+- **[API 设计规范](../01-runtime/01-containerization.md)** - API
   设计标准
-- **[API 安全规范](../11-api-security/api-security.md)** - 认证授权标准
+- **[API 安全规范](../05-security/01-api-security.md)** - 认证授权标准
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述
 
 ---

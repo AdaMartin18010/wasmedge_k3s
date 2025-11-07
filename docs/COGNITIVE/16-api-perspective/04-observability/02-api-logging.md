@@ -64,7 +64,7 @@ API 请求（API Request）
 ### 1.2 API 日志在 API 规范中的位置
 
 根据 API 规范四元组定义（见
-[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+[API 规范形式化定义](../00-foundation/01-formalization.md#21-api-规范四元组)）
 ，API 日志主要涉及 Observability 维度：
 
 ```text
@@ -568,7 +568,7 @@ Indexed(Log_Store) ⟹ Query_Efficiency(Query_Logs) ↑
   观测性
 - **[API 监控告警](../20-api-monitoring/api-monitoring.md)** - 日志监控
 - **[API 错误处理](../47-api-error-handling/api-error-handling.md)** - 错误日志
-- **[最佳实践](../08-best-practices/best-practices.md)** - 日志最佳实践
+- **[最佳实践](../00-foundation/05-best-practices.md)** - 日志最佳实践
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述
 
 **最后更新**：2025-11-07 **维护者**：项目团队

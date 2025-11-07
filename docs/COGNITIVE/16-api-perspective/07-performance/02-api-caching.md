@@ -61,7 +61,7 @@ API 请求（API Request）
 ### 1.2 API 缓存在 API 规范中的位置
 
 根据 API 规范四元组定义（见
-[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+[API 规范形式化定义](../00-foundation/01-formalization.md#21-api-规范四元组)）
 ，API 缓存主要涉及 Observability 和 Performance 维度：
 
 ```text
@@ -470,7 +470,7 @@ func (wbs *WriteBehindStrategy) Update(ctx context.Context, key string, value in
 - **[API 性能优化](../14-api-performance/api-performance.md)** - 缓存性能优化
 - **[API 网关](../17-api-gateway/api-gateway.md)** - 网关缓存
 - **[API 边缘计算](../34-api-edge-computing/api-edge-computing.md)** - 边缘缓存
-- **[最佳实践](../08-best-practices/best-practices.md)** - 缓存最佳实践
+- **[最佳实践](../00-foundation/05-best-practices.md)** - 缓存最佳实践
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述
 
 **最后更新**：2025-11-07 **维护者**：项目团队

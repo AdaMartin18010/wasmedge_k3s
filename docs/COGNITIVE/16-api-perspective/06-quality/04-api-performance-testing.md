@@ -549,7 +549,7 @@ Performance_Test(API) ⟹ Detect(Performance_Regression(API))
 - **[API 性能优化](../14-api-performance/api-performance.md)** - 性能优化策略
 - **[API 基准测试](../27-api-benchmarks/api-benchmarks.md)** - 性能基准
 - **[API 测试规范](../15-api-testing/api-testing.md)** - 性能测试
-- **[最佳实践](../08-best-practices/best-practices.md)** - 性能测试最佳实践
+- **[最佳实践](../00-foundation/05-best-practices.md)** - 性能测试最佳实践
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述
 
 **最后更新**：2025-11-07 **维护者**：项目团队

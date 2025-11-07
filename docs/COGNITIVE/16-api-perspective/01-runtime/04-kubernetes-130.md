@@ -68,7 +68,7 @@ Runtime 维度分组、ValidatingAdmissionPolicy 稳定版等特性，为容器�
 ### 1.2 Kubernetes 1.30+ API 在 API 规范中的位置
 
 根据 API 规范四元组定义（见
-[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+[API 规范形式化定义](../00-foundation/01-formalization.md#21-api-规范四元组)）
 ，Kubernetes 1.30+ API 增强主要覆盖 Governance 维度：
 
 ```text
@@ -597,11 +597,11 @@ Valid(CRD_Schema, Resource) ⟺ Resource 符合 Schema
 
 ## 8. 相关文档
 
-- **[容器化 API 规范](../01-containerization-api/containerization-api.md)** -
+- **[容器化 API 规范](../01-runtime/01-containerization.md)** -
   Kubernetes CRD API 详解
-- **[2025 技术生态](../04-2025-ecosystem/2025-ecosystem.md)** - Kubernetes 1.30+
+- **[2025 技术生态](../00-foundation/06-2025-ecosystem.md)** - Kubernetes 1.30+
   生态更新
-- **[最佳实践](../08-best-practices/best-practices.md)** - API 规范最佳实践
+- **[最佳实践](../00-foundation/05-best-practices.md)** - API 规范最佳实践
 - **[编排运行时技术规范](../../TECHNICAL/04-orchestration-runtime/orchestration-runtime.md)** -
   RuntimeClass 详细文档
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述

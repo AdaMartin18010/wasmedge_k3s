@@ -68,7 +68,7 @@ API 性能基准测试规范定义了 API 在不同运行时环境下的性能�
 ### 1.2 API 性能基准测试在 API 规范中的位置
 
 根据 API 规范四元组定义（见
-[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+[API 规范形式化定义](../00-foundation/01-formalization.md#21-api-规范四元组)）
 ，API 性能基准测试主要涉及 Observability 和 Performance 维度：
 
 ```text
@@ -416,7 +416,7 @@ Performance_Advantage(Benchmark₁, Benchmark₂) > 1 ∧ Performance_Advantage(
 - **[API 测试规范](../15-api-testing/api-testing.md)** - 性能测试方法
 - **[API 成本优化](../21-api-cost-optimization/api-cost-optimization.md)** - 成
   本优化分析
-- **[技术对比矩阵](../05-comparison-matrix/comparison-matrix.md)** - 技术对比
+- **[技术对比矩阵](../00-foundation/03-comparison-matrix.md)** - 技术对比
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述
 
 ---

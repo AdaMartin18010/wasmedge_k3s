@@ -79,7 +79,7 @@ WASM 化 API（WASI/WIT）
 ### 1.2 API 迁移在 API 规范中的位置
 
 根据 API 规范四元组定义（见
-[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+[API 规范形式化定义](../00-foundation/01-formalization.md#21-api-规范四元组)）
 ，API 迁移涉及所有四个维度：
 
 ```text
@@ -582,9 +582,9 @@ Rollback_Capability(Migration) ⟹ Risk(Migration) < Risk(No_Rollback_Migration)
 
 ## 9. 相关文档
 
-- **[API 演进路径](../06-api-evolution/api-evolution.md)** - API 演进理论
-- **[实际案例研究](../10-case-studies/case-studies.md)** - 迁移案例
-- **[最佳实践](../08-best-practices/best-practices.md)** - 迁移最佳实践
+- **[API 演进路径](../00-foundation/04-api-evolution.md)** - API 演进理论
+- **[实际案例研究](../00-foundation/07-case-studies.md)** - 迁移案例
+- **[最佳实践](../00-foundation/05-best-practices.md)** - 迁移最佳实践
 - **[API 故障排查](../18-api-troubleshooting/api-troubleshooting.md)** - 迁移故
   障排查
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述

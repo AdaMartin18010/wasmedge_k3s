@@ -63,7 +63,7 @@ GraphQL Schema
 ### 1.2 API GraphQL 在 API 规范中的位置
 
 根据 API 规范四元组定义（见
-[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+[API 规范形式化定义](../00-foundation/01-formalization.md#21-api-规范四元组)）
 ，API GraphQL 主要涉及 IDL 维度：
 
 ```text
@@ -437,13 +437,13 @@ Latency(Batch_Load(keys)) < Σ(Latency(Load(key))) for key in keys
 
 ## 8. 相关文档
 
-- **[API 标准化规范](../25-api-standardization/api-standardization.md)** -
+- **[API 标准化规范](../03-governance/03-api-standardization.md)** -
   GraphQL 标准
-- **[API 性能优化](../14-api-performance/api-performance.md)** - GraphQL 性能优
+- **[API 性能优化](../07-performance/01-api-performance.md)** - GraphQL 性能优
   化
-- **[API 事件驱动架构](../35-api-event-driven/api-event-driven.md)** - GraphQL
+- **[API 事件驱动架构](../09-architecture/01-api-event-driven.md)** - GraphQL
   订阅
-- **[最佳实践](../08-best-practices/best-practices.md)** - GraphQL 最佳实践
+- **[最佳实践](../00-foundation/05-best-practices.md)** - GraphQL 最佳实践
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述
 
 **最后更新**：2025-11-07 **维护者**：项目团队

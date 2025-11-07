@@ -65,7 +65,7 @@ API 事件驱动架构规范定义了 API 在事件驱动架构下的设计和�
 ### 1.2 API 事件驱动架构在 API 规范中的位置
 
 根据 API 规范四元组定义（见
-[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+[API 规范形式化定义](../00-foundation/01-formalization.md#21-api-规范四元组)）
 ，API 事件驱动架构主要涉及 IDL 和 Governance 维度：
 
 ```text
@@ -458,7 +458,7 @@ Replay_Events(Events, Initial_State) = Current_State
 - **[API 生态系统集成](../26-api-ecosystem/api-ecosystem.md)** - 消息队列集成
 - **[API 架构设计](../01-containerization-api/containerization-api.md)** - 架构
   模式
-- **[最佳实践](../08-best-practices/best-practices.md)** - 事件驱动最佳实践
+- **[最佳实践](../00-foundation/05-best-practices.md)** - 事件驱动最佳实践
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述
 
 ---

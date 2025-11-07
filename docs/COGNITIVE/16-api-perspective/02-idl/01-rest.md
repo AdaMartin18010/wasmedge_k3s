@@ -62,7 +62,7 @@ HTTP 方法（HTTP Methods）
 ### 1.2 API RESTful 在 API 规范中的位置
 
 根据 API 规范四元组定义（见
-[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+[API 规范形式化定义](../00-foundation/01-formalization.md#21-api-规范四元组)）
 ，API RESTful 主要涉及 IDL 维度：
 
 ```text
@@ -472,12 +472,11 @@ HATEOAS(API) ⟹ Discoverable(API)
 
 ## 8. 相关文档
 
-- **[API 标准化规范](../25-api-standardization/api-standardization.md)** -
-  RESTful 标准
-- **[API 版本管理](../23-api-versioning/api-versioning.md)** - RESTful 版本控制
-- **[API 性能优化](../14-api-performance/api-performance.md)** - RESTful 性能优
-  化
-- **[最佳实践](../08-best-practices/best-practices.md)** - RESTful 最佳实践
+- **[API 标准化规范](../03-governance/03-api-standardization.md)** - RESTful 标
+  准
+- **[API 版本管理](../03-governance/01-api-versioning.md)** - RESTful 版本控制
+- **[API 性能优化](../07-performance/01-api-performance.md)** - RESTful 性能优化
+- **[最佳实践](../00-foundation/05-best-practices.md)** - RESTful 最佳实践
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述
 
 **最后更新**：2025-11-07 **维护者**：项目团队

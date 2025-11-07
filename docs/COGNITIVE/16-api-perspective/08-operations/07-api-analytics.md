@@ -641,7 +641,7 @@ Analysis_Quality(API₁) > Analysis_Quality(API₂) ⟹ Insight_Value(API₁) > 
 - **[API 指标规范](../49-api-metrics/api-metrics.md)** - 指标管理
 - **[API 可观测性规范](../60-api-api-observability/api-api-observability.md)** -
   可观测性
-- **[最佳实践](../08-best-practices/best-practices.md)** - 分析最佳实践
+- **[最佳实践](../00-foundation/05-best-practices.md)** - 分析最佳实践
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述
 
 **最后更新**：2025-11-07 **维护者**：项目团队

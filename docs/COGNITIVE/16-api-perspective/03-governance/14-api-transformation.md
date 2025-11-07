@@ -65,7 +65,7 @@ API 转换规范定义了 API 在转换场景下的设计和实现，从转换�
 ### 1.2 转换在 API 规范中的位置
 
 根据 API 规范四元组定义（见
-[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+[API 规范形式化定义](../00-foundation/01-formalization.md#21-api-规范四元组)）
 ，API 转换属于 **IDL** 和 **Governance** 维度：
 
 ```text
@@ -982,7 +982,7 @@ Capability(WASMTransform) = Minimal_Set(Required_Transformations)
 - **[API 集成规范](../70-api-integration/api-integration.md)** - API 集成
 - **[API 代理规范](../77-api-proxy/api-proxy.md)** - API 代理
 - **[API 适配器规范](../79-api-adapter/api-adapter.md)** - API 适配器
-- **[最佳实践](../08-best-practices/best-practices.md)** - 转换最佳实践
+- **[最佳实践](../00-foundation/05-best-practices.md)** - 转换最佳实践
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述
 
 **最后更新**：2025-11-07 **维护者**：项目团队

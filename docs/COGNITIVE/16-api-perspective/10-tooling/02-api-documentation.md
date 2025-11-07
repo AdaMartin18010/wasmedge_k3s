@@ -63,7 +63,7 @@ HTML/PDF/Markdown 文档
 ### 1.2 API 文档在 API 规范中的位置
 
 根据 API 规范四元组定义（见
-[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+[API 规范形式化定义](../00-foundation/01-formalization.md#21-api-规范四元组)）
 ，API 文档是 IDL 维度的输出：
 
 ```text
@@ -554,7 +554,7 @@ Docs_as_Code(Doc) ⟹ Maintainability(Doc) > Manual_Documentation(Doc)
 - **[容器化 API 规范](../01-containerization-api/containerization-api.md)** -
   Kubernetes CRD API 文档
 - **[WASM 化 API 规范](../03-wasm-api/wasm-api.md)** - WIT 文档生成
-- **[最佳实践](../08-best-practices/best-practices.md)** - API 文档最佳实践
+- **[最佳实践](../00-foundation/05-best-practices.md)** - API 文档最佳实践
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述
 
 ---

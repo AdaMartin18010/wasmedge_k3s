@@ -68,7 +68,7 @@ CI/CD（GitHub Actions、ArgoCD）
 ### 1.2 API 生态系统集成在 API 规范中的位置
 
 根据 API 规范四元组定义（见
-[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+[API 规范形式化定义](../00-foundation/01-formalization.md#21-api-规范四元组)）
 ，API 生态系统集成跨越所有维度：
 
 ```text
@@ -504,12 +504,12 @@ Integration_Efficiency(API₁, Ecosystem) > Integration_Efficiency(API₂, Ecosy
 
 ## 9. 相关文档
 
-- **[Service Mesh 集成](../17-api-gateway/api-gateway.md)** - Service Mesh 网关
+- **[Service Mesh 集成](../10-tooling/03-api-gateway.md)** - Service Mesh 网关
   集成
-- **[可观测性集成](../12-api-observability/api-observability.md)** - 可观测性技
+- **[可观测性集成](../04-observability/01-api-observability.md)** - 可观测性技
   术实现
-- **[CI/CD 集成](../24-api-lifecycle/api-lifecycle.md)** - CI/CD 流程
-- **[最佳实践](../08-best-practices/best-practices.md)** - 生态系统集成最佳实践
+- **[CI/CD 集成](../03-governance/02-api-lifecycle.md)** - CI/CD 流程
+- **[最佳实践](../00-foundation/05-best-practices.md)** - 生态系统集成最佳实践
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述
 
 ---

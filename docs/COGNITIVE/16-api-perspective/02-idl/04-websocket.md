@@ -64,7 +64,7 @@ WebSocket 服务器（Server）
 ### 1.2 API WebSocket 在 API 规范中的位置
 
 根据 API 规范四元组定义（见
-[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+[API 规范形式化定义](../00-foundation/01-formalization.md#21-api-规范四元组)）
 ，API WebSocket 主要涉及 IDL 和 Observability 维度：
 
 ```text
@@ -478,13 +478,13 @@ Message_Latency(WebSocket) < Message_Latency(HTTP_Polling)
 
 ## 8. 相关文档
 
-- **[API 事件驱动架构](../35-api-event-driven/api-event-driven.md)** - WebSocket
+- **[API 事件驱动架构](../09-architecture/01-api-event-driven.md)** - WebSocket
   事件
-- **[API 性能优化](../14-api-performance/api-performance.md)** - WebSocket 性能
+- **[API 性能优化](../07-performance/01-api-performance.md)** - WebSocket 性能
   优化
-- **[API 微服务架构](../36-api-microservices/api-microservices.md)** - WebSocket
+- **[API 微服务架构](../09-architecture/02-api-microservices.md)** - WebSocket
   服务通信
-- **[最佳实践](../08-best-practices/best-practices.md)** - WebSocket 最佳实践
+- **[最佳实践](../00-foundation/05-best-practices.md)** - WebSocket 最佳实践
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述
 
 **最后更新**：2025-11-07 **维护者**：项目团队

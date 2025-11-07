@@ -73,7 +73,7 @@ API 性能优化是 API 规范的重要组成部分，从序列化性能到网�
 ### 1.2 API 性能在 API 规范中的位置
 
 根据 API 规范四元组定义（见
-[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+[API 规范形式化定义](../00-foundation/01-formalization.md#21-api-规范四元组)）
 ，API 性能优化跨越所有维度：
 
 ```text
@@ -690,8 +690,8 @@ Cache_Hit_Rate(API₁) > Cache_Hit_Rate(API₂) ⟹ Performance(API₁) > Perfor
 
 ## 10. 相关文档
 
-- **[最佳实践](../08-best-practices/best-practices.md)** - API 性能优化最佳实践
-- **[技术对比矩阵](../05-comparison-matrix/comparison-matrix.md)** - 性能对比分
+- **[最佳实践](../00-foundation/05-best-practices.md)** - API 性能优化最佳实践
+- **[技术对比矩阵](../00-foundation/03-comparison-matrix.md)** - 性能对比分
   析
 - **[API 可观测性规范](../12-api-observability/api-observability.md)** - 性能监
   控

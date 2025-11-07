@@ -86,7 +86,7 @@ Linux 系统调用 API
 ### 1.3 容器化在 API 规范中的位置
 
 根据 API 规范四元组定义（见
-[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)），
+[API 规范形式化定义](../00-foundation/01-formalization.md#21-api-规范四元组)），
 容器化 API 属于 **IDL** 和 **Governance** 维度：
 
 ```text

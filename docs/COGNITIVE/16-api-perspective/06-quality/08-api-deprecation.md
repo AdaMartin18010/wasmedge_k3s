@@ -462,7 +462,7 @@ Migration_Completion(API) ≥ Threshold ⟹ Safe(Remove(API))
 - **[API 版本管理](../23-api-versioning/api-versioning.md)** - API 版本控制
 - **[API 生命周期](../24-api-lifecycle/api-lifecycle.md)** - API 生命周期管理
 - **[API 迁移指南](../19-api-migration/api-migration.md)** - API 迁移
-- **[最佳实践](../08-best-practices/best-practices.md)** - 弃用最佳实践
+- **[最佳实践](../00-foundation/05-best-practices.md)** - 弃用最佳实践
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述
 
 **最后更新**：2025-11-07 **维护者**：项目团队

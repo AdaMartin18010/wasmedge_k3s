@@ -67,7 +67,7 @@ Logging（日志）
 ### 1.2 API 可观测性在 API 规范中的位置
 
 根据 API 规范四元组定义（见
-[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+[API 规范形式化定义](../00-foundation/01-formalization.md#21-api-规范四元组)）
 ，API 可观测性是 Observability 维度的核心：
 
 ```text
@@ -682,7 +682,7 @@ RED_Metrics(API) ⟹ Performance_Assessable(API)
 
 ## 9. 相关文档
 
-- **[最佳实践](../08-best-practices/best-practices.md)** - API 可观测性最佳实践
+- **[最佳实践](../00-foundation/05-best-practices.md)** - API 可观测性最佳实践
 - **[eBPF/OTLP 扩展技术分析](../../TECHNICAL/32-ebpf-otlp-analysis/ebpf-otlp-analysis.md)**
   ⭐ - eBPF 和 OTLP 技术详解
 - **[eBPF/OTLP 认知视角](../../COGNITIVE/13-ebpf-otlp-perspective/ebpf-otlp-perspective.md)** -

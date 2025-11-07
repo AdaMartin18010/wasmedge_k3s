@@ -285,7 +285,8 @@ Breaking(Δ) ⟺ ∃ input: (input ∉ Domain(A₂)) ∨ (A₁(input) ≠ A₂(i
 ## 6. 相关文档
 
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述
-- **[形式化理论](../07-formal-theory/formal-theory.md)** - 形式化理论框架
+- **[理论基础](02-theoretical-foundation.md)** - 理论基础（形式化证明、概念矩阵
+  、知识图谱）
 
 ---
 

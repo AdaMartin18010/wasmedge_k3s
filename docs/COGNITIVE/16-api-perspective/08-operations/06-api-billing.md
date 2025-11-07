@@ -557,7 +557,7 @@ Billing_Accuracy(API₁) > Billing_Accuracy(API₂) ⟹ Trust(API₁) > Trust(AP
   费
 - **[API 成本优化](../21-api-cost-optimization/api-cost-optimization.md)** - 成
   本优化
-- **[最佳实践](../08-best-practices/best-practices.md)** - 计费最佳实践
+- **[最佳实践](../00-foundation/05-best-practices.md)** - 计费最佳实践
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述
 
 **最后更新**：2025-11-07 **维护者**：项目团队

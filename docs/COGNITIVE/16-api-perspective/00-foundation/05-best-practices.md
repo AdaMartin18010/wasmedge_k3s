@@ -86,7 +86,7 @@
 ### 1.2 最佳实践在 API 规范中的位置
 
 根据 API 规范四元组定义（见
-[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)），
+[API 规范形式化定义](../00-foundation/01-formalization.md#21-api-规范四元组)），
 最佳实践覆盖所有四个维度：
 
 ```text
@@ -688,12 +688,10 @@ Adoption_Rate(Practice, t) = K / (1 + A × e^(-r×t))
 
 ## 9. 相关文档
 
-- **[容器化 API 规范](../01-containerization-api/containerization-api.md)** - 容
-  器化 API 详解
-- **[沙盒化 API 规范](../02-sandboxing-api/sandboxing-api.md)** - 沙盒化 API 详
-  解
-- **[WASM 化 API 规范](../03-wasm-api/wasm-api.md)** - WASM 化 API 详解
-- **[API 演进路径](../06-api-evolution/api-evolution.md)** - API 演进最佳实践
+- **[容器化 API 规范](../01-runtime/01-containerization.md)** - 容器化 API 详解
+- **[沙盒化 API 规范](../01-runtime/02-sandboxing.md)** - 沙盒化 API 详解
+- **[WASM 化 API 规范](../01-runtime/03-wasm.md)** - WASM 化 API 详解
+- **[API 演进路径](04-api-evolution.md)** - API 演进最佳实践
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述
 
 ---

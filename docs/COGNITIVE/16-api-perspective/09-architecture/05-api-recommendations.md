@@ -67,7 +67,7 @@ API 推荐规范定义了 API 在推荐场景下的设计和实现，从推荐�
 ### 1.2 API 推荐在 API 规范中的位置
 
 根据 API 规范四元组定义（见
-[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+[API 规范形式化定义](../00-foundation/01-formalization.md#21-api-规范四元组)）
 ，API 推荐主要涉及 Governance 和 Observability 维度：
 
 ```text
@@ -595,7 +595,7 @@ Recommendation_Quality(API₁) > Recommendation_Quality(API₂) ⟹ Adoption_Rat
 - **[API 市场规范](../69-api-marketplace/api-marketplace.md)** - API 市场
 - **[API 分析规范](../68-api-analytics/api-analytics.md)** - API 分析
 - **[API 管理规范](../58-api-api-management/api-api-management.md)** - API 管理
-- **[最佳实践](../08-best-practices/best-practices.md)** - 推荐最佳实践
+- **[最佳实践](../00-foundation/05-best-practices.md)** - 推荐最佳实践
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述
 
 **最后更新**：2025-11-07 **维护者**：项目团队

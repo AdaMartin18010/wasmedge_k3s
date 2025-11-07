@@ -615,7 +615,7 @@ SLA_Violation(API, SLA) ⟹ Compensation(API, SLA)
 - **[API 性能规范](../14-api-performance/api-performance.md)** - API 性能
 - **[API 成本优化](../21-api-cost-optimization/api-cost-optimization.md)** - SLA
   成本
-- **[最佳实践](../08-best-practices/best-practices.md)** - SLA 最佳实践
+- **[最佳实践](../00-foundation/05-best-practices.md)** - SLA 最佳实践
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述
 
 **最后更新**：2025-11-07 **维护者**：项目团队

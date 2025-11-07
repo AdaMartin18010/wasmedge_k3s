@@ -64,7 +64,7 @@ API Gateway
 ### 1.2 API 微服务架构在 API 规范中的位置
 
 根据 API 规范四元组定义（见
-[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+[API 规范形式化定义](../00-foundation/01-formalization.md#21-api-规范四元组)）
 ，API 微服务架构跨越所有维度：
 
 ```text
@@ -440,7 +440,7 @@ Governance_Policy(Service) ⟹ Service_Availability(Service) ↑
 - **[服务网格 API 治理](../13-api-governance/api-governance.md)** - 服务网格治理
 - **[API 网关集成](../17-api-gateway/api-gateway.md)** - API Gateway
 - **[API 可观测性](../12-api-observability/api-observability.md)** - 服务监控
-- **[最佳实践](../08-best-practices/best-practices.md)** - 微服务最佳实践
+- **[最佳实践](../00-foundation/05-best-practices.md)** - 微服务最佳实践
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述
 
 ---

@@ -63,7 +63,7 @@ API 调用（API Calls）
 ### 1.2 API 编排在 API 规范中的位置
 
 根据 API 规范四元组定义（见
-[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+[API 规范形式化定义](../00-foundation/01-formalization.md#21-api-规范四元组)）
 ，API 编排主要涉及 Governance 维度：
 
 ```text
@@ -644,7 +644,7 @@ Compensation_Mechanism(Orchestration) ⟹ State_Consistency(Orchestration)
 - **[API 集成规范](../70-api-integration/api-integration.md)** - API 集成
 - **[API 工作流规范](../72-api-workflow/api-workflow.md)** - API 工作流
 - **[API 事件驱动规范](../35-api-event-driven/api-event-driven.md)** - 事件驱动
-- **[最佳实践](../08-best-practices/best-practices.md)** - 编排最佳实践
+- **[最佳实践](../00-foundation/05-best-practices.md)** - 编排最佳实践
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述
 
 **最后更新**：2025-11-07 **维护者**：项目团队

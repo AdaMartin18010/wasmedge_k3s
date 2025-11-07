@@ -61,7 +61,7 @@ API Gateway
 ### 1.2 API 无服务器架构在 API 规范中的位置
 
 根据 API 规范四元组定义（见
-[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+[API 规范形式化定义](../00-foundation/01-formalization.md#21-api-规范四元组)）
 ，API 无服务器架构主要涉及 IDL 和 Governance 维度：
 
 ```text
@@ -381,7 +381,7 @@ Cost_Efficiency(Serverless(API)) > Cost_Efficiency(Traditional(API))
   服务器成本优化
 - **[API 边缘计算](../34-api-edge-computing/api-edge-computing.md)** - 边缘无服
   务器
-- **[最佳实践](../08-best-practices/best-practices.md)** - 无服务器最佳实践
+- **[最佳实践](../00-foundation/05-best-practices.md)** - 无服务器最佳实践
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述
 
 ---

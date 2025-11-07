@@ -68,7 +68,7 @@ API 故障恢复和灾难恢复规范定义了 API 在不同运行时环境下�
 ### 1.2 API 故障恢复和灾难恢复在 API 规范中的位置
 
 根据 API 规范四元组定义（见
-[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+[API 规范形式化定义](../00-foundation/01-formalization.md#21-api-规范四元组)）
 ，API 故障恢复和灾难恢复主要涉及 Governance 和 Observability 维度：
 
 ```text
@@ -481,7 +481,7 @@ Actual_Recovery_Time(API, Disaster) ≤ RTO(API, Disaster) ⟹ RTO_Satisfied(API
 - **[API 故障排查](../18-api-troubleshooting/api-troubleshooting.md)** - 故障诊
   断
 - **[API 监控告警](../20-api-monitoring/api-monitoring.md)** - 故障检测
-- **[最佳实践](../08-best-practices/best-practices.md)** - 恢复最佳实践
+- **[最佳实践](../00-foundation/05-best-practices.md)** - 恢复最佳实践
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述
 
 **最后更新**：2025-11-07 **维护者**：项目团队

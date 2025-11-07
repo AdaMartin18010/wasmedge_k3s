@@ -64,7 +64,7 @@ Span 创建（Span Creation）
 ### 1.2 API 追踪在 API 规范中的位置
 
 根据 API 规范四元组定义（见
-[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+[API 规范形式化定义](../00-foundation/01-formalization.md#21-api-规范四元组)）
 ，API 追踪主要涉及 Observability 维度：
 
 ```text
@@ -524,7 +524,7 @@ Sampling_Rate(Tracing₁) < Sampling_Rate(Tracing₂) ⟹ Storage_Cost(Tracing�
 - **[API 监控告警](../20-api-monitoring/api-monitoring.md)** - 追踪监控
 - **[API 微服务架构](../36-api-microservices/api-microservices.md)** - 分布式追
   踪
-- **[最佳实践](../08-best-practices/best-practices.md)** - 追踪最佳实践
+- **[最佳实践](../00-foundation/05-best-practices.md)** - 追踪最佳实践
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述
 
 **最后更新**：2025-11-07 **维护者**：项目团队

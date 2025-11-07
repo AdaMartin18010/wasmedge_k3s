@@ -556,7 +556,7 @@ Error_Strategy(API) ⟹ Availability(API) ↑
 - **[API 数据验证规范](../46-api-data-validation/api-data-validation.md)** - 验
   证错误处理
 - **[API 监控告警](../20-api-monitoring/api-monitoring.md)** - 错误监控
-- **[最佳实践](../08-best-practices/best-practices.md)** - 错误处理最佳实践
+- **[最佳实践](../00-foundation/05-best-practices.md)** - 错误处理最佳实践
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述
 
 **最后更新**：2025-11-07 **维护者**：项目团队

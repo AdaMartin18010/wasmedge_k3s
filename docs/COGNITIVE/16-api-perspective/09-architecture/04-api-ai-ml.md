@@ -62,7 +62,7 @@ API AI/ML 集成的理论基础和实践方法。
 ### 1.2 API AI/ML 集成在 API 规范中的位置
 
 根据 API 规范四元组定义（见
-[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+[API 规范形式化定义](../00-foundation/01-formalization.md#21-api-规范四元组)）
 ，API AI/ML 集成主要涉及 IDL 和 Observability 维度：
 
 ```text
@@ -413,7 +413,7 @@ Latency(Quantized_Model) < Latency(Original_Model)
 - **[WASM 化 API 规范](../03-wasm-api/wasm-api.md)** - WASI-NN 接口
 - **[API 性能优化](../14-api-performance/api-performance.md)** - ML 性能优化
 - **[API 无服务器架构](../37-api-serverless/api-serverless.md)** - ML 无服务器
-- **[最佳实践](../08-best-practices/best-practices.md)** - AI/ML API 最佳实践
+- **[最佳实践](../00-foundation/05-best-practices.md)** - AI/ML API 最佳实践
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述
 
 ---

@@ -616,7 +616,7 @@ Integration_Test_Coverage(Integration) ↑ ⟹ Integration_Reliability(Integrati
   成
 - **[API 事件驱动规范](../35-api-event-driven/api-event-driven.md)** - 事件驱动
   集成
-- **[最佳实践](../08-best-practices/best-practices.md)** - 集成最佳实践
+- **[最佳实践](../00-foundation/05-best-practices.md)** - 集成最佳实践
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述
 
 **最后更新**：2025-11-07 **维护者**：项目团队

@@ -554,7 +554,7 @@ Privacy_Protection(Data) ⟹ Compliant(API, Privacy_Regulation)
 
 - **[API 合规规范](../22-api-compliance/api-compliance.md)** - API 合规
 - **[API 安全规范](../11-api-security/api-security.md)** - API 安全
-- **[最佳实践](../08-best-practices/best-practices.md)** - 数据隐私最佳实践
+- **[最佳实践](../00-foundation/05-best-practices.md)** - 数据隐私最佳实践
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述
 
 **最后更新**：2025-11-07 **维护者**：项目团队

@@ -70,7 +70,7 @@ API 质量（API 设计、API 测试）
 ### 1.2 API 质量保证在 API 规范中的位置
 
 根据 API 规范四元组定义（见
-[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+[API 规范形式化定义](../00-foundation/01-formalization.md#21-api-规范四元组)）
 ，API 质量保证跨越所有维度：
 
 ```text
@@ -490,7 +490,7 @@ Quality_Gate(API, Threshold) = Pass ⟹ Overall_Quality(API) ≥ Threshold
 - **[API 测试规范](../15-api-testing/api-testing.md)** - 测试质量保证
 - **[API 标准化规范](../25-api-standardization/api-standardization.md)** - API
   质量标准
-- **[最佳实践](../08-best-practices/best-practices.md)** - 质量保证最佳实践
+- **[最佳实践](../00-foundation/05-best-practices.md)** - 质量保证最佳实践
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述
 
 ---

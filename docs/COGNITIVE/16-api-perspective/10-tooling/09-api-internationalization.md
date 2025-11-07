@@ -517,7 +517,7 @@ Negotiate_Content(Request) = Best_Match(Requested_Language, Available_Languages)
 - **[API 标准化规范](../25-api-standardization/api-standardization.md)** - API
   标准化
 - **[API 设计规范](../57-api-api-design/api-api-design.md)** - API 设计
-- **[最佳实践](../08-best-practices/best-practices.md)** - 国际化最佳实践
+- **[最佳实践](../00-foundation/05-best-practices.md)** - 国际化最佳实践
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述
 
 **最后更新**：2025-11-07 **维护者**：项目团队

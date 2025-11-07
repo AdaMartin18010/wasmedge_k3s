@@ -65,7 +65,7 @@ API 版本管理规范定义了 API 在不同运行时环境下的版本管理�
 ### 1.2 API 版本管理在 API 规范中的位置
 
 根据 API 规范四元组定义（见
-[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+[API 规范形式化定义](../00-foundation/01-formalization.md#21-api-规范四元组)）
 ，API 版本管理是 Governance 维度的核心组成部分：
 
 ```text
@@ -545,9 +545,9 @@ Coexist_Versions: API_Version[] → Bool
 
 ## 8. 相关文档
 
-- **[API 演进路径](../06-api-evolution/api-evolution.md)** - API 演进理论
-- **[API 迁移指南](../19-api-migration/api-migration.md)** - 版本迁移实践
-- **[最佳实践](../08-best-practices/best-practices.md)** - 版本管理最佳实践
+- **[API 演进路径](../00-foundation/04-api-evolution.md)** - API 演进理论
+- **[API 迁移指南](../08-operations/01-api-migration.md)** - 版本迁移实践
+- **[最佳实践](../00-foundation/05-best-practices.md)** - 版本管理最佳实践
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述
 
 ---

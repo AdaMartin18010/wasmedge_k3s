@@ -71,7 +71,7 @@ API 设计（OpenAPI Editor、WIT Editor）
 ### 1.2 API 开发工具链在 API 规范中的位置
 
 根据 API 规范四元组定义（见
-[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+[API 规范形式化定义](../00-foundation/01-formalization.md#21-api-规范四元组)）
 ，API 开发工具链跨越所有维度：
 
 ```text
@@ -521,7 +521,7 @@ Toolchain_Efficiency(Toolchain₁) > Toolchain_Efficiency(Toolchain₂) ⟹ Deve
   具使用
 - **[API 测试规范](../15-api-testing/api-testing.md)** - 测试工具使用
 - **[API 监控告警](../20-api-monitoring/api-monitoring.md)** - 监控工具使用
-- **[最佳实践](../08-best-practices/best-practices.md)** - 工具链最佳实践
+- **[最佳实践](../00-foundation/05-best-practices.md)** - 工具链最佳实践
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述
 
 **最后更新**：2025-11-07 **维护者**：项目团队

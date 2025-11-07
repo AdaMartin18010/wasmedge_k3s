@@ -72,7 +72,7 @@ API 故障排查规范定义了 API 在不同运行时环境下的故障诊断�
 ### 1.2 API 故障排查在 API 规范中的位置
 
 根据 API 规范四元组定义（见
-[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+[API 规范形式化定义](../00-foundation/01-formalization.md#21-api-规范四元组)）
 ，API 故障排查覆盖所有四个维度：
 
 ```text

@@ -69,7 +69,7 @@ Artifact v1.1、OTLP 标准、eBPF 生态和 WASM 技术栈都迎来了重要更
 ### 1.2 2025 生态在 API 规范中的位置
 
 根据 API 规范四元组定义（见
-[API 规范形式化定义](../07-formalization/formalization.md#21-api-规范四元组)）
+[API 规范形式化定义](../00-foundation/01-formalization.md#21-api-规范四元组)）
 ，2025 技术生态覆盖所有四个维度：
 
 ```text

@@ -620,7 +620,7 @@ Marketplace_Health(Marketplace₁) > Marketplace_Health(Marketplace₂) ⟹ Grow
 - **[API 管理规范](../58-api-api-management/api-api-management.md)** - API 管理
 - **[API 计费规范](../67-api-billing/api-billing.md)** - API 计费
 - **[API 分析规范](../68-api-analytics/api-analytics.md)** - API 分析
-- **[最佳实践](../08-best-practices/best-practices.md)** - 市场最佳实践
+- **[最佳实践](../00-foundation/05-best-practices.md)** - 市场最佳实践
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述
 
 **最后更新**：2025-11-07 **维护者**：项目团队
