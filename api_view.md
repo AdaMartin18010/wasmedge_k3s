@@ -1157,6 +1157,13 @@ message SmartClause {
 **[API 规范视角文档集](docs/COGNITIVE/16-api-perspective/)** ⭐，包含以下核心专
 题：
 
+#### 理论基础文档
+
+- **[API 理论基础](docs/COGNITIVE/16-api-perspective/79-api-theoretical-foundation/api-theoretical-foundation.md)**
+  ⭐ - 形式化证明、概念矩阵、思维导图、知识图谱
+- **[API 规范形式化定义](docs/COGNITIVE/16-api-perspective/07-formalization/formalization.md)**
+  ⭐ - API 规范形式化基础
+
 #### 核心基础文档（01-07）
 
 - **[容器化 API 规范](docs/COGNITIVE/16-api-perspective/01-containerization-api/containerization-api.md)** -
