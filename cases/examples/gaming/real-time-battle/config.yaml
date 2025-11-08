@@ -1,0 +1,35 @@
+# 实时对战应用配置文件
+# 用途：配置实时对战应用参数
+# 创建日期：2025-11-07
+
+# 服务器配置
+server:
+  port: 8080
+  host: "0.0.0.0"
+  timeout: 30s
+
+# 游戏配置
+game:
+  max_players: 10
+  tick_rate: 120
+  latency_target: 20
+  timeout: 60s
+
+# 性能配置
+performance:
+  fps_target: 120
+  latency_threshold: 50
+  packet_loss_threshold: 0.01
+
+# 日志配置
+logging:
+  level: "info"
+  format: "json"
+  output: "stdout"
+
+# 数据库配置
+database:
+  type: "sqlite"
+  path: "/data/real-time-battle.db"
+  max_connections: 10
+

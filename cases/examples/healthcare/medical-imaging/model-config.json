@@ -1,0 +1,30 @@
+{
+  "model": {
+    "name": "medical-imaging-ai",
+    "version": "1.0.0",
+    "type": "wasm",
+    "path": "/model.wasm",
+    "format": "onnx"
+  },
+  "inference": {
+    "batch_size": 1,
+    "timeout": 30,
+    "max_retries": 3
+  },
+  "gpu": {
+    "enabled": false,
+    "device": "cuda"
+  },
+  "preprocessing": {
+    "resize": {
+      "width": 512,
+      "height": 512
+    },
+    "normalize": true
+  },
+  "postprocessing": {
+    "threshold": 0.5,
+    "format": "json"
+  }
+}
+

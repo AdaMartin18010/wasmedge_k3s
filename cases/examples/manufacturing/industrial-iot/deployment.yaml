@@ -1,0 +1,68 @@
+# 工业 IoT Kubernetes Deployment 配置
+# 用途：部署工业 IoT 服务到 K3s 集群
+# 创建日期：2025-11-07
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: industrial-iot
+  namespace: default
+  labels:
+    app: industrial-iot
+    version: v1.0.0
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: industrial-iot
+  template:
+    metadata:
+      labels:
+        app: industrial-iot
+        version: v1.0.0
+    spec:
+      # 使用 WasmEdge RuntimeClass
+      runtimeClassName: wasmedge
+      containers:
+      - name: industrial-iot
+        image: registry.example.com/industrial-iot:latest
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 50m
+            memory: 64Mi
+          limits:
+            cpu: 200m
+            memory: 128Mi
+        env:
+        - name: LOG_LEVEL
+          value: "info"
+        - name: PORT
+          value: "8080"
+        - name: DATABASE_PATH
+          value: "/data/industrial-iot.db"
+        volumeMounts:
+        - name: sqlite-data
+          mountPath: /data
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10
+      volumes:
+      - name: sqlite-data
+        hostPath:
+          path: /var/lib/industrial-iot
+          type: DirectoryOrCreate
+

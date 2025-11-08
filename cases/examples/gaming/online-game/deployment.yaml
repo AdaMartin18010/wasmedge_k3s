@@ -1,0 +1,67 @@
+# 在线游戏边缘渲染 Kubernetes Deployment 配置
+# 用途：部署在线游戏边缘渲染服务到 K3s 集群（GPU 支持）
+# 创建日期：2025-11-07
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: game-renderer
+  namespace: default
+  labels:
+    app: game-renderer
+    version: v1.0.0
+spec:
+  replicas: 20
+  selector:
+    matchLabels:
+      app: game-renderer
+  template:
+    metadata:
+      labels:
+        app: game-renderer
+        version: v1.0.0
+    spec:
+      # 选择 GPU 节点
+      nodeSelector:
+        gpu: enabled
+      # 使用 WasmEdge RuntimeClass
+      runtimeClassName: wasmedge
+      containers:
+      - name: game-renderer
+        image: registry.example.com/game-renderer:latest
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 500m
+            memory: 512Mi
+            nvidia.com/gpu: 1
+          limits:
+            cpu: 2
+            memory: 1Gi
+            nvidia.com/gpu: 1
+        env:
+        - name: LOG_LEVEL
+          value: "info"
+        - name: PORT
+          value: "8080"
+        - name: GPU_ENABLED
+          value: "true"
+        - name: FPS_TARGET
+          value: "60"
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 60
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 30
+

@@ -1,0 +1,60 @@
+# 医疗影像处理 Kubernetes Deployment 配置
+# 用途：部署医疗影像处理服务到 K3s 集群
+# 创建日期：2025-11-07
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: medical-imaging-ai
+  namespace: default
+  labels:
+    app: medical-imaging-ai
+    version: v1.0.0
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: medical-imaging-ai
+  template:
+    metadata:
+      labels:
+        app: medical-imaging-ai
+        version: v1.0.0
+    spec:
+      # 使用 WasmEdge RuntimeClass
+      runtimeClassName: wasmedge
+      containers:
+      - name: medical-imaging-ai
+        image: registry.example.com/medical-imaging-ai:latest
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 500m
+            memory: 1Gi
+          limits:
+            cpu: 2
+            memory: 2Gi
+        env:
+        - name: LOG_LEVEL
+          value: "info"
+        - name: PORT
+          value: "8080"
+        - name: MODEL_PATH
+          value: "/model.wasm"
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 60
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 30
+

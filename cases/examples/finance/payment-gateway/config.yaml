@@ -1,0 +1,33 @@
+# 支付网关应用配置文件
+# 用途：配置支付网关应用参数
+# 创建日期：2025-11-07
+
+# 服务器配置
+server:
+  port: 8080
+  host: "0.0.0.0"
+  timeout: 30s
+
+# 日志配置
+logging:
+  level: "info"
+  format: "json"
+  output: "stdout"
+
+# 数据库配置
+database:
+  type: "sqlite"
+  path: "/data/payment.db"
+  max_connections: 10
+
+# 支付配置
+payment:
+  max_amount: 10000
+  timeout: 30s
+  retry_count: 3
+
+# 安全配置
+security:
+  jwt_secret: "${JWT_SECRET}"
+  token_expiry: 3600s
+

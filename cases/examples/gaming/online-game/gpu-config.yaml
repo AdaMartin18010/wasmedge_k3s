@@ -1,0 +1,26 @@
+# 在线游戏 GPU 配置
+# 用途：配置 GPU 渲染参数
+# 创建日期：2025-11-07
+
+gpu:
+  enabled: true
+  device: "cuda"
+  memory_limit: "2Gi"
+
+rendering:
+  fps_target: 60
+  resolution:
+    width: 1920
+    height: 1080
+  quality: "high"
+
+performance:
+  vsync: true
+  anti_aliasing: true
+  shadow_quality: "high"
+
+logging:
+  level: "info"
+  format: "json"
+  output: "stdout"
+

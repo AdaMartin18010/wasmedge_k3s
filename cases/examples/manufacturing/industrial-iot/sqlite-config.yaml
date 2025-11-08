@@ -1,0 +1,20 @@
+# 工业 IoT SQLite 配置
+# 用途：配置 SQLite 数据库参数（支持离线自治）
+# 创建日期：2025-11-07
+
+database:
+  type: "sqlite"
+  path: "/data/industrial-iot.db"
+  max_connections: 10
+  timeout: 30s
+
+offline:
+  enabled: true
+  sync_interval: 300
+  max_queue_size: 10000
+
+logging:
+  level: "info"
+  format: "json"
+  output: "stdout"
+

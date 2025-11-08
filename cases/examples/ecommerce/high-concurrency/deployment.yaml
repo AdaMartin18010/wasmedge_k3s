@@ -1,0 +1,101 @@
+# 电商高并发 Serverless 函数 Kubernetes Deployment 配置
+# 用途：部署电商高并发 Serverless 函数到 K3s 集群
+# 创建日期：2025-11-07
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: serverless-function
+  namespace: default
+  labels:
+    app: serverless-function
+    version: v1.0.0
+spec:
+  replicas: 100
+  selector:
+    matchLabels:
+      app: serverless-function
+  template:
+    metadata:
+      labels:
+        app: serverless-function
+        version: v1.0.0
+    spec:
+      # 使用 WasmEdge RuntimeClass
+      runtimeClassName: wasmedge
+      containers:
+      - name: serverless-function
+        image: registry.example.com/serverless-function:latest
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 10m
+            memory: 32Mi
+          limits:
+            cpu: 100m
+            memory: 64Mi
+        env:
+        - name: LOG_LEVEL
+          value: "info"
+        - name: PORT
+          value: "8080"
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
+          initialDelaySeconds: 2
+          periodSeconds: 10
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: serverless-function-hpa
+  namespace: default
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: serverless-function
+  minReplicas: 10
+  maxReplicas: 5000
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 60
+      policies:
+      - type: Percent
+        value: 50
+        periodSeconds: 60
+    scaleUp:
+      stabilizationWindowSeconds: 0
+      policies:
+      - type: Percent
+        value: 100
+        periodSeconds: 30
+      - type: Pods
+        value: 100
+        periodSeconds: 30
+      selectPolicy: Max
+

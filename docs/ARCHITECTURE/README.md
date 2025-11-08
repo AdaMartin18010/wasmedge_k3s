@@ -233,10 +233,8 @@ ARCHITECTURE/
 ARCHITECTURE 目录已完成重组，从 14 个目录优化为 5 个核心目录，减少 64%。详情请参
 考：
 
-- **[重组完成总结](REORGANIZATION-SUMMARY.md)** ⭐ - 完整的重组完成总结
-- **[重组完成报告](REORGANIZATION-COMPLETE.md)** - 重组完成报告
-- **[引用更新完成报告](REFERENCE-UPDATE-COMPLETE.md)** ⭐ - 引用更新完成报告
-  （390+ 个引用）
+- **[引用更新完成报告](../ARCHIVE/REFERENCE-UPDATE-COMPLETE.md)** ⭐ - 引用更新
+  完成报告（已归档）（390+ 个引用）
 
 **重组统计**：
 
