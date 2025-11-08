@@ -1,0 +1,184 @@
+# 32. eBPF/OTLP 扩展技术分析文档目录
+
+## 1. 文档概述
+
+本目录包含 eBPF（extended Berkeley Packet Filter）和 OTLP（OpenTelemetry
+Protocol）的扩展技术分析文档，提供架构设计、性能分析、实践指南等深层次技术内容，
+对齐 2025 年 11 月 7 日最新技术栈状态。
+
+## 2. 文档列表
+
+| 文档                                               | 描述                                               |
+| -------------------------------------------------- | -------------------------------------------------- |
+| [ebpf-otlp-analysis.md](ebpf-otlp-analysis.md)     | eBPF/OTLP 扩展技术分析完整文档（2025-11-07 更新）  |
+| [QUICK-REFERENCE.md](QUICK-REFERENCE.md) ⭐        | 快速参考指南：关键技术要点、性能指标、故障排查速查 |
+| [architecture-design.md](architecture-design.md)   | 架构设计与实现细节                                 |
+| [performance-analysis.md](performance-analysis.md) | 性能分析与优化指南                                 |
+| [practice-guide.md](practice-guide.md)             | 生产实践指南与最佳实践                             |
+
+## 3. 文档结构
+
+### 3.1 架构设计
+
+- **32.1 技术规范与语义模型对齐**：从底层到协议的精密映射
+- **32.2 虚拟化/容器化/沙盒化架构视角**：三层隔离模型
+- **32.3 思维导图**：eBPF-OTLP 融合架构全景
+- **32.4 知识图谱**：实体关系与语义关联
+
+### 3.2 性能分析
+
+- **32.5 多维矩阵视角**：性能-安全-可移植性-语义的权衡空间
+- **32.6 性能基准测试**：详细性能数据和对比分析
+- **32.7 优化策略**：内核态预聚合、列式编码、批处理
+
+### 3.3 实践指南
+
+- **32.8 部署架构**：生产级实践架构设计
+- **32.9 安全与权限管理**：零信任架构设计
+- **32.10 故障排查**：常见问题与解决方案
+- **32.11 最佳实践**：生产环境最佳实践总结
+
+### 3.4 技术前沿
+
+- **32.12 智能系统能力架构**：系统自我感知、自动伸缩、自我治愈
+- **32.13 最新技术栈前沿**：eBPF + OTLP 的未来演进
+- **32.14 虚拟化/容器化融合架构**：eBPF as a Service (EaaS)
+
+### 3.5 总结与展望
+
+- **32.15 总结**：eBPF + OTLP 技术栈的核心价值、技术演进路径、适用场景矩阵
+
+## 4. 使用指南
+
+### 4.0 快速参考
+
+**快速查找关键信息**：
+
+- **[QUICK-REFERENCE.md](QUICK-REFERENCE.md)** ⭐ - 快速参考指南
+  - 按角色快速定位（架构师、性能工程师、运维工程师等）
+  - 按场景快速定位（架构设计、性能优化、生产部署等）
+  - 关键技术要点速查（eBPF/OTLP 核心概念）
+  - 性能指标速查（eBPF/OTLP 性能基准）
+  - 故障排查速查（常见问题、诊断工具）
+  - 部署架构速查（部署模式、资源限制）
+  - 安全最佳实践速查（安全措施）
+
+### 4.1 快速开始
+
+**如果你是架构师**：
+
+- 直接阅读
+  [32.1 技术规范与语义模型对齐](ebpf-otlp-analysis.md#321-技术规范与语义模型对齐从底层到协议的精密映射)
+- 重点关注
+  [32.2 虚拟化/容器化/沙盒化架构视角](ebpf-otlp-analysis.md#322-虚拟化容器化沙盒化架构视角三层隔离模型)
+- 参考 [32.3 思维导图](ebpf-otlp-analysis.md#323-思维导图ebpf-otlp-融合架构全景)
+
+**如果你是性能工程师**：
+
+- 直接阅读
+  [32.5 多维矩阵视角](ebpf-otlp-analysis.md#325-多维矩阵视角性能-安全-可移植性-语义的权衡空间)
+- 重点关注
+  [32.6 性能基准测试](ebpf-otlp-analysis.md#326-性能基准测试详细性能数据和对比分析)
+- 参考
+  [32.7 优化策略](ebpf-otlp-analysis.md#327-优化策略内核态预聚合列式编码批处理)
+
+**如果你是运维工程师**：
+
+- 直接阅读 [32.8 部署架构](ebpf-otlp-analysis.md#328-部署架构生产级实践架构设计)
+- 重点关注
+  [32.9 安全与权限管理](ebpf-otlp-analysis.md#329-安全与权限管理零信任架构设计)
+- 参考 [32.10 故障排查](ebpf-otlp-analysis.md#3210-故障排查常见问题与解决方案)
+
+### 4.2 深入学习路径
+
+1. **架构理解**：
+
+   - [32.1 技术规范与语义模型对齐](ebpf-otlp-analysis.md#321-技术规范与语义模型对齐从底层到协议的精密映射)
+   - [32.2 虚拟化/容器化/沙盒化架构视角](ebpf-otlp-analysis.md#322-虚拟化容器化沙盒化架构视角三层隔离模型)
+   - [32.3 思维导图](ebpf-otlp-analysis.md#323-思维导图ebpf-otlp-融合架构全景)
+   - [32.4 知识图谱](ebpf-otlp-analysis.md#324-知识图谱实体关系与语义关联)
+
+2. **性能分析**：
+
+   - [32.5 多维矩阵视角](ebpf-otlp-analysis.md#325-多维矩阵视角性能-安全-可移植性-语义的权衡空间)
+   - [32.6 性能基准测试](ebpf-otlp-analysis.md#326-性能基准测试详细性能数据和对比分析)
+   - [32.7 优化策略](ebpf-otlp-analysis.md#327-优化策略内核态预聚合列式编码批处理)
+
+3. **实践指南**：
+
+   - [32.8 部署架构](ebpf-otlp-analysis.md#328-部署架构生产级实践架构设计)
+   - [32.9 安全与权限管理](ebpf-otlp-analysis.md#329-安全与权限管理零信任架构设计)
+   - [32.10 故障排查](ebpf-otlp-analysis.md#3210-故障排查常见问题与解决方案)
+   - [32.11 最佳实践](ebpf-otlp-analysis.md#3211-最佳实践生产环境最佳实践总结)
+
+4. **技术前沿**：
+
+   - [32.12 智能系统能力架构](ebpf-otlp-analysis.md#3212-智能系统能力架构从观测到自治的技术演进)
+   - [32.13 最新技术栈前沿](ebpf-otlp-analysis.md#3213-最新技术栈前沿ebpf--otlp-的未来演进)
+   - [32.14 虚拟化/容器化融合架构](ebpf-otlp-analysis.md#3214-虚拟化容器化融合架构ebpf-as-a-service-eaas)
+
+5. **总结与展望**：
+
+   - [32.15 总结](ebpf-otlp-analysis.md#3215-总结ebpf--otlp-技术栈的核心价值)
+
+## 5. 相关文档
+
+### 5.1 视角文档
+
+- **[eBPF/OTLP 视角](../../../ebpf_otlp_view.md)** ⭐ - 从 eBPF 和 OTLP 的视角看
+  虚拟化容器化（根目录）
+- **[13. eBPF/OTLP 认知视角](../../COGNITIVE/04-application-perspectives/ebpf-otlp-perspective/)** -
+  eBPF/OTLP 认知视角分析文档
+
+### 5.2 技术文档
+
+- **[31. eBPF 技术堆栈](../31-ebpf-stack/ebpf-stack.md)** - eBPF 技术堆栈完整技
+  术参考文档
+- **[16. 监控与可观测性](../16-observability/observability.md)** -
+  OTLP、OpenTelemetry、eBPF 等技术规范
+- **[29. 隔离栈](../29-isolation-stack/isolation-stack.md)** - 问题定位模型、横
+  纵耦合定位方法
+- **[12. 网络技术栈](../12-network-stack/network-stack.md)** -
+  CNI、Service、Ingress 等技术规格
+
+### 5.3 认知模型文档
+
+- **[13. eBPF/OTLP 认知视角](../../COGNITIVE/04-application-perspectives/ebpf-otlp-perspective/ebpf-otlp-perspective.md)** -
+  认知视角分析文档
+- **[01. 总览](../../COGNITIVE/01-core-foundations/overview/overview.md)** - 技术栈总览和决策框架
+- **[09. 矩阵视角](../../COGNITIVE/03-theoretical-perspectives/matrix-perspective/README.md)** - 矩阵力学
+  模型
+
+## 6. 文档特性
+
+### 6.1 深度技术分析
+
+- ✅ **技术规范对齐**：eBPF 字节码规范与 OTLP 协议规范的精密映射
+- ✅ **架构设计**：虚拟化/容器化/沙盒化三层隔离模型
+- ✅ **性能分析**：详细性能基准测试和优化策略
+- ✅ **实践指南**：生产级部署架构和最佳实践
+
+### 6.2 2025-11-07 技术栈状态
+
+- ✅ 对齐 2025 年 11 月 7 日最新技术栈状态
+- ✅ 包含最新技术趋势（bpftime、Wasm-bpf、SandBPF、MiddleNet）
+- ✅ 列式编码（Arrow Flight）集成
+- ✅ Profile 信号 GA 支持
+
+## 7. 文档统计
+
+- **文档行数**：3292 行
+- **主要章节**：16 个（32.1-32.16）
+- **子章节**：70+ 个
+- **代码示例**：60+ 个（C、Go、YAML、Bash）
+- **性能对比表格**：35+ 个
+- **架构图**：3 个（Mermaid）
+- **配置示例**：30+ 个（YAML/JSON/Bash/Go/C）
+- **实际案例**：3 个（大规模集群、多租户 SaaS、边缘计算）
+- **交叉引用**：15+ 处（与相关技术文档建立关联）
+- **快速参考指南**：1 个（QUICK-REFERENCE.md）
+- **最后更新**：2025-11-07
+
+---
+
+**最后更新**：2025-11-07 **维护者**：项目团队

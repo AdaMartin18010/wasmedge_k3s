@@ -33,7 +33,7 @@
 > 已被证明等价于一段可验证的代码**。
 >
 > 📋 **概念定义参考**：虚拟化、容器化、沙盒化的严格定义和技术层级分析请参考
-> [严格定义文档](docs/COGNITIVE/10-decision-models/06-technical-concepts/12-virtualization-paravirtualization-containerization-sandboxing-strict-definition.md)。
+> [严格定义文档](docs/COGNITIVE/05-decision-analysis/decision-models/06-technical-concepts/12-virtualization-paravirtualization-containerization-sandboxing-strict-definition.md)。
 
 ### 1.2 统一中层模型 ℳ
 
@@ -869,8 +869,10 @@ Dynamic Software World
 
 ### 10.6 认知模型
 
-- **[形式化理论](docs/COGNITIVE/07-formal-theory/)** - 形式化理论模型
-- **[范畴论](docs/COGNITIVE/08-category-theory/)** - 范畴论视角
+- **[形式化理论](docs/COGNITIVE/03-theoretical-perspectives/formal-theory/)** -
+  形式化理论模型
+- **[范畴论](docs/COGNITIVE/03-theoretical-perspectives/category-theory/)** - 范
+  畴论视角
 
 ### 10.7 多视角文档
 

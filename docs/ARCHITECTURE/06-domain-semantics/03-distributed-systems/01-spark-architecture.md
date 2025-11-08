@@ -1,0 +1,45 @@
+# Spark 软件栈的语义分层模型
+
+> **本文档是 Spark 架构分析的简化版本。详细分析请参考：**
+> [`../04-domain-case-studies/01-spark-semantic-layering.md`](../04-domain-case-studies/01-spark-semantic-layering.md)
+
+## 概述
+
+本文档从**分层消解律视角**简要分析 Spark 软件栈的语义分层模型。
+
+### 核心思想
+
+> **Spark 作为分布式计算领域的标杆，其软件堆栈本身就是"分层消解律"的最佳演绎场。
+> Spark 如何在虚拟化/容器化浪潮中，既主动消解下层复杂性，又固守核心计算语义。**
+
+## 五层语义架构
+
+1. **层 1：物理执行语义层** - JVM/容器/网络/磁盘（消解率：100%）
+2. **层 2：资源管理语义层** - Master/Worker 或 YARN/K8s（消解率：100%）
+3. **层 3：分布式调度语义层** - TaskScheduler（消解率：50%）
+4. **层 4：计算图语义层** - DAG 构建（消解率：0%）
+5. **层 5：业务领域语义层** - 业务逻辑（消解率：0%）
+
+## 分层消解的演进路径
+
+- **Spark 1.x（2010）**：Standalone 模式，消解率约 0%
+- **Spark 2.x（2014）**：YARN 模式，消解率约 50%
+- **Spark 3.x（2020）**：K8s 模式，消解率约 80%
+- **Spark 4.0（2024）**：K8s 原生，消解率约 100%（层 2）
+
+## 核心启示
+
+1. **资源管理层可以完全被 K8s 消解**
+2. **分布式调度层部分消解，计算感知的调度无法消解**
+3. **计算图和业务逻辑无法被消解**
+
+## 相关文档
+
+- [详细分析文档](../04-domain-case-studies/01-spark-semantic-layering.md)
+- [分层消解律概述](../03-layered-disintegration-law/01-introduction.md)
+- [分布式计算系统消解](../03-layered-disintegration-law/02-distributed-computing-disintegration.md)
+
+---
+
+**最后更新**：2025-11-08 **维护者**：项目团队
+

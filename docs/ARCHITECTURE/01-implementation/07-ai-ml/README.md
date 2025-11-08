@@ -95,11 +95,11 @@
 
 ### 4.1 架构视角文档
 
-- [`../../01-views/ai-ml-architecture-view.md`](../../01-views/ai-ml-architecture-view.md) -
+- [`../../02-views/10-quick-views/ai-ml-architecture-view.md`](../../02-views/10-quick-views/ai-ml-architecture-view.md) -
   AI/ML 架构视角
-- [`../../01-views/webassembly-view.md`](../../01-views/webassembly-view.md) -
+- [`../../02-views/10-quick-views/webassembly-view.md`](../../02-views/10-quick-views/webassembly-view.md) -
   WebAssembly 架构视角（模型 Wasm 化）
-- [`../../01-views/edge-computing-view.md`](../../01-views/edge-computing-view.md)
+- [`../../02-views/10-quick-views/edge-computing-view.md`](../../02-views/10-quick-views/edge-computing-view.md)
   ⭐ 新增（2025-11-07） - 边缘计算架构视角（边缘 AI 推理）
 
 ### 4.2 理论文档

@@ -78,13 +78,13 @@
 
 **定义来源对比**：
 
-| 文档                                                                                                                                            | 定义                                                         |
-| ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| `architecture_view.md`                                                                                                                          | 将物理硬件抽象为虚拟机资源池                                 |
-| `system_view.md`                                                                                                                                | 硬件级隔离，完全虚拟化                                       |
-| `algebra_view.md`                                                                                                                               | 算子 V：把裸 Binary 变成 VM                                  |
-| `docs/ARCHITECTURE/08-concepts-relations/concept-definitions.md`                                                                                | 将物理硬件抽象为虚拟机资源池，提供资源隔离、快照、迁移等功能 |
-| `docs/COGNITIVE/10-decision-models/06-technical-concepts/12-virtualization-paravirtualization-containerization-sandboxing-strict-definition.md` | 硬件支持的复用，Guest OS 无需修改                            |
+| 文档                                                                                                                                                              | 定义                                                         |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| `architecture_view.md`                                                                                                                                            | 将物理硬件抽象为虚拟机资源池                                 |
+| `system_view.md`                                                                                                                                                  | 硬件级隔离，完全虚拟化                                       |
+| `algebra_view.md`                                                                                                                                                 | 算子 V：把裸 Binary 变成 VM                                  |
+| `docs/ARCHITECTURE/08-concepts-relations/concept-definitions.md`                                                                                                  | 将物理硬件抽象为虚拟机资源池，提供资源隔离、快照、迁移等功能 |
+| `docs/COGNITIVE/05-decision-analysis/decision-models/06-technical-concepts/12-virtualization-paravirtualization-containerization-sandboxing-strict-definition.md` | 硬件支持的复用，Guest OS 无需修改                            |
 
 **一致性评估**：✅ 基本一致，但需要统一引用权威定义文档
 
@@ -117,7 +117,7 @@
 **解决方案**：
 
 1. ✅ 已在
-   `docs/COGNITIVE/10-decision-models/06-technical-concepts/12-virtualization-paravirtualization-containerization-sandboxing-strict-definition.md`
+   `docs/COGNITIVE/05-decision-analysis/decision-models/06-technical-concepts/12-virtualization-paravirtualization-containerization-sandboxing-strict-definition.md`
    中建立权威定义
 2. ✅ 已在所有视图文档中添加权威定义引用
    - `ai_view.md`：已添加
@@ -207,16 +207,16 @@
 
 #### 2.5.1 已覆盖视角
 
-| 视角         | 文档                                                           | 状态 |
-| ------------ | -------------------------------------------------------------- | ---- |
-| 认知视角     | `ai_view.md`                                                   | ✅   |
-| 代数视角     | `algebra_view.md`                                              | ✅   |
-| 架构视角     | `architecture_view.md`                                         | ✅   |
-| 系统视角     | `system_view.md`                                               | ✅   |
-| 结构视角     | `structure_view.md`                                            | ✅   |
-| 技术社会视角 | `tech_view.md`                                                 | ✅   |
-| 网络视角     | `docs/TECHNICAL/12-network-stack/virtualization-comparison.md` | ✅   |
-| 存储视角     | `docs/TECHNICAL/15-storage-stack/virtualization-comparison.md` | ✅   |
+| 视角         | 文档                                                                                | 状态 |
+| ------------ | ----------------------------------------------------------------------------------- | ---- |
+| 认知视角     | `ai_view.md`                                                                        | ✅   |
+| 代数视角     | `algebra_view.md`                                                                   | ✅   |
+| 架构视角     | `architecture_view.md`                                                              | ✅   |
+| 系统视角     | `system_view.md`                                                                    | ✅   |
+| 结构视角     | `structure_view.md`                                                                 | ✅   |
+| 技术社会视角 | `tech_view.md`                                                                      | ✅   |
+| 网络视角     | `docs/TECHNICAL/04-infrastructure-stack/network-stack/virtualization-comparison.md` | ✅   |
+| 存储视角     | `docs/TECHNICAL/04-infrastructure-stack/storage-stack/virtualization-comparison.md` | ✅   |
 
 #### 2.5.2 视角交叉引用
 
@@ -301,9 +301,11 @@
 
 1. ✅ 检查文件内容是否已完全迁移（已确认）
    - `network_view_optimized.md`（1081 行）→
-     `docs/TECHNICAL/12-network-stack/virtualization-comparison.md`（1176 行）✅
+     `docs/TECHNICAL/04-infrastructure-stack/network-stack/virtualization-comparison.md`（1176
+     行）✅
    - `storage_view_backup.md`（1051 行）→
-     `docs/TECHNICAL/15-storage-stack/virtualization-comparison.md`（1036 行）✅
+     `docs/TECHNICAL/04-infrastructure-stack/storage-stack/virtualization-comparison.md`（1036
+     行）✅
 2. ✅ 已迁移文件已添加重定向说明
 3. ⚠️ 删除临时文件（建议：可以安全删除，但建议保留一段时间作为备份）
 
@@ -312,9 +314,9 @@
 **文件**：
 
 - `network_view.md` - 已迁移到
-  `docs/TECHNICAL/12-network-stack/virtualization-comparison.md`
+  `docs/TECHNICAL/04-infrastructure-stack/network-stack/virtualization-comparison.md`
 - `storage_view.md` - 已迁移到
-  `docs/TECHNICAL/15-storage-stack/virtualization-comparison.md`
+  `docs/TECHNICAL/04-infrastructure-stack/storage-stack/virtualization-comparison.md`
 
 **操作**：
 
@@ -396,12 +398,14 @@
 - ✅ **第六阶段**：清理临时文件（90%）
   - `network_view_optimized.md`（1081 行）
     - 内容已迁移到
-      `docs/TECHNICAL/12-network-stack/virtualization-comparison.md`（1176 行）
+      `docs/TECHNICAL/04-infrastructure-stack/network-stack/virtualization-comparison.md`（1176
+      行）
     - **状态**：✅ 目标文件行数更多，说明内容已迁移并扩展
     - **建议**：可以安全删除，但建议保留一段时间作为备份
   - `storage_view_backup.md`（1051 行）
     - 备份文件，内容已迁移到
-      `docs/TECHNICAL/15-storage-stack/virtualization-comparison.md`（1036 行）
+      `docs/TECHNICAL/04-infrastructure-stack/storage-stack/virtualization-comparison.md`（1036
+      行）
     - **状态**：✅ 内容已完整迁移
     - **建议**：可以安全删除，但建议保留一段时间作为备份
 

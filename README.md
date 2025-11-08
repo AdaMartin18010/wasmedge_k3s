@@ -88,15 +88,15 @@ Kubernetes → K3s → WasmEdge → OPA** 的完整技术栈，包含理念、�
 
 **目录文档**：
 
-- [`docs/COGNITIVE/00-knowledge-map/`](docs/COGNITIVE/00-knowledge-map/) - 认知
-  图谱和学习路径
-- [`docs/COGNITIVE/01-overview/`](docs/COGNITIVE/01-overview/) - 技术栈总览和决
-  策框架
-- [`docs/COGNITIVE/02-principles/`](docs/COGNITIVE/02-principles/) - 云原生核心
-  理念
-- [`docs/COGNITIVE/10-decision-models/`](docs/COGNITIVE/10-decision-models/) -
+- [`docs/COGNITIVE/01-core-foundations/knowledge-map/`](docs/COGNITIVE/01-core-foundations/knowledge-map/) -
+  认知图谱和学习路径
+- [`docs/COGNITIVE/01-core-foundations/overview/`](docs/COGNITIVE/01-core-foundations/overview/) -
+  技术栈总览和决策框架
+- [`docs/COGNITIVE/01-core-foundations/principles/`](docs/COGNITIVE/01-core-foundations/principles/) -
+  云原生核心理念
+- [`docs/COGNITIVE/05-decision-analysis/decision-models/`](docs/COGNITIVE/05-decision-analysis/decision-models/) -
   技术决策模型与架构选择
-- [`docs/COGNITIVE/13-ebpf-otlp-perspective/`](docs/COGNITIVE/13-ebpf-otlp-perspective/) -
+- [`docs/COGNITIVE/04-application-perspectives/ebpf-otlp-perspective/`](docs/COGNITIVE/04-application-perspectives/ebpf-otlp-perspective/) -
   eBPF/OTLP 认知视角分析
 
 **完整列表**：详见 [`docs/COGNITIVE/README.md`](docs/COGNITIVE/README.md)
@@ -139,20 +139,22 @@ Kubernetes → K3s → WasmEdge → OPA** 的完整技术栈，包含理念、�
 
 **核心文档**：
 
-- [`docs/TECHNICAL/00-docker/`](docs/TECHNICAL/00-docker/) - Docker 技术规范
-- [`docs/TECHNICAL/01-kubernetes/`](docs/TECHNICAL/01-kubernetes/) - Kubernetes
-  架构与实践
-- [`docs/TECHNICAL/02-k3s/`](docs/TECHNICAL/02-k3s/) - K3s 轻量级架构
-- [`docs/TECHNICAL/03-wasm-edge/`](docs/TECHNICAL/03-wasm-edge/) - WasmEdge 集成
-  指南
-- [`docs/TECHNICAL/29-isolation-stack/`](docs/TECHNICAL/29-isolation-stack/) -
+- [`docs/TECHNICAL/01-core-foundations/docker/`](docs/TECHNICAL/01-core-foundations/docker/) -
+  Docker 技术规范
+- [`docs/TECHNICAL/01-core-foundations/kubernetes/`](docs/TECHNICAL/01-core-foundations/kubernetes/) -
+  Kubernetes 架构与实践
+- [`docs/TECHNICAL/01-core-foundations/k3s/`](docs/TECHNICAL/01-core-foundations/k3s/) -
+  K3s 轻量级架构
+- [`docs/TECHNICAL/02-runtime-policy/wasm-edge/`](docs/TECHNICAL/02-runtime-policy/wasm-edge/) -
+  WasmEdge 集成指南
+- [`docs/TECHNICAL/08-architecture-analysis/isolation-stack/`](docs/TECHNICAL/08-architecture-analysis/isolation-stack/) -
   五层隔离栈技术实现：硬件辅助层 → 全虚拟化 → 半虚拟化 → 容器化 → 沙盒化；横纵耦
   合问题定位模型（OTLP + eBPF）
-- [`docs/TECHNICAL/31-ebpf-stack/`](docs/TECHNICAL/31-ebpf-stack/) - eBPF 技术堆
-  栈：内核可编程技术堆栈，网络加速、可观测性、服务网格、安全应用
-- [`docs/TECHNICAL/32-ebpf-otlp-analysis/`](docs/TECHNICAL/32-ebpf-otlp-analysis/)
+- [`docs/TECHNICAL/04-infrastructure-stack/ebpf-stack/`](docs/TECHNICAL/04-infrastructure-stack/ebpf-stack/) -
+  eBPF 技术堆栈：内核可编程技术堆栈，网络加速、可观测性、服务网格、安全应用
+- [`docs/TECHNICAL/08-architecture-analysis/ebpf-otlp-analysis/`](docs/TECHNICAL/08-architecture-analysis/ebpf-otlp-analysis/)
   ⭐ - eBPF/OTLP 扩展技术分析：架构设计、性能分析、实践指南
-- [`docs/TECHNICAL/30-concept-relations-matrix/`](docs/TECHNICAL/30-concept-relations-matrix/) -
+- [`docs/TECHNICAL/08-architecture-analysis/concept-relations-matrix/`](docs/TECHNICAL/08-architecture-analysis/concept-relations-matrix/) -
   概念关系矩阵：2025 技术堆栈概念关系矩阵与多维关系分析
 - 其他 30+ 个技术规格和实践文档
 
@@ -162,45 +164,50 @@ Kubernetes → K3s → WasmEdge → OPA** 的完整技术栈，包含理念、�
 
 ### 最常用文档
 
-| 需求         | 文档                                                                                   | 说明                        |
-| ------------ | -------------------------------------------------------------------------------------- | --------------------------- |
-| **快速入门** | [总览](docs/COGNITIVE/01-overview/overview.md)                                         | 了解技术栈全貌              |
-| **技术选型** | [系统视角](system_view.md) ⭐                                                          | 7 层 4 域模型，技术选型决策 |
-| **问题定位** | [eBPF/OTLP 视角](ebpf_otlp_view.md) ⭐                                                 | 横纵耦合问题定位模型        |
-| **隔离栈**   | [隔离栈技术实现](docs/TECHNICAL/29-isolation-stack/isolation-stack.md)                 | 五层隔离栈完整体系          |
-| **架构设计** | [架构视角](architecture_view.md) ⭐                                                    | 架构拆解与组合              |
-| **故障排查** | [故障排查](docs/TECHNICAL/11-troubleshooting/troubleshooting.md)                       | 常见问题解决方案            |
-| **概念关系** | [概念关系矩阵](docs/TECHNICAL/30-concept-relations-matrix/concept-relations-matrix.md) | 技术堆栈概念关系梳理        |
-| **架构框架** | [架构框架](docs/TECHNICAL/28-architecture-framework/architecture-framework.md)         | 多维度架构体系              |
+| 需求         | 文档                                                                                                         | 说明                        |
+| ------------ | ------------------------------------------------------------------------------------------------------------ | --------------------------- |
+| **快速入门** | [总览](docs/COGNITIVE/01-core-foundations/overview/overview.md)                                              | 了解技术栈全貌              |
+| **技术选型** | [系统视角](system_view.md) ⭐                                                                                | 7 层 4 域模型，技术选型决策 |
+| **问题定位** | [eBPF/OTLP 视角](ebpf_otlp_view.md) ⭐                                                                       | 横纵耦合问题定位模型        |
+| **隔离栈**   | [隔离栈技术实现](docs/TECHNICAL/08-architecture-analysis/isolation-stack/isolation-stack.md)                 | 五层隔离栈完整体系          |
+| **架构设计** | [架构视角](architecture_view.md) ⭐                                                                          | 架构拆解与组合              |
+| **故障排查** | [故障排查](docs/TECHNICAL/05-devops/troubleshooting/troubleshooting.md)                                      | 常见问题解决方案            |
+| **概念关系** | [概念关系矩阵](docs/TECHNICAL/08-architecture-analysis/concept-relations-matrix/concept-relations-matrix.md) | 技术堆栈概念关系梳理        |
+| **架构框架** | [架构框架](docs/TECHNICAL/08-architecture-analysis/architecture-framework/architecture-framework.md)         | 多维度架构体系              |
 
 ### 按角色快速入口
 
-- **👨‍💻 开发者**：[Docker](docs/TECHNICAL/00-docker/docker.md) →
-  [Kubernetes](docs/TECHNICAL/01-kubernetes/kubernetes.md) →
-  [K3s](docs/TECHNICAL/02-k3s/k3s.md) →
-  [WasmEdge](docs/TECHNICAL/03-wasm-edge/wasmedge.md)
+- **👨‍💻 开发者**：[Docker](docs/TECHNICAL/01-core-foundations/docker/docker.md) →
+  [Kubernetes](docs/TECHNICAL/01-core-foundations/kubernetes/kubernetes.md) →
+  [K3s](docs/TECHNICAL/01-core-foundations/k3s/k3s.md) →
+  [WasmEdge](docs/TECHNICAL/02-runtime-policy/wasm-edge/wasmedge.md)
 - **🏗️ 架构师**：[架构视角](architecture_view.md) ⭐ →
   [系统视角](system_view.md) ⭐ →
-  [架构框架](docs/TECHNICAL/28-architecture-framework/architecture-framework.md)
+  [架构框架](docs/TECHNICAL/08-architecture-analysis/architecture-framework/architecture-framework.md)
   → [案例研究](docs/ARCHITECTURE/07-case-studies/)
-- **🔧 运维工程师**：[安装部署](docs/TECHNICAL/10-installation/installation.md)
-  → [故障排查](docs/TECHNICAL/11-troubleshooting/troubleshooting.md) →
-  [隔离栈](docs/TECHNICAL/29-isolation-stack/isolation-stack.md) →
-  [eBPF/OTLP 视角](ebpf_otlp_view.md) ⭐
+- **🔧 运维工程
+  师**：[安装部署](docs/TECHNICAL/05-devops/installation/installation.md) →
+  [故障排查](docs/TECHNICAL/05-devops/troubleshooting/troubleshooting.md) →
+  [隔离栈](docs/TECHNICAL/08-architecture-analysis/isolation-stack/isolation-stack.md)
+  → [eBPF/OTLP 视角](ebpf_otlp_view.md) ⭐
 - **🔬 研究人员**：[认知视角](ai_view.md) ⭐ →
-  [形式化理论](docs/COGNITIVE/07-formal-theory/formal-theory.md) →
-  [范畴论视角](docs/COGNITIVE/08-category-theory/category-theory.md) →
-  [矩阵视角](docs/COGNITIVE/09-matrix-perspective/README.md)
+  [形式化理论](docs/COGNITIVE/03-theoretical-perspectives/formal-theory/formal-theory.md)
+  →
+  [范畴论视角](docs/COGNITIVE/03-theoretical-perspectives/category-theory/category-theory.md)
+  →
+  [矩阵视角](docs/COGNITIVE/03-theoretical-perspectives/matrix-perspective/README.md)
 
 ## 🚀 快速开始
 
 ### 新手推荐路径
 
-1. **[总览](docs/COGNITIVE/01-overview/overview.md)** - 了解技术栈全貌和核心理念
-2. **[认知图谱](docs/COGNITIVE/00-knowledge-map/knowledge-map.md)** - 快速理解知
-   识结构和学习路径
+1. **[总览](docs/COGNITIVE/01-core-foundations/overview/overview.md)** - 了解技
+   术栈全貌和核心理念
+2. **[认知图谱](docs/COGNITIVE/01-core-foundations/knowledge-map/knowledge-map.md)** -
+   快速理解知识结构和学习路径
 3. **[认知视角](ai_view.md)** ⭐ - 掌握技术演进主线和认知框架
-4. **[理念层](docs/COGNITIVE/02-principles/principles.md)** - 理解云原生核心思想
+4. **[理念层](docs/COGNITIVE/01-core-foundations/principles/principles.md)** -
+   理解云原生核心思想
 5. **[Docker 基础](docs/TECHNICAL/00-docker/docker.md)** - 掌握容器技术基础
 
 ### 进阶学习路径
@@ -227,14 +234,14 @@ Kubernetes → K3s → WasmEdge → OPA** 的完整技术栈，包含理念、�
 
 ### 高级理论路径
 
-1. **[隔离模型](docs/COGNITIVE/10-decision-models/01-theory-models/02-isolation-models.md)** -
+1. **[隔离模型](docs/COGNITIVE/05-decision-analysis/decision-models/01-theory-models/02-isolation-models.md)** -
    理解隔离层次理论模型
-2. **[矩阵视角](docs/COGNITIVE/09-matrix-perspective/README.md)** - 理解矩阵力学
-   模型
-3. **[范畴论视角](docs/COGNITIVE/08-category-theory/category-theory.md)** - 探索
-   对象、态射与函子
-4. **[形式化理论](docs/COGNITIVE/07-formal-theory/formal-theory.md)** - 深入理解
-   结构同构和关系等价
+2. **[矩阵视角](docs/COGNITIVE/03-theoretical-perspectives/matrix-perspective/README.md)** -
+   理解矩阵力学模型
+3. **[范畴论视角](docs/COGNITIVE/03-theoretical-perspectives/category-theory/category-theory.md)** -
+   探索对象、态射与函子
+4. **[形式化理论](docs/COGNITIVE/03-theoretical-perspectives/formal-theory/formal-theory.md)** -
+   深入理解结构同构和关系等价
 
 ## 🎯 如何使用三类文档
 
@@ -262,7 +269,7 @@ Kubernetes → K3s → WasmEdge → OPA** 的完整技术栈，包含理念、�
 
 **典型关联示例**：
 
-- **[隔离模型](docs/COGNITIVE/10-decision-models/01-theory-models/02-isolation-models.md)**（
+- **[隔离模型](docs/COGNITIVE/05-decision-analysis/decision-models/01-theory-models/02-isolation-models.md)**（
   认知层）↔
   **[隔离栈技术实现](docs/TECHNICAL/29-isolation-stack/isolation-stack.md)**（技
   术层）
@@ -357,7 +364,7 @@ Kubernetes → K3s → WasmEdge → OPA** 的完整技术栈，包含理念、�
   ⭐ - 架构设计、性能分析、实践指南
 - [eBPF 技术堆栈](docs/TECHNICAL/31-ebpf-stack/ebpf-stack.md) - 内核可编程技术堆
   栈完整文档（1481 行）
-- [eBPF/OTLP 认知视角](docs/COGNITIVE/13-ebpf-otlp-perspective/ebpf-otlp-perspective.md) -
+- [eBPF/OTLP 认知视角](docs/COGNITIVE/04-application-perspectives/ebpf-otlp-perspective/ebpf-otlp-perspective.md) -
   eBPF/OTLP 认知视角分析文档
 
 ## 📖 文档导航
@@ -415,7 +422,7 @@ Kubernetes → K3s → WasmEdge → OPA** 的完整技术栈，包含理念、�
 - **按缩写查找**：查看
   [`docs/TECHNICAL/13-acronyms-glossary/`](docs/TECHNICAL/13-acronyms-glossary/)
 - **按问题查找**：查看
-  [`docs/COGNITIVE/06-problem-solution-matrix/`](docs/COGNITIVE/06-problem-solution-matrix/)
+  [`docs/COGNITIVE/02-architecture-design/problem-solution-matrix/`](docs/COGNITIVE/02-architecture-design/problem-solution-matrix/)
 - **按概念关系查找**：查看
   [`docs/TECHNICAL/30-concept-relations-matrix/`](docs/TECHNICAL/30-concept-relations-matrix/) -
   2025 技术堆栈概念关系矩阵与多维关系分析
@@ -571,14 +578,15 @@ Kubernetes → K3s → WasmEdge → OPA** 的完整技术栈，包含理念、�
 
 **A**: 文档集分为三个层次，适合不同水平的读者：
 
-- **新手**：从 [`总览`](docs/COGNITIVE/01-overview/overview.md) 和
-  [`认知视角`](ai_view.md) 开始，建立整体认知框架
+- **新手**：从 [`总览`](docs/COGNITIVE/01-core-foundations/overview/overview.md)
+  和 [`认知视角`](ai_view.md) 开始，建立整体认知框架
 - **进阶**：深入 [`架构视角`](architecture_view.md) 和
   [`系统视角`](system_view.md)，理解架构设计原理
 - **专家**：研究
-  [`形式化理论`](docs/COGNITIVE/07-formal-theory/formal-theory.md) 和
-  [`范畴论视角`](docs/COGNITIVE/08-category-theory/category-theory.md)，探索理论
-  深度
+  [`形式化理论`](docs/COGNITIVE/03-theoretical-perspectives/formal-theory/formal-theory.md)
+  和
+  [`范畴论视角`](docs/COGNITIVE/03-theoretical-perspectives/category-theory/category-theory.md)，
+  探索理论深度
 
 ### Q2: 如何选择合适的学习路径？
 

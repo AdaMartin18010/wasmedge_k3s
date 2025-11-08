@@ -28,16 +28,16 @@ system_view.md (系统视角)
     ├── 概念与历史年表
     │   └──→ ARCHITECTURE/00-theory/ (形式化理论论证)
     ├── 统一分层模型（7层4域）
-    │   └──→ ARCHITECTURE/02-layers/ (分层架构模型)
+    │   └──→ ARCHITECTURE/03-models/ (分层架构模型)
     ├── 隔离维度定量对比
     │   └──→ ARCHITECTURE/00-theory/04-state-compression/ (状态空间压缩)
     ├── 分层功能对比矩阵
     │   ├──→ ARCHITECTURE/01-implementation/ (实现细节)
     │   └──→ ARCHITECTURE/00-theory/06-comparison-matrix/ (对比矩阵)
     ├── 实战案例
-    │   └──→ ARCHITECTURE/07-case-studies/ (案例研究)
+    │   └──→ ARCHITECTURE/04-applications/case-studies/ (案例研究)
     └── 未来趋势与风险
-        └──→ ARCHITECTURE/05-trends-2025/ (技术趋势)
+        └──→ ARCHITECTURE/05-trends/ (技术趋势)
 ```
 
 ---
@@ -59,15 +59,15 @@ system_view.md (系统视角)
 
 系统视角的 7 层模型对应架构视图：
 
-| system_view 层级       | 架构视图文档                                                                                                                                           |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| L1 硬件资源层          | [`02-layers/hardware-firmware-layer.md`](02-layers/hardware-firmware-layer.md)                                                                         |
-| L2 计算虚拟层          | [`02-layers/hypervisor-kernel-layer.md`](02-layers/hypervisor-kernel-layer.md)<br>[`01-views/virtualization-view.md`](01-views/virtualization-view.md) |
-| L3 分布式调度层        | [`01-views/dynamic-operations-view.md`](01-views/dynamic-operations-view.md)                                                                           |
-| L4 分布式数据面        | [`01-views/service-mesh-view.md`](01-views/service-mesh-view.md)<br>[`01-views/network-service-mesh-view.md`](01-views/network-service-mesh-view.md)   |
-| L5 控制面 & 治理       | [`01-views/opa-policy-governance-view.md`](01-views/opa-policy-governance-view.md)                                                                     |
-| L6 可观测性 & 故障治理 | [`01-views/dynamic-operations-view.md`](01-views/dynamic-operations-view.md)                                                                           |
-| L7 应用交付层          | [`07-case-studies/`](07-case-studies/)                                                                                                                 |
+| system_view 层级       | 架构视图文档                                                                                                                                                                                                     |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| L1 硬件资源层          | [`03-models/hardware-firmware-layer.md`](03-models/hardware-firmware-layer.md)                                                                                                                                   |
+| L2 计算虚拟层          | [`03-models/hypervisor-kernel-layer.md`](03-models/hypervisor-kernel-layer.md)<br>[`02-views/10-quick-views/virtualization-view.md`](02-views/10-quick-views/virtualization-view.md)                             |
+| L3 分布式调度层        | [`02-views/10-quick-views/dynamic-operations-view.md`](02-views/10-quick-views/dynamic-operations-view.md)                                                                                                       |
+| L4 分布式数据面        | [`02-views/10-quick-views/service-mesh-view.md`](02-views/10-quick-views/service-mesh-view.md)<br>[`02-views/10-quick-views/network-service-mesh-view.md`](02-views/10-quick-views/network-service-mesh-view.md) |
+| L5 控制面 & 治理       | [`02-views/10-quick-views/opa-policy-governance-view.md`](02-views/10-quick-views/opa-policy-governance-view.md)                                                                                                 |
+| L6 可观测性 & 故障治理 | [`02-views/10-quick-views/dynamic-operations-view.md`](02-views/10-quick-views/dynamic-operations-view.md)                                                                                                       |
+| L7 应用交付层          | [`04-applications/case-studies/`](04-applications/case-studies/)                                                                                                                                                 |
 
 ---
 
@@ -143,31 +143,32 @@ system_view.md (系统视角)
 
 ### 5.1 system_view 案例与 ARCHITECTURE 案例对应
 
-| system_view 案例        | ARCHITECTURE 案例                                                                | 扩展分析                             |
-| ----------------------- | -------------------------------------------------------------------------------- | ------------------------------------ |
-| 案例 A：银行核心系统    | [`07-case-studies/financial-system.md`](07-case-studies/financial-system.md)     | 监管合规、热迁移、KubeVirt           |
-| 案例 B：互联网 CI/CD    | -                                                                                | 需要补充：CI/CD 高密度场景的架构设计 |
-| 案例 C：PC 端安全软件   | -                                                                                | 需要补充：桌面应用的沙盒化架构       |
-| 案例 D：边缘 K8s        | [`07-case-studies/multi-cloud-hybrid.md`](07-case-studies/multi-cloud-hybrid.md) | 边缘计算、K3s、gVisor                |
-| 案例 E：单节点 WASM-P2P | -                                                                                | 需要补充：浏览器内 WASM 架构         |
+| system_view 案例        | ARCHITECTURE 案例                                                                                          | 扩展分析                             |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------- | ------------------------------------ |
+| 案例 A：银行核心系统    | [`04-applications/case-studies/financial-system.md`](04-applications/case-studies/financial-system.md)     | 监管合规、热迁移、KubeVirt           |
+| 案例 B：互联网 CI/CD    | -                                                                                                          | 需要补充：CI/CD 高密度场景的架构设计 |
+| 案例 C：PC 端安全软件   | -                                                                                                          | 需要补充：桌面应用的沙盒化架构       |
+| 案例 D：边缘 K8s        | [`04-applications/case-studies/multi-cloud-hybrid.md`](04-applications/case-studies/multi-cloud-hybrid.md) | 边缘计算、K3s、gVisor                |
+| 案例 E：单节点 WASM-P2P | -                                                                                                          | 需要补充：浏览器内 WASM 架构         |
 
 ### 5.2 需要补充的案例
 
 基于 `system_view.md` 的案例，建议在 ARCHITECTURE 中补充：
 
-1. **CI/CD 高密度场景架构** (`07-case-studies/cicd-high-density.md`)
+1. **CI/CD 高密度场景架构**
+   (`04-applications/case-studies/cicd-high-density.md`)
 
    - 10 万 job/天的架构设计
    - gVisor/Firecracker 混部方案
    - 成本优化策略
 
-2. **桌面应用沙盒化架构** (`07-case-studies/desktop-sandboxing.md`)
+2. **桌面应用沙盒化架构** (`04-applications/case-studies/desktop-sandboxing.md`)
 
    - Windows 沙盒模型
    - Chrome 沙盒架构
    - WASM 插件化
 
-3. **浏览器 WASM 架构** (`07-case-studies/browser-wasm.md`)
+3. **浏览器 WASM 架构** (`04-applications/case-studies/browser-wasm.md`)
    - WebAssembly 运行时
    - WASI 接口设计
    - P2P 网络集成
@@ -181,24 +182,24 @@ system_view.md (系统视角)
 | system_view 章节               | ARCHITECTURE 文档                                                                                            | 说明                        |
 | ------------------------------ | ------------------------------------------------------------------------------------------------------------ | --------------------------- |
 | 1.1 技术演进时间线             | [`00-theory/02-induction-proof/base-case.md`](00-theory/02-induction-proof/base-case.md)                     | 基础归纳步（n=0：裸机世界） |
-| 1.2 三条路线在技术栈中的"切口" | [`02-layers/layer-model.md`](02-layers/layer-model.md)                                                       | 分层架构模型                |
-| 2. 统一分层模型：7 层 4 域     | [`02-layers/`](02-layers/)                                                                                   | 完整的分层架构文档          |
+| 1.2 三条路线在技术栈中的"切口" | [`03-models/layer-model.md`](03-models/layer-model.md)                                                       | 分层架构模型                |
+| 2. 统一分层模型：7 层 4 域     | [`03-models/`](03-models/)                                                                                   | 完整的分层架构文档          |
 | 3. 隔离维度定量对比            | [`00-theory/04-state-compression/empirical-data.md`](00-theory/04-state-compression/empirical-data.md)       | 实证数据                    |
 | 4. 分层功能对比矩阵            | [`00-theory/06-comparison-matrix/comparison-matrix.md`](00-theory/06-comparison-matrix/comparison-matrix.md) | 对比矩阵                    |
-| 5. 实战案例                    | [`07-case-studies/`](07-case-studies/)                                                                       | 案例研究                    |
-| 6. 选型决策指南                | [`architecture-view/08-composition-patterns/`](architecture-view/08-composition-patterns/)                   | 组合模式                    |
-| 7. 未来趋势与风险              | [`05-trends-2025/`](05-trends-2025/)                                                                         | 技术趋势                    |
+| 5. 实战案例                    | [`04-applications/case-studies/`](04-applications/case-studies/)                                             | 案例研究                    |
+| 6. 选型决策指南                | [`02-views/08-composition-patterns/`](02-views/08-composition-patterns/)                                     | 组合模式                    |
+| 7. 未来趋势与风险              | [`05-trends/`](05-trends/)                                                                                   | 技术趋势                    |
 
 ### 6.2 关键概念交叉引用
 
-| system_view 概念 | ARCHITECTURE 概念 | 链接                                                                                                                                                                                                                                                                                   |
-| ---------------- | ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 虚拟化           | 虚拟化抽象        | [`01-views/virtualization-view.md`](01-views/virtualization-view.md)<br>[`architecture-view/02-virtualization-containerization-sandboxing/01-virtualization-abstraction.md`](architecture-view/02-virtualization-containerization-sandboxing/01-virtualization-abstraction.md)         |
-| 容器化           | 容器化抽象        | [`01-views/containerization-view.md`](01-views/containerization-view.md)<br>[`architecture-view/02-virtualization-containerization-sandboxing/02-containerization-abstraction.md`](architecture-view/02-virtualization-containerization-sandboxing/02-containerization-abstraction.md) |
-| 沙盒化           | 沙盒化抽象        | [`01-views/sandboxing-view.md`](01-views/sandboxing-view.md)<br>[`architecture-view/02-virtualization-containerization-sandboxing/03-sandboxing-abstraction.md`](architecture-view/02-virtualization-containerization-sandboxing/03-sandboxing-abstraction.md)                         |
-| WebAssembly      | WebAssembly 视角  | [`01-views/webassembly-view.md`](01-views/webassembly-view.md)<br>[`01-implementation/06-wasm/`](01-implementation/06-wasm/)                                                                                                                                                           |
-| Service Mesh     | Service Mesh 视角 | [`01-views/service-mesh-view.md`](01-views/service-mesh-view.md)<br>[`architecture-view/03-service-mesh-nsm/`](architecture-view/03-service-mesh-nsm/)                                                                                                                                 |
-| OPA              | OPA 策略治理      | [`01-views/opa-policy-governance-view.md`](01-views/opa-policy-governance-view.md)<br>[`architecture-view/04-opa-policy-governance/`](architecture-view/04-opa-policy-governance/)                                                                                                     |
+| system_view 概念 | ARCHITECTURE 概念 | 链接                                                                                                                                                                                                                                                                                               |
+| ---------------- | ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 虚拟化           | 虚拟化抽象        | [`02-views/10-quick-views/virtualization-view.md`](02-views/10-quick-views/virtualization-view.md)<br>[`02-views/02-virtualization-containerization-sandboxing/01-virtualization-abstraction.md`](02-views/02-virtualization-containerization-sandboxing/01-virtualization-abstraction.md)         |
+| 容器化           | 容器化抽象        | [`02-views/10-quick-views/containerization-view.md`](02-views/10-quick-views/containerization-view.md)<br>[`02-views/02-virtualization-containerization-sandboxing/02-containerization-abstraction.md`](02-views/02-virtualization-containerization-sandboxing/02-containerization-abstraction.md) |
+| 沙盒化           | 沙盒化抽象        | [`02-views/10-quick-views/sandboxing-view.md`](02-views/10-quick-views/sandboxing-view.md)<br>[`02-views/02-virtualization-containerization-sandboxing/03-sandboxing-abstraction.md`](02-views/02-virtualization-containerization-sandboxing/03-sandboxing-abstraction.md)                         |
+| WebAssembly      | WebAssembly 视角  | [`02-views/10-quick-views/webassembly-view.md`](02-views/10-quick-views/webassembly-view.md)<br>[`01-implementation/06-wasm/`](01-implementation/06-wasm/)                                                                                                                                         |
+| Service Mesh     | Service Mesh 视角 | [`02-views/10-quick-views/service-mesh-view.md`](02-views/10-quick-views/service-mesh-view.md)<br>[`02-views/03-service-mesh-nsm/`](02-views/03-service-mesh-nsm/)                                                                                                                                 |
+| OPA              | OPA 策略治理      | [`02-views/10-quick-views/opa-policy-governance-view.md`](02-views/10-quick-views/opa-policy-governance-view.md)<br>[`02-views/04-opa-policy-governance/`](02-views/04-opa-policy-governance/)                                                                                                     |
 
 ---
 
@@ -230,9 +231,9 @@ system_view.md (系统视角)
 
 ### 7.3 系统视角的架构视图
 
-建议在 `01-views/` 中补充：
+建议在 `02-views/10-quick-views/` 中补充：
 
-1. **系统视角架构视图** (`01-views/system-view-architecture.md`)
+1. **系统视角架构视图** (`02-views/10-quick-views/system-view-architecture.md`)
    - 7 层 4 域的可视化
    - 三层路线在 7 层中的映射
    - 分布式系统的完整视图
@@ -260,7 +261,45 @@ system_view.md (系统视角)
 2. 将 `system_view.md` 的案例与 ARCHITECTURE 的案例结合
 3. 将 `system_view.md` 的选型指南与 ARCHITECTURE 的组合模式结合
 
+### 8.4 领域语义视角
+
+1. 从 [`06-domain-semantics/`](06-domain-semantics/) 开始，理解领域语义架构分析
+   模型
+2. 学习分层消解律，理解通用能力下沉、领域语义固化的规律
+3. 研究跨领域验证案例（Spark、Argo、Temporal、Ceph、Flink、Kafka 等）
+4. 分析领域案例（IoT、电商、金融、推荐、自动驾驶、医疗、游戏等）
+
 ---
 
-**更新时间**：2025-11-05 **版本**：v1.0 **维护者**：基于 `system_view.md` 和
+## 9. 领域语义架构分析模型整合
+
+### 9.1 领域语义视角的定位
+
+`06-domain-semantics/` 目录从**领域语义视角**分析分布式系统架构演进，重点阐
+述**分层消解律**（Layer Disintegration Law）。
+
+### 9.2 与系统视角的关系
+
+| system_view 层级 | 领域语义视角对应文档                                                                                                                                                                           |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| L3 分布式调度层  | [`06-domain-semantics/03-layered-disintegration-law/02-distributed-computing-disintegration.md`](06-domain-semantics/03-layered-disintegration-law/02-distributed-computing-disintegration.md) |
+| L4 分布式数据面  | [`06-domain-semantics/03-layered-disintegration-law/04-distributed-storage-disintegration.md`](06-domain-semantics/03-layered-disintegration-law/04-distributed-storage-disintegration.md)     |
+| L7 应用交付层    | [`06-domain-semantics/04-domain-case-studies/`](06-domain-semantics/04-domain-case-studies/)                                                                                                   |
+
+### 9.3 核心文档链接
+
+- **总览**：[`06-domain-semantics/README.md`](06-domain-semantics/README.md) -
+  领域语义架构分析模型总览
+- **索引**：[`06-domain-semantics/INDEX.md`](06-domain-semantics/INDEX.md) - 领
+  域语义架构分析模型索引
+- **分层消解
+  律**：[`06-domain-semantics/03-layered-disintegration-law/01-introduction.md`](06-domain-semantics/03-layered-disintegration-law/01-introduction.md) -
+  分层消解律概述
+- **语义模型视
+  角**：[`06-domain-semantics/02-semantic-model-perspective/01-three-layer-semantic-architecture.md`](06-domain-semantics/02-semantic-model-perspective/01-three-layer-semantic-architecture.md) -
+  三层语义模型架构
+
+---
+
+**更新时间**：2025-11-08 **版本**：v1.1 **维护者**：基于 `system_view.md` 和
 `ARCHITECTURE/` 内容整合

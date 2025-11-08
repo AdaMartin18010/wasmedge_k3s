@@ -286,7 +286,7 @@
 ## 第一部分：虚拟化容器化沙盒化的结构分析
 
 > 📋 **概念定义参考**：虚拟化、容器化、沙盒化的严格定义和技术层级分析请参考
-> [严格定义文档](docs/COGNITIVE/10-decision-models/06-technical-concepts/12-virtualization-paravirtualization-containerization-sandboxing-strict-definition.md)。
+> [严格定义文档](docs/COGNITIVE/05-decision-analysis/decision-models/06-technical-concepts/12-virtualization-paravirtualization-containerization-sandboxing-strict-definition.md)。
 
 ### 0. 先给三件套一个最小定义
 
@@ -545,8 +545,8 @@ Unikernel**”时，你只需问三句：
 
 ### 结构视角相关文档
 
-- **[结构视角文档集](docs/COGNITIVE/12-structural-perspective/)** - 结构视角的详
-  细文档
+- **[结构视角文档集](docs/COGNITIVE/03-theoretical-perspectives/structural-perspective/)** -
+  结构视角的详细文档
 - **[结构视角架构视图](docs/ARCHITECTURE/architecture-view/09-multi-perspectives/02-structural-perspective.md)** -
   结构视角的架构视图
 
@@ -556,7 +556,7 @@ Unikernel**”时，你只需问三句：
 
 本文档提供了结构视角的核心思想。如需深入了解，请参考：
 
-- **[结构视角详细文档集](docs/COGNITIVE/12-structural-perspective/README.md)**
+- **[结构视角详细文档集](docs/COGNITIVE/03-theoretical-perspectives/structural-perspective/README.md)**
   ⭐ - 基于本文档的详细扩展，包含：
 
   - 结构主义基础理论（数学结构主义启示、三元结构框架、结构分类）

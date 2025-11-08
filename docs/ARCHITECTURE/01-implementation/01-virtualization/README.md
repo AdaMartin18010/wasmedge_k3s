@@ -59,7 +59,7 @@
 
 ### 3.2 架构视角
 
-- **`../../01-views/virtualization-view.md`** - 虚拟化架构视角
+- **`../../02-views/10-quick-views/virtualization-view.md`** - 虚拟化架构视角
 
 ### 3.3 技术文档
 

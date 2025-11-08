@@ -18,91 +18,94 @@
 
 ### 核心认知框架
 
-| 文档     | 路径                      | 核心内容               |
-| -------- | ------------------------- | ---------------------- |
-| 认知视角 | `../ai_view.md`（根目录） | 技术演进主线和认知框架 |
-| 认知图谱 | `00-knowledge-map/`       | 知识地图和学习路径     |
-| 总览     | `01-overview/`            | 技术栈总览和决策框架   |
-| 理念层   | `02-principles/`          | 云原生核心理念         |
+| 文档     | 路径                                 | 核心内容               |
+| -------- | ------------------------------------ | ---------------------- |
+| 认知视角 | `../ai_view.md`（根目录）            | 技术演进主线和认知框架 |
+| 认知图谱 | `01-core-foundations/knowledge-map/` | 知识地图和学习路径     |
+| 总览     | `01-core-foundations/overview/`      | 技术栈总览和决策框架   |
+| 理念层   | `01-core-foundations/principles/`    | 云原生核心理念         |
 
 ### 架构与设计
 
-| 文档           | 路径                                      | 核心内容                     |
-| -------------- | ----------------------------------------- | ---------------------------- |
-| 架构与对象模型 | `03-architecture/`                        | 架构理念和设计思想（混合型） |
-| 全局架构设计   | `05-architecture-design/`                 | 技术组合和架构决策           |
-| 问题解决方案   | `06-problem-solution-matrix/`             | 问题分类框架（混合型）       |
-| 架构框架       | `../TECHNICAL/28-architecture-framework/` | 多维度架构体系与技术规范     |
+| 文档           | 路径                                                            | 核心内容                     |
+| -------------- | --------------------------------------------------------------- | ---------------------------- |
+| 架构与对象模型 | `02-architecture-design/architecture/`                          | 架构理念和设计思想（混合型） |
+| 全局架构设计   | `02-architecture-design/architecture-design/`                   | 技术组合和架构决策           |
+| 问题解决方案   | `02-architecture-design/problem-solution-matrix/`               | 问题分类框架（混合型）       |
+| 架构框架       | `../TECHNICAL/08-architecture-analysis/architecture-framework/` | 多维度架构体系与技术规范     |
 
 ### 理论与分析
 
-| 文档             | 路径                          | 核心内容                                                                                                                                                                 |
-| ---------------- | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 形式化理论       | `07-formal-theory/`           | 结构同构和关系等价                                                                                                                                                       |
-| 范畴论视角       | `08-category-theory/`         | 对象、态射与函子                                                                                                                                                         |
-| 矩阵视角         | `09-matrix-perspective/`      | 矩阵力学模型                                                                                                                                                             |
-| 代数结构视角     | `11-algebraic-structure/`     | 算子理论与代数结构                                                                                                                                                       |
-| 结构视角         | `12-structural-perspective/`  | 计算结构、控制结构、信息结构（结构主义视角）                                                                                                                             |
-| 技术社会视角     | `../../tech_view.md`          | 基础设施史、风险社会学、发展经济学、人类学视角 ⭐                                                                                                                        |
-| eBPF/OTLP 视角   | `13-ebpf-otlp-perspective/`   | eBPF/OTLP 认知视角分析（2025-11-07）⭐                                                                                                                                   |
-| 程序设计视角     | `14-programming-perspective/` | 从编程视角看 eBPF 与 OTLP，代码省却 95.7%、组件省却 69%、编程范式转变（2025-11-07）⭐                                                                                    |
-| 应用业务架构视角 | `15-application-perspective/` | 从应用业务架构视角看虚拟化容器化沙盒化，技术演进对业务架构的影响（2025-11-07）⭐<br/>✅ **已完成深度增强**：163+ 形式化定义、117+ 定理证明、500+ 数学公式、205+ 权威引用 |
-| API 规范视角     | `16-api-perspective/`         | 从 API 规范视角看虚拟化容器化沙盒化 WASM 化，程序 API 规范在云原生技术栈中的核心作用（2025-11-07）⭐<br/>✅ **重点领域**：容器化、沙盒化、WASM 化 API 规范               |
-| 决策模型         | `10-decision-models/`         | 技术决策模型与架构选择                                                                                                                                                   |
+| 文档             | 路径                                                   | 核心内容                                                                                                                                                                 |
+| ---------------- | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 形式化理论       | `03-theoretical-perspectives/formal-theory/`           | 结构同构和关系等价                                                                                                                                                       |
+| 范畴论视角       | `03-theoretical-perspectives/category-theory/`         | 对象、态射与函子                                                                                                                                                         |
+| 矩阵视角         | `03-theoretical-perspectives/matrix-perspective/`      | 矩阵力学模型                                                                                                                                                             |
+| 代数结构视角     | `03-theoretical-perspectives/algebraic-structure/`     | 算子理论与代数结构                                                                                                                                                       |
+| 结构视角         | `03-theoretical-perspectives/structural-perspective/`  | 计算结构、控制结构、信息结构（结构主义视角）                                                                                                                             |
+| 技术社会视角     | `../../tech_view.md`                                   | 基础设施史、风险社会学、发展经济学、人类学视角 ⭐                                                                                                                        |
+| eBPF/OTLP 视角   | `04-application-perspectives/ebpf-otlp-perspective/`   | eBPF/OTLP 认知视角分析（2025-11-07）⭐                                                                                                                                   |
+| 程序设计视角     | `04-application-perspectives/programming-perspective/` | 从编程视角看 eBPF 与 OTLP，代码省却 95.7%、组件省却 69%、编程范式转变（2025-11-07）⭐                                                                                    |
+| 应用业务架构视角 | `04-application-perspectives/application-perspective/` | 从应用业务架构视角看虚拟化容器化沙盒化，技术演进对业务架构的影响（2025-11-07）⭐<br/>✅ **已完成深度增强**：163+ 形式化定义、117+ 定理证明、500+ 数学公式、205+ 权威引用 |
+| API 规范视角     | `04-application-perspectives/api-perspective/`         | 从 API 规范视角看虚拟化容器化沙盒化 WASM 化，程序 API 规范在云原生技术栈中的核心作用（2025-11-07）⭐<br/>✅ **重点领域**：容器化、沙盒化、WASM 化 API 规范               |
+| 决策模型         | `05-decision-analysis/decision-models/`                | 技术决策模型与架构选择                                                                                                                                                   |
 
 ### 隔离栈理论实现
 
-| 文档       | 路径                                                         | 核心内容                                                                                     |
-| ---------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------------------- |
-| 隔离模型   | `10-decision-models/01-theory-models/02-isolation-models.md` | 隔离层次理论模型，四层隔离栈的理论支撑                                                       |
-| 隔离栈技术 | `../TECHNICAL/29-isolation-stack/`                           | 四层隔离栈技术实现：虚拟化 → 半虚拟化 → 容器化 → 沙盒化；横纵耦合问题定位模型（OTLP + eBPF） |
+| 文档       | 路径                                                                           | 核心内容                                                                                     |
+| ---------- | ------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------- |
+| 隔离模型   | `05-decision-analysis/decision-models/01-theory-models/02-isolation-models.md` | 隔离层次理论模型，四层隔离栈的理论支撑                                                       |
+| 隔离栈技术 | `../TECHNICAL/08-architecture-analysis/isolation-stack/`                       | 四层隔离栈技术实现：虚拟化 → 半虚拟化 → 容器化 → 沙盒化；横纵耦合问题定位模型（OTLP + eBPF） |
 
 ### 性能与分析
 
-| 文档     | 路径             | 核心内容               |
-| -------- | ---------------- | ---------------------- |
-| 性能基准 | `04-benchmarks/` | 性能评估框架（混合型） |
+| 文档     | 路径                               | 核心内容               |
+| -------- | ---------------------------------- | ---------------------- |
+| 性能基准 | `05-decision-analysis/benchmarks/` | 性能评估框架（混合型） |
 
 ## 3. 快速开始
 
 ### 3.1 新手推荐路径
 
-1. **[总览](01-overview/overview.md)** - 了解技术栈全貌和核心理念
-2. **[认知图谱](00-knowledge-map/knowledge-map.md)** - 快速理解知识结构和学习路
-   径
-3. **[理念层](02-principles/principles.md)** - 理解云原生核心思想
+1. **[总览](01-core-foundations/overview/overview.md)** - 了解技术栈全貌和核心理
+   念
+2. **[认知图谱](01-core-foundations/knowledge-map/knowledge-map.md)** - 快速理解
+   知识结构和学习路径
+3. **[理念层](01-core-foundations/principles/principles.md)** - 理解云原生核心思
+   想
 4. **[认知视角](../ai_view.md)** - 掌握技术演进主线和认知框架
 
 ### 3.2 进阶学习路径
 
-1. **[架构与对象模型](03-architecture/architecture.md)** - 理解架构理念和设计思
-   想
-2. **[全局架构设计](05-architecture-design/architecture-design.md)** - 掌握技术
-   组合和架构决策
-3. **[架构框架](../TECHNICAL/28-architecture-framework/architecture-framework.md)** -
+1. **[架构与对象模型](02-architecture-design/architecture/architecture.md)** -
+   理解架构理念和设计思想
+2. **[全局架构设计](02-architecture-design/architecture-design/architecture-design.md)** -
+   掌握技术组合和架构决策
+3. **[架构框架](../TECHNICAL/08-architecture-analysis/architecture-framework/architecture-framework.md)** -
    了解多维度架构体系与技术规范
-4. **[形式化理论](07-formal-theory/formal-theory.md)** - 深入理解结构同构和关系
-   等价
+4. **[形式化理论](03-theoretical-perspectives/formal-theory/formal-theory.md)** -
+   深入理解结构同构和关系等价
 
 ### 3.3 高级理论路径
 
-1. **[范畴论视角](08-category-theory/category-theory.md)** - 探索对象、态射与函
-   子
-2. **[矩阵视角](09-matrix-perspective/README.md)** - 理解矩阵力学模型
-3. **[结构视角](12-structural-perspective/README.md)** ⭐ - 从结构主义视角理解计
-   算结构、控制结构、信息结构
+1. **[范畴论视角](03-theoretical-perspectives/category-theory/category-theory.md)** -
+   探索对象、态射与函子
+2. **[矩阵视角](03-theoretical-perspectives/matrix-perspective/README.md)** - 理
+   解矩阵力学模型
+3. **[结构视角](03-theoretical-perspectives/structural-perspective/README.md)**
+   ⭐ - 从结构主义视角理解计算结构、控制结构、信息结构
 4. **[技术社会视角](../../tech_view.md)** ⭐ - 从基础设施史、风险社会学、发展经
    济学、人类学视角理解技术的社会意义
-5. **[API 规范视角](16-api-perspective/)** ⭐ - 从 API 规范视角理解容器化、沙盒
-   化、WASM 化的 API 设计
-6. **[问题解决方案](06-problem-solution-matrix/problem-solution-matrix.md)** -
+5. **[API 规范视角](04-application-perspectives/api-perspective/)** ⭐ - 从 API
+   规范视角理解容器化、沙盒化、WASM 化的 API 设计
+6. **[问题解决方案](02-architecture-design/problem-solution-matrix/problem-solution-matrix.md)** -
    掌握问题分类框架
-7. **[隔离模型](10-decision-models/01-theory-models/02-isolation-models.md)** -
+7. **[隔离模型](05-decision-analysis/decision-models/01-theory-models/02-isolation-models.md)** -
    理解隔离层次理论模型
-8. **[隔离栈技术实现](../TECHNICAL/29-isolation-stack/isolation-stack.md)** - 掌
-   握四层隔离栈技术实现和问题定位模型
-9. **[服务网格架构案例](10-decision-models/03-cases/04-service-mesh.md)** - 理解
-   服务间通信治理和零信任安全场景的技术选择论证
+8. **[隔离栈技术实现](../TECHNICAL/08-architecture-analysis/isolation-stack/isolation-stack.md)** -
+   掌握四层隔离栈技术实现和问题定位模型
+9. **[服务网格架构案例](05-decision-analysis/decision-models/03-cases/04-service-mesh.md)** -
+   理解服务间通信治理和零信任安全场景的技术选择论证
 
 ## 4. 使用场景
 
@@ -121,17 +124,18 @@
 
 **典型关联示例**：
 
-- **[隔离模型](10-decision-models/01-theory-models/02-isolation-models.md)**（认
-  知层）↔
-  **[隔离栈技术实现](../TECHNICAL/29-isolation-stack/isolation-stack.md)**（技术
-  层）
+- **[隔离模型](05-decision-analysis/decision-models/01-theory-models/02-isolation-models.md)**（
+  认知层）↔
+  **[隔离栈技术实现](../TECHNICAL/08-architecture-analysis/isolation-stack/isolation-stack.md)**（
+  技术层）
 
   - 认知层：提供隔离层次的理论模型和决策框架
   - 技术层：提供四层隔离栈的技术实现、问题定位模型和实战案例
 
-- **[服务网格架构案例](10-decision-models/03-cases/04-service-mesh.md)**（认知层
-  ）↔ **[服务网格技术栈全景](../TECHNICAL/19-service-mesh/service-mesh.md)**（技
-  术层）
+- **[服务网格架构案例](05-decision-analysis/decision-models/03-cases/04-service-mesh.md)**（
+  认知层）↔
+  **[服务网格技术栈全景](../TECHNICAL/06-advanced-features/service-mesh/service-mesh.md)**（
+  技术层）
   - 认知层：提供服务间通信治理和零信任安全场景的技术选择论证
   - 技术层：提供服务网格的技术实现、配置方案和最佳实践
 

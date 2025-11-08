@@ -57,8 +57,10 @@
 - 系统视角（`system_view.md`）
 - 结构视角（`structure_view.md`）
 - 技术社会视角（`tech_view.md`）
-- 网络视角（`docs/TECHNICAL/12-network-stack/virtualization-comparison.md`）
-- 存储视角（`docs/TECHNICAL/15-storage-stack/virtualization-comparison.md`）
+- 网络视角
+  （`docs/TECHNICAL/04-infrastructure-stack/network-stack/virtualization-comparison.md`）
+- 存储视角
+  （`docs/TECHNICAL/04-infrastructure-stack/storage-stack/virtualization-comparison.md`）
 
 ### 4. 结构统一（100%）
 
@@ -78,7 +80,7 @@
 
 **权威定义文档**：
 
-- `docs/COGNITIVE/10-decision-models/06-technical-concepts/12-virtualization-paravirtualization-containerization-sandboxing-strict-definition.md`
+- `docs/COGNITIVE/05-decision-analysis/decision-models/06-technical-concepts/12-virtualization-paravirtualization-containerization-sandboxing-strict-definition.md`
 
 ---
 
@@ -90,12 +92,14 @@
 
 - `network_view_optimized.md`（1081 行）
   - 内容已迁移到
-    `docs/TECHNICAL/12-network-stack/virtualization-comparison.md`（1176 行）
+    `docs/TECHNICAL/04-infrastructure-stack/network-stack/virtualization-comparison.md`（1176
+    行）
   - **状态**：✅ 内容已完全迁移并扩展
   - **建议**：可以安全删除，但建议保留一段时间作为备份
 - `storage_view_backup.md`（1051 行）
   - 备份文件，内容已迁移到
-    `docs/TECHNICAL/15-storage-stack/virtualization-comparison.md`（1036 行）
+    `docs/TECHNICAL/04-infrastructure-stack/storage-stack/virtualization-comparison.md`（1036
+    行）
   - **状态**：✅ 内容已完全迁移
   - **建议**：可以安全删除，但建议保留一段时间作为备份
 

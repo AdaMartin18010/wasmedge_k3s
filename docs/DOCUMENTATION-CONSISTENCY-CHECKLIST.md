@@ -88,7 +88,7 @@
 
 ```markdown
 > 📋 **概念定义参考**：虚拟化、容器化、沙盒化的严格定义和技术层级分析请参考
-> [严格定义文档](docs/COGNITIVE/10-decision-models/06-technical-concepts/12-virtualization-paravirtualization-containerization-sandboxing-strict-definition.md)。
+> [严格定义文档](docs/COGNITIVE/05-decision-analysis/decision-models/06-technical-concepts/12-virtualization-paravirtualization-containerization-sandboxing-strict-definition.md)。
 ```
 
 ---
@@ -126,9 +126,11 @@
 - [ ] **结构视角**：`structure_view.md` 存在且更新
 - [ ] **技术社会视角**：`tech_view.md` 存在且更新
 - [ ] **网络视
-      角**：`docs/TECHNICAL/12-network-stack/virtualization-comparison.md` 存在
+      角**：`docs/TECHNICAL/04-infrastructure-stack/network-stack/virtualization-comparison.md`
+      存在
 - [ ] **存储视
-      角**：`docs/TECHNICAL/15-storage-stack/virtualization-comparison.md` 存在
+      角**：`docs/TECHNICAL/04-infrastructure-stack/storage-stack/virtualization-comparison.md`
+      存在
 
 ### 视角导航
 

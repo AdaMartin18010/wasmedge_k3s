@@ -175,11 +175,11 @@ spec:
 
 ### 5.2 架构视角
 
-- **`../../01-views/containerization-view.md`** - 容器化架构视角
+- **`../../02-views/10-quick-views/containerization-view.md`** - 容器化架构视角
 
 ### 5.3 技术文档
 
-- **`../../../TECHNICAL/00-docker/docker.md`** - Docker 技术文档
+- **`../../../TECHNICAL/01-core-foundations/docker/docker.md`** - Docker 技术文档
 
 ---
 

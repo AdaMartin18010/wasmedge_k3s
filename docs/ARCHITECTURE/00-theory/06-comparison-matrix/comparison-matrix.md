@@ -297,7 +297,7 @@
 - **相关文档**：
   - `06-formalization/state-space-compression.md` - 状态空间压缩
   - `08-concepts-relations/concept-properties-matrix.md` - 概念属性关系矩阵
-  - `05-trends-2025/november-2025-updates.md` - 2025 年 11 月技术趋势
+  - `../../05-trends/november-2025-updates.md` - 2025 年 11 月技术趋势
 
 ---
 

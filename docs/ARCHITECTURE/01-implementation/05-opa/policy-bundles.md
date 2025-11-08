@@ -298,11 +298,12 @@ spec:
 
 ### 6.2 架构视角
 
-- **`../../01-views/opa-policy-governance-view.md`** - OPA 策略治理架构视角
+- **`../../02-views/10-quick-views/opa-policy-governance-view.md`** - OPA 策略治
+  理架构视角
 
 ### 6.3 技术文档
 
-- **`../../../TECHNICAL/06-policy-opa/policy-opa.md`** - OPA 技术文档
+- **`../../../TECHNICAL/02-runtime-policy/policy-opa/policy-opa.md`** - OPA 技术文档
 
 ---
 

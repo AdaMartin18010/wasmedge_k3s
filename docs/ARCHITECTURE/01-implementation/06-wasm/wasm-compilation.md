@@ -314,7 +314,7 @@ export function fibonacci(n: i32): i32 {
 
 ### 6.2 架构视角文档
 
-- [`../../01-views/webassembly-view.md`](../../01-views/webassembly-view.md) -
+- [`../../02-views/10-quick-views/webassembly-view.md`](../../02-views/10-quick-views/webassembly-view.md) -
   WebAssembly 架构视角
 
 ### 6.3 编译工具文档

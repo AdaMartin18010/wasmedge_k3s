@@ -133,7 +133,7 @@
 
 ### 3.3 与架构视角的关系
 
-**架构视角文档**（`01-views/`）：
+**架构视角文档**（`02-views/10-quick-views/`）：
 
 - **引用理论论证**：说明使用的公理、引理、定理
 - **引用实现细节**：说明如何实现（链接到本目录）
@@ -172,13 +172,13 @@
 
 ### 5.2 架构视角
 
-- **`../01-views/`** - 架构视角文档（引用理论论证和实现细节）
-  - [`webassembly-view.md`](../01-views/webassembly-view.md) - WebAssembly 架构
-    视角
-  - [`ai-ml-architecture-view.md`](../01-views/ai-ml-architecture-view.md) ⭐ 新
-    增（2025-11-07） - AI/ML 架构视角
-  - [`edge-computing-view.md`](../01-views/edge-computing-view.md) ⭐ 新增
-    （2025-11-07） - 边缘计算架构视角
+- **`../02-views/10-quick-views/`** - 架构视角文档（引用理论论证和实现细节）
+  - [`webassembly-view.md`](../02-views/10-quick-views/webassembly-view.md) -
+    WebAssembly 架构视角
+  - [`ai-ml-architecture-view.md`](../02-views/10-quick-views/ai-ml-architecture-view.md)
+    ⭐ 新增（2025-11-07） - AI/ML 架构视角
+  - [`edge-computing-view.md`](../02-views/10-quick-views/edge-computing-view.md)
+    ⭐ 新增（2025-11-07） - 边缘计算架构视角
 
 ### 5.3 源文档
 

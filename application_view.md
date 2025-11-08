@@ -4,7 +4,7 @@
 
 > **本文档已重构并全面增强**：本文档集已全面展开为多个子文档，并已完成深度增强，
 > 详见
-> [`docs/COGNITIVE/15-application-perspective/`](docs/COGNITIVE/15-application-perspective/)
+> [`docs/COGNITIVE/04-application-perspectives/application-perspective/`](docs/COGNITIVE/04-application-perspectives/application-perspective/)
 > ⭐
 >
 > **增强内容**：
@@ -39,14 +39,14 @@
 
 ### 核心文档
 
-1. **[技术层次体系架构](docs/COGNITIVE/15-application-perspective/01-technical-layers/technical-layers.md)**
+1. **[技术层次体系架构](docs/COGNITIVE/04-application-perspectives/application-perspective/01-technical-layers/technical-layers.md)**
    ⭐
 
    - 四层演进模型详解
    - 各层技术栈分析
    - 层间交互关系
 
-2. **[多维技术对比矩阵](docs/COGNITIVE/15-application-perspective/02-comparison-matrix/comparison-matrix.md)**
+2. **[多维技术对比矩阵](docs/COGNITIVE/04-application-perspectives/application-perspective/02-comparison-matrix/comparison-matrix.md)**
    ⭐
 
    - 核心维度对比（隔离级别、启动时间、内存开销等）
@@ -55,97 +55,97 @@
    - 成本维度对比
    - 适用场景矩阵
 
-3. **[业务应用架构映射](docs/COGNITIVE/15-application-perspective/03-business-architecture-mapping/business-architecture-mapping.md)**
+3. **[业务应用架构映射](docs/COGNITIVE/04-application-perspectives/application-perspective/03-business-architecture-mapping/business-architecture-mapping.md)**
    ⭐
 
    - 技术层 → 架构层映射
    - 领域驱动设计(DDD)适配演进
    - 业务架构、信息架构、领域模型影响分析
 
-4. **[知识图谱构建](docs/COGNITIVE/15-application-perspective/04-knowledge-graph/knowledge-graph.md)**
+4. **[知识图谱构建](docs/COGNITIVE/04-application-perspectives/application-perspective/04-knowledge-graph/knowledge-graph.md)**
 
    - 技术基础层 → 运行时管理层 → 架构模式层 → 业务价值层
    - 技术生态依赖图谱
 
-5. **[核心架构模型论证](docs/COGNITIVE/15-application-perspective/05-architecture-models/architecture-models.md)**
+5. **[核心架构模型论证](docs/COGNITIVE/04-application-perspectives/application-perspective/05-architecture-models/architecture-models.md)**
 
    - TOGAF 框架映射
    - C4 模型适配性分析
    - 架构决策框架
 
-6. **[性能与效率实证数据](docs/COGNITIVE/15-application-perspective/06-performance-efficiency/performance-efficiency.md)**
+6. **[性能与效率实证数据](docs/COGNITIVE/04-application-perspectives/application-perspective/06-performance-efficiency/performance-efficiency.md)**
    ⭐
 
    - Kuasar 沙箱管理器性能表现
    - 各技术层开销对比
    - 性能优化建议
 
-7. **[演进路径与决策树](docs/COGNITIVE/15-application-perspective/07-evolution-decision-tree/evolution-decision-tree.md)**
+7. **[演进路径与决策树](docs/COGNITIVE/04-application-perspectives/application-perspective/07-evolution-decision-tree/evolution-decision-tree.md)**
    ⭐
 
    - 技术演进决策树
    - 选型决策框架
    - 演进路径分析
 
-8. **[未来发展趋势与架构建议](docs/COGNITIVE/15-application-perspective/08-future-trends/future-trends.md)**
+8. **[未来发展趋势与架构建议](docs/COGNITIVE/04-application-perspectives/application-perspective/08-future-trends/future-trends.md)**
 
    - 混合沙箱架构模式
    - 信息架构演进方向
    - 领域模型设计原则
 
-9. **[应用架构演进分析](docs/COGNITIVE/15-application-perspective/09-application-evolution/application-evolution.md)**
+9. **[应用架构演进分析](docs/COGNITIVE/04-application-perspectives/application-perspective/09-application-evolution/application-evolution.md)**
    ⭐
 
    - 应用层穿透式演进矩阵
    - 应用启动范式迁移
    - 应用类型演进路径
 
-10. **[业务价值定量论证模型](docs/COGNITIVE/15-application-perspective/10-business-value/business-value.md)**
+10. **[业务价值定量论证模型](docs/COGNITIVE/04-application-perspectives/application-perspective/10-business-value/business-value.md)**
     ⭐
 
     - 成本效益分析模型（TCO 公式）
     - 业务敏捷性评估
     - 真实业务案例
 
-11. **[未来趋势预测模型](docs/COGNITIVE/15-application-perspective/11-trend-prediction/trend-prediction.md)**
+11. **[未来趋势预测模型](docs/COGNITIVE/04-application-perspectives/application-perspective/11-trend-prediction/trend-prediction.md)**
     ⭐
 
     - 技术成熟度 S 曲线模型
     - 驱动力-阻力矩阵
     - 技术渗透率预测
 
-12. **[未来架构模型推演](docs/COGNITIVE/15-application-perspective/12-future-architecture/future-architecture.md)**
+12. **[未来架构模型推演](docs/COGNITIVE/04-application-perspectives/application-perspective/12-future-architecture/future-architecture.md)**
 
     - 2026 年主流架构模型：混合沙箱中台
     - 2028 年颠覆模型：WASM 原生云
 
-13. **[业务场景演进预测](docs/COGNITIVE/15-application-perspective/13-scenario-evolution/scenario-evolution.md)**
+13. **[业务场景演进预测](docs/COGNITIVE/04-application-perspectives/application-perspective/13-scenario-evolution/scenario-evolution.md)**
 
     - 场景化渗透率预测（2025-2030）
     - 商业模式颠覆预测
 
-14. **[决策树与行动建议](docs/COGNITIVE/15-application-perspective/14-decision-action/decision-action.md)**
+14. **[决策树与行动建议](docs/COGNITIVE/04-application-perspectives/application-perspective/14-decision-action/decision-action.md)**
     ⭐
 
     - 企业技术选型决策树（2025 版）
     - 分阶段行动路径
     - 风险与反论
 
-15. **[形式化论证框架](docs/COGNITIVE/15-application-perspective/15-formalization/formalization.md)**
+15. **[形式化论证框架](docs/COGNITIVE/04-application-perspectives/application-perspective/15-formalization/formalization.md)**
     ⭐
 
     - 基于 λ 演算的应用架构形式化定义
     - 资源效率形式化度量
     - 形式化优势证明
 
-16. **[技术生态成熟度定量评估](docs/COGNITIVE/15-application-perspective/16-ecosystem-maturity/ecosystem-maturity.md)**
+16. **[技术生态成熟度定量评估](docs/COGNITIVE/04-application-perspectives/application-perspective/16-ecosystem-maturity/ecosystem-maturity.md)**
     ⭐
 
     - Gartner 模型量化
     - 技术成熟度与生态健康度矩阵
     - 生态组件依赖图谱
 
-17. **[形式化证明和定理](docs/COGNITIVE/15-application-perspective/17-formal-proofs/formal-proofs.md)**
+17. **[形式化证明和定理](docs/COGNITIVE/04-application-perspectives/application-perspective/17-formal-proofs/formal-proofs.md)**
     ⭐
     - 技术趋势形式化模型（Adoption S-curve）
     - 技术演进马尔可夫链模型
@@ -153,7 +153,7 @@
     - 全面论证结论（形式化定理）
 
 **完整文档索引**：详见
-[`docs/COGNITIVE/15-application-perspective/README.md`](docs/COGNITIVE/15-application-perspective/README.md)
+[`docs/COGNITIVE/04-application-perspectives/application-perspective/README.md`](docs/COGNITIVE/04-application-perspectives/application-perspective/README.md)
 ⭐
 
 ---

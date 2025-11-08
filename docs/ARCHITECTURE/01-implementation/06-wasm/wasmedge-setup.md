@@ -275,7 +275,7 @@ wasmedge --enable-gpu tensorflow.wasm
 
 ### 6.2 架构视角文档
 
-- [`../../01-views/webassembly-view.md`](../../01-views/webassembly-view.md) -
+- [`../../02-views/10-quick-views/webassembly-view.md`](../../02-views/10-quick-views/webassembly-view.md) -
   WebAssembly 架构视角
 
 ### 6.3 理论文档

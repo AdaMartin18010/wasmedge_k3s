@@ -225,7 +225,7 @@ spec:
 ## 6. 相关文档
 
 - [`README.md`](README.md) - AI/ML 实现细节总览
-- [`../../01-views/ai-ml-architecture-view.md`](../../01-views/ai-ml-architecture-view.md) -
+- [`../../02-views/10-quick-views/ai-ml-architecture-view.md`](../../02-views/10-quick-views/ai-ml-architecture-view.md) -
   AI/ML 架构视角
 - [`gpu-scheduling.md`](gpu-scheduling.md) - GPU 资源调度配置
 

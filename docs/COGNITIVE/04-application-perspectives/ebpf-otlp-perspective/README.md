@@ -1,0 +1,147 @@
+# 13. eBPF/OTLP 认知视角文档目录
+
+## 1. 文档概述
+
+本目录包含 eBPF（extended Berkeley Packet Filter）和 OTLP（OpenTelemetry
+Protocol）的认知视角分析文档，从理念层、知识结构、技术演进等维度全面梳理
+eBPF/OTLP 技术栈的认知框架。
+
+## 2. 文档列表
+
+| 文档                                                 | 描述                                              |
+| ---------------------------------------------------- | ------------------------------------------------- |
+| [ebpf-otlp-perspective.md](ebpf-otlp-perspective.md) | eBPF/OTLP 认知视角完整分析文档（2025-11-07 更新） |
+
+## 3. 文档结构
+
+### 3.1 理念层
+
+- **13.1 技术演进主线**：从内核可编程到可观测性驱动的自治系统
+- **13.2 核心理念**：横纵耦合的问题定位模型、智能系统能力架构
+- **13.3 范式突破**：从"监控工具集"到"基础设施原生能力"
+
+### 3.2 知识结构
+
+- **13.4 三维知识框架**：技术层、应用层、能力层
+- **13.5 技术演进时间轴**：eBPF 和 OTLP 的发展历程
+- **13.6 知识图谱**：eBPF/OTLP 技术栈的知识关联网络
+
+### 3.3 技术层
+
+- **13.7 eBPF 技术本质**：内核可编程的范式突破
+- **13.8 OTLP 技术本质**：观测数据标准化协议
+- **13.9 协同关系**：eBPF 与 OTLP 的互补性论证
+
+### 3.4 应用层
+
+- **13.10 横纵耦合定位模型**：OTLP（横向）+ eBPF（纵向）的问题定位
+- **13.11 智能系统能力架构**：自我感知、自动伸缩、自我治愈
+- **13.12 应用场景矩阵**：不同场景下的技术选型
+
+## 4. 使用指南
+
+### 4.1 快速开始
+
+**如果你是架构师**：
+
+- 直接阅读 [13.1 技术演进主线](ebpf-otlp-perspective.md#131-技术演进主线)
+- 重点关注 [13.2 核心理念](ebpf-otlp-perspective.md#132-核心理念)
+- 参考 [13.10 横纵耦合定位模型](ebpf-otlp-perspective.md#1310-横纵耦合定位模型)
+
+**如果你是可观测性工程师**：
+
+- 直接阅读
+  [13.10 横纵耦合定位模型](ebpf-otlp-perspective.md#1310-横纵耦合定位模型)
+- 重点关注
+  [13.11 智能系统能力架构](ebpf-otlp-perspective.md#1311-智能系统能力架构)
+- 参考 [13.9 协同关系](ebpf-otlp-perspective.md#139-协同关系)
+
+**如果你是技术决策者**：
+
+- 阅读 [13.2 核心理念](ebpf-otlp-perspective.md#132-核心理念)
+- 参考 [13.12 应用场景矩阵](ebpf-otlp-perspective.md#1312-应用场景矩阵)
+- 查看 [13.3 范式突破](ebpf-otlp-perspective.md#133-范式突破)
+
+### 4.2 深入学习路径
+
+1. **理念理解**：
+
+   - [13.1 技术演进主线](ebpf-otlp-perspective.md#131-技术演进主线)
+   - [13.2 核心理念](ebpf-otlp-perspective.md#132-核心理念)
+   - [13.3 范式突破](ebpf-otlp-perspective.md#133-范式突破)
+
+2. **知识结构**：
+
+   - [13.4 三维知识框架](ebpf-otlp-perspective.md#134-三维知识框架)
+   - [13.5 技术演进时间轴](ebpf-otlp-perspective.md#135-技术演进时间轴)
+   - [13.6 知识图谱](ebpf-otlp-perspective.md#136-知识图谱)
+
+3. **技术本质**：
+
+   - [13.7 eBPF 技术本质](ebpf-otlp-perspective.md#137-ebpf-技术本质)
+   - [13.8 OTLP 技术本质](ebpf-otlp-perspective.md#138-otlp-技术本质)
+   - [13.9 协同关系](ebpf-otlp-perspective.md#139-协同关系)
+
+4. **应用实践**：
+   - [13.10 横纵耦合定位模型](ebpf-otlp-perspective.md#1310-横纵耦合定位模型)
+   - [13.11 智能系统能力架构](ebpf-otlp-perspective.md#1311-智能系统能力架构)
+   - [13.12 应用场景矩阵](ebpf-otlp-perspective.md#1312-应用场景矩阵)
+
+## 5. 相关文档
+
+### 5.1 视角文档
+
+- **[eBPF/OTLP 视角](../../../ebpf_otlp_view.md)** ⭐ - 从 eBPF 和 OTLP 的视角看
+  虚拟化容器化（根目录）
+- **[认知视角](../../../ai_view.md)** - 云原生技术栈认知视图：Docker → K8s/K3s →
+  WasmEdge → OPA
+- **[系统视角](../../../system_view.md)** - 从系统的视角看虚拟化容器化沙盒化（7
+  层 4 域模型）
+
+### 5.2 技术文档
+
+- **[31. eBPF 技术堆栈](../../TECHNICAL/31-ebpf-stack/ebpf-stack.md)** - eBPF 技
+  术堆栈完整技术参考文档
+- **[32. eBPF/OTLP 扩展技术分析](../../TECHNICAL/32-ebpf-otlp-analysis/)** -
+  eBPF/OTLP 扩展技术分析文档
+- **[16. 监控与可观测性](../../TECHNICAL/16-observability/observability.md)** -
+  OTLP、OpenTelemetry、eBPF 等技术规范
+- **[29. 隔离栈](../../TECHNICAL/29-isolation-stack/isolation-stack.md)** - 问题
+  定位模型、横纵耦合定位方法
+
+### 5.3 认知模型文档
+
+- **[01. 总览](../../01-core-foundations/overview/overview.md)** - 技术栈总览和
+  决策框架
+- **[02. 理念层](../../01-core-foundations/principles/principles.md)** - 云原生
+  核心理念
+- **[09. 矩阵视角](../../03-theoretical-perspectives/matrix-perspective/README.md)** -
+  矩阵力学模型
+- **[10. 决策模型](../../05-decision-analysis/decision-models/README.md)** - 技
+  术决策模型与架构选择
+
+## 6. 文档特性
+
+### 6.1 认知视角特征
+
+- ✅ **理念导向**：强调"为什么"（Why）而非"怎么做"（How）
+- ✅ **认知工具**：使用类比、思维导图、矩阵等认知工具
+- ✅ **演进主线**：提供技术演进的时间轴和逻辑链
+- ✅ **论证推理**：每个技术选择都有"问题 → 解法 → 副作用 → 再演化"的论证
+
+### 6.2 2025-11-07 技术栈状态
+
+- ✅ 对齐 2025 年 11 月 7 日最新技术栈状态
+- ✅ 包含横纵耦合定位模型、智能系统能力架构等核心概念
+- ✅ 提供完整的认知框架和知识结构
+
+## 7. 文档统计
+
+- **文档行数**：待创建
+- **主要章节**：12 个
+- **子章节**：30+ 个
+- **最后更新**：2025-11-07
+
+---
+
+**最后更新**：2025-11-07 **维护者**：项目团队

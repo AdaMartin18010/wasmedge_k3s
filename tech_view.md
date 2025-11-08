@@ -71,7 +71,7 @@
 ## 引言：为何需要社会技术视角？
 
 > 📋 **概念定义参考**：虚拟化、容器化、沙盒化的严格定义和技术层级分析请参考
-> [严格定义文档](docs/COGNITIVE/10-decision-models/06-technical-concepts/12-virtualization-paravirtualization-containerization-sandboxing-strict-definition.md)。
+> [严格定义文档](docs/COGNITIVE/05-decision-analysis/decision-models/06-technical-concepts/12-virtualization-paravirtualization-containerization-sandboxing-strict-definition.md)。
 
 好，我们**把镜头整个换掉**—— 不再用"计算-控制-信息"这把手术刀，而是**把虚拟化/容
 器化/沙盒化当成一次"社会-技术"现象**，用**人类学、经济学、基础设施史、风险社会学

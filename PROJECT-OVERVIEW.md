@@ -94,12 +94,13 @@
 
 - `ai_view.md` ⭐ - 认知视角：技术演进主线
 - `algebra_view.md` ⭐ - 代数视角：算子、公理、复合运算
-- `docs/COGNITIVE/00-knowledge-map/` - 认知图谱
-- `docs/COGNITIVE/01-overview/` - 技术栈总览
-- `docs/COGNITIVE/02-principles/` - 云原生核心理念
-- `docs/COGNITIVE/07-formal-theory/` - 形式化理论
-- `docs/COGNITIVE/08-category-theory/` - 范畴论视角
-- `docs/COGNITIVE/09-matrix-perspective/` - 矩阵力学模型
+- `docs/COGNITIVE/01-core-foundations/knowledge-map/` - 认知图谱
+- `docs/COGNITIVE/01-core-foundations/overview/` - 技术栈总览
+- `docs/COGNITIVE/01-core-foundations/principles/` - 云原生核心理念
+- `docs/COGNITIVE/03-theoretical-perspectives/formal-theory/` - 形式化理论
+- `docs/COGNITIVE/03-theoretical-perspectives/category-theory/` - 范畴论视角
+- `docs/COGNITIVE/03-theoretical-perspectives/matrix-perspective/` - 矩阵力学模
+  型
 
 ### 3.2 架构视图文档（Architecture View Documents）
 
@@ -134,13 +135,15 @@
 
 **核心文档**：
 
-- `docs/TECHNICAL/00-docker/` - Docker 技术规范
-- `docs/TECHNICAL/01-kubernetes/` - Kubernetes 架构与实践
-- `docs/TECHNICAL/02-k3s/` - K3s 轻量级架构
-- `docs/TECHNICAL/03-wasm-edge/` - WasmEdge 集成指南
-- `docs/TECHNICAL/29-isolation-stack/` - 五层隔离栈技术实现
-- `docs/TECHNICAL/31-ebpf-stack/` - eBPF 技术堆栈
-- `docs/TECHNICAL/32-ebpf-otlp-analysis/` ⭐ - eBPF/OTLP 扩展技术分析
+- `docs/TECHNICAL/01-core-foundations/docker/` - Docker 技术规范
+- `docs/TECHNICAL/01-core-foundations/kubernetes/` - Kubernetes 架构与实践
+- `docs/TECHNICAL/01-core-foundations/k3s/` - K3s 轻量级架构
+- `docs/TECHNICAL/02-runtime-policy/wasm-edge/` - WasmEdge 集成指南
+- `docs/TECHNICAL/08-architecture-analysis/isolation-stack/` - 五层隔离栈技术实
+  现
+- `docs/TECHNICAL/04-infrastructure-stack/ebpf-stack/` - eBPF 技术堆栈
+- `docs/TECHNICAL/08-architecture-analysis/ebpf-otlp-analysis/` ⭐ - eBPF/OTLP
+  扩展技术分析
 
 ---
 
@@ -179,7 +182,8 @@
 - **L-3 容器化层**：runc、containerd、Docker、Podman
 - **L-4 沙盒化层**：gVisor、Firecracker、WASM、Windows Sandbox
 
-**文档位置**：`docs/TECHNICAL/29-isolation-stack/isolation-stack.md`
+**文档位
+置**：`docs/TECHNICAL/08-architecture-analysis/isolation-stack/isolation-stack.md`
 
 ### 5.2 横纵耦合问题定位模型
 
@@ -191,7 +195,8 @@
 **文档位置**：
 
 - `ebpf_otlp_view.md` ⭐ - 横纵耦合问题定位模型完整论述
-- `docs/TECHNICAL/32-ebpf-otlp-analysis/` ⭐ - 架构设计、性能分析、实践指南
+- `docs/TECHNICAL/08-architecture-analysis/ebpf-otlp-analysis/` ⭐ - 架构设计、
+  性能分析、实践指南
 
 ### 5.3 观测系统作为第四大基础设施
 
@@ -201,7 +206,7 @@
 - 落地最小完备集（MVP）
 
 **文档位
-置**：`docs/TECHNICAL/29-isolation-stack/isolation-stack.md#2960-观测系统作为第四大基础设施`
+置**：`docs/TECHNICAL/08-architecture-analysis/isolation-stack/isolation-stack.md#2960-观测系统作为第四大基础设施`
 
 ### 5.4 网络作为横向生命线
 
@@ -210,7 +215,7 @@
 - 问题定位 = 先选切片，再按"队列 → 调度 → 协议"逐层下钻
 
 **文档位
-置**：`docs/TECHNICAL/29-isolation-stack/isolation-stack.md#29612-网络定位专题横向生命线`
+置**：`docs/TECHNICAL/08-architecture-analysis/isolation-stack/isolation-stack.md#29612-网络定位专题横向生命线`
 
 ### 5.5 eBPF/OTLP 横纵耦合问题定位
 
@@ -224,8 +229,10 @@
 **文档位置**：
 
 - `ebpf_otlp_view.md` ⭐ - 横纵耦合问题定位模型、智能系统能力架构（1434 行）
-- `docs/TECHNICAL/32-ebpf-otlp-analysis/` ⭐ - 架构设计、性能分析、实践指南
-- `docs/TECHNICAL/31-ebpf-stack/` - eBPF 技术堆栈完整文档（1481 行）
+- `docs/TECHNICAL/08-architecture-analysis/ebpf-otlp-analysis/` ⭐ - 架构设计、
+  性能分析、实践指南
+- `docs/TECHNICAL/04-infrastructure-stack/ebpf-stack/` - eBPF 技术堆栈完整文档
+  （1481 行）
 
 ---
 
@@ -325,53 +332,68 @@ ARCHITECTURE/
 
 #### TECHNICAL/（技术参考文档）
 
+> 📋 **目录重组说明**：已从 33 个数字编号目录重组为 10 个主题分类目录。详见
+> [TECHNICAL/PATH-MAPPING.md](docs/TECHNICAL/PATH-MAPPING.md)
+
 ```text
 TECHNICAL/
-├── 00-docker/                   # Docker 技术规范
-├── 01-kubernetes/               # Kubernetes 架构与实践
-├── 02-k3s/                      # K3s 轻量级架构
-├── 03-wasm-edge/                # WasmEdge 集成指南
-├── 04-orchestration-runtime/   # CRI 和 RuntimeClass
-├── 05-oci-supply-chain/         # OCI 标准和供应链安全
-├── 06-policy-opa/               # Open Policy Agent
-├── 07-edge-serverless/          # 边缘计算和 Serverless
-├── 08-ai-inference/             # AI 推理应用
-├── 09-security-compliance/      # 安全与合规最佳实践
-├── 10-installation/              # 安装和最小示例
-├── 11-troubleshooting/           # 故障排查
-├── 12-network-stack/             # 网络技术规格（2 个文档）
-├── 13-acronyms-glossary/         # 缩写词汇表
-├── 14-theme-inventory/           # 主题清单
-├── 15-storage-stack/             # 存储技术规格（2 个文档）
-├── 16-observability/             # 监控与可观测性
-├── 17-gitops-cicd/               # GitOps/CI/CD 技术规范
-├── 18-operator-crd/              # Operator/CRD 开发规范
-├── 19-service-mesh/              # 服务网格技术规范
-├── 20-multi-cluster/             # 多集群管理技术规范
-├── 21-image-registry/            # 镜像仓库与管理技术规范
-├── 22-upgrade-migration/         # 升级和迁移技术规范
-├── 23-dev-tools/                 # 开发和调试工具规范
-├── 24-cost-optimization/         # 成本优化技术规范
-├── 25-community-best-practices/  # 社区生态和最佳实践
-├── 26-analysis-improvement/      # 文档体系分析与改进
-├── 27-2025-trends/               # 2025 技术趋势
-├── 28-architecture-framework/   # 多维度架构体系与技术规范
-├── 29-isolation-stack/           # 五层隔离栈（9 个文档）
-│   ├── isolation-stack.md       # 主文档
-│   ├── layers/                   # 各层次独立文档（5 个）
-│   └── troubleshooting/           # 问题定位文档
-├── 30-concept-relations-matrix/  # 概念关系矩阵（36 个文档）
-│   ├── concept-relations-matrix.md  # 主文档
-│   ├── matrices/                 # 关系矩阵（3 个文档）
-│   ├── graphs/                   # 关系图谱（4 个文档）
-│   ├── properties/              # 属性矩阵（4 个文档）
-│   ├── applications/             # 应用案例（4 个文档）
-│   ├── decision-trees/           # 决策树（3 个文档）
-│   ├── analysis/                 # 分析部分（6 个文档）
-│   └── reference/                # 快速参考（3 个文档）
-├── 31-ebpf-stack/                # eBPF 技术堆栈（2 个文档）
-└── 32-ebpf-otlp-analysis/        # eBPF/OTLP 扩展技术分析（3 个文档）
+├── 01-core-foundations/          # 核心基础
+│   ├── docker/                   # Docker 技术规范
+│   ├── kubernetes/               # Kubernetes 架构与实践
+│   └── k3s/                      # K3s 轻量级架构
+│
+├── 02-runtime-policy/            # 运行时与策略
+│   ├── wasm-edge/                # WasmEdge 集成指南
+│   ├── orchestration-runtime/    # CRI 和 RuntimeClass
+│   ├── oci-supply-chain/         # OCI 标准和供应链安全
+│   └── policy-opa/               # Open Policy Agent
+│
+├── 03-application-scenarios/     # 应用场景
+│   ├── edge-serverless/          # 边缘计算和 Serverless
+│   └── ai-inference/             # AI 推理应用
+│
+├── 04-infrastructure-stack/      # 基础设施栈
+│   ├── network-stack/            # 网络技术规格
+│   ├── storage-stack/            # 存储技术规格
+│   ├── observability/            # 监控与可观测性
+│   └── ebpf-stack/               # eBPF 技术堆栈
+│
+├── 05-devops/                    # 开发与运维
+│   ├── installation/             # 安装和最小示例
+│   ├── troubleshooting/          # 故障排查
+│   ├── gitops-cicd/              # GitOps/CI/CD 技术规范
+│   ├── operator-crd/             # Operator/CRD 开发规范
+│   ├── dev-tools/                # 开发和调试工具规范
+│   └── upgrade-migration/        # 升级和迁移技术规范
+│
+├── 06-advanced-features/         # 高级功能
+│   ├── service-mesh/             # 服务网格技术规范
+│   ├── multi-cluster/            # 多集群管理技术规范
+│   └── image-registry/           # 镜像仓库与管理技术规范
+│
+├── 07-security-compliance/       # 安全与合规
+│   └── security-compliance/      # 安全与合规最佳实践
+│
+├── 08-architecture-analysis/     # 架构与分析
+│   ├── architecture-framework/   # 架构框架
+│   ├── isolation-stack/          # 隔离栈
+│   ├── concept-relations-matrix/ # 概念关系矩阵
+│   └── ebpf-otlp-analysis/       # eBPF/OTLP 扩展技术分析
+│
+├── 09-optimization-practices/    # 优化与实践
+│   ├── cost-optimization/        # 成本优化技术规范
+│   ├── community-best-practices/ # 社区生态和最佳实践
+│   └── analysis-improvement/     # 文档体系分析与改进
+│
+└── 10-reference-trends/          # 参考与趋势
+    ├── acronyms-glossary/        # 缩写词汇表
+    ├── theme-inventory/          # 主题清单
+    └── 2025-trends/              # 2025 技术趋势
 ```
+
+注：原
+`28-architecture-framework/`、`29-isolation-stack/`、`30-concept-relations-matrix/`、`31-ebpf-stack/`、`32-ebpf-otlp-analysis/`
+已整合到 `08-architecture-analysis/` 主题目录中。
 
 ---
 
@@ -381,35 +403,35 @@ TECHNICAL/
 
 **Docker → Kubernetes → K3s → WasmEdge → OPA**:
 
-| 技术           | 文档位置                        | 核心内容                    |
-| -------------- | ------------------------------- | --------------------------- |
-| **Docker**     | `docs/TECHNICAL/00-docker/`     | Docker 容器技术规范         |
-| **Kubernetes** | `docs/TECHNICAL/01-kubernetes/` | Kubernetes 架构与实践       |
-| **K3s**        | `docs/TECHNICAL/02-k3s/`        | K3s 轻量级架构              |
-| **WasmEdge**   | `docs/TECHNICAL/03-wasm-edge/`  | WasmEdge WebAssembly 运行时 |
-| **OPA**        | `docs/TECHNICAL/06-policy-opa/` | Open Policy Agent 策略引擎  |
+| 技术           | 文档位置                                         | 核心内容                    |
+| -------------- | ------------------------------------------------ | --------------------------- |
+| **Docker**     | `docs/TECHNICAL/01-core-foundations/docker/`     | Docker 容器技术规范         |
+| **Kubernetes** | `docs/TECHNICAL/01-core-foundations/kubernetes/` | Kubernetes 架构与实践       |
+| **K3s**        | `docs/TECHNICAL/01-core-foundations/k3s/`        | K3s 轻量级架构              |
+| **WasmEdge**   | `docs/TECHNICAL/02-runtime-policy/wasm-edge/`    | WasmEdge WebAssembly 运行时 |
+| **OPA**        | `docs/TECHNICAL/02-runtime-policy/policy-opa/`   | Open Policy Agent 策略引擎  |
 
 ### 7.2 技术规格覆盖
 
-| 技术领域      | 文档位置                                | 核心内容                  |
-| ------------- | --------------------------------------- | ------------------------- |
-| **网络**      | `docs/TECHNICAL/12-network-stack/`      | CNI、Service、Ingress     |
-| **存储**      | `docs/TECHNICAL/15-storage-stack/`      | CSI、PV/PVC、存储类型     |
-| **可观测性**  | `docs/TECHNICAL/16-observability/`      | Metrics、Logging、Tracing |
-| **GitOps**    | `docs/TECHNICAL/17-gitops-cicd/`        | GitOps/CI/CD 技术规范     |
-| **Operator**  | `docs/TECHNICAL/18-operator-crd/`       | Operator/CRD 开发规范     |
-| **服务网格**  | `docs/TECHNICAL/19-service-mesh/`       | 服务网格技术规范          |
-| **eBPF**      | `docs/TECHNICAL/31-ebpf-stack/`         | eBPF 内核可编程技术堆栈   |
-| **eBPF/OTLP** | `docs/TECHNICAL/32-ebpf-otlp-analysis/` | eBPF/OTLP 扩展技术分析    |
+| 技术领域      | 文档位置                                                      | 核心内容                  |
+| ------------- | ------------------------------------------------------------- | ------------------------- |
+| **网络**      | `docs/TECHNICAL/04-infrastructure-stack/network-stack/`       | CNI、Service、Ingress     |
+| **存储**      | `docs/TECHNICAL/04-infrastructure-stack/storage-stack/`       | CSI、PV/PVC、存储类型     |
+| **可观测性**  | `docs/TECHNICAL/04-infrastructure-stack/observability/`       | Metrics、Logging、Tracing |
+| **GitOps**    | `docs/TECHNICAL/05-devops/gitops-cicd/`                       | GitOps/CI/CD 技术规范     |
+| **Operator**  | `docs/TECHNICAL/05-devops/operator-crd/`                      | Operator/CRD 开发规范     |
+| **服务网格**  | `docs/TECHNICAL/06-advanced-features/service-mesh/`           | 服务网格技术规范          |
+| **eBPF**      | `docs/TECHNICAL/04-infrastructure-stack/ebpf-stack/`          | eBPF 内核可编程技术堆栈   |
+| **eBPF/OTLP** | `docs/TECHNICAL/08-architecture-analysis/ebpf-otlp-analysis/` | eBPF/OTLP 扩展技术分析    |
 
 ### 7.3 应用场景覆盖
 
-| 场景           | 文档位置                                 | 核心内容              |
-| -------------- | ---------------------------------------- | --------------------- |
-| **边缘计算**   | `docs/TECHNICAL/07-edge-serverless/`     | 边缘计算和 Serverless |
-| **AI 推理**    | `docs/TECHNICAL/08-ai-inference/`        | AI 推理应用           |
-| **安全合规**   | `docs/TECHNICAL/09-security-compliance/` | 安全与合规最佳实践    |
-| **供应链安全** | `docs/TECHNICAL/05-oci-supply-chain/`    | OCI 标准和供应链安全  |
+| 场景           | 文档位置                                                     | 核心内容              |
+| -------------- | ------------------------------------------------------------ | --------------------- |
+| **边缘计算**   | `docs/TECHNICAL/03-application-scenarios/edge-serverless/`   | 边缘计算和 Serverless |
+| **AI 推理**    | `docs/TECHNICAL/03-application-scenarios/ai-inference/`      | AI 推理应用           |
+| **安全合规**   | `docs/TECHNICAL/07-security-compliance/security-compliance/` | 安全与合规最佳实践    |
+| **供应链安全** | `docs/TECHNICAL/02-runtime-policy/oci-supply-chain/`         | OCI 标准和供应链安全  |
 
 ---
 
@@ -462,25 +484,29 @@ TECHNICAL/
 
 ### 9.1 新手推荐路径
 
-1. **[总览](docs/COGNITIVE/01-overview/overview.md)** - 了解技术栈全貌和核心理念
-2. **[认知图谱](docs/COGNITIVE/00-knowledge-map/knowledge-map.md)** - 快速理解知
-   识结构和学习路径
+1. **[总览](docs/COGNITIVE/01-core-foundations/overview/overview.md)** - 了解技
+   术栈全貌和核心理念
+2. **[认知图谱](docs/COGNITIVE/01-core-foundations/knowledge-map/knowledge-map.md)** -
+   快速理解知识结构和学习路径
 3. **[认知视角](ai_view.md)** ⭐ - 掌握技术演进主线和认知框架
-4. **[理念层](docs/COGNITIVE/02-principles/principles.md)** - 理解云原生核心思想
-5. **[Docker 基础](docs/TECHNICAL/00-docker/docker.md)** - 掌握容器技术基础
+4. **[理念层](docs/COGNITIVE/01-core-foundations/principles/principles.md)** -
+   理解云原生核心思想
+5. **[Docker 基础](docs/TECHNICAL/01-core-foundations/docker/docker.md)** - 掌握
+   容器技术基础
 
 ### 9.2 进阶学习路径
 
-1. **[Kubernetes](docs/TECHNICAL/01-kubernetes/kubernetes.md)** - 深入学习容器编
-   排
-2. **[K3s](docs/TECHNICAL/02-k3s/k3s.md)** - 了解轻量级 Kubernetes 架构
+1. **[Kubernetes](docs/TECHNICAL/01-core-foundations/kubernetes/kubernetes.md)** -
+   深入学习容器编排
+2. **[K3s](docs/TECHNICAL/01-core-foundations/k3s/k3s.md)** - 了解轻量级
+   Kubernetes 架构
 3. **[架构视角](architecture_view.md)** ⭐ v2.0 - 从软件架构视角理解虚拟化、容器
    化、沙盒化
 4. **[系统视角](system_view.md)** ⭐ - 从系统视角（7 层 4 域模型）理解虚拟化、容
    器化、沙盒化
-5. **[隔离栈技术实现](docs/TECHNICAL/29-isolation-stack/isolation-stack.md)** -
+5. **[隔离栈技术实现](docs/TECHNICAL/08-architecture-analysis/isolation-stack/isolation-stack.md)** -
    掌握五层隔离栈技术实现和问题定位模型
-6. **[架构框架](docs/TECHNICAL/28-architecture-framework/architecture-framework.md)** -
+6. **[架构框架](docs/TECHNICAL/08-architecture-analysis/architecture-framework/architecture-framework.md)** -
    了解多维度架构体系与技术规范
 
 ### 9.3 多视角深入路径
@@ -493,33 +519,36 @@ TECHNICAL/
 
 ### 9.4 高级理论路径
 
-1. **[隔离模型](docs/COGNITIVE/10-decision-models/01-theory-models/02-isolation-models.md)** -
+1. **[隔离模型](docs/COGNITIVE/05-decision-analysis/decision-models/01-theory-models/02-isolation-models.md)** -
    理解隔离层次理论模型
-2. **[矩阵视角](docs/COGNITIVE/09-matrix-perspective/README.md)** - 理解矩阵力学
-   模型
-3. **[范畴论视角](docs/COGNITIVE/08-category-theory/category-theory.md)** - 探索
-   对象、态射与函子
-4. **[形式化理论](docs/COGNITIVE/07-formal-theory/formal-theory.md)** - 深入理解
-   结构同构和关系等价
+2. **[矩阵视角](docs/COGNITIVE/03-theoretical-perspectives/matrix-perspective/README.md)** -
+   理解矩阵力学模型
+3. **[范畴论视角](docs/COGNITIVE/03-theoretical-perspectives/category-theory/category-theory.md)** -
+   探索对象、态射与函子
+4. **[形式化理论](docs/COGNITIVE/03-theoretical-perspectives/formal-theory/formal-theory.md)** -
+   深入理解结构同构和关系等价
 
 ### 9.5 按角色快速入口
 
-- **👨‍💻 开发者**：[Docker](docs/TECHNICAL/00-docker/docker.md) →
-  [Kubernetes](docs/TECHNICAL/01-kubernetes/kubernetes.md) →
-  [K3s](docs/TECHNICAL/02-k3s/k3s.md) →
-  [WasmEdge](docs/TECHNICAL/03-wasm-edge/wasmedge.md)
+- **👨‍💻 开发者**：[Docker](docs/TECHNICAL/01-core-foundations/docker/docker.md) →
+  [Kubernetes](docs/TECHNICAL/01-core-foundations/kubernetes/kubernetes.md) →
+  [K3s](docs/TECHNICAL/01-core-foundations/k3s/k3s.md) →
+  [WasmEdge](docs/TECHNICAL/02-runtime-policy/wasm-edge/wasmedge.md)
 - **🏗️ 架构师**：[架构视角](architecture_view.md) ⭐ →
   [系统视角](system_view.md) ⭐ →
-  [架构框架](docs/TECHNICAL/28-architecture-framework/architecture-framework.md)
+  [架构框架](docs/TECHNICAL/08-architecture-analysis/architecture-framework/architecture-framework.md)
   → [案例研究](docs/ARCHITECTURE/07-case-studies/)
-- **🔧 运维工程师**：[安装部署](docs/TECHNICAL/10-installation/installation.md)
-  → [故障排查](docs/TECHNICAL/11-troubleshooting/troubleshooting.md) →
-  [隔离栈](docs/TECHNICAL/29-isolation-stack/isolation-stack.md) →
-  [eBPF/OTLP 视角](ebpf_otlp_view.md) ⭐
+- **🔧 运维工程
+  师**：[安装部署](docs/TECHNICAL/05-devops/installation/installation.md) →
+  [故障排查](docs/TECHNICAL/05-devops/troubleshooting/troubleshooting.md) →
+  [隔离栈](docs/TECHNICAL/08-architecture-analysis/isolation-stack/isolation-stack.md)
+  → [eBPF/OTLP 视角](ebpf_otlp_view.md) ⭐
 - **🔬 研究人员**：[认知视角](ai_view.md) ⭐ →
-  [形式化理论](docs/COGNITIVE/07-formal-theory/formal-theory.md) →
-  [范畴论视角](docs/COGNITIVE/08-category-theory/category-theory.md) →
-  [矩阵视角](docs/COGNITIVE/09-matrix-perspective/README.md)
+  [形式化理论](docs/COGNITIVE/03-theoretical-perspectives/formal-theory/formal-theory.md)
+  →
+  [范畴论视角](docs/COGNITIVE/03-theoretical-perspectives/category-theory/category-theory.md)
+  →
+  [矩阵视角](docs/COGNITIVE/03-theoretical-perspectives/matrix-perspective/README.md)
 
 ---
 
@@ -569,8 +598,10 @@ TECHNICAL/
 **重要更新**：
 
 - ✅ **eBPF/OTLP 视角文档**：新增 `ebpf_otlp_view.md` ⭐（1434 行）
-- ✅ **eBPF 技术堆栈文档**：新增 `docs/TECHNICAL/31-ebpf-stack/`（1481 行）
-- ✅ **eBPF/OTLP 扩展技术分析**：新增 `docs/TECHNICAL/32-ebpf-otlp-analysis/` ⭐
+- ✅ **eBPF 技术堆栈文档**：新增
+  `docs/TECHNICAL/04-infrastructure-stack/ebpf-stack/`（1481 行）
+- ✅ **eBPF/OTLP 扩展技术分析**：新增
+  `docs/TECHNICAL/08-architecture-analysis/ebpf-otlp-analysis/` ⭐
 - ✅ **虚拟化与容器化对比分析**：
   - 网络对比分析（1169 行）
   - 存储对比分析（1036 行）
@@ -591,16 +622,16 @@ TECHNICAL/
 
 ### 最常用文档
 
-| 需求         | 文档                                                                                   | 说明                        |
-| ------------ | -------------------------------------------------------------------------------------- | --------------------------- |
-| **快速入门** | [总览](docs/COGNITIVE/01-overview/overview.md)                                         | 了解技术栈全貌              |
-| **技术选型** | [系统视角](system_view.md) ⭐                                                          | 7 层 4 域模型，技术选型决策 |
-| **问题定位** | [eBPF/OTLP 视角](ebpf_otlp_view.md) ⭐                                                 | 横纵耦合问题定位模型        |
-| **隔离栈**   | [隔离栈技术实现](docs/TECHNICAL/29-isolation-stack/isolation-stack.md)                 | 五层隔离栈完整体系          |
-| **架构设计** | [架构视角](architecture_view.md) ⭐                                                    | 架构拆解与组合              |
-| **故障排查** | [故障排查](docs/TECHNICAL/11-troubleshooting/troubleshooting.md)                       | 常见问题解决方案            |
-| **概念关系** | [概念关系矩阵](docs/TECHNICAL/30-concept-relations-matrix/concept-relations-matrix.md) | 技术堆栈概念关系梳理        |
-| **架构框架** | [架构框架](docs/TECHNICAL/28-architecture-framework/architecture-framework.md)         | 多维度架构体系              |
+| 需求         | 文档                                                                                                         | 说明                        |
+| ------------ | ------------------------------------------------------------------------------------------------------------ | --------------------------- |
+| **快速入门** | [总览](docs/COGNITIVE/01-core-foundations/overview/overview.md)                                              | 了解技术栈全貌              |
+| **技术选型** | [系统视角](system_view.md) ⭐                                                                                | 7 层 4 域模型，技术选型决策 |
+| **问题定位** | [eBPF/OTLP 视角](ebpf_otlp_view.md) ⭐                                                                       | 横纵耦合问题定位模型        |
+| **隔离栈**   | [隔离栈技术实现](docs/TECHNICAL/08-architecture-analysis/isolation-stack/isolation-stack.md)                 | 五层隔离栈完整体系          |
+| **架构设计** | [架构视角](architecture_view.md) ⭐                                                                          | 架构拆解与组合              |
+| **故障排查** | [故障排查](docs/TECHNICAL/05-devops/troubleshooting/troubleshooting.md)                                      | 常见问题解决方案            |
+| **概念关系** | [概念关系矩阵](docs/TECHNICAL/08-architecture-analysis/concept-relations-matrix/concept-relations-matrix.md) | 技术堆栈概念关系梳理        |
+| **架构框架** | [架构框架](docs/TECHNICAL/08-architecture-analysis/architecture-framework/architecture-framework.md)         | 多维度架构体系              |
 
 ### 文档导航
 
@@ -647,7 +678,7 @@ TECHNICAL/
 ### 内部文档
 
 - [文档类型说明](docs/META/DOCUMENT-TYPES.md) - 文档分类和特征说明
-- [文档变更历史](docs/TECHNICAL/29-isolation-stack/isolation-stack.md#2911-文档变更历史) -
+- [文档变更历史](docs/TECHNICAL/08-architecture-analysis/isolation-stack/isolation-stack.md#2911-文档变更历史) -
   重要文档的变更记录
 - [文档一致性检查清单](docs/DOCUMENTATION-CONSISTENCY-CHECKLIST.md) ⭐ - 文档一
   致性检查清单（快速参考）

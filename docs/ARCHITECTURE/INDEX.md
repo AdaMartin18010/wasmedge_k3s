@@ -18,12 +18,12 @@
 
 ### 🎯 快速导航
 
-- **入门路径**：从 [多视角架构视图](01-views/) 开始
-- **深入路径**：进入 [分层架构模型](02-layers/) 和
-  [组合模式](architecture-view/08-composition-patterns/)
-- **实践路径**：查看 [案例研究](07-case-studies/)，学习实际案例
+- **入门路径**：从 [架构视图文档集](02-views/) 开始
+- **深入路径**：进入 [分层架构模型](03-models/) 和
+  [组合模式](02-views/08-composition-patterns/)
+- **实践路径**：查看 [案例研究](04-applications/case-studies/)，学习实际案例
 - **理论路径**：研读 [理论论证](00-theory/) ⭐，理解数学基础
-- **趋势路径**：了解 [2025 年技术趋势](05-trends-2025/)，把握最新动态
+- **趋势路径**：了解 [技术趋势](05-trends/)，把握最新动态
 
 ### ⚠️ 重要说明
 
@@ -31,8 +31,7 @@
 
 - **理论论证** (`00-theory/`)：纯形式化证明，不包含代码示例
 - **实现细节** (`01-implementation/`)：技术实现细节（代码示例、配置示例）
-- **架构视角** (`01-views/`, `02-architecture-views/`)：理念 + 引用理论论证和实
-  现细节
+- **架构视角** (`02-views/`)：理念 + 引用理论论证和实现细节
 
 ## 📋 文档结构
 
@@ -168,69 +167,83 @@
   - [deployment-guide.md](01-implementation/09-system-view/deployment-guide.md) -
     部署指南
 
-### 1. 多视角架构视图 (`01-views/`)
+### 1. 架构视图文档集 (`02-views/`) ⭐ 重组
 
-从不同视角理解架构：
+架构视图文档集（推荐使用，原 `architecture-view/`）：
 
-- [架构拆解与组合](01-views/decomposition-composition.md) - 5 步拆分与组合流程
-- [虚拟化视角](01-views/virtualization-view.md) - 虚拟化的"剪裁"作用
-- [容器化视角](01-views/containerization-view.md) - 容器化的抽象层次
-- [沙盒化视角](01-views/sandboxing-view.md) - 沙盒化的安全模型
-- [WebAssembly 视角](01-views/webassembly-view.md) ⭐ 新增 - WebAssembly 作为第
-  四层抽象
-- [AI/ML 架构视角](01-views/ai-ml-architecture-view.md) ⭐ 新增 - AI/ML 工作负载
-  与云原生集成
-- [边缘计算视角](01-views/edge-computing-view.md) ⭐ 新增 - 边缘计算与 5G MEC 架
-  构
-- [Service Mesh 视角](01-views/service-mesh-view.md) - 网络服务的聚合与组合
-- [Network Service Mesh 视角](01-views/network-service-mesh-view.md) - 跨域网络
-  服务的聚合与组合
-- [OPA 策略治理视角](01-views/opa-policy-governance-view.md) - 策略即代码的治理
-  范式
-- [动态运维视角](01-views/dynamic-operations-view.md) -
+#### 1.1 快捷视图 (`10-quick-views/`) ⭐ 重组
+
+单文件视图（原 `01-views/`）：
+
+- [架构拆解与组合](02-views/10-quick-views/decomposition-composition.md) - 5 步
+  拆分与组合流程
+- [虚拟化视角](02-views/10-quick-views/virtualization-view.md) - 虚拟化的"剪裁"
+  作用
+- [容器化视角](02-views/10-quick-views/containerization-view.md) - 容器化的抽象
+  层次
+- [沙盒化视角](02-views/10-quick-views/sandboxing-view.md) - 沙盒化的安全模型
+- [WebAssembly 视角](02-views/10-quick-views/webassembly-view.md) ⭐ -
+  WebAssembly 作为第四层抽象
+- [AI/ML 架构视角](02-views/10-quick-views/ai-ml-architecture-view.md) ⭐ -
+  AI/ML 工作负载与云原生集成
+- [边缘计算视角](02-views/10-quick-views/edge-computing-view.md) ⭐ - 边缘计算与
+  5G MEC 架构
+- [Service Mesh 视角](02-views/10-quick-views/service-mesh-view.md) - 网络服务的
+  聚合与组合
+- [Network Service Mesh 视角](02-views/10-quick-views/network-service-mesh-view.md) -
+  跨域网络服务的聚合与组合
+- [OPA 策略治理视角](02-views/10-quick-views/opa-policy-governance-view.md) - 策
+  略即代码的治理范式
+- [动态运维视角](02-views/10-quick-views/dynamic-operations-view.md) -
   GitOps、Observability、Autoscaling
-- [系统视角架构视图](01-views/system-view-architecture.md) ⭐ 新增 - 7 层 4 域模
-  型的完整架构视图
+- [系统视角架构视图](02-views/10-quick-views/system-view-architecture.md) ⭐ - 7
+  层 4 域模型的完整架构视图
 
-### 2. 分层架构模型 (`02-layers/`)
+#### 1.2 详细视图
 
-从硬件到业务的分层抽象：
+- 参见 `02-views/` 下的其他子目录（01-09）
 
-- [分层架构模型](02-layers/layer-model.md) - 整体分层模型
-- [硬件/固件层](02-layers/hardware-firmware-layer.md) - CPU、内存、I/O、可信根
-- [Hypervisor/Kernel 层](02-layers/hypervisor-kernel-layer.md) - VM 与容器的资源
+### 2. 架构模型 (`03-models/`) ⭐ 重组
+
+从硬件到业务的分层抽象（原 `02-layers/`）：
+
+- [分层架构模型](03-models/layer-model.md) - 整体分层模型
+- [硬件/固件层](03-models/hardware-firmware-layer.md) - CPU、内存、I/O、可信根
+- [Hypervisor/Kernel 层](03-models/hypervisor-kernel-layer.md) - VM 与容器的资源
   调度
-- [容器运行时层](02-layers/runtime-container-layer.md) - 进程隔离、镜像运行
-- [沙盒层](02-layers/sandbox-layer.md) - 系统调用过滤、文件系统隔离
-- [Service Mesh 层](02-layers/service-mesh-layer.md) - 代理、流量治理、监控
-- [应用层](02-layers/application-layer.md) - 业务逻辑、数据访问
+- [容器运行时层](03-models/runtime-container-layer.md) - 进程隔离、镜像运行
+- [沙盒层](03-models/sandbox-layer.md) - 系统调用过滤、文件系统隔离
+- [Service Mesh 层](03-models/service-mesh-layer.md) - 代理、流量治理、监控
+- [应用层](03-models/application-layer.md) - 业务逻辑、数据访问
 
 ### 3. 组合模式与实践 (`03-composition/`) ⚠️ 已删除
 
-> **注意**：本目录已删除，内容已合并到
-> `architecture-view/08-composition-patterns/` 目录。详细内容请参考：
+> **注意**：本目录已删除，内容已合并到 `02-views/08-composition-patterns/` 目录
+> 。详细内容请参考：
 >
-> - [`architecture-view/08-composition-patterns/`](architecture-view/08-composition-patterns/) -
+> - [`02-views/08-composition-patterns/`](02-views/08-composition-patterns/) -
 >   组合模式文档集
 
 ### 4. 架构模式与设计 (`04-patterns/`) ⚠️ 已删除
 
-> **注意**：本目录已删除，内容已合并到
-> `architecture-view/08-composition-patterns/` 目录。详细内容请参考：
+> **注意**：本目录已删除，内容已合并到 `02-views/08-composition-patterns/` 目录
+> 。详细内容请参考：
 >
-> - [`architecture-view/08-composition-patterns/`](architecture-view/08-composition-patterns/) -
+> - [`02-views/08-composition-patterns/`](02-views/08-composition-patterns/) -
 >   组合模式文档集
 
-### 5. 2025 年技术趋势 (`05-trends-2025/`)
+### 5. 技术趋势 (`05-trends/`) ⭐ 重组
 
-最新的技术动态：
+最新的技术动态（原 `05-trends-2025/`）：
 
-- [2025 年 11 月架构技术更新](05-trends-2025/november-2025-architecture-updates.md) -
+- [README](05-trends/README.md) - 技术趋势总览
+- [2025 年 11 月架构技术更新](05-trends/november-2025-architecture-updates.md) -
   最新架构技术更新
-- [2025 年 11 月综合趋势报告](05-trends-2025/comprehensive-trends-november-2025.md) -
+- [2025 年 11 月综合趋势报告](05-trends/comprehensive-trends-november-2025.md) -
   综合技术趋势分析
-- [2025 年 11 月技术趋势](05-trends-2025/november-2025-updates.md) - 最新技术更
-  新
+- [2025 年 11 月技术趋势](05-trends/november-2025-updates.md) - 最新技术更新
+- [2025 年 11 月特别文档集](05-trends/november-2025-special/) - 核心主题、形式化
+  论证、概念关系、实证分析、技术演进路径
 - 虚拟化趋势 - 轻量级虚拟机、机密计算
 - 容器化趋势 - 轻量级运行时、eBPF 增强
 - Service Mesh 趋势 - 轻量化、边缘计算
@@ -252,43 +265,101 @@
 > - **归纳证明**：`00-theory/02-induction-proof/`
 > - **状态空间压缩**：`00-theory/04-state-compression/`
 
-### 7. 案例研究 (`07-case-studies/`)
+### 7. 领域语义架构分析模型 (`06-domain-semantics/`) ⭐ 新增
 
-实际生产环境案例：
+从领域语义视角分析分布式系统架构演进，重点阐述分层消解律：
 
-- [支付网关案例](07-case-studies/payment-gateway.md) - 支付网关架构设计
-- [电商平台案例](07-case-studies/e-commerce-platform.md) - 电商平台架构设计
-- [金融系统案例](07-case-studies/financial-system.md) - 金融系统架构设计
-- [多云混合案例](07-case-studies/multi-cloud-hybrid.md) - 多云混合架构设计
-- [CI/CD 高密度场景](07-case-studies/cicd-high-density.md) ⭐ 新增 - 基于
-  system_view 案例 B
-- [桌面应用沙盒化](07-case-studies/desktop-sandboxing.md) ⭐ 新增 - 基于
+- [README](06-domain-semantics/README.md) - 领域语义架构分析模型总览
+- [INDEX](06-domain-semantics/INDEX.md) - 领域语义架构分析模型索引
+- **核心主题** (`01-core-themes/`)：
+  - 技术本质与演进趋势对比
+  - 集群分布式计算系统架构演进
+  - 分布式存储系统架构选择与性能论证
+  - 云原生环境下的最佳实践
+  - 语义模型视角下的分布式系统分层抽象
+  - 挑战与未来趋势
+  - 技术选型决策树
+- **语义模型视角** (`02-semantic-model-perspective/`)：
+  - 三层语义模型架构
+  - 领域语义无法通用化的本质原因
+  - 通用框架与领域模型的双向赋能
+  - 未来演进：领域特定基础设施（DSI）
+- **分层消解律** (`03-layered-disintegration-law/`)：
+  - 分层消解律概述
+  - 分布式计算系统：从手动编排到声明式调度
+  - 分布式工作流系统：从代码编排到声明式定义
+  - 分布式存储系统：从多级抽象到统一声明
+  - 分层消解律的量化验证
+  - 未来演进：领域语义的"二次消解"
+- **领域案例分析** (`04-domain-case-studies/`)：
+  - Spark 软件栈的语义分层模型
+  - Argo vs Temporal：两条工作流演进路径
+  - Ceph/DPU 架构中的分层消解律
+  - IoT：业务硬核如何穿透基础设施消解
+  - Temporal 工作流系统的语义分层模型
+  - Argo Workflows 工作流系统的语义分层模型
+  - Apache Flink 流处理系统的语义分层模型
+  - Apache Kafka 消息队列系统的语义分层模型
+- **领域案例** (`04-domain-cases/`)：
+  - IoT、电商、金融、推荐、自动驾驶、医疗、游戏、边缘计算、工业数字孪生、能源电
+    网
+- **Wikipedia 概念定义** (`05-wikipedia-references/`)：
+  - 虚拟化、容器化、沙盒化、分布式系统、云原生、分层抽象、领域驱动设计
+
+### 8. 应用场景 (`04-applications/`) ⭐ 重组
+
+应用场景（合并 `07-case-studies/` 和 `11-extensions/`）：
+
+#### 7.1 案例研究 (`case-studies/`)
+
+实际生产环境案例（原 `07-case-studies/`）：
+
+- [支付网关案例](04-applications/case-studies/payment-gateway.md) - 支付网关架构
+  设计
+- [电商平台案例](04-applications/case-studies/e-commerce-platform.md) - 电商平台
+  架构设计
+- [金融系统案例](04-applications/case-studies/financial-system.md) - 金融系统架
+  构设计
+- [多云混合案例](04-applications/case-studies/multi-cloud-hybrid.md) - 多云混合
+  架构设计
+- [CI/CD 高密度场景](04-applications/case-studies/cicd-high-density.md) ⭐ - 基
+  于 system_view 案例 B
+- [桌面应用沙盒化](04-applications/case-studies/desktop-sandboxing.md) ⭐ - 基于
   system_view 案例 C
-- [浏览器 WASM 架构](07-case-studies/browser-wasm.md) ⭐ 新增 - 基于 system_view
-  案例 E
-- [银行核心系统](07-case-studies/banking-core-system.md) ⭐ 新增 - 基于
+- [浏览器 WASM 架构](04-applications/case-studies/browser-wasm.md) ⭐ - 基于
+  system_view 案例 E
+- [银行核心系统](04-applications/case-studies/banking-core-system.md) ⭐ - 基于
   system_view 案例 A
-- [边缘零售 K8s](07-case-studies/edge-retail-k8s.md) ⭐ 新增 - 基于 system_view
-  案例 D
-- [system_view 案例扩展分析](07-case-studies/system-view-cases-analysis.md) ⭐
-  新增 - system_view 案例的详细分析
+- [边缘零售 K8s](04-applications/case-studies/edge-retail-k8s.md) ⭐ - 基于
+  system_view 案例 D
+- [system_view 案例扩展分析](04-applications/case-studies/system-view-cases-analysis.md)
+  ⭐ - system_view 案例的详细分析
+
+#### 7.2 拓展应用 (`extensions/`)
+
+拓展应用场景（原 `11-extensions/`）：
+
+- [README](04-applications/extensions/README.md) - 拓展应用说明
+- **详细文档**：参见
+  `02-views/06-concepts-properties-relations/04-extensions.md` - 拓展场景详细文
+  档
 
 ### 8. 概念属性关系 (`08-concepts-relations/`) ⚠️ 已删除
 
 > **注意**：本目录已删除，内容已合并到
-> `architecture-view/06-concepts-properties-relations/` 目录。详细内容请参考：
+> `02-views/06-concepts-properties-relations/` 目录。详细内容请参考：
 >
-> - [`architecture-view/06-concepts-properties-relations/`](architecture-view/06-concepts-properties-relations/) -
+> - [`02-views/06-concepts-properties-relations/`](02-views/06-concepts-properties-relations/) -
 >   概念属性关系文档集
 
-### 9. 2025 年 11 月专题文档 ⚠️ 已删除（内容合并到 `05-trends-2025/`）
+### 9. 2025 年 11 月专题文档 ⚠️ 已删除（内容合并到 `05-trends/`）
 
 > **注意**：`09-november-2025-special/` 目录已删除，内容已合并到
-> `05-trends-2025/november-2025-special/`。详细内容请参考：
+> `05-trends/november-2025-special/`。详细内容请参考：
 >
-> - [`05-trends-2025/november-2025-special/`](05-trends-2025/november-2025-special/) -
->   合并后的专题文档
-> - [`05-trends-2025/README.md`](05-trends-2025/README.md) - 趋势文档总览
+> - [`05-trends/november-2025-special/`](05-trends/november-2025-special/) - 合
+>   并后的专题文档
+> - [`05-trends/README.md`](05-trends/README.md) - 趋势文档总览
 
 ### 10. 形式化证明 (`10-formal-proofs/`) ⚠️ 已删除
 
@@ -297,26 +368,31 @@
 > - [`00-theory/`](00-theory/) - 完整的理论论证文档集
 > - [`00-theory/README.md`](00-theory/README.md) - 理论论证文档集总览
 
-### 11. 拓展应用 (`11-extensions/`)
+### 架构视图文档集 (`02-views/`) ⭐ 重组
 
-拓展应用场景文档：
+完整的架构视图文档集（**推荐使用**，原 `architecture-view/`）：
 
-- [README](11-extensions/README.md) - 拓展应用说明
-- **详细文档**：参见
-  `architecture-view/06-concepts-properties-relations/04-extensions.md` - 拓展场
-  景详细文档
-
-### 架构视图文档集 (`architecture-view/`)
-
-完整的架构视图文档集（**推荐使用**）：
-
-- [README](architecture-view/README.md) - 文档集说明
-- [INDEX](architecture-view/INDEX.md) - 文档索引
-- [SUMMARY](architecture-view/SUMMARY.md) - 文档总结
+- [README](02-views/README.md) - 文档集说明
+- [INDEX](02-views/INDEX.md) - 文档索引
+- **详细视图**：参见 `02-views/` 下的子目录（01-09）
+- **快捷视图**：参见 `02-views/10-quick-views/`（原 `01-views/`）
 
 **包含 10 个主要目录，53 个详细文档，涵盖所有核心主题**。
 
 ## 🔗 相关文档
+
+### 领域语义架构分析模型
+
+- **领域语义架构分析模型**：`06-domain-semantics/` ⭐ 新增
+  - **总览**：[06-domain-semantics/README.md](06-domain-semantics/README.md) -
+    领域语义架构分析模型总览
+  - **索引**：[06-domain-semantics/INDEX.md](06-domain-semantics/INDEX.md) - 领
+    域语义架构分析模型索引
+  - **核心内容**：分层消解律、语义模型视角、跨领域验证
+    （Spark、Argo、Temporal、Ceph、Flink、Kafka 等）
+  - **技术系统**：Spark、Argo Workflows、Temporal、Ceph/DPU、Flink、Kafka
+  - **领域案例**：IoT、电商、金融、推荐、自动驾驶、医疗、游戏、边缘计算、工业数
+    字孪生、能源电网
 
 ### 源文档
 
@@ -328,21 +404,21 @@
 ### 技术文档
 
 - **`docs/TECHNICAL/`** - 技术实现细节
-  - [Docker](TECHNICAL/00-docker/docker.md)
-  - [Kubernetes](TECHNICAL/01-kubernetes/kubernetes.md)
-  - [K3s](TECHNICAL/02-k3s/k3s.md)
-  - [WasmEdge](TECHNICAL/03-wasm-edge/wasmedge.md)
-  - [Service Mesh](TECHNICAL/19-service-mesh/service-mesh.md)
-  - [OPA](TECHNICAL/06-policy-opa/policy-opa.md)
+  - [Docker](TECHNICAL/01-core-foundations/docker/docker.md)
+  - [Kubernetes](TECHNICAL/01-core-foundations/kubernetes/kubernetes.md)
+  - [K3s](TECHNICAL/01-core-foundations/k3s/k3s.md)
+  - [WasmEdge](TECHNICAL/02-runtime-policy/wasm-edge/wasmedge.md)
+  - [Service Mesh](TECHNICAL/06-advanced-features/service-mesh/service-mesh.md)
+  - [OPA](TECHNICAL/02-runtime-policy/policy-opa/policy-opa.md)
 
 ### 认知模型
 
 - **`docs/COGNITIVE/`** - 认知框架和理论模型
-  - [知识图谱](COGNITIVE/00-knowledge-map/knowledge-map.md)
-  - [概览](COGNITIVE/01-overview/overview.md)
-  - [原则](COGNITIVE/02-principles/principles.md)
-  - [形式化理论](COGNITIVE/07-formal-theory/formal-theory.md)
-  - [范畴论](COGNITIVE/08-category-theory/category-theory.md)
+  - [知识图谱](COGNITIVE/01-core-foundations/knowledge-map/knowledge-map.md)
+  - [概览](COGNITIVE/01-core-foundations/overview/overview.md)
+  - [原则](COGNITIVE/01-core-foundations/principles/principles.md)
+  - [形式化理论](COGNITIVE/03-theoretical-perspectives/formal-theory/formal-theory.md)
+  - [范畴论](COGNITIVE/03-theoretical-perspectives/category-theory/category-theory.md)
 
 ### 参考资源
 
@@ -369,9 +445,9 @@
 
 ### 初学者
 
-1. 阅读 [架构拆解与组合](01-views/decomposition-composition.md)
-2. 了解 [分层架构模型](02-layers/layer-model.md)
-3. 查看 [支付网关案例](07-case-studies/payment-gateway.md)
+1. 阅读 [架构拆解与组合](02-views/10-quick-views/decomposition-composition.md)
+2. 了解 [分层架构模型](03-models/layer-model.md)
+3. 查看 [支付网关案例](04-applications/case-studies/payment-gateway.md)
 
 ### 理论研究者
 
@@ -383,15 +459,17 @@
 
 ### 进阶者
 
-1. 深入 [组合模式与实践](architecture-view/08-composition-patterns/)
+1. 深入 [组合模式与实践](02-views/08-composition-patterns/)
 2. 研究 [对比矩阵](00-theory/06-comparison-matrix/comparison-matrix.md)
-3. 跟踪 [2025 年技术趋势](05-trends-2025/november-2025-updates.md)
+3. 跟踪 [技术趋势](05-trends/november-2025-updates.md)
 
 ### 实践者
 
-1. 参考 [案例研究](07-case-studies/)
-2. 应用 [组合模式](architecture-view/08-composition-patterns/)
-3. 优化 [分层架构](02-layers/)
+1. 参考 [案例研究](04-applications/case-studies/)
+2. 应用 [组合模式](02-views/08-composition-patterns/)
+3. 优化 [分层架构](03-models/)
+4. 学习 [领域语义架构分析模型](06-domain-semantics/) ⭐ 新增 - 理解分层消解律和
+   跨领域验证
 
 ## 🎯 核心主题
 
@@ -447,6 +525,7 @@
   - ✅ 更新 `09-november-2025-special` 目录，整合到主文档索引
 
 - **2025-11-07**：
+
   - ✅ 增强 WebAssembly 第四层抽象讨论（添加范式转换意义、应用场景、GPU 加速等）
   - ✅ 完善 AI/ML 架构视角文档（395 行，9 个章节）
   - ✅ 完善边缘计算架构视角文档（390 行，9 个章节）
@@ -454,6 +533,14 @@
   - ✅ 更新理论文档交叉引用（3 个文档，4 个新引用）
   - ✅ 更新实现细节文档交叉引用（4 个文档，8 个新引用）
   - ✅ 完成链接格式验证（11 个核心链接）
+
+- **2025-11-08**：
+  - ✅ 整合 `06-domain-semantics/` 领域语义架构分析模型到 ARCHITECTURE 主文档
+  - ✅ 创建技术系统案例分析文档（Temporal、Argo Workflows、Flink、Kafka）
+  - ✅ 更新 README.md 和 INDEX.md 的阅读路径和实践者路径
+  - ✅ 更新 SYSTEM-VIEW-INTEGRATION.md 添加领域语义视角整合说明
+  - ✅ 统一文档元数据格式（版本、创建日期、维护者）
+  - ✅ 修复路径不一致问题和文档交叉引用
 
 ---
 

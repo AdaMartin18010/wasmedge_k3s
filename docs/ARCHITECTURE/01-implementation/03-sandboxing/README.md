@@ -60,11 +60,11 @@
 
 ### 3.2 架构视角
 
-- **`../../01-views/sandboxing-view.md`** - 沙盒化架构视角
+- **`../../02-views/10-quick-views/sandboxing-view.md`** - 沙盒化架构视角
 
 ### 3.3 技术文档
 
-- **`../../../TECHNICAL/29-isolation-stack/isolation-stack.md`** - 隔离技术栈文
+- **`../../../TECHNICAL/08-architecture-analysis/isolation-stack/isolation-stack.md`** - 隔离技术栈文
   档
 
 ---

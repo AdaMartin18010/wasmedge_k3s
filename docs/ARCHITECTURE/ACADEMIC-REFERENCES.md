@@ -50,8 +50,8 @@
 
 **参考章节**：
 
-- `architecture-view/05-formal-proofs/01-axioms.md` - 公理层（A1）
-- `architecture-view/02-virtualization-containerization-sandboxing/01-layered-abstraction.md` -
+- `02-views/05-formal-proofs/01-axioms.md` - 公理层（A1）
+- `02-views/02-virtualization-containerization-sandboxing/01-layered-abstraction.md` -
   层级模型
 
 ---
@@ -78,8 +78,8 @@
 
 **参考章节**：
 
-- `architecture-view/05-formal-proofs/01-axioms.md` - 公理层（A2）
-- `02-layers/hypervisor-kernel-layer.md` - Hypervisor/Kernel 层
+- `02-views/05-formal-proofs/01-axioms.md` - 公理层（A2）
+- `03-models/hypervisor-kernel-layer.md` - Hypervisor/Kernel 层
 
 ---
 
@@ -106,8 +106,8 @@
 
 **参考章节**：
 
-- `architecture-view/05-formal-proofs/02-induction-proof.md` - 归纳证明
-- `01-views/virtualization-view.md` - 虚拟化视角
+- `02-views/05-formal-proofs/02-induction-proof.md` - 归纳证明
+- `02-views/10-quick-views/virtualization-view.md` - 虚拟化视角
 
 ---
 
@@ -134,7 +134,7 @@
 
 **参考章节**：
 
-- `02-layers/hypervisor-kernel-layer.md` - Hypervisor/Kernel 层
+- `03-models/hypervisor-kernel-layer.md` - Hypervisor/Kernel 层
 
 ---
 
@@ -161,8 +161,8 @@
 
 **参考章节**：
 
-- `architecture-view/05-formal-proofs/02-induction-proof.md` - 归纳证明
-- `01-views/containerization-view.md` - 容器化视角
+- `02-views/05-formal-proofs/02-induction-proof.md` - 归纳证明
+- `02-views/10-quick-views/containerization-view.md` - 容器化视角
 
 ---
 
@@ -182,7 +182,7 @@
 
 **参考章节**：
 
-- `02-layers/runtime-container-layer.md` - 容器运行时层
+- `03-models/runtime-container-layer.md` - 容器运行时层
 
 ---
 
@@ -202,7 +202,7 @@
 
 **参考章节**：
 
-- `architecture-view/07-dynamic-operations/02-observability.md` - 动态运维
+- `02-views/07-dynamic-operations/02-observability.md` - 动态运维
 - `docs/TECHNICAL/01-kubernetes/kubernetes.md` - Kubernetes 技术文档
 
 ---
@@ -231,8 +231,8 @@
 
 **参考章节**：
 
-- `architecture-view/05-formal-proofs/02-induction-proof.md` - 归纳证明
-- `01-views/sandboxing-view.md` - 沙盒化视角
+- `02-views/05-formal-proofs/02-induction-proof.md` - 归纳证明
+- `02-views/10-quick-views/sandboxing-view.md` - 沙盒化视角
 
 ---
 
@@ -257,7 +257,7 @@
 
 **参考章节**：
 
-- `02-layers/sandbox-layer.md` - 沙盒层
+- `03-models/sandbox-layer.md` - 沙盒层
 
 ---
 
@@ -284,8 +284,8 @@
 
 **参考章节**：
 
-- `architecture-view/03-service-mesh-nsm/01-node-aggregation.md` - 节点聚合
-- `architecture-view/03-service-mesh-nsm/02-service-composition.md` - 服务组合
+- `02-views/03-service-mesh-nsm/01-node-aggregation.md` - 节点聚合
+- `02-views/03-service-mesh-nsm/02-service-composition.md` - 服务组合
 
 ---
 
@@ -332,8 +332,8 @@
 
 **参考章节**：
 
-- `architecture-view/04-opa-policy-governance/01-opa-positioning.md` - OPA 定位
-- `architecture-view/04-opa-policy-governance/02-security-formalization.md` - 安
+- `02-views/04-opa-policy-governance/01-opa-positioning.md` - OPA 定位
+- `02-views/04-opa-policy-governance/02-security-formalization.md` - 安
   全形式化
 
 ---
@@ -363,7 +363,7 @@
 
 **参考章节**：
 
-- `architecture-view/05-formal-proofs/01-axioms.md` - 公理层（A3）
+- `02-views/05-formal-proofs/01-axioms.md` - 公理层（A3）
 
 ---
 
@@ -391,8 +391,8 @@
 
 **参考章节**：
 
-- `architecture-view/02-virtualization-containerization-sandboxing/` - 三层抽象
-- `11-extensions/README.md` - 拓展应用（WasmEdge）
+- `02-views/02-virtualization-containerization-sandboxing/` - 三层抽象
+- `04-applications/extensions/README.md` - 拓展应用（WasmEdge）
 
 ---
 
@@ -420,8 +420,8 @@
 
 **参考章节**：
 
-- `architecture-view/03-service-mesh-nsm/04-nsm-architecture.md` - NSM 架构
-- `01-views/network-service-mesh-view.md` - 网络服务网格视角
+- `02-views/03-service-mesh-nsm/04-nsm-architecture.md` - NSM 架构
+- `02-views/10-quick-views/network-service-mesh-view.md` - 网络服务网格视角
 
 ---
 
@@ -449,8 +449,8 @@
 
 **参考章节**：
 
-- `02-layers/sandbox-layer.md` - 沙盒层
-- `01-views/sandboxing-view.md` - 沙盒化视角
+- `03-models/sandbox-layer.md` - 沙盒层
+- `02-views/10-quick-views/sandboxing-view.md` - 沙盒化视角
 
 ---
 
@@ -479,8 +479,8 @@
 
 **参考章节**：
 
-- `architecture-view/01-decomposition-composition/` - 架构拆解与组合
-- `01-views/decomposition-composition.md` - 拆解与组合视角
+- `02-views/01-decomposition-composition/` - 架构拆解与组合
+- `02-views/10-quick-views/decomposition-composition.md` - 拆解与组合视角
 
 ---
 
@@ -508,8 +508,8 @@
 
 **参考章节**：
 
-- `architecture-view/03-service-mesh-nsm/` - Service Mesh 与 NSM
-- `01-views/service-mesh-view.md` - Service Mesh 视角
+- `02-views/03-service-mesh-nsm/` - Service Mesh 与 NSM
+- `02-views/10-quick-views/service-mesh-view.md` - Service Mesh 视角
 
 ---
 
@@ -538,8 +538,8 @@
 
 **参考章节**：
 
-- `architecture-view/07-dynamic-operations/` - 动态运维
-- `01-views/dynamic-operations-view.md` - 动态运维视角
+- `02-views/07-dynamic-operations/` - 动态运维
+- `02-views/10-quick-views/dynamic-operations-view.md` - 动态运维视角
 
 ---
 
@@ -563,13 +563,13 @@
 
 **与架构文档的对应关系**：
 
-- **分布式系统设计**：对应 `architecture-view/03-service-mesh-nsm/` 中的网络服务
+- **分布式系统设计**：对应 `02-views/03-service-mesh-nsm/` 中的网络服务
   聚合
 - **共识算法**：对应 Service Mesh 和 NSM 的配置管理
 
 **参考章节**：
 
-- `architecture-view/03-service-mesh-nsm/04-nsm-architecture.md` - NSM 架构
+- `02-views/03-service-mesh-nsm/04-nsm-architecture.md` - NSM 架构
 
 ---
 
@@ -589,14 +589,14 @@
 
 **与架构文档的对应关系**：
 
-- **系统设计原理**：对应 `architecture-view/01-decomposition-composition/` 中的
+- **系统设计原理**：对应 `02-views/01-decomposition-composition/` 中的
   5 步流程
-- **安全与隐私**：对应 `architecture-view/04-opa-policy-governance/` 中的策略治
+- **安全与隐私**：对应 `02-views/04-opa-policy-governance/` 中的策略治
   理
 
 **参考章节**：
 
-- `architecture-view/01-decomposition-composition/01-5-step-process.md` - 5 步流
+- `02-views/01-decomposition-composition/01-5-step-process.md` - 5 步流
   程
 
 ---
@@ -624,7 +624,7 @@
 
 **参考章节**：
 
-- `architecture-view/03-service-mesh-nsm/03-paradigm-reshaping.md` - 架构范式重
+- `02-views/03-service-mesh-nsm/03-paradigm-reshaping.md` - 架构范式重
   塑
 
 ---
@@ -650,7 +650,7 @@
 
 **参考章节**：
 
-- `02-layers/runtime-container-layer.md` - 容器运行时层
+- `03-models/runtime-container-layer.md` - 容器运行时层
 
 ---
 
@@ -677,7 +677,7 @@
 
 **参考章节**：
 
-- `architecture-view/08-composition-patterns/04-pipeline-orchestration.md` -
+- `02-views/08-composition-patterns/04-pipeline-orchestration.md` -
   Pipeline/Orchestration
 
 ---
@@ -703,8 +703,8 @@
 
 **参考章节**：
 
-- `02-layers/hypervisor-kernel-layer.md` - Hypervisor/Kernel 层
-- `02-layers/sandbox-layer.md` - 沙盒层
+- `03-models/hypervisor-kernel-layer.md` - Hypervisor/Kernel 层
+- `03-models/sandbox-layer.md` - 沙盒层
 
 ---
 
@@ -731,7 +731,7 @@
 
 **参考章节**：
 
-- `02-layers/runtime-container-layer.md` - 容器运行时层
+- `03-models/runtime-container-layer.md` - 容器运行时层
 
 ---
 
@@ -756,7 +756,7 @@
 
 **参考章节**：
 
-- `architecture-view/03-service-mesh-nsm/` - Service Mesh 与 NSM
+- `02-views/03-service-mesh-nsm/` - Service Mesh 与 NSM
 
 ---
 
@@ -784,7 +784,7 @@
 
 **参考章节**：
 
-- `architecture-view/07-dynamic-operations/` - 动态运维
+- `02-views/07-dynamic-operations/` - 动态运维
 - `01-implementation/02-containerization/cgroup-config.md` - cgroup 配置
 
 ---
@@ -813,8 +813,8 @@
 
 **参考章节**：
 
-- `architecture-view/04-opa-policy-governance/` - OPA 策略治理
-- `01-views/sandboxing-view.md` - 沙盒化视角
+- `02-views/04-opa-policy-governance/` - OPA 策略治理
+- `02-views/10-quick-views/sandboxing-view.md` - 沙盒化视角
 - `00-theory/01-axioms/A5-A8-opa.md` - OPA 公理（A5-A8）
 
 ---
@@ -842,8 +842,8 @@
 
 **参考章节**：
 
-- `architecture-view/07-dynamic-operations/` - 动态运维
-- `architecture-view/` - AI/ML 架构章节（待补充）
+- `02-views/07-dynamic-operations/` - 动态运维
+- `02-views/` - AI/ML 架构章节（待补充）
 
 ---
 
@@ -870,9 +870,9 @@
 
 **参考章节**：
 
-- `architecture-view/03-service-mesh-nsm/` - Service Mesh 与 NSM
-- `01-views/service-mesh-view.md` - Service Mesh 视角
-- `01-views/network-service-mesh-view.md` - 网络服务网格视角
+- `02-views/03-service-mesh-nsm/` - Service Mesh 与 NSM
+- `02-views/10-quick-views/service-mesh-view.md` - Service Mesh 视角
+- `02-views/10-quick-views/network-service-mesh-view.md` - 网络服务网格视角
 
 ---
 
@@ -901,7 +901,7 @@
 
 **参考章节**：
 
-- `architecture-view/05-formal-proofs/02-induction-proof.md` - 归纳证明
+- `02-views/05-formal-proofs/02-induction-proof.md` - 归纳证明
 
 ---
 
@@ -921,7 +921,7 @@
 
 **参考章节**：
 
-- `02-layers/hypervisor-kernel-layer.md` - Hypervisor/Kernel 层
+- `03-models/hypervisor-kernel-layer.md` - Hypervisor/Kernel 层
 
 ---
 
@@ -944,7 +944,7 @@
 
 **参考章节**：
 
-- `architecture-view/05-formal-proofs/02-induction-proof.md` - 归纳证明
+- `02-views/05-formal-proofs/02-induction-proof.md` - 归纳证明
 
 ---
 
@@ -966,7 +966,7 @@
 
 **参考章节**：
 
-- `architecture-view/03-service-mesh-nsm/01-node-aggregation.md` - 节点聚合
+- `02-views/03-service-mesh-nsm/01-node-aggregation.md` - 节点聚合
 
 ---
 
@@ -992,7 +992,7 @@
 
 **参考章节**：
 
-- `architecture-view/03-service-mesh-nsm/04-nsm-architecture.md` - NSM 架构
+- `02-views/03-service-mesh-nsm/04-nsm-architecture.md` - NSM 架构
 
 ---
 
@@ -1028,7 +1028,7 @@
 
 **参考章节**：
 
-- `02-layers/runtime-container-layer.md` - 容器运行时层
+- `03-models/runtime-container-layer.md` - 容器运行时层
 
 ---
 
@@ -1043,7 +1043,7 @@
 
 **参考章节**：
 
-- `11-extensions/README.md` - 拓展应用（WasmEdge）
+- `04-applications/extensions/README.md` - 拓展应用（WasmEdge）
 
 ---
 
@@ -1065,19 +1065,19 @@
 
 | 架构文档章节          | 对应学术资源                                            | 引用位置                                                   |
 | --------------------- | ------------------------------------------------------- | ---------------------------------------------------------- |
-| 公理层（A1）          | Von Neumann Architecture (Wikipedia)                    | `architecture-view/05-formal-proofs/01-axioms.md`          |
-| 公理层（A2）          | Operating System (Wikipedia)                            | `architecture-view/05-formal-proofs/01-axioms.md`          |
-| 虚拟化层              | Virtualization (Wikipedia), Xen Paper (SOSP 2003)       | `architecture-view/05-formal-proofs/02-induction-proof.md` |
-| 容器化层              | OS-level Virtualization (Wikipedia), Docker (Wikipedia) | `architecture-view/05-formal-proofs/02-induction-proof.md` |
-| 沙盒化层              | Sandbox (Wikipedia), Seccomp (Wikipedia)                | `architecture-view/05-formal-proofs/02-induction-proof.md` |
-| Service Mesh          | Service Mesh (Wikipedia), Istio (Wikipedia)             | `architecture-view/03-service-mesh-nsm/`                   |
-| NSM                   | Network Service Mesh (Wikipedia)                        | `architecture-view/03-service-mesh-nsm/`                   |
-| OPA                   | Open Policy Agent (Wikipedia)                           | `architecture-view/04-opa-policy-governance/`              |
-| WebAssembly           | WebAssembly (Wikipedia)                                 | `11-extensions/README.md`                                  |
-| eBPF                  | eBPF (Wikipedia)                                        | `02-layers/sandbox-layer.md`                               |
-| Software Architecture | Software Architecture (Wikipedia)                       | `architecture-view/01-decomposition-composition/`          |
-| Microservices         | Microservices (Wikipedia)                               | `architecture-view/03-service-mesh-nsm/`                   |
-| Serverless            | Serverless Computing (Wikipedia)                        | `architecture-view/07-dynamic-operations/`                 |
+| 公理层（A1）          | Von Neumann Architecture (Wikipedia)                    | `02-views/05-formal-proofs/01-axioms.md`          |
+| 公理层（A2）          | Operating System (Wikipedia)                            | `02-views/05-formal-proofs/01-axioms.md`          |
+| 虚拟化层              | Virtualization (Wikipedia), Xen Paper (SOSP 2003)       | `02-views/05-formal-proofs/02-induction-proof.md` |
+| 容器化层              | OS-level Virtualization (Wikipedia), Docker (Wikipedia) | `02-views/05-formal-proofs/02-induction-proof.md` |
+| 沙盒化层              | Sandbox (Wikipedia), Seccomp (Wikipedia)                | `02-views/05-formal-proofs/02-induction-proof.md` |
+| Service Mesh          | Service Mesh (Wikipedia), Istio (Wikipedia)             | `02-views/03-service-mesh-nsm/`                   |
+| NSM                   | Network Service Mesh (Wikipedia)                        | `02-views/03-service-mesh-nsm/`                   |
+| OPA                   | Open Policy Agent (Wikipedia)                           | `02-views/04-opa-policy-governance/`              |
+| WebAssembly           | WebAssembly (Wikipedia)                                 | `04-applications/extensions/README.md`                                  |
+| eBPF                  | eBPF (Wikipedia)                                        | `03-models/sandbox-layer.md`                               |
+| Software Architecture | Software Architecture (Wikipedia)                       | `02-views/01-decomposition-composition/`          |
+| Microservices         | Microservices (Wikipedia)                               | `02-views/03-service-mesh-nsm/`                   |
+| Serverless            | Serverless Computing (Wikipedia)                        | `02-views/07-dynamic-operations/`                 |
 
 ---
 

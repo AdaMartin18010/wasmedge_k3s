@@ -35,14 +35,14 @@
 
 **目录文档**：
 
-- `COGNITIVE/00-knowledge-map/` - 认知图谱和学习路径
-- `COGNITIVE/01-overview/` - 技术栈总览和决策框架
-- `COGNITIVE/02-principles/` - 云原生核心理念
-- `COGNITIVE/07-formal-theory/` - 形式化理论模型
-- `COGNITIVE/08-category-theory/` - 范畴论视角
-- `COGNITIVE/09-matrix-perspective/` - 矩阵力学模型
-- `COGNITIVE/11-algebraic-structure/` - 算子理论与代数结构（与 `algebra_view.md`
-  相关）
+- `COGNITIVE/01-core-foundations/knowledge-map/` - 认知图谱和学习路径
+- `COGNITIVE/01-core-foundations/overview/` - 技术栈总览和决策框架
+- `COGNITIVE/01-core-foundations/principles/` - 云原生核心理念
+- `COGNITIVE/03-theoretical-perspectives/formal-theory/` - 形式化理论模型
+- `COGNITIVE/03-theoretical-perspectives/category-theory/` - 范畴论视角
+- `COGNITIVE/03-theoretical-perspectives/matrix-perspective/` - 矩阵力学模型
+- `COGNITIVE/03-theoretical-perspectives/algebraic-structure/` - 算子理论与代数
+  结构（与 `algebra_view.md` 相关）
 
 #### 2. 🏗️ 架构视图文档（Architecture View Documents）
 
@@ -113,15 +113,26 @@
 
 **主要文档**：
 
-- `TECHNICAL/00-docker/` - Docker 技术规范
-- `TECHNICAL/01-kubernetes/` - Kubernetes 架构与实践
-- `TECHNICAL/02-k3s/` - K3s 轻量级架构
-- `TECHNICAL/03-wasm-edge/` - WasmEdge 集成指南
-- `TECHNICAL/12-network-stack/` - 网络技术规格
-- `TECHNICAL/15-storage-stack/` - 存储技术规格
-- `TECHNICAL/29-isolation-stack/` - 四层隔离栈：虚拟化 → 半虚拟化 → 容器化 → 沙
-  盒化；横纵耦合问题定位模型
-- 其他技术规格和实践文档
+> 📋 **目录重组说明**：TECHNICAL 目录已按主题重新组织，从 33 个数字编号目录重组
+> 为 10 个主题分类目录。如需查找旧路径，请参考
+> [TECHNICAL/PATH-MAPPING.md](TECHNICAL/PATH-MAPPING.md)
+
+- `TECHNICAL/01-core-foundations/` - 核心基础（Docker、Kubernetes、K3s）
+- `TECHNICAL/02-runtime-policy/` - 运行时与策略（WasmEdge、编排运行时
+  、OCI、OPA）
+- `TECHNICAL/03-application-scenarios/` - 应用场景（边缘 Serverless、AI 推理）
+- `TECHNICAL/04-infrastructure-stack/` - 基础设施栈（网络、存储、可观测性
+  、eBPF）
+- `TECHNICAL/05-devops/` - 开发与运维（安装、故障排查、GitOps、Operator、工具、
+  升级）
+- `TECHNICAL/06-advanced-features/` - 高级功能（服务网格、多集群、镜像仓库）
+- `TECHNICAL/07-security-compliance/` - 安全与合规
+- `TECHNICAL/08-architecture-analysis/` - 架构与分析（架构框架、隔离栈、概念关系
+  矩阵、eBPF/OTLP）
+- `TECHNICAL/09-optimization-practices/` - 优化与实践（成本优化、最佳实践、分析
+  改进）
+- `TECHNICAL/10-reference-trends/` - 参考与趋势（缩写词汇表、主题清单、2025 趋势
+  ）
 
 **适用场景**：
 
@@ -177,11 +188,13 @@
 **文档关联**：
 
 - `ai_view.md` ↔ `COGNITIVE/` - 认知模型文档集
-- `algebra_view.md` ↔ `COGNITIVE/11-algebraic-structure/` - 代数结构文档
+- `algebra_view.md` ↔
+  `COGNITIVE/03-theoretical-perspectives/algebraic-structure/` - 代数结构文档
 - `architecture_view.md` ↔ `ARCHITECTURE/` - 架构视图文档集
 - `system_view.md` ↔ `ARCHITECTURE/` - 系统视角文档集（7 层 4 域模型） ⭐
-- `structure_view.md` ↔ `COGNITIVE/12-structural-perspective/` - 结构视角文档集
-  ⭐
+- `structure_view.md` ↔
+  `COGNITIVE/03-theoretical-perspectives/structural-perspective/` - 结构视角文档
+  集 ⭐
 - `tech_view.md` ↔ `ARCHITECTURE/architecture-view/09-multi-perspectives/` - 技
   术社会视角文档集 ⭐
 
@@ -192,9 +205,10 @@
 ### 新手入门
 
 1. **[认知视角](../ai_view.md)** ⭐ - 云原生技术栈认知视图，快速理解技术演进主线
-2. **[总览](COGNITIVE/01-overview/overview.md)** - 了解技术栈全貌和核心理念
-3. **[认知图谱](COGNITIVE/00-knowledge-map/knowledge-map.md)** - 快速理解知识结
-   构和学习路径
+2. **[总览](COGNITIVE/01-core-foundations/overview/overview.md)** - 了解技术栈全
+   貌和核心理念
+3. **[认知图谱](COGNITIVE/01-core-foundations/knowledge-map/knowledge-map.md)** -
+   快速理解知识结构和学习路径
 4. **[架构视角](../architecture_view.md)** ⭐ - 从软件架构视角理解虚拟化、容器化
    、沙盒化
 5. **[系统视角](../system_view.md)** ⭐ - 从系统视角（7 层 4 域模型）理解虚拟化
@@ -204,15 +218,20 @@
 7. **[技术社会视角](../tech_view.md)** ⭐ - 从技术和社会的视角（基础设施史、风险
    社会学、发展经济学、人类学）理解虚拟化、容器化、沙盒化
 8. **[架构视图](ARCHITECTURE/INDEX.md)** - 理解架构设计的多视角
-9. **[理念层](COGNITIVE/02-principles/principles.md)** - 理解云原生核心思想
-10. **[Docker 基础](TECHNICAL/00-docker/docker.md)** - 掌握容器技术基础
+9. **[理念层](COGNITIVE/01-core-foundations/principles/principles.md)** - 理解云
+   原生核心思想
+10. **[Docker 基础](TECHNICAL/01-core-foundations/docker/docker.md)** - 掌握容器
+    技术基础
 
 ### 进阶学习
 
-1. **[Kubernetes](TECHNICAL/01-kubernetes/kubernetes.md)** - 深入学习容器编排
-2. **[K3s](TECHNICAL/02-k3s/k3s.md)** - 了解轻量级 Kubernetes
-3. **[WasmEdge](TECHNICAL/03-wasm-edge/wasmedge.md)** - 探索字节码运行时
-4. **[OPA 策略即代码](TECHNICAL/06-policy-opa/policy-opa.md)** - 掌握策略管理
+1. **[Kubernetes](TECHNICAL/01-core-foundations/kubernetes/kubernetes.md)** - 深
+   入学习容器编排
+2. **[K3s](TECHNICAL/01-core-foundations/k3s/k3s.md)** - 了解轻量级 Kubernetes
+3. **[WasmEdge](TECHNICAL/02-runtime-policy/wasm-edge/wasmedge.md)** - 探索字节
+   码运行时
+4. **[OPA 策略即代码](TECHNICAL/02-runtime-policy/policy-opa/policy-opa.md)** -
+   掌握策略管理
 
 ## 📚 文档结构
 
@@ -233,115 +252,124 @@
 
 ### 核心理念与架构
 
-- **[00. 认知图谱](COGNITIVE/00-knowledge-map/knowledge-map.md)** - 知识地图和学
-  习路径
-- **[01. 总览](COGNITIVE/01-overview/overview.md)** - 技术栈定位和决策树
-- **[02. 理念层](COGNITIVE/02-principles/principles.md)** - 云原生核心理念
-- **[03. 架构与对象模型](COGNITIVE/03-architecture/architecture.md)** - 系统架构
-  设计
-- **[11. 代数结构](COGNITIVE/11-algebraic-structure/README.md)** - 算子理论与代
-  数结构（与 `algebra_view.md` 相关）
+- **[00. 认知图谱](COGNITIVE/01-core-foundations/knowledge-map/knowledge-map.md)** -
+  知识地图和学习路径
+- **[01. 总览](COGNITIVE/01-core-foundations/overview/overview.md)** - 技术栈定
+  位和决策树
+- **[02. 理念层](COGNITIVE/01-core-foundations/principles/principles.md)** - 云
+  原生核心理念
+- **[03. 架构与对象模型](COGNITIVE/02-architecture-design/architecture/architecture.md)** -
+  系统架构设计
+- **[11. 代数结构](COGNITIVE/03-theoretical-perspectives/algebraic-structure/README.md)** -
+  算子理论与代数结构（与 `algebra_view.md` 相关）
 
 ### 核心技术
 
 #### 容器与编排
 
-- **[00. Docker](TECHNICAL/00-docker/docker.md)** - Docker 容器技术规范
-- **[01. Kubernetes](TECHNICAL/01-kubernetes/kubernetes.md)** - Kubernetes 编排
-  系统
-- **[02. K3s](TECHNICAL/02-k3s/k3s.md)** - K3s 轻量级 Kubernetes
+- **[00. Docker](TECHNICAL/01-core-foundations/docker/docker.md)** - Docker 容器
+  技术规范
+- **[01. Kubernetes](TECHNICAL/01-core-foundations/kubernetes/kubernetes.md)** -
+  Kubernetes 编排系统
+- **[02. K3s](TECHNICAL/01-core-foundations/k3s/k3s.md)** - K3s 轻量级
+  Kubernetes
 
 #### 运行时与策略
 
-- **[03. WasmEdge](TECHNICAL/03-wasm-edge/wasmedge.md)** - WasmEdge WebAssembly
-  运行时
-- **[04. 编排运行时](TECHNICAL/04-orchestration-runtime/orchestration-runtime.md)** -
+- **[03. WasmEdge](TECHNICAL/02-runtime-policy/wasm-edge/wasmedge.md)** -
+  WasmEdge WebAssembly 运行时
+- **[04. 编排运行时](TECHNICAL/02-runtime-policy/orchestration-runtime/orchestration-runtime.md)** -
   CRI 和 RuntimeClass
-- **[29. 隔离栈](TECHNICAL/29-isolation-stack/isolation-stack.md)** - 四层隔离栈
-  ：虚拟化 → 半虚拟化 → 容器化 → 沙盒化；横纵耦合问题定位模型（OTLP + eBPF）
-- **[05. OCI 供应链](TECHNICAL/05-oci-supply-chain/oci-supply-chain.md)** - OCI
-  标准和供应链安全
-- **[06. OPA 策略即代码](TECHNICAL/06-policy-opa/policy-opa.md)** - Open Policy
-  Agent
+- **[29. 隔离栈](TECHNICAL/08-architecture-analysis/isolation-stack/isolation-stack.md)** -
+  四层隔离栈：虚拟化 → 半虚拟化 → 容器化 → 沙盒化；横纵耦合问题定位模型（OTLP +
+  eBPF）
+- **[05. OCI 供应链](TECHNICAL/02-runtime-policy/oci-supply-chain/oci-supply-chain.md)** -
+  OCI 标准和供应链安全
+- **[06. OPA 策略即代码](TECHNICAL/02-runtime-policy/policy-opa/policy-opa.md)** -
+  Open Policy Agent
 
 #### 应用场景
 
-- **[07. 边缘 Serverless](TECHNICAL/07-edge-serverless/edge-serverless.md)** -
+- **[07. 边缘 Serverless](TECHNICAL/03-application-scenarios/edge-serverless/edge-serverless.md)** -
   边缘计算和 Serverless
-- **[08. AI 推理](TECHNICAL/08-ai-inference/ai-inference.md)** - AI 推理应用
+- **[08. AI 推理](TECHNICAL/03-application-scenarios/ai-inference/ai-inference.md)** -
+  AI 推理应用
 
 ### 实践指南
 
-- **[09. 安全合规](TECHNICAL/09-security-compliance/security-compliance.md)** -
+- **[09. 安全合规](TECHNICAL/07-security-compliance/security-compliance/security-compliance.md)** -
   安全与合规最佳实践
-- **[04. 性能基准](COGNITIVE/04-benchmarks/benchmarks.md)** - 性能指标和基准测试
-- **[10. 安装部署](TECHNICAL/10-installation/installation.md)** - 安装和最小示例
-- **[11. 故障排查](TECHNICAL/11-troubleshooting/troubleshooting.md)** - 常见问题
-  解决方案
-- **[29. 隔离栈](TECHNICAL/29-isolation-stack/isolation-stack.md)** - 问题定位模
-  型、横纵耦合定位方法（OTLP + eBPF）
+- **[04. 性能基准](COGNITIVE/05-decision-analysis/benchmarks/benchmarks.md)** -
+  性能指标和基准测试
+- **[10. 安装部署](TECHNICAL/05-devops/installation/installation.md)** - 安装和
+  最小示例
+- **[11. 故障排查](TECHNICAL/05-devops/troubleshooting/troubleshooting.md)** -
+  常见问题解决方案
+- **[29. 隔离栈](TECHNICAL/08-architecture-analysis/isolation-stack/isolation-stack.md)** -
+  问题定位模型、横纵耦合定位方法（OTLP + eBPF）
 
 ### 架构设计与理论
 
-- **[05. 全局架构设计](COGNITIVE/05-architecture-design/architecture-design.md)** -
+- **[05. 全局架构设计](COGNITIVE/02-architecture-design/architecture-design/architecture-design.md)** -
   技术组合和架构决策
-- **[28. 架构框架](TECHNICAL/28-architecture-framework/architecture-framework.md)** -
+- **[28. 架构框架](TECHNICAL/08-architecture-analysis/architecture-framework/architecture-framework.md)** -
   多维度架构体系与技术规范（技术架构、概念架构、数据架构、业务架构、软件架构、应
   用架构、场景架构）
-- **[06. 问题解决方案](COGNITIVE/06-problem-solution-matrix/problem-solution-matrix.md)** -
+- **[06. 问题解决方案](COGNITIVE/02-architecture-design/problem-solution-matrix/problem-solution-matrix.md)** -
   技术问题分类和解决
-- **[07. 形式化理论](COGNITIVE/07-formal-theory/formal-theory.md)** - 结构同构和
-  关系等价
-- **[08. 范畴论视角](COGNITIVE/08-category-theory/category-theory.md)** - 范畴论
-  分析方法
-- **[09. 矩阵视角](COGNITIVE/09-matrix-perspective/README.md)** - 云原生技术栈的
-  矩阵力学
-- **[11. 代数结构视角](COGNITIVE/11-algebraic-structure/README.md)** - 算子理论
-  与代数结构
-- **[10. 技术决策模型](COGNITIVE/10-decision-models/decision-models.md)** - 技术
-  选型决策框架
-- **[10. 快速参考指南](COGNITIVE/10-decision-models/QUICK-REFERENCE.md)** - 设备
-  访问（USB/PCI/GPU）和内核特性决策快速参考
-- **[10. 一致性检查报告](COGNITIVE/10-decision-models/CONSISTENCY-REPORT.md)** -
+- **[07. 形式化理论](COGNITIVE/03-theoretical-perspectives/formal-theory/formal-theory.md)** -
+  结构同构和关系等价
+- **[08. 范畴论视角](COGNITIVE/03-theoretical-perspectives/category-theory/category-theory.md)** -
+  范畴论分析方法
+- **[09. 矩阵视角](COGNITIVE/03-theoretical-perspectives/matrix-perspective/README.md)** -
+  云原生技术栈的矩阵力学
+- **[11. 代数结构视角](COGNITIVE/03-theoretical-perspectives/algebraic-structure/README.md)** -
+  算子理论与代数结构
+- **[10. 技术决策模型](COGNITIVE/05-decision-analysis/decision-models/decision-models.md)** -
+  技术选型决策框架
+- **[10. 快速参考指南](COGNITIVE/05-decision-analysis/decision-models/QUICK-REFERENCE.md)** -
+  设备访问（USB/PCI/GPU）和内核特性决策快速参考
+- **[10. 一致性检查报告](COGNITIVE/05-decision-analysis/decision-models/CONSISTENCY-REPORT.md)** -
   文档一致性检查与 Wikipedia 标准对齐
 
 ### 技术规格堆栈
 
-- **[12. 网络技术规格堆栈](TECHNICAL/12-network-stack/network-stack.md)** -
+- **[12. 网络技术规格堆栈](TECHNICAL/04-infrastructure-stack/network-stack/network-stack.md)** -
   CNI、Service、Ingress 技术规范
-- **[13. 缩写词汇表](TECHNICAL/13-acronyms-glossary/acronyms-glossary.md)** - 所
-  有缩写词定义与关系
-- **[14. 主题清单](TECHNICAL/14-theme-inventory/theme-inventory.md)** - 全面梳理
-  所有主题与子主题
-- **[15. 存储技术规格堆栈](TECHNICAL/15-storage-stack/storage-stack.md)** -
+- **[13. 缩写词汇表](TECHNICAL/10-reference-trends/acronyms-glossary/acronyms-glossary.md)** -
+  所有缩写词定义与关系
+- **[14. 主题清单](TECHNICAL/10-reference-trends/theme-inventory/theme-inventory.md)** -
+  全面梳理所有主题与子主题
+- **[15. 存储技术规格堆栈](TECHNICAL/04-infrastructure-stack/storage-stack/storage-stack.md)** -
   CSI、PV/PVC、存储类型规格
-- **[16. 监控与可观测性](TECHNICAL/16-observability/observability.md)** -
+- **[16. 监控与可观测性](TECHNICAL/04-infrastructure-stack/observability/observability.md)** -
   Metrics、Logging、Tracing 技术规范
-- **[32. eBPF/OTLP 扩展技术分析](TECHNICAL/32-ebpf-otlp-analysis/ebpf-otlp-analysis.md)**
+- **[32. eBPF/OTLP 扩展技术分析](TECHNICAL/08-architecture-analysis/ebpf-otlp-analysis/ebpf-otlp-analysis.md)**
   ⭐ - eBPF/OTLP 扩展技术分析；架构设计、性能分析、实践指南；技术规范对齐、虚拟
   化/容器化/沙盒化架构（2025-11-07）
-- **[17. GitOps 和持续交付](TECHNICAL/17-gitops-cicd/gitops-cicd.md)** -
+- **[17. GitOps 和持续交付](TECHNICAL/05-devops/gitops-cicd/gitops-cicd.md)** -
   GitOps/CI/CD 技术规范
-- **[18. Operator 和 CRD](TECHNICAL/18-operator-crd/operator-crd.md)** -
+- **[18. Operator 和 CRD](TECHNICAL/05-devops/operator-crd/operator-crd.md)** -
   Operator/CRD 开发规范
-- **[19. 服务网格](TECHNICAL/19-service-mesh/service-mesh.md)** - 服务网格技术规
-  范（可选）
-- **[20. 多集群管理](TECHNICAL/20-multi-cluster/multi-cluster.md)** - 多集群管理
-  技术规范（可选）
-- **[21. 镜像仓库和镜像管理](TECHNICAL/21-image-registry/image-registry.md)** -
+- **[19. 服务网格](TECHNICAL/06-advanced-features/service-mesh/service-mesh.md)** -
+  服务网格技术规范（可选）
+- **[20. 多集群管理](TECHNICAL/06-advanced-features/multi-cluster/multi-cluster.md)** -
+  多集群管理技术规范（可选）
+- **[21. 镜像仓库和镜像管理](TECHNICAL/06-advanced-features/image-registry/image-registry.md)** -
   镜像仓库与管理技术规范
-- **[22. 升级和迁移](TECHNICAL/22-upgrade-migration/upgrade-migration.md)** - 升
-  级和迁移技术规范
-- **[23. 开发和调试工具](TECHNICAL/23-dev-tools/dev-tools.md)** - 开发和调试工具
-  规范
-- **[24. 成本优化](TECHNICAL/24-cost-optimization/cost-optimization.md)** - 成本
-  优化技术规范（可选）
-- **[25. 社区生态和最佳实践](TECHNICAL/25-community-best-practices/community-best-practices.md)** -
+- **[22. 升级和迁移](TECHNICAL/05-devops/upgrade-migration/upgrade-migration.md)** -
+  升级和迁移技术规范
+- **[23. 开发和调试工具](TECHNICAL/05-devops/dev-tools/dev-tools.md)** - 开发和
+  调试工具规范
+- **[24. 成本优化](TECHNICAL/09-optimization-practices/cost-optimization/cost-optimization.md)** -
+  成本优化技术规范（可选）
+- **[25. 社区生态和最佳实践](TECHNICAL/09-optimization-practices/community-best-practices/community-best-practices.md)** -
   社区生态和最佳实践（可选）
-- **[26. 分析改进](TECHNICAL/26-analysis-improvement/analysis-improvement.md)** -
+- **[26. 分析改进](TECHNICAL/09-optimization-practices/analysis-improvement/analysis-improvement.md)** -
   文档体系分析与改进
-- **[27. 2025 趋势](TECHNICAL/27-2025-trends/2025-trends.md)** - 2025 技术趋势
-- **[28. 架构框架](TECHNICAL/28-architecture-framework/architecture-framework.md)** -
+- **[27. 2025 趋势](TECHNICAL/10-reference-trends/2025-trends/2025-trends.md)** -
+  2025 技术趋势
+- **[28. 架构框架](TECHNICAL/08-architecture-analysis/architecture-framework/architecture-framework.md)** -
   多维度架构体系与技术规范（技术架构、概念架构、数据架构、业务架构、软件架构、应
   用架构、场景架构）
 
@@ -349,63 +377,65 @@
 
 ### 按场景选择文档
 
-| 场景           | 推荐文档                                                                      | 说明                     |
-| -------------- | ----------------------------------------------------------------------------- | ------------------------ |
-| **快速入门**   | [01. 总览](COGNITIVE/01-overview/overview.md)                                 | 了解技术栈全貌           |
-| **学习路径**   | [00. 认知图谱](COGNITIVE/00-knowledge-map/knowledge-map.md)                   | 规划学习路线             |
-| **架构设计**   | [05. 全局架构设计](COGNITIVE/05-architecture-design/architecture-design.md)   | 技术组合和架构决策       |
-| **架构框架**   | [28. 架构框架](TECHNICAL/28-architecture-framework/architecture-framework.md) | 多维度架构体系与技术规范 |
-| **技术选型**   | [01. 总览 - 技术决策树](COGNITIVE/01-overview/overview.md#14-技术决策树)      | 根据场景选择技术         |
-| **决策参考**   | [10. 快速参考指南](COGNITIVE/10-decision-models/QUICK-REFERENCE.md)           | 设备访问和内核特性决策   |
-| **一致性检查** | [10. 一致性检查报告](COGNITIVE/10-decision-models/CONSISTENCY-REPORT.md)      | 与 Wikipedia 标准对齐    |
-| **安装部署**   | [10. 安装部署](TECHNICAL/10-installation/installation.md)                     | 快速上手各技术           |
-| **故障排查**   | [11. 故障排查](TECHNICAL/11-troubleshooting/troubleshooting.md)               | 解决常见问题             |
-| **性能优化**   | [04. 性能基准](COGNITIVE/04-benchmarks/benchmarks.md)                         | 了解性能基线             |
-| **安全合规**   | [13. 安全合规](TECHNICAL/09-security-compliance/security-compliance.md)       | 安全最佳实践             |
+| 场景           | 推荐文档                                                                                            | 说明                     |
+| -------------- | --------------------------------------------------------------------------------------------------- | ------------------------ |
+| **快速入门**   | [01. 总览](COGNITIVE/01-core-foundations/overview/overview.md)                                      | 了解技术栈全貌           |
+| **学习路径**   | [00. 认知图谱](COGNITIVE/01-core-foundations/knowledge-map/knowledge-map.md)                        | 规划学习路线             |
+| **架构设计**   | [05. 全局架构设计](COGNITIVE/02-architecture-design/architecture-design/architecture-design.md)     | 技术组合和架构决策       |
+| **架构框架**   | [28. 架构框架](TECHNICAL/08-architecture-analysis/architecture-framework/architecture-framework.md) | 多维度架构体系与技术规范 |
+| **技术选型**   | [01. 总览 - 技术决策树](COGNITIVE/01-core-foundations/overview/overview.md#14-技术决策树)           | 根据场景选择技术         |
+| **决策参考**   | [10. 快速参考指南](COGNITIVE/05-decision-analysis/decision-models/QUICK-REFERENCE.md)               | 设备访问和内核特性决策   |
+| **一致性检查** | [10. 一致性检查报告](COGNITIVE/05-decision-analysis/decision-models/CONSISTENCY-REPORT.md)          | 与 Wikipedia 标准对齐    |
+| **安装部署**   | [10. 安装部署](TECHNICAL/05-devops/installation/installation.md)                                    | 快速上手各技术           |
+| **故障排查**   | [11. 故障排查](TECHNICAL/05-devops/troubleshooting/troubleshooting.md)                              | 解决常见问题             |
+| **性能优化**   | [04. 性能基准](COGNITIVE/05-decision-analysis/benchmarks/benchmarks.md)                             | 了解性能基线             |
+| **安全合规**   | [13. 安全合规](TECHNICAL/07-security-compliance/security-compliance/security-compliance.md)         | 安全最佳实践             |
 
 ### 按角色选择文档
 
 #### 架构师
 
-- [28. 架构框架](TECHNICAL/28-architecture-framework/architecture-framework.md) -
+- [28. 架构框架](TECHNICAL/08-architecture-analysis/architecture-framework/architecture-framework.md) -
   多维度架构体系与技术规范
-- [05. 全局架构设计](COGNITIVE/05-architecture-design/architecture-design.md) -
+- [05. 全局架构设计](COGNITIVE/02-architecture-design/architecture-design/architecture-design.md) -
   技术组合和架构决策
-- [03. 架构与对象模型](COGNITIVE/03-architecture/architecture.md) - 系统架构设计
-- [10. 技术决策模型](COGNITIVE/10-decision-models/decision-models.md) - 技术选型
-  决策框架
-- [10. 快速参考指南](COGNITIVE/10-decision-models/QUICK-REFERENCE.md) - 设备访问
-  和内核特性决策
-- [10. 一致性检查报告](COGNITIVE/10-decision-models/CONSISTENCY-REPORT.md) - 与
-  Wikipedia 标准对齐
-- [09. 矩阵视角](COGNITIVE/09-matrix-perspective/README.md) - 矩阵力学模型
-- [08. 范畴论视角](COGNITIVE/08-category-theory/category-theory.md) - 范畴论分析
-  方法
+- [03. 架构与对象模型](COGNITIVE/02-architecture-design/architecture/architecture.md) -
+  系统架构设计
+- [10. 技术决策模型](COGNITIVE/05-decision-analysis/decision-models/decision-models.md) -
+  技术选型决策框架
+- [10. 快速参考指南](COGNITIVE/05-decision-analysis/decision-models/QUICK-REFERENCE.md) -
+  设备访问和内核特性决策
+- [10. 一致性检查报告](COGNITIVE/05-decision-analysis/decision-models/CONSISTENCY-REPORT.md) -
+  与 Wikipedia 标准对齐
+- [09. 矩阵视角](COGNITIVE/03-theoretical-perspectives/matrix-perspective/README.md) -
+  矩阵力学模型
+- [08. 范畴论视角](COGNITIVE/03-theoretical-perspectives/category-theory/category-theory.md) -
+  范畴论分析方法
 
 #### 开发者
 
-- [00. Docker](TECHNICAL/00-docker/docker.md)
-- [01. Kubernetes](TECHNICAL/01-kubernetes/kubernetes.md)
-- [02. K3s](TECHNICAL/02-k3s/k3s.md)
-- [03. WasmEdge](TECHNICAL/03-wasm-edge/wasmedge.md)
-- [18. Operator 和 CRD](TECHNICAL/18-operator-crd/operator-crd.md)
+- [00. Docker](TECHNICAL/01-core-foundations/docker/docker.md)
+- [01. Kubernetes](TECHNICAL/01-core-foundations/kubernetes/kubernetes.md)
+- [02. K3s](TECHNICAL/01-core-foundations/k3s/k3s.md)
+- [03. WasmEdge](TECHNICAL/02-runtime-policy/wasm-edge/wasmedge.md)
+- [18. Operator 和 CRD](TECHNICAL/05-devops/operator-crd/operator-crd.md)
 
 #### 运维工程师
 
-- [10. 安装部署](TECHNICAL/10-installation/installation.md)
-- [11. 故障排查](TECHNICAL/11-troubleshooting/troubleshooting.md)
-- [16. 监控与可观测性](TECHNICAL/16-observability/observability.md)
-- [32. eBPF/OTLP 扩展技术分析](TECHNICAL/32-ebpf-otlp-analysis/ebpf-otlp-analysis.md)
+- [10. 安装部署](TECHNICAL/05-devops/installation/installation.md)
+- [11. 故障排查](TECHNICAL/05-devops/troubleshooting/troubleshooting.md)
+- [16. 监控与可观测性](TECHNICAL/04-infrastructure-stack/observability/observability.md)
+- [32. eBPF/OTLP 扩展技术分析](TECHNICAL/08-architecture-analysis/ebpf-otlp-analysis/ebpf-otlp-analysis.md)
   ⭐ - 故障排查、部署架构、最佳实践
-- [17. GitOps 和持续交付](TECHNICAL/17-gitops-cicd/gitops-cicd.md)
-- [22. 升级和迁移](TECHNICAL/22-upgrade-migration/upgrade-migration.md)
+- [17. GitOps 和持续交付](TECHNICAL/05-devops/gitops-cicd/gitops-cicd.md)
+- [22. 升级和迁移](TECHNICAL/05-devops/upgrade-migration/upgrade-migration.md)
 
 #### DevOps 工程师
 
-- [17. GitOps 和持续交付](TECHNICAL/17-gitops-cicd/gitops-cicd.md)
-- [21. 镜像仓库和镜像管理](TECHNICAL/21-image-registry/image-registry.md)
-- [05. OCI 供应链](TECHNICAL/05-oci-supply-chain/oci-supply-chain.md)
-- [06. OPA 策略即代码](TECHNICAL/06-policy-opa/policy-opa.md)
+- [17. GitOps 和持续交付](TECHNICAL/05-devops/gitops-cicd/gitops-cicd.md)
+- [21. 镜像仓库和镜像管理](TECHNICAL/06-advanced-features/image-registry/image-registry.md)
+- [05. OCI 供应链](TECHNICAL/02-runtime-policy/oci-supply-chain/oci-supply-chain.md)
+- [06. OPA 策略即代码](TECHNICAL/02-runtime-policy/policy-opa/policy-opa.md)
 
 ## 📊 文档统计
 
@@ -453,12 +483,15 @@
 
 ### 核心文档
 
-- [认知图谱](COGNITIVE/00-knowledge-map/knowledge-map.md) - 知识地图
-- [总览](COGNITIVE/01-overview/overview.md) - 技术栈总览
+- [认知图谱](COGNITIVE/01-core-foundations/knowledge-map/knowledge-map.md) - 知
+  识地图
+- [总览](COGNITIVE/01-core-foundations/overview/overview.md) - 技术栈总览
 - [架构视图索引](ARCHITECTURE/INDEX.md) - 架构视图文档索引
 - [文档索引](INDEX.md) - 完整文档索引
-- [主题清单](TECHNICAL/14-theme-inventory/theme-inventory.md) - 所有主题
-- [缩写词汇表](TECHNICAL/13-acronyms-glossary/acronyms-glossary.md) - 缩写查询
+- [主题清单](TECHNICAL/10-reference-trends/theme-inventory/theme-inventory.md) -
+  所有主题
+- [缩写词汇表](TECHNICAL/10-reference-trends/acronyms-glossary/acronyms-glossary.md) -
+  缩写查询
 - [文档一致性分析](DOCUMENTATION-CONSISTENCY-ANALYSIS.md) - 文档一致性分析报告
 - [文档一致性总结](DOCUMENTATION-CONSISTENCY-SUMMARY.md) - 文档一致性修复完成总
   结
@@ -467,18 +500,19 @@
 
 ### 技术规格
 
-- [网络技术规格](TECHNICAL/12-network-stack/network-stack.md) -
+- [网络技术规格](TECHNICAL/04-infrastructure-stack/network-stack/network-stack.md) -
   CNI、Service、Ingress
-- [存储技术规格](TECHNICAL/15-storage-stack/storage-stack.md) - CSI、PV/PVC
-- [监控与可观测性](TECHNICAL/16-observability/observability.md) -
+- [存储技术规格](TECHNICAL/04-infrastructure-stack/storage-stack/storage-stack.md) -
+  CSI、PV/PVC
+- [监控与可观测性](TECHNICAL/04-infrastructure-stack/observability/observability.md) -
   Metrics、Logging、Tracing
 
 ### 实践指南
 
-- [安装部署](TECHNICAL/10-installation/installation.md) - 快速上手
-- [故障排查](TECHNICAL/11-troubleshooting/troubleshooting.md) - 问题解决
-- [全局架构设计](COGNITIVE/05-architecture-design/architecture-design.md) - 架构
-  决策
+- [安装部署](TECHNICAL/05-devops/installation/installation.md) - 快速上手
+- [故障排查](TECHNICAL/05-devops/troubleshooting/troubleshooting.md) - 问题解决
+- [全局架构设计](COGNITIVE/02-architecture-design/architecture-design/architecture-design.md) -
+  架构决策
 
 ## 📝 文档特色
 
@@ -512,39 +546,46 @@
 
 ### 新手路径（2-4 周）
 
-1. 理解容器概念 → [00. Docker](TECHNICAL/00-docker/docker.md)
-2. 掌握 Docker 基础 → [00. Docker](TECHNICAL/00-docker/docker.md)
-3. 理解编排需求 → [01. Kubernetes](TECHNICAL/01-kubernetes/kubernetes.md)
-4. 学习 Kubernetes → [01. Kubernetes](TECHNICAL/01-kubernetes/kubernetes.md)
-5. 实践应用 → [10. 安装部署](TECHNICAL/10-installation/installation.md)
+1. 理解容器概念 → [00. Docker](TECHNICAL/01-core-foundations/docker/docker.md)
+2. 掌握 Docker 基础 →
+   [00. Docker](TECHNICAL/01-core-foundations/docker/docker.md)
+3. 理解编排需求 →
+   [01. Kubernetes](TECHNICAL/01-core-foundations/kubernetes/kubernetes.md)
+4. 学习 Kubernetes →
+   [01. Kubernetes](TECHNICAL/01-core-foundations/kubernetes/kubernetes.md)
+5. 实践应用 → [10. 安装部署](TECHNICAL/05-devops/installation/installation.md)
 
 ### 进阶路径（1-2 月）
 
-1. 深入架构 → [02. K3s](TECHNICAL/02-k3s/k3s.md),
-   [03. WasmEdge](TECHNICAL/03-wasm-edge/wasmedge.md)
+1. 深入架构 → [02. K3s](TECHNICAL/01-core-foundations/k3s/k3s.md),
+   [03. WasmEdge](TECHNICAL/02-runtime-policy/wasm-edge/wasmedge.md)
 2. 边缘计算 →
-   [07. 边缘 Serverless](TECHNICAL/07-edge-serverless/edge-serverless.md)
+   [07. 边缘 Serverless](TECHNICAL/03-application-scenarios/edge-serverless/edge-serverless.md)
 3. Serverless →
-   [07. 边缘 Serverless](TECHNICAL/07-edge-serverless/edge-serverless.md)
-4. AI 推理 → [08. AI 推理](TECHNICAL/08-ai-inference/ai-inference.md)
+   [07. 边缘 Serverless](TECHNICAL/03-application-scenarios/edge-serverless/edge-serverless.md)
+4. AI 推理 →
+   [08. AI 推理](TECHNICAL/03-application-scenarios/ai-inference/ai-inference.md)
 
 ### 专家路径（3-6 月）
 
 1. 架构设计 →
-   [05. 全局架构设计](COGNITIVE/05-architecture-design/architecture-design.md)
+   [05. 全局架构设计](COGNITIVE/02-architecture-design/architecture-design/architecture-design.md)
 2. 架构框架 →
-   [28. 架构框架](TECHNICAL/28-architecture-framework/architecture-framework.md)
+   [28. 架构框架](TECHNICAL/08-architecture-analysis/architecture-framework/architecture-framework.md)
 3. 技术决策模型 →
-   [10. 技术决策模型](COGNITIVE/10-decision-models/decision-models.md)
+   [10. 技术决策模型](COGNITIVE/05-decision-analysis/decision-models/decision-models.md)
 4. 决策参考指南 →
-   [10. 快速参考指南](COGNITIVE/10-decision-models/QUICK-REFERENCE.md)
+   [10. 快速参考指南](COGNITIVE/05-decision-analysis/decision-models/QUICK-REFERENCE.md)
 5. 一致性检查 →
-   [10. 一致性检查报告](COGNITIVE/10-decision-models/CONSISTENCY-REPORT.md)
-6. 形式化理论 → [07. 形式化理论](COGNITIVE/07-formal-theory/formal-theory.md)
-7. 范畴论 → [08. 范畴论视角](COGNITIVE/08-category-theory/category-theory.md)
-8. 矩阵视角 → [09. 矩阵视角](COGNITIVE/09-matrix-perspective/README.md)
+   [10. 一致性检查报告](COGNITIVE/05-decision-analysis/decision-models/CONSISTENCY-REPORT.md)
+6. 形式化理论 →
+   [07. 形式化理论](COGNITIVE/03-theoretical-perspectives/formal-theory/formal-theory.md)
+7. 范畴论 →
+   [08. 范畴论视角](COGNITIVE/03-theoretical-perspectives/category-theory/category-theory.md)
+8. 矩阵视角 →
+   [09. 矩阵视角](COGNITIVE/03-theoretical-perspectives/matrix-perspective/README.md)
 9. 技术规格深度 →
-   [21-32. 技术规格堆栈](TECHNICAL/12-network-stack/network-stack.md)
+   [21-32. 技术规格堆栈](TECHNICAL/04-infrastructure-stack/network-stack/network-stack.md)
 
 ## 📚 参考资源
 

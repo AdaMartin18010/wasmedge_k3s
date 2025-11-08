@@ -4,7 +4,7 @@
 
 > **本文档已重构并全面增强**：本文档集已全面展开为多个子文档，并已完成深度增强，
 > 详见
-> [`docs/COGNITIVE/14-programming-perspective/`](docs/COGNITIVE/14-programming-perspective/)
+> [`docs/COGNITIVE/04-application-perspectives/programming-perspective/`](docs/COGNITIVE/04-application-perspectives/programming-perspective/)
 > ⭐
 >
 > **增强内容**：
@@ -33,27 +33,27 @@
 
 ### 核心文档
 
-1. **[代码省却分析](docs/COGNITIVE/14-programming-perspective/01-code-savings/code-savings.md)**
+1. **[代码省却分析](docs/COGNITIVE/04-application-perspectives/programming-perspective/01-code-savings/code-savings.md)**
    ⭐
 
    - 传统可观测性编程的"必须清单"
    - eBPF + OTLP 下的"省却清单"（7 个功能模块）
    - 总体代码行数省却统计（95.7% 省却率）
 
-2. **[架构组件省却分析](docs/COGNITIVE/14-programming-perspective/02-architecture-savings/architecture-savings.md)**
+2. **[架构组件省却分析](docs/COGNITIVE/04-application-perspectives/programming-perspective/02-architecture-savings/architecture-savings.md)**
    ⭐
 
    - 传统可观测性架构的组件堆砌
    - eBPF + OTLP 架构的组件省却（7 类组件）
    - 架构组件省却统计（69% 省却率）
 
-3. **[编程范式转变](docs/COGNITIVE/14-programming-perspective/03-paradigm-shift/paradigm-shift.md)**
+3. **[编程范式转变](docs/COGNITIVE/04-application-perspectives/programming-perspective/03-paradigm-shift/paradigm-shift.md)**
 
    - 代码结构重构：观测代码占比从 30% → 1%
    - 测试覆盖率提升：无需 mock 可观测性组件
    - 故障排查范式：从"猜"到"看"
 
-4. **[分布式调用链分析](docs/COGNITIVE/14-programming-perspective/08-distributed-tracing/distributed-tracing.md)**
+4. **[分布式调用链分析](docs/COGNITIVE/04-application-perspectives/programming-perspective/08-distributed-tracing/distributed-tracing.md)**
    ⭐
 
    - 分布式调用链语义网络全景
@@ -61,14 +61,14 @@
    - 语义完整性矩阵（What vs How）
    - 分布式调用链的"双螺旋"模型
 
-5. **[综合分析](docs/COGNITIVE/14-programming-perspective/09-comprehensive-analysis/comprehensive-analysis.md)**
+5. **[综合分析](docs/COGNITIVE/04-application-perspectives/programming-perspective/09-comprehensive-analysis/comprehensive-analysis.md)**
 
    - 省却价值转化链（价值链分析）
    - 多维度 ROI 矩阵（5 年 TCO 对比）
    - 风险-收益平衡矩阵
    - 最终结论：省却即创新
 
-6. **[混合架构设计](docs/COGNITIVE/14-programming-perspective/10-hybrid-architecture/hybrid-architecture.md)**
+6. **[混合架构设计](docs/COGNITIVE/04-application-perspectives/programming-perspective/10-hybrid-architecture/hybrid-architecture.md)**
    ⭐
 
    - 架构原则：eBPF 负责"广度"，SDK 负责"深度"
@@ -76,7 +76,7 @@
    - 技术选型决策树和风险缓解策略
    - 核心认知修正：eBPF+OTLP 是"增强"而非"替代"
 
-7. **[技术成熟度评估](docs/COGNITIVE/14-programming-perspective/11-technology-readiness/technology-readiness.md)**
+7. **[技术成熟度评估](docs/COGNITIVE/04-application-perspectives/programming-perspective/11-technology-readiness/technology-readiness.md)**
    ⭐
    - 技术就绪度（TRL）评级矩阵
    - 当前生态缺口：缺失的拼图
@@ -84,17 +84,17 @@
 
 ### 扩展文档
 
-- **[知识图谱分析](docs/COGNITIVE/14-programming-perspective/04-knowledge-graph/knowledge-graph.md)** -
+- **[知识图谱分析](docs/COGNITIVE/04-application-perspectives/programming-perspective/04-knowledge-graph/knowledge-graph.md)** -
   "省却"概念的三层语义网络
-- **[技术栈架构](docs/COGNITIVE/14-programming-perspective/05-technology-stack/technology-stack.md)** -
+- **[技术栈架构](docs/COGNITIVE/04-application-perspectives/programming-perspective/05-technology-stack/technology-stack.md)** -
   垂直穿透架构、水平扩展架构、控制闭环架构
-- **[矩阵对比分析](docs/COGNITIVE/14-programming-perspective/06-matrix-analysis/matrix-analysis.md)** -
+- **[矩阵对比分析](docs/COGNITIVE/04-application-perspectives/programming-perspective/06-matrix-analysis/matrix-analysis.md)** -
   多维矩阵对比
-- **[演进路径](docs/COGNITIVE/14-programming-perspective/07-evolution-path/evolution-path.md)** -
+- **[演进路径](docs/COGNITIVE/04-application-perspectives/programming-perspective/07-evolution-path/evolution-path.md)** -
   架构演进时间线和状态机
 
 **完整文档索引**：详见
-[`docs/COGNITIVE/14-programming-perspective/README.md`](docs/COGNITIVE/14-programming-perspective/README.md)
+[`docs/COGNITIVE/04-application-perspectives/programming-perspective/README.md`](docs/COGNITIVE/04-application-perspectives/programming-perspective/README.md)
 ⭐
 
 ---
@@ -155,17 +155,17 @@
 
 ### 推荐阅读顺序
 
-1. **[代码省却分析](docs/COGNITIVE/14-programming-perspective/01-code-savings/code-savings.md)** -
+1. **[代码省却分析](docs/COGNITIVE/04-application-perspectives/programming-perspective/01-code-savings/code-savings.md)** -
    了解功能需求的省却
-2. **[架构组件省却分析](docs/COGNITIVE/14-programming-perspective/02-architecture-savings/architecture-savings.md)** -
+2. **[架构组件省却分析](docs/COGNITIVE/04-application-perspectives/programming-perspective/02-architecture-savings/architecture-savings.md)** -
    了解架构组件的省却
-3. **[混合架构设计](docs/COGNITIVE/14-programming-perspective/10-hybrid-architecture/hybrid-architecture.md)** -
+3. **[混合架构设计](docs/COGNITIVE/04-application-perspectives/programming-perspective/10-hybrid-architecture/hybrid-architecture.md)** -
    理解 eBPF 与 SDK 的务实分工
-4. **[分布式调用链分析](docs/COGNITIVE/14-programming-perspective/08-distributed-tracing/distributed-tracing.md)** -
+4. **[分布式调用链分析](docs/COGNITIVE/04-application-perspectives/programming-perspective/08-distributed-tracing/distributed-tracing.md)** -
    理解 eBPF 与 OTLP 的共生关系
-5. **[技术成熟度评估](docs/COGNITIVE/14-programming-perspective/11-technology-readiness/technology-readiness.md)** -
+5. **[技术成熟度评估](docs/COGNITIVE/04-application-perspectives/programming-perspective/11-technology-readiness/technology-readiness.md)** -
    了解当前技术边界和未闭环问题
-6. **[综合分析](docs/COGNITIVE/14-programming-perspective/09-comprehensive-analysis/comprehensive-analysis.md)** -
+6. **[综合分析](docs/COGNITIVE/04-application-perspectives/programming-perspective/09-comprehensive-analysis/comprehensive-analysis.md)** -
    全面了解省却的价值量化
 
 ---

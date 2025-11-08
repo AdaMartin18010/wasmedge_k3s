@@ -61,13 +61,14 @@ Service Mesh 实现基于以下理论论证：
 
 ### 3.2 架构视角
 
-- **`../../01-views/service-mesh-view.md`** - Service Mesh 架构视角
-- **`../../01-views/network-service-mesh-view.md`** - Network Service Mesh 架构
-  视角
+- **`../../02-views/10-quick-views/service-mesh-view.md`** - Service Mesh 架构视
+  角
+- **`../../02-views/10-quick-views/network-service-mesh-view.md`** - Network
+  Service Mesh 架构视角
 
 ### 3.3 技术文档
 
-- **`../../../TECHNICAL/19-service-mesh/service-mesh.md`** - Service Mesh 技术文
+- **`../../../TECHNICAL/06-advanced-features/service-mesh/service-mesh.md`** - Service Mesh 技术文
   档
 
 ---

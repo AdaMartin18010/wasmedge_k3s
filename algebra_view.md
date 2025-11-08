@@ -178,7 +178,7 @@
 ## 3. 算子定义
 
 > 📋 **概念定义参考**：虚拟化、容器化、沙盒化的严格定义和技术层级分析请参考
-> [严格定义文档](docs/COGNITIVE/10-decision-models/06-technical-concepts/12-virtualization-paravirtualization-containerization-sandboxing-strict-definition.md)。
+> [严格定义文档](docs/COGNITIVE/05-decision-analysis/decision-models/06-technical-concepts/12-virtualization-paravirtualization-containerization-sandboxing-strict-definition.md)。
 
 ### 3.1 20 个一元算子（O₁–O₂₀）
 
@@ -904,6 +904,7 @@ print('metric:', phi(simplify(seq)))
 
 ### 16.3 代数结构相关文档
 
-- **[算子理论与代数结构](docs/COGNITIVE/11-algebraic-structure/)** - 代数结构的
-  详细文档
-- **[矩阵力学模型](docs/COGNITIVE/09-matrix-perspective/)** - 矩阵视角的详细文档
+- **[算子理论与代数结构](docs/COGNITIVE/03-theoretical-perspectives/algebraic-structure/)** -
+  代数结构的详细文档
+- **[矩阵力学模型](docs/COGNITIVE/03-theoretical-perspectives/matrix-perspective/)** -
+  矩阵视角的详细文档

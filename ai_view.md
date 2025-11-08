@@ -106,7 +106,7 @@ Docker 与 Kubernetes（K8s）、K3s 并非"同一类"东西，它们各自解�
 ## 2. Docker → K8s → K3s：容器技术栈演进
 
 > 📋 **概念定义参考**：虚拟化、容器化、沙盒化的严格定义和技术层级分析请参考
-> [严格定义文档](docs/COGNITIVE/10-decision-models/06-technical-concepts/12-virtualization-paravirtualization-containerization-sandboxing-strict-definition.md)。
+> [严格定义文档](docs/COGNITIVE/05-decision-analysis/decision-models/06-technical-concepts/12-virtualization-paravirtualization-containerization-sandboxing-strict-definition.md)。
 
 ### 2.1 理念层：从"货运集装箱"到"声明式宇宙"
 
@@ -983,8 +983,9 @@ wasm-to-oci push yourhub/policy.wasm yourhub/policy:v1
 
 ### 9.3 认知视角相关文档
 
-- **[认知图谱](docs/COGNITIVE/00-knowledge-map/knowledge-map.md)** - 知识地图和
-  学习路径
-- **[技术栈总览](docs/COGNITIVE/01-overview/overview.md)** - 技术栈总览和决策框
-  架
-- **[矩阵力学模型](docs/COGNITIVE/09-matrix-perspective/)** - 矩阵视角的详细文档
+- **[认知图谱](docs/COGNITIVE/01-core-foundations/knowledge-map/knowledge-map.md)** -
+  知识地图和学习路径
+- **[技术栈总览](docs/COGNITIVE/01-core-foundations/overview/overview.md)** - 技
+  术栈总览和决策框架
+- **[矩阵力学模型](docs/COGNITIVE/03-theoretical-perspectives/matrix-perspective/)** -
+  矩阵视角的详细文档

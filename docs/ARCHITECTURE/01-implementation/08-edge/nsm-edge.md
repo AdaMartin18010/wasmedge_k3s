@@ -129,7 +129,7 @@ spec:
 
 - [`README.md`](README.md) - 边缘计算实现细节总览
 - [`edge-cloud-sync.md`](edge-cloud-sync.md) - 边缘-云同步配置
-- [`../../01-views/network-service-mesh-view.md`](../../01-views/network-service-mesh-view.md) -
+- [`../../02-views/10-quick-views/network-service-mesh-view.md`](../../02-views/10-quick-views/network-service-mesh-view.md) -
   NSM 架构视角
 
 ---

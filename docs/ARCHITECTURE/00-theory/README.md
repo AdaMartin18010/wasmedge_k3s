@@ -209,18 +209,17 @@
 
 ### 6.2 架构视角
 
-- **`../01-views/`** - 架构视角文档（引用理论论证和实现细节）
-  - [`webassembly-view.md`](../01-views/webassembly-view.md) - WebAssembly 架构
-    视角
-  - [`ai-ml-architecture-view.md`](../01-views/ai-ml-architecture-view.md) ⭐ 新
-    增（2025-11-07） - AI/ML 架构视角
-  - [`edge-computing-view.md`](../01-views/edge-computing-view.md) ⭐ 新增
-    （2025-11-07） - 边缘计算架构视角
+- **`../02-views/10-quick-views/`** - 架构视角文档（引用理论论证和实现细节）
+  - [`webassembly-view.md`](../02-views/10-quick-views/webassembly-view.md) -
+    WebAssembly 架构视角
+  - [`ai-ml-architecture-view.md`](../02-views/10-quick-views/ai-ml-architecture-view.md)
+    ⭐ 新增（2025-11-07） - AI/ML 架构视角
+  - [`edge-computing-view.md`](../02-views/10-quick-views/edge-computing-view.md)
+    ⭐ 新增（2025-11-07） - 边缘计算架构视角
 
 ### 6.3 组合模式
 
-- **`../architecture-view/08-composition-patterns/`** - 组合模式文档（引用理论论
-  证）
+- **`../02-views/08-composition-patterns/`** - 组合模式文档（引用理论论证）
 
 ### 6.4 源文档
 
@@ -231,8 +230,10 @@
 
 ### 6.5 认知模型
 
-- **`../../COGNITIVE/07-formal-theory/`** - 形式化理论模型
-- **`../../COGNITIVE/08-category-theory/`** - 范畴论视角
+- **`../../COGNITIVE/03-theoretical-perspectives/formal-theory/`** - 形式化理论
+  模型
+- **`../../COGNITIVE/03-theoretical-perspectives/category-theory/`** - 范畴论视
+  角
 
 ---
 

@@ -789,7 +789,7 @@ eBPF 与 OTLP 的融合，标志着可观测性从 **"数据采集工具"** 演�
 
 ### eBPF 和 OTLP 相关文档
 
-- **[13. eBPF/OTLP 认知视角](docs/COGNITIVE/13-ebpf-otlp-perspective/ebpf-otlp-perspective.md)**
+- **[13. eBPF/OTLP 认知视角](docs/COGNITIVE/04-application-perspectives/ebpf-otlp-perspective/ebpf-otlp-perspective.md)**
   ⭐ - eBPF/OTLP 认知视角分析文档（理念层、知识结构、技术演进）
 - **[32. eBPF/OTLP 扩展技术分析](docs/TECHNICAL/32-ebpf-otlp-analysis/ebpf-otlp-analysis.md)**
   ⭐ - eBPF/OTLP 扩展技术分析文档（架构设计、性能分析、实践指南）

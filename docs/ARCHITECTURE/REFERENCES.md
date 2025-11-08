@@ -456,10 +456,10 @@
 
 **参考资源**：
 
-- [架构拆解与组合：5 步流程](./architecture-view/01-decomposition-composition/01-5-step-process.md)
-- [分层拆解：9 层架构模型](./architecture-view/01-decomposition-composition/02-layered-decomposition.md)
-- [组合模式](./architecture-view/01-decomposition-composition/03-composition-patterns.md)
-- [接口与契约](./architecture-view/01-decomposition-composition/04-interfaces-contracts.md)
+- [架构拆解与组合：5 步流程](./02-views/01-decomposition-composition/01-5-step-process.md)
+- [分层拆解：9 层架构模型](./02-views/01-decomposition-composition/02-layered-decomposition.md)
+- [组合模式](./02-views/01-decomposition-composition/03-composition-patterns.md)
+- [接口与契约](./02-views/01-decomposition-composition/04-interfaces-contracts.md)
 
 ---
 

@@ -111,7 +111,7 @@ Lⱼ 依赖于 Lᵢ  ⟺  Lⱼ 的实现需要 Lᵢ 提供的抽象
 4. 因此，L1 层提供了硬件资源的抽象。□
 
 **对应文档**：参见
-[`02-layers/hardware-firmware-layer.md`](02-layers/hardware-firmware-layer.md)
+[`../../03-models/hardware-firmware-layer.md`](../../03-models/hardware-firmware-layer.md)
 
 ### 3.2 L2 计算虚拟层
 
@@ -144,7 +144,7 @@ Lⱼ 依赖于 Lᵢ  ⟺  Lⱼ 的实现需要 Lᵢ 提供的抽象
 4. 因此，L3 层提供了分布式资源的调度抽象。□
 
 **对应文档**：参见
-[`01-views/dynamic-operations-view.md`](01-views/dynamic-operations-view.md)
+[`../../02-views/10-quick-views/dynamic-operations-view.md`](../../02-views/10-quick-views/dynamic-operations-view.md)
 
 ### 3.4 L4 分布式数据面
 
@@ -160,7 +160,7 @@ Lⱼ 依赖于 Lᵢ  ⟺  Lⱼ 的实现需要 Lᵢ 提供的抽象
 **对应文档**：
 
 - [`00-theory/02-induction-proof/psi4-network.md`](00-theory/02-induction-proof/psi4-network.md)
-- [`01-views/service-mesh-view.md`](01-views/service-mesh-view.md)
+- [`../../02-views/10-quick-views/service-mesh-view.md`](../../02-views/10-quick-views/service-mesh-view.md)
 
 ### 3.5 L5 控制面 & 治理
 
@@ -176,7 +176,7 @@ Lⱼ 依赖于 Lᵢ  ⟺  Lⱼ 的实现需要 Lᵢ 提供的抽象
 **对应文档**：
 
 - [`00-theory/01-axioms/A5-A8-opa.md`](00-theory/01-axioms/A5-A8-opa.md)
-- [`01-views/opa-policy-governance-view.md`](01-views/opa-policy-governance-view.md)
+- [`../../02-views/10-quick-views/opa-policy-governance-view.md`](../../02-views/10-quick-views/opa-policy-governance-view.md)
 
 ### 3.6 L6 可观测性 & 故障治理
 
@@ -190,7 +190,7 @@ Lⱼ 依赖于 Lᵢ  ⟺  Lⱼ 的实现需要 Lᵢ 提供的抽象
 4. 因此，L6 层提供了系统的可观测性和故障治理抽象。□
 
 **对应文档**：参见
-[`01-views/dynamic-operations-view.md`](01-views/dynamic-operations-view.md)
+[`../../02-views/10-quick-views/dynamic-operations-view.md`](../../02-views/10-quick-views/dynamic-operations-view.md)
 
 ### 3.7 L7 应用交付层
 
@@ -203,7 +203,8 @@ Lⱼ 依赖于 Lᵢ  ⟺  Lⱼ 的实现需要 Lᵢ 提供的抽象
 3. 应用交付层需要 L1-L6 层的抽象来支持应用运行
 4. 因此，L7 层提供了应用交付的完整抽象。□
 
-**对应文档**：参见 [`07-case-studies/`](07-case-studies/)
+**对应文档**：参见
+[`../../04-applications/case-studies/`](../../04-applications/case-studies/)
 
 ---
 
@@ -277,7 +278,7 @@ Lⱼ 依赖于 Lᵢ  ⟺  Lⱼ 的实现需要 Lᵢ 提供的抽象
 **对应文档**：
 
 - [`00-theory/02-induction-proof/psi1-virtualization.md`](00-theory/02-induction-proof/psi1-virtualization.md)
-- [`01-views/virtualization-view.md`](01-views/virtualization-view.md)
+- [`../../02-views/10-quick-views/virtualization-view.md`](../../02-views/10-quick-views/virtualization-view.md)
 
 ### 5.2 容器化在 7 层中的映射
 
@@ -294,7 +295,7 @@ Lⱼ 依赖于 Lᵢ  ⟺  Lⱼ 的实现需要 Lᵢ 提供的抽象
 **对应文档**：
 
 - [`00-theory/02-induction-proof/psi2-containerization.md`](00-theory/02-induction-proof/psi2-containerization.md)
-- [`01-views/containerization-view.md`](01-views/containerization-view.md)
+- [`../../02-views/10-quick-views/containerization-view.md`](../../02-views/10-quick-views/containerization-view.md)
 
 ### 5.3 沙盒化在 7 层中的映射
 
@@ -313,7 +314,7 @@ Lⱼ 依赖于 Lᵢ  ⟺  Lⱼ 的实现需要 Lᵢ 提供的抽象
 
 - [`00-theory/02-induction-proof/psi3-sandboxing.md`](00-theory/02-induction-proof/psi3-sandboxing.md)
 - [`00-theory/02-induction-proof/psi5-wasm.md`](00-theory/02-induction-proof/psi5-wasm.md)
-- [`01-views/sandboxing-view.md`](01-views/sandboxing-view.md)
+- [`../../02-views/10-quick-views/sandboxing-view.md`](../../02-views/10-quick-views/sandboxing-view.md)
 
 ---
 
@@ -404,7 +405,8 @@ Lⱼ 依赖于 Lᵢ  ⟺  Lⱼ 的实现需要 Lᵢ 提供的抽象
 - [`SYSTEM-VIEW-INTEGRATION.md`](SYSTEM-VIEW-INTEGRATION.md) - 系统视角与架构文
   档整合指南
 - [`00-theory/README.md`](00-theory/README.md) - 理论论证文档集总览
-- [`02-layers/layer-model.md`](02-layers/layer-model.md) - 分层架构模型
+- [`../../03-models/layer-model.md`](../../03-models/layer-model.md) - 分层架构
+  模型
 
 ---
 

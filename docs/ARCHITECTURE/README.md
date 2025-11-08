@@ -11,6 +11,7 @@
     - [3.2 其他文档目录](#32-其他文档目录)
   - [4. 阅读路径](#4-阅读路径)
 - [📌 推荐阅读顺序](#-推荐阅读顺序)
+- [📋 目录重组情况](#-目录重组情况)
 - [✅ 对齐完成情况](#-对齐完成情况)
 - [📋 文档重构情况](#-文档重构情况)
   - [`architecture_view.md` v2.0 重构完成](#architecture_viewmd-v20-重构完成)
@@ -38,94 +39,96 @@
 ```text
 ARCHITECTURE/
 ├── 00-theory/             # 理论论证（纯形式化）⭐
-│   └── 07-system-model/   # ⭐ 新增：7层4域模型形式化论证
-│       ├── README.md
-│       └── 7-layer-4-domain-formalization.md
+│   ├── 01-axioms/         # 公理层（A1-A8）
+│   ├── 02-induction-proof/ # 归纳证明（Ψ₁-Ψ₅）
+│   ├── 03-category-theory/ # 范畴论视角
+│   ├── 04-state-compression/ # 状态空间压缩
+│   ├── 05-lemmas-theorems/ # 引理和定理（L1-L4, T1）
+│   ├── 06-comparison-matrix/ # 对比矩阵
+│   └── 07-system-model/   # ⭐ 7层4域模型形式化论证
+│
 ├── 01-implementation/     # 实现细节（纯技术）📋
-│   └── 09-system-view/    # ⭐ 新增：7层4域模型实现细节
-│       ├── README.md
-│       ├── 7-layer-4-domain-implementation.md
-│       └── deployment-guide.md
-├── SYSTEM-VIEW-INTEGRATION.md ⭐ 新增：系统视角与架构文档整合指南
-├── 01-views/              # 多视角架构视图
-│   ├── decomposition-composition.md
-│   ├── virtualization-view.md
-│   ├── webassembly-view.md ⭐ 新增
-│   ├── ai-ml-architecture-view.md ⭐ 新增（2025-11-07）
-│   ├── edge-computing-view.md ⭐ 新增（2025-11-07）
-│   ├── containerization-view.md
-│   ├── sandboxing-view.md
-│   ├── service-mesh-view.md
-│   ├── network-service-mesh-view.md
-│   ├── opa-policy-governance-view.md
-│   ├── dynamic-operations-view.md
-│   └── system-view-architecture.md ⭐ 新增：7层4域模型架构视图
-├── REFERENCES.md          # 参考资源文档
-├── 02-layers/             # 分层架构模型
-│   ├── layer-model.md
+│   ├── 01-virtualization/ # 虚拟化实现
+│   ├── 02-containerization/ # 容器化实现
+│   ├── 03-sandboxing/     # 沙盒化实现
+│   ├── 04-service-mesh/   # 服务网格实现
+│   ├── 05-opa/            # OPA 实现
+│   ├── 06-wasm/           # WASM 实现
+│   ├── 07-ai-ml/          # AI/ML 实现
+│   ├── 08-edge/           # 边缘计算实现
+│   └── 09-system-view/    # ⭐ 7层4域模型实现细节
+│
+├── 02-views/              # 架构视图文档集（推荐使用）⭐
+│   ├── 01-decomposition-composition/ # 拆解与组合
+│   ├── 02-virtualization-containerization-sandboxing/ # 虚拟化-容器化-沙盒化
+│   ├── 03-service-mesh-nsm/ # 服务网格与 NSM
+│   ├── 04-opa-policy-governance/ # OPA 策略治理
+│   ├── 05-formal-proofs/  # 形式化证明
+│   ├── 06-concepts-properties-relations/ # 概念属性关系
+│   ├── 07-dynamic-operations/ # 动态运维
+│   ├── 08-composition-patterns/ # 组合模式
+│   ├── 09-multi-perspectives/ # 多视角分析（9个视角）
+│   ├── 10-november-2025-updates/ # 2025年11月更新
+│   └── 10-quick-views/    # 快捷视图（单文件视图）
+│
+├── 03-models/             # 架构模型（原 02-layers/）
+│   ├── layer-model.md     # 分层模型
 │   ├── hardware-firmware-layer.md
 │   ├── hypervisor-kernel-layer.md
 │   ├── runtime-container-layer.md
 │   ├── sandbox-layer.md
 │   ├── service-mesh-layer.md
 │   └── application-layer.md
-├── 03-composition/        # ⚠️ 已删除（内容合并到 architecture-view/08-composition-patterns/）
-│   └── README.md（重定向文档）
-├── 04-patterns/           # ⚠️ 已删除（内容合并到 architecture-view/08-composition-patterns/）
-│   └── README.md（重定向文档）
-├── 05-trends-2025/        # 2025年技术趋势（合并后）
-│   ├── november-2025-updates.md
-│   ├── november-2025-architecture-updates.md
+│
+├── 04-applications/       # 应用场景 ⭐ 重组
+│   ├── case-studies/      # 案例研究（原 04-applications/case-studies/）
+│   │   ├── banking-core-system.md
+│   │   ├── browser-wasm.md
+│   │   ├── cicd-high-density.md
+│   │   ├── desktop-sandboxing.md
+│   │   ├── e-commerce-platform.md
+│   │   ├── edge-retail-k8s.md
+│   │   ├── financial-system.md
+│   │   ├── multi-cloud-hybrid.md
+│   │   ├── payment-gateway.md
+│   │   └── system-view-cases-analysis.md
+│   └── extensions/         # 拓展应用（原 11-extensions/）
+│       └── README.md
+│
+├── 05-trends/             # 技术趋势（原 05-trends-2025/）⭐ 重组
+│   ├── trends-november-2025.md
+│   ├── technology-updates.md
+│   ├── best-practices.md
 │   ├── comprehensive-trends-november-2025.md
-│   ├── trends-november-2025.md ⭐ 新增（合并自 architecture-view/10-november-2025-updates/）
-│   ├── technology-updates.md ⭐ 新增（合并自 architecture-view/10-november-2025-updates/）
-│   ├── best-practices.md ⭐ 新增（合并自 architecture-view/10-november-2025-updates/）
-│   └── november-2025-special/ ⭐ 新增（合并自 09-november-2025-special/）
+│   ├── november-2025-architecture-updates.md
+│   ├── november-2025-updates.md
+│   └── november-2025-special/ # 2025年11月特别文档
 │       ├── 01-core-themes/
 │       ├── 02-formal-proofs/
 │       ├── 03-concepts-relations/
 │       ├── 04-empirical-analysis/
 │       └── 05-evolution-path/
-├── 06-comparison-matrix/  # ⚠️ 已删除（内容合并到 00-theory/06-comparison-matrix/）
-│   └── README.md（重定向文档）
-├── 07-case-studies/       # 案例研究
-│   ├── payment-gateway.md
-│   ├── e-commerce-platform.md
-│   ├── financial-system.md
-│   ├── multi-cloud-hybrid.md
-│   ├── system-view-cases-analysis.md ⭐ 新增：system_view 案例扩展分析
-│   ├── cicd-high-density.md ⭐ 新增：CI/CD 高密度场景
-│   ├── desktop-sandboxing.md ⭐ 新增：桌面应用沙盒化
-│   ├── browser-wasm.md ⭐ 新增：浏览器 WASM 架构
-│   ├── banking-core-system.md ⭐ 新增：银行核心系统
-│   └── edge-retail-k8s.md ⭐ 新增：边缘零售 K8s
-├── 08-concepts-relations/ # ⚠️ 已删除（内容合并到 architecture-view/06-concepts-properties-relations/）
-│   └── README.md（重定向文档）
-├── 09-november-2025-special/ # ⚠️ 已删除（内容合并到 05-trends-2025/november-2025-special/）
-│   └── README.md（重定向文档）
-├── 10-formal-proofs/      # ⚠️ 已删除（内容合并到 00-theory/）
-│   └── README.md（重定向文档）
-├── 11-extensions/         # 拓展应用
-│   └── README.md
-└── architecture-view/    # 架构视图文档集（推荐使用）
-    ├── 01-decomposition-composition/
-    ├── 02-virtualization-containerization-sandboxing/
-    ├── 03-service-mesh-nsm/
-    ├── 04-opa-policy-governance/
-    ├── 05-formal-proofs/
-    ├── 06-concepts-properties-relations/
-    ├── 07-dynamic-operations/
-    ├── 08-composition-patterns/
-    ├── 09-multi-perspectives/           # 多视角分析
-    │   ├── README.md                     # 多视角文档集说明
-    │   ├── 01-functional-perspective.md  # 功能视角
-    │   ├── 02-structural-perspective.md  # 结构视角
-    │   ├── 03-behavioral-perspective.md  # 行为视角
-    │   ├── 04-data-perspective.md        # 数据视角
-    │   ├── 05-security-perspective.md    # 安全视角
-    │   ├── 06-observability-perspective.md # 可观测视角
-    │   └── 07-ebpf-otlp-perspective.md  # eBPF/OTLP 视角 ⭐ 新增
-    └── 10-november-2025-updates/        # ⚠️ 已删除（内容合并到 05-trends-2025/）
+│
+├── 06-domain-semantics/        # ⭐ 领域语义架构分析模型
+│   ├── README.md               # 领域语义架构分析模型总览
+│   ├── INDEX.md                # 领域语义架构分析模型索引
+│   ├── 01-core-themes/         # 核心主题
+│   ├── 02-semantic-model-perspective/ # 语义模型视角
+│   ├── 03-layered-disintegration-law/ # 分层消解律
+│   ├── 04-domain-case-studies/ # 领域案例分析
+│   ├── 04-domain-cases/       # 领域案例
+│   └── 05-wikipedia-references/ # Wikipedia 概念定义
+│
+├── SYSTEM-VIEW-INTEGRATION.md ⭐ 系统视角与架构文档整合指南
+├── REFERENCES.md          # 参考资源文档
+└── ACADEMIC-REFERENCES.md # 学术资源文档
+
+⚠️ 已删除的目录（保留 README 重定向）：
+├── 03-composition/        # 内容已合并到 02-views/08-composition-patterns/
+├── 04-patterns/           # 内容已合并到 02-views/08-composition-patterns/
+├── 06-formalization/      # 内容已合并到 00-theory/
+├── 08-concepts-relations/ # 内容已合并到 02-views/06-concepts-properties-relations/
+└── 10-formal-proofs/      # 内容已合并到 00-theory/
 ```
 
 ### 3. 相关文档
@@ -154,18 +157,25 @@ ARCHITECTURE/
     增
   - **理论论证**：[00-theory/07-system-model/](00-theory/07-system-model/) ⭐ 新
     增
+- **领域语义架构分析模型**：`06-domain-semantics/` ⭐ 新增 - 从领域语义视角分析
+  分布式系统架构演进，重点阐述分层消解律
+  - **位置**：[06-domain-semantics/](06-domain-semantics/)
+  - **总览**：[06-domain-semantics/README.md](06-domain-semantics/README.md)
+  - **索引**：[06-domain-semantics/INDEX.md](06-domain-semantics/INDEX.md)
+  - **核心内容**：分层消解律、语义模型视角、跨领域验证（Spark、Argo、Temporal、
+    Ceph、Flink、Kafka 等）
   - **案例扩
-    展**：[07-case-studies/system-view-cases-analysis.md](07-case-studies/system-view-cases-analysis.md)
+    展**：[04-applications/case-studies/system-view-cases-analysis.md](04-applications/case-studies/system-view-cases-analysis.md)
     ⭐ 新增
 - **技术文档**：`docs/TECHNICAL/` - 技术实现细节
-  - **[32. eBPF/OTLP 扩展技术分析](../TECHNICAL/32-ebpf-otlp-analysis/ebpf-otlp-analysis.md)**
+  - **[32. eBPF/OTLP 扩展技术分析](../TECHNICAL/08-architecture-analysis/ebpf-otlp-analysis/ebpf-otlp-analysis.md)**
     ⭐ - eBPF/OTLP 扩展技术分析文档
-  - **[31. eBPF 技术堆栈](../TECHNICAL/31-ebpf-stack/ebpf-stack.md)** - eBPF 技
-    术堆栈完整技术参考文档
-  - **[29. 隔离栈](../TECHNICAL/29-isolation-stack/isolation-stack.md)** - 问题
-    定位模型、横纵耦合定位方法
+  - **[31. eBPF 技术堆栈](../TECHNICAL/04-infrastructure-stack/ebpf-stack/ebpf-stack.md)** -
+    eBPF 技术堆栈完整技术参考文档
+  - **[29. 隔离栈](../TECHNICAL/08-architecture-analysis/isolation-stack/isolation-stack.md)** -
+    问题定位模型、横纵耦合定位方法
 - **认知模型**：`docs/COGNITIVE/` - 认知框架和理论模型
-  - **[13. eBPF/OTLP 认知视角](../COGNITIVE/13-ebpf-otlp-perspective/ebpf-otlp-perspective.md)**
+  - **[13. eBPF/OTLP 认知视角](../COGNITIVE/04-application-perspectives/ebpf-otlp-perspective/ebpf-otlp-perspective.md)**
     ⭐ - eBPF/OTLP 认知视角分析文档
 - **多视角文档**：`../../ebpf_otlp_view.md` ⭐ - eBPF/OTLP 视角完整文档（1438 行
   ）
@@ -175,40 +185,74 @@ ARCHITECTURE/
 
 ### 4. 阅读路径
 
-1. **入门路径**（推荐）：从 `architecture-view/` 开始，理解完整的架构视图
-2. **多视角路径**：从 `01-views/` 开始，理解多视角架构
-3. **深入路径**：进入 `02-layers/` 和
-   `architecture-view/08-composition-patterns/`，掌握分层与组合
-4. **实践路径**：查看 `07-case-studies/`，学习实际案例
+1. **入门路径**（推荐）：从 `02-views/` 开始，理解完整的架构视图
+2. **多视角路径**：从 `02-views/10-quick-views/` 开始，理解多视角架构
+3. **深入路径**：进入 `03-models/` 和 `02-views/08-composition-patterns/`，掌握
+   分层与组合
+4. **实践路径**：查看 `04-applications/case-studies/`，学习实际案例
 5. **理论路径**：研读 `00-theory/`，理解形式化理论
-6. **概念路径**：查看 `architecture-view/06-concepts-properties-relations/`，理
-   解概念属性关系
-7. **拓展路径**：查看 `05-trends-2025/`，了解最新技术动态
+6. **概念路径**：查看 `02-views/06-concepts-properties-relations/`，理解概念属性
+   关系
+7. **领域语义路径**：从 `06-domain-semantics/` 开始，理解分层消解律和领域语义架
+   构分析模型 ⭐ 新增
+8. **拓展路径**：查看 `05-trends/`，了解最新技术动态
 
 ---
 
-**更新时间**：2025-11-07 **版本**：v1.1 **参考**：基于 `architecture_view.md` 和
+**更新时间**：2025-11-08 **版本**：v1.2 **参考**：基于 `architecture_view.md` 和
 `system_view.md` 内容扩展
 
 ## 📌 推荐阅读顺序
 
-**强烈推荐优先阅读 `architecture-view/` 目录下的文档**，这是最完整、最系统的架构
-视图文档集，包含：
+**强烈推荐优先阅读 `02-views/` 目录下的文档**，这是最完整、最系统的架构视图文档
+集，包含：
 
 - ✅ 10 个主要目录
-- ✅ 54 个详细文档（新增 eBPF/OTLP 架构视角）
+- ✅ 54+ 个详细文档（新增 eBPF/OTLP 架构视角）
 - ✅ 统一的格式和结构
 - ✅ 完整的索引和总结
 - ✅ 最新的技术动态（2025 年 11 月）
 - ✅ 多视角分析（9 个视角，新增 AI/ML、边缘计算视角）⭐
+- ✅ 快捷视图（12 个单文件视图）⭐
 
-**其他目录**：`01-views/` 提供快捷入口，`02-layers/` 提供分层模型
-，`07-case-studies/` 提供案例研究。
+**其他目录**：
+
+- `03-models/` 提供分层模型
+- `04-applications/case-studies/` 提供案例研究
+- `04-applications/extensions/` 提供拓展应用
+- `05-trends/` 提供技术趋势
 
 ⚠️ **注
-意**：`03-composition/`、`04-patterns/`、`08-concepts-relations/`、`06-formalization/`、`10-formal-proofs/`、`09-november-2025-special/`
-目录已删除，内容已合并到其他目录。请参考各目录的 README 重定向文档。可与
-`architecture-view/` 配合阅读。
+意**：`03-composition/`、`04-patterns/`、`08-concepts-relations/`、`06-formalization/`、`10-formal-proofs/`
+目录已删除，内容已合并到其他目录。请参考各目录的 README 重定向文档。
+
+## 📋 目录重组情况
+
+**重组日期**：2025-11-07 **重组状态**：✅ 已完成
+
+ARCHITECTURE 目录已完成重组，从 14 个目录优化为 5 个核心目录，减少 64%。详情请参
+考：
+
+- **[重组完成总结](REORGANIZATION-SUMMARY.md)** ⭐ - 完整的重组完成总结
+- **[重组完成报告](REORGANIZATION-COMPLETE.md)** - 重组完成报告
+- **[引用更新完成报告](REFERENCE-UPDATE-COMPLETE.md)** ⭐ - 引用更新完成报告
+  （390+ 个引用）
+
+**重组统计**：
+
+- ✅ **目录数量**：从 14 个减少到 5 个核心目录（减少 64%）
+- ✅ **引用更新**：390+ 个引用已全部更新
+- ✅ **涉及文件**：100+ 个文件已更新
+- ✅ **文档一致性**：所有文档与新目录结构一致
+
+**重组详情**：
+
+- `01-views/` → `02-views/10-quick-views/`（单文件视图移动到快捷视图）
+- `architecture-view/` → `02-views/`（重命名为 02-views）
+- `02-layers/` → `03-models/`（重命名为 03-models）
+- `07-case-studies/` → `04-applications/case-studies/`（移动到应用场景）
+- `11-extensions/` → `04-applications/extensions/`（移动到应用场景）
+- `05-trends-2025/` → `05-trends/`（重命名为 05-trends）
 
 ## ✅ 对齐完成情况
 
