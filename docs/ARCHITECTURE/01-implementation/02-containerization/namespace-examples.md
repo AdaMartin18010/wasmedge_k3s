@@ -3,29 +3,29 @@
 ## 📑 目录
 
 - [📑 目录](#-目录)
-- [1. 概述](#1-概述)
+- [1 概述](#1-概述)
   - [1.1 理论基础](#11-理论基础)
-- [2. Linux namespace 类型](#2-linux-namespace-类型)
-- [3. namespace 创建示例](#3-namespace-创建示例)
+- [2 Linux namespace 类型](#2-linux-namespace-类型)
+- [3 namespace 创建示例](#3-namespace-创建示例)
   - [3.1 使用 unshare 创建 namespace](#31-使用-unshare-创建-namespace)
   - [3.2 使用 clone 系统调用创建 namespace](#32-使用-clone-系统调用创建-namespace)
   - [3.3 查看 namespace](#33-查看-namespace)
-- [4. Docker namespace 示例](#4-docker-namespace-示例)
+- [4 Docker namespace 示例](#4-docker-namespace-示例)
   - [4.1 Docker 容器 namespace 配置](#41-docker-容器-namespace-配置)
   - [4.2 Docker 容器 namespace 检查](#42-docker-容器-namespace-检查)
   - [4.3 Docker Compose namespace 配置](#43-docker-compose-namespace-配置)
-- [5. Kubernetes namespace 示例](#5-kubernetes-namespace-示例)
+- [5 Kubernetes namespace 示例](#5-kubernetes-namespace-示例)
   - [5.1 Kubernetes Pod namespace 配置](#51-kubernetes-pod-namespace-配置)
   - [5.2 Kubernetes SecurityContext namespace 配置](#52-kubernetes-securitycontext-namespace-配置)
   - [5.3 Kubernetes NetworkPolicy namespace 配置](#53-kubernetes-networkpolicy-namespace-配置)
-- [6. 相关文档](#6-相关文档)
+- [6 相关文档](#6-相关文档)
   - [6.1 理论论证](#61-理论论证)
   - [6.2 架构视角](#62-架构视角)
   - [6.3 技术文档](#63-技术文档)
 
 ---
 
-## 1. 概述
+## 1 概述
 
 本文档提供 **Linux namespace 的实际代码示例**，展示如何通过 namespace 实现进程隔
 离。
@@ -41,7 +41,7 @@ namespace 配置基于以下理论论证：
 
 ---
 
-## 2. Linux namespace 类型
+## 2 Linux namespace 类型
 
 Linux 提供了以下 namespace 类型：
 
@@ -57,7 +57,7 @@ Linux 提供了以下 namespace 类型：
 
 ---
 
-## 3. namespace 创建示例
+## 3 namespace 创建示例
 
 ### 3.1 使用 unshare 创建 namespace
 
@@ -116,7 +116,7 @@ ls -la /proc/$$/ns/
 
 ---
 
-## 4. Docker namespace 示例
+## 4 Docker namespace 示例
 
 ### 4.1 Docker 容器 namespace 配置
 
@@ -155,7 +155,7 @@ services:
 
 ---
 
-## 5. Kubernetes namespace 示例
+## 5 Kubernetes namespace 示例
 
 ### 5.1 Kubernetes Pod namespace 配置
 
@@ -225,7 +225,7 @@ spec:
 
 ---
 
-## 6. 相关文档
+## 6 相关文档
 
 ### 6.1 理论论证
 
@@ -239,8 +239,8 @@ spec:
 
 ### 6.3 技术文档
 
-- **`../../../TECHNICAL/08-architecture-analysis/isolation-stack/isolation-stack.md`** - 隔离技术栈文
-  档
+- **`../../../TECHNICAL/08-architecture-analysis/isolation-stack/isolation-stack.md`** -
+  隔离技术栈文档
 
 ---
 

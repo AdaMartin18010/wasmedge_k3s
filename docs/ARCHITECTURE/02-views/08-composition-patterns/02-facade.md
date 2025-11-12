@@ -3,38 +3,38 @@
 ## 📑 目录
 
 - [📑 目录](#-目录)
-- [1. 概述](#1-概述)
+- [1 概述](#1-概述)
   - [1.1 核心思想](#11-核心思想)
-- [2. Facade 模式定义](#2-facade-模式定义)
+- [2 Facade 模式定义](#2-facade-模式定义)
   - [2.1 Facade 模式概念](#21-facade-模式概念)
   - [2.2 Facade 模式结构](#22-facade-模式结构)
   - [2.3 Facade 模式特点](#23-facade-模式特点)
-- [3. 架构中的应用](#3-架构中的应用)
+- [3 架构中的应用](#3-架构中的应用)
   - [3.1 Service Mesh 作为 Facade](#31-service-mesh-作为-facade)
   - [3.2 Kubernetes API 作为 Facade](#32-kubernetes-api-作为-facade)
   - [3.3 OPA Control Plane 作为 Facade](#33-opa-control-plane-作为-facade)
-- [4. Facade 模式实现](#4-facade-模式实现)
+- [4 Facade 模式实现](#4-facade-模式实现)
   - [4.1 Service Mesh Facade 实现](#41-service-mesh-facade-实现)
   - [4.2 Kubernetes API Facade 实现](#42-kubernetes-api-facade-实现)
   - [4.3 OPA Control Plane Facade 实现](#43-opa-control-plane-facade-实现)
-- [5. Facade 模式优势](#5-facade-模式优势)
+- [5 Facade 模式优势](#5-facade-模式优势)
   - [5.1 简化客户端](#51-简化客户端)
   - [5.2 提高可维护性](#52-提高可维护性)
   - [5.3 提高可复用性](#53-提高可复用性)
-- [6. Facade 模式与其他模式](#6-facade-模式与其他模式)
+- [6 Facade 模式与其他模式](#6-facade-模式与其他模式)
   - [6.1 Facade vs Adapter](#61-facade-vs-adapter)
   - [6.2 Facade vs Bridge](#62-facade-vs-bridge)
-- [7. 形式化定义](#7-形式化定义)
+- [7 形式化定义](#7-形式化定义)
   - [7.1 Facade 模式定义](#71-facade-模式定义)
   - [7.2 Facade 操作定义](#72-facade-操作定义)
-- [8. 相关文档](#8-相关文档)
+- [8 相关文档](#8-相关文档)
   - [8.1 组合模式文档](#81-组合模式文档)
   - [8.2 参考资源](#82-参考资源)
-- [9. 总结](#9-总结)
+- [9 总结](#9-总结)
 
 ---
 
-## 1. 概述
+## 1 概述
 
 本文档详细阐述**Facade 模式**在架构设计中的应用，通过统一接口简化复杂系统。
 
@@ -42,7 +42,7 @@
 
 > **通过 Facade 模式提供统一接口，隐藏底层系统的复杂性，简化客户端的使用**
 
-## 2. Facade 模式定义
+## 2 Facade 模式定义
 
 ### 2.1 Facade 模式概念
 
@@ -67,7 +67,7 @@ Facade
 - **隐藏复杂性**：隐藏底层系统的复杂性
 - **简化使用**：简化客户端的使用
 
-## 3. 架构中的应用
+## 3 架构中的应用
 
 ### 3.1 Service Mesh 作为 Facade
 
@@ -130,7 +130,7 @@ OPA Control Plane (Facade)
 - **隐藏复杂性**：隐藏策略评估、分发的复杂性
 - **简化使用**：客户端只需调用决策 API
 
-## 4. Facade 模式实现
+## 4 Facade 模式实现
 
 ### 4.1 Service Mesh Facade 实现
 
@@ -204,7 +204,7 @@ curl -X POST http://opa:8181/v1/data/mesh/authz/allow \
   }'
 ```
 
-## 5. Facade 模式优势
+## 5 Facade 模式优势
 
 ### 5.1 简化客户端
 
@@ -230,7 +230,7 @@ curl -X POST http://opa:8181/v1/data/mesh/authz/allow \
 - **组件复用**：底层组件可以复用
 - **模式复用**：Facade 模式可以复用
 
-## 6. Facade 模式与其他模式
+## 6 Facade 模式与其他模式
 
 ### 6.1 Facade vs Adapter
 
@@ -250,7 +250,7 @@ curl -X POST http://opa:8181/v1/data/mesh/authz/allow \
 | **Facade** | 简化接口       | 复杂子系统 |
 | **Bridge** | 分离抽象和实现 | 多维度变化 |
 
-## 7. 形式化定义
+## 7 形式化定义
 
 ### 7.1 Facade 模式定义
 
@@ -273,7 +273,7 @@ Facade 操作 O = ⟨name, inputs, outputs, subsystems⟩
 - subsystems: 涉及的子系统集合
 ```
 
-## 8. 相关文档
+## 8 相关文档
 
 ### 8.1 组合模式文档
 
@@ -288,7 +288,7 @@ Facade 操作 O = ⟨name, inputs, outputs, subsystems⟩
 - **[ACADEMIC-REFERENCES.md](../../ACADEMIC-REFERENCES.md)** - Wikipedia、大学课
   程、学术论文等学术资源
 
-## 9. 总结
+## 9 总结
 
 通过**Facade 模式**，我们实现了：
 

@@ -3,38 +3,38 @@
 ## 📑 目录
 
 - [📑 目录](#-目录)
-- [1. 概述](#1-概述)
+- [1 概述](#1-概述)
   - [1.1 核心原则](#11-核心原则)
-- [2. GitOps 工作流](#2-gitops-工作流)
+- [2 GitOps 工作流](#2-gitops-工作流)
   - [2.1 基本流程](#21-基本流程)
   - [2.2 关键组件](#22-关键组件)
-- [3. ArgoCD](#3-argocd)
+- [3 ArgoCD](#3-argocd)
   - [3.1 概述](#31-概述)
   - [3.2 核心概念](#32-核心概念)
     - [3.2.1 Application](#321-application)
     - [3.2.2 ApplicationSet](#322-applicationset)
-- [4. Flux](#4-flux)
+- [4 Flux](#4-flux)
   - [4.1 概述](#41-概述)
   - [4.2 核心概念](#42-核心概念)
     - [4.2.1 GitRepository](#421-gitrepository)
     - [4.2.2 Kustomization](#422-kustomization)
-- [5. GitOps 最佳实践](#5-gitops-最佳实践)
+- [5 GitOps 最佳实践](#5-gitops-最佳实践)
   - [5.1 目录结构](#51-目录结构)
   - [5.2 环境分离](#52-环境分离)
   - [5.3 安全实践](#53-安全实践)
-- [6. GitOps 与 CI/CD 集成](#6-gitops-与-cicd-集成)
+- [6 GitOps 与 CI/CD 集成](#6-gitops-与-cicd-集成)
   - [6.1 传统 CI/CD](#61-传统-cicd)
   - [6.2 GitOps CI/CD](#62-gitops-cicd)
   - [6.3 优势](#63-优势)
-- [7. 形式化定义](#7-形式化定义)
+- [7 形式化定义](#7-形式化定义)
   - [7.1 GitOps 状态](#71-gitops-状态)
   - [7.2 同步函数](#72-同步函数)
   - [7.3 一致性检查](#73-一致性检查)
-- [8. 总结](#8-总结)
+- [8 总结](#8-总结)
 
 ---
 
-## 1. 概述
+## 1 概述
 
 **GitOps** 是一种使用 Git 作为**单一可信源（Single Source of Truth）**的持续交付
 范式，通过声明式配置实现自动化部署和运维。
@@ -46,7 +46,7 @@
 3. **自动化同步**：自动检测 Git 变更并同步到集群
 4. **可观测性**：所有变更可追溯、可审计
 
-## 2. GitOps 工作流
+## 2 GitOps 工作流
 
 ### 2.1 基本流程
 
@@ -64,7 +64,7 @@
 | **GitOps 工具** | 同步 Git 到集群    | ArgoCD, Flux            |
 | **Kubernetes**  | 运行应用           | K8s, K3s                |
 
-## 3. ArgoCD
+## 3 ArgoCD
 
 ### 3.1 概述
 
@@ -126,7 +126,7 @@ spec:
         namespace: default
 ```
 
-## 4. Flux
+## 4 Flux
 
 ### 4.1 概述
 
@@ -170,7 +170,7 @@ spec:
   validation: client
 ```
 
-## 5. GitOps 最佳实践
+## 5 GitOps 最佳实践
 
 ### 5.1 目录结构
 
@@ -212,7 +212,7 @@ my-app/
 - **OPA/Gatekeeper**：策略即代码
 - **审计日志**：记录所有变更
 
-## 6. GitOps 与 CI/CD 集成
+## 6 GitOps 与 CI/CD 集成
 
 ### 6.1 传统 CI/CD
 
@@ -233,7 +233,7 @@ my-app/
 - **可回滚性**：快速回滚到之前的版本
 - **多环境一致性**：使用相同的配置和流程
 
-## 7. 形式化定义
+## 7 形式化定义
 
 ### 7.1 GitOps 状态
 
@@ -260,7 +260,7 @@ GitOps 状态 S = ⟨repo, branch, path, commit⟩
 其中 Consistent(S, k8s) 检查集群状态是否与 Git 一致
 ```
 
-## 8. 总结
+## 8 总结
 
 GitOps 通过**Git 作为真相源**和**声明式配置**实现了：
 

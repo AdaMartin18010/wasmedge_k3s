@@ -1380,8 +1380,8 @@ cat /proc/config.gz | gunzip | grep CONFIG_BPF
 ### 27.15.3 外部参考
 
 - [ai_view.md](../../ai_view.md) - 个人认知层面的技术梳理
-- [38. 矩阵视角](../../COGNITIVE/03-theoretical-perspectives/matrix-perspective/README.md) - 云原生技术栈
-  的矩阵力学分析
+- [38. 矩阵视角](../../COGNITIVE/03-theoretical-perspectives/matrix-perspective/README.md) -
+  云原生技术栈的矩阵力学分析
 - [Kubernetes 1.30 发布说明](https://kubernetes.io/blog/2024/12/kubernetes-1-30-release-announcement/)
 - [K3s 1.30 发布说明](https://github.com/k3s-io/k3s/releases/tag/v1.30.4%2Bk3s1)
 - [WasmEdge 0.14 发布说明](https://github.com/WasmEdge/WasmEdge/releases/tag/0.14.0)

@@ -1,5 +1,30 @@
 # 认知模型文档
 
+## 📑 目录
+
+- [📑 目录](#-目录)
+- [📖 文档简介](#-文档简介)
+- [1 文档定位](#1-文档定位)
+- [2 文档列表](#2-文档列表)
+  - [核心认知框架](#核心认知框架)
+  - [架构与设计](#架构与设计)
+  - [理论与分析](#理论与分析)
+  - [隔离栈理论实现](#隔离栈理论实现)
+  - [性能与分析](#性能与分析)
+- [3 快速开始](#3-快速开始)
+  - [3.1 新手推荐路径](#31-新手推荐路径)
+  - [3.2 进阶学习路径](#32-进阶学习路径)
+  - [3.3 高级理论路径](#33-高级理论路径)
+- [4 使用场景](#4-使用场景)
+  - [4.1 适用场景](#41-适用场景)
+  - [4.2 与其他文档的关系](#42-与其他文档的关系)
+- [5 相关文档](#5-相关文档)
+  - [5.1 文档一致性](#51-文档一致性)
+  - [5.2 其他文档目录](#52-其他文档目录)
+- [6 文档统计](#6-文档统计)
+
+---
+
 ## 📖 文档简介
 
 本目录包含**认知模型文档**，专注于构建技术栈的**认知框架**和**推理模型**，帮助理
@@ -95,6 +120,7 @@
 | 矩阵视角         | `03-theoretical-perspectives/matrix-perspective/`      | 矩阵力学模型                                                                                                                                                             |
 | 代数结构视角     | `03-theoretical-perspectives/algebraic-structure/`     | 算子理论与代数结构                                                                                                                                                       |
 | 结构视角         | `03-theoretical-perspectives/structural-perspective/`  | 计算结构、控制结构、信息结构（结构主义视角）                                                                                                                             |
+| 调度视角         | `03-theoretical-perspectives/scheduling-perspective/`  | 调度决策、分层分析、动态特性（调度优化、性能分析）⭐                                                                                                                     |
 | 技术社会视角     | `../../tech_view.md`                                   | 基础设施史、风险社会学、发展经济学、人类学视角 ⭐                                                                                                                        |
 | eBPF/OTLP 视角   | `04-application-perspectives/ebpf-otlp-perspective/`   | eBPF/OTLP 认知视角分析（2025-11-07）⭐                                                                                                                                   |
 | 程序设计视角     | `04-application-perspectives/programming-perspective/` | 从编程视角看 eBPF 与 OTLP，代码省却 95.7%、组件省却 69%、编程范式转变（2025-11-07）⭐                                                                                    |
@@ -176,18 +202,21 @@
    解矩阵力学模型
 3. **[结构视角](03-theoretical-perspectives/structural-perspective/README.md)**
    ⭐ - 从结构主义视角理解计算结构、控制结构、信息结构
-4. **[技术社会视角](../../tech_view.md)** ⭐ - 从基础设施史、风险社会学、发展经
+4. **[调度视角](03-theoretical-perspectives/scheduling-perspective/README.md)**
+   ⭐
+   - 从调度理论视角理解调度决策、分层分析、动态特性
+5. **[技术社会视角](../../tech_view.md)** ⭐ - 从基础设施史、风险社会学、发展经
    济学、人类学视角理解技术的社会意义
-5. **[API 规范视角](04-application-perspectives/api-perspective/)** ⭐ - 从 API
+6. **[API 规范视角](04-application-perspectives/api-perspective/)** ⭐ - 从 API
    规范视角理解容器化、沙盒化、WASM 化的 API 设计
-6. **[问题解决方案](02-architecture-design/problem-solution-matrix/problem-solution-matrix.md)** -
+7. **[问题解决方案](02-architecture-design/problem-solution-matrix/problem-solution-matrix.md)** -
    掌握问题分类框架
-7. **[隔离模型](05-decision-analysis/decision-models/01-theory-models/02-isolation-models.md)** -
+8. **[隔离模型](05-decision-analysis/decision-models/01-theory-models/02-isolation-models.md)** -
    理解隔离层次理论模型
-8. **[隔离栈技术实现](../TECHNICAL/08-architecture-analysis/isolation-stack/isolation-stack.md)** -
+9. **[隔离栈技术实现](../TECHNICAL/08-architecture-analysis/isolation-stack/isolation-stack.md)** -
    掌握四层隔离栈技术实现和问题定位模型
-9. **[服务网格架构案例](05-decision-analysis/decision-models/03-cases/04-service-mesh.md)** -
-   理解服务间通信治理和零信任安全场景的技术选择论证
+10. **[服务网格架构案例](05-decision-analysis/decision-models/03-cases/04-service-mesh.md)** -
+    理解服务间通信治理和零信任安全场景的技术选择论证
 
 **为什么推荐这个高级理论路径？**
 

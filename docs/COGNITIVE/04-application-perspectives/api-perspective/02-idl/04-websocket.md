@@ -480,8 +480,8 @@ Message_Latency(WebSocket) < Message_Latency(HTTP_Polling)
 
 - **[API 事件驱动架构](../09-architecture/01-api-event-driven.md)** - WebSocket
   事件
-- **[API 性能优化](../07-performance/01-api-performance.md)** - WebSocket 性能
-  优化
+- **[API 性能优化](../07-performance/01-api-performance.md)** - WebSocket 性能优
+  化
 - **[API 微服务架构](../09-architecture/02-api-microservices.md)** - WebSocket
   服务通信
 - **[最佳实践](../00-foundation/05-best-practices.md)** - WebSocket 最佳实践

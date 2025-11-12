@@ -1,5 +1,37 @@
 # 文档一致性检查报告
 
+## 📑 目录
+
+- [📑 目录](#-目录)
+- [📋 检查概览](#-检查概览)
+- [✅ 一致性检查结果](#-一致性检查结果)
+  - [1. 技术定义与 Wikipedia 对齐](#1-技术定义与-wikipedia-对齐)
+    - [1.1 虚拟化（Full Virtualization）](#11-虚拟化full-virtualization)
+    - [1.2 半虚拟化（Paravirtualization）](#12-半虚拟化paravirtualization)
+    - [1.3 容器化（Containerization）](#13-容器化containerization)
+    - [1.4 沙盒化（Sandboxing）](#14-沙盒化sandboxing)
+  - [2. GPU 相关术语一致性](#2-gpu-相关术语一致性)
+    - [2.1 GPU 直通（GPU Passthrough）](#21-gpu-直通gpu-passthrough)
+    - [2.2 GPU 虚拟化（vGPU/SR-IOV）](#22-gpu-虚拟化vgpusr-iov)
+  - [3. 内核特性术语一致性](#3-内核特性术语一致性)
+    - [3.1 epoll](#31-epoll)
+    - [3.2 io_uring](#32-io_uring)
+    - [3.3 eBPF](#33-ebpf)
+  - [4. 执行流文档术语一致性](#4-执行流文档术语一致性)
+    - [4.1 技术术语](#41-技术术语)
+  - [5. 决策规则一致性](#5-决策规则一致性)
+    - [5.1 设备访问决策规则](#51-设备访问决策规则)
+    - [5.2 内核特性决策规则](#52-内核特性决策规则)
+  - [6. 文档日期更新](#6-文档日期更新)
+- [📊 一致性统计](#-一致性统计)
+  - [术语一致性](#术语一致性)
+  - [性能数据一致性](#性能数据一致性)
+  - [决策规则一致性](#决策规则一致性)
+- [✅ 总结](#-总结)
+- [📚 Wikipedia 参考链接](#-wikipedia-参考链接)
+
+---
+
 **检查日期**：2025-11-03
 
 ## 📋 检查概览
@@ -197,12 +229,17 @@
 **已更新文档**：
 
 - ✅ `docs/README.md` → 2025-11-03
-- ✅ `docs/COGNITIVE/05-decision-analysis/decision-models/QUICK-REFERENCE.md` → 2025-11-03
-- ✅ `docs/COGNITIVE/05-decision-analysis/decision-models/decision-models.md` → 2025-11-03
-- ✅ `docs/COGNITIVE/05-decision-analysis/decision-models/03-cases/README.md` → 2025-11-03
-- ✅ `docs/COGNITIVE/05-decision-analysis/decision-models/README.md` → 2025-11-03
-- ✅ `docs/COGNITIVE/05-decision-analysis/decision-models/02-scenario-models/README.md` →
+- ✅ `docs/COGNITIVE/05-decision-analysis/decision-models/QUICK-REFERENCE.md` →
   2025-11-03
+- ✅ `docs/COGNITIVE/05-decision-analysis/decision-models/decision-models.md` →
+  2025-11-03
+- ✅ `docs/COGNITIVE/05-decision-analysis/decision-models/03-cases/README.md` →
+  2025-11-03
+- ✅ `docs/COGNITIVE/05-decision-analysis/decision-models/README.md` →
+  2025-11-03
+- ✅
+  `docs/COGNITIVE/05-decision-analysis/decision-models/02-scenario-models/README.md`
+  → 2025-11-03
 - ✅
   `docs/COGNITIVE/05-decision-analysis/decision-models/02-scenario-models/01-decision-framework.md`
   → 2025-11-03

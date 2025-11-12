@@ -1,5 +1,17 @@
 # COGNITIVE 目录路径映射表
 
+## 📑 目录
+
+- [📑 目录](#-目录)
+- [📋 路径映射表](#-路径映射表)
+  - [核心基础（Core Foundations）](#核心基础core-foundations)
+  - [架构与设计（Architecture \& Design）](#架构与设计architecture--design)
+  - [理论视角（Theoretical Perspectives）](#理论视角theoretical-perspectives)
+  - [应用视角（Application Perspectives）](#应用视角application-perspectives)
+  - [决策与分析（Decision \& Analysis）](#决策与分析decision--analysis)
+
+---
+
 **创建日期**：2025-11-08 **版本**：v1.0
 
 > ⚠️ **向后兼容性说明**：本文档提供旧路径到新路径的映射，帮助查找已迁移的文档。

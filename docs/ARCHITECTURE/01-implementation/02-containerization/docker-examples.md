@@ -3,28 +3,28 @@
 ## 📑 目录
 
 - [📑 目录](#-目录)
-- [1. 概述](#1-概述)
+- [1 概述](#1-概述)
   - [1.1 理论基础](#11-理论基础)
-- [2. Dockerfile 示例](#2-dockerfile-示例)
+- [2 Dockerfile 示例](#2-dockerfile-示例)
   - [2.1 基础 Dockerfile](#21-基础-dockerfile)
   - [2.2 多阶段构建示例](#22-多阶段构建示例)
   - [2.3 优化后的 Dockerfile](#23-优化后的-dockerfile)
-- [3. docker-compose 示例](#3-docker-compose-示例)
+- [3 docker-compose 示例](#3-docker-compose-示例)
   - [3.1 基础 docker-compose.yml](#31-基础-docker-composeyml)
   - [3.2 微服务 docker-compose.yml](#32-微服务-docker-composeyml)
-- [4. 容器运行示例](#4-容器运行示例)
+- [4 容器运行示例](#4-容器运行示例)
   - [4.1 基础容器运行](#41-基础容器运行)
   - [4.2 带环境变量的容器运行](#42-带环境变量的容器运行)
   - [4.3 带卷挂载的容器运行](#43-带卷挂载的容器运行)
   - [4.4 带网络配置的容器运行](#44-带网络配置的容器运行)
-- [5. 相关文档](#5-相关文档)
+- [5 相关文档](#5-相关文档)
   - [5.1 理论论证](#51-理论论证)
   - [5.2 架构视角](#52-架构视角)
   - [5.3 技术文档](#53-技术文档)
 
 ---
 
-## 1. 概述
+## 1 概述
 
 本文档提供 **Docker 容器化的实际代码示例和配置示例**，包含可直接运行的
 Dockerfile、docker-compose 配置和容器运行命令。
@@ -41,7 +41,7 @@ Docker 容器化实现基于以下理论论证：
 
 ---
 
-## 2. Dockerfile 示例
+## 2 Dockerfile 示例
 
 ### 2.1 基础 Dockerfile
 
@@ -140,7 +140,7 @@ CMD ["node", "dist/index.js"]
 
 ---
 
-## 3. docker-compose 示例
+## 3 docker-compose 示例
 
 ### 3.1 基础 docker-compose.yml
 
@@ -207,7 +207,7 @@ volumes:
 
 ---
 
-## 4. 容器运行示例
+## 4 容器运行示例
 
 ### 4.1 基础容器运行
 
@@ -265,7 +265,7 @@ docker run -d \
 
 ---
 
-## 5. 相关文档
+## 5 相关文档
 
 ### 5.1 理论论证
 
@@ -281,7 +281,8 @@ docker run -d \
 
 ### 5.3 技术文档
 
-- **`../../../TECHNICAL/01-core-foundations/docker/docker.md`** - Docker 技术文档
+- **`../../../TECHNICAL/01-core-foundations/docker/docker.md`** - Docker 技术文
+  档
 
 ---
 

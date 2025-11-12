@@ -11,10 +11,10 @@
 - [问题描述](#问题描述)
 - [优化方案对比](#优化方案对比)
 - [API 配置示例](#api-配置示例)
-  - [1. SR-IOV 网络直通配置](#1-sr-iov-网络直通配置)
-  - [2. DPDK 加速配置](#2-dpdk-加速配置)
-  - [3. Multiqueue 配置](#3-multiqueue-配置)
-  - [4. HostNetwork 配置](#4-hostnetwork-配置)
+  - [1 SR-IOV 网络直通配置](#1-sr-iov-网络直通配置)
+  - [2 DPDK 加速配置](#2-dpdk-加速配置)
+  - [3 Multiqueue 配置](#3-multiqueue-配置)
+  - [4 HostNetwork 配置](#4-hostnetwork-配置)
 - [相关文档](#相关文档)
 
 ---

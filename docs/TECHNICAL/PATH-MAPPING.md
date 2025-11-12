@@ -1,5 +1,25 @@
 # TECHNICAL 目录路径映射表
 
+## 📑 目录
+
+- [📑 目录](#-目录)
+- [📋 路径映射表](#-路径映射表)
+  - [核心基础（Core Foundations）](#核心基础core-foundations)
+  - [运行时与策略（Runtime \& Policy）](#运行时与策略runtime--policy)
+  - [应用场景（Application Scenarios）](#应用场景application-scenarios)
+  - [基础设施栈（Infrastructure Stack）](#基础设施栈infrastructure-stack)
+  - [开发与运维（DevOps）](#开发与运维devops)
+  - [高级功能（Advanced Features）](#高级功能advanced-features)
+  - [安全与合规（Security \& Compliance）](#安全与合规security--compliance)
+  - [架构与分析（Architecture \& Analysis）](#架构与分析architecture--analysis)
+  - [优化与实践（Optimization \& Practices）](#优化与实践optimization--practices)
+  - [参考与趋势（Reference \& Trends）](#参考与趋势reference--trends)
+- [🔍 快速查找](#-快速查找)
+  - [按主题查找](#按主题查找)
+- [📝 使用说明](#-使用说明)
+
+---
+
 **创建日期**：2025-11-08 **版本**：v1.0
 
 > ⚠️ **向后兼容性说明**：本文档提供旧路径到新路径的映射，帮助查找已迁移的文档。

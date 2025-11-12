@@ -11,11 +11,11 @@
 - [场景描述](#场景描述)
 - [API 调用流程](#api-调用流程)
 - [关键技术分析](#关键技术分析)
-  - [1. 身份认证和授权](#1-身份认证和授权)
-  - [2. 创建 VirtualMachine CRD](#2-创建-virtualmachine-crd)
-  - [3. 创建 VMI 和 virt-launcher Pod](#3-创建-vmi-和-virt-launcher-pod)
-  - [4. 调度和启动](#4-调度和启动)
-  - [5. 自动扩缩容](#5-自动扩缩容)
+  - [1 身份认证和授权](#1-身份认证和授权)
+  - [2 创建 VirtualMachine CRD](#2-创建-virtualmachine-crd)
+  - [3 创建 VMI 和 virt-launcher Pod](#3-创建-vmi-和-virt-launcher-pod)
+  - [4 调度和启动](#4-调度和启动)
+  - [5 自动扩缩容](#5-自动扩缩容)
 - [相关文档](#相关文档)
 
 ---

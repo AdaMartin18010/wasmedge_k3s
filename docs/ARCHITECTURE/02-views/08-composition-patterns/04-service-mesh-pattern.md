@@ -3,37 +3,37 @@
 ## 📑 目录
 
 - [📑 目录](#-目录)
-- [1. 概述](#1-概述)
+- [1 概述](#1-概述)
   - [1.1 核心思想](#11-核心思想)
-- [2. Service Mesh 模式定义](#2-service-mesh-模式定义)
+- [2 Service Mesh 模式定义](#2-service-mesh-模式定义)
   - [2.1 Service Mesh 模式概念](#21-service-mesh-模式概念)
   - [2.2 Service Mesh 模式结构](#22-service-mesh-模式结构)
   - [2.3 Service Mesh 模式特点](#23-service-mesh-模式特点)
-- [3. 架构中的应用](#3-架构中的应用)
+- [3 架构中的应用](#3-架构中的应用)
   - [3.1 Istio Service Mesh](#31-istio-service-mesh)
   - [3.2 Linkerd Service Mesh](#32-linkerd-service-mesh)
-- [4. Service Mesh 模式实现](#4-service-mesh-模式实现)
+- [4 Service Mesh 模式实现](#4-service-mesh-模式实现)
   - [4.1 Istio 配置示例](#41-istio-配置示例)
   - [4.2 Linkerd 配置示例](#42-linkerd-配置示例)
-- [5. Service Mesh 模式优势](#5-service-mesh-模式优势)
+- [5 Service Mesh 模式优势](#5-service-mesh-模式优势)
   - [5.1 透明治理](#51-透明治理)
   - [5.2 统一控制](#52-统一控制)
   - [5.3 可观测性](#53-可观测性)
-- [6. Service Mesh 模式与其他模式](#6-service-mesh-模式与其他模式)
+- [6 Service Mesh 模式与其他模式](#6-service-mesh-模式与其他模式)
   - [6.1 Service Mesh vs API Gateway](#61-service-mesh-vs-api-gateway)
   - [6.2 Service Mesh vs Sidecar](#62-service-mesh-vs-sidecar)
-- [7. 形式化定义](#7-形式化定义)
+- [7 形式化定义](#7-形式化定义)
   - [7.1 Service Mesh 模式定义](#71-service-mesh-模式定义)
   - [7.2 Sidecar 定义](#72-sidecar-定义)
   - [7.3 Control Plane 定义](#73-control-plane-定义)
-- [8. 相关文档](#8-相关文档)
+- [8 相关文档](#8-相关文档)
   - [8.1 组合模式文档](#81-组合模式文档)
   - [8.2 参考资源](#82-参考资源)
-- [9. 总结](#9-总结)
+- [9 总结](#9-总结)
 
 ---
 
-## 1. 概述
+## 1 概述
 
 本文档详细阐述**Service Mesh 模式**在架构设计中的应用，通过侧车和代理实现流量治
 理。
@@ -42,7 +42,7 @@
 
 > **通过 Service Mesh 模式将流量治理从应用中分离出来，通过侧车代理实现统一治理**
 
-## 2. Service Mesh 模式定义
+## 2 Service Mesh 模式定义
 
 ### 2.1 Service Mesh 模式概念
 
@@ -69,7 +69,7 @@ Application Pod
 - **统一控制**：通过控制平面统一控制
 - **可观测性**：自动注入遥测数据
 
-## 3. 架构中的应用
+## 3 架构中的应用
 
 ### 3.1 Istio Service Mesh
 
@@ -133,7 +133,7 @@ Application Pod
 - **易于使用**：配置更简单
 - **可观测性**：自动注入遥测数据
 
-## 4. Service Mesh 模式实现
+## 4 Service Mesh 模式实现
 
 ### 4.1 Istio 配置示例
 
@@ -246,7 +246,7 @@ spec:
       weight: 10
 ```
 
-## 5. Service Mesh 模式优势
+## 5 Service Mesh 模式优势
 
 ### 5.1 透明治理
 
@@ -272,7 +272,7 @@ spec:
 - **统一遥测**：统一的遥测标准
 - **可视化**：通过 Grafana 可视化
 
-## 6. Service Mesh 模式与其他模式
+## 6 Service Mesh 模式与其他模式
 
 ### 6.1 Service Mesh vs API Gateway
 
@@ -292,7 +292,7 @@ spec:
 | **Service Mesh** | 完整的流量治理平台 | 微服务架构     |
 | **Sidecar**      | 单个侧车代理       | 特定场景的代理 |
 
-## 7. 形式化定义
+## 7 形式化定义
 
 ### 7.1 Service Mesh 模式定义
 
@@ -327,7 +327,7 @@ Control Plane C = ⟨config, discovery, security, observability⟩
 - observability: 可观测性管理
 ```
 
-## 8. 相关文档
+## 8 相关文档
 
 ### 8.1 组合模式文档
 
@@ -345,7 +345,7 @@ Control Plane C = ⟨config, discovery, security, observability⟩
 - **[ACADEMIC-REFERENCES.md](../../ACADEMIC-REFERENCES.md)** - Wikipedia、大学课
   程、学术论文等学术资源
 
-## 9. 总结
+## 9 总结
 
 通过**Service Mesh 模式**，我们实现了：
 

@@ -3,33 +3,33 @@
 ## 📑 目录
 
 - [📑 目录](#-目录)
-- [1. 概述](#1-概述)
+- [1 概述](#1-概述)
   - [1.1 理论基础](#11-理论基础)
-- [2. KVM 安装与检查](#2-kvm-安装与检查)
+- [2 KVM 安装与检查](#2-kvm-安装与检查)
   - [2.1 KVM 安装](#21-kvm-安装)
   - [2.2 检查 CPU 虚拟化支持](#22-检查-cpu-虚拟化支持)
   - [2.3 用户权限配置](#23-用户权限配置)
-- [3. libvirt 配置](#3-libvirt-配置)
+- [3 libvirt 配置](#3-libvirt-配置)
   - [3.1 libvirt 默认网络配置](#31-libvirt-默认网络配置)
   - [3.2 桥接网络配置](#32-桥接网络配置)
   - [3.3 存储池配置](#33-存储池配置)
-- [4. KVM 虚拟机创建](#4-kvm-虚拟机创建)
+- [4 KVM 虚拟机创建](#4-kvm-虚拟机创建)
   - [4.1 使用 virt-install 创建虚拟机](#41-使用-virt-install-创建虚拟机)
   - [4.2 使用 virt-manager 创建虚拟机](#42-使用-virt-manager-创建虚拟机)
   - [4.3 虚拟机 XML 配置示例](#43-虚拟机-xml-配置示例)
-- [5. KVM 性能优化](#5-kvm-性能优化)
+- [5 KVM 性能优化](#5-kvm-性能优化)
   - [5.1 CPU 性能优化](#51-cpu-性能优化)
   - [5.2 内存性能优化](#52-内存性能优化)
   - [5.3 网络性能优化](#53-网络性能优化)
   - [5.4 存储性能优化](#54-存储性能优化)
-- [6. 相关文档](#6-相关文档)
+- [6 相关文档](#6-相关文档)
   - [6.1 理论论证](#61-理论论证)
   - [6.2 架构视角](#62-架构视角)
   - [6.3 技术文档](#63-技术文档)
 
 ---
 
-## 1. 概述
+## 1 概述
 
 本文档提供 **KVM（Kernel-based Virtual Machine）的实际配置示例**，展示如何配置和
 使用 KVM 虚拟化。
@@ -46,7 +46,7 @@ KVM 配置基于以下理论论证：
 
 ---
 
-## 2. KVM 安装与检查
+## 2 KVM 安装与检查
 
 ### 2.1 KVM 安装
 
@@ -91,7 +91,7 @@ sudo usermod -aG kvm $USER
 
 ---
 
-## 3. libvirt 配置
+## 3 libvirt 配置
 
 ### 3.1 libvirt 默认网络配置
 
@@ -144,7 +144,7 @@ virsh pool-autostart default
 
 ---
 
-## 4. KVM 虚拟机创建
+## 4 KVM 虚拟机创建
 
 ### 4.1 使用 virt-install 创建虚拟机
 
@@ -216,7 +216,7 @@ virsh define /path/to/vm.xml
 
 ---
 
-## 5. KVM 性能优化
+## 5 KVM 性能优化
 
 ### 5.1 CPU 性能优化
 
@@ -270,7 +270,7 @@ virsh define /path/to/vm.xml
 
 ---
 
-## 6. 相关文档
+## 6 相关文档
 
 ### 6.1 理论论证
 
@@ -284,8 +284,8 @@ virsh define /path/to/vm.xml
 
 ### 6.3 技术文档
 
-- **`../../../TECHNICAL/08-architecture-analysis/isolation-stack/isolation-stack.md`** - 隔离技术栈文
-  档
+- **`../../../TECHNICAL/08-architecture-analysis/isolation-stack/isolation-stack.md`** -
+  隔离技术栈文档
 
 ---
 

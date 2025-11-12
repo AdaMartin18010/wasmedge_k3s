@@ -452,11 +452,10 @@ Latency(Reused_Connection) < Latency(New_Connection)
 
 ## 8 相关文档
 
-- **[API 标准化规范](../03-governance/03-api-standardization.md)** - gRPC
-  标准
+- **[API 标准化规范](../03-governance/03-api-standardization.md)** - gRPC 标准
 - **[API 性能优化](../07-performance/01-api-performance.md)** - gRPC 性能优化
-- **[API 微服务架构](../09-architecture/02-api-microservices.md)** - gRPC 服务
-  通信
+- **[API 微服务架构](../09-architecture/02-api-microservices.md)** - gRPC 服务通
+  信
 - **[最佳实践](../00-foundation/05-best-practices.md)** - gRPC 最佳实践
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述
 

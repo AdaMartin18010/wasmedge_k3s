@@ -12,10 +12,10 @@
 - [安全加固配置](#安全加固配置)
   - [多租户安全隔离配置](#多租户安全隔离配置)
 - [关键技术分析](#关键技术分析)
-  - [1. Namespace 隔离](#1-namespace-隔离)
-  - [2. RBAC 权限控制](#2-rbac-权限控制)
-  - [3. NetworkPolicy 网络隔离](#3-networkpolicy-网络隔离)
-  - [4. ResourceQuota 资源限制](#4-resourcequota-资源限制)
+  - [1 Namespace 隔离](#1-namespace-隔离)
+  - [2 RBAC 权限控制](#2-rbac-权限控制)
+  - [3 NetworkPolicy 网络隔离](#3-networkpolicy-网络隔离)
+  - [4 ResourceQuota 资源限制](#4-resourcequota-资源限制)
 - [相关文档](#相关文档)
 
 ---

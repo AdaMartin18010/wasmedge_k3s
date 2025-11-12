@@ -597,8 +597,8 @@ Valid(CRD_Schema, Resource) ⟺ Resource 符合 Schema
 
 ## 8 相关文档
 
-- **[容器化 API 规范](../01-runtime/01-containerization.md)** -
-  Kubernetes CRD API 详解
+- **[容器化 API 规范](../01-runtime/01-containerization.md)** - Kubernetes CRD
+  API 详解
 - **[2025 技术生态](../00-foundation/06-2025-ecosystem.md)** - Kubernetes 1.30+
   生态更新
 - **[最佳实践](../00-foundation/05-best-practices.md)** - API 规范最佳实践

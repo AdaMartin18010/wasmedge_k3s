@@ -3,30 +3,30 @@
 ## 📑 目录
 
 - [📑 目录](#-目录)
-- [1. 概述](#1-概述)
+- [1 概述](#1-概述)
   - [1.1 理论基础](#11-理论基础)
-- [2. Firecracker 安装](#2-firecracker-安装)
+- [2 Firecracker 安装](#2-firecracker-安装)
   - [2.1 下载 Firecracker](#21-下载-firecracker)
   - [2.2 验证安装](#22-验证安装)
-- [3. MicroVM 配置](#3-microvm-配置)
+- [3 MicroVM 配置](#3-microvm-配置)
   - [3.1 创建根文件系统](#31-创建根文件系统)
   - [3.2 启动 MicroVM](#32-启动-microvm)
-- [4. Jailer 配置](#4-jailer-配置)
+- [4 Jailer 配置](#4-jailer-配置)
   - [4.1 使用 Jailer 启动 MicroVM](#41-使用-jailer-启动-microvm)
   - [4.2 Jailer 配置文件](#42-jailer-配置文件)
-- [5. Kubernetes 集成](#5-kubernetes-集成)
+- [5 Kubernetes 集成](#5-kubernetes-集成)
   - [5.1 安装 containerd-firecracker-runtime](#51-安装-containerd-firecracker-runtime)
   - [5.2 containerd 配置](#52-containerd-配置)
   - [5.3 Firecracker RuntimeClass](#53-firecracker-runtimeclass)
   - [5.4 Pod 使用 Firecracker](#54-pod-使用-firecracker)
-- [6. 相关文档](#6-相关文档)
+- [6 相关文档](#6-相关文档)
   - [6.1 理论论证](#61-理论论证)
   - [6.2 架构视角](#62-架构视角)
   - [6.3 技术文档](#63-技术文档)
 
 ---
 
-## 1. 概述
+## 1 概述
 
 本文档提供 **Firecracker 的实际配置示例**，展示如何配置和使用 Firecracker 创建轻
 量级 MicroVM。
@@ -43,7 +43,7 @@ Firecracker 配置基于以下理论论证：
 
 ---
 
-## 2. Firecracker 安装
+## 2 Firecracker 安装
 
 ### 2.1 下载 Firecracker
 
@@ -69,7 +69,7 @@ jailer --version
 
 ---
 
-## 3. MicroVM 配置
+## 3 MicroVM 配置
 
 ### 3.1 创建根文件系统
 
@@ -131,7 +131,7 @@ curl --unix-socket /tmp/firecracker.sock -i \
 
 ---
 
-## 4. Jailer 配置
+## 4 Jailer 配置
 
 ### 4.1 使用 Jailer 启动 MicroVM
 
@@ -178,7 +178,7 @@ sudo jailer \
 
 ---
 
-## 5. Kubernetes 集成
+## 5 Kubernetes 集成
 
 ### 5.1 安装 containerd-firecracker-runtime
 
@@ -235,7 +235,7 @@ spec:
 
 ---
 
-## 6. 相关文档
+## 6 相关文档
 
 ### 6.1 理论论证
 
@@ -250,8 +250,8 @@ spec:
 
 ### 6.3 技术文档
 
-- **`../../../TECHNICAL/08-architecture-analysis/isolation-stack/isolation-stack.md`** - 隔离技术栈文
-  档
+- **`../../../TECHNICAL/08-architecture-analysis/isolation-stack/isolation-stack.md`** -
+  隔离技术栈文档
 
 ---
 

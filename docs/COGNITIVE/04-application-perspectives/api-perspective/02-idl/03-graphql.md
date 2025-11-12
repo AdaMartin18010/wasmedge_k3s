@@ -437,12 +437,11 @@ Latency(Batch_Load(keys)) < Σ(Latency(Load(key))) for key in keys
 
 ## 8 相关文档
 
-- **[API 标准化规范](../03-governance/03-api-standardization.md)** -
-  GraphQL 标准
-- **[API 性能优化](../07-performance/01-api-performance.md)** - GraphQL 性能优
-  化
-- **[API 事件驱动架构](../09-architecture/01-api-event-driven.md)** - GraphQL
-  订阅
+- **[API 标准化规范](../03-governance/03-api-standardization.md)** - GraphQL 标
+  准
+- **[API 性能优化](../07-performance/01-api-performance.md)** - GraphQL 性能优化
+- **[API 事件驱动架构](../09-architecture/01-api-event-driven.md)** - GraphQL 订
+  阅
 - **[最佳实践](../00-foundation/05-best-practices.md)** - GraphQL 最佳实践
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述
 
