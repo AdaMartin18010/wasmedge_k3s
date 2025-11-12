@@ -5,38 +5,38 @@
 ## 📑 目录
 
 - [📑 目录](#-目录)
-- [1. 概述](#1-概述)
+- [1 概述](#1-概述)
   - [1.1 Kubernetes 1.30+ 核心 API 更新](#11-kubernetes-130-核心-api-更新)
   - [1.2 Kubernetes 1.30+ API 在 API 规范中的位置](#12-kubernetes-130-api-在-api-规范中的位置)
-- [2. RuntimeClass 增强](#2-runtimeclass-增强)
+- [2 RuntimeClass 增强](#2-runtimeclass-增强)
   - [2.1 RuntimeClass API 增强](#21-runtimeclass-api-增强)
   - [2.2 RuntimeClass 使用场景](#22-runtimeclass-使用场景)
     - [2.2.1 场景 1：混部 Linux 容器和 WASM 容器](#221-场景-1混部-linux-容器和-wasm-容器)
     - [2.2.2 场景 2：不同沙盒化运行时](#222-场景-2不同沙盒化运行时)
-- [3. HPA 按 Runtime 维度分组](#3-hpa-按-runtime-维度分组)
+- [3 HPA 按 Runtime 维度分组](#3-hpa-按-runtime-维度分组)
   - [3.1 HPA Runtime 分组配置](#31-hpa-runtime-分组配置)
   - [3.2 混部场景 HPA 配置](#32-混部场景-hpa-配置)
-- [4. ValidatingAdmissionPolicy 稳定版](#4-validatingadmissionpolicy-稳定版)
+- [4 ValidatingAdmissionPolicy 稳定版](#4-validatingadmissionpolicy-稳定版)
   - [4.1 ValidatingAdmissionPolicy 配置](#41-validatingadmissionpolicy-配置)
   - [4.2 ValidatingAdmissionPolicyBinding](#42-validatingadmissionpolicybinding)
-- [5. CustomResourceDefinition v1.1](#5-customresourcedefinition-v11)
+- [5 CustomResourceDefinition v1.1](#5-customresourcedefinition-v11)
   - [5.1 CRD v1.1 新特性](#51-crd-v11-新特性)
-- [6. 实际案例](#6-实际案例)
+- [6 实际案例](#6-实际案例)
   - [6.1 案例：支付服务 API 现代化](#61-案例支付服务-api-现代化)
     - [6.1.1 步骤 1：创建 RuntimeClass](#611-步骤-1创建-runtimeclass)
     - [6.1.2 步骤 2：创建 WASM 版本 Deployment](#612-步骤-2创建-wasm-版本-deployment)
     - [6.1.3 步骤 3：配置 HPA](#613-步骤-3配置-hpa)
     - [6.1.4 步骤 4：API 规范 CRD](#614-步骤-4api-规范-crd)
-- [7. 形式化定义与理论基础](#7-形式化定义与理论基础)
+- [7 形式化定义与理论基础](#7-形式化定义与理论基础)
   - [7.1 RuntimeClass 形式化](#71-runtimeclass-形式化)
   - [7.2 HPA Runtime 分组形式化](#72-hpa-runtime-分组形式化)
   - [7.3 ValidatingAdmissionPolicy 形式化](#73-validatingadmissionpolicy-形式化)
   - [7.4 CRD v1.1 形式化](#74-crd-v11-形式化)
-- [8. 相关文档](#8-相关文档)
+- [8 相关文档](#8-相关文档)
 
 ---
 
-## 1. 概述
+## 1 概述
 
 Kubernetes 1.30+ 在 API 规范方面带来了重要增强，特别是 RuntimeClass 增强、HPA 按
 Runtime 维度分组、ValidatingAdmissionPolicy 稳定版等特性，为容器化、沙盒化、WASM
@@ -86,7 +86,7 @@ Kubernetes 1.30+ API 增强在 API 规范中提供：
 
 ---
 
-## 2. RuntimeClass 增强
+## 2 RuntimeClass 增强
 
 ### 2.1 RuntimeClass API 增强
 
@@ -176,7 +176,7 @@ overhead:
 
 ---
 
-## 3. HPA 按 Runtime 维度分组
+## 3 HPA 按 Runtime 维度分组
 
 ### 3.1 HPA Runtime 分组配置
 
@@ -275,7 +275,7 @@ spec:
 
 ---
 
-## 4. ValidatingAdmissionPolicy 稳定版
+## 4 ValidatingAdmissionPolicy 稳定版
 
 ### 4.1 ValidatingAdmissionPolicy 配置
 
@@ -328,7 +328,7 @@ spec:
 
 ---
 
-## 5. CustomResourceDefinition v1.1
+## 5 CustomResourceDefinition v1.1
 
 ### 5.1 CRD v1.1 新特性
 
@@ -383,7 +383,7 @@ versions:
 
 ---
 
-## 6. 实际案例
+## 6 实际案例
 
 ### 6.1 案例：支付服务 API 现代化
 
@@ -486,7 +486,7 @@ spec:
 
 ---
 
-## 7. 形式化定义与理论基础
+## 7 形式化定义与理论基础
 
 ### 7.1 RuntimeClass 形式化
 
@@ -595,7 +595,7 @@ Valid(CRD_Schema, Resource) ⟺ Resource 符合 Schema
 
 ---
 
-## 8. 相关文档
+## 8 相关文档
 
 - **[容器化 API 规范](../01-containerization-api/containerization-api.md)** -
   Kubernetes CRD API 详解

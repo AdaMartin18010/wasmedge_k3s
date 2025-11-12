@@ -315,8 +315,8 @@ $$P_{\text{improvement}} = \frac{P_{\text{container}} - P_{\text{wasm}}}{P_{\tex
   用架构、场景架构）
 - **[05. 全局架构设计](../../02-architecture-design/architecture-design/architecture-design.md)** -
   技术组合和架构决策
-- [10. 技术决策模型](../decision-models/decision-models.md) - 技术选型决策框架
-- [10. 快速参考指南](../decision-models/QUICK-REFERENCE.md) - 设备访问和内核特性
+- [10 技术决策模型](../decision-models/decision-models.md) - 技术选型决策框架
+- [10 快速参考指南](../decision-models/QUICK-REFERENCE.md) - 设备访问和内核特性
   决策快速参考
 
 > 完整参考列表见 [REFERENCES.md](../REFERENCES.md) > **重要提醒**：本文档所有性

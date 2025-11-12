@@ -1531,9 +1531,9 @@ $$\eta(\text{paradigm}) = \frac{C_{\text{workload}}}{C_{\text{workload}} + S(\te
   合和架构决策
 - [03.6 Kubernetes 调度算法](./architecture.md#036-kubernetes-调度算法) -
   Kubernetes 调度机制
-- [10. 决策模型](../../05-decision-analysis/decision-models/decision-models.md) -
+- [10 决策模型](../../05-decision-analysis/decision-models/decision-models.md) -
   技术选型决策框架
-- [10. 快速参考指南](../../05-decision-analysis/decision-models/QUICK-REFERENCE.md) -
+- [10 快速参考指南](../../05-decision-analysis/decision-models/QUICK-REFERENCE.md) -
   设备访问（USB/PCI/GPU）和内核特性决策快速参考
 - [10.1.1 资源模型](../../05-decision-analysis/decision-models/01-theory-models/01-resource-models.md) -
   CPU 调度与资源模型

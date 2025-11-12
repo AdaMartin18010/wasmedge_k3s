@@ -14,9 +14,9 @@
   - [规则 3：场景特性规则](#规则-3场景特性规则)
   - [规则 4：概念成熟度规则](#规则-4概念成熟度规则)
 - [5 场景变换的应用](#5-场景变换的应用)
-  - [1. 场景迁移规划](#1-场景迁移规划)
-  - [2. 场景适配优化](#2-场景适配优化)
-  - [3. 场景转换策略](#3-场景转换策略)
+  - [1 场景迁移规划](#1-场景迁移规划)
+  - [2 场景适配优化](#2-场景适配优化)
+  - [3 场景转换策略](#3-场景转换策略)
 
 ---
 
@@ -216,7 +216,7 @@ Prod → MultiTenant
 
 ## 5 场景变换的应用
 
-### 1. 场景迁移规划
+### 1 场景迁移规划
 
 **应用场景**：
 
@@ -237,7 +237,7 @@ cost = sum(T_migrate[i, j] for i, j in path)
 migration_plan = plan_migration(path, concepts)
 ```
 
-### 2. 场景适配优化
+### 2 场景适配优化
 
 **应用场景**：
 
@@ -255,7 +255,7 @@ adaptation_score = calculate_adaptation(concept, source_scene, target_scene)
 optimized_adaptation = optimize_adaptation(adaptation_score, constraints)
 ```
 
-### 3. 场景转换策略
+### 3 场景转换策略
 
 **应用场景**：
 

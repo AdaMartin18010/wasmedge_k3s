@@ -1218,13 +1218,13 @@ $$P_{K3}(N, P) = \text{controller\_count} \times \text{sqlite\_latency}(P)$$
   用架构、场景架构）
 - **[05. 全局架构设计](../architecture-design/architecture-design.md)** - 全局架
   构设计与技术组合
-- [09. 矩阵视角](../../03-theoretical-perspectives/matrix-perspective/README.md) -
+- [09 矩阵视角](../../03-theoretical-perspectives/matrix-perspective/README.md) -
   矩阵力学分析方法（用于架构决策量化支持）
-- [10. 技术决策模型](../../05-decision-analysis/decision-models/decision-models.md) -
+- [10 技术决策模型](../../05-decision-analysis/decision-models/decision-models.md) -
   技术选型决策框架
-- [10. 快速参考指南](../../05-decision-analysis/decision-models/QUICK-REFERENCE.md) -
+- [10 快速参考指南](../../05-decision-analysis/decision-models/QUICK-REFERENCE.md) -
   设备访问（USB/PCI/GPU）和内核特性决策快速参考
-- [10. 一致性检查报告](../../05-decision-analysis/decision-models/CONSISTENCY-REPORT.md) -
+- [10 一致性检查报告](../../05-decision-analysis/decision-models/CONSISTENCY-REPORT.md) -
   文档一致性检查与 Wikipedia 标准对齐
 
 **外部参考**：

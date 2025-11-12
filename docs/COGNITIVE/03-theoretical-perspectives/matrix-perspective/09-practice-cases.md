@@ -442,12 +442,12 @@ optimal_stack = ['K8s', 'K3s', 'WasmEdge', 'OPA', 'Capsule']
   技术组合和架构决策
 - [实践案例 - 返回目录](../README.md)
 - [矩阵运算与应用：实际的计算方法和应用场景](08-matrix-operations.md)
-- [27. 2025 年技术趋势汇总](../../TECHNICAL/27-2025-trends/2025-trends.md)
-- [10. 技术决策模型](../../05-decision-analysis/decision-models/decision-models.md) -
+- [27 2025 年技术趋势汇总](../../TECHNICAL/27-2025-trends/2025-trends.md)
+- [10 技术决策模型](../../05-decision-analysis/decision-models/decision-models.md) -
   技术选型决策框架
-- [10. 快速参考指南](../../05-decision-analysis/decision-models/QUICK-REFERENCE.md) -
+- [10 快速参考指南](../../05-decision-analysis/decision-models/QUICK-REFERENCE.md) -
   设备访问（USB/PCI/GPU）和内核特性决策快速参考
-- [10. 一致性检查报告](../../05-decision-analysis/decision-models/CONSISTENCY-REPORT.md) -
+- [10 一致性检查报告](../../05-decision-analysis/decision-models/CONSISTENCY-REPORT.md) -
   文档一致性检查与 Wikipedia 标准对齐
-- [03. 执行流与调度视角](../../02-architecture-design/architecture/execution-flow-scheduling.md) -
+- [03 执行流与调度视角](../../02-architecture-design/architecture/execution-flow-scheduling.md) -
   从执行流视角分析设备访问和内核特性

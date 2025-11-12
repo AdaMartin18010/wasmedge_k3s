@@ -5,32 +5,32 @@
 ## 📑 目录
 
 - [📑 目录](#-目录)
-- [1. 概述](#1-概述)
+- [1 概述](#1-概述)
   - [1.1 核心 WASM API 规范](#11-核心-wasm-api-规范)
   - [1.2 WASM API 层次](#12-wasm-api-层次)
   - [1.3 WASM 化在 API 规范中的位置](#13-wasm-化在-api-规范中的位置)
-- [2. WASI Preview 2 接口](#2-wasi-preview-2-接口)
+- [2 WASI Preview 2 接口](#2-wasi-preview-2-接口)
   - [2.1 WASI Preview 2 核心接口](#21-wasi-preview-2-核心接口)
   - [2.2 WASI 能力模型](#22-wasi-能力模型)
-- [3. WIT 组件模型](#3-wit-组件模型)
+- [3 WIT 组件模型](#3-wit-组件模型)
   - [3.1 WIT 接口定义](#31-wit-接口定义)
   - [3.2 WIT 组件组合](#32-wit-组件组合)
-- [4. WasmEdge API](#4-wasmedge-api)
-- [5. wasmCloud Lattice API](#5-wasmcloud-lattice-api)
-- [6. WASM 组件组合 API](#6-wasm-组件组合-api)
-- [7. API 演进路径](#7-api-演进路径)
+- [4 WasmEdge API](#4-wasmedge-api)
+- [5 wasmCloud Lattice API](#5-wasmcloud-lattice-api)
+- [6 WASM 组件组合 API](#6-wasm-组件组合-api)
+- [7 API 演进路径](#7-api-演进路径)
   - [7.1 WASM API 演进时间线](#71-wasm-api-演进时间线)
   - [7.2 Kubernetes WASM 支持演进](#72-kubernetes-wasm-支持演进)
-- [8. 形式化定义与理论基础](#8-形式化定义与理论基础)
+- [8 形式化定义与理论基础](#8-形式化定义与理论基础)
   - [8.1 WASM API 规范形式化](#81-wasm-api-规范形式化)
   - [8.2 组件模型形式化](#82-组件模型形式化)
   - [8.3 能力模型形式化](#83-能力模型形式化)
   - [8.4 WASM 安全性形式化](#84-wasm-安全性形式化)
-- [9. 相关文档](#9-相关文档)
+- [9 相关文档](#9-相关文档)
 
 ---
 
-## 1. 概述
+## 1 概述
 
 WASM 化 API 规范代表了 API 设计的最新范式，从 WASI 系统接口到 WIT 组件模型，实现
 了跨语言、跨平台的 API 标准化。本文档基于形式化方法，提供严格的数学定义和推理论
@@ -91,7 +91,7 @@ WASM 化 API 在 API 规范中提供：
 
 ---
 
-## 2. WASI Preview 2 接口
+## 2 WASI Preview 2 接口
 
 ### 2.1 WASI Preview 2 核心接口
 
@@ -158,7 +158,7 @@ world my-app {
 
 ---
 
-## 3. WIT 组件模型
+## 3 WIT 组件模型
 
 ### 3.1 WIT 接口定义
 
@@ -234,7 +234,7 @@ package example:calculator@1.0.1;
 
 ---
 
-## 4. WasmEdge API
+## 4 WasmEdge API
 
 ### 4.1 WasmEdge Runtime API
 
@@ -300,7 +300,7 @@ overhead:
 
 ---
 
-## 5. wasmCloud Lattice API
+## 5 wasmCloud Lattice API
 
 ### 5.1 Lattice 组件通信 API
 
@@ -341,7 +341,7 @@ wash ctl get links
 
 ---
 
-## 6. WASM 组件组合 API
+## 6 WASM 组件组合 API
 
 ### 6.1 组件导入/导出 API
 
@@ -400,7 +400,7 @@ world facade {
 
 ---
 
-## 7. API 演进路径
+## 7 API 演进路径
 
 ### 7.1 WASM API 演进时间线
 
@@ -431,7 +431,7 @@ WASI Preview 3 (2025 预计)
 
 ---
 
-## 8. 形式化定义与理论基础
+## 8 形式化定义与理论基础
 
 ### 8.1 WASM API 规范形式化
 
@@ -577,7 +577,7 @@ Valid(Module) ⟹ Type_Safe(Module)
 
 ---
 
-## 9. 相关文档
+## 9 相关文档
 
 - **[WebAssembly 抽象层](../../ARCHITECTURE/architecture-view/02-virtualization-containerization-sandboxing/06-webassembly-abstraction.md)**
   ⭐ - WASM 组件模型与 WASI 接口详解

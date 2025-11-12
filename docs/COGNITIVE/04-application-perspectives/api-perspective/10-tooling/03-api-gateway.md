@@ -5,36 +5,36 @@
 ## 📑 目录
 
 - [📑 目录](#-目录)
-- [1. 概述](#1-概述)
+- [1 概述](#1-概述)
   - [1.1 API 网关层次](#11-api-网关层次)
   - [1.2 API 网关在 API 规范中的位置](#12-api-网关在-api-规范中的位置)
-- [2. Kubernetes Ingress API](#2-kubernetes-ingress-api)
+- [2 Kubernetes Ingress API](#2-kubernetes-ingress-api)
   - [2.1 Ingress 资源定义](#21-ingress-资源定义)
   - [2.2 Ingress Controller 配置](#22-ingress-controller-配置)
-- [3. Istio Gateway API](#3-istio-gateway-api)
+- [3 Istio Gateway API](#3-istio-gateway-api)
   - [3.1 Gateway 资源定义](#31-gateway-资源定义)
   - [3.2 VirtualService 路由](#32-virtualservice-路由)
-- [4. Kong API Gateway](#4-kong-api-gateway)
+- [4 Kong API Gateway](#4-kong-api-gateway)
   - [4.1 Kong Ingress Controller](#41-kong-ingress-controller)
   - [4.2 Kong Plugin 配置](#42-kong-plugin-配置)
-- [5. APISIX API Gateway](#5-apisix-api-gateway)
+- [5 APISIX API Gateway](#5-apisix-api-gateway)
   - [5.1 APISIX Route 配置](#51-apisix-route-配置)
   - [5.2 APISIX Plugin 配置](#52-apisix-plugin-配置)
-- [6. WASM 网关插件](#6-wasm-网关插件)
+- [6 WASM 网关插件](#6-wasm-网关插件)
   - [6.1 Envoy WASM 过滤器](#61-envoy-wasm-过滤器)
   - [6.2 WASM 插件开发](#62-wasm-插件开发)
-- [7. 网关性能优化](#7-网关性能优化)
+- [7 网关性能优化](#7-网关性能优化)
   - [7.1 连接池优化](#71-连接池优化)
   - [7.2 缓存优化](#72-缓存优化)
-- [8. 形式化定义与理论基础](#8-形式化定义与理论基础)
+- [8 形式化定义与理论基础](#8-形式化定义与理论基础)
   - [8.1 API 网关形式化模型](#81-api-网关形式化模型)
   - [8.2 路由形式化](#82-路由形式化)
   - [8.3 网关性能形式化](#83-网关性能形式化)
-- [9. 相关文档](#9-相关文档)
+- [9 相关文档](#9-相关文档)
 
 ---
 
-## 1. 概述
+## 1 概述
 
 API 网关是 API 规范的重要实现层，从 Kubernetes Ingress 到 Istio Gateway，从 Kong
 到 APISIX，提供了统一的 API 入口和治理能力。本文档基于形式化方法，提供严格的数学
@@ -84,7 +84,7 @@ API 网关在 API 规范中提供：
 
 ---
 
-## 2. Kubernetes Ingress API
+## 2 Kubernetes Ingress API
 
 ### 2.1 Ingress 资源定义
 
@@ -155,7 +155,7 @@ data:
 
 ---
 
-## 3. Istio Gateway API
+## 3 Istio Gateway API
 
 ### 3.1 Gateway 资源定义
 
@@ -218,7 +218,7 @@ spec:
 
 ---
 
-## 4. Kong API Gateway
+## 4 Kong API Gateway
 
 ### 4.1 Kong Ingress Controller
 
@@ -272,7 +272,7 @@ plugin: key-auth
 
 ---
 
-## 5. APISIX API Gateway
+## 5 APISIX API Gateway
 
 ### 5.1 APISIX Route 配置
 
@@ -324,7 +324,7 @@ spec:
 
 ---
 
-## 6. WASM 网关插件
+## 6 WASM 网关插件
 
 ### 6.1 Envoy WASM 过滤器
 
@@ -409,7 +409,7 @@ impl HttpContext for AuthFilter {
 
 ---
 
-## 7. 网关性能优化
+## 7 网关性能优化
 
 ### 7.1 连接池优化
 
@@ -452,7 +452,7 @@ plugin: response-caching
 
 ---
 
-## 8. 形式化定义与理论基础
+## 8 形式化定义与理论基础
 
 ### 8.1 API 网关形式化模型
 
@@ -565,7 +565,7 @@ Gateway_Efficiency = Gateway_Throughput / Gateway_Resource_Usage
 
 ---
 
-## 9. 相关文档
+## 9 相关文档
 
 - **[服务网格 API 治理](../13-api-governance/api-governance.md)** - Service Mesh
   网关治理

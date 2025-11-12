@@ -2,16 +2,41 @@
 
 ## 📑 目录
 
-- [1. 12 维原子概念向量](#0911-12-维原子概念向量)
-- [2. 6 维场景向量](#0912-6-维场景向量)
-- [3. 时间维度](#0913-时间维度)
-- [4. 概念属性定义](#0914-概念属性定义)
-- [5. 概念分类体系](#0915-概念分类体系)
-- [6. 概念向量的数学表示](#0916-概念向量的数学表示)
+- [📑 目录](#-目录)
+- [1 12 维原子概念向量](#1-12-维原子概念向量)
+  - [概念详解](#概念详解)
+    - [e₁: Image（镜像）](#e₁-image镜像)
+    - [e₂: Container（容器）](#e₂-container容器)
+    - [e₃: Quota（配额）](#e₃-quota配额)
+    - [e₄: RuntimeTransform（运行时切换）](#e₄-runtimetransform运行时切换)
+    - [e₅: Monitor（观测）](#e₅-monitor观测)
+    - [e₆: VersionUpgrade（版本变更）](#e₆-versionupgrade版本变更)
+    - [e₇: LoadBalance（负载均衡）](#e₇-loadbalance负载均衡)
+    - [e₈: Scale（扩缩容）](#e₈-scale扩缩容)
+    - [e₉: BackupRestore（灾备）](#e₉-backuprestore灾备)
+    - [e₁₀: Policy（策略）](#e₁₀-policy策略)
+    - [e₁₁: Tenant（租户隔离）](#e₁₁-tenant租户隔离)
+    - [e₁₂: AI-Parameter（AI 可学习参数）](#e₁₂-ai-parameterai-可学习参数)
+- [2 6 维场景向量](#2-6-维场景向量)
+  - [场景详解](#场景详解)
+    - [s₁: 本地开发（Dev）](#s₁-本地开发dev)
+    - [s₂: CI/测试（CI/Test）](#s₂-citest)
+    - [s₃: 在线生产（Prod）](#s₃-在线生产prod)
+    - [s₄: 边缘/IoT（Edge/IoT）](#s₄-边缘iotedgeiot)
+    - [s₅: Serverless/AI（Serverless/AI）](#s₅-serverlessaiserverlessai)
+    - [s₆: 多租户平台（MultiTenant）](#s₆-多租户平台multitenant)
+- [3 时间维度](#3-时间维度)
+  - [静态 vs 动态](#静态-vs-动态)
+- [4 概念属性定义](#4-概念属性定义)
+- [5 概念分类体系](#5-概念分类体系)
+  - [1 层次维度](#1-层次维度)
+  - [2 生命周期维度](#2-生命周期维度)
+  - [3 场景维度](#3-场景维度)
+- [6 概念向量的数学表示](#6-概念向量的数学表示)
 
 ---
 
-## 1. 12 维原子概念向量
+## 1 12 维原子概念向量
 
 **概念向量定义**：
 
@@ -144,7 +169,7 @@ $$
 - **特性**：可微参数、梯度下降、在线学习
 - **相关技术**：KEDA AI、Fluid AI、Volcano AI
 
-## 2. 6 维场景向量
+## 2 6 维场景向量
 
 **场景向量定义**：
 
@@ -207,7 +232,7 @@ $$
 - **技术要求**：租户级配额、策略隔离、租户级观测
 - **典型技术**：Capsule、HNC、Cluster-API-Nested
 
-## 3. 时间维度
+## 3 时间维度
 
 **时间维度定义**：
 
@@ -225,7 +250,7 @@ $$\mathbf{T} = [t_1, t_2]^T = [\text{静态 (Static)}, \text{动态 (Dynamic)}]^
 - **静态**：配置即代码，声明式定义，一次性设置后持续有效
 - **动态**：运行时自适应，根据实际负载和状态持续调整
 
-## 4. 概念属性定义
+## 4 概念属性定义
 
 **概念的核心属性**：
 
@@ -251,11 +276,11 @@ $$
 \end{bmatrix}
 $$
 
-## 5. 概念分类体系
+## 5 概念分类体系
 
 **概念的分类维度**：
 
-### 1. 层次维度
+### 1 层次维度
 
 - **基础设施层**：Image, Container
 - **编排层**：Quota, RuntimeTransform, Scale
@@ -265,7 +290,7 @@ $$
 - **演进层**：VersionUpgrade
 - **AI 层**：AI-Parameter
 
-### 2. 生命周期维度
+### 2 生命周期维度
 
 - **构建阶段**：Image
 - **运行时阶段**：Container, RuntimeTransform
@@ -274,7 +299,7 @@ $$
 - **演进阶段**：VersionUpgrade, BackupRestore
 - **优化阶段**：LoadBalance, AI-Parameter
 
-### 3. 场景维度
+### 3 场景维度
 
 - **通用场景**：Image, Container, Monitor
 - **企业场景**：Quota, Policy, Tenant
@@ -282,7 +307,7 @@ $$
 - **Serverless 场景**：Scale, AI-Parameter
 - **AI 场景**：RuntimeTransform, AI-Parameter
 
-## 6. 概念向量的数学表示
+## 6 概念向量的数学表示
 
 **完整的概念向量空间**：
 

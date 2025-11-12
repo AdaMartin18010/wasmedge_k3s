@@ -1483,10 +1483,10 @@ $$\text{Choice} = \arg\max_{\mathcal{C} \in \{\mathcal{C}_{\text{VM}}, \mathcal{
   用架构、场景架构）
 - **[05. 全局架构设计](../../02-architecture-design/architecture-design/architecture-design.md)** -
   技术组合和架构决策
-- [03. 架构与对象模型](../../02-architecture-design/architecture/architecture.md) -
+- [03 架构与对象模型](../../02-architecture-design/architecture/architecture.md) -
   系统架构设计
-- [07. 形式化理论](../formal-theory/formal-theory.md) - 结构同构和关系等价
-- [09. 矩阵视角](../matrix-perspective/README.md) - 矩阵力学与数学建模（补充视角
+- [07 形式化理论](../formal-theory/formal-theory.md) - 结构同构和关系等价
+- [09 矩阵视角](../matrix-perspective/README.md) - 矩阵力学与数学建模（补充视角
   ）
 
 **外部参考（Wikipedia，as of 2025-11-02）**：

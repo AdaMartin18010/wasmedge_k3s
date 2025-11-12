@@ -5,41 +5,41 @@
 ## 📑 目录
 
 - [📑 目录](#-目录)
-- [1. 概述](#1-概述)
+- [1 概述](#1-概述)
   - [1.1 核心沙盒化 API](#11-核心沙盒化-api)
   - [1.2 沙盒化 API 层次](#12-沙盒化-api-层次)
   - [1.3 沙盒化在 API 规范中的位置](#13-沙盒化在-api-规范中的位置)
-- [2. Seccomp/AppArmor Profile API](#2-seccompapparmor-profile-api)
+- [2 Seccomp/AppArmor Profile API](#2-seccompapparmor-profile-api)
   - [2.1 Seccomp Profile API](#21-seccomp-profile-api)
   - [2.2 AppArmor Profile API](#22-apparmor-profile-api)
   - [2.3 Landlock LSM API](#23-landlock-lsm-api)
-- [3. gVisor Sentry API](#3-gvisor-sentry-api)
+- [3 gVisor Sentry API](#3-gvisor-sentry-api)
   - [3.1 Sentry 系统调用 API](#31-sentry-系统调用-api)
   - [3.2 gVisor 配置 API](#32-gvisor-配置-api)
   - [3.3 gVisor 性能 API](#33-gvisor-性能-api)
-- [4. Firecracker API](#4-firecracker-api)
+- [4 Firecracker API](#4-firecracker-api)
   - [4.1 Firecracker REST API](#41-firecracker-rest-api)
   - [4.2 Firecracker 性能 API](#42-firecracker-性能-api)
-- [5. Kata Containers API](#5-kata-containers-api)
+- [5 Kata Containers API](#5-kata-containers-api)
   - [5.1 Kata Runtime API](#51-kata-runtime-api)
   - [5.2 Kata 2.0 API（2024）](#52-kata-20-api2024)
-- [6. 沙盒化 API 安全模型](#6-沙盒化-api-安全模型)
+- [6 沙盒化 API 安全模型](#6-沙盒化-api-安全模型)
   - [6.1 安全边界 API](#61-安全边界-api)
   - [6.2 能力模型 API](#62-能力模型-api)
   - [6.3 零信任 API 模型](#63-零信任-api-模型)
-- [7. API 演进路径](#7-api-演进路径)
+- [7 API 演进路径](#7-api-演进路径)
   - [7.1 从容器到沙盒的 API 演进](#71-从容器到沙盒的-api-演进)
   - [7.2 Kubernetes 沙盒化 API 演进](#72-kubernetes-沙盒化-api-演进)
-- [8. 形式化定义与理论基础](#8-形式化定义与理论基础)
+- [8 形式化定义与理论基础](#8-形式化定义与理论基础)
   - [8.1 沙盒化 API 规范形式化](#81-沙盒化-api-规范形式化)
   - [8.2 安全隔离度模型](#82-安全隔离度模型)
   - [8.3 系统调用拦截形式化](#83-系统调用拦截形式化)
   - [8.4 安全边界形式化](#84-安全边界形式化)
-- [9. 相关文档](#9-相关文档)
+- [9 相关文档](#9-相关文档)
 
 ---
 
-## 1. 概述
+## 1 概述
 
 沙盒化 API 规范定义了安全沙盒的接口标准，从 Seccomp/AppArmor 到
 gVisor、Firecracker，提供了不同级别的安全隔离 API。本文档基于形式化方法，提供严
@@ -101,7 +101,7 @@ API_Spec = ⟨IDL, Governance, Observability, Security⟩
 
 ---
 
-## 2. Seccomp/AppArmor Profile API
+## 2 Seccomp/AppArmor Profile API
 
 ### 2.1 Seccomp Profile API
 
@@ -174,7 +174,7 @@ int ruleset_fd = landlock_create_ruleset(&ruleset_attr, sizeof(ruleset_attr), 0)
 
 ---
 
-## 3. gVisor Sentry API
+## 3 gVisor Sentry API
 
 ### 3.1 Sentry 系统调用 API
 
@@ -225,7 +225,7 @@ scheduling:
 
 ---
 
-## 4. Firecracker API
+## 4 Firecracker API
 
 ### 4.1 Firecracker REST API
 
@@ -268,7 +268,7 @@ PUT /vms/{vm_id}/networks/{iface_id}
 
 ---
 
-## 5. Kata Containers API
+## 5 Kata Containers API
 
 ### 5.1 Kata Runtime API
 
@@ -298,7 +298,7 @@ enable_iommu = false
 
 ---
 
-## 6. 沙盒化 API 安全模型
+## 6 沙盒化 API 安全模型
 
 ### 6.1 安全边界 API
 
@@ -346,7 +346,7 @@ spec:
 
 ---
 
-## 7. API 演进路径
+## 7 API 演进路径
 
 ### 7.1 从容器到沙盒的 API 演进
 
@@ -380,7 +380,7 @@ Landlock LSM API (2021)
 
 ---
 
-## 8. 形式化定义与理论基础
+## 8 形式化定义与理论基础
 
 ### 8.1 沙盒化 API 规范形式化
 
@@ -497,7 +497,7 @@ Security_Boundary(Sandbox) = Minimal_Set(Required_Resources)
 
 ---
 
-## 9. 相关文档
+## 9 相关文档
 
 - **[沙盒化抽象](../../ARCHITECTURE/architecture-view/02-virtualization-containerization-sandboxing/03-sandboxing-abstraction.md)** -
   沙盒化 API 设计原理

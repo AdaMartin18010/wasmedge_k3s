@@ -5,40 +5,40 @@
 ## 📑 目录
 
 - [📑 目录](#-目录)
-- [1. 概述](#1-概述)
+- [1 概述](#1-概述)
   - [1.1 核心 API 规范](#11-核心-api-规范)
   - [1.2 API 规范层次](#12-api-规范层次)
   - [1.3 容器化在 API 规范中的位置](#13-容器化在-api-规范中的位置)
-- [2. OCI Runtime Spec API](#2-oci-runtime-spec-api)
+- [2 OCI Runtime Spec API](#2-oci-runtime-spec-api)
   - [2.1 核心接口定义](#21-核心接口定义)
   - [2.2 API 调用流程](#22-api-调用流程)
   - [2.3 资源管理 API](#23-资源管理-api)
-- [3. Kubernetes CRD API](#3-kubernetes-crd-api)
+- [3 Kubernetes CRD API](#3-kubernetes-crd-api)
   - [3.1 CRD 定义示例](#31-crd-定义示例)
   - [3.2 CRD API 设计原则](#32-crd-api-设计原则)
   - [3.3 Operator 模式 API](#33-operator-模式-api)
-- [4. 服务发现 API](#4-服务发现-api)
+- [4 服务发现 API](#4-服务发现-api)
   - [4.1 CoreDNS API](#41-coredns-api)
   - [4.2 etcd API](#42-etcd-api)
-- [5. 容器网络 API](#5-容器网络-api)
+- [5 容器网络 API](#5-容器网络-api)
   - [5.1 CNI 接口规范](#51-cni-接口规范)
   - [5.2 CNI 插件 API](#52-cni-插件-api)
-- [6. 容器存储 API](#6-容器存储-api)
+- [6 容器存储 API](#6-容器存储-api)
   - [6.1 CSI 接口规范](#61-csi-接口规范)
   - [6.2 PV/PVC API](#62-pvpvc-api)
-- [7. API 演进路径](#7-api-演进路径)
+- [7 API 演进路径](#7-api-演进路径)
   - [7.1 从 Docker API 到 OCI Runtime Spec](#71-从-docker-api-到-oci-runtime-spec)
   - [7.2 Kubernetes API 演进](#72-kubernetes-api-演进)
-- [8. 形式化定义与理论基础](#8-形式化定义与理论基础)
+- [8 形式化定义与理论基础](#8-形式化定义与理论基础)
   - [8.1 容器 API 规范形式化](#81-容器-api-规范形式化)
   - [8.2 API 版本化模型](#82-api-版本化模型)
   - [8.3 容器生命周期形式化](#83-容器生命周期形式化)
   - [8.4 资源隔离形式化](#84-资源隔离形式化)
-- [9. 相关文档](#9-相关文档)
+- [9 相关文档](#9-相关文档)
 
 ---
 
-## 1. 概述
+## 1 概述
 
 容器化 API 规范是云原生技术栈的核心，从 OCI Runtime Spec 到 Kubernetes CRD，定义
 了容器生命周期、资源管理、网络和存储的标准化接口。本文档基于形式化方法，提供严格
@@ -105,7 +105,7 @@ API_Spec = ⟨IDL, Governance, Observability, Security⟩
 
 ---
 
-## 2. OCI Runtime Spec API
+## 2 OCI Runtime Spec API
 
 ### 2.1 核心接口定义
 
@@ -203,7 +203,7 @@ API_Spec = ⟨IDL, Governance, Observability, Security⟩
 
 ---
 
-## 3. Kubernetes CRD API
+## 3 Kubernetes CRD API
 
 ### 3.1 CRD 定义示例
 
@@ -275,7 +275,7 @@ func (r *APIDefinitionReconciler) Reconcile(ctx context.Context, req ctrl.Reques
 
 ---
 
-## 4. 服务发现 API
+## 4 服务发现 API
 
 ### 4.1 CoreDNS API
 
@@ -323,7 +323,7 @@ resp, err := client.Get(ctx, "/services/payment-service", client.WithPrefix())
 
 ---
 
-## 5. 容器网络 API
+## 5 容器网络 API
 
 ### 5.1 CNI 接口规范
 
@@ -374,7 +374,7 @@ echo '{"cniVersion":"1.0.0","name":"bridge","type":"bridge"}' | \
 
 ---
 
-## 6. 容器存储 API
+## 6 容器存储 API
 
 ### 6.1 CSI 接口规范
 
@@ -422,7 +422,7 @@ spec:
 
 ---
 
-## 7. API 演进路径
+## 7 API 演进路径
 
 ### 7.1 从 Docker API 到 OCI Runtime Spec
 
@@ -451,7 +451,7 @@ OCI Runtime Spec v1.1.0 (2024)
 
 ---
 
-## 8. 形式化定义与理论基础
+## 8 形式化定义与理论基础
 
 ### 8.1 容器 API 规范形式化
 
@@ -575,7 +575,7 @@ ResourceLimit: Container × ResourceType → Limit
 
 ---
 
-## 9. 相关文档
+## 9 相关文档
 
 - **[容器化抽象](../../ARCHITECTURE/architecture-view/02-virtualization-containerization-sandboxing/02-containerization-abstraction.md)** -
   容器化 API 设计原理

@@ -445,16 +445,16 @@ $$T* = \arg\min_{T \in \{D, K, K_3, W, O\}} \text{cost}(T, S)$$
   用架构、场景架构）
 - **[05. 全局架构设计](../../02-architecture-design/architecture-design/architecture-design.md)** -
   技术组合和架构决策
-- [02. 理念层](../principles/principles.md) - 云原生核心理念演进
-- [03. 架构与对象模型](../../02-architecture-design/architecture/architecture.md) -
+- [02 理念层](../principles/principles.md) - 云原生核心理念演进
+- [03 架构与对象模型](../../02-architecture-design/architecture/architecture.md) -
   系统架构设计
-- [10. 技术决策模型](../../05-decision-analysis/decision-models/decision-models.md) -
+- [10 技术决策模型](../../05-decision-analysis/decision-models/decision-models.md) -
   技术选型决策框架
-- [07. 形式化理论](../../03-theoretical-perspectives/formal-theory/formal-theory.md) -
+- [07 形式化理论](../../03-theoretical-perspectives/formal-theory/formal-theory.md) -
   结构同构和关系等价
-- [08. 范畴论视角](../../03-theoretical-perspectives/category-theory/category-theory.md) -
+- [08 范畴论视角](../../03-theoretical-perspectives/category-theory/category-theory.md) -
   范畴论分析方法
-- [09. 矩阵视角](../../03-theoretical-perspectives/matrix-perspective/README.md) -
+- [09 矩阵视角](../../03-theoretical-perspectives/matrix-perspective/README.md) -
   矩阵力学与数学建模
 
 **外部参考**：

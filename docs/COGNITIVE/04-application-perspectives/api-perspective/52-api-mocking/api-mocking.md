@@ -5,35 +5,35 @@
 ## 📑 目录
 
 - [📑 目录](#-目录)
-- [1. 概述](#1-概述)
+- [1 概述](#1-概述)
   - [1.1 Mock 架构](#11-mock-架构)
   - [1.2 API Mock 在 API 规范中的位置](#12-api-mock-在-api-规范中的位置)
-- [2. Mock 服务](#2-mock-服务)
+- [2 Mock 服务](#2-mock-服务)
   - [2.1 WireMock](#21-wiremock)
   - [2.2 MockServer](#22-mockserver)
   - [2.3 Prism](#23-prism)
-- [3. Mock 数据生成](#3-mock-数据生成)
+- [3 Mock 数据生成](#3-mock-数据生成)
   - [3.1 数据生成器](#31-数据生成器)
   - [3.2 模板引擎](#32-模板引擎)
-- [4. Mock 场景](#4-mock-场景)
+- [4 Mock 场景](#4-mock-场景)
   - [4.1 成功场景](#41-成功场景)
   - [4.2 错误场景](#42-错误场景)
   - [4.3 延迟场景](#43-延迟场景)
-- [5. Mock 验证](#5-mock-验证)
+- [5 Mock 验证](#5-mock-验证)
   - [5.1 请求验证](#51-请求验证)
   - [5.2 调用验证](#52-调用验证)
-- [6. Mock 管理](#6-mock-管理)
+- [6 Mock 管理](#6-mock-管理)
   - [6.1 Mock 存储](#61-mock-存储)
   - [6.2 Mock 版本管理](#62-mock-版本管理)
-- [7. 形式化定义与理论基础](#7-形式化定义与理论基础)
+- [7 形式化定义与理论基础](#7-形式化定义与理论基础)
   - [7.1 API Mock 形式化模型](#71-api-mock-形式化模型)
   - [7.2 Mock 数据生成形式化](#72-mock-数据生成形式化)
   - [7.3 Mock 验证形式化](#73-mock-验证形式化)
-- [8. 相关文档](#8-相关文档)
+- [8 相关文档](#8-相关文档)
 
 ---
 
-## 1. 概述
+## 1 概述
 
 API 模拟/Mock 规范定义了 API 在 Mock 场景下的设计和实现，从 Mock 服务到 Mock 数
 据生成，从 Mock 场景到 Mock 验证。本文档基于形式化方法，提供严格的数学定义和推理
@@ -81,7 +81,7 @@ API Mock 在 API 规范中提供：
 
 ---
 
-## 2. Mock 服务
+## 2 Mock 服务
 
 ### 2.1 WireMock
 
@@ -223,7 +223,7 @@ spec:
 
 ---
 
-## 3. Mock 数据生成
+## 3 Mock 数据生成
 
 ### 3.1 数据生成器
 
@@ -271,7 +271,7 @@ func GenerateMockPayment() map[string]interface{} {
 
 ---
 
-## 4. Mock 场景
+## 4 Mock 场景
 
 ### 4.1 成功场景
 
@@ -346,7 +346,7 @@ func GenerateMockPayment() map[string]interface{} {
 
 ---
 
-## 5. Mock 验证
+## 5 Mock 验证
 
 ### 5.1 请求验证
 
@@ -394,7 +394,7 @@ func VerifyCallCount(client *wiremock.Client, expectedRequest wiremock.RequestPa
 
 ---
 
-## 6. Mock 管理
+## 6 Mock 管理
 
 ### 6.1 Mock 存储
 
@@ -447,7 +447,7 @@ spec:
 
 ---
 
-## 7. 形式化定义与理论基础
+## 7 形式化定义与理论基础
 
 ### 7.1 API Mock 形式化模型
 
@@ -524,7 +524,7 @@ Verify_Request(Request) = Pass ∧ Verify_Calls(Mock) = Pass ⟹ Correct_Usage(M
 
 ---
 
-## 8. 相关文档
+## 8 相关文档
 
 - **[API 测试规范](../15-api-testing/api-testing.md)** - Mock 测试
 - **[API 契约测试](../51-api-contract-testing/api-contract-testing.md)** - 契约

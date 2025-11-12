@@ -5,38 +5,38 @@
 ## 📑 目录
 
 - [📑 目录](#-目录)
-- [1. 概述](#1-概述)
+- [1 概述](#1-概述)
   - [1.1 可观测性三大支柱](#11-可观测性三大支柱)
   - [1.2 API 可观测性在 API 规范中的位置](#12-api-可观测性在-api-规范中的位置)
-- [2. 容器化 API 可观测性](#2-容器化-api-可观测性)
+- [2 容器化 API 可观测性](#2-容器化-api-可观测性)
   - [2.1 Kubernetes Metrics API](#21-kubernetes-metrics-api)
   - [2.2 Kubernetes Events API](#22-kubernetes-events-api)
-- [3. 沙盒化 API 可观测性](#3-沙盒化-api-可观测性)
+- [3 沙盒化 API 可观测性](#3-沙盒化-api-可观测性)
   - [3.1 gVisor Tracing](#31-gvisor-tracing)
   - [3.2 eBPF 系统调用追踪](#32-ebpf-系统调用追踪)
-- [4. WASM 化 API 可观测性](#4-wasm-化-api-可观测性)
+- [4 WASM 化 API 可观测性](#4-wasm-化-api-可观测性)
   - [4.1 WASI Tracing 接口](#41-wasi-tracing-接口)
   - [4.2 WasmEdge 可观测性](#42-wasmedge-可观测性)
-- [5. OTLP 统一可观测性](#5-otlp-统一可观测性)
+- [5 OTLP 统一可观测性](#5-otlp-统一可观测性)
   - [5.1 OTLP 协议概述](#51-otlp-协议概述)
   - [5.2 OTLP 集成示例](#52-otlp-集成示例)
   - [5.3 OpenTelemetry Collector 配置](#53-opentelemetry-collector-配置)
-- [6. eBPF 增强可观测性](#6-ebpf-增强可观测性)
+- [6 eBPF 增强可观测性](#6-ebpf-增强可观测性)
   - [6.1 eBPF 零侵入追踪](#61-ebpf-零侵入追踪)
   - [6.2 eBPF + OTLP 集成](#62-ebpf--otlp-集成)
-- [7. 可观测性最佳实践](#7-可观测性最佳实践)
+- [7 可观测性最佳实践](#7-可观测性最佳实践)
   - [7.1 采样策略](#71-采样策略)
   - [7.2 追踪上下文传播](#72-追踪上下文传播)
   - [7.3 指标聚合](#73-指标聚合)
-- [8. 形式化定义与理论基础](#8-形式化定义与理论基础)
+- [8 形式化定义与理论基础](#8-形式化定义与理论基础)
   - [8.1 API 可观测性形式化模型](#81-api-可观测性形式化模型)
   - [8.2 追踪形式化](#82-追踪形式化)
   - [8.3 指标形式化](#83-指标形式化)
-- [9. 相关文档](#9-相关文档)
+- [9 相关文档](#9-相关文档)
 
 ---
 
-## 1. 概述
+## 1 概述
 
 API 可观测性是 API 规范的重要组成部分，通过 OTLP、eBPF、Prometheus 等技术实现
 API 调用的全链路追踪、指标采集和日志聚合。本文档基于形式化方法，提供严格的数学定
@@ -85,7 +85,7 @@ API 可观测性在 API 规范中提供：
 
 ---
 
-## 2. 容器化 API 可观测性
+## 2 容器化 API 可观测性
 
 ### 2.1 Kubernetes Metrics API
 
@@ -139,7 +139,7 @@ kubectl get events --field-selector reason=APIDefinitionUpdated
 
 ---
 
-## 3. 沙盒化 API 可观测性
+## 3 沙盒化 API 可观测性
 
 ### 3.1 gVisor Tracing
 
@@ -213,7 +213,7 @@ int trace_openat(struct trace_event_raw_sys_enter *ctx) {
 
 ---
 
-## 4. WASM 化 API 可观测性
+## 4 WASM 化 API 可观测性
 
 ### 4.1 WASI Tracing 接口
 
@@ -287,7 +287,7 @@ service_name = "wasm-service"
 
 ---
 
-## 5. OTLP 统一可观测性
+## 5 OTLP 统一可观测性
 
 ### 5.1 OTLP 协议概述
 
@@ -436,7 +436,7 @@ service:
 
 ---
 
-## 6. eBPF 增强可观测性
+## 6 eBPF 增强可观测性
 
 ### 6.1 eBPF 零侵入追踪
 
@@ -491,7 +491,7 @@ func convertEBPFToOTLP(event *EBPFSpanEvent) *otlptrace.Span {
 
 ---
 
-## 7. 可观测性最佳实践
+## 7 可观测性最佳实践
 
 ### 7.1 采样策略
 
@@ -579,7 +579,7 @@ var (
 
 ---
 
-## 8. 形式化定义与理论基础
+## 8 形式化定义与理论基础
 
 ### 8.1 API 可观测性形式化模型
 
@@ -680,7 +680,7 @@ RED_Metrics(API) ⟹ Performance_Assessable(API)
 
 ---
 
-## 9. 相关文档
+## 9 相关文档
 
 - **[最佳实践](../08-best-practices/best-practices.md)** - API 可观测性最佳实践
 - **[eBPF/OTLP 扩展技术分析](../../TECHNICAL/32-ebpf-otlp-analysis/ebpf-otlp-analysis.md)**

@@ -5,35 +5,35 @@
 ## 📑 目录
 
 - [📑 目录](#-目录)
-- [1. 概述](#1-概述)
+- [1 概述](#1-概述)
   - [1.1 SLA 架构](#11-sla-架构)
   - [1.2 API SLA 在 API 规范中的位置](#12-api-sla-在-api-规范中的位置)
-- [2. SLA 指标](#2-sla-指标)
+- [2 SLA 指标](#2-sla-指标)
   - [2.1 可用性](#21-可用性)
   - [2.2 性能](#22-性能)
   - [2.3 错误率](#23-错误率)
-- [3. SLA 等级](#3-sla-等级)
+- [3 SLA 等级](#3-sla-等级)
   - [3.1 基础 SLA](#31-基础-sla)
   - [3.2 标准 SLA](#32-标准-sla)
   - [3.3 高级 SLA](#33-高级-sla)
-- [4. SLA 监控](#4-sla-监控)
+- [4 SLA 监控](#4-sla-监控)
   - [4.1 SLA 指标收集](#41-sla-指标收集)
   - [4.2 SLA 指标计算](#42-sla-指标计算)
-- [5. SLA 告警](#5-sla-告警)
+- [5 SLA 告警](#5-sla-告警)
   - [5.1 SLA 违反检测](#51-sla-违反检测)
   - [5.2 SLA 告警通知](#52-sla-告警通知)
-- [6. SLA 报告](#6-sla-报告)
+- [6 SLA 报告](#6-sla-报告)
   - [6.1 SLA 报告生成](#61-sla-报告生成)
   - [6.2 SLA 报告分析](#62-sla-报告分析)
-- [7. 形式化定义与理论基础](#7-形式化定义与理论基础)
+- [7 形式化定义与理论基础](#7-形式化定义与理论基础)
   - [7.1 API SLA 形式化模型](#71-api-sla-形式化模型)
   - [7.2 SLA 指标形式化](#72-sla-指标形式化)
   - [7.3 SLA 违反形式化](#73-sla-违反形式化)
-- [8. 相关文档](#8-相关文档)
+- [8 相关文档](#8-相关文档)
 
 ---
 
-## 1. 概述
+## 1 概述
 
 API SLA 规范定义了 API 在服务级别协议（SLA）场景下的设计和实现，从 SLA 指标到
 SLA 等级，从 SLA 监控到 SLA 报告。本文档基于形式化方法，提供严格的数学定义和推理
@@ -86,7 +86,7 @@ API SLA 在 API 规范中提供：
 
 ---
 
-## 2. SLA 指标
+## 2 SLA 指标
 
 ### 2.1 可用性
 
@@ -240,7 +240,7 @@ func CheckErrorRateSLA(errorRate float64, target float64) bool {
 
 ---
 
-## 3. SLA 等级
+## 3 SLA 等级
 
 ### 3.1 基础 SLA
 
@@ -314,7 +314,7 @@ spec:
 
 ---
 
-## 4. SLA 监控
+## 4 SLA 监控
 
 ### 4.1 SLA 指标收集
 
@@ -395,7 +395,7 @@ func CalculateSLAMetrics(window time.Duration) (*SLAMetrics, error) {
 
 ---
 
-## 5. SLA 告警
+## 5 SLA 告警
 
 ### 5.1 SLA 违反检测
 
@@ -472,7 +472,7 @@ spec:
 
 ---
 
-## 6. SLA 报告
+## 6 SLA 报告
 
 ### 6.1 SLA 报告生成
 
@@ -549,7 +549,7 @@ func GenerateSLAReport(startTime, endTime time.Time, slaTier SLATier) (*SLARepor
 
 ---
 
-## 7. 形式化定义与理论基础
+## 7 形式化定义与理论基础
 
 ### 7.1 API SLA 形式化模型
 
@@ -628,7 +628,7 @@ SLA_Violation(API, SLA) ⟹ Compensation(API, SLA)
 
 ---
 
-## 8. 相关文档
+## 8 相关文档
 
 - **[API 监控规范](../20-api-monitoring/api-monitoring.md)** - API 监控
 - **[API 性能规范](../14-api-performance/api-performance.md)** - API 性能

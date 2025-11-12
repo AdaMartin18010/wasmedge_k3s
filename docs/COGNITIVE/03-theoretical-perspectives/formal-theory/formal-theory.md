@@ -4,7 +4,7 @@
 
 - [📑 目录](#-目录)
 - [1 文档定位](#1-文档定位)
-- [1.1 形式化基础理论](#11-形式化基础理论)
+  - [1.1 形式化基础理论](#11-形式化基础理论)
   - [形式系统定义](#形式系统定义)
   - [模型论基础](#模型论基础)
   - [证明论基础](#证明论基础)
@@ -68,7 +68,7 @@
 > grammar that consists of a recursive definition of the well-formed formulas of
 > the theory."
 
-## 1.1 形式化基础理论
+### 1.1 形式化基础理论
 
 ### 形式系统定义
 
@@ -1544,12 +1544,12 @@ $$
   用架构、场景架构）
 - **[05. 全局架构设计](../../02-architecture-design/architecture-design/architecture-design.md)** -
   技术组合和架构决策
-- [03. 架构与对象模型](../../02-architecture-design/architecture/architecture.md) -
+- [03 架构与对象模型](../../02-architecture-design/architecture/architecture.md) -
   系统架构设计
-- [08. 范畴论视角](../category-theory/category-theory.md) - 范畴论分析方法
-- [09. 矩阵视角](../matrix-perspective/README.md) - 矩阵力学与数学建模（补充视角
+- [08 范畴论视角](../category-theory/category-theory.md) - 范畴论分析方法
+- [09 矩阵视角](../matrix-perspective/README.md) - 矩阵力学与数学建模（补充视角
   ）
-- [04. 分布式系统模型](../../05-decision-analysis/decision-models/01-theory-models/04-distributed-models.md) -
+- [04 分布式系统模型](../../05-decision-analysis/decision-models/01-theory-models/04-distributed-models.md) -
   分布式系统理论模型
 
 **外部参考（Wikipedia，as of 2025-11-02）**：

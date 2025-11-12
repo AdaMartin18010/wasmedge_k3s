@@ -5,38 +5,38 @@
 ## 📑 目录
 
 - [📑 目录](#-目录)
-- [1. 概述](#1-概述)
+- [1 概述](#1-概述)
   - [1.1 API 治理层次](#11-api-治理层次)
   - [1.2 API 治理在 API 规范中的位置](#12-api-治理在-api-规范中的位置)
-- [2. 容器化 API 治理](#2-容器化-api-治理)
+- [2 容器化 API 治理](#2-容器化-api-治理)
   - [2.1 Kubernetes Admission Webhook](#21-kubernetes-admission-webhook)
   - [2.2 ValidatingAdmissionPolicy（K8s 1.28+）](#22-validatingadmissionpolicyk8s-128)
-- [3. 沙盒化 API 治理](#3-沙盒化-api-治理)
+- [3 沙盒化 API 治理](#3-沙盒化-api-治理)
   - [3.1 Seccomp Profile 治理](#31-seccomp-profile-治理)
   - [3.2 AppArmor Profile 治理](#32-apparmor-profile-治理)
-- [4. WASM 化 API 治理](#4-wasm-化-api-治理)
+- [4 WASM 化 API 治理](#4-wasm-化-api-治理)
   - [4.1 WASI 能力治理](#41-wasi-能力治理)
   - [4.2 WASM 策略插件](#42-wasm-策略插件)
-- [5. 服务网格 API 治理](#5-服务网格-api-治理)
+- [5 服务网格 API 治理](#5-服务网格-api-治理)
   - [5.1 Istio VirtualService](#51-istio-virtualservice)
   - [5.2 DestinationRule](#52-destinationrule)
-- [6. 策略即代码（OPA）](#6-策略即代码opa)
+- [6 策略即代码（OPA）](#6-策略即代码opa)
   - [6.1 OPA 策略定义](#61-opa-策略定义)
   - [6.2 OPA + Kubernetes](#62-opa--kubernetes)
   - [6.3 OPA-Wasm](#63-opa-wasm)
-- [7. API 版本管理](#7-api-版本管理)
+- [7 API 版本管理](#7-api-版本管理)
   - [7.1 语义化版本](#71-语义化版本)
   - [7.2 API 生命周期管理](#72-api-生命周期管理)
   - [7.3 GitOps 版本管理](#73-gitops-版本管理)
-- [8. 形式化定义与理论基础](#8-形式化定义与理论基础)
+- [8 形式化定义与理论基础](#8-形式化定义与理论基础)
   - [8.1 API 治理形式化模型](#81-api-治理形式化模型)
   - [8.2 策略执行形式化](#82-策略执行形式化)
   - [8.3 生命周期管理形式化](#83-生命周期管理形式化)
-- [9. 相关文档](#9-相关文档)
+- [9 相关文档](#9-相关文档)
 
 ---
 
-## 1. 概述
+## 1 概述
 
 API 治理规范定义了 API 生命周期管理、策略执行、版本控制和访问控制的标准化机制，
 从 Kubernetes Admission Webhook 到 OPA 策略引擎，再到 WASM 策略插件。本文档基于
@@ -88,7 +88,7 @@ API 治理在 API 规范中提供：
 
 ---
 
-## 2. 容器化 API 治理
+## 2 容器化 API 治理
 
 ### 2.1 Kubernetes Admission Webhook
 
@@ -172,7 +172,7 @@ spec:
 
 ---
 
-## 3. 沙盒化 API 治理
+## 3 沙盒化 API 治理
 
 ### 3.1 Seccomp Profile 治理
 
@@ -253,7 +253,7 @@ spec:
 
 ---
 
-## 4. WASM 化 API 治理
+## 4 WASM 化 API 治理
 
 ### 4.1 WASI 能力治理
 
@@ -333,7 +333,7 @@ spec:
 
 ---
 
-## 5. 服务网格 API 治理
+## 5 服务网格 API 治理
 
 ### 5.1 Istio VirtualService
 
@@ -427,7 +427,7 @@ spec:
 
 ---
 
-## 6. 策略即代码（OPA）
+## 6 策略即代码（OPA）
 
 ### 6.1 OPA 策略定义
 
@@ -521,7 +521,7 @@ opa eval --format=json --wasm-bundle=bundle.tar.gz 'data.api.authz.allow'
 
 ---
 
-## 7. API 版本管理
+## 7 API 版本管理
 
 ### 7.1 语义化版本
 
@@ -583,7 +583,7 @@ spec:
 
 ---
 
-## 8. 形式化定义与理论基础
+## 8 形式化定义与理论基础
 
 ### 8.1 API 治理形式化模型
 
@@ -702,7 +702,7 @@ Version_Compatible(v₁, v₂) ∧ Version_Compatible(v₂, v₃) ⟹ Version_Co
 
 ---
 
-## 9. 相关文档
+## 9 相关文档
 
 - **[容器化 API 规范](../01-containerization-api/containerization-api.md)** -
   Kubernetes CRD API 治理

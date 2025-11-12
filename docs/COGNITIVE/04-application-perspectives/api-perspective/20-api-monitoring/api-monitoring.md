@@ -5,38 +5,38 @@
 ## 📑 目录
 
 - [📑 目录](#-目录)
-- [1. 概述](#1-概述)
+- [1 概述](#1-概述)
   - [1.1 监控体系](#11-监控体系)
-- [2. 监控指标定义](#2-监控指标定义)
+- [2 监控指标定义](#2-监控指标定义)
   - [2.1 核心指标（RED）](#21-核心指标red)
   - [2.2 业务指标（USE）](#22-业务指标use)
-- [3. Prometheus 监控](#3-prometheus-监控)
+- [3 Prometheus 监控](#3-prometheus-监控)
   - [3.1 ServiceMonitor 配置](#31-servicemonitor-配置)
   - [3.2 PrometheusRule 配置](#32-prometheusrule-配置)
-- [4. Grafana 仪表板](#4-grafana-仪表板)
+- [4 Grafana 仪表板](#4-grafana-仪表板)
   - [4.1 仪表板配置](#41-仪表板配置)
   - [4.2 仪表板部署](#42-仪表板部署)
-- [5. 告警规则](#5-告警规则)
+- [5 告警规则](#5-告警规则)
   - [5.1 Alertmanager 配置](#51-alertmanager-配置)
   - [5.2 告警规则示例](#52-告警规则示例)
-- [6. 容器化 API 监控](#6-容器化-api-监控)
+- [6 容器化 API 监控](#6-容器化-api-监控)
   - [6.1 Kubernetes 指标](#61-kubernetes-指标)
   - [6.2 CRD 监控](#62-crd-监控)
-- [7. 沙盒化 API 监控](#7-沙盒化-api-监控)
+- [7 沙盒化 API 监控](#7-沙盒化-api-监控)
   - [7.1 gVisor 监控](#71-gvisor-监控)
   - [7.2 Seccomp 监控](#72-seccomp-监控)
-- [8. WASM 化 API 监控](#8-wasm-化-api-监控)
+- [8 WASM 化 API 监控](#8-wasm-化-api-监控)
   - [8.1 WasmEdge 监控](#81-wasmedge-监控)
   - [8.2 WASI 接口监控](#82-wasi-接口监控)
-- [9. 形式化定义与理论基础](#9-形式化定义与理论基础)
+- [9 形式化定义与理论基础](#9-形式化定义与理论基础)
   - [9.1 API 监控形式化模型](#91-api-监控形式化模型)
   - [9.2 监控指标形式化](#92-监控指标形式化)
   - [9.3 告警形式化](#93-告警形式化)
-- [10. 相关文档](#10-相关文档)
+- [10 相关文档](#10-相关文档)
 
 ---
 
-## 1. 概述
+## 1 概述
 
 API 监控告警规范定义了 API 在不同运行时环境下的监控指标、告警规则和可视化方案，
 从 Prometheus 指标到 Grafana 仪表板，从告警规则到通知渠道。本文档基于形式化方法
@@ -87,7 +87,7 @@ API 监控在 API 规范中提供：
 
 ---
 
-## 2. 监控指标定义
+## 2 监控指标定义
 
 ### 2.1 核心指标（RED）
 
@@ -155,7 +155,7 @@ rate(container_cpu_cfs_throttled_seconds_total[5m])
 
 ---
 
-## 3. Prometheus 监控
+## 3 Prometheus 监控
 
 ### 3.1 ServiceMonitor 配置
 
@@ -216,7 +216,7 @@ spec:
 
 ---
 
-## 4. Grafana 仪表板
+## 4 Grafana 仪表板
 
 ### 4.1 仪表板配置
 
@@ -279,7 +279,7 @@ data:
 
 ---
 
-## 5. 告警规则
+## 5 告警规则
 
 ### 5.1 Alertmanager 配置
 
@@ -347,7 +347,7 @@ receivers:
 
 ---
 
-## 6. 容器化 API 监控
+## 6 容器化 API 监控
 
 ### 6.1 Kubernetes 指标
 
@@ -387,7 +387,7 @@ apidefinition_status_phase{phase="active"}
 
 ---
 
-## 7. 沙盒化 API 监控
+## 7 沙盒化 API 监控
 
 ### 7.1 gVisor 监控
 
@@ -412,7 +412,7 @@ rate(seccomp_violations_total[5m])
 
 ---
 
-## 8. WASM 化 API 监控
+## 8 WASM 化 API 监控
 
 ### 8.1 WasmEdge 监控
 
@@ -442,7 +442,7 @@ rate(wasi_interface_calls_total[5m])
 
 ---
 
-## 9. 形式化定义与理论基础
+## 9 形式化定义与理论基础
 
 ### 9.1 API 监控形式化模型
 
@@ -548,7 +548,7 @@ Alert_Timeliness = 1 - (Detection_Time / Incident_Duration)
 
 ---
 
-## 10. 相关文档
+## 10 相关文档
 
 - **[API 可观测性规范](../12-api-observability/api-observability.md)** - 可观测
   性技术实现
