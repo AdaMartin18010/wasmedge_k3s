@@ -207,9 +207,53 @@ spec:
           averageUtilization: 70
 ```
 
-### 步骤 3：API 网关配置
+### 步骤 3：Service 配置
 
-**部署 API 网关**：
+**部署 Service**：
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: serverless-function
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 8080
+      protocol: TCP
+      name: http
+  selector:
+    app: serverless-function
+```
+
+**配置文件**：参考 `cases/examples/ecommerce/high-concurrency/service.yaml`
+
+### 步骤 4：应用配置
+
+**配置应用参数**：
+
+```yaml
+# config.yaml
+server:
+  port: 8080
+  host: "0.0.0.0"
+  timeout: 30s
+
+function:
+  max_concurrent_requests: 1000
+  request_timeout: 30s
+
+rate_limit:
+  requests_per_second: 100
+  burst_size: 200
+```
+
+**配置文件**：参考 `cases/examples/ecommerce/high-concurrency/config.yaml`
+
+### 步骤 5：API 网关配置（可选）
+
+**部署 API 网关**（如需要外部访问）：
 
 ```yaml
 apiVersion: v1
@@ -225,7 +269,7 @@ spec:
   type: LoadBalancer
 ```
 
-### 步骤 4：策略配置
+### 步骤 6：策略配置
 
 **配置 OPA 策略**：
 
@@ -252,6 +296,8 @@ kubectl apply -f https://raw.githubusercontent.com/open-policy-agent/gatekeeper/
 # 应用策略
 kubectl apply -f serverless-policy.yaml
 ```
+
+**配置文件**：参考 `cases/examples/ecommerce/high-concurrency/policy.rego`
 
 ---
 
@@ -307,8 +353,9 @@ kubectl apply -f serverless-policy.yaml
 
 ## 📝 更新记录
 
-| 日期       | 更新内容 | 更新人   |
-| ---------- | -------- | -------- |
-| 2025-11-07 | 创建案例 | 项目团队 |
+| 日期       | 更新内容                         | 更新人   |
+| ---------- | -------------------------------- | -------- |
+| 2025-11-07 | 创建案例                         | 项目团队 |
+| 2025-11-07 | 添加 service.yaml 和 config.yaml | 项目团队 |
 
 **最后更新**：2025-11-07 **下次审查**：2025-11-14 **维护者**：项目团队

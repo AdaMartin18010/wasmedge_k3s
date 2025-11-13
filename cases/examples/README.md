@@ -37,6 +37,8 @@ cases/examples/
 │   └── high-concurrency/              # 高并发案例 ✅
 │       ├── Dockerfile
 │       ├── deployment.yaml
+│       ├── service.yaml               # Kubernetes Service
+│       ├── config.yaml                # 应用配置
 │       ├── hpa.yaml                   # HPA 配置（包含在 deployment.yaml 中）
 │       └── policy.rego
 └── gaming/                            # 游戏行业案例

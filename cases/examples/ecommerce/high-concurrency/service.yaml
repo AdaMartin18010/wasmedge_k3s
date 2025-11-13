@@ -1,0 +1,21 @@
+# 电商高并发 Serverless 函数 Kubernetes Service 配置
+# 用途：暴露电商高并发 Serverless 函数服务
+# 创建日期：2025-11-07
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: serverless-function
+  namespace: default
+  labels:
+    app: serverless-function
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  selector:
+    app: serverless-function
+

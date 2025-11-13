@@ -99,6 +99,9 @@
 | 40   | 结构视角            | [40-structural-perspective](COGNITIVE/03-theoretical-perspectives/structural-perspective/README.md)                     | 计算结构、控制结构、信息结构（结构主义视角） | 理论 |
 | 41   | AI/ML 架构视角      | [41-ai-ml-architecture-view](ARCHITECTURE/01-views/ai-ml-architecture-view.md)                                          | LLM 推理与容器编排集成                       | 架构 |
 | 42   | 边缘计算架构视角    | [42-edge-computing-view](ARCHITECTURE/01-views/edge-computing-view.md)                                                  | 5G MEC 架构、离线自治、热更新                | 架构 |
+| 43   | 文档对标分析        | [43-documentation-benchmark-analysis](DOCUMENTATION-BENCHMARK-ANALYSIS.md)                                              | 全面对标分析和改进建议                       | 参考 |
+| 44   | 对标分析执行摘要    | [44-benchmark-executive-summary](BENCHMARK-EXECUTIVE-SUMMARY.md)                                                        | 关键发现和行动计划快速参考                   | 参考 |
+| 45   | 对标改进检查清单    | [45-benchmark-improvement-checklist](BENCHMARK-IMPROVEMENT-CHECKLIST.md)                                                | 具体改进任务清单                             | 参考 |
 
 **说明**：文档编号 28 为架构框架文档（多维度架构体系与技术规范）。文档编号 29-30
 为可选文档（服务网格、多集群管理），34 为可选文档（成本优化）。37 为趋势文档

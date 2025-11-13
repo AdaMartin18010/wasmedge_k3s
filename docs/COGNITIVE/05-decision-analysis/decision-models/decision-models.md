@@ -429,4 +429,4 @@ $$A_{\text{attack}} = \sum_{i} A_{\text{interface}_i} \times P_{\text{vulnerabil
 
 ---
 
-**最后更新**：2025-11-03 **维护者**：项目团队
+**最后更新**：2025-11-07 **维护者**：项目团队

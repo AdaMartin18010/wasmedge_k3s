@@ -1242,4 +1242,4 @@ $$P_{K3}(N, P) = \text{controller\_count} \times \text{sqlite\_latency}(P)$$
 >
 > ---
 >
-> **最后更新**：2025-11-03
+> **最后更新**：2025-11-07

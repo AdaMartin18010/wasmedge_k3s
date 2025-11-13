@@ -464,6 +464,16 @@
 
 ## 🔗 快速链接
 
+### 文档质量与对标分析
+
+- **[文档对标分析报告](DOCUMENTATION-BENCHMARK-ANALYSIS.md)** ⭐ - 全面对标分析
+  和改进建议
+- **[对标分析执行摘要](BENCHMARK-EXECUTIVE-SUMMARY.md)** - 关键发现和行动计划快
+  速参考
+- **[对标改进检查清单](BENCHMARK-IMPROVEMENT-CHECKLIST.md)** - 具体改进任务清单
+- **[文档一致性总结](DOCUMENTATION-CONSISTENCY-SUMMARY.md)** - 文档一致性修复总
+  结
+
 ### 核心视角文档（项目根目录）
 
 - **[ai_view.md](../ai_view.md)** ⭐ - 认知视角和技术演进主线
