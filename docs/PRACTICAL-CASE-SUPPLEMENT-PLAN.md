@@ -139,6 +139,7 @@
   - 硬件配置：xxx
 
 **排查过程**：
+
 1. **初步诊断**：
    - 检查项 1
    - 检查项 2
@@ -154,18 +155,21 @@
    - 根因 2
 
 **解决方案**：
+
 1. **临时方案**：
-   ```bash
-   # 临时修复命令
-   ```
+
+    ```bash
+    # 临时修复命令
+    ```
 
 2. **根本方案**：
 
-   ```yaml
-   # 配置修改
-   ```
+    ```yaml
+    # 配置修改
+    ```
 
 3. **预防措施**：
+
    - 措施 1
    - 措施 2
 
@@ -181,14 +185,14 @@
 - **最佳实践**：推荐的实践方法
 - **相关文档**：相关文档链接
 
-```
+---
 
 ### 2.3 补充清单
 
 **WasmEdge 故障案例**（目标：8 个）：
 
-- [ ] 案例 1：Wasm 应用冷启动超时
-- [ ] 案例 2：Wasm 内存溢出
+- [x] 案例 1：Wasm 应用冷启动超时 ✅ [W-001](TECHNICAL/05-devops/troubleshooting/cases/wasmedge-cold-start-timeout.md)
+- [x] 案例 2：Wasm 内存溢出 ✅ [W-002](TECHNICAL/05-devops/troubleshooting/cases/wasmedge-memory-overflow.md)
 - [ ] 案例 3：Wasm 网络连接失败
 - [ ] 案例 4：Wasm 文件系统访问错误
 - [ ] 案例 5：Wasm 多线程问题
@@ -296,16 +300,16 @@
 
 **启动性能优化案例**（目标：4 个）：
 
-- [ ] 案例 1：Wasm 应用冷启动优化（从 100ms 到 10ms）
-- [ ] 案例 2：K3s 节点启动优化（从 30s 到 10s）
+- [x] 案例 1：Wasm 应用冷启动优化（从 100ms 到 10ms） ✅ [P-001](TECHNICAL/05-devops/performance-optimization/cases/wasm-cold-start-optimization.md)
+- [x] 案例 2：K3s 节点启动优化（从 30s 到 10s） ✅ [P-002](TECHNICAL/05-devops/performance-optimization/cases/k3s-node-startup-optimization.md)
 - [ ] 案例 3：Pod 批量启动优化
 - [ ] 案例 4：镜像拉取优化
 
 **内存占用优化案例**（目标：4 个）：
 
-- [ ] 案例 1：Wasm 应用内存占用优化（从 50MB 到 2MB）
-- [ ] 案例 2：K3s 控制平面内存优化
-- [ ] 案例 3：OPA 内存占用优化
+- [x] 案例 1：Wasm 应用内存占用优化（从 50MB 到 2MB） ✅ [P-005](TECHNICAL/05-devops/performance-optimization/cases/wasm-memory-optimization.md)
+- [x] 案例 2：K3s 控制平面内存优化 ✅ [P-006](TECHNICAL/05-devops/performance-optimization/cases/k3s-control-plane-memory-optimization.md)
+- [x] 案例 3：OPA 内存占用优化 ✅ [P-007](TECHNICAL/05-devops/performance-optimization/cases/opa-memory-optimization.md)
 - [ ] 案例 4：多 Pod 内存优化
 
 **CPU 使用优化案例**（目标：3 个）：
@@ -436,28 +440,30 @@
 **任务清单**：
 
 1. **WasmEdge 故障案例**（4 个）：
-   - [ ] 案例 1：Wasm 应用冷启动超时
-   - [ ] 案例 2：Wasm 内存溢出
-   - [ ] 案例 3：Wasm 网络连接失败
-   - [ ] 案例 4：Wasm 文件系统访问错误
+   - [x] 案例 1：Wasm 应用冷启动超时 ✅ [W-001](TECHNICAL/05-devops/troubleshooting/cases/wasmedge-cold-start-timeout.md)
+   - [x] 案例 2：Wasm 内存溢出 ✅ [W-002](TECHNICAL/05-devops/troubleshooting/cases/wasmedge-memory-overflow.md)
+   - [x] 案例 3：Wasm 网络连接失败 ✅ [W-003](TECHNICAL/05-devops/troubleshooting/cases/wasmedge-network-connection-failed.md)
+   - [x] 案例 4：Wasm 文件系统访问错误 ✅ [W-004](TECHNICAL/05-devops/troubleshooting/cases/wasmedge-filesystem-access-error.md)
 
 2. **K3s 故障案例**（3 个）：
-   - [ ] 案例 1：K3s 节点无法加入集群
-   - [ ] 案例 2：K3s Pod 调度失败
-   - [ ] 案例 3：K3s 存储卷挂载失败
+   - [x] 案例 1：K3s 节点无法加入集群 ✅ [K-001](TECHNICAL/05-devops/troubleshooting/cases/k3s-node-join-failed.md)
+   - [x] 案例 2：K3s Pod 调度失败 ✅ [K-002](TECHNICAL/05-devops/troubleshooting/cases/k3s-pod-scheduling-failed.md)
+   - [x] 案例 3：K3s 存储卷挂载失败 ✅ [K-003](TECHNICAL/05-devops/troubleshooting/cases/k3s-storage-volume-mount-failed.md)
 
 3. **性能优化案例**（5 个）：
-   - [ ] 案例 1：Wasm 应用冷启动优化
-   - [ ] 案例 2：Wasm 应用内存占用优化
-   - [ ] 案例 3：K3s 节点启动优化
-   - [ ] 案例 4：K3s 控制平面内存优化
-   - [ ] 案例 5：OPA 内存占用优化
+   - [x] 案例 1：Wasm 应用冷启动优化 ✅ [P-001](TECHNICAL/05-devops/performance-optimization/cases/wasm-cold-start-optimization.md)
+   - [x] 案例 2：Wasm 应用内存占用优化 ✅ [P-005](TECHNICAL/05-devops/performance-optimization/cases/wasm-memory-optimization.md)
+   - [x] 案例 3：K3s 节点启动优化 ✅ [P-002](TECHNICAL/05-devops/performance-optimization/cases/k3s-node-startup-optimization.md)
+   - [x] 案例 4：K3s 控制平面内存优化 ✅ [P-006](TECHNICAL/05-devops/performance-optimization/cases/k3s-control-plane-memory-optimization.md)
+   - [x] 案例 5：OPA 内存占用优化 ✅ [P-007](TECHNICAL/05-devops/performance-optimization/cases/opa-memory-optimization.md)
 
 **交付物**：
 
-- 更新 `TECHNICAL/05-devops/troubleshooting/troubleshooting.md`
-- 创建 `TECHNICAL/05-devops/troubleshooting/cases/` 目录
-- 创建案例文档集
+- ✅ 更新 `TECHNICAL/05-devops/troubleshooting/troubleshooting.md`
+- ✅ 创建 `TECHNICAL/05-devops/troubleshooting/cases/` 目录
+- ✅ 创建故障排查案例文档集（案例目录和第一个案例 W-001）
+- ✅ 创建 `TECHNICAL/05-devops/performance-optimization/cases/` 目录
+- ✅ 创建性能优化案例文档集（案例目录和第一个案例 P-001）
 
 ### 5.2 第二阶段（3-4 周）
 
