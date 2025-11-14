@@ -274,6 +274,10 @@
 - **[代数结构](02-algebraic-structure.md)** - 代数结构 Σ = ⟨Ω, ℱ, 𝒫, ℒ⟩
 - **[复合运算表](04-composition-table.md)** - 20×20 运算表
 - **[最简范式定理](05-normal-form-theorem.md)** - 主范式定理
+- **[公理系统性质证明](../../ARCHITECTURE/00-theory/03-axiom-properties/axiom-properties-proofs.md)**
+  ⭐ - 独立性、一致性、完备性证明
+- **[形式化定义](../../ARCHITECTURE/00-theory/04-formal-definitions/formal-definitions.md)**
+  ⭐ - 集合、函数与类型系统的严格定义
 
 **外部参考**：
 
@@ -281,6 +285,8 @@
 - [Idempotence (Wikipedia)](https://en.wikipedia.org/wiki/Idempotence)
 - [Homomorphism (Wikipedia)](https://en.wikipedia.org/wiki/Homomorphism)
 - [Exact Sequence (Wikipedia)](https://en.wikipedia.org/wiki/Exact_sequence)
+- [Model Theory (Wikipedia)](https://en.wikipedia.org/wiki/Model_theory)
+- [Proof Theory (Wikipedia)](https://en.wikipedia.org/wiki/Proof_theory)
 
 ---
 

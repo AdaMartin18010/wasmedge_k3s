@@ -240,6 +240,8 @@ def simplify(seq):
 - **[公理体系](03-axioms.md)** - 公理 A1-A7
 - **[复合运算表](04-composition-table.md)** - 20×20 运算表
 - **[同态映射](06-homomorphism.md)** - 指标映射
+- **[最简范式定理完整证明](../../ARCHITECTURE/00-theory/06-normal-form-proof/normal-form-theorem-proof.md)**
+  ⭐ - 唯一性、终止性与复杂度证明
 
 **外部参考**：
 

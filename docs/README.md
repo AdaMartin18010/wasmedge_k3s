@@ -471,8 +471,10 @@
 - **[对标分析执行摘要](BENCHMARK-EXECUTIVE-SUMMARY.md)** - 关键发现和行动计划快
   速参考
 - **[对标改进检查清单](BENCHMARK-IMPROVEMENT-CHECKLIST.md)** - 具体改进任务清单
-- **[文档一致性总结](DOCUMENTATION-CONSISTENCY-SUMMARY.md)** - 文档一致性修复总
-  结
+- **[理论严谨性改进总结](THEORETICAL-RIGOR-IMPROVEMENT-SUMMARY.md)** ⭐ - 理论严谨性改进成果总结
+- **[实践案例补充计划](PRACTICAL-CASE-SUPPLEMENT-PLAN.md)** - 实践案例补充工作计划
+- **[文档一致性总结](DOCUMENTATION-CONSISTENCY-SUMMARY.md)** - 文档一致性修复总结
+- **[版本信息验证指南](VERSION-VERIFICATION-GUIDE.md)** - 版本信息验证流程和检查清单
 
 ### 核心视角文档（项目根目录）
 
