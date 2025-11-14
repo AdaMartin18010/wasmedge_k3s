@@ -302,31 +302,31 @@
 
 - [x] 案例 1：Wasm 应用冷启动优化（从 100ms 到 10ms） ✅ [P-001](TECHNICAL/05-devops/performance-optimization/cases/wasm-cold-start-optimization.md)
 - [x] 案例 2：K3s 节点启动优化（从 30s 到 10s） ✅ [P-002](TECHNICAL/05-devops/performance-optimization/cases/k3s-node-startup-optimization.md)
-- [ ] 案例 3：Pod 批量启动优化
-- [ ] 案例 4：镜像拉取优化
+  - [x] 案例 3：Pod 批量启动优化 ✅ [P-003](TECHNICAL/05-devops/performance-optimization/cases/pod-batch-startup-optimization.md)
+  - [x] 案例 4：镜像拉取优化 ✅ [P-004](TECHNICAL/05-devops/performance-optimization/cases/image-pull-optimization.md)
 
 **内存占用优化案例**（目标：4 个）：
 
 - [x] 案例 1：Wasm 应用内存占用优化（从 50MB 到 2MB） ✅ [P-005](TECHNICAL/05-devops/performance-optimization/cases/wasm-memory-optimization.md)
 - [x] 案例 2：K3s 控制平面内存优化 ✅ [P-006](TECHNICAL/05-devops/performance-optimization/cases/k3s-control-plane-memory-optimization.md)
 - [x] 案例 3：OPA 内存占用优化 ✅ [P-007](TECHNICAL/05-devops/performance-optimization/cases/opa-memory-optimization.md)
-- [ ] 案例 4：多 Pod 内存优化
+  - [x] 案例 4：多 Pod 内存优化 ✅ [P-008](TECHNICAL/05-devops/performance-optimization/cases/multi-pod-memory-optimization.md)
 
 **CPU 使用优化案例**（目标：3 个）：
 
-- [ ] 案例 1：Wasm 应用 CPU 使用优化
-- [ ] 案例 2：K3s 节点 CPU 优化
-- [ ] 案例 3：OPA 评估性能优化
+- [x] 案例 1：Wasm 应用 CPU 使用优化 ✅ [P-009](TECHNICAL/05-devops/performance-optimization/cases/wasm-cpu-optimization.md)
+- [x] 案例 2：K3s 节点 CPU 优化 ✅ [P-010](TECHNICAL/05-devops/performance-optimization/cases/k3s-node-cpu-optimization.md)
+- [x] 案例 3：OPA 评估性能优化 ✅ [P-011](TECHNICAL/05-devops/performance-optimization/cases/opa-evaluation-performance-optimization.md)
 
 **网络性能优化案例**（目标：2 个）：
 
-- [ ] 案例 1：Pod 间通信优化
-- [ ] 案例 2：Service Mesh 延迟优化
+- [x] 案例 1：Pod 间通信优化 ✅ [P-012](TECHNICAL/05-devops/performance-optimization/cases/pod-communication-optimization.md)
+- [x] 案例 2：Service Mesh 延迟优化 ✅ [P-013](TECHNICAL/05-devops/performance-optimization/cases/service-mesh-latency-optimization.md)
 
 **存储性能优化案例**（目标：2 个）：
 
-- [ ] 案例 1：PVC 读写性能优化
-- [ ] 案例 2：镜像存储优化
+- [x] 案例 1：PVC 读写性能优化 ✅ [P-014](TECHNICAL/05-devops/performance-optimization/cases/pvc-read-write-optimization.md)
+- [x] 案例 2：镜像存储优化 ✅ [P-015](TECHNICAL/05-devops/performance-optimization/cases/image-storage-optimization.md)
 
 **总计**：15 个性能优化案例
 
@@ -401,13 +401,13 @@
 
 **金融行业案例**（目标：2 个）：
 
-- [ ] 案例 1：支付网关系统（边缘计算）
-- [ ] 案例 2：风控系统（Serverless）
+- [x] 案例 1：支付网关系统（边缘计算）✅ [I-001](ARCHITECTURE/04-applications/case-studies/payment-gateway.md)
+- [x] 案例 2：风控系统（Serverless）✅ [I-004](ARCHITECTURE/04-applications/case-studies/risk-control-system.md)
 
 **医疗行业案例**（目标：2 个）：
 
-- [ ] 案例 1：医疗影像处理系统（AI/ML）
-- [ ] 案例 2：远程医疗系统（边缘计算）
+- [x] 案例 1：医疗影像处理系统（AI/ML）✅ [I-005](ARCHITECTURE/04-applications/case-studies/medical-imaging-system.md)
+- [x] 案例 2：远程医疗系统（边缘计算）✅ [I-006](ARCHITECTURE/04-applications/case-studies/telemedicine-system.md)
 
 **制造业案例**（目标：2 个）：
 

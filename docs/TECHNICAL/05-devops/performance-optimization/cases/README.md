@@ -67,8 +67,8 @@
 |-----|---------|---------|------|
 | [P-001](wasm-cold-start-optimization.md) | Wasm 应用冷启动优化 | 从 100ms 到 10ms | ✅ 已完成 |
 | [P-002](k3s-node-startup-optimization.md) | K3s 节点启动优化 | 从 30s 到 10s | ✅ 已完成 |
-| [P-003](pod-batch-startup-optimization.md) | Pod 批量启动优化 | 提升批量启动速度 | ⏳ 待补充 |
-| [P-004](image-pull-optimization.md) | 镜像拉取优化 | 减少镜像拉取时间 | ⏳ 待补充 |
+| [P-003](pod-batch-startup-optimization.md) | Pod 批量启动优化 | 提升批量启动速度 | ✅ 已完成 |
+| [P-004](image-pull-optimization.md) | 镜像拉取优化 | 减少镜像拉取时间 | ✅ 已完成 |
 
 ### 3.2 内存占用优化案例
 
@@ -77,29 +77,29 @@
 | [P-005](wasm-memory-optimization.md) | Wasm 应用内存占用优化 | 从 50MB 到 2MB | ✅ 已完成 |
 | [P-006](k3s-control-plane-memory-optimization.md) | K3s 控制平面内存优化 | 减少控制平面内存占用 | ✅ 已完成 |
 | [P-007](opa-memory-optimization.md) | OPA 内存占用优化 | 减少 OPA 内存占用 | ✅ 已完成 |
-| [P-008](multi-pod-memory-optimization.md) | 多 Pod 内存优化 | 优化多 Pod 内存使用 | ⏳ 待补充 |
+| [P-008](multi-pod-memory-optimization.md) | 多 Pod 内存优化 | 优化多 Pod 内存使用 | ✅ 已完成 |
 
 ### 3.3 CPU 使用优化案例
 
 | 编号 | 案例标题 | 优化目标 | 状态 |
 |-----|---------|---------|------|
-| [P-009](wasm-cpu-optimization.md) | Wasm 应用 CPU 使用优化 | 降低 CPU 使用率 | ⏳ 待补充 |
-| [P-010](k3s-node-cpu-optimization.md) | K3s 节点 CPU 优化 | 优化节点 CPU 使用 | ⏳ 待补充 |
-| [P-011](opa-evaluation-performance-optimization.md) | OPA 评估性能优化 | 提升策略评估性能 | ⏳ 待补充 |
+| [P-009](wasm-cpu-optimization.md) | Wasm 应用 CPU 使用优化 | 降低 CPU 使用率 | ✅ 已完成 |
+| [P-010](k3s-node-cpu-optimization.md) | K3s 节点 CPU 优化 | 优化节点 CPU 使用 | ✅ 已完成 |
+| [P-011](opa-evaluation-performance-optimization.md) | OPA 评估性能优化 | 提升策略评估性能 | ✅ 已完成 |
 
 ### 3.4 网络性能优化案例
 
 | 编号 | 案例标题 | 优化目标 | 状态 |
 |-----|---------|---------|------|
-| [P-012](pod-communication-optimization.md) | Pod 间通信优化 | 降低 Pod 间通信延迟 | ⏳ 待补充 |
-| [P-013](service-mesh-latency-optimization.md) | Service Mesh 延迟优化 | 降低 Service Mesh 延迟开销 | ⏳ 待补充 |
+| [P-012](pod-communication-optimization.md) | Pod 间通信优化 | 降低 Pod 间通信延迟 | ✅ 已完成 |
+| [P-013](service-mesh-latency-optimization.md) | Service Mesh 延迟优化 | 降低 Service Mesh 延迟开销 | ✅ 已完成 |
 
 ### 3.5 存储性能优化案例
 
 | 编号 | 案例标题 | 优化目标 | 状态 |
 |-----|---------|---------|------|
-| [P-014](pvc-read-write-optimization.md) | PVC 读写性能优化 | 提升 PVC 读写性能 | ⏳ 待补充 |
-| [P-015](image-storage-optimization.md) | 镜像存储优化 | 优化镜像存储性能 | ⏳ 待补充 |
+| [P-014](pvc-read-write-optimization.md) | PVC 读写性能优化 | 提升 PVC 读写性能 | ✅ 已完成 |
+| [P-015](image-storage-optimization.md) | 镜像存储优化 | 优化镜像存储性能 | ✅ 已完成 |
 
 ---
 

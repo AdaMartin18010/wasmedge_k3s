@@ -91,7 +91,7 @@
 | [K-003](k3s-storage-volume-mount-failed.md) | K3s 存储卷挂载失败 | 中等 | ✅ 已完成 |
 | [K-004](k3s-network-policy-not-effective.md) | K3s 网络策略不生效 | 中等 | ⏳ 待补充 |
 | [K-005](k3s-control-plane-high-load.md) | K3s 控制平面高负载 | 中等 | ⏳ 待补充 |
-| [K-006](k3s-certificate-expired.md) | K3s 证书过期问题 | 严重 | ⏳ 待补充 |
+| [K-006](k3s-certificate-expired.md) | K3s 证书过期问题 | 严重 | ✅ 已完成 |
 
 ### 3.3 OPA/Gatekeeper 故障案例
 
@@ -99,23 +99,23 @@
 |-----|---------|---------|------|
 | [O-001](gatekeeper-webhook-timeout.md) | Gatekeeper Webhook 超时 | 严重 | ✅ 已完成 |
 | [O-002](opa-policy-evaluation-failed.md) | OPA 策略评估失败 | 中等 | ✅ 已完成 |
-| [O-003](gatekeeper-policy-update-delayed.md) | Gatekeeper 策略更新延迟 | 中等 | ⏳ 待补充 |
-| [O-004](opa-performance-issue.md) | OPA 性能问题 | 轻微 | ⏳ 待补充 |
+| [O-003](gatekeeper-policy-update-delayed.md) | Gatekeeper 策略更新延迟 | 中等 | ✅ 已完成 |
+| [O-004](opa-performance-issue.md) | OPA 性能问题 | 轻微 | ✅ 已完成 |
 
 ### 3.4 网络故障案例
 
 | 编号 | 案例标题 | 严重程度 | 状态 |
 |-----|---------|---------|------|
 | [N-001](pod-cross-node-communication-failed.md) | Pod 跨节点通信失败 | 严重 | ✅ 已完成 |
-| [N-002](service-unreachable.md) | Service 无法访问 | 严重 | ⏳ 待补充 |
-| [N-003](ingress-routing-error.md) | Ingress 路由错误 | 中等 | ⏳ 待补充 |
+| [N-002](service-unreachable.md) | Service 无法访问 | 严重 | ✅ 已完成 |
+| [N-003](ingress-routing-error.md) | Ingress 路由错误 | 中等 | ✅ 已完成 |
 
 ### 3.5 存储故障案例
 
 | 编号 | 案例标题 | 严重程度 | 状态 |
 |-----|---------|---------|------|
 | [S-001](pvc-mount-failed.md) | PVC 挂载失败 | 严重 | ✅ 已完成 |
-| [S-002](storage-performance-issue.md) | 存储性能问题 | 中等 | ⏳ 待补充 |
+| [S-002](storage-performance-issue.md) | 存储性能问题 | 中等 | ✅ 已完成 |
 
 ---
 
