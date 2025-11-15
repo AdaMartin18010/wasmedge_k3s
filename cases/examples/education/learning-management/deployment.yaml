@@ -1,0 +1,61 @@
+# 学习管理系统 Kubernetes Deployment 配置
+# 用途：部署学习管理服务到边缘 K3s 集群
+# 创建日期：2025-11-15
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: learning-management-system
+  namespace: default
+  labels:
+    app: learning-management-system
+    version: v1.0.0
+spec:
+  replicas: 60
+  selector:
+    matchLabels:
+      app: learning-management-system
+  template:
+    metadata:
+      labels:
+        app: learning-management-system
+        version: v1.0.0
+    spec:
+      # 使用 WasmEdge RuntimeClass
+      runtimeClassName: wasmedge
+      nodeSelector:
+        node-type: edge
+      containers:
+      - name: learning-management-system
+        image: registry.example.com/learning-management-system:latest
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 200m
+            memory: 256Mi
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+        env:
+        - name: LOG_LEVEL
+          value: "info"
+        - name: PORT
+          value: "8080"
+        - name: SYNC_ENABLED
+          value: "true"
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10

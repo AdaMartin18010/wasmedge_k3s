@@ -1,0 +1,61 @@
+# 交易系统 Kubernetes Deployment 配置
+# 用途：部署交易服务到边缘 K3s 集群
+# 创建日期：2025-11-15
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: trading-service
+  namespace: default
+  labels:
+    app: trading-service
+    version: v1.0.0
+spec:
+  replicas: 100
+  selector:
+    matchLabels:
+      app: trading-service
+  template:
+    metadata:
+      labels:
+        app: trading-service
+        version: v1.0.0
+    spec:
+      # 使用 WasmEdge RuntimeClass
+      runtimeClassName: wasmedge
+      nodeSelector:
+        node-type: edge
+      containers:
+      - name: trading-service
+        image: registry.example.com/trading-service:latest
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 500m
+            memory: 512Mi
+          limits:
+            cpu: 2000m
+            memory: 2Gi
+        env:
+        - name: LOG_LEVEL
+          value: "info"
+        - name: PORT
+          value: "8080"
+        - name: LOW_LATENCY_MODE
+          value: "true"
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
+          initialDelaySeconds: 3
+          periodSeconds: 10

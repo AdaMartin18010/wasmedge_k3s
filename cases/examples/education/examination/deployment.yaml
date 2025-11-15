@@ -1,0 +1,63 @@
+# 考试系统 Kubernetes Deployment 配置
+# 用途：部署考试服务到边缘 K3s 集群
+# 创建日期：2025-11-15
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: examination-system
+  namespace: default
+  labels:
+    app: examination-system
+    version: v1.0.0
+spec:
+  replicas: 40
+  selector:
+    matchLabels:
+      app: examination-system
+  template:
+    metadata:
+      labels:
+        app: examination-system
+        version: v1.0.0
+    spec:
+      # 使用 WasmEdge RuntimeClass
+      runtimeClassName: wasmedge
+      nodeSelector:
+        node-type: edge
+      containers:
+      - name: examination-system
+        image: registry.example.com/examination-system:latest
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 200m
+            memory: 256Mi
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+        env:
+        - name: LOG_LEVEL
+          value: "info"
+        - name: PORT
+          value: "8080"
+        - name: ANTI_CHEAT_ENABLED
+          value: "true"
+        - name: MODEL_PATH
+          value: "/models/anti-cheat-model.wasm"
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10

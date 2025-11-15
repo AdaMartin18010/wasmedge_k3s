@@ -1,0 +1,84 @@
+# 银行核心系统 Kubernetes Deployment 配置
+# 用途：部署银行核心服务到 K3s 集群
+# 创建日期：2025-11-15
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bank-core-service
+  namespace: default
+  labels:
+    app: bank-core-service
+    version: v1.0.0
+spec:
+  replicas: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: bank-core-service
+  template:
+    metadata:
+      labels:
+        app: bank-core-service
+        version: v1.0.0
+    spec:
+      # 使用 WasmEdge RuntimeClass
+      runtimeClassName: wasmedge
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - bank-core-service
+                topologyKey: kubernetes.io/hostname
+      containers:
+      - name: bank-core-service
+        image: registry.example.com/bank-core-service:latest
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 200m
+            memory: 256Mi
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+        env:
+        - name: LOG_LEVEL
+          value: "info"
+        - name: PORT
+          value: "8080"
+        - name: DB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: bank-core-secret
+              key: db-host
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: bank-core-secret
+              key: db-password
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10

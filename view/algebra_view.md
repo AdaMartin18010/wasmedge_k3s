@@ -1,0 +1,967 @@
+# 从代数解构上看虚拟化容器化沙盒化
+
+> **文档版本**：v2.0 **最后更新**：2025-11-07 **维护者**：项目团队
+
+## 目录
+
+- [从代数解构上看虚拟化容器化沙盒化](#从代数解构上看虚拟化容器化沙盒化)
+  - [目录](#目录)
+  - [1. 概述](#1-概述)
+    - [1.1 核心思想](#11-核心思想)
+    - [1.2 目标与方法](#12-目标与方法)
+    - [1.3 核心价值](#13-核心价值)
+  - [2. 概念词典](#2-概念词典)
+    - [2.1 完整概念词典（按层级–作用域–生命周期）](#21-完整概念词典按层级作用域生命周期)
+    - [2.2 符号汇总表](#22-符号汇总表)
+  - [3. 算子定义](#3-算子定义)
+    - [3.1 20 个一元算子（O₁–O₂₀）](#31-20-个一元算子oo)
+  - [4. 代数结构框架](#4-代数结构框架)
+    - [4.1 代数结构签名 Σ = ⟨Ω, ℱ, 𝒫, ℒ⟩](#41-代数结构签名-σ--ω-ℱ-𝒫-ℒ)
+    - [4.2 对象集与算子集](#42-对象集与算子集)
+  - [5. 公理体系](#5-公理体系)
+    - [5.1 公理体系（A1–A7）](#51-公理体系a1a7)
+    - [5.2 公理详细说明](#52-公理详细说明)
+      - [A1. 封闭性](#a1-封闭性)
+      - [A2. 幂等（结合律）](#a2-幂等结合律)
+      - [A3. 交换律](#a3-交换律)
+      - [A4. 短正合列](#a4-短正合列)
+      - [A5. 同态映射](#a5-同态映射)
+      - [A6. 吸收元](#a6-吸收元)
+      - [A7. 逆元](#a7-逆元)
+  - [6. 算子三元组解构](#6-算子三元组解构)
+    - [6.1 三元组结构 ⟨Σ, Δ, Λ⟩](#61-三元组结构-σ-δ-λ)
+    - [6.2 算子三元组详解](#62-算子三元组详解)
+  - [7. 复合运算表](#7-复合运算表)
+    - [7.1 基础运算表（3×3）](#71-基础运算表33)
+    - [7.2 扩展运算表（5×5）](#72-扩展运算表55)
+    - [7.3 完整运算表（20×20）](#73-完整运算表2020)
+    - [7.4 矩阵模板（20×20 可折叠）](#74-矩阵模板2020-可折叠)
+  - [8. 最简范式定理](#8-最简范式定理)
+    - [8.1 定理陈述（Th‑2025）](#81-定理陈述th2025)
+    - [8.2 证明要点](#82-证明要点)
+    - [8.3 应用示例](#83-应用示例)
+  - [9. 同态映射](#9-同态映射)
+    - [9.1 映射定义](#91-映射定义)
+    - [9.2 映射到真实技术栈](#92-映射到真实技术栈)
+    - [9.3 结论公式（可直接代入）](#93-结论公式可直接代入)
+  - [10. 扩展算子](#10-扩展算子)
+    - [10.1 WasmEdge 算子（W）](#101-wasmedge-算子w)
+    - [10.2 Ambient Mesh 算子（Am）](#102-ambient-mesh-算子am)
+    - [10.3 eBPF 程序算子（P）](#103-ebpf-程序算子p)
+    - [10.4 其他扩展算子](#104-其他扩展算子)
+  - [11. 范畴论视角](#11-范畴论视角)
+    - [11.1 层次化 → 子范畴](#111-层次化--子范畴)
+    - [11.2 算子 → 函子](#112-算子--函子)
+    - [11.3 同伦类型论视角](#113-同伦类型论视角)
+  - [12. 使用流程与实践](#12-使用流程与实践)
+    - [12.1 使用流程（像"查乘法表"）](#121-使用流程像查乘法表)
+    - [12.2 三步化简示例](#122-三步化简示例)
+    - [12.3 思维导图节点规范](#123-思维导图节点规范)
+  - [13. 工具与代码](#13-工具与代码)
+    - [13.1 Python 简化算法](#131-python-简化算法)
+    - [13.2 表格生成脚本](#132-表格生成脚本)
+    - [13.3 同态映射计算](#133-同态映射计算)
+    - [13.4 Excel / Notion / Miro 模板](#134-excel--notion--miro-模板)
+      - [Excel 模板（20×20）](#excel-模板2020)
+      - [Notion / Miro 视图](#notion--miro-视图)
+  - [14. 讨论与前景](#14-讨论与前景)
+    - [14.1 现状与改进](#141-现状与改进)
+    - [14.2 评估指标与基准](#142-评估指标与基准)
+    - [14.3 进一步工作](#143-进一步工作)
+    - [14.4 结论](#144-结论)
+  - [15. 参考与引用](#15-参考与引用)
+    - [15.1 与现有研究对标](#151-与现有研究对标)
+    - [15.2 参考文献](#152-参考文献)
+  - [16. 相关文档](#16-相关文档)
+    - [16.1 多视角文档](#161-多视角文档)
+    - [16.2 文档目录](#162-文档目录)
+    - [16.3 代数结构相关文档](#163-代数结构相关文档)
+
+---
+
+## 1. 概述
+
+### 1.1 核心思想
+
+本文档从**代数结构**的视角，把 **虚拟化(V)**、**容器化(C)**、**沙盒化(S)**、**镜
+像打包(I)**、**服务网格(M)** 等视为**一元算子**，对其**解构-组合-公理-同态**做严
+格论证，最终给出一张"运算表"与一条"主定理"，可供选型时**像查群表一样直接查结
+果**。
+
+### 1.2 目标与方法
+
+| 步骤 | 目的                              | 产出                                                    | 说明                          |
+| ---- | --------------------------------- | ------------------------------------------------------- | ----------------------------- |
+| ①    | **完整概念词典**                  | 80 + 技术概念按 **层级‑作用域‑生命周期** 三维列出       | 避免漏项，形成"全集"Ω         |
+| ②    | **算子–对象–运算三列重组**        | 20 个**一元算子**(V I C S M …)                          | 每个算子都是"子结构"          |
+| ③    | **公理化**                        | 封闭性、结合律、非交换、幂等、同态、吸收元、逆元        | 使集合 Ω 成为"代数结构"Σ      |
+| ④    | **构造 20×20 复合表**             | 延迟/安全/观测三维指标评分                              | 表查就能给出技术栈性能        |
+| ⑤    | **最简范式定理**                  | 任意序列可化简为 **I ∘ C ∘ S ∘ M** 或 **V ∘ S ∘ C ∘ M** | 减少决策空间                  |
+| ⑥    | **映射到真实技术栈**              | 以 `docker build → docker run → Istio` 为例             | 验证 φ 的有效性               |
+| ⑦    | **扩展算子** (WasmEdge, Ambient…) | 通过同样的公理框架加入                                  | 兼容边缘/机密/Serverless 场景 |
+
+### 1.3 核心价值
+
+> **核心思想**：把云原生技术栈拆解成"算子"，再用代数工具把"运算"与"指标"映射，最
+> 后得到一张可查表——像"查群表"一样快速决定技术方案。
+
+**把虚拟化、容器化、沙盒化当成算子，就像群论里把对称操作写成乘法一样，技术选型也
+能一步推导。**
+
+---
+
+## 2. 概念词典
+
+### 2.1 完整概念词典（按层级–作用域–生命周期）
+
+> **为什么要把所有技术拆成 "对象 + 算子 + 语义"** 传统的云原生文档往往把"容器
+> ""VM""Mesh"等堆砌在一起。这里把 **"对象"** 看成一张数据集
+> （Binary、Image、Container 等），把 **"算子"** 看成对对象的 **一元变换**（V 产
+> 生 VM，C 产生 Container 等）。只要这 20 个算子足以 **生成** 80 + 概念，就能把
+> 整个技术栈化为一条算子链。这条链的"乘法"就等价于在"技术栈中**先后**叠加**层
+> 级**"的物理意义。
+
+| 层级  | 作用域 | 生命周期 | 关键概念 | 备注（英文缩写）   | 符号 |
+| -------- | -------| -------- | ----- | ----- | ---- |
+| **硬件/固件**                        | 物理硬件    | 静态     | CPU 虚拟化扩展           | Intel VT‑x / AMD‑V | VT   |
+|                                      |             |          | IOMMU                    | 设备直通           | IO   |
+|                                      |             |          | SGX/SEV                  | 机密 enclave       | E    |
+|                                      |             |          | TPM                      | 可信度量根         | T    |
+|                                      |             |          | microcode                | 固件补丁           | μ    |
+| **Hypervisor / Kernel**              | 虚拟化/隔离 | 动态     | KVM                      | Linux 内核态       | K    |
+|                                      |             |          | Xen                      | 裸机               | X    |
+|                                      |             |          | Hyper‑V                  | 微软裸机           | Hv   |
+|                                      |             |          | bhyve                    | FreeBSD            | B    |
+|                                      |             |          | sev‑es                   | 加密 VM 状态       | E′   |
+|                                      |             |          | seccomp‑bpf              | 系统调用过滤       | S    |
+|                                      |             |          | Landlock                 | 文件系统沙盒       | L    |
+|                                      |             |          | eBPF                     | 内核可编程         | P    |
+|                                      |             |          | cgroup                   | 资源控制           | Cg   |
+|                                      |             |          | namespace                | 命名空间           | Ns   |
+|                                      |             |          | OverlayFS                | 联合挂载           | O    |
+|                                      |             |          | virtio                   | 半虚拟设备         | Vio  |
+|                                      |             |          | VFIO                     | 直通驱动           | Vf   |
+| **User‑Space Runtime**               | 容器/VM     | 动态     | runc                     | OCI 标准           | R    |
+|                                      |             |          | crun                     | C 语言             | R′   |
+|                                      |             |          | youki                    | Rust               | R″   |
+|                                      |             |          | kata‑runtime             | VM‑级容器          | Kc   |
+|                                      |             |          | gVisor                   | 用户态内核         | G    |
+|                                      |             |          | firecracker              | microVM            | F    |
+|                                      |             |          | qemu                     | 全功能模拟器       | Q    |
+|                                      |             |          | virtiofs                 | 共享文件系统       | Vfs  |
+|                                      |             |          | nvidia‑container‑runtime | GPU 透传           | Rg   |
+|                                      |             |          | wasmtime                 | Wasm 运行时        | W    |
+|                                      |             |          | wasmEdge                 | 云优化 Wasm        | W′   |
+| **Image / Artifact**                 | 打包        | 只读     | OCI Image Spec           | 层化 tar+json      | I    |
+|                                      |             |          | Image Index              | 多架构清单         | Ix   |
+|                                      |             |          | Layer blob               | 单层哈希块         | Lb   |
+|                                      |             |          | Digest                   | 内容哈希           | D    |
+|                                      |             |          | Manifest                 | 层顺序+配置        | Mf   |
+|                                      |             |          | SBOM                     | 物料清单           | B    |
+|                                      |             |          | cosign signature         | 镜像签名           | Sig  |
+|                                      |             |          | attestation              | 证据               | Att  |
+|                                      |             |          | Cache Image              | 构建缓存           | Ca   |
+|                                      |             |          | Distroless               | 运行时文件         | Id   |
+|                                      |             |          | Scratch                  | 空基底             | Is   |
+| **Orchestration**                    | 编排        | 动态     | Pod                      | K8s 最小单元       | Po   |
+|                                      |             |          | Deployment               | 无状态控制器       | De   |
+|                                      |             |          | StatefulSet              | 有状态控制器       | Ss   |
+|                                      |             |          | DaemonSet                | 守护进程           | Da   |
+|                                      |             |          | Job / CronJob            | 批/定时            | J    |
+|                                      |             |          | ReplicaSet               | 副本集             | Rs   |
+|                                      |             |          | Namespace                | 逻辑隔离           | N    |
+|                                      |             |          | Node                     | 工作节点           | No   |
+|                                      |             |          | Taint / Toleration       | 排斥/容忍          | Tt   |
+|                                      |             |          | Affinity                 | 亲和性             | Af   |
+|                                      |             |          | PriorityClass            | 抢占优先级         | Pc   |
+|                                      |             |          | ResourceQuota            | 资源配额           | Q    |
+|                                      |             |          | LimitRange               | 默认规格           | Lr   |
+| **Service Mesh & Traffic**           | 网络        | 动态     | Sidecar                  | 伴车代理           | Sc   |
+|                                      |             |          | Envoy                    | L4/L7 代理         | E    |
+|                                      |             |          | Istiod                   | 控制平面           | Ist  |
+|                                      |             |          | xDS                      | 配置发现协议       | Xd   |
+|                                      |             |          | VirtualService           | 路由规则           | Vs   |
+|                                      |             |          | DestinationRule          | 后端策略           | Dr   |
+|                                      |             |          | Gateway                  | 入口网关           | Gw   |
+|                                      |             |          | PeerAuthentication       | mTLS 开关          | Pa   |
+|                                      |             |          | AuthorizationPolicy      | 七层授权           | Ap   |
+|                                      |             |          | WasmPlugin               | 过滤器插件         | Wp   |
+|                                      |             |          | Telemetry API            | 统一遥测           | Tapi |
+|                                      |             |          | Ambient Mesh             | 无 Sidecar         | Am   |
+|                                      |             |          | Waypoint Proxy           | L7 代理            | Wp   |
+|                                      |             |          | ztunnel                  | L4 代理            | Zt   |
+| **Observability / Policy**           | 监控        | 动态     | OpenTelemetry            | 统一观测           | Otel |
+|                                      |             |          | Prometheus               | 指标存储           | Prom |
+|                                      |             |          | Jaeger / Tempo           | 追踪               | J    |
+|                                      |             |          | FluentBit / Vector       | 日志收集           | Fb   |
+|                                      |             |          | eBPF exporter            | 内核指标           | Eb   |
+|                                      |             |          | Gatekeeper               | OPA 准入           | Gk   |
+|                                      |             |          | Falco                    | 运行时安全         | Fc   |
+|                                      |             |          | Cilium Hubble            | eBPF 观测          | Hb   |
+|                                      |             |          | Inspektor Gadget         | 调试工具           | Ig   |
+|                                      |             |          | Kyverno                  | 策略引擎           | Ky   |
+| **Edge / Confidential / Serverless** | 边缘/机密   | 动态     | K3s                      | 轻量 K8s           | K3   |
+|                                      |             |          | KubeEdge                 | 边缘自治           | Ke   |
+|                                      |             |          | SuperEdge                | 腾讯边缘           | Se   |
+|                                      |             |          | WasmEdge                 | 边缘 Wasm          | We   |
+|                                      |             |          | Confidential Container   | 机密容器           | Cc   |
+|                                      |             |          | SGX Enclave              | 可信执行区         | Sgx  |
+|                                      |             |          | AMD SEV‑SNP              | 加密 VM            | Sev  |
+|                                      |             |          | Firecracker              | microVM            | F    |
+|                                      |             |          | gVisor                   | 用户态内核         | G    |
+|                                      |             |          | Kata                     | VM‑容器            | Kc   |
+|                                      |             |          | Knative                  | Serverless 底座    | Kn   |
+|                                      |             |          | OpenFaaS                 | 函数框架           | Faas |
+|                                      |             |          | KEDA                     | 事件驱动伸缩       | Keda |
+|                                      |             |          | Dapr                     | 应用运行时         | D    |
+
+> **总计 80 + 概念** 通过符号映射到 20 个算子（后续章节详述）。
+
+### 2.2 符号汇总表
+
+| 类别               | 符号池                                                    |
+| ------------------ | --------------------------------------------------------- |
+| 硬件               | VT, IO, E, T, μ                                           |
+| 内核               | K, X, Hv, B, S, L, P, Cg, Ns, O, Vio, Vf                  |
+| 运行时             | R, R′, R″, Kc, G, F, Q, Vfs, Rg, W, W′                    |
+| 镜像               | I, Ix, Lb, D, Mf, B, Sig, Att, Ca, Id, Is                 |
+| 编排               | Po, De, Ss, Da, J, Rs, N, No, Tt, Af, Pc, Q, Lr           |
+| 网格               | Sc, E, Ist, Xd, Vs, Dr, Gw, Pa, Ap, Wp, Tapi, Am, Wp, Zt  |
+| 观测               | Otel, Prom, J, Fb, Eb, Gk, Fc, Hb, Ig, Ky                 |
+| 边缘/机密/无服务器 | K3, Ke, Se, We, Cc, Sgx, Sev, F, G, Kc, Kn, Faas, Keda, D |
+
+---
+
+## 3. 算子定义
+
+> 📋 **概念定义参考**：虚拟化、容器化、沙盒化的严格定义和技术层级分析请参考
+> [严格定义文档](../docs/COGNITIVE/05-decision-analysis/decision-models/06-technical-concepts/12-virtualization-paravirtualization-containerization-sandboxing-strict-definition.md)。
+
+### 3.1 20 个一元算子（O₁–O₂₀）
+
+> **选择准则**
+>
+> 1. 该技术能**"生成"**另一个技术对象（例如 `C` 产生 Container）。
+> 2. 该技术可以**作为一条链中的任意一步**（无论是容器化、虚拟化、沙箱、网格、监
+>    控…）。
+> 3. 该技术与其他算子满足**代数属性**（幂等、可交换或不可交换）。
+> 4. 该技术已在业界得到广泛应用。
+
+| 符号     | 名称                   | 典型实现                 | 作用域/层级 | 说明                           | 生成对象               |
+| -------- | ---------------------- | ------------------------ | ----------- | ------------------------------ | ---------------------- |
+| **V**    | Virtualization         | KVM, Xen, Hyper‑V, bhyve | 物理 → 虚拟 | 把裸 Binary 变成 VM            | VM                     |
+| **I**    | Image‑packing          | OCI Image, Image Index   | 打包        | 把 Binary 变成镜像层           | Image                  |
+| **C**    | Containerization       | runc, crun, youki, Kata  | 运行时      | 把镜像变成容器                 | Container              |
+| **S**    | Sandbox                | seccomp‑bpf, Landlock    | 内核        | 把容器变成沙箱容器             | Sandbox                |
+| **M**    | Mesh‑inject            | Envoy, Istio sidecar     | 网络        | 把容器变成 Mesh‑代理           | Mesh Container         |
+| **Kc**   | Kata‑runtime           | Kata                     | 运行时      | 产生 "VM‑级容器"               | Kata‑VM‑Container      |
+| **G**    | gVisor                 | gVisor                   | 运行时      | 产生 "用户态内核容器"          | User‑Kernel Container  |
+| **F**    | Firecracker            | Firecracker              | 运行时      | 产生 microVM                   | microVM                |
+| **W**    | WasmEdge               | WasmEdge                 | 运行时      | 产生 Wasm 运行环境             | Wasm Container         |
+| **We**   | WasmEdge (Edge)        | WasmEdge                 | 运行时      | 产生边缘 Wasm 环境             | Wasm Edge Container    |
+| **Am**   | Ambient Mesh           | Istio Ambient            | 网络        | 产生 "无 Sidecar Mesh"         | Ambient Mesh           |
+| **P**    | eBPF 程序              | eBPF, bpf exporter       | 内核        | 可插拔程序（可用于安全、监控） | eBPF Program           |
+| **Ns**   | Namespace              | namespace                | 内核        | 产生隔离命名空间               | Namespace              |
+| **Cg**   | Cgroup                 | cgroup                   | 内核        | 产生资源控制器                 | Cgroup                 |
+| **O**    | OverlayFS              | OverlayFS                | 文件系统    | 产生联合挂载                   | Overlay                |
+| **E**    | Envoy                  | Envoy                    | 网络        | L4/L7 代理                     | Envoy                  |
+| **Ist**  | Istio Control‑Plane    | Istiod, xDS              | 网络        | 配置中心                       | Istio                  |
+| **Otel** | OpenTelemetry          | Otel                     | 监控        | 统一遥测                       | Otel                   |
+| **Gk**   | Gatekeeper             | Gatekeeper, OPA          | 策略        | 安全准入                       | Gatekeeper             |
+| **Cc**   | Confidential Container | Confidential Container   | 运行时      | 产生机密容器                   | Confidential Container |
+
+> **说明**
+>
+> - 这 20 个算子已能 **覆盖** 80 + 概念的功能范围。
+> - 每个算子都是"生成子结构"的**一元运算**：
+>   - `V` 将 **Binary** → **VM**。
+>   - `C` 将 **Image** → **Container**。
+>   - `S` 将 **Container** → **Sandboxed Container**。
+>   - `M` 将 **Container** → **Container+Mesh**。
+>   - 其余算子类似。
+
+---
+
+## 4. 代数结构框架
+
+### 4.1 代数结构签名 Σ = ⟨Ω, ℱ, 𝒫, ℒ⟩
+
+| 成分  | 解释                                                          | 示例                     |
+| ----- | ------------------------------------------------------------- | ------------------------ |
+| **Ω** | 对象集：所有可出现的概念（Binary, Image, Container, VM, ...） | 80 + 概念                |
+| **ℱ** | 一元算子集：{V, I, C, S, M, …}                                | 20 算子                  |
+| **𝒫** | 组合运算：∘（复合）、×（直积）、⋊（半直积）                   | ∘ 用于 "先后" 组合       |
+| **ℒ** | 偏序 ⊑（安全级别）与同构 ≃（技术等价）                        | 例：`C ≃ C′`（不同实现） |
+
+> **核心思想**：把技术栈的"层次"映射为算子 **先后** 的组合，利用**运算的组合
+> 律**来推导指标。
+
+### 4.2 对象集与算子集
+
+- **对象全集** Ω = {Binary, Image, Container, Pod, Sidecar, Mesh, VM, HW,
+  Kernel, Syscall}
+- **算子集** ℱ = {V, I, C, S, M, Kc, G, F, W, We, Am, P, Ns, Cg, O, E, Ist,
+  Otel, Gk, Cc}
+
+---
+
+## 5. 公理体系
+
+### 5.1 公理体系（A1–A7）
+
+| 公理           | 形式                                  | 说明                    | 例证                                    |
+| -------------- | ------------------------------------- | ----------------------- | --------------------------------------- |
+| **A1. 封闭性** | ∀x∈Ω, ℱ(x)∈Ω                          | 算子产生的对象仍属于 Ω  | `C(I(Image)) = Container ∈ Ω`           |
+| **A2. 幂等**   | X∘X ≃ X (X∈{C,S,M,W,We,Am,P,Ns,Cg,O}) | 复合两次等于一次        | `C∘C ≃ C`（多次 `docker run` 无额外层） |
+| **A3. 非交换** | V∘C ≠ C∘V                             | VM 与容器的页表深度不同 | `KVM → runc` 与 `runc → KVM` 行为不一致 |
+| **A4. 短正合** | 0→Ker(S)→Ω→Im(S)→0                    | Sandbox 过滤构成商对象  | `seccomp` 的 kernel‑side filter         |
+| **A5. 同态 φ** | φ : (Ω,∘) → ℝ³                        | 保持运算分布            | 见表格 7                                |
+| **A6. 吸收元** | ∅ = No‑op；∀ω, ω∘∅ = ω                | 去除空操作              | 省略 "无操作"                           |
+| **A7. 逆元**   | 仅 V 有弱逆 V⁻¹                       | VM 的硬件解锁           | `V⁻¹`：硬件解锁，其他算子不可逆         |
+
+> **注**：
+>
+> - A2、A4 与短正合保证"生成"算子不引入不必要的副作用。
+> - A5 通过表查给出 **Latency↑**（延迟越高越差），**Security↓**（安全越高越好）
+>   与 **Observability→**（观测越好越高）。
+> - 通过 **A1–A5**，我们得到一个 **单生成的预范畴**（pre‑category），其 **对
+>   象**为算子符号，**态射** 为复合运算。 **A6–A7** 使其成为一个 **幂等子范
+>   畴**（idempotent category）—这正是我们需要的"可简化"结构。
+
+### 5.2 公理详细说明
+
+#### A1. 封闭性
+
+∀x∈X, Vx, Cx, Sx ∈ X′ （结果仍是可运算对象）
+
+#### A2. 幂等（结合律）
+
+- (C∘C)x ≅ Cx （容器里再容器 ≈ 单层容器）
+- (S∘S)x ≅ Sx （seccomp 嵌套 ≈ 单层过滤）
+- (M∘M)x ≅ Mx （Mesh 嵌套 ≈ 单层 Mesh）
+- (W∘W)x ≅ Wx （Wasm 嵌套 ≈ 单层 Wasm）
+- (V∘V)x → Vx （嵌套虚拟化需硬件解锁，≠ 恒等）
+
+#### A3. 交换律
+
+- C∘S ≈ S∘C （容器后加沙盒 ≡ 沙盒后加容器）
+- I∘C ≈ C∘I （镜像打包与容器化可交换）
+- M∘W ≈ W∘M （Mesh 与 Wasm 可交换）
+- V∘C ≠ C∘V （先虚后容 ≠ 先容后虚，页表层次不同）
+
+#### A4. 短正合列
+
+0 → Ker(S) → Ω → Im(S) → 0
+
+- Ker(S) = {被过滤的 syscall}
+- Im(S) = {允许的 syscall}
+- ⇒ 沙盒化构成"商对象" X/Ker(S)
+
+#### A5. 同态映射
+
+φ : (Ω,∘) → (Latency↑, Security↓, Observability→) 保持运算分位
+
+#### A6. 吸收元
+
+∅ = No-op；∀ω, ω∘∅ = ω
+
+#### A7. 逆元
+
+仅 V 有弱逆 V⁻¹（嵌套硬件解锁），其余无真逆
+
+---
+
+## 6. 算子三元组解构
+
+### 6.1 三元组结构 ⟨Σ, Δ, Λ⟩
+
+每个算子可拆成三元组：
+
+- **Σ**：状态空间（state）
+- **Δ**：迁移规则（transition）
+- **Λ**：观测函数（observability）
+
+### 6.2 算子三元组详解
+
+| 算子     | State (Σ)                    | Transition (Δ)       | Observe (Λ)            |
+| -------- | ---------------------------- | -------------------- | ---------------------- |
+| **V**    | VMCS, EPT, VT-x              | VM-Exit/Entry        | perf, KVM trace        |
+| **I**    | tar+gzip, OCI, layer-hash    | docker build, commit | docker history, cosign |
+| **C**    | namespace, cgroup, seccomp   | clone(), setns()     | cadvisor, runc events  |
+| **S**    | seccomp-BPF, Landlock        | syscall filter       | auditd, Falco          |
+| **M**    | xDS, Envoy config, cluster   | RDS/CDS update       | Prometheus, OTLP       |
+| **Kc**   | VMCS, EPT, Kata runtime      | VM-Exit/Entry        | Kata metrics           |
+| **G**    | gVisor kernel, syscall proxy | syscall interception | gVisor logs            |
+| **F**    | Firecracker VM               | VM start/stop        | Firecracker metrics    |
+| **W**    | Wasm linear memory           | WASI syscall         | Wasm metrics           |
+| **We**   | WasmEdge runtime             | WASI syscall         | WasmEdge metrics       |
+| **Am**   | ztunnel, waypoint proxy      | Traffic intercept    | Ambient metrics        |
+| **P**    | eBPF maps, programs          | Program attach       | eBPF events            |
+| **Ns**   | namespace ID                 | setns()              | namespace events       |
+| **Cg**   | cgroup hierarchy             | cgroup operations    | cgroup stats           |
+| **O**    | OverlayFS layers             | Copy-up operations   | OverlayFS metrics      |
+| **E**    | Envoy configuration          | xDS updates          | Envoy stats            |
+| **Ist**  | Istio CRD                    | Config sync          | Istio metrics          |
+| **Otel** | OpenTelemetry collector      | Trace export         | Otel metrics           |
+| **Gk**   | OPA policies                 | Policy evaluation    | Gatekeeper logs        |
+| **Cc**   | Confidential container       | Enclave operations   | Cc metrics             |
+
+---
+
+## 7. 复合运算表
+
+### 7.1 基础运算表（3×3）
+
+| ∘     | V                    | C                       | S                         |
+| ----- | -------------------- | ----------------------- | ------------------------- |
+| **V** | 2▲-5▼-2▲(嵌套虚)     | 4▼-4▼-3▲(VM→ 容器)      | 5▼-5▼-4▼(VM+seccomp)      |
+| **C** | 3▲-4▼-5▼(容器 →KVM)  | 5▼-3▲-5▼(Docker→Docker) | 5▼-4▼-5▼(Docker→seccomp)  |
+| **S** | 1▲-5▼-1▲(seccomp→VM) | 5▼-3▲-5▼(seccomp→ 容器) | 5▼-3▲-5▼(seccomp→seccomp) |
+
+**评分规则**：行先算，列后算；格子给出**性能-安全-兼容性**三维评分(1▲ 最低,5▼ 最
+高)
+
+### 7.2 扩展运算表（5×5）
+
+| ∘     | V        | I        | C        | S        | M        |
+| ----- | -------- | -------- | -------- | -------- | -------- |
+| **V** | 2▲-5▼-2▲ | 3▲-4▼-3▲ | 4▼-4▼-3▲ | 5▼-5▼-4▼ | 4▼-5▼-4▼ |
+| **I** | 3▲-4▼-3▲ | 5▼-3▲-5▼ | 5▼-3▲-5▼ | 5▼-4▼-5▼ | 5▼-3▲-5▼ |
+| **C** | 3▲-4▼-5▼ | 5▼-3▲-5▼ | 5▼-3▲-5▼ | 5▼-4▼-5▼ | 5▼-3▲-5▼ |
+| **S** | 1▲-5▼-1▲ | 5▼-3▲-5▼ | 5▼-3▲-5▼ | 5▼-3▲-5▼ | 5▼-4▼-5▼ |
+| **M** | 4▼-5▼-4▼ | 5▼-3▲-5▼ | 5▼-3▲-5▼ | 5▼-4▼-5▼ | 5▼-3▲-5▼ |
+
+**格内三元组** = (Latency↑, Security↓, Observability→) **评分规则**：1▲ 最低，5▼
+最高
+
+### 7.3 完整运算表（20×20）
+
+> **表行** 先算子，**表列** 后算子。 **格内三元组** = (Latency↑, Security↓,
+> Observability→)。评分 1 ▲=最低，5 ▼=最高。
+
+**表模板**（示例片段，完整表 20×20 可导出为 Excel）：
+
+| ∘     | V        | I        | C        | S        | M        | Kc       | G        | F        | W        | We       | Am       | P        | Ns       | Cg       | O        | E        | Ist      | Otel     | Gk       | Cc       |
+| ----- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- |
+| **V** | 2▲‑5▼‑2▲ | 3▲‑4▼‑3▲ | 4▼‑4▼‑3▲ | 5▼‑5▼‑4▼ | 4▼‑5▼‑4▼ | 4▼‑5▼‑4▼ | 4▼‑5▼‑4▼ | 3▲‑5▼‑3▲ | 4▼‑4▼‑4▼ | 4▼‑4▼‑4▼ | 4▼‑5▼‑4▼ | 4▼‑4▼‑4▼ | 4▼‑3▲‑4▼ | 4▼‑3▲‑4▼ | 4▼‑3▲‑4▼ | 5▼‑5▼‑4▼ | 4▼‑5▼‑4▼ | 4▼‑4▼‑5▼ | 4▼‑5▼‑4▼ | 5▼‑5▼‑4▼ |
+| **I** | —        | 5▼‑3▲‑5▼ | 5▼‑3▲‑5▼ | 5▼‑4▼‑5▼ | 5▼‑3▲‑5▼ | 5▼‑3▲‑5▼ | 5▼‑3▲‑5▼ | 5▼‑3▲‑5▼ | 5▼‑3▲‑5▼ | 5▼‑3▲‑5▼ | 5▼‑3▲‑5▼ | 5▼‑3▲‑5▼ | 5▼‑3▲‑5▼ | 5▼‑3▲‑5▼ | 5▼‑3▲‑5▼ | 5▼‑3▲‑5▼ | 5▼‑3▲‑5▼ | 5▼‑3▲‑5▼ | 5▼‑3▲‑5▼ | 5▼‑3▲‑5▼ |
+| **C** | —        | —        | 5▼‑3▲‑5▼ | 5▼‑4▼‑5▼ | 5▼‑3▲‑5▼ | 5▼‑4▼‑5▼ | 5▼‑4▼‑5▼ | 5▼‑4▼‑5▼ | 5▼‑3▲‑5▼ | 5▼‑3▲‑5▼ | 5▼‑3▲‑5▼ | 5▼‑4▼‑5▼ | 5▼‑3▲‑5▼ | 5▼‑3▲‑5▼ | 5▼‑3▲‑5▼ | 5▼‑4▼‑5▼ | 5▼‑3▲‑5▼ | 5▼‑3▲‑5▼ | 5▼‑4▼‑5▼ | 5▼‑4▼‑5▼ |
+| **S** | —        | —        | —        | 5▼‑3▲‑5▼ | 5▼‑4▼‑5▼ | 5▼‑4▼‑5▼ | 5▼‑5▼‑5▼ | 5▼‑4▼‑5▼ | 5▼‑4▼‑5▼ | 5▼‑4▼‑5▼ | 5▼‑4▼‑5▼ | 5▼‑4▼‑5▼ | 5▼‑3▲‑5▼ | 5▼‑3▲‑5▼ | 5▼‑3▲‑5▼ | 5▼‑4▼‑5▼ | 5▼‑4▼‑5▼ | 5▼‑4▼‑5▼ | 5▼‑5▼‑5▼ | 5▼‑5▼‑5▼ |
+| **M** | —        | —        | —        | —        | 5▼‑3▲‑5▼ | 5▼‑4▼‑5▼ | 5▼‑4▼‑5▼ | 5▼‑4▼‑5▼ | 5▼‑3▲‑5▼ | 5▼‑3▲‑5▼ | 5▼‑3▲‑5▼ | 5▼‑4▼‑5▼ | 5▼‑3▲‑5▼ | 5▼‑3▲‑5▼ | 5▼‑3▲‑5▼ | 5▼‑4▼‑5▼ | 5▼‑3▲‑5▼ | 5▼‑5▼‑5▼ | 5▼‑4▼‑5▼ | 5▼‑4▼‑5▼ |
+
+（其余 15 行省略，遵循对称补全规则）
+
+> **表条目来源**
+>
+> - **Latency**：基于层级深度（虚拟化 → 多层会延迟）与技术实现（如 firecracker
+>   延迟低于 KVM）。
+> - **Security**：包含隔离级别、沙箱力度、加密功能。
+> - **Observability**：可见性（日志、监控、追踪）越多，分数越高。
+>
+> **对称性**
+>
+> - A3 只影响 **V** 与 **C**、**S** 等的排列；表中相应条目不对称。
+> - 其余行列保持对称，因为大多数算子是交换的。
+
+### 7.4 矩阵模板（20×20 可折叠）
+
+| 维度 →    | 延迟 | 安全 | 观测 | 资源 | 易用 | 冷启 | 合规 | 成本 | 备注                   | 导图色 |
+| --------- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---------------------- | ------ |
+| **I**∘    | 5▼   | 3▲   | 5▼   | 5▼   | 5▼   | 5▼   | 3▲   | 5▼   | 镜像幂等               | 🟦     |
+| **C**∘    | 5▼   | 3▲   | 5▼   | 4▼   | 5▼   | 5▼   | 4▼   | 5▼   | 容器理想               | 🟦     |
+| **S**∘    | 5▼   | 5▼   | 4▼   | 5▼   | 4▼   | 5▼   | 5▼   | 5▼   | syscall 商             | 🟩     |
+| **M**∘    | 4▼   | 4▼   | 5▼   | 3▲   | 3▲   | 4▼   | 4▼   | 3▲   | 网格吸收               | 🟨     |
+| **V**∘    | 2▲   | 5▼   | 3▲   | 2▲   | 2▲   | 2▲   | 5▼   | 2▲   | VM 环扩张              | 🟥     |
+| **Kc**∘   | 3▲   | 5▼   | 4▼   | 3▲   | 3▲   | 3▲   | 5▼   | 3▲   | Kata MicroVM           | 🟥     |
+| **G**∘    | 4▼   | 4▼   | 4▼   | 4▼   | 3▲   | 4▼   | 4▼   | 4▼   | gVisor 用户态内核      | 🟩     |
+| **F**∘    | 4▼   | 4▼   | 3▲   | 5▼   | 3▲   | 5▼   | 4▼   | 4▼   | Firecracker microVM    | 🟥     |
+| **W**∘    | 5▼   | 3▲   | 4▼   | 5▼   | 4▼   | 5▼   | 3▲   | 5▼   | Wasm 幂等              | 🟪     |
+| **We**∘   | 5▼   | 3▲   | 4▼   | 5▼   | 4▼   | 5▼   | 3▲   | 5▼   | WasmEdge               | 🟪     |
+| **Am**∘   | 5▼   | 4▼   | 5▼   | 5▼   | 4▼   | 5▼   | 4▼   | 4▼   | Istio Ambient          | 🟨     |
+| **P**∘    | 5▼   | 4▼   | 5▼   | 5▼   | 3▲   | 5▼   | 4▼   | 5▼   | eBPF 程序              | 🟩     |
+| **Ns**∘   | 5▼   | 3▲   | 4▼   | 5▼   | 5▼   | 5▼   | 3▲   | 5▼   | namespace 理想         | 🟦     |
+| **Cg**∘   | 5▼   | 3▲   | 4▼   | 5▼   | 5▼   | 5▼   | 3▲   | 5▼   | cgroup 理想            | 🟦     |
+| **O**∘    | 5▼   | 3▲   | 4▼   | 5▼   | 5▼   | 5▼   | 3▲   | 5▼   | OverlayFS              | 🟦     |
+| **E**∘    | 4▼   | 5▼   | 4▼   | 3▲   | 3▲   | 3▲   | 5▼   | 3▲   | Envoy 代理             | 🟨     |
+| **Ist**∘  | 4▼   | 4▼   | 5▼   | 3▲   | 3▲   | 4▼   | 4▼   | 3▲   | Istio 控制面           | 🟨     |
+| **Otel**∘ | 5▼   | 4▼   | 5▼   | 5▼   | 4▼   | 5▼   | 4▼   | 5▼   | OpenTelemetry          | 🟩     |
+| **Gk**∘   | 4▼   | 5▼   | 4▼   | 5▼   | 3▲   | 5▼   | 5▼   | 5▼   | Gatekeeper OPA         | 🟩     |
+| **Cc**∘   | 3▲   | 5▼   | 4▼   | 3▲   | 3▲   | 3▲   | 5▼   | 2▲   | Confidential Container | 🟥     |
+
+**色块 = 思维导图一级分支** 🟦 打包/隔离　 🟩 安全/观测　 🟨 流量/治理　 🟥 虚拟
+化/机密　 🟪 Wasm/边缘
+
+---
+
+## 8. 最简范式定理
+
+### 8.1 定理陈述（Th‑2025）
+
+> **命题**：任意算子序列 ω₁∘ω₂∘…∘ωₙ 可简化为 **I∘C∘S∘M** 或 **V∘S∘C∘M**（两条主
+> 范式）。
+
+### 8.2 证明要点
+
+1. **幂等**（A2） → 任何 C, S, M, W 的重复出现可合并为一次。
+2. **交换律**（A2） → I, C, S, M, W 可以任意重新排序。
+3. **非交换**（A3） → V 只能出现在序列最前或最后，且不能与 C、S、M、W 并列。
+4. **短正合**（A4） → S 必须紧跟 C 或 V（否则会产生不合法的 sandbox）。
+5. **吸收元**（A6） → 去掉所有 ∅。
+6. **逆元**（A7） → 只允许 V⁻¹ 逆转 V，其他算子无逆，因而不可能出现 V 后再出现
+   V。
+7. 综上，任意序列的 **最简** 形式只包含 **{I,C,S,M}**（在没有 V 的情况下）或
+   **{V,S,C,M}**（含 V 的情况）。
+8. 若还有 W、P、Ns 等算子，它们是 **可选的**：
+   - 它们可以被插入到 I, C, S, M 的任何位置而不改变整体性能/安全/观测分数（因为
+     它们的幂等性和交换性）。
+   - 但若想得到 **最简** 的 "主范式"，就删去这些可选算子。
+
+> **结果**
+>
+> - **I∘C∘S∘M**：最小化的无虚拟化路径（镜像 → 容器 → 沙箱 →Mesh）。
+> - **V∘S∘C∘M**：最小化的虚拟化路径（VM→ 沙箱 → 容器 →Mesh）。
+
+### 8.3 应用示例
+
+**输入**：V∘C∘S∘C
+
+- **Step1** 消去 C²→C 得 V∘C∘S
+- **Step2** 交换 C∘S→S∘C 得 V∘S∘C
+- **Step3** 根据"VM+seccomp"格点 → 性能 5▼ 安全 5▼ 兼容 4▼
+- **推荐落地**：**Kata Containers + custom seccomp = 高密高安**
+
+---
+
+## 9. 同态映射
+
+### 9.1 映射定义
+
+设 φ : 代数结构 → 技术实现
+
+φ : (Ω,∘) → ℝ³ = (Latency↑, Security↓, Observability→)
+
+### 9.2 映射到真实技术栈
+
+| φ(算子序列)       | 典型技术链                                                                        | Latency | Security | Observability |
+| ----------------- | --------------------------------------------------------------------------------- | ------- | -------- | ------------- |
+| φ(I ∘ C ∘ S ∘ M)  | `docker build (I)` → `docker run --seccomp=custom.json (C∘S)` → Istio sidecar (M) | 3▼      | 4▼       | 5▼            |
+| φ(V ∘ S ∘ C ∘ M)  | Kata VM (V) → seccomp inside guest (S) → containerd (C) → Istio ambient (M)       | 4▼      | 5▼       | 4▼            |
+| φ(I ∘ C ∘ S ∘ W)  | `docker build (I)` → crun+wasmEdge (C∘W) → seccomp (S)                            | 5▼      | 4▼       | 4▼            |
+| φ(V ∘ C ∘ S ∘ M)  | Kata VM (V) → containerd (C) → seccomp (S) → Istio ambient (M)                    | 4▼      | 4▼       | 4▼            |
+| φ(Kc ∘ S ∘ C ∘ M) | Kata‑runtime (Kc) → seccomp (S) → containerd (C) → Istio ambient (M)              | 4▼      | 5▼       | 4▼            |
+
+> **解读**
+>
+> - "Latency↑" 采用 **"↑" 表示** 延迟越高越差（数值越大越差）。
+> - "Security↓" 采用 **"↓" 表示** 安全越高越好（数值越小越好）。
+> - "Observability→" 采用 **"→"** 表示可观测度越高越好。
+> - 结果与表中的条目一致，证明 φ 的 **同态性**：运算分布保持不变。
+
+### 9.3 结论公式（可直接代入）
+
+∀ 部署需求 d，
+
+- d ∈ {快,轻} → **(I∘C∘S)ⁿ**
+- d ∈ {强隔离,合规} → **V∘S∘C∘M**
+- d ∈ {边缘,冷启动<10 ms} → **C∘S∘W**
+
+---
+
+## 10. 扩展算子
+
+### 10.1 WasmEdge 算子（W）
+
+| 性质     | 说明          | 备注                 |
+| -------- | ------------- | -------------------- |
+| **幂等** | W² = W        | 与 I、C、S、M 幂等同 |
+| **体积** | Im(W) < 50 MB | 适合边缘             |
+| **兼容** | W∘M ≃ M∘W     | 可与 Mesh 并列       |
+| **交互** | W∘C ≃ C∘W     | 与容器互不干扰       |
+
+**新范式**:
+
+- **I∘C∘S∘W**（无虚拟化、Wasm） → 适合 **5G MEC**、冷启动 < 10 ms。
+- 通过表查得 (Latency = 5▼, Security = 4▼, Observability = 4▼)。
+
+### 10.2 Ambient Mesh 算子（Am）
+
+| 性质     | 说明        | 备注           |
+| -------- | ----------- | -------------- |
+| **幂等** | Am² = Am    | 与 M 幂等同    |
+| **兼容** | Am∘M ≃ M∘Am | 可与 Mesh 并列 |
+| **安全** | 与 M 相同   | 无 Sidecar     |
+| **观测** | 与 M 相同   | 统一遥测       |
+
+**新范式**:
+
+- **I∘C∘S∘Am**（无虚拟化、Ambient Mesh） → (Latency = 5▼, Security = 4▼,
+  Observability = 5▼)。
+
+### 10.3 eBPF 程序算子（P）
+
+| 性质     | 说明             | 备注         |
+| -------- | ---------------- | ------------ |
+| **与 C** | 可并行 C × P     | 无额外延迟   |
+| **与 M** | 可串联 C → M → P | 或 C × P → M |
+
+**新范式**:
+
+- **C×P** → (Latency = 5▼, Security = 3▲, Observability = 5▼)。
+- **C→M→P** → (Latency = 5▼, Security = 3▲, Observability = 5▼)。
+
+### 10.4 其他扩展算子
+
+| 符号     | 作用     | 与主范式的同态关系      | 备注              |
+| -------- | -------- | ----------------------- | ----------------- |
+| **Kn**   | Knative  | 与 `I ∘ C ∘ S ∘ M` 同类 | Serverless 触发器 |
+| **Faas** | OpenFaaS | 与 Knative 同类         | 函数框架          |
+
+---
+
+## 11. 范畴论视角
+
+### 11.1 层次化 → 子范畴
+
+| 层级                                 | 子范畴      | 典型对象                                  | 典型态射              |
+| ------------------------------------ | ----------- | ----------------------------------------- | --------------------- |
+| **硬件/固件**                        | **Hw**      | CPU, IOMMU, SGX, TPM, μ                   | 设备固件、CPU 指令    |
+| **Hypervisor / 内核**                | **Kernel**  | KVM, Xen, Hyper‑V, seccomp‑bpf, eBPF      | VM 生成、系统调用过滤 |
+| **Runtime**                          | **Runtime** | runc, Kata, gVisor, Firecracker, WasmEdge | 运行时容器/VM         |
+| **Image / Artifact**                 | **Image**   | OCI Image, Index                          | 镜像构建、层压缩      |
+| **Orchestration**                    | **Orc**     | Pod, Deployment, DaemonSet                | 调度/复制             |
+| **Mesh & Traffic**                   | **Mesh**    | Envoy, Istio, Ambient                     | 路由/代理             |
+| **Observability / Policy**           | **Obs**     | Prometheus, OpenTelemetry, Gatekeeper     | 监控/准入             |
+| **Edge / Confidential / Serverless** | **Edge**    | K3s, Knative, WasmEdge                    | 边缘/无服务器         |
+
+> 这 8 个子范畴构成 **整体范畴 C**： C = Hw ∪ Kernel ∪ Runtime ∪ Image ∪ Orc ∪
+> Mesh ∪ Obs ∪ Edge
+
+### 11.2 算子 → 函子
+
+| 算子符号 | 函子       | 源范畴     | 目标范畴   | 关键性质                       |
+| -------- | ---------- | ---------- | ---------- | ------------------------------ |
+| V        | `virt`     | Image      | Runtime    | 生成 VM（幂等）                |
+| I        | `pack`     | Binary     | Image      | 镜像层（幂等）                 |
+| C        | `cont`     | Image      | Runtime    | 容器（幂等）                   |
+| S        | `sandbox`  | Runtime    | Runtime    | 沙箱（幂等）                   |
+| M        | `mesh`     | Runtime    | Mesh       | 代理（幂等）                   |
+| Kc       | `kata`     | Binary     | Runtime    | Kata‑VM（幂等）                |
+| G        | `gvis`     | Binary     | Runtime    | gVisor（幂等）                 |
+| F        | `fire`     | Binary     | Runtime    | Firecracker（幂等）            |
+| W        | `wasm`     | Binary     | Runtime    | Wasm（幂等）                   |
+| We       | `wasmedge` | Binary     | Runtime    | Edge Wasm（幂等）              |
+| Am       | `ambient`  | Runtime    | Mesh       | Ambient Mesh（幂等）           |
+| P        | `bpf`      | Kernel     | Kernel     | eBPF（可变）                   |
+| Ns       | `ns`       | Runtime    | Runtime    | Namespace（可变）              |
+| Cg       | `cg`       | Runtime    | Runtime    | Cgroup（可变）                 |
+| O        | `overlay`  | FileSystem | FileSystem | OverlayFS（可变）              |
+| E        | `envoy`    | Mesh       | Mesh       | Envoy（可变）                  |
+| Ist      | `istio`    | Mesh       | Mesh       | Istio 控制面（可变）           |
+| Otel     | `otel`     | Obs        | Obs        | OpenTelemetry（可变）          |
+| Gk       | `gate`     | Obs        | Obs        | Gatekeeper（可变）             |
+| Cc       | `conf`     | Runtime    | Runtime    | Confidential Container（幂等） |
+
+> **属性解读**
+>
+> - **Idempotent endofunctor** → 复合两次等于一次（A2）。
+> - **Non‑commutative** (`V` 与 `C`) → A3。
+> - **Kernel → Kernel** 的 `P`、`Ns`、`Cg` 等可以在任何容器/VM 上堆叠，给我们
+>   **monoidal** 的 tensor 结构（×, ⋊）。
+
+### 11.3 同伦类型论视角
+
+把 **Latency, Security, Observability** 视作 **依赖类型**：
+
+```haskell
+type Metric = (Latency, Security, Observability)
+
+Latency  = 1 .. 5   -- 1 = 最低延迟
+Security = 1 .. 5   -- 5 = 最高安全
+Observ   = 1 .. 5   -- 5 = 最高可观测
+
+-- φ : Functor Ω → Metric
+phi :: Ω → Metric
+```
+
+- **φ** 是 **类型推导** 的一层：从算子生成三元组。
+- **同态** 保证： φ(ω₁ ∘ ω₂) = φ(ω₁) ⊕ φ(ω₂) 其中 `⊕` 对应**延迟加法**、**安全取
+  最小**、**观测取最大**。
+
+> 这正对应 **同伦类型论** 的**路径空间**：两条不同的算子路径如果得到相同的三元组
+> ，就在"取值空间"中是**等价路径**（同伦等价）。
+
+---
+
+## 12. 使用流程与实践
+
+### 12.1 使用流程（像"查乘法表"）
+
+1. **写出需求串**
+   - 例：`V → C → M → C` → 先化简
+2. **化简**
+   - C² → C
+   - 结果：`V → C → M`
+3. **查表**
+   - 从行 `V`、列 `C`、再到 `M` → 得到 (4▼-5▼-4▼)
+4. **技术落地**
+   - 方案：`Kata VM (V)` → `containerd (C)` → `Istio Ambient (M)`
+   - 与 4▼‑5▼‑4▼ 的表值一致
+
+> **快速决策** 只需 30 秒（键入、化简、查表、映射）就能给出技术栈及其三维指标。
+
+### 12.2 三步化简示例
+
+**输入**：V∘C∘S∘C
+
+- **Step1** 消去 C²→C 得 V∘C∘S
+- **Step2** 交换 C∘S→S∘C 得 V∘S∘C
+- **Step3** 根据"VM+seccomp"格点 → 性能 5▼ 安全 5▼ 兼容 4▼
+- **推荐落地**：**Kata Containers + custom seccomp = 高密高安**
+
+### 12.3 思维导图节点规范
+
+```text
+根: Cloud-Native Operators
+├─ 🟦 Pack&Isolate (I,C,Ns,Cg,O)
+│  ├─ I: 镜像幂等, layer hash
+│  ├─ C: 容器理想, namespace+cgroup
+│  └─ O: OverlayFS, 联合挂载
+├─ 🟩 Sec&Observe (S,P,Gk,Otel,Fc)
+│  ├─ S: syscall 商, seccomp
+│  ├─ P: eBPF 程序, 5▼延迟
+│  └─ Gk: Gatekeeper, 云原生策略
+├─ 🟨 Traffic&Mesh (M,E,Ist,Am,Dr)
+│  ├─ M: 网格吸收, mTLS
+│  ├─ Am: Ambient, 无 Sidecar
+│  └─ E: Envoy, L4/L7
+├─ 🟥 Virt&Confidential (V,Kc,F,G,Cc)
+│  ├─ V: VM 环扩张, 2▲延迟
+│  ├─ Kc: Kata, microVM
+│  └─ Cc: SGX/SEV, 机密容器
+└─ 🟪 Wasm&Edge (W,We,Kn,Keda)
+   ├─ W: 幂等, <50 MB
+   └─ We: WasmEdge, 冷启 10 ms
+```
+
+**连线规则**:
+
+- 实线 = 可交换（C∘S = S∘C）
+- 虚线 = 非交换（V∘C ≠ C∘V）
+- 颜色渐变 = 复合后得分区间（绿 → 红）
+
+---
+
+## 13. 工具与代码
+
+### 13.1 Python 简化算法
+
+```python
+def simplify(seq):
+    # seq: list of operator symbols, e.g. ['V','C','S','M']
+
+    # 1. 去除重复幂等算子
+    seq = [seq[i] for i in range(len(seq))
+           if i==0 or seq[i] != seq[i-1]]
+
+    # 2. 交换可交换算子为固定顺序 [I,C,S,M,W,We,Am,P,Ns,Cg,O]
+    order = ['I','C','S','M','W','We','Am','P','Ns','Cg','O']
+    seq = [op for op in order if op in seq] + \
+          [op for op in seq if op not in order]  # keep others
+
+    # 3. 处理 V
+    if 'V' in seq:
+        # V must be at start or end
+        seq.remove('V')
+        seq = ['V'] + seq  # put V at start
+
+    return seq
+
+# 示例
+seq = ['V','C','S','M']
+print('simplified:', simplify(seq))
+```
+
+### 13.2 表格生成脚本
+
+```python
+import pandas as pd
+
+# 20 operators
+ops = ['V','I','C','S','M','Kc','G','F','W','We','Am','P','Ns','Cg','O','E','Ist','Otel','Gk','Cc']
+
+# 预先设定评分（仅示例）
+# 结构: { (x,y): (lat, sec, obs) }
+scores = {
+    ('V','I'): (3,4,3), ('V','C'): (4,4,3), ('V','S'): (5,5,4), ('V','M'): (4,5,4),
+    ('I','C'): (5,3,5), ('I','S'): (5,4,5), ('I','M'): (5,3,5),
+    # …（其余对称或手工填写）
+}
+
+def get_score(a,b):
+    if (a,b) in scores:
+        return scores[(a,b)]
+    if (b,a) in scores:
+        return scores[(b,a)]  # 只在 A3 需要区分
+    # 默认
+    return (5,3,5)
+
+# 构造表
+data = []
+for a in ops:
+    row = [a]
+    for b in ops:
+        row.append(get_score(a,b))
+    data.append(row)
+
+cols = [''] + ops
+df = pd.DataFrame(data, columns=cols)
+print(df)
+```
+
+### 13.3 同态映射计算
+
+```python
+def phi(seq):
+    lat, sec, obs = 0, 0, 0
+    for op in seq:
+        l, s, o = get_score(op, op)   # 取单算子分数
+        lat += l
+        sec = min(sec, s) if sec else s
+        obs += o
+    return (lat, sec, obs)
+
+# 示例
+seq = ['V','C','S','M']
+print('simplified:', simplify(seq))
+print('metric:', phi(simplify(seq)))
+```
+
+### 13.4 Excel / Notion / Miro 模板
+
+#### Excel 模板（20×20）
+
+- 用 **Conditional Formatting** 颜色区分（🟦、🟩、🟨、🟥、🟪）。
+- 用 **Data Validation** 给单元格加下拉框，确保评分 1–5。
+- 用 **SUMPRODUCT** 或 **INDEX** 取行列的值。
+
+#### Notion / Miro 视图
+
+- **思维导图**：根节点 "Cloud‑Native Operators" → 5 颜色分支
+  （🟦、🟩、🟨、🟥、🟪）。
+- **折叠面板**：每个算子展开其 **子算子**、**公理**、**表格分数**、**典型实
+  现**。
+- **交互式表格**：用 Notion 的 **Formula** 计算行列值；用 Miro 的 **link** 把表
+  格格子连到对应算子节点。
+
+---
+
+## 14. 讨论与前景
+
+### 14.1 现状与改进
+
+| 维度         | 现状                      | 可能改进                               | 影响                 |
+| ------------ | ------------------------- | -------------------------------------- | -------------------- |
+| **覆盖率**   | 80 + 概念已映射至 20 算子 | 进一步归并（e.g., C & Kc）             | 简化表格，提升可读性 |
+| **指标精度** | 经验评分（1–5）           | 引入量化基准（PerfKit、sysbench）      | 更精准决策           |
+| **动态性**   | 静态表                    | 加入"生命周期"维度（CI/CD, 灰度）      | 兼顾上线与演进       |
+| **扩展性**   | 新算子可插拔              | 设计可插拔插件（如 Knative, OpenFaaS） | 适配未来技术         |
+| **工具化**   | 手工表                    | 自动化生成（Python/Notion API）        | 提升效率             |
+
+### 14.2 评估指标与基准
+
+| 指标                   | 典型数据                                      | 评估方法                                              |
+| ---------------------- | --------------------------------------------- | ----------------------------------------------------- |
+| **Latency**            | VM 200 ms, Container 20 ms, Mesh 5 ms         | `docker run` vs `kata-runtime run` vs `istio sidecar` |
+| **Security**           | VM 5, Confidential 5, Mesh 4, Container 3     | CVE 攻击面、CVE‑score、硬件安全扩展                   |
+| **Observability**      | Mesh 5, Container 5, VM 4                     | Prometheus/Jaeger 覆盖率、日志收集粒度                |
+| **Cold‑Start**         | Firecracker 2 ms, Kata 20 ms, WasmEdge 8 ms   | `kstart`、`kata-runtime`、`wasmEdge` 启动时间         |
+| **Resource Footprint** | VM 1 GB RAM, Container 100 MB, WasmEdge 10 MB | `free`、`docker stats`、`wasmtime info`               |
+
+> **评分 1–5** 依据以上数据，结合行业经验，统一映射到 **Latency↑, Security↓,
+> Observability→**。具体数值可按企业内部基准表格化。
+
+### 14.3 进一步工作
+
+| 方向           | 下一步                                             | 参考/工具 |
+| -------------- | -------------------------------------------------- | --------- |
+| **量化指标**   | 用 **PerfKit / sysbench** 记录真实延迟/安全/观测值 |           |
+| **可视化**     | 把表格导入 **Notion/Miro** 的思维导图              |           |
+| **动态化**     | 把技术栈映射到 **CI/CD**、**灰度**、**弹性伸缩**   |           |
+| **扩展算子**   | 加入 **Knative、OpenFaaS、Dapr** 等                |           |
+| **同伦型模型** | 用 **Homotopy Type Theory** 记录算子间的"同伦等价" |           |
+| **社区化**     | 在 **GitHub** 打开 Issue、PR，邀请社区贡献         |           |
+
+### 14.4 结论
+
+> **结论** 通过把云原生技术拆解为 **一元算子** 并用 **代数公理** 规范其组合，我
+> 们能把技术栈设计变成"算式求值"。任何需求 → 先后算子序列 → 代数化简 → 查表 → 指
+> 标 → 选型。这套框架兼顾 **理论严谨** 与 **实践可落地**，为 DevOps、SRE 与架构
+> 师提供了一个"公式化"的决策工具。
+
+**后续工作**:
+
+- **自动化工具**：把 20×20 表导入 Excel/Notion/Chart。
+- **指标量化**：收集真实基准，映射到 Latency/Security/Observability。
+- **社区化**：开放算子与表，鼓励社区贡献新算子与更新。
+
+**一句话总结**： **"把云原生技术栈变成算式，借助代数公理与复合表，你可以像查乘法
+表一样在 30 秒内决定哪套技术最符合性能、安全、可观测的需求。"**
+
+---
+
+## 15. 参考与引用
+
+### 15.1 与现有研究对标
+
+| 研究                                   | 贡献                                      | 对应的**范畴/代数**                                                              |
+| -------------------------------------- | ----------------------------------------- | -------------------------------------------------------------------------------- |
+| **Kubernetes Formal Model**            | 通过 **monoid** 表达容器资源消耗          | 这里的 `C`、`S`、`M` 组成 **Monoid**；`φ` 是 **Monoid Homomorphism**             |
+| **NIST Service Mesh Models**           | 定义 **proxy model** 的安全/可观测性      | `M`、`E`、`Ist` 组成 **Commutative Monoids**；安全/观测可视为 **Partial Orders** |
+| **Seven Sketches in Compositionality** | 讨论 **compositional** 语言/系统          | 这里的 **Functor Composition** 与 **Algebraic Laws** 对应                        |
+| **Docker**                             | 实现 **OCI Image**、**Container Runtime** | `I`, `C` 对应 **Functor** `pack` → `cont`                                        |
+| **Istio**                              | 细粒度路由/安全                           | `M`, `Ist` 组成 **Composable** 体系                                              |
+
+### 15.2 参考文献
+
+- [Wikipedia：Containerization](<https://en.wikipedia.org/wiki/Containerization_(computing)>)
+- [NIST Service Mesh Proxy Models](https://www.nist.gov/publications/service-mesh-proxy-models-cloud-native-applications)
+- [Docker](<https://en.wikipedia.org/wiki/Docker_(software)>)
+- [OCI Image Spec](https://opencontainers.org/)
+- [Kubernetes formal model](https://ebjohnsen.org/publication/20-isola2/20-isola2.pdf)
+- [Tigera Service Mesh guide](https://www.tigera.io/learn/guides/service-mesh/service-mesh-architecture/)
+- [OpenTelemetry](https://opentelemetry.io/)
+- [Knative](https://knative.dev/)
+
+---
+
+**最后更新**：2025-11-07 **文档版本**：v2.0（梳理重构版） **维护者**：项目团队
+
+---
+
+## 16. 相关文档
+
+### 16.1 多视角文档
+
+- **[认知视角](ai_view.md)** - 云原生技术栈认知视图：Docker → K8s/K3s → WasmEdge
+  → OPA
+- **[架构视角](architecture_view.md)** - 从软件架构的视角看待虚拟化容器化沙盒化
+- **[系统视角](system_view.md)** - 从系统的视角看虚拟化容器化沙盒化（7 层 4 域模
+  型）
+- **[结构视角](structure_view.md)** - 从抽象结构的视角看虚拟化容器化沙盒化
+- **[技术社会视角](tech_view.md)** - 从社会技术类比的视角看待虚拟化容器化沙盒化
+- **[eBPF/OTLP 视角](ebpf_otlp_view.md)** - 从 eBPF 和 OTLP 的视角看虚拟化容器化
+  （横纵耦合定位模型、智能系统能力架构）
+
+### 16.2 文档目录
+
+- **[文档总览](../docs/README.md)** - 完整的文档体系说明
+- **[架构视图文档](../docs/ARCHITECTURE/README.md)** - 架构视角的详细文档
+- **[认知模型文档](../docs/COGNITIVE/README.md)** - 认知层面的分析文档
+- **[技术规格文档](../docs/TECHNICAL/README.md)** - 技术实现细节
+
+### 16.3 代数结构相关文档
+
+- **[算子理论与代数结构](../docs/COGNITIVE/03-theoretical-perspectives/algebraic-structure/)** -
+  代数结构的详细文档
+- **[矩阵力学模型](../docs/COGNITIVE/03-theoretical-perspectives/matrix-perspective/)** -
+  矩阵视角的详细文档

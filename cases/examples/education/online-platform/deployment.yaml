@@ -1,0 +1,64 @@
+# 在线教育平台 Kubernetes Deployment 配置
+# 用途：部署在线教育服务到边缘 K3s 集群
+# 创建日期：2025-11-15
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: education-platform
+  namespace: default
+  labels:
+    app: education-platform
+    version: v1.0.0
+spec:
+  replicas: 60
+  selector:
+    matchLabels:
+      app: education-platform
+  template:
+    metadata:
+      labels:
+        app: education-platform
+        version: v1.0.0
+    spec:
+      # 使用 WasmEdge RuntimeClass
+      runtimeClassName: wasmedge
+      nodeSelector:
+        node-type: edge
+      containers:
+      - name: education-platform
+        image: registry.example.com/education-platform:latest
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 200m
+            memory: 256Mi
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+        env:
+        - name: LOG_LEVEL
+          value: "info"
+        - name: PORT
+          value: "8080"
+        - name: WEBSOCKET_ENABLED
+          value: "true"
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        - containerPort: 8081
+          name: websocket
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10

@@ -1,0 +1,24 @@
+# 远程医疗 Kubernetes Service 配置
+# 用途：暴露远程医疗服务
+# 创建日期：2025-11-15
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: telemedicine-service
+  namespace: default
+  labels:
+    app: telemedicine-service
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  - port: 8081
+    targetPort: 8081
+    protocol: TCP
+    name: webrtc
+  selector:
+    app: telemedicine-service

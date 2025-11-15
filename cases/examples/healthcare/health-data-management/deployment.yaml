@@ -1,0 +1,69 @@
+# 健康数据管理 Kubernetes Deployment 配置
+# 用途：部署健康数据管理服务到边缘 K3s 集群
+# 创建日期：2025-11-15
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: health-data-storage
+  namespace: default
+  labels:
+    app: health-data-storage
+    version: v1.0.0
+spec:
+  replicas: 40
+  selector:
+    matchLabels:
+      app: health-data-storage
+  template:
+    metadata:
+      labels:
+        app: health-data-storage
+        version: v1.0.0
+    spec:
+      # 使用 WasmEdge RuntimeClass
+      runtimeClassName: wasmedge
+      nodeSelector:
+        node-type: edge
+      containers:
+      - name: health-data-storage
+        image: registry.example.com/health-data-storage:latest
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 200m
+            memory: 512Mi
+          limits:
+            cpu: 1000m
+            memory: 2Gi
+        env:
+        - name: LOG_LEVEL
+          value: "info"
+        - name: PORT
+          value: "8080"
+        - name: DB_PATH
+          value: "/data/health-data.db"
+        volumeMounts:
+        - name: data-storage
+          mountPath: /data
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10
+      volumes:
+      - name: data-storage
+        hostPath:
+          path: /var/lib/health-data
+          type: DirectoryOrCreate

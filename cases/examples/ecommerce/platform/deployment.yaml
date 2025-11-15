@@ -1,0 +1,62 @@
+# 电商平台 Kubernetes Deployment 配置
+# 用途：部署电商平台服务到 K3s 集群
+# 创建日期：2025-11-15
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ecommerce-platform
+  namespace: default
+  labels:
+    app: ecommerce-platform
+    version: v1.0.0
+spec:
+  replicas: 50
+  selector:
+    matchLabels:
+      app: ecommerce-platform
+  template:
+    metadata:
+      labels:
+        app: ecommerce-platform
+        version: v1.0.0
+    spec:
+      # 使用 WasmEdge RuntimeClass
+      runtimeClassName: wasmedge
+      containers:
+      - name: ecommerce-platform
+        image: registry.example.com/ecommerce-platform:latest
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 200m
+            memory: 256Mi
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+        env:
+        - name: LOG_LEVEL
+          value: "info"
+        - name: PORT
+          value: "8080"
+        - name: DB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: ecommerce-secret
+              key: db-host
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10

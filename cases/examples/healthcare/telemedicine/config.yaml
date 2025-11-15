@@ -1,0 +1,17 @@
+# 远程医疗配置
+# 用途：定义远程医疗配置参数
+# 创建日期：2025-11-15
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: telemedicine-config
+  namespace: default
+data:
+  log_level: "info"
+  port: "8080"
+  webrtc_port: "8081"
+  webrtc_enabled: "true"
+  data_stays_local: "true"
+  cache_enabled: "true"
+  cache_ttl: "300s"

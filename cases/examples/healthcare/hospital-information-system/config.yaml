@@ -1,0 +1,18 @@
+# 医院信息系统配置
+# 用途：定义医院信息系统配置参数
+# 创建日期：2025-11-15
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hospital-information-system-config
+  namespace: default
+data:
+  log_level: "info"
+  port: "8080"
+  max_connections: "1000"
+  timeout: "30s"
+  audit_enabled: "true"
+  encryption_enabled: "true"
+  hipaa_compliant: "true"
+  gdpr_compliant: "true"

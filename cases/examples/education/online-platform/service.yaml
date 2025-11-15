@@ -1,0 +1,24 @@
+# 在线教育平台 Kubernetes Service 配置
+# 用途：暴露在线教育服务
+# 创建日期：2025-11-15
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: education-platform
+  namespace: default
+  labels:
+    app: education-platform
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  - port: 8081
+    targetPort: 8081
+    protocol: TCP
+    name: websocket
+  selector:
+    app: education-platform

@@ -1,0 +1,17 @@
+# 智能制造配置
+# 用途：定义智能制造配置参数
+# 创建日期：2025-11-15
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: iot-data-processor-config
+  namespace: default
+data:
+  log_level: "info"
+  port: "8080"
+  mqtt_enabled: "true"
+  mqtt_port: "1883"
+  data_stays_local: "true"
+  cache_enabled: "true"
+  cache_ttl: "300s"

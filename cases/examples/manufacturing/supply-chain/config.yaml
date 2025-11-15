@@ -1,0 +1,16 @@
+# 供应链管理配置
+# 用途：定义供应链管理配置参数
+# 创建日期：2025-11-15
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: supply-chain-config
+  namespace: default
+data:
+  log_level: "info"
+  port: "8080"
+  sync_enabled: "true"
+  sync_interval: "10s"
+  cache_enabled: "true"
+  cache_ttl: "300s"

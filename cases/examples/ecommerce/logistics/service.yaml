@@ -1,0 +1,20 @@
+# 物流系统 Kubernetes Service 配置
+# 用途：暴露物流服务
+# 创建日期：2025-11-15
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: logistics-service
+  namespace: default
+  labels:
+    app: logistics-service
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  selector:
+    app: logistics-service

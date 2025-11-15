@@ -1,0 +1,61 @@
+# 风控系统 Kubernetes Deployment 配置
+# 用途：部署风控服务到边缘 K3s 集群
+# 创建日期：2025-11-15
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: risk-control-service
+  namespace: default
+  labels:
+    app: risk-control-service
+    version: v1.0.0
+spec:
+  replicas: 20
+  selector:
+    matchLabels:
+      app: risk-control-service
+  template:
+    metadata:
+      labels:
+        app: risk-control-service
+        version: v1.0.0
+    spec:
+      # 使用 WasmEdge RuntimeClass
+      runtimeClassName: wasmedge
+      nodeSelector:
+        node-type: edge
+      containers:
+      - name: risk-control-service
+        image: registry.example.com/risk-control-service:latest
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
+        env:
+        - name: LOG_LEVEL
+          value: "info"
+        - name: PORT
+          value: "8080"
+        - name: MODEL_PATH
+          value: "/models/risk-model.wasm"
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10

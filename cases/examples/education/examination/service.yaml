@@ -1,0 +1,20 @@
+# 考试系统 Kubernetes Service 配置
+# 用途：暴露考试服务
+# 创建日期：2025-11-15
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: examination-system
+  namespace: default
+  labels:
+    app: examination-system
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8080
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  selector:
+    app: examination-system
