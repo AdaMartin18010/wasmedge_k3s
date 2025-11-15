@@ -1,0 +1,16 @@
+# 数字政务服务配置
+# 用途：定义数字政务服务配置参数
+# 创建日期：2025-11-15
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: digital-government-config
+  namespace: default
+data:
+  log_level: "info"
+  port: "8080"
+  data_encrypted: "true"
+  audit_enabled: "true"
+  cache_enabled: "true"
+  cache_ttl: "300s"

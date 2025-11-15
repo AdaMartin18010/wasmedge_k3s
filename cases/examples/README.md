@@ -36,17 +36,17 @@ cases/examples/
 │   │   ├── deployment.yaml
 │   │   ├── policy.rego
 │   │   └── model-config.json          # AI 模型配置
-│   ├── hospital-information-system/   # 医院信息系统案例（待创建）
-│   ├── telemedicine/                  # 远程医疗案例（待创建）
-│   └── health-data-management/        # 健康数据管理案例（待创建）
+│   ├── hospital-information-system/   # 医院信息系统案例 ✅
+│   ├── telemedicine/                  # 远程医疗案例 ✅
+│   └── health-data-management/        # 健康数据管理案例 ✅
 ├── manufacturing/                     # 制造业案例
 │   ├── industrial-iot/                # 工业 IoT 案例 ✅
 │   │   ├── Dockerfile
 │   │   ├── deployment.yaml
 │   │   ├── policy.rego
 │   │   └── sqlite-config.yaml        # SQLite 配置
-│   ├── smart-manufacturing/           # 智能制造案例（待创建）
-│   ├── supply-chain/                  # 供应链管理案例（待创建）
+│   ├── smart-manufacturing/           # 智能制造案例 ✅
+│   ├── supply-chain/                  # 供应链管理案例 ✅
 │   └── edge-computing/                # 边缘计算案例（待创建）
 ├── ecommerce/                         # 电商行业案例
 │   ├── high-concurrency/              # 高并发案例 ✅
@@ -68,7 +68,7 @@ cases/examples/
 │   │   ├── service.yaml
 │   │   ├── policy.rego
 │   │   └── config.yaml
-│   └── inventory-management/          # 库存管理案例（待创建）
+│   └── inventory-management/          # 库存管理案例 ✅
 │       ├── Dockerfile
 │       ├── deployment.yaml
 │       ├── service.yaml               # Kubernetes Service
@@ -86,6 +86,12 @@ cases/examples/
         ├── deployment.yaml
         ├── policy.rego
         └── config.yaml
+├── government/                       # 政府行业案例
+│   └── digital-services/            # 数字政务服务案例 ✅
+├── energy/                           # 能源行业案例
+│   └── smart-grid/                   # 智能电网案例 ✅
+├── transportation/                   # 交通物流行业案例
+│   └── logistics/                    # 智能物流案例 ✅
 └── education/                        # 教育行业案例
     ├── online-platform/              # 在线教育平台案例 ✅
     │   ├── Dockerfile
@@ -93,8 +99,8 @@ cases/examples/
     │   ├── service.yaml
     │   ├── policy.rego
     │   └── config.yaml
-    ├── learning-management/          # 学习管理系统案例（待创建）
-    └── examination/                   # 考试系统案例（待创建）
+    ├── learning-management/          # 学习管理系统案例 ✅
+    └── examination/                   # 考试系统案例 ✅
         ├── Dockerfile
         ├── deployment.yaml
         ├── policy.rego
@@ -161,6 +167,7 @@ kubectl logs -l app=payment-gateway
 | 2025-11-07 | 更新案例验证完成状态和文档统计信息 | 项目团队 |
 | 2025-11-15 | 为 6 个待验证案例创建代码示例     | 项目团队 |
 | 2025-11-15 | 更新代码示例目录结构               | 项目团队 |
+| 2025-11-15 | 为 3 个其他行业案例创建代码示例     | 项目团队 |
 
 ---
 
