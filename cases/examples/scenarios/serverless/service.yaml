@@ -1,0 +1,23 @@
+# Serverless 场景 Kubernetes Service 配置
+# 用途：暴露 Serverless 函数服务（Knative 自动管理）
+# 创建日期：2025-11-15
+
+# 注意：Knative Service 会自动创建和管理 Service
+# 此文件仅作为参考，实际部署使用 Knative Service
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: serverless-function
+  namespace: default
+  labels:
+    app: serverless-function
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  selector:
+    serving.knative.dev/service: serverless-function

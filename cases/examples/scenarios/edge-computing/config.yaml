@@ -1,0 +1,17 @@
+# 边缘计算场景配置
+# 用途：定义边缘计算服务配置参数
+# 创建日期：2025-11-15
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: edge-computing-config
+  namespace: default
+data:
+  log_level: "info"
+  port: "8080"
+  offline_mode: "true"
+  local_storage: "true"
+  sync_interval: "60s"
+  cache_enabled: "true"
+  cache_ttl: "300s"
