@@ -89,6 +89,63 @@
 - **金丝雀发布**：支持模型版本的金丝雀发布
 - **推理图**：支持复杂的推理图（预处理、推理、后处理）
 
+## 4 快速开始
+
+### 4.1 Kubeflow 快速安装
+
+```bash
+# 安装 Kubeflow
+kubectl apply -k "github.com/kubeflow/manifests/example?ref=main"
+
+# 验证安装
+kubectl get pods -n kubeflow
+```
+
+### 4.2 GPU 调度配置
+
+```bash
+# 安装 NVIDIA GPU Operator
+kubectl apply -f https://raw.githubusercontent.com/NVIDIA/gpu-operator/main/deployments/static/gpu-operator.yaml
+
+# 验证 GPU 节点
+kubectl get nodes -o json | jq '.items[].status.capacity."nvidia.com/gpu"'
+```
+
+### 4.3 部署第一个模型
+
+```bash
+# 创建 InferenceService
+kubectl apply -f inference-service.yaml
+
+# 测试推理
+curl -H "Content-Type: application/json" \
+  -d @input.json \
+  http://model-service.default.svc.cluster.local/v1/models/model:predict
+```
+
+## 5 最佳实践
+
+### 5.1 模型训练
+
+- **分布式训练**：使用分布式训练加速
+- **超参数调优**：使用 Katib 自动调优
+- **实验跟踪**：使用 MLflow 跟踪实验
+- **版本管理**：管理模型版本
+
+### 5.2 模型部署
+
+- **资源规划**：合理规划 GPU 资源
+- **自动扩缩容**：配置自动扩缩容
+- **金丝雀发布**：使用金丝雀发布新模型
+- **监控告警**：监控模型性能
+
+### 5.3 性能优化
+
+- **模型优化**：优化模型大小和性能
+- **批处理**：使用批处理提升吞吐
+- **缓存策略**：缓存常用推理结果
+- **GPU 共享**：合理共享 GPU 资源
+
 ---
 
 ## 4 相关文档

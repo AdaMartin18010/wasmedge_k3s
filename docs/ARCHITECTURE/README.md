@@ -16,6 +16,10 @@
   - [✅ 对齐完成情况](#-对齐完成情况)
   - [📋 文档重构情况](#-文档重构情况)
     - [`architecture_view.md` v2.0 重构完成](#architecture_viewmd-v20-重构完成)
+  - [7 快速导航](#7-快速导航)
+    - [7.1 按角色导航](#71-按角色导航)
+    - [7.2 按场景导航](#72-按场景导航)
+    - [7.3 按技术导航](#73-按技术导航)
 
 ---
 
@@ -314,3 +318,62 @@ ARCHITECTURE 目录已完成重组，从 14 个目录优化为 5 个核心目录
 
 - [重构完成报告](REFACTORING-COMPLETE-V2-2025-11-04.md) - 详细的重构完成报告
 - [重构完成总结](REFACTORING-SUMMARY-V2-2025-11-04.md) - 重构完成总结
+
+## 7 快速导航
+
+### 7.1 按角色导航
+
+**架构师**：
+
+- [`00-theory/`](00-theory/) - 理论论证
+- [`02-views/`](02-views/) - 架构视图
+- [`06-domain-semantics/`](06-domain-semantics/) - 领域语义分析
+
+**开发者**：
+
+- [`01-implementation/`](01-implementation/) - 实现细节
+- [`04-applications/case-studies/`](04-applications/case-studies/) - 案例研究
+
+**运维工程师**：
+
+- [`02-views/07-dynamic-operations/`](02-views/07-dynamic-operations/) - 动态运维
+- [`04-applications/case-studies/`](04-applications/case-studies/) - 案例研究
+
+### 7.2 按场景导航
+
+**技术选型**：
+
+- [`02-views/09-multi-perspectives/`](02-views/09-multi-perspectives/) - 多视角分析
+- [`06-domain-semantics/`](06-domain-semantics/) - 领域语义分析
+
+**架构设计**：
+
+- [`02-views/01-decomposition-composition/`](02-views/01-decomposition-composition/) - 拆解与组合
+- [`02-views/08-composition-patterns/`](02-views/08-composition-patterns/) - 组合模式
+
+**理论理解**：
+
+- [`00-theory/`](00-theory/) - 理论论证
+- [`02-views/05-formal-proofs/`](02-views/05-formal-proofs/) - 形式化证明
+
+### 7.3 按技术导航
+
+**虚拟化容器化沙盒化**：
+
+- [`01-implementation/01-virtualization/`](01-implementation/01-virtualization/) - 虚拟化
+- [`01-implementation/02-containerization/`](01-implementation/02-containerization/) - 容器化
+- [`01-implementation/03-sandboxing/`](01-implementation/03-sandboxing/) - 沙盒化
+
+**服务网格与策略**：
+
+- [`01-implementation/04-service-mesh/`](01-implementation/04-service-mesh/) - 服务网格
+- [`01-implementation/05-opa/`](01-implementation/05-opa/) - OPA
+
+**WebAssembly 与 AI/ML**：
+
+- [`01-implementation/06-wasm/`](01-implementation/06-wasm/) - WebAssembly
+- [`01-implementation/07-ai-ml/`](01-implementation/07-ai-ml/) - AI/ML
+
+**边缘计算**：
+
+- [`01-implementation/08-edge/`](01-implementation/08-edge/) - 边缘计算

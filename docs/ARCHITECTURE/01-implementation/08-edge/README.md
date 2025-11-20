@@ -89,6 +89,61 @@
 - **状态同步**：边缘状态同步到云端
 - **版本管理**：边缘应用版本管理
 
+## 4 快速开始
+
+### 4.1 K3s 边缘节点安装
+
+```bash
+# 安装 K3s Agent
+curl -sfL https://get.k3s.io | K3S_URL=https://server:6443 K3S_TOKEN=xxx sh -
+
+# 验证节点
+kubectl get nodes
+```
+
+### 4.2 WasmEdge 边缘部署
+
+```bash
+# 安装 WasmEdge RuntimeClass
+kubectl apply -f wasmedge-runtimeclass.yaml
+
+# 部署 Wasm 应用
+kubectl apply -f wasm-edge-app.yaml
+```
+
+### 4.3 NSM 边缘网关配置
+
+```bash
+# 安装 NSM
+kubectl apply -f https://raw.githubusercontent.com/networkservicemesh/deployments-k8s/main/basic/nsm-system.yaml
+
+# 配置边缘网关
+kubectl apply -f nsm-edge-gateway.yaml
+```
+
+## 5 最佳实践
+
+### 5.1 边缘部署
+
+- **轻量级**：使用轻量级组件
+- **离线支持**：支持离线运行
+- **资源优化**：优化资源使用
+- **网络优化**：优化网络配置
+
+### 5.2 边缘-云同步
+
+- **增量同步**：使用增量同步减少带宽
+- **冲突解决**：处理同步冲突
+- **版本管理**：管理边缘应用版本
+- **回滚机制**：支持快速回滚
+
+### 5.3 监控管理
+
+- **边缘监控**：监控边缘节点状态
+- **性能监控**：监控边缘应用性能
+- **告警机制**：配置告警规则
+- **日志收集**：收集边缘日志
+
 ---
 
 ## 4 相关文档

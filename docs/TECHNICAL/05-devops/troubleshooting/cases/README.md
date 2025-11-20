@@ -77,10 +77,10 @@
 | [W-002](wasmedge-memory-overflow.md) | Wasm 内存溢出 | 严重 | ✅ 已完成 |
 | [W-003](wasmedge-network-connection-failed.md) | Wasm 网络连接失败 | 中等 | ✅ 已完成 |
 | [W-004](wasmedge-filesystem-access-error.md) | Wasm 文件系统访问错误 | 中等 | ✅ 已完成 |
-| [W-005](wasmedge-multithreading-issue.md) | Wasm 多线程问题 | 中等 | ⏳ 待补充 |
-| [W-006](wasmedge-performance-degradation.md) | Wasm 性能下降 | 轻微 | ⏳ 待补充 |
-| [W-007](wasmedge-image-pull-failed.md) | Wasm 镜像拉取失败 | 中等 | ⏳ 待补充 |
-| [W-008](wasmedge-log-output-abnormal.md) | Wasm 日志输出异常 | 轻微 | ⏳ 待补充 |
+| [W-005](wasmedge-multithreading-issue.md) | Wasm 多线程问题 | 中等 | ✅ 已完成 |
+| [W-006](wasmedge-performance-degradation.md) | Wasm 性能下降 | 轻微 | ✅ 已完成 |
+| [W-007](wasmedge-image-pull-failed.md) | Wasm 镜像拉取失败 | 中等 | ✅ 已完成 |
+| [W-008](wasmedge-log-output-abnormal.md) | Wasm 日志输出异常 | 轻微 | ✅ 已完成 |
 
 ### 3.2 K3s 故障案例
 
@@ -89,8 +89,8 @@
 | [K-001](k3s-node-join-failed.md) | K3s 节点无法加入集群 | 严重 | ✅ 已完成 |
 | [K-002](k3s-pod-scheduling-failed.md) | K3s Pod 调度失败 | 严重 | ✅ 已完成 |
 | [K-003](k3s-storage-volume-mount-failed.md) | K3s 存储卷挂载失败 | 中等 | ✅ 已完成 |
-| [K-004](k3s-network-policy-not-effective.md) | K3s 网络策略不生效 | 中等 | ⏳ 待补充 |
-| [K-005](k3s-control-plane-high-load.md) | K3s 控制平面高负载 | 中等 | ⏳ 待补充 |
+| [K-004](k3s-network-policy-not-effective.md) | K3s 网络策略不生效 | 中等 | ✅ 已完成 |
+| [K-005](k3s-control-plane-high-load.md) | K3s 控制平面高负载 | 中等 | ✅ 已完成 |
 | [K-006](k3s-certificate-expired.md) | K3s 证书过期问题 | 严重 | ✅ 已完成 |
 
 ### 3.3 OPA/Gatekeeper 故障案例

@@ -2,19 +2,28 @@
 
 ## 📑 目录
 
-- [📑 目录](#-目录)
-- [1 概述](#1-概述)
-  - [1.1 核心思想](#11-核心思想)
-  - [1.2 实现目标](#12-实现目标)
-- [2 文档结构](#2-文档结构)
-- [3 核心概念](#3-核心概念)
-  - [3.1 WasmEdge 0.14](#31-wasmedge-014)
-  - [3.2 WASI Preview 2](#32-wasi-preview-2)
-  - [3.3 WebAssembly 编译](#33-webassembly-编译)
-- [4 相关文档](#4-相关文档)
-  - [4.1 架构视角文档](#41-架构视角文档)
-  - [4.2 理论文档](#42-理论文档)
-  - [4.3 源文档](#43-源文档)
+- [WebAssembly 实现细节文档集](#webassembly-实现细节文档集)
+  - [📑 目录](#-目录)
+  - [1 概述](#1-概述)
+    - [1.1 核心思想](#11-核心思想)
+    - [1.2 实现目标](#12-实现目标)
+  - [2 文档结构](#2-文档结构)
+  - [3 核心概念](#3-核心概念)
+    - [3.1 WasmEdge 0.14](#31-wasmedge-014)
+    - [3.2 WASI Preview 2](#32-wasi-preview-2)
+    - [3.3 WebAssembly 编译](#33-webassembly-编译)
+  - [4 快速开始](#4-快速开始)
+    - [4.1 WasmEdge 快速安装](#41-wasmedge-快速安装)
+    - [4.2 运行第一个 Wasm 应用](#42-运行第一个-wasm-应用)
+    - [4.3 Kubernetes 集成](#43-kubernetes-集成)
+  - [5 最佳实践](#5-最佳实践)
+    - [5.1 性能优化](#51-性能优化)
+    - [5.2 安全加固](#52-安全加固)
+    - [5.3 开发实践](#53-开发实践)
+  - [4 相关文档](#4-相关文档)
+    - [4.1 架构视角文档](#41-架构视角文档)
+    - [4.2 理论文档](#42-理论文档)
+    - [4.3 源文档](#43-源文档)
 
 ---
 
@@ -60,6 +69,13 @@
 - **GPU 加速**：支持 GPU 加速推理
 - **Kubernetes 集成**：Kubernetes 1.30 双运行时支持
 
+**技术优势**：
+
+- **性能**：接近原生性能，JIT 编译优化
+- **安全**：内存安全，沙盒隔离
+- **轻量**：镜像 < 2MB，启动 < 1ms
+- **跨平台**：支持多种架构和操作系统
+
 ### 3.2 WASI Preview 2
 
 **WASI (WebAssembly System Interface)** 是 WebAssembly 的系统调用接口：
@@ -78,6 +94,61 @@
 - **Go**：`GOOS=wasip1 GOARCH=wasm go build`
 - **C/C++**：使用 `wasi-sdk` 编译
 - **AssemblyScript**：TypeScript 子集，编译为 Wasm
+
+## 4 快速开始
+
+### 4.1 WasmEdge 快速安装
+
+```bash
+# 安装 WasmEdge
+curl -sSf https://raw.githubusercontent.com/WasmEdge/WasmEdge/master/utils/install.sh | bash
+
+# 验证安装
+wasmedge --version
+```
+
+### 4.2 运行第一个 Wasm 应用
+
+```bash
+# 编译 Rust 为 Wasm
+cargo build --target wasm32-wasi --release
+
+# 运行 Wasm 应用
+wasmedge target/wasm32-wasi/release/app.wasm
+```
+
+### 4.3 Kubernetes 集成
+
+```bash
+# 安装 WasmEdge RuntimeClass
+kubectl apply -f https://raw.githubusercontent.com/second-state/wasmedge-containers-examples/main/runtime/wasmedge-runtimeclass.yaml
+
+# 部署 Wasm 应用
+kubectl apply -f wasm-app.yaml
+```
+
+## 5 最佳实践
+
+### 5.1 性能优化
+
+- **JIT 编译**：使用 JIT 编译提升性能
+- **内存管理**：合理管理线性内存
+- **缓存策略**：使用缓存减少重复编译
+- **并发处理**：使用多线程提升性能
+
+### 5.2 安全加固
+
+- **沙盒隔离**：使用 Wasm 沙盒隔离
+- **权限控制**：限制 WASI 权限
+- **输入验证**：验证输入数据
+- **资源限制**：限制内存和 CPU 使用
+
+### 5.3 开发实践
+
+- **模块化**：将应用模块化设计
+- **错误处理**：完善的错误处理机制
+- **测试验证**：充分测试 Wasm 应用
+- **文档维护**：维护开发文档
 
 ---
 

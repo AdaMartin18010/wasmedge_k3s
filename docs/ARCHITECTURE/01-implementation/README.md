@@ -163,6 +163,44 @@
 2. **查看实现**：阅读本目录的实现细节，理解如何将理论转化为实际代码
 3. **验证理论**：通过实际代码验证理论论证的正确性
 
+## 5 技术栈概览
+
+### 5.1 虚拟化技术栈
+
+- **KVM**：内核虚拟化模块
+- **QEMU**：硬件模拟器
+- **libvirt**：虚拟化管理库
+
+### 5.2 容器化技术栈
+
+- **Docker**：容器运行时
+- **containerd**：容器运行时接口
+- **cgroup/namespace**：资源隔离
+
+### 5.3 沙盒化技术栈
+
+- **seccomp**：系统调用过滤
+- **gVisor**：用户态内核
+- **Firecracker**：轻量级 VMM
+
+### 5.4 Service Mesh 技术栈
+
+- **Istio**：Service Mesh 控制平面
+- **Envoy**：高性能代理
+- **xDS API**：动态配置 API
+
+### 5.5 OPA 技术栈
+
+- **OPA**：通用策略引擎
+- **Rego**：策略语言
+- **Gatekeeper**：Kubernetes 策略控制器
+
+### 5.6 WebAssembly 技术栈
+
+- **WasmEdge**：云原生 WebAssembly 运行时
+- **WASI**：WebAssembly 系统接口
+- **Kubernetes 集成**：双运行时支持
+
 ---
 
 ## 5 相关文档

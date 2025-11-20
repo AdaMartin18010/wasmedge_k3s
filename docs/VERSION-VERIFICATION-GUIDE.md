@@ -8,24 +8,32 @@
 
 ## 📑 目录
 
-- [📑 目录](#-目录)
-- [1 概述](#1-概述)
-  - [1.1 验证目标](#11-验证目标)
-  - [1.2 验证原则](#12-验证原则)
-- [2 验证流程](#2-验证流程)
-  - [2.1 准备阶段](#21-准备阶段)
-  - [2.2 验证阶段](#22-验证阶段)
-  - [2.3 更新阶段](#23-更新阶段)
-- [3 核心组件版本验证](#3-核心组件版本验证)
-  - [3.1 Kubernetes 版本验证](#31-kubernetes-版本验证)
-  - [3.2 K3s 版本验证](#32-k3s-版本验证)
-  - [3.3 WasmEdge 版本验证](#33-wasmedge-版本验证)
-  - [3.4 OPA/Gatekeeper 版本验证](#34-opagatekeeper-版本验证)
-- [4 版本信息记录](#4-版本信息记录)
-  - [4.1 记录格式](#41-记录格式)
-  - [4.2 记录位置](#42-记录位置)
-- [5 验证检查清单](#5-验证检查清单)
-- [6 相关文档](#6-相关文档)
+- [版本信息验证指南](#版本信息验证指南)
+  - [📑 目录](#-目录)
+  - [1 概述](#1-概述)
+    - [1.1 验证目标](#11-验证目标)
+    - [1.2 验证原则](#12-验证原则)
+  - [2 验证流程](#2-验证流程)
+    - [2.1 准备阶段](#21-准备阶段)
+    - [2.2 验证阶段](#22-验证阶段)
+    - [2.3 更新阶段](#23-更新阶段)
+  - [3 核心组件版本验证](#3-核心组件版本验证)
+    - [3.1 Kubernetes 版本验证](#31-kubernetes-版本验证)
+    - [3.2 K3s 版本验证](#32-k3s-版本验证)
+    - [3.3 WasmEdge 版本验证](#33-wasmedge-版本验证)
+    - [3.4 OPA/Gatekeeper 版本验证](#34-opagatekeeper-版本验证)
+  - [4 版本信息记录](#4-版本信息记录)
+    - [4.1 记录格式](#41-记录格式)
+    - [4.2 记录位置](#42-记录位置)
+  - [5 验证检查清单](#5-验证检查清单)
+    - [5.1 Kubernetes 版本验证](#51-kubernetes-版本验证)
+    - [5.2 K3s 版本验证](#52-k3s-版本验证)
+    - [5.3 WasmEdge 版本验证](#53-wasmedge-版本验证)
+    - [5.4 OPA/Gatekeeper 版本验证](#54-opagatekeeper-版本验证)
+  - [6 相关文档](#6-相关文档)
+    - [6.1 对标分析文档](#61-对标分析文档)
+    - [6.2 技术趋势文档](#62-技术趋势文档)
+    - [6.3 参考资料文档](#63-参考资料文档)
 
 ---
 
@@ -117,11 +125,11 @@
 **验证步骤**：
 
 1. **访问官方发布页面**：
-   - URL：https://kubernetes.io/releases/
+   - URL：<https://kubernetes.io/releases/>
    - 检查最新稳定版本
 
 2. **检查 GitHub Releases**：
-   - URL：https://github.com/kubernetes/kubernetes/releases
+   - URL：<https://github.com/kubernetes/kubernetes/releases>
    - 检查发布标签和日期
 
 3. **验证版本类型**：
@@ -144,11 +152,11 @@
 **验证步骤**：
 
 1. **访问官方发布页面**：
-   - URL：https://github.com/k3s-io/k3s/releases
+   - URL：<https://github.com/k3s-io/k3s/releases>
    - 检查最新稳定版本
 
 2. **检查 K3s 官方文档**：
-   - URL：https://docs.k3s.io/
+   - URL：<https://docs.k3s.io/>
    - 检查版本信息和功能状态
 
 3. **验证 `--wasm` flag 功能**：
@@ -173,11 +181,11 @@
 **验证步骤**：
 
 1. **访问官方发布页面**：
-   - URL：https://github.com/WasmEdge/WasmEdge/releases
+   - URL：<https://github.com/WasmEdge/WasmEdge/releases>
    - 检查最新稳定版本
 
 2. **检查 WasmEdge 官方文档**：
-   - URL：https://wasmedge.org/docs/
+   - URL：<https://wasmedge.org/docs/>
    - 检查版本信息和功能状态
 
 3. **验证版本类型**：
@@ -199,11 +207,11 @@
 **验证步骤**：
 
 1. **访问 OPA 官方发布页面**：
-   - URL：https://github.com/open-policy-agent/opa/releases
+   - URL：<https://github.com/open-policy-agent/opa/releases>
    - 检查最新稳定版本
 
 2. **访问 Gatekeeper 官方发布页面**：
-   - URL：https://github.com/open-policy-agent/gatekeeper/releases
+   - URL：<https://github.com/open-policy-agent/gatekeeper/releases>
    - 检查最新稳定版本
 
 3. **验证 OPA-Wasm 功能状态**：
@@ -319,4 +327,3 @@
 **最后更新**：2025-11-13
 **下次审查**：2025-11-20
 **维护者**：项目团队
-
