@@ -300,7 +300,7 @@
 ---
 
 **最后更新**：2025-11-07
-**文档状态**：✅ 完整 | ✅ 所有13个核心文档已完成 | 📊 包含内核实现分析、容器化应用、虚拟化机制 | 🎨 包含67个可视化文档（22个思维导图2000+节点、34个知识矩阵220+矩阵2100+数据项、11个关系图谱55+图谱650+节点） | 🎯 生产就绪
+**文档状态**：✅ 完整 | ✅ 所有13个核心文档已完成 | 📊 包含内核实现分析、容器化应用、虚拟化机制 | 🎨 包含71个可视化文档（23个思维导图2100+节点、36个知识矩阵240+矩阵2300+数据项、12个关系图谱60+图谱700+节点） | 🎯 生产就绪
 
 ## 7 可视化内容
 
@@ -329,6 +329,7 @@
 - **[内核锁机制详细思维导图](visualizations/mindmaps/20-locking.md)** - 内核锁机制详细知识结构
 - **[内核高级内存管理详细思维导图](visualizations/mindmaps/21-advanced-memory.md)** - 内核高级内存管理详细知识结构
 - **[内核高级网络管理详细思维导图](visualizations/mindmaps/22-advanced-network.md)** - 内核高级网络管理详细知识结构
+- **[内核高级存储管理详细思维导图](visualizations/mindmaps/23-advanced-storage.md)** - 内核高级存储管理详细知识结构
 - **[内核子系统对比矩阵](visualizations/matrices/01-kernel-subsystems.md)** - 内核子系统多维对比
 - **[容器化机制对比矩阵](visualizations/matrices/02-containerization-mechanisms.md)** - 容器化机制多维对比
 - **[系统调用对比矩阵](visualizations/matrices/03-system-calls.md)** - 系统调用多维对比
@@ -363,6 +364,8 @@
 - **[内核最佳实践综合矩阵](visualizations/matrices/32-best-practices.md)** - 开发、性能、安全、调试最佳实践
 - **[内核高级内存管理详细矩阵](visualizations/matrices/33-advanced-memory.md)** - NUMA、大页内存、内存压缩
 - **[内核高级网络管理详细矩阵](visualizations/matrices/34-advanced-network.md)** - 多队列网络、网络性能优化、网络虚拟化
+- **[内核高级存储管理详细矩阵](visualizations/matrices/35-advanced-storage.md)** - I/O 调度器、文件系统、存储性能优化
+- **[内核综合性能调优矩阵](visualizations/matrices/36-comprehensive-performance.md)** - 性能瓶颈诊断、性能优化策略、性能调优工具
 - **[内核机制关系图](visualizations/diagrams/01-kernel-mechanisms-relations.md)** - 内核机制依赖关系
 - **[容器化技术栈关系图](visualizations/diagrams/02-containerization-stack-relations.md)** - 容器化技术栈关系
 - **[内核架构图](visualizations/diagrams/03-kernel-architecture.md)** - 内核整体架构可视化
@@ -396,10 +399,10 @@
 
 ### 7.4 可视化内容统计
 
-- **思维导图**：22个（2000+节点）
-- **知识矩阵**：34个（220+矩阵，2100+数据项）
-- **关系图谱**：11个（55+图谱，650+节点）
-- **总计**：67个可视化文档
+- **思维导图**：23个（2100+节点）
+- **知识矩阵**：36个（240+矩阵，2300+数据项）
+- **关系图谱**：12个（60+图谱，700+节点）
+- **总计**：71个可视化文档
 
 **详细统计**：参见 [可视化内容统计](visualizations/STATISTICS.md)
 **维护者**：项目团队
