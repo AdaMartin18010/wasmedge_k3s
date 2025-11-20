@@ -24,7 +24,8 @@
   - [4 可视化文档](#4-可视化文档)
     - [4.1 思维导图](#41-思维导图)
     - [4.2 知识矩阵](#42-知识矩阵)
-    - [4.3 可视化文档集](#43-可视化文档集)
+    - [4.3 关系图谱和架构图](#43-关系图谱和架构图)
+    - [4.4 可视化文档集](#44-可视化文档集)
   - [5 相关文档](#5-相关文档)
     - [5.1 实现细节文档](#51-实现细节文档)
     - [5.2 架构视角文档](#52-架构视角文档)
@@ -35,7 +36,9 @@
   - [7 可视化内容](#7-可视化内容)
     - [7.1 快速访问](#71-快速访问)
     - [7.2 可视化内容特点](#72-可视化内容特点)
+    - [7.4 可视化内容统计](#74-可视化内容统计)
     - [7.3 使用建议](#73-使用建议)
+    - [7.4 可视化内容统计](#74-可视化内容统计-1)
 
 ---
 
@@ -232,6 +235,7 @@
 - **[内核架构图](visualizations/diagrams/03-kernel-architecture.md)** - 内核整体架构可视化
 - **[综合关系图谱](visualizations/diagrams/04-comprehensive-relations.md)** - Linux 内核全景关系图
 - **[知识地图](visualizations/diagrams/05-knowledge-map.md)** - Linux 内核原理知识地图和学习路径
+- **[综合知识地图](visualizations/diagrams/06-comprehensive-knowledge-map.md)** - Linux 内核原理综合知识地图
 
 ### 4.4 可视化文档集
 
@@ -296,7 +300,7 @@
 ---
 
 **最后更新**：2025-11-07
-**文档状态**：✅ 完整 | ✅ 所有13个核心文档已完成 | 📊 包含内核实现分析、容器化应用、虚拟化机制 | 🎨 包含15+个可视化文档（思维导图、知识矩阵、关系图谱、知识地图） | 🎯 生产就绪
+**文档状态**：✅ 完整 | ✅ 所有13个核心文档已完成 | 📊 包含内核实现分析、容器化应用、虚拟化机制 | 🎨 包含56个可视化文档（18个思维导图1600+节点、29个知识矩阵180+矩阵1700+数据项、9个关系图谱45+图谱550+节点） | 🎯 生产就绪
 
 ## 7 可视化内容
 
@@ -308,24 +312,70 @@
 - **[安全机制思维导图](visualizations/mindmaps/03-security-mechanisms.md)** - 安全机制全景
 - **[系统调用思维导图](visualizations/mindmaps/04-system-calls.md)** - 系统调用分类和功能思维导图
 - **[虚拟化机制思维导图](visualizations/mindmaps/05-virtualization.md)** - 虚拟化机制全景思维导图
+- **[进程管理详细思维导图](visualizations/mindmaps/06-process-management.md)** - 进程管理详细知识结构
+- **[内存管理详细思维导图](visualizations/mindmaps/07-memory-management.md)** - 内存管理详细知识结构
+- **[文件系统详细思维导图](visualizations/mindmaps/08-filesystem.md)** - 文件系统详细知识结构
+- **[网络子系统详细思维导图](visualizations/mindmaps/09-network.md)** - 网络子系统详细知识结构
+- **[设备驱动详细思维导图](visualizations/mindmaps/10-device-driver.md)** - 设备驱动详细知识结构
+- **[同步机制详细思维导图](visualizations/mindmaps/11-synchronization.md)** - 同步机制详细知识结构
+- **[中断处理详细思维导图](visualizations/mindmaps/12-interrupt.md)** - 中断处理详细知识结构
+- **[内核模块详细思维导图](visualizations/mindmaps/13-kernel-module.md)** - 内核模块详细知识结构
+- **[内核调试详细思维导图](visualizations/mindmaps/14-kernel-debugging.md)** - 内核调试详细知识结构
+- **[内核启动流程详细思维导图](visualizations/mindmaps/15-kernel-boot.md)** - 内核启动流程详细知识结构
+- **[内核时间管理详细思维导图](visualizations/mindmaps/16-time-management.md)** - 内核时间管理详细知识结构
+- **[内核电源管理详细思维导图](visualizations/mindmaps/17-power-management.md)** - 内核电源管理详细知识结构
+- **[内核热插拔详细思维导图](visualizations/mindmaps/18-hotplug.md)** - 内核热插拔详细知识结构
 - **[内核子系统对比矩阵](visualizations/matrices/01-kernel-subsystems.md)** - 内核子系统多维对比
 - **[容器化机制对比矩阵](visualizations/matrices/02-containerization-mechanisms.md)** - 容器化机制多维对比
 - **[系统调用对比矩阵](visualizations/matrices/03-system-calls.md)** - 系统调用多维对比
 - **[虚拟化机制对比矩阵](visualizations/matrices/04-virtualization-mechanisms.md)** - 虚拟化机制多维对比
 - **[交叉对比矩阵](visualizations/matrices/05-cross-comparison.md)** - 隔离机制、资源管理、安全机制交叉对比
 - **[实践指南矩阵](visualizations/matrices/06-practical-guide.md)** - 场景选型、配置推荐、故障排查、性能调优
+- **[进程管理详细矩阵](visualizations/matrices/07-process-management.md)** - 进程创建、调度、IPC 详细对比
+- **[内存管理详细矩阵](visualizations/matrices/08-memory-management.md)** - 内存分配、映射、回收详细对比
+- **[文件系统详细矩阵](visualizations/matrices/09-filesystem.md)** - 文件系统类型、操作、性能详细对比
+- **[网络子系统详细矩阵](visualizations/matrices/10-network.md)** - 网络协议、Socket、设备详细对比
+- **[性能优化矩阵](visualizations/matrices/11-performance-optimization.md)** - 内核子系统、容器化、系统调用性能优化
+- **[故障排查矩阵](visualizations/matrices/12-troubleshooting.md)** - 进程、内存、文件系统、网络、容器化问题排查
+- **[综合映射矩阵](visualizations/matrices/13-comprehensive-mapping.md)** - 内核机制与容器化技术映射、版本特性映射
+- **[设备驱动详细矩阵](visualizations/matrices/14-device-driver.md)** - 设备类型、操作、性能详细对比
+- **[系统集成矩阵](visualizations/matrices/15-system-integration.md)** - 内核子系统集成、容器化技术集成、安全机制集成
+- **[同步机制详细矩阵](visualizations/matrices/16-synchronization.md)** - 锁机制、信号量、原子操作详细对比
+- **[中断处理详细矩阵](visualizations/matrices/17-interrupt.md)** - 中断类型、处理性能、优化技术详细对比
+- **[内核开发矩阵](visualizations/matrices/18-kernel-development.md)** - 内核开发工具、调试方法、最佳实践
+- **[内核模块详细矩阵](visualizations/matrices/19-kernel-module.md)** - 模块加载、接口、开发详细对比
+- **[内核调试详细矩阵](visualizations/matrices/20-kernel-debugging.md)** - 调试工具、方法、场景详细对比
+- **[性能分析详细矩阵](visualizations/matrices/21-performance-analysis.md)** - 性能分析工具、指标、瓶颈分析
+- **[内核启动流程详细矩阵](visualizations/matrices/22-kernel-boot.md)** - 启动阶段、初始化流程、优化技术
+- **[内核时间管理详细矩阵](visualizations/matrices/23-time-management.md)** - 时间源、定时器、时间同步
+- **[内核错误处理详细矩阵](visualizations/matrices/24-error-handling.md)** - 错误类型、处理机制、恢复策略
+- **[内核安全综合矩阵](visualizations/matrices/25-security-comprehensive.md)** - 安全机制、安全策略、安全等级
+- **[内核电源管理详细矩阵](visualizations/matrices/26-power-management.md)** - CPU 频率调节、设备电源状态、系统电源状态
+- **[内核热插拔详细矩阵](visualizations/matrices/27-hotplug.md)** - CPU、内存、设备热插拔
+- **[内核实时性详细矩阵](visualizations/matrices/28-realtime.md)** - 实时性类型、实时调度策略、实时性优化
+- **[内核可扩展性详细矩阵](visualizations/matrices/29-scalability.md)** - 可扩展性维度、优化技术、瓶颈分析
 - **[内核机制关系图](visualizations/diagrams/01-kernel-mechanisms-relations.md)** - 内核机制依赖关系
 - **[容器化技术栈关系图](visualizations/diagrams/02-containerization-stack-relations.md)** - 容器化技术栈关系
 - **[内核架构图](visualizations/diagrams/03-kernel-architecture.md)** - 内核整体架构可视化
 - **[综合关系图谱](visualizations/diagrams/04-comprehensive-relations.md)** - Linux 内核全景关系图
 - **[知识地图](visualizations/diagrams/05-knowledge-map.md)** - Linux 内核原理知识地图和学习路径
+- **[综合知识地图](visualizations/diagrams/06-comprehensive-knowledge-map.md)** - Linux 内核原理综合知识地图
 
 ### 7.2 可视化内容特点
 
-- **思维导图**：使用 Mermaid 格式，支持层级化知识结构展示
-- **知识矩阵**：多维对比分析，包含功能、性能、安全、兼容性等维度
-- **关系图谱**：展示机制之间的依赖关系和交互
+- **思维导图**：使用 Mermaid 格式，支持层级化知识结构展示（7个，600+节点）
+- **知识矩阵**：多维对比分析，包含功能、性能、安全、兼容性等维度（13个，80+矩阵，700+数据项）
+- **关系图谱**：展示机制之间的依赖关系和交互（6个，30+图谱，400+节点）
 - **架构图**：系统架构的可视化表达
+- **综合知识地图**：全面的知识结构可视化
+
+### 7.4 可视化内容统计
+
+- **总文档数**：26个可视化文档
+- **思维导图**：7个（600+节点）
+- **知识矩阵**：13个（80+矩阵，700+数据项）
+- **关系图谱**：6个（30+图谱，400+节点）
+- **详细统计**：参见 [可视化内容统计](visualizations/STATISTICS.md)
 
 ### 7.3 使用建议
 
@@ -337,12 +387,12 @@
 
 ### 7.4 可视化内容统计
 
-- **思维导图**：5个（360+节点）
-- **知识矩阵**：6个（35个矩阵，200+数据项）
-- **关系图谱**：5个（24个图谱，300+节点）
-- **总计**：16个可视化文档
+- **思维导图**：18个（1600+节点）
+- **知识矩阵**：29个（180+矩阵，1700+数据项）
+- **关系图谱**：9个（45+图谱，550+节点）
+- **总计**：56个可视化文档
 
-详细统计参见：[可视化内容统计](visualizations/STATISTICS.md)
+**详细统计**：参见 [可视化内容统计](visualizations/STATISTICS.md)
 **维护者**：项目团队
 
 > **📊 2025 年技术趋势参考**：详细技术状态和版本信息请查看
