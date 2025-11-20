@@ -7,16 +7,17 @@
   - [📖 文档简介](#-文档简介)
   - [1 文档定位](#1-文档定位)
   - [2 目录结构](#2-目录结构)
-    - [2.1 核心基础（Core Foundations）](#21-核心基础core-foundations)
-    - [2.2 运行时与策略（Runtime \& Policy）](#22-运行时与策略runtime--policy)
-    - [2.3 应用场景（Application Scenarios）](#23-应用场景application-scenarios)
-    - [2.4 基础设施栈（Infrastructure Stack）](#24-基础设施栈infrastructure-stack)
-    - [2.5 开发与运维（DevOps）](#25-开发与运维devops)
-    - [2.6 高级功能（Advanced Features）](#26-高级功能advanced-features)
-    - [2.7 安全与合规（Security \& Compliance）](#27-安全与合规security--compliance)
-    - [2.8 架构与分析（Architecture \& Analysis）](#28-架构与分析architecture--analysis)
-    - [2.9 优化与实践（Optimization \& Practices）](#29-优化与实践optimization--practices)
-    - [2.10 参考与趋势（Reference \& Trends）](#210-参考与趋势reference--trends)
+    - [2.1 Linux 内核原理（Linux Kernel Principles）⭐ 新增](#21-linux-内核原理linux-kernel-principles-新增)
+    - [2.2 核心基础（Core Foundations）](#22-核心基础core-foundations)
+    - [2.3 运行时与策略（Runtime \& Policy）](#23-运行时与策略runtime--policy)
+    - [2.4 应用场景（Application Scenarios）](#24-应用场景application-scenarios)
+    - [2.5 基础设施栈（Infrastructure Stack）](#25-基础设施栈infrastructure-stack)
+    - [2.6 开发与运维（DevOps）](#26-开发与运维devops)
+    - [2.7 高级功能（Advanced Features）](#27-高级功能advanced-features)
+    - [2.8 安全与合规（Security \& Compliance）](#28-安全与合规security--compliance)
+    - [2.9 架构与分析（Architecture \& Analysis）](#29-架构与分析architecture--analysis)
+    - [2.10 优化与实践（Optimization \& Practices）](#210-优化与实践optimization--practices)
+    - [2.11 参考与趋势（Reference \& Trends）](#211-参考与趋势reference--trends)
   - [3 快速开始](#3-快速开始)
     - [3.1 新手入门路径](#31-新手入门路径)
     - [3.2 进阶学习路径](#32-进阶学习路径)
@@ -74,7 +75,16 @@
 
 > 📋 **路径映射**：如需查找旧路径，请参考 [PATH-MAPPING.md](PATH-MAPPING.md)
 
-### 2.1 核心基础（Core Foundations）
+### 2.1 Linux 内核原理（Linux Kernel Principles）⭐ 新增
+
+| 文档           | 路径                                    | 核心内容                    |
+| -------------- | --------------------------------------- | --------------------------- |
+| Linux 内核原理 | `00-linux-kernel-principles/`          | Linux 操作系统内核机制详解  |
+| Namespace      | `00-linux-kernel-principles/08-namespace.md` | Namespace 隔离机制详解      |
+| Cgroup         | `00-linux-kernel-principles/09-cgroup.md`    | Cgroup 资源控制机制详解     |
+| Capabilities   | `00-linux-kernel-principles/10-capabilities.md` | Capabilities 权限机制详解   |
+
+### 2.2 核心基础（Core Foundations）
 
 | 文档       | 路径                              | 核心内容              |
 | ---------- | --------------------------------- | --------------------- |
@@ -82,7 +92,7 @@
 | Kubernetes | `01-core-foundations/kubernetes/` | Kubernetes 架构与实践 |
 | K3s        | `01-core-foundations/k3s/`        | K3s 轻量级架构        |
 
-### 2.2 运行时与策略（Runtime & Policy）
+### 2.3 运行时与策略（Runtime & Policy）
 
 | 文档           | 路径                                       | 核心内容             |
 | -------------- | ------------------------------------------ | -------------------- |
@@ -91,14 +101,14 @@
 | OCI 供应链     | `02-runtime-policy/oci-supply-chain/`      | OCI 标准和供应链安全 |
 | OPA 策略即代码 | `02-runtime-policy/policy-opa/`            | Open Policy Agent    |
 
-### 2.3 应用场景（Application Scenarios）
+### 2.4 应用场景（Application Scenarios）
 
 | 文档            | 路径                                        | 核心内容              |
 | --------------- | ------------------------------------------- | --------------------- |
 | 边缘 Serverless | `03-application-scenarios/edge-serverless/` | 边缘计算和 Serverless |
 | AI 推理         | `03-application-scenarios/ai-inference/`    | AI 推理应用           |
 
-### 2.4 基础设施栈（Infrastructure Stack）
+### 2.5 基础设施栈（Infrastructure Stack）
 
 | 文档           | 路径                                     | 核心内容                                                                                         |
 | -------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------------ |
@@ -107,7 +117,7 @@
 | 监控与可观测性 | `04-infrastructure-stack/observability/` | Metrics、Logging、Tracing                                                                        |
 | eBPF 技术堆栈  | `04-infrastructure-stack/ebpf-stack/`    | eBPF 内核可编程技术堆栈；网络加速、可观测性、服务网格、安全应用；工具生态；2025-11-07 技术栈状态 |
 
-### 2.5 开发与运维（DevOps）
+### 2.6 开发与运维（DevOps）
 
 | 文档              | 路径                           | 核心内容              |
 | ----------------- | ------------------------------ | --------------------- |
@@ -118,7 +128,7 @@
 | 升级和迁移        | `05-devops/upgrade-migration/` | 升级和迁移技术规范    |
 | 开发和调试工具    | `05-devops/dev-tools/`         | 开发和调试工具规范    |
 
-### 2.6 高级功能（Advanced Features）
+### 2.7 高级功能（Advanced Features）
 
 | 文档               | 路径                                   | 核心内容                   |
 | ------------------ | -------------------------------------- | -------------------------- |
@@ -126,13 +136,13 @@
 | 多集群管理         | `06-advanced-features/multi-cluster/`  | 多集群管理技术规范（可选） |
 | 镜像仓库和镜像管理 | `06-advanced-features/image-registry/` | 镜像仓库与管理技术规范     |
 
-### 2.7 安全与合规（Security & Compliance）
+### 2.8 安全与合规（Security & Compliance）
 
 | 文档     | 路径                                          | 核心内容           |
 | -------- | --------------------------------------------- | ------------------ |
 | 安全合规 | `07-security-compliance/security-compliance/` | 安全与合规最佳实践 |
 
-### 2.8 架构与分析（Architecture & Analysis）
+### 2.9 架构与分析（Architecture & Analysis）
 
 | 文档               | 路径                                                 | 核心内容                                                                                                                                          |
 | ------------------ | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -141,7 +151,7 @@
 | 概念关系矩阵       | `08-architecture-analysis/concept-relations-matrix/` | 2025 技术堆栈概念关系矩阵与多维关系分析；二维、三维、多维关系矩阵；思维导图；形式化定义；快速参考指南；使用指南；概念索引；与故障排查文档深度集成 |
 | eBPF/OTLP 扩展分析 | `08-architecture-analysis/ebpf-otlp-analysis/`       | eBPF/OTLP 扩展技术分析；架构设计、性能分析、实践指南；技术规范对齐、虚拟化/容器化/沙盒化架构；2025-11-07 技术栈状态 ⭐                            |
 
-### 2.9 优化与实践（Optimization & Practices）
+### 2.10 优化与实践（Optimization & Practices）
 
 | 文档               | 路径                                                  | 核心内容                   |
 | ------------------ | ----------------------------------------------------- | -------------------------- |
@@ -149,7 +159,7 @@
 | 社区生态和最佳实践 | `09-optimization-practices/community-best-practices/` | 社区生态和最佳实践（可选） |
 | 分析改进           | `09-optimization-practices/analysis-improvement/`     | 分析改进文档               |
 
-### 2.10 参考与趋势（Reference & Trends）
+### 2.11 参考与趋势（Reference & Trends）
 
 | 文档       | 路径                                     | 核心内容                 |
 | ---------- | ---------------------------------------- | ------------------------ |
@@ -680,6 +690,5 @@
 
 > **📊 2025 年技术趋势参考**：详细技术状态和版本信息请查看
 > [27. 2025 年技术趋势汇总](10-reference-trends/2025-trends/2025-trends.md)
-
 > 📋 **目录重组说明**：本目录已按主题重新组织，从 33 个数字编号目录重组为 10 个
 > 主题分类目录。如需查找旧路径，请参考 [PATH-MAPPING.md](PATH-MAPPING.md)。
