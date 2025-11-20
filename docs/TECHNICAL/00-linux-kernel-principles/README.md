@@ -300,7 +300,7 @@
 ---
 
 **最后更新**：2025-11-07
-**文档状态**：✅ 完整 | ✅ 所有13个核心文档已完成 | 📊 包含内核实现分析、容器化应用、虚拟化机制 | 🎨 包含56个可视化文档（18个思维导图1600+节点、29个知识矩阵180+矩阵1700+数据项、9个关系图谱45+图谱550+节点） | 🎯 生产就绪
+**文档状态**：✅ 完整 | ✅ 所有13个核心文档已完成 | 📊 包含内核实现分析、容器化应用、虚拟化机制 | 🎨 包含67个可视化文档（22个思维导图2000+节点、34个知识矩阵220+矩阵2100+数据项、11个关系图谱55+图谱650+节点） | 🎯 生产就绪
 
 ## 7 可视化内容
 
@@ -325,6 +325,10 @@
 - **[内核时间管理详细思维导图](visualizations/mindmaps/16-time-management.md)** - 内核时间管理详细知识结构
 - **[内核电源管理详细思维导图](visualizations/mindmaps/17-power-management.md)** - 内核电源管理详细知识结构
 - **[内核热插拔详细思维导图](visualizations/mindmaps/18-hotplug.md)** - 内核热插拔详细知识结构
+- **[内核调度器详细思维导图](visualizations/mindmaps/19-scheduler.md)** - 内核调度器详细知识结构
+- **[内核锁机制详细思维导图](visualizations/mindmaps/20-locking.md)** - 内核锁机制详细知识结构
+- **[内核高级内存管理详细思维导图](visualizations/mindmaps/21-advanced-memory.md)** - 内核高级内存管理详细知识结构
+- **[内核高级网络管理详细思维导图](visualizations/mindmaps/22-advanced-network.md)** - 内核高级网络管理详细知识结构
 - **[内核子系统对比矩阵](visualizations/matrices/01-kernel-subsystems.md)** - 内核子系统多维对比
 - **[容器化机制对比矩阵](visualizations/matrices/02-containerization-mechanisms.md)** - 容器化机制多维对比
 - **[系统调用对比矩阵](visualizations/matrices/03-system-calls.md)** - 系统调用多维对比
@@ -354,6 +358,11 @@
 - **[内核热插拔详细矩阵](visualizations/matrices/27-hotplug.md)** - CPU、内存、设备热插拔
 - **[内核实时性详细矩阵](visualizations/matrices/28-realtime.md)** - 实时性类型、实时调度策略、实时性优化
 - **[内核可扩展性详细矩阵](visualizations/matrices/29-scalability.md)** - 可扩展性维度、优化技术、瓶颈分析
+- **[内核调度器详细矩阵](visualizations/matrices/30-scheduler.md)** - 调度策略、调度算法、调度性能
+- **[内核锁机制详细矩阵](visualizations/matrices/31-locking.md)** - 锁类型、锁性能、锁使用场景
+- **[内核最佳实践综合矩阵](visualizations/matrices/32-best-practices.md)** - 开发、性能、安全、调试最佳实践
+- **[内核高级内存管理详细矩阵](visualizations/matrices/33-advanced-memory.md)** - NUMA、大页内存、内存压缩
+- **[内核高级网络管理详细矩阵](visualizations/matrices/34-advanced-network.md)** - 多队列网络、网络性能优化、网络虚拟化
 - **[内核机制关系图](visualizations/diagrams/01-kernel-mechanisms-relations.md)** - 内核机制依赖关系
 - **[容器化技术栈关系图](visualizations/diagrams/02-containerization-stack-relations.md)** - 容器化技术栈关系
 - **[内核架构图](visualizations/diagrams/03-kernel-architecture.md)** - 内核整体架构可视化
@@ -387,10 +396,10 @@
 
 ### 7.4 可视化内容统计
 
-- **思维导图**：18个（1600+节点）
-- **知识矩阵**：29个（180+矩阵，1700+数据项）
-- **关系图谱**：9个（45+图谱，550+节点）
-- **总计**：56个可视化文档
+- **思维导图**：22个（2000+节点）
+- **知识矩阵**：34个（220+矩阵，2100+数据项）
+- **关系图谱**：11个（55+图谱，650+节点）
+- **总计**：67个可视化文档
 
 **详细统计**：参见 [可视化内容统计](visualizations/STATISTICS.md)
 **维护者**：项目团队
