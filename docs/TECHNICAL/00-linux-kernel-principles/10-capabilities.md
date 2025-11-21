@@ -34,6 +34,14 @@
     - [8.1 实现细节](#81-实现细节)
     - [8.2 架构分析](#82-架构分析)
     - [8.3 理论分析](#83-理论分析)
+  - [9 2025 年最新实践](#9-2025-年最新实践)
+    - [9.1 安全加固最佳实践（2025）](#91-安全加固最佳实践2025)
+    - [9.2 Kubernetes Pod Security Standards（2025）](#92-kubernetes-pod-security-standards2025)
+    - [9.3 Docker 24.0+ Capabilities 管理（2025）](#93-docker-240-capabilities-管理2025)
+  - [10 实际应用案例](#10-实际应用案例)
+    - [案例 1：Web 服务器安全加固](#案例-1web-服务器安全加固)
+    - [案例 2：网络工具容器](#案例-2网络工具容器)
+    - [案例 3：容器运行时安全配置](#案例-3容器运行时安全配置)
 
 ---
 
@@ -451,10 +459,195 @@ securityContext:
 - **[安全模型](../../COGNITIVE/05-decision-analysis/decision-models/01-theory-models/03-security-models.md)** - 安全机制的理论分析
 - **[隔离模型](../../COGNITIVE/05-decision-analysis/decision-models/01-theory-models/02-isolation-models.md)** - 隔离机制的理论分析
 
+## 9 2025 年最新实践
+
+### 9.1 安全加固最佳实践（2025）
+
+**2025 年安全趋势**：最小权限原则成为标准
+
+**推荐配置**：
+
+```yaml
+# Kubernetes Pod 安全配置（2025 推荐）
+apiVersion: v1
+kind: Pod
+metadata:
+  name: secure-pod
+spec:
+  securityContext:
+    # 移除所有 Capabilities，然后只添加需要的
+    capabilities:
+      drop:
+        - ALL
+    runAsNonRoot: true
+    runAsUser: 1000
+    seccompProfile:
+      type: RuntimeDefault
+  containers:
+  - name: app
+    image: nginx
+    securityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      capabilities:
+        drop:
+          - ALL
+        add:
+          - NET_BIND_SERVICE  # 只添加必要的 Capability
+```
+
+### 9.2 Kubernetes Pod Security Standards（2025）
+
+**Kubernetes 1.25+ Pod Security Standards**：
+
+- **Restricted**：最严格的安全策略（推荐）
+- **Baseline**：基本安全策略
+- **Privileged**：无限制（不推荐）
+
+**配置示例**：
+
+```yaml
+# Namespace 级别 Pod Security
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: secure-ns
+  labels:
+    pod-security.kubernetes.io/enforce: restricted
+    pod-security.kubernetes.io/audit: restricted
+    pod-security.kubernetes.io/warn: restricted
+```
+
+### 9.3 Docker 24.0+ Capabilities 管理（2025）
+
+**Docker 24.0+ 新特性**：
+
+- **默认 Capabilities 减少**：默认只保留必要的 Capabilities
+- **安全扫描增强**：自动检测不安全的 Capabilities 配置
+- **策略模板**：提供安全策略模板
+
+**配置示例**：
+
+```yaml
+# docker-compose.yml（2025 推荐）
+version: '3.8'
+services:
+  app:
+    image: nginx
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE
+    read_only: true
+```
+
+## 10 实际应用案例
+
+### 案例 1：Web 服务器安全加固
+
+**场景**：部署 Web 服务器，需要绑定 80/443 端口
+
+**实现方案**：
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web-server
+spec:
+  containers:
+  - name: nginx
+    image: nginx:latest
+    ports:
+    - containerPort: 80
+    - containerPort: 443
+    securityContext:
+      # 只添加绑定端口所需的 Capability
+      capabilities:
+        drop:
+          - ALL
+        add:
+          - NET_BIND_SERVICE
+      runAsNonRoot: true
+      runAsUser: 101  # nginx 用户
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+```
+
+**效果**：
+
+- 最小权限：只拥有绑定端口权限
+- 安全加固：移除所有不必要的 Capabilities
+- 攻击面减少：减少容器逃逸风险
+
+### 案例 2：网络工具容器
+
+**场景**：运行网络诊断工具（如 ping），需要网络相关 Capabilities
+
+**实现方案**：
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: network-tool
+spec:
+  containers:
+  - name: ping
+    image: busybox:latest
+    command: ["ping", "8.8.8.8"]
+    securityContext:
+      capabilities:
+        drop:
+          - ALL
+        add:
+          - NET_RAW  # ping 需要 RAW socket
+      runAsNonRoot: true
+      allowPrivilegeEscalation: false
+```
+
+**效果**：
+
+- 精确权限：只添加网络工具所需的 Capability
+- 安全隔离：其他操作被禁止
+- 功能完整：ping 功能正常工作
+
+### 案例 3：容器运行时安全配置
+
+**场景**：配置容器运行时（如 containerd）的安全策略
+
+**实现方案**：
+
+```toml
+# /etc/containerd/config.toml
+version = 2
+
+[plugins."io.containerd.grpc.v1.cri".containerd]
+  default_runtime_name = "runc"
+
+  [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+    runtime_type = "io.containerd.runc.v2"
+    [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+      # 默认移除所有 Capabilities
+      SystemdCgroup = true
+      # 安全配置
+      NoNewPrivileges = true
+      # 默认 Capabilities（空列表）
+      DefaultCapabilities = []
+```
+
+**效果**：
+
+- 默认安全：所有容器默认无特权
+- 最小权限：需要显式添加 Capabilities
+- 安全审计：便于安全审计和合规
+
 ---
 
-**最后更新**：2025-11-07
-**文档状态**：✅ 完整 | 📊 包含内核实现分析 | 🎯 生产就绪
+**最后更新**：2025-11-15
+**文档状态**：✅ 完整 | 📊 包含内核实现分析、2025 年最新实践、实际应用案例 | 🎯 生产就绪
 **维护者**：项目团队
 
 > **📊 2025 年技术趋势参考**：详细技术状态和版本信息请查看

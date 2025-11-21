@@ -212,7 +212,6 @@ ARCHITECTURE/
 > [27. 2025 年技术趋势汇总](../TECHNICAL/10-reference-trends/2025-trends/2025-trends.md)
 **版本**：v1.2
 **参考**：基于 `architecture_view.md` 和
-
 > **📊 2025 年技术趋势参考**：详细技术状态和版本信息请查看
 > [27. 2025 年技术趋势汇总](../TECHNICAL/10-reference-trends/2025-trends/2025-trends.md)
 `system_view.md` 内容扩展

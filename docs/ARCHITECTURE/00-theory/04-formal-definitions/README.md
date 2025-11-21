@@ -48,7 +48,7 @@
 
 ### 2.2 文档结构
 
-```
+```text
 04-formal-definitions/
 ├── README.md                        # 本文档
 └── formal-definitions.md           # 形式化定义（新）

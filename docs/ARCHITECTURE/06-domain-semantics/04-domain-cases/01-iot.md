@@ -71,6 +71,88 @@
 - **状态存储**：使用 etcd 或数据库存储状态
 - **事件驱动**：使用事件驱动架构同步状态
 
+**代码示例**：
+
+```yaml
+# 设备影子 CRD 定义
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: deviceshadows.iot.example.com
+spec:
+  group: iot.example.com
+  versions:
+  - name: v1
+    served: true
+    storage: true
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          spec:
+            type: object
+            properties:
+              deviceId:
+                type: string
+              reported:
+                type: object
+              desired:
+                type: object
+          status:
+            type: object
+            properties:
+              state:
+                type: string
+              version:
+                type: integer
+              lastSyncTime:
+                type: string
+                format: date-time
+---
+# 设备影子实例
+apiVersion: iot.example.com/v1
+kind: DeviceShadow
+metadata:
+  name: sensor-001
+spec:
+  deviceId: "sensor-001"
+  reported:
+    temperature: 25.5
+    humidity: 60.0
+    timestamp: "2025-11-06T10:00:00Z"
+  desired:
+    targetTemperature: 24.0
+    mode: "auto"
+status:
+  state: "syncing"
+  version: 42
+  lastSyncTime: "2025-11-06T10:00:00Z"
+```
+
+**状态同步逻辑**：
+
+```go
+// 设备影子状态同步（Go 示例）
+func (s *DeviceShadow) SyncState() error {
+    // 比较 reported 和 desired 状态
+    if !reflect.DeepEqual(s.Spec.Reported, s.Spec.Desired) {
+        // 生成状态差异
+        delta := computeDelta(s.Spec.Reported, s.Spec.Desired)
+
+        // 发送状态更新到设备
+        if err := s.sendToDevice(delta); err != nil {
+            return err
+        }
+
+        // 更新状态版本
+        s.Status.Version++
+        s.Status.LastSyncTime = time.Now()
+    }
+
+    return nil
+}
+```
+
 ### 规则链设计
 
 **设计原则**：
@@ -86,6 +168,59 @@
 - **工作流引擎**：使用工作流引擎（如 Temporal）
 - **事件流处理**：使用事件流处理（如 Kafka Streams）
 
+**代码示例**：
+
+```yaml
+# 规则链定义
+apiVersion: iot.example.com/v1
+kind: RuleChain
+metadata:
+  name: temperature-alert-chain
+spec:
+  rules:
+  - name: check-temperature
+    condition: "device.temperature > 30"
+    action: "send-alert"
+    priority: 1
+  - name: check-humidity
+    condition: "device.humidity > 80"
+    action: "send-alert"
+    priority: 2
+  - name: auto-adjust
+    condition: "device.temperature > 25 && device.mode == 'auto'"
+    action: "adjust-cooling"
+    priority: 3
+```
+
+**规则执行引擎**：
+
+```python
+# 规则链执行（Python 示例）
+class RuleChain:
+    def __init__(self, rules):
+        self.rules = sorted(rules, key=lambda r: r.priority)
+
+    def execute(self, device_state):
+        results = []
+        for rule in self.rules:
+            if self.evaluate_condition(rule.condition, device_state):
+                result = self.execute_action(rule.action, device_state)
+                results.append(result)
+        return results
+
+    def evaluate_condition(self, condition, state):
+        # 使用表达式引擎评估条件
+        return eval(condition, {"device": state})
+
+    def execute_action(self, action, state):
+        # 执行动作
+        if action == "send-alert":
+            return self.send_alert(state)
+        elif action == "adjust-cooling":
+            return self.adjust_cooling(state)
+        return None
+```
+
 ### 时空分区策略
 
 **分区维度**：
@@ -99,6 +234,66 @@
 - **降采样**：时序数据降采样
 - **数据归档**：历史数据归档
 - **查询优化**：分区查询优化
+
+**代码示例**：
+
+```sql
+-- 时序数据分区表（PostgreSQL 示例）
+CREATE TABLE device_metrics (
+    device_id VARCHAR(50),
+    metric_type VARCHAR(50),
+    value DOUBLE PRECISION,
+    timestamp TIMESTAMP,
+    location VARCHAR(50)
+) PARTITION BY RANGE (timestamp);
+
+-- 按月分区
+CREATE TABLE device_metrics_2025_11 PARTITION OF device_metrics
+    FOR VALUES FROM ('2025-11-01') TO ('2025-12-01');
+
+CREATE TABLE device_metrics_2025_12 PARTITION OF device_metrics
+    FOR VALUES FROM ('2025-12-01') TO ('2026-01-01');
+
+-- 按地理位置分区
+CREATE TABLE device_metrics_beijing PARTITION OF device_metrics_2025_11
+    FOR VALUES WITH (location = 'beijing');
+
+CREATE TABLE device_metrics_shanghai PARTITION OF device_metrics_2025_11
+    FOR VALUES WITH (location = 'shanghai');
+```
+
+**降采样示例**：
+
+```python
+# 时序数据降采样（Python 示例）
+import pandas as pd
+
+def downsample_metrics(df, interval='1H'):
+    """
+    将高频数据降采样到指定间隔
+    """
+    df['timestamp'] = pd.to_datetime(df['timestamp'])
+    df = df.set_index('timestamp')
+
+    # 按时间间隔聚合
+    downsampled = df.resample(interval).agg({
+        'temperature': 'mean',
+        'humidity': 'mean',
+        'pressure': 'mean'
+    })
+
+    return downsampled.reset_index()
+
+# 使用示例
+hourly_data = downsample_metrics(device_data, interval='1H')
+daily_data = downsample_metrics(device_data, interval='1D')
+```
+
+**2025 年最新实践**：
+
+- **时序数据库**：使用 InfluxDB 3.0 或 TimescaleDB 2.0 进行时序数据存储
+- **边缘计算**：使用 K3s + WasmEdge 在边缘节点进行数据预处理
+- **实时流处理**：使用 Kafka Streams 或 Flink 进行实时数据处理
 
 ## 相关文档
 

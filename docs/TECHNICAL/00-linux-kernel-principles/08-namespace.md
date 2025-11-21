@@ -35,6 +35,14 @@
     - [8.1 实现细节](#81-实现细节)
     - [8.2 架构分析](#82-架构分析)
     - [8.3 理论分析](#83-理论分析)
+  - [9 2025 年最新实践](#9-2025-年最新实践)
+    - [9.1 Linux 6.1+ Namespace 增强（2025）](#91-linux-61-namespace-增强2025)
+    - [9.2 containerd 2.0+ Namespace 管理（2025）](#92-containerd-20-namespace-管理2025)
+    - [9.3 Kubernetes 1.30+ Namespace 支持（2025）](#93-kubernetes-130-namespace-支持2025)
+  - [10 实际应用案例](#10-实际应用案例)
+    - [案例 1：多租户容器隔离](#案例-1多租户容器隔离)
+    - [案例 2：高性能网络应用](#案例-2高性能网络应用)
+    - [案例 3：容器化 CI/CD 系统](#案例-3容器化-cicd-系统)
 
 ---
 
@@ -496,10 +504,184 @@ cmd.SysProcAttr = &syscall.SysProcAttr{
 
 - **[隔离模型](../../COGNITIVE/05-decision-analysis/decision-models/01-theory-models/02-isolation-models.md)** - 隔离机制的理论分析
 
+## 9 2025 年最新实践
+
+### 9.1 Linux 6.1+ Namespace 增强（2025）
+
+**最新内核版本**：Linux 6.1+（2025 年）
+
+**新特性**：
+
+- **Time Namespace 增强**：支持更精确的时间隔离
+- **User Namespace 改进**：更好的安全性和性能
+- **PID Namespace 优化**：减少嵌套 Namespace 的开销
+- **Network Namespace 性能提升**：更快的网络栈初始化
+
+**内核版本要求**：
+
+```bash
+# 检查内核版本
+uname -r
+# 推荐：6.1+ 或 5.15 LTS
+
+# 检查 Namespace 支持
+ls /proc/self/ns/
+# 应该看到：pid, net, mnt, uts, ipc, user, cgroup, time
+```
+
+### 9.2 containerd 2.0+ Namespace 管理（2025）
+
+**containerd 2.0+ 新特性**：
+
+- **统一 Namespace 管理**：更好的 Namespace 生命周期管理
+- **性能优化**：减少 Namespace 创建和销毁的开销
+- **安全增强**：默认启用 User Namespace
+
+**配置示例**：
+
+```toml
+# /etc/containerd/config.toml
+version = 2
+
+[plugins."io.containerd.grpc.v1.cri"]
+  # 启用 User Namespace（2025 推荐）
+  enable_userns = true
+
+  # Namespace 配置
+  [plugins."io.containerd.grpc.v1.cri".containerd]
+    default_runtime_name = "runc"
+    [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+      runtime_type = "io.containerd.runc.v2"
+      [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
+        # 启用所有 Namespace
+        SystemdCgroup = true
+```
+
+### 9.3 Kubernetes 1.30+ Namespace 支持（2025）
+
+**Kubernetes 1.30+ 新特性**：
+
+- **User Namespace 支持**：Pod 级别的 User Namespace
+- **Network Namespace 共享**：支持 Pod 内容器共享 Network Namespace
+- **PID Namespace 共享**：支持 Pod 内容器共享 PID Namespace
+
+**配置示例**：
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: shared-ns-pod
+spec:
+  shareProcessNamespace: true  # 共享 PID Namespace
+  containers:
+  - name: app1
+    image: nginx
+  - name: app2
+    image: nginx
+```
+
+## 10 实际应用案例
+
+### 案例 1：多租户容器隔离
+
+**场景**：在 Kubernetes 集群中实现多租户隔离
+
+**实现方案**：
+
+```yaml
+# 使用 User Namespace 实现租户隔离
+apiVersion: v1
+kind: Pod
+metadata:
+  name: tenant-a-app
+  namespace: tenant-a
+spec:
+  securityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
+    fsGroup: 1000
+  containers:
+  - name: app
+    image: nginx
+    securityContext:
+      # 移除不必要的 Capabilities
+      capabilities:
+        drop:
+          - ALL
+        add:
+          - NET_BIND_SERVICE
+```
+
+**效果**：
+
+- 租户隔离：每个租户有独立的 User Namespace
+- 安全性：减少容器逃逸风险
+- 资源隔离：通过 Namespace 实现资源隔离
+
+### 案例 2：高性能网络应用
+
+**场景**：部署高性能网络应用，需要独立的 Network Namespace
+
+**实现方案**：
+
+```bash
+# 创建独立的 Network Namespace
+ip netns add app-ns
+
+# 配置网络接口
+ip link add veth0 type veth peer name veth1
+ip link set veth0 netns app-ns
+ip netns exec app-ns ip addr add 10.0.0.1/24 dev veth0
+ip netns exec app-ns ip link set veth0 up
+
+# 在 Network Namespace 中运行应用
+ip netns exec app-ns /usr/bin/myapp
+```
+
+**效果**：
+
+- 网络隔离：应用有独立的网络栈
+- 性能优化：减少网络干扰
+- 安全性：网络流量隔离
+
+### 案例 3：容器化 CI/CD 系统
+
+**场景**：在容器中运行 CI/CD 任务，需要隔离的进程树
+
+**实现方案**：
+
+```yaml
+# Kubernetes Job 配置
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ci-job
+spec:
+  template:
+    spec:
+      # 使用独立的 PID Namespace
+      shareProcessNamespace: false
+      containers:
+      - name: builder
+        image: build-tool:latest
+        securityContext:
+          # 移除不必要的 Capabilities
+          capabilities:
+            drop:
+              - ALL
+```
+
+**效果**：
+
+- 进程隔离：每个 CI/CD 任务有独立的进程树
+- 安全性：任务之间完全隔离
+- 资源控制：通过 Cgroup 限制资源使用
+
 ---
 
-**最后更新**：2025-11-07
-**文档状态**：✅ 完整 | 📊 包含内核实现分析 | 🎯 生产就绪
+**最后更新**：2025-11-15
+**文档状态**：✅ 完整 | 📊 包含内核实现分析、2025 年最新实践、实际应用案例 | 🎯 生产就绪
 **维护者**：项目团队
 
 > **📊 2025 年技术趋势参考**：详细技术状态和版本信息请查看

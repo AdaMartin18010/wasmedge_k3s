@@ -86,28 +86,28 @@
 
 | 编号 | 案例标题 | 场景 | 状态 |
 |-----|---------|------|------|
-| [I-007](industrial-iot-edge.md) | 工业 IoT 边缘计算系统 | IoT/边缘计算 | ⏳ 待补充 |
-| [I-008](smart-manufacturing.md) | 智能制造系统 | 微服务 | ⏳ 待补充 |
+| [I-007](industrial-iot-edge.md) | 工业 IoT 边缘计算系统 | IoT/边缘计算 | ✅ 已完成 |
+| [I-008](smart-manufacturing.md) | 智能制造系统 | 微服务 | ✅ 已完成 |
 
 ### 3.4 电商行业案例
 
 | 编号 | 案例标题 | 场景 | 状态 |
 |-----|---------|------|------|
 | [I-009](e-commerce-platform.md) | 电商平台 | 微服务 | ✅ 已有 |
-| [I-010](high-concurrency-serverless.md) | 高并发 Serverless 函数系统 | Serverless | ⏳ 待补充 |
-| [I-011](recommendation-system.md) | 推荐系统 | AI/ML | ⏳ 待补充 |
+| [I-010](high-concurrency-serverless.md) | 高并发 Serverless 函数系统 | Serverless | ✅ 已完成 |
+| [I-011](recommendation-system.md) | 推荐系统 | AI/ML | ✅ 已完成 |
 
 ### 3.5 游戏行业案例
 
 | 编号 | 案例标题 | 场景 | 状态 |
 |-----|---------|------|------|
-| [I-012](game-edge-rendering.md) | 在线游戏边缘渲染系统 | 边缘计算 | ⏳ 待补充 |
+| [I-012](game-edge-rendering.md) | 在线游戏边缘渲染系统 | 边缘计算 | ✅ 已完成 |
 
 ### 3.6 教育行业案例
 
 | 编号 | 案例标题 | 场景 | 状态 |
 |-----|---------|------|------|
-| [I-013](online-education-platform.md) | 在线教育平台 | 边缘计算 | ⏳ 待补充 |
+| [I-013](online-education-platform.md) | 在线教育平台 | 边缘计算 | ✅ 已完成 |
 
 ### 3.7 其他行业案例
 

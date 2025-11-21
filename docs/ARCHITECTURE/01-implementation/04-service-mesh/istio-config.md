@@ -2,28 +2,37 @@
 
 ## 📑 目录
 
-- [📑 目录](#-目录)
-- [1 概述](#1-概述)
-  - [1.1 理论基础](#11-理论基础)
-- [2 Istio 安装配置](#2-istio-安装配置)
-  - [2.1 Istio 安装](#21-istio-安装)
-  - [2.2 命名空间自动注入](#22-命名空间自动注入)
-  - [2.3 Istio Operator 配置](#23-istio-operator-配置)
-- [3 VirtualService 配置](#3-virtualservice-配置)
-  - [3.1 基础路由配置](#31-基础路由配置)
-  - [3.2 金丝雀发布配置](#32-金丝雀发布配置)
-  - [3.3 流量镜像配置](#33-流量镜像配置)
-- [4 DestinationRule 配置](#4-destinationrule-配置)
-  - [4.1 负载均衡配置](#41-负载均衡配置)
-  - [4.2 熔断配置](#42-熔断配置)
-  - [4.3 子集配置](#43-子集配置)
-- [5 Gateway 配置](#5-gateway-配置)
-  - [5.1 入口网关配置](#51-入口网关配置)
-  - [5.2 TLS 配置](#52-tls-配置)
-- [6 相关文档](#6-相关文档)
-  - [6.1 理论论证](#61-理论论证)
-  - [6.2 架构视角](#62-架构视角)
-  - [6.3 技术文档](#63-技术文档)
+- [Istio 配置示例](#istio-配置示例)
+  - [📑 目录](#-目录)
+  - [1 概述](#1-概述)
+    - [1.1 理论基础](#11-理论基础)
+  - [2 Istio 安装配置](#2-istio-安装配置)
+    - [2.1 Istio 安装](#21-istio-安装)
+    - [2.2 命名空间自动注入](#22-命名空间自动注入)
+    - [2.3 Istio Operator 配置](#23-istio-operator-配置)
+  - [3 VirtualService 配置](#3-virtualservice-配置)
+    - [3.1 基础路由配置](#31-基础路由配置)
+    - [3.2 金丝雀发布配置](#32-金丝雀发布配置)
+    - [3.3 流量镜像配置](#33-流量镜像配置)
+  - [4 DestinationRule 配置](#4-destinationrule-配置)
+    - [4.1 负载均衡配置](#41-负载均衡配置)
+    - [4.2 熔断配置](#42-熔断配置)
+    - [4.3 子集配置](#43-子集配置)
+  - [5 Gateway 配置](#5-gateway-配置)
+    - [5.1 入口网关配置](#51-入口网关配置)
+    - [5.2 TLS 配置](#52-tls-配置)
+  - [6 相关文档](#6-相关文档)
+    - [6.1 理论论证](#61-理论论证)
+    - [6.2 架构视角](#62-架构视角)
+    - [6.3 技术文档](#63-技术文档)
+  - [7 2025 年最新实践](#7-2025-年最新实践)
+    - [7.1 Istio 1.22+ 新特性（2025）](#71-istio-122-新特性2025)
+    - [7.2 Ambient Mesh 模式（2025）](#72-ambient-mesh-模式2025)
+    - [7.3 Wasm 插件支持（2025）](#73-wasm-插件支持2025)
+  - [8 实际应用案例](#8-实际应用案例)
+    - [案例 1：微服务流量管理](#案例-1微服务流量管理)
+    - [案例 2：服务间安全通信](#案例-2服务间安全通信)
+    - [案例 3：多集群 Service Mesh](#案例-3多集群-service-mesh)
 
 ---
 
@@ -291,6 +300,201 @@ spec:
 - **`../../../TECHNICAL/06-advanced-features/service-mesh/service-mesh.md`** - Service Mesh 技术文
   档
 
+## 7 2025 年最新实践
+
+### 7.1 Istio 1.22+ 新特性（2025）
+
+**最新版本**：Istio 1.22+（2025 年 11 月）
+
+**新特性**：
+
+- **Ambient Mesh**：无 Sidecar 的 Service Mesh 模式
+- **性能优化**：减少延迟和资源消耗
+- **Telemetry API**：统一的遥测 API
+- **Wasm 插件支持**：支持 Wasm 扩展
+
+**安装最新版本**：
+
+```bash
+# 安装 Istio 1.22
+curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.22.0 sh -
+cd istio-1.22.0
+./bin/istioctl install --set profile=default
+```
+
+### 7.2 Ambient Mesh 模式（2025）
+
+**Ambient Mesh 优势**：
+
+- **无 Sidecar**：不需要在每个 Pod 中注入 Sidecar
+- **性能提升**：减少延迟和资源消耗
+- **简化运维**：减少 Sidecar 管理复杂度
+
+**启用 Ambient Mesh**：
+
+```bash
+# 安装 Ambient Mesh
+istioctl install --set profile=ambient
+
+# 标记命名空间使用 Ambient Mesh
+kubectl label namespace default istio.io/dataplane-mode=ambient
+```
+
+### 7.3 Wasm 插件支持（2025）
+
+**Istio Wasm 插件**：
+
+- **动态扩展**：无需重启即可加载 Wasm 插件
+- **性能优化**：Wasm 插件执行效率高
+- **安全隔离**：Wasm 插件提供安全隔离
+
+**配置示例**：
+
+```yaml
+apiVersion: extensions.istio.io/v1alpha1
+kind: WasmPlugin
+metadata:
+  name: my-wasm-plugin
+spec:
+  selector:
+    matchLabels:
+      app: myapp
+  url: oci://myregistry.com/wasm-plugins/my-plugin:v1.0.0
+  phase: AUTHN
+```
+
+## 8 实际应用案例
+
+### 案例 1：微服务流量管理
+
+**场景**：管理微服务之间的流量路由和负载均衡
+
+**实现方案**：
+
+```yaml
+# VirtualService：流量路由
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: reviews
+spec:
+  hosts:
+  - reviews
+  http:
+  - match:
+    - headers:
+        end-user:
+          exact: jason
+    route:
+    - destination:
+        host: reviews
+        subset: v2
+  - route:
+    - destination:
+        host: reviews
+        subset: v1
+      weight: 50
+    - destination:
+        host: reviews
+        subset: v3
+      weight: 50
+
+---
+# DestinationRule：负载均衡策略
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: reviews
+spec:
+  host: reviews
+  trafficPolicy:
+    loadBalancer:
+      simple: LEAST_CONN
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+  - name: v2
+    labels:
+      version: v2
+  - name: v3
+    labels:
+      version: v3
+```
+
+**效果**：
+
+- 流量路由：根据用户和权重进行流量路由
+- 负载均衡：使用最少连接负载均衡策略
+- 金丝雀发布：支持渐进式发布
+
+### 案例 2：服务间安全通信
+
+**场景**：实现服务间的 mTLS 通信
+
+**实现方案**：
+
+```yaml
+# PeerAuthentication：启用 mTLS
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: default
+  namespace: production
+spec:
+  mtls:
+    mode: STRICT
+
+---
+# AuthorizationPolicy：访问控制
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: allow-frontend
+  namespace: production
+spec:
+  selector:
+    matchLabels:
+      app: backend
+  action: ALLOW
+  rules:
+  - from:
+    - source:
+        principals: ["cluster.local/ns/production/sa/frontend"]
+    to:
+    - operation:
+        methods: ["GET", "POST"]
+```
+
+**效果**：
+
+- mTLS 加密：所有服务间通信自动加密
+- 访问控制：基于服务身份的访问控制
+- 安全加固：减少中间人攻击风险
+
+### 案例 3：多集群 Service Mesh
+
+**场景**：跨多个 Kubernetes 集群的 Service Mesh
+
+**实现方案**：
+
+```bash
+# 安装 Istio 多集群
+istioctl install --set profile=multicluster
+
+# 配置多集群网络
+istioctl create-remote-secret \
+  --name=cluster-1 \
+  --context=cluster-1-context | \
+  kubectl apply -f - --context=cluster-2-context
+```
+
+**效果**：
+
+- 跨集群通信：实现跨集群的服务通信
+- 统一管理：统一管理多个集群的流量
+- 故障隔离：集群间故障隔离
+
 ---
 
-**更新时间**：2025-11-04 **版本**：v1.0 **状态**：✅ 基础示例已创建
+**更新时间**：2025-11-15 **版本**：v1.1 **状态**：✅ 包含 2025 年最新实践
