@@ -202,6 +202,34 @@
 
 参见：[内核高级存储管理详细思维导图](mindmaps/23-advanced-storage.md)
 
+### 1.24 内核高级虚拟化详细思维导图
+
+参见：[内核高级虚拟化详细思维导图](mindmaps/24-advanced-virtualization.md)
+
+### 1.25 内核高级安全管理详细思维导图
+
+参见：[内核高级安全管理详细思维导图](mindmaps/25-advanced-security.md)
+
+### 1.26 内核高级实时性详细思维导图
+
+参见：[内核高级实时性详细思维导图](mindmaps/26-advanced-realtime.md)
+
+### 1.27 内核高级模块管理详细思维导图
+
+参见：[内核高级模块管理详细思维导图](mindmaps/27-advanced-module.md)
+
+### 1.28 内核高级启动管理详细思维导图
+
+参见：[内核高级启动管理详细思维导图](mindmaps/28-advanced-boot.md)
+
+### 1.29 内核高级错误处理详细思维导图
+
+参见：[内核高级错误处理详细思维导图](mindmaps/29-advanced-error-handling.md)
+
+### 1.30 内核高级热插拔管理详细思维导图
+
+参见：[内核高级热插拔管理详细思维导图](mindmaps/30-advanced-hotplug.md)
+
 ### 1.4 内存管理思维导图
 
 参见：[内核架构思维导图](mindmaps/01-kernel-architecture.md#3-内存管理思维导图)
@@ -362,6 +390,70 @@
 
 参见：[内核综合性能调优矩阵](matrices/36-comprehensive-performance.md)
 
+### 2.37 内核高级虚拟化详细矩阵
+
+参见：[内核高级虚拟化详细矩阵](matrices/37-advanced-virtualization.md)
+
+### 2.38 内核综合故障诊断矩阵
+
+参见：[内核综合故障诊断矩阵](matrices/38-comprehensive-troubleshooting.md)
+
+### 2.39 内核高级安全管理详细矩阵
+
+参见：[内核高级安全管理详细矩阵](matrices/39-advanced-security.md)
+
+### 2.40 内核综合开发指南矩阵
+
+参见：[内核综合开发指南矩阵](matrices/40-comprehensive-development.md)
+
+### 2.41 内核综合集成矩阵
+
+参见：[内核综合集成矩阵](matrices/41-comprehensive-integration.md)
+
+### 2.42 内核高级实时性详细矩阵
+
+参见：[内核高级实时性详细矩阵](matrices/42-advanced-realtime.md)
+
+### 2.43 内核高级可扩展性详细矩阵
+
+参见：[内核高级可扩展性详细矩阵](matrices/43-advanced-scalability.md)
+
+### 2.44 内核高级模块管理详细矩阵
+
+参见：[内核高级模块管理详细矩阵](matrices/44-advanced-module.md)
+
+### 2.45 内核高级调试详细矩阵
+
+参见：[内核高级调试详细矩阵](matrices/45-advanced-debugging.md)
+
+### 2.46 内核高级启动管理详细矩阵
+
+参见：[内核高级启动管理详细矩阵](matrices/46-advanced-boot.md)
+
+### 2.47 内核高级时间管理详细矩阵
+
+参见：[内核高级时间管理详细矩阵](matrices/47-advanced-time.md)
+
+### 2.48 内核高级错误处理详细矩阵
+
+参见：[内核高级错误处理详细矩阵](matrices/48-advanced-error-handling.md)
+
+### 2.49 内核高级电源管理详细矩阵
+
+参见：[内核高级电源管理详细矩阵](matrices/49-advanced-power.md)
+
+### 2.50 内核高级热插拔管理详细矩阵
+
+参见：[内核高级热插拔管理详细矩阵](matrices/50-advanced-hotplug.md)
+
+### 2.51 内核高级调度器详细矩阵
+
+参见：[内核高级调度器详细矩阵](matrices/51-advanced-scheduler.md)
+
+### 2.52 内核高级锁机制详细矩阵
+
+参见：[内核高级锁机制详细矩阵](matrices/52-advanced-locking.md)
+
 ---
 
 ## 3 关系图谱
@@ -414,6 +506,46 @@
 
 参见：[内核性能优化流程关系图](diagrams/12-kernel-performance-optimization-flow.md)
 
+### 3.13 内核故障诊断流程关系图
+
+参见：[内核故障诊断流程关系图](diagrams/13-kernel-troubleshooting-flow.md)
+
+### 3.14 内核开发工作流关系图
+
+参见：[内核开发工作流关系图](diagrams/14-kernel-development-workflow.md)
+
+### 3.15 内核子系统综合集成关系图
+
+参见：[内核子系统综合集成关系图](diagrams/15-kernel-subsystems-comprehensive-integration.md)
+
+### 3.16 内核机制综合关系图
+
+参见：[内核机制综合关系图](diagrams/16-kernel-mechanisms-comprehensive-relations.md)
+
+### 3.17 内核综合知识地图
+
+参见：[内核综合知识地图](diagrams/17-kernel-comprehensive-knowledge-map.md)
+
+### 3.18 内核实时性与可扩展性集成关系图
+
+参见：[内核实时性与可扩展性集成关系图](diagrams/18-kernel-realtime-scalability-integration.md)
+
+### 3.19 内核模块与调试集成关系图
+
+参见：[内核模块与调试集成关系图](diagrams/19-kernel-module-debugging-integration.md)
+
+### 3.20 内核启动与时间管理集成关系图
+
+参见：[内核启动与时间管理集成关系图](diagrams/20-kernel-boot-time-integration.md)
+
+### 3.21 内核错误处理与电源管理集成关系图
+
+参见：[内核错误处理与电源管理集成关系图](diagrams/21-kernel-error-power-integration.md)
+
+### 3.22 内核热插拔、调度器与锁机制集成关系图
+
+参见：[内核热插拔、调度器与锁机制集成关系图](diagrams/22-kernel-hotplug-scheduler-locking-integration.md)
+
 ---
 
 ## 4 架构图
@@ -432,10 +564,10 @@
 
 ### 5.1 内容统计
 
-- **思维导图**：23个（2100+节点）
-- **知识矩阵**：36个（240+个矩阵，2300+数据项）
-- **关系图谱**：12个（60+个图谱，700+节点）
-- **总计**：71个可视化文档
+- **思维导图**：30个（2800+节点）
+- **知识矩阵**：52个（350+个矩阵，3900+数据项）
+- **关系图谱**：22个（105+个图谱，1150+节点）
+- **总计**：104个可视化文档
 
 ### 5.2 详细统计
 
@@ -444,7 +576,7 @@
 ---
 
 **最后更新**：2025-11-07
-**文档状态**：✅ 完整 | 📊 包含71个可视化文档 | 🎨 思维导图、知识矩阵、关系图谱、知识地图 | 📈 2100+节点、240+矩阵、2300+数据项 | 🎯 生产就绪
+**文档状态**：✅ 完整 | 📊 包含104个可视化文档 | 🎨 思维导图、知识矩阵、关系图谱、知识地图 | 📈 2800+节点、350+矩阵、3900+数据项 | 🎯 生产就绪
 **维护者**：项目团队
 
 > **📊 2025 年技术趋势参考**：详细技术状态和版本信息请查看
