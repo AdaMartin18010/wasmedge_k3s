@@ -2,19 +2,20 @@
 
 ## 📑 目录
 
-- [📑 目录](#-目录)
-- [1 概述](#1-概述)
-  - [1.1 核心组件](#11-核心组件)
-- [2 MLflow Server 部署](#2-mlflow-server-部署)
-  - [2.1 Kubernetes 部署](#21-kubernetes-部署)
-  - [2.2 访问 MLflow UI](#22-访问-mlflow-ui)
-- [3 模型注册](#3-模型注册)
-  - [3.1 Python 代码示例](#31-python-代码示例)
-  - [3.2 模型版本管理](#32-模型版本管理)
-- [4 GitOps 集成](#4-gitops-集成)
-  - [4.1 ArgoCD 配置](#41-argocd-配置)
-  - [4.2 Webhook 触发](#42-webhook-触发)
-- [5 相关文档](#5-相关文档)
+- [MLflow 集成和配置](#mlflow-集成和配置)
+  - [📑 目录](#-目录)
+  - [1 概述](#1-概述)
+    - [1.1 核心组件](#11-核心组件)
+  - [2 MLflow Server 部署](#2-mlflow-server-部署)
+    - [2.1 Kubernetes 部署](#21-kubernetes-部署)
+    - [2.2 访问 MLflow UI](#22-访问-mlflow-ui)
+  - [3 模型注册](#3-模型注册)
+    - [3.1 Python 代码示例](#31-python-代码示例)
+    - [3.2 模型版本管理](#32-模型版本管理)
+  - [4 GitOps 集成](#4-gitops-集成)
+    - [4.1 ArgoCD 配置](#41-argocd-配置)
+    - [4.2 Webhook 触发](#42-webhook-触发)
+  - [5 相关文档](#5-相关文档)
 
 ---
 

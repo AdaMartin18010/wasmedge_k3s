@@ -39,6 +39,14 @@
     - [9.1 详细机制文档](#91-详细机制文档)
     - [9.2 架构分析](#92-架构分析)
     - [9.3 实现细节](#93-实现细节)
+  - [10 2025 年最新实践](#10-2025-年最新实践)
+    - [10.1 KVM 性能优化（2025）](#101-kvm-性能优化2025)
+    - [10.2 容器与 VM 混合部署（2025）](#102-容器与-vm-混合部署2025)
+    - [10.3 边缘计算 KVM 部署（2025）](#103-边缘计算-kvm-部署2025)
+  - [11 实际应用案例](#11-实际应用案例)
+    - [案例 1：云原生 VM 部署](#案例-1云原生-vm-部署)
+    - [案例 2：安全隔离 VM 部署](#案例-2安全隔离-vm-部署)
+    - [案例 3：高性能计算 VM 部署](#案例-3高性能计算-vm-部署)
 
 ---
 
@@ -57,7 +65,7 @@
 
 **KVM 架构**：
 
-```
+```text
 用户空间（QEMU）
     │
     ├── /dev/kvm（KVM 接口）
@@ -581,10 +589,179 @@ struct kvm_irq_routing_table {
 - **[KVM 配置示例](../../ARCHITECTURE/01-implementation/01-virtualization/kvm-setup.md)** - KVM 实际配置
 - **[QEMU 配置示例](../../ARCHITECTURE/01-implementation/01-virtualization/qemu-config.md)** - QEMU 配置
 
+## 10 2025 年最新实践
+
+### 10.1 KVM 性能优化（2025）
+
+**最新内核版本**：Linux 6.1+（2025 年）
+
+**新特性**：
+
+- **嵌套虚拟化增强**：更好的嵌套虚拟化支持
+- **IO 虚拟化优化**：virtio 性能提升
+- **内存虚拟化优化**：EPT/NPT 性能提升
+
+**性能提升**：
+
+```bash
+# 启用 KVM 性能优化
+echo 1 > /sys/module/kvm/parameters/allow_unsafe_assigned_interrupts
+echo 1 > /sys/module/kvm_intel/parameters/nested
+
+# 配置 CPU 特性
+virsh cpu-baseline /usr/share/libvirt/cpu_map.xml
+```
+
+### 10.2 容器与 VM 混合部署（2025）
+
+**2025 年趋势**：容器和 VM 混合部署
+
+**Kata Containers 2.0+**：
+
+- **轻量级 VM**：每个容器运行在轻量级 VM 中
+- **KVM 支持**：基于 KVM 构建
+- **性能优化**：接近容器的性能
+
+**配置示例**：
+
+```yaml
+# Kubernetes RuntimeClass 配置
+apiVersion: node.k8s.io/v1
+kind: RuntimeClass
+metadata:
+  name: kata
+handler: kata
+overhead:
+  podFixed:
+    cpu: "100m"
+    memory: "160Mi"
+```
+
+### 10.3 边缘计算 KVM 部署（2025）
+
+**边缘 KVM 部署**：
+
+- **轻量级 Hypervisor**：适合边缘设备的 KVM 配置
+- **资源优化**：最小化资源占用
+- **快速启动**：优化 VM 启动时间
+
+**配置示例**：
+
+```bash
+# 边缘 KVM 配置
+qemu-system-x86_64 \
+  -enable-kvm \
+  -cpu host \
+  -m 512M \
+  -smp 2 \
+  -drive file=vm.img,format=qcow2 \
+  -netdev user,id=net0 \
+  -device virtio-net-pci,netdev=net0 \
+  -nographic
+```
+
+## 11 实际应用案例
+
+### 案例 1：云原生 VM 部署
+
+**场景**：在 Kubernetes 中部署 VM 工作负载
+
+**实现方案**：
+
+```yaml
+# 使用 KubeVirt 部署 VM
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: myvm
+spec:
+  running: true
+  template:
+    spec:
+      domain:
+        devices:
+          disks:
+          - name: disk0
+            disk:
+              bus: virtio
+        resources:
+          requests:
+            memory: 1Gi
+            cpu: 1
+      volumes:
+      - name: disk0
+        containerDisk:
+          image: myvm:latest
+```
+
+**效果**：
+
+- 统一管理：VM 和容器统一管理
+- 资源隔离：VM 提供更强的隔离
+- 灵活部署：支持混合部署
+
+### 案例 2：安全隔离 VM 部署
+
+**场景**：需要强安全隔离的工作负载
+
+**实现方案**：
+
+```bash
+# 使用 Kata Containers 部署
+# 每个容器运行在独立的轻量级 VM 中
+kubectl run secure-app --image=nginx:latest \
+  --runtimeclass=kata \
+  --restart=Never
+```
+
+**Kata Containers 配置**：
+
+```toml
+# /etc/kata-containers/configuration.toml
+[hypervisor.qemu]
+path = "/usr/bin/qemu-system-x86_64"
+kernel = "/usr/share/kata-containers/vmlinux.container"
+machine_type = "pc"
+enable_annotations = ["enable_iommu", "virtio_fs_extra_args"]
+```
+
+**效果**：
+
+- 安全隔离：VM 级别的隔离
+- 性能优化：接近容器的性能
+- 兼容性：完全兼容容器接口
+
+### 案例 3：高性能计算 VM 部署
+
+**场景**：运行高性能计算任务
+
+**实现方案**：
+
+```bash
+# 配置高性能 VM
+qemu-system-x86_64 \
+  -enable-kvm \
+  -cpu host,+x2apic \
+  -smp 8,sockets=2,cores=4,threads=1 \
+  -m 16G \
+  -numa node,nodeid=0,cpus=0-3,mem=8G \
+  -numa node,nodeid=1,cpus=4-7,mem=8G \
+  -drive file=vm.img,format=raw,cache=none \
+  -netdev tap,id=net0,ifname=tap0 \
+  -device virtio-net-pci,netdev=net0 \
+  -device vfio-pci,host=01:00.0
+```
+
+**效果**：
+
+- 性能优化：接近原生性能
+- NUMA 优化：NUMA 感知配置
+- GPU 直通：支持 GPU 直通
+
 ---
 
-**最后更新**：2025-11-07
-**文档状态**：✅ 完整 | 📊 包含内核实现分析 | 🎯 生产就绪
+**最后更新**：2025-11-15
+**文档状态**：✅ 完整 | 📊 包含内核实现分析、2025 年最新实践、实际应用案例 | 🎯 生产就绪
 **维护者**：项目团队
 
 > **📊 2025 年技术趋势参考**：详细技术状态和版本信息请查看

@@ -2,29 +2,38 @@
 
 ## 📑 目录
 
-- [📑 目录](#-目录)
-- [1 概述](#1-概述)
-  - [1.1 理论基础](#11-理论基础)
-- [2 QEMU 基本命令](#2-qemu-基本命令)
-  - [2.1 创建虚拟机](#21-创建虚拟机)
-  - [2.2 网络配置](#22-网络配置)
-  - [2.3 存储配置](#23-存储配置)
-- [3 QEMU 设备配置](#3-qemu-设备配置)
-  - [3.1 CPU 配置](#31-cpu-配置)
-  - [3.2 内存配置](#32-内存配置)
-  - [3.3 图形配置](#33-图形配置)
-- [4 QEMU 性能优化](#4-qemu-性能优化)
-  - [4.1 CPU 性能优化](#41-cpu-性能优化)
-  - [4.2 网络性能优化](#42-网络性能优化)
-  - [4.3 存储性能优化](#43-存储性能优化)
-- [5 QEMU 与 KVM 集成](#5-qemu-与-kvm-集成)
-  - [5.1 使用 KVM 加速](#51-使用-kvm-加速)
-  - [5.2 libvirt 集成](#52-libvirt-集成)
-  - [5.3 QEMU Monitor Protocol (QMP)](#53-qemu-monitor-protocol-qmp)
-- [6 相关文档](#6-相关文档)
-  - [6.1 理论论证](#61-理论论证)
-  - [6.2 架构视角](#62-架构视角)
-  - [6.3 技术文档](#63-技术文档)
+- [QEMU 配置示例](#qemu-配置示例)
+  - [📑 目录](#-目录)
+  - [1 概述](#1-概述)
+    - [1.1 理论基础](#11-理论基础)
+  - [2 QEMU 基本命令](#2-qemu-基本命令)
+    - [2.1 创建虚拟机](#21-创建虚拟机)
+    - [2.2 网络配置](#22-网络配置)
+    - [2.3 存储配置](#23-存储配置)
+  - [3 QEMU 设备配置](#3-qemu-设备配置)
+    - [3.1 CPU 配置](#31-cpu-配置)
+    - [3.2 内存配置](#32-内存配置)
+    - [3.3 图形配置](#33-图形配置)
+  - [4 QEMU 性能优化](#4-qemu-性能优化)
+    - [4.1 CPU 性能优化](#41-cpu-性能优化)
+    - [4.2 网络性能优化](#42-网络性能优化)
+    - [4.3 存储性能优化](#43-存储性能优化)
+  - [5 QEMU 与 KVM 集成](#5-qemu-与-kvm-集成)
+    - [5.1 使用 KVM 加速](#51-使用-kvm-加速)
+    - [5.2 libvirt 集成](#52-libvirt-集成)
+    - [5.3 QEMU Monitor Protocol (QMP)](#53-qemu-monitor-protocol-qmp)
+  - [6 相关文档](#6-相关文档)
+    - [6.1 理论论证](#61-理论论证)
+    - [6.2 架构视角](#62-架构视角)
+    - [6.3 技术文档](#63-技术文档)
+  - [7 2025 年最新实践](#7-2025-年最新实践)
+    - [7.1 QEMU 8.2+ 新特性（2025）](#71-qemu-82-新特性2025)
+    - [7.2 QEMU 与容器集成（2025）](#72-qemu-与容器集成2025)
+    - [7.3 边缘计算 QEMU 部署（2025）](#73-边缘计算-qemu-部署2025)
+  - [8 实际应用案例](#8-实际应用案例)
+    - [案例 1：开发环境 VM 部署](#案例-1开发环境-vm-部署)
+    - [案例 2：测试环境 VM 部署](#案例-2测试环境-vm-部署)
+    - [案例 3：生产环境 VM 部署](#案例-3生产环境-vm-部署)
 
 ---
 
@@ -289,6 +298,154 @@ echo '{"execute":"query-status"}' | socat - UNIX-CONNECT:/tmp/qmp.sock
 - **`../../../TECHNICAL/08-architecture-analysis/isolation-stack/isolation-stack.md`** -
   隔离技术栈文档
 
+## 7 2025 年最新实践
+
+### 7.1 QEMU 8.2+ 新特性（2025）
+
+**最新版本**：QEMU 8.2+（2025 年）
+
+**新特性**：
+
+- **性能优化**：减少 VM 启动时间和资源占用
+- **网络性能提升**：改进的 virtio-net 性能
+- **存储性能提升**：改进的 virtio-blk 性能
+
+**安装最新版本**：
+
+```bash
+# 编译安装 QEMU 8.2
+wget https://download.qemu.org/qemu-8.2.0.tar.xz
+tar -xf qemu-8.2.0.tar.xz
+cd qemu-8.2.0
+./configure --enable-kvm --target-list=x86_64-softmmu
+make -j$(nproc)
+sudo make install
+```
+
+### 7.2 QEMU 与容器集成（2025）
+
+**2025 年趋势**：QEMU 与容器运行时集成
+
+**Kata Containers**：
+
+- **轻量级 VM**：使用 QEMU 创建轻量级 VM
+- **快速启动**：优化 VM 启动时间
+- **资源效率**：低资源占用
+
+**配置示例**：
+
+```toml
+# /etc/kata-containers/configuration.toml
+[hypervisor.qemu]
+path = "/usr/bin/qemu-system-x86_64"
+kernel = "/usr/share/kata-containers/vmlinux.container"
+machine_type = "pc"
+enable_annotations = ["enable_iommu"]
+```
+
+### 7.3 边缘计算 QEMU 部署（2025）
+
+**边缘 QEMU 部署**：
+
+- **轻量级配置**：适合边缘设备的 QEMU 配置
+- **资源优化**：最小化资源占用
+- **快速启动**：优化启动时间
+
+**配置示例**：
+
+```bash
+# 边缘 QEMU 配置
+qemu-system-x86_64 \
+  -enable-kvm \
+  -cpu host \
+  -m 512M \
+  -smp 2 \
+  -drive file=vm.img,format=qcow2 \
+  -netdev user,id=net0 \
+  -device virtio-net-pci,netdev=net0 \
+  -nographic \
+  -no-reboot
+```
+
+## 8 实际应用案例
+
+### 案例 1：开发环境 VM 部署
+
+**场景**：使用 QEMU 创建开发环境 VM
+
+**实现方案**：
+
+```bash
+# 创建开发环境 VM
+qemu-system-x86_64 \
+  -enable-kvm \
+  -cpu host \
+  -m 4G \
+  -smp 4 \
+  -drive file=dev-vm.qcow2,format=qcow2 \
+  -netdev user,id=net0 \
+  -device virtio-net-pci,netdev=net0 \
+  -vnc :1 \
+  -name dev-vm
+```
+
+**效果**：
+
+- 快速创建：快速创建开发环境
+- 资源隔离：独立的开发环境
+- 易于管理：易于备份和恢复
+
+### 案例 2：测试环境 VM 部署
+
+**场景**：使用 QEMU 创建测试环境 VM
+
+**实现方案**：
+
+```bash
+# 创建测试环境 VM
+qemu-system-x86_64 \
+  -enable-kvm \
+  -cpu host \
+  -m 2G \
+  -smp 2 \
+  -drive file=test-vm.qcow2,format=qcow2 \
+  -netdev bridge,id=net0,br=br0 \
+  -device virtio-net-pci,netdev=net0 \
+  -snapshot
+```
+
+**效果**：
+
+- 快速测试：快速创建测试环境
+- 快照支持：支持快照功能
+- 易于重置：易于重置测试环境
+
+### 案例 3：生产环境 VM 部署
+
+**场景**：使用 QEMU 部署生产环境 VM
+
+**实现方案**：
+
+```bash
+# 生产环境 VM 配置
+qemu-system-x86_64 \
+  -enable-kvm \
+  -cpu host \
+  -m 8G \
+  -smp 4 \
+  -drive file=prod-vm.qcow2,format=qcow2,cache=none \
+  -netdev bridge,id=net0,br=br0 \
+  -device virtio-net-pci,netdev=net0 \
+  -device virtio-balloon-pci \
+  -monitor unix:/var/run/qemu/prod-vm.monitor,server,nowait
+```
+
+**效果**：
+
+- 性能优化：优化的性能配置
+- 资源管理：支持动态资源调整
+- 监控支持：支持 QMP 监控
+
 ---
 
-**更新时间**：2025-11-04 **版本**：v1.0 **状态**：✅ 基础示例已创建
+**更新时间**：2025-11-15 **版本**：v1.1 **状态**：✅ 包含 2025 年最新实践

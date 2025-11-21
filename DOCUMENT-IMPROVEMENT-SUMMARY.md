@@ -352,7 +352,77 @@
     - 添加了实际应用案例（API 网关配置、限流和熔断、边缘代理配置）
     - 行数：从 361 行增加到 480+ 行
 
-44. ✅ **文档归档工作**（2025-11-15）
+44. ✅ **系统调用机制文档** (`docs/TECHNICAL/00-linux-kernel-principles/07-syscall.md`)
+    - 添加了 2025 年最新实践（Linux 6.1+ 系统调用优化、容器化系统调用优化、系统调用安全加固）
+    - 添加了实际应用案例（高性能 Web 服务器系统调用优化、容器系统调用监控、微服务系统调用优化）
+    - 行数：从 415 行增加到 580+ 行
+
+45. ✅ **KVM 内核文档** (`docs/TECHNICAL/00-linux-kernel-principles/12-kvm-kernel.md`)
+    - 添加了 2025 年最新实践（KVM 性能优化、容器与 VM 混合部署、边缘计算 KVM 部署）
+    - 添加了实际应用案例（云原生 VM 部署、安全隔离 VM 部署、高性能计算 VM 部署）
+    - 行数：从 592 行增加到 720+ 行
+
+46. ✅ **Docker 示例文档** (`docs/ARCHITECTURE/01-implementation/02-containerization/docker-examples.md`)
+    - 添加了 2025 年最新实践（Docker 24.0+ 新特性、Docker Compose V2 增强、多阶段构建优化）
+    - 添加了实际应用案例（微服务 Docker 部署、CI/CD Docker 构建、生产环境 Docker 部署）
+    - 行数：从 290 行增加到 450+ 行
+
+47. ✅ **Namespace 示例文档** (`docs/ARCHITECTURE/01-implementation/02-containerization/namespace-examples.md`)
+    - 添加了 2025 年最新实践（Linux 6.1+ Namespace 增强、containerd 2.0+ Namespace 管理、Kubernetes 1.30+ Namespace 支持）
+    - 添加了实际应用案例（多租户容器隔离、高性能网络应用、容器化 CI/CD 系统）
+    - 行数：从 247 行增加到 380+ 行
+
+48. ✅ **Cgroup 配置文档** (`docs/ARCHITECTURE/01-implementation/02-containerization/cgroup-config.md`)
+    - 添加了 2025 年最新实践（Cgroup v2 全面采用、Kubernetes 1.30+ Cgroup 增强、systemd 250+ Cgroup 管理）
+    - 添加了实际应用案例（多租户资源隔离、高性能计算任务、数据库容器资源管理）
+    - 行数：从 187 行增加到 320+ 行
+
+49. ✅ **Seccomp 示例文档** (`docs/ARCHITECTURE/01-implementation/03-sandboxing/seccomp-examples.md`)
+    - 添加了 2025 年最新实践（Kubernetes 1.30+ Seccomp 增强、containerd 2.0+ Seccomp 管理、Docker 24.0+ Seccomp 增强）
+    - 添加了实际应用案例（Web 服务器 Seccomp 配置、数据库容器 Seccomp 配置、多租户环境 Seccomp 策略）
+    - 行数：从 770 行增加到 900+ 行
+
+50. ✅ **gVisor 配置文档** (`docs/ARCHITECTURE/01-implementation/03-sandboxing/gvisor-setup.md`)
+    - 添加了 2025 年最新实践（gVisor 2024.1+ 新特性、containerd 2.0+ gVisor 集成、Kubernetes 1.30+ gVisor 支持）
+    - 添加了实际应用案例（多租户安全隔离、不可信代码执行、边缘计算安全沙盒）
+    - 行数：从 237 行增加到 350+ 行
+
+51. ✅ **Firecracker 配置文档** (`docs/ARCHITECTURE/01-implementation/03-sandboxing/firecracker-config.md`)
+    - 添加了 2025 年最新实践（Firecracker 1.7+ 新特性、containerd 2.0+ Firecracker 集成、Serverless 场景优化）
+    - 添加了实际应用案例（Serverless 函数执行、多租户 VM 隔离、边缘计算 VM 部署）
+    - 行数：从 258 行增加到 370+ 行
+
+52. ✅ **KVM 配置文档** (`docs/ARCHITECTURE/01-implementation/01-virtualization/kvm-setup.md`)
+    - 添加了 2025 年最新实践（KVM 性能优化、容器与 VM 混合部署、边缘计算 KVM 部署）
+    - 添加了实际应用案例（云原生 VM 部署、安全隔离 VM 部署、高性能计算 VM 部署）
+    - 行数：从 292 行增加到 420+ 行
+
+53. ✅ **QEMU 配置文档** (`docs/ARCHITECTURE/01-implementation/01-virtualization/qemu-config.md`)
+    - 添加了 2025 年最新实践（QEMU 8.2+ 新特性、QEMU 与容器集成、边缘计算 QEMU 部署）
+    - 添加了实际应用案例（开发环境 VM 部署、测试环境 VM 部署、生产环境 VM 部署）
+    - 行数：从 294 行增加到 420+ 行
+
+54. ✅ **VM 示例文档** (`docs/ARCHITECTURE/01-implementation/01-virtualization/vm-examples.md`)
+    - 添加了 2025 年最新实践（libvirt 9.0+ 新特性、KubeVirt 1.2+ VM 管理、云原生 VM 部署）
+    - 添加了实际应用案例（开发环境 VM 自动化管理、测试环境 VM 快照管理、生产环境 VM 高可用部署）
+    - 行数：从 380 行增加到 643 行
+
+55. ✅ **xDS API 文档** (`docs/ARCHITECTURE/01-implementation/04-service-mesh/xds-api.md`)
+    - 添加了 2025 年最新实践（Envoy 1.30+ xDS API 增强、Istio 1.22+ xDS 优化、多集群 xDS 管理）
+    - 添加了实际应用案例（微服务动态路由配置、多租户 Service Mesh 配置、边缘计算 xDS 配置）
+    - 行数：从 367 行增加到 480+ 行
+
+56. ✅ **Gatekeeper 配置文档** (`docs/ARCHITECTURE/01-implementation/05-opa/gatekeeper-config.md`)
+    - 添加了 2025 年最新实践（Gatekeeper 3.15+ 新特性、OPA-Wasm 策略支持、多集群 Gatekeeper 部署）
+    - 添加了实际应用案例（多租户资源配额策略、镜像安全扫描策略、标签验证策略）
+    - 行数：从 277 行增加到 400+ 行
+
+57. ✅ **Policy Bundle 文档** (`docs/ARCHITECTURE/01-implementation/05-opa/policy-bundles.md`)
+    - 添加了 2025 年最新实践（OPA 0.60+ Bundle 增强、OCI Registry Bundle 分发、Wasm Bundle 编译）
+    - 添加了实际应用案例（多环境策略管理、策略版本管理、分布式策略分发）
+    - 行数：从 310 行增加到 430+ 行
+
+58. ✅ **文档归档工作**（2025-11-15）
     - 创建归档目录：`docs/ARCHIVE/project-management/`
     - 归档与项目主题无关的文档：33 个
     - 归档分类：

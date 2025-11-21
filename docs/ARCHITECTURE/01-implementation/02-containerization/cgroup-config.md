@@ -2,23 +2,32 @@
 
 ## 📑 目录
 
-- [📑 目录](#-目录)
-- [1 概述](#1-概述)
-  - [1.1 理论基础](#11-理论基础)
-- [2 cgroup v2 配置示例](#2-cgroup-v2-配置示例)
-  - [2.1 创建 cgroup](#21-创建-cgroup)
-  - [2.2 cgroup 配置文件示例](#22-cgroup-配置文件示例)
-- [3 systemd cgroup 配置](#3-systemd-cgroup-配置)
-  - [3.1 systemd 服务单元配置](#31-systemd-服务单元配置)
-  - [3.2 systemd 切片配置](#32-systemd-切片配置)
-- [4 Docker cgroup 配置](#4-docker-cgroup-配置)
-  - [4.1 Docker 容器资源限制](#41-docker-容器资源限制)
-  - [4.2 docker-compose 资源限制](#42-docker-compose-资源限制)
-  - [4.3 Kubernetes Pod 资源限制](#43-kubernetes-pod-资源限制)
-- [5 相关文档](#5-相关文档)
-  - [5.1 理论论证](#51-理论论证)
-  - [5.2 架构视角](#52-架构视角)
-  - [5.3 技术文档](#53-技术文档)
+- [cgroup 配置示例](#cgroup-配置示例)
+  - [📑 目录](#-目录)
+  - [1 概述](#1-概述)
+    - [1.1 理论基础](#11-理论基础)
+  - [2 cgroup v2 配置示例](#2-cgroup-v2-配置示例)
+    - [2.1 创建 cgroup](#21-创建-cgroup)
+    - [2.2 cgroup 配置文件示例](#22-cgroup-配置文件示例)
+  - [3 systemd cgroup 配置](#3-systemd-cgroup-配置)
+    - [3.1 systemd 服务单元配置](#31-systemd-服务单元配置)
+    - [3.2 systemd 切片配置](#32-systemd-切片配置)
+  - [4 Docker cgroup 配置](#4-docker-cgroup-配置)
+    - [4.1 Docker 容器资源限制](#41-docker-容器资源限制)
+    - [4.2 docker-compose 资源限制](#42-docker-compose-资源限制)
+    - [4.3 Kubernetes Pod 资源限制](#43-kubernetes-pod-资源限制)
+  - [5 相关文档](#5-相关文档)
+    - [5.1 理论论证](#51-理论论证)
+    - [5.2 架构视角](#52-架构视角)
+    - [5.3 技术文档](#53-技术文档)
+  - [6 2025 年最新实践](#6-2025-年最新实践)
+    - [6.1 Cgroup v2 全面采用（2025）](#61-cgroup-v2-全面采用2025)
+    - [6.2 Kubernetes 1.30+ Cgroup 增强（2025）](#62-kubernetes-130-cgroup-增强2025)
+    - [6.3 systemd 250+ Cgroup 管理（2025）](#63-systemd-250-cgroup-管理2025)
+  - [7 实际应用案例](#7-实际应用案例)
+    - [案例 1：多租户资源隔离](#案例-1多租户资源隔离)
+    - [案例 2：高性能计算任务](#案例-2高性能计算任务)
+    - [案例 3：数据库容器资源管理](#案例-3数据库容器资源管理)
 
 ---
 
@@ -182,6 +191,236 @@ spec:
 - **`../../../TECHNICAL/01-core-foundations/docker/docker.md`** - Docker 技术文
   档
 
+## 6 2025 年最新实践
+
+### 6.1 Cgroup v2 全面采用（2025）
+
+**2025 年趋势**：Cgroup v2 已成为主流
+
+**采用情况**：
+
+- **Kubernetes 1.25+**：默认使用 Cgroup v2
+- **Docker 24.0+**：默认使用 Cgroup v2
+- **systemd 250+**：默认使用 Cgroup v2
+
+**检查 Cgroup 版本**：
+
+```bash
+# 检查 Cgroup 版本
+stat -fc %T /sys/fs/cgroup/
+# 输出 "cgroup2fs" 表示使用 Cgroup v2
+
+# 检查可用控制器
+cat /sys/fs/cgroup/cgroup.controllers
+# 输出：cpuset cpu io memory hugetlb pids rdma misc
+```
+
+### 6.2 Kubernetes 1.30+ Cgroup 增强（2025）
+
+**Kubernetes 1.30+ 新特性**：
+
+- **Cgroup v2 完整支持**：所有功能基于 Cgroup v2
+- **资源配额增强**：更精确的资源限制
+- **性能优化**：减少 Cgroup 操作开销
+
+**配置示例**：
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: resource-limited-pod
+spec:
+  containers:
+  - name: app
+    image: nginx
+    resources:
+      requests:
+        cpu: "500m"
+        memory: "256Mi"
+      limits:
+        cpu: "1000m"
+        memory: "512Mi"
+    # Cgroup v2 配置
+    securityContext:
+      cgroupPolicy: "Restricted"  # 使用受限的 Cgroup 策略
+```
+
+### 6.3 systemd 250+ Cgroup 管理（2025）
+
+**systemd 250+ 新特性**：
+
+- **统一 Cgroup 管理**：systemd 统一管理所有 Cgroup
+- **资源限制增强**：更灵活的资源配置
+- **性能监控**：内置资源使用监控
+
+**配置示例**：
+
+```ini
+# /etc/systemd/system/myapp.service
+[Unit]
+Description=My Application
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/myapp
+# Cgroup v2 资源限制
+CPUQuota=50%
+MemoryMax=512M
+IOWeight=100
+```
+
+## 7 实际应用案例
+
+### 案例 1：多租户资源隔离
+
+**场景**：在 Kubernetes 集群中实现多租户资源隔离
+
+**实现方案**：
+
+```yaml
+# 租户 A 的 Pod
+apiVersion: v1
+kind: Pod
+metadata:
+  name: tenant-a-pod
+  namespace: tenant-a
+spec:
+  containers:
+  - name: app
+    image: nginx
+    resources:
+      requests:
+        cpu: "1"
+        memory: "1Gi"
+      limits:
+        cpu: "2"
+        memory: "2Gi"
+
+---
+# 租户 B 的 Pod
+apiVersion: v1
+kind: Pod
+metadata:
+  name: tenant-b-pod
+  namespace: tenant-b
+spec:
+  containers:
+  - name: app
+    image: nginx
+    resources:
+      requests:
+        cpu: "1"
+        memory: "1Gi"
+      limits:
+        cpu: "2"
+        memory: "2Gi"
+```
+
+**效果**：
+
+- 资源隔离：每个租户有独立的资源配额
+- 公平调度：Kubernetes 根据 requests 进行调度
+- 资源限制：limits 防止资源滥用
+
+### 案例 2：高性能计算任务
+
+**场景**：运行 CPU 密集型计算任务，需要精确的 CPU 控制
+
+**实现方案**：
+
+```bash
+# 创建专用的 Cgroup
+mkdir -p /sys/fs/cgroup/app
+
+# 设置 CPU 限制（2 核）
+echo "200000 100000" > /sys/fs/cgroup/app/cpu.max
+# 格式：quota period (200000 = 2 核，100000 = 1 秒)
+
+# 设置内存限制（4GB）
+echo "4G" > /sys/fs/cgroup/app/memory.max
+
+# 将进程加入 Cgroup
+echo $$ > /sys/fs/cgroup/app/cgroup.procs
+
+# 运行计算任务
+./compute-intensive-task
+```
+
+**Kubernetes 配置**：
+
+```yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: compute-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: compute
+        image: compute-tool:latest
+        resources:
+          requests:
+            cpu: "2"
+            memory: "4Gi"
+          limits:
+            cpu: "2"
+            memory: "4Gi"
+      restartPolicy: Never
+```
+
+**效果**：
+
+- CPU 控制：精确控制 CPU 使用率
+- 内存限制：防止内存溢出
+- 性能稳定：保证任务性能一致性
+
+### 案例 3：数据库容器资源管理
+
+**场景**：运行数据库容器，需要稳定的 IO 性能
+
+**实现方案**：
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: database-pod
+spec:
+  containers:
+  - name: postgres
+    image: postgres:15
+    resources:
+      requests:
+        cpu: "2"
+        memory: "4Gi"
+      limits:
+        cpu: "4"
+        memory: "8Gi"
+    # IO 限制（Cgroup v2）
+    securityContext:
+      # 通过 annotations 设置 IO 限制
+      annotations:
+        io.kubernetes.cri-o/IOWeight: "500"  # IO 权重
+```
+
+**直接 Cgroup 配置**：
+
+```bash
+# 设置数据库容器的 IO 权重
+echo 500 > /sys/fs/cgroup/kubepods/pod-xxx/container-xxx/io.weight
+
+# 设置 IO 限制
+echo "8:0 rbps=10485760 wbps=10485760" > /sys/fs/cgroup/kubepods/pod-xxx/container-xxx/io.max
+```
+
+**效果**：
+
+- 资源保证：requests 保证最小资源
+- 性能上限：limits 防止资源耗尽
+- IO 控制：通过 IO 权重控制 IO 性能
+
 ---
 
-**更新时间**：2025-11-04 **版本**：v1.0 **状态**：✅ 基础示例已创建
+**更新时间**：2025-11-15 **版本**：v1.1 **状态**：✅ 包含 2025 年最新实践
