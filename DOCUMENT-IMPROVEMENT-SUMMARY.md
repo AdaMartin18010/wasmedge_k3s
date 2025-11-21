@@ -422,7 +422,42 @@
     - 添加了实际应用案例（多环境策略管理、策略版本管理、分布式策略分发）
     - 行数：从 310 行增加到 430+ 行
 
-58. ✅ **文档归档工作**（2025-11-15）
+58. ✅ **WASI 示例文档** (`docs/ARCHITECTURE/01-implementation/06-wasm/wasi-examples.md`)
+    - 添加了 2025 年最新实践（WASI Preview 2 全面采用、WasmEdge WASI 支持、多语言 WASI 支持）
+    - 添加了实际应用案例（边缘计算 WASI 应用、Serverless WASI 函数、插件系统 WASI 应用）
+    - 行数：从 357 行增加到 450+ 行
+
+59. ✅ **Wasm 编译文档** (`docs/ARCHITECTURE/01-implementation/06-wasm/wasm-compilation.md`)
+    - 添加了 2025 年最新实践（Rust 1.75+ Wasm 编译优化、Go 1.22+ Wasm 编译、多阶段编译优化）
+    - 添加了实际应用案例（高性能计算 Wasm 应用、Web 应用 Wasm 编译、边缘 AI 推理 Wasm 应用）
+    - 行数：从 329 行增加到 430+ 行
+
+60. ✅ **Kubernetes 集成文档** (`docs/ARCHITECTURE/01-implementation/06-wasm/kubernetes-integration.md`)
+    - 添加了 2025 年最新实践（Kubernetes 1.30+ Wasm 运行时增强、containerd 2.0+ Wasm shim、K3s 1.30.4+ Wasm 集成）
+    - 添加了实际应用案例（边缘计算 Wasm 部署、Serverless Wasm 函数、混合运行时部署）
+    - 行数：从 271 行增加到 370+ 行
+
+61. ✅ **Kubeflow 配置文档** (`docs/ARCHITECTURE/01-implementation/07-ai-ml/kubeflow-setup.md`)
+    - 添加了 2025 年最新实践（Kubeflow 1.9+ 新特性、Tekton Pipeline 集成、边缘 Kubeflow 部署）
+    - 添加了实际应用案例（端到端 ML Pipeline、多租户 ML 平台、分布式训练 Pipeline）
+    - 行数：从 235 行增加到 330+ 行
+
+62. ✅ **GPU 调度文档** (`docs/ARCHITECTURE/01-implementation/07-ai-ml/gpu-scheduling.md`)
+    - 添加了 2025 年最新实践（GPU Operator 2.0+ 新特性、MIG 支持、边缘 GPU 调度）
+    - 添加了实际应用案例（多租户 GPU 共享、GPU 自动扩缩容、GPU 时间切片）
+    - 行数：从 226 行增加到 320+ 行
+
+63. ✅ **MLflow 集成文档** (`docs/ARCHITECTURE/01-implementation/07-ai-ml/mlflow-integration.md`)
+    - 添加了 2025 年最新实践（MLflow 2.12+ 新特性、MLflow 与 Kubernetes 集成、MLflow 模型服务化）
+    - 添加了实际应用案例（模型版本管理、模型 A/B 测试、模型自动部署）
+    - 行数：从 198 行增加到 290+ 行
+
+64. ✅ **KServe 部署文档** (`docs/ARCHITECTURE/01-implementation/07-ai-ml/kserve-deployment.md`)
+    - 添加了 2025 年最新实践（KServe 0.12+ 新特性、边缘 KServe 部署、Wasm 模型推理）
+    - 添加了实际应用案例（多模型服务部署、模型金丝雀发布、边缘 AI 推理）
+    - 行数：从 200 行增加到 290+ 行
+
+65. ✅ **文档归档工作**（2025-11-15）
     - 创建归档目录：`docs/ARCHIVE/project-management/`
     - 归档与项目主题无关的文档：33 个
     - 归档分类：

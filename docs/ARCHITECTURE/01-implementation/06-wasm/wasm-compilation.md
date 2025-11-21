@@ -480,7 +480,7 @@ use wasi::filesystem::preopens::get_directories;
 pub fn inference(input: &[f32]) -> Vec<f32> {
     // 加载模型
     let model = load_model();
-    
+
     // 执行推理
     model.predict(input)
 }
