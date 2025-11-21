@@ -51,7 +51,7 @@
 
 ### 2.2 文档结构
 
-```
+```text
 03-axiom-properties/
 ├── README.md                        # 本文档
 └── axiom-properties-proofs.md      # 公理系统性质证明

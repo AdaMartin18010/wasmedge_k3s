@@ -106,6 +106,7 @@
 | 认知图谱 | `01-core-foundations/knowledge-map/` | 知识地图和学习路径     |
 | 总览     | `01-core-foundations/overview/`      | 技术栈总览和决策框架   |
 | 理念层   | `01-core-foundations/principles/`    | 云原生核心理念         |
+| 可视化文档 | `01-core-foundations/visualizations/` | 认知框架思维导图、认知模型对比矩阵 |
 
 ### 架构与设计
 
@@ -115,6 +116,7 @@
 | 全局架构设计   | `02-architecture-design/architecture-design/`                   | 技术组合和架构决策           |
 | 问题解决方案   | `02-architecture-design/problem-solution-matrix/`               | 问题分类框架（混合型）       |
 | 架构框架       | `../TECHNICAL/08-architecture-analysis/architecture-framework/` | 多维度架构体系与技术规范     |
+| 可视化文档     | `02-architecture-design/visualizations/`                         | 架构认知地图                 |
 
 ### 理论与分析
 
@@ -126,12 +128,15 @@
 | 代数结构视角     | `03-theoretical-perspectives/algebraic-structure/`     | 算子理论与代数结构                                                                                                                                                       |
 | 结构视角         | `03-theoretical-perspectives/structural-perspective/`  | 计算结构、控制结构、信息结构（结构主义视角）                                                                                                                             |
 | 调度视角         | `03-theoretical-perspectives/scheduling-perspective/`  | 调度决策、分层分析、动态特性（调度优化、性能分析）⭐                                                                                                                     |
+| 可视化文档       | `03-theoretical-perspectives/visualizations/`            | 理论视角思维导图、理论视角对比矩阵                                                                                                                                    |
 | 技术社会视角     | `../../tech_view.md`                                   | 基础设施史、风险社会学、发展经济学、人类学视角 ⭐                                                                                                                        |
 | eBPF/OTLP 视角   | `04-application-perspectives/ebpf-otlp-perspective/`   | eBPF/OTLP 认知视角分析（2025-11-07）⭐                                                                                                                                   |
 | 程序设计视角     | `04-application-perspectives/programming-perspective/` | 从编程视角看 eBPF 与 OTLP，代码省却 95.7%、组件省却 69%、编程范式转变（2025-11-07）⭐                                                                                    |
 | 应用业务架构视角 | `04-application-perspectives/application-perspective/` | 从应用业务架构视角看虚拟化容器化沙盒化，技术演进对业务架构的影响（2025-11-07）⭐<br/>✅ **已完成深度增强**：163+ 形式化定义、117+ 定理证明、500+ 数学公式、205+ 权威引用 |
 | API 规范视角     | `04-application-perspectives/api-perspective/`         | 从 API 规范视角看虚拟化容器化沙盒化 WASM 化，程序 API 规范在云原生技术栈中的核心作用（2025-11-07）⭐<br/>✅ **重点领域**：容器化、沙盒化、WASM 化 API 规范               |
+| 可视化文档       | `04-application-perspectives/visualizations/`           | 应用视角思维导图、应用场景认知矩阵                                                                                                                                    |
 | 决策模型         | `05-decision-analysis/decision-models/`                | 技术决策模型与架构选择                                                                                                                                                   |
+| 可视化文档       | `05-decision-analysis/visualizations/`                  | 决策框架对比矩阵                                                                                                                                                         |
 
 ### 隔离栈理论实现
 
@@ -338,6 +343,7 @@
 
 - **总文档数**：15 个核心认知模型文档（含技术社会视角、eBPF/OTLP 视角、程序设计
   视角、应用业务架构视角）
+- **可视化文档**：75 个（思维导图、知识矩阵、认知地图、关系图谱、认知路径、决策树、集成关系、工作流图、学习指南、实践指南、组合使用指南、交互关系、演进路径图、应用场景、完整工作流、综合应用指南、故障排查指南、评估方法、实践总结、最佳实践、进阶应用、技术集成指南、架构决策流程、理论视角应用案例、决策优化指南、工具使用指南、实践案例指南、问题解决流程）
 - **覆盖范围**：认知框架、架构设计、理论分析、性能评估、eBPF/OTLP 技术栈、应用业
   务架构
 - **文档类型**：认知模型文档（含部分混合型文档）
