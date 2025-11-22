@@ -972,4 +972,132 @@ spec:
 
 ---
 
-**更新时间**：2025-11-15 **版本**：v1.1 **状态**：✅ 包含 2025 年最新实践
+## 8 使用指南
+
+### 8.1 快速开始
+
+**适用场景**：
+
+- 需要限制容器系统调用
+- 增强容器安全性
+- 多租户环境安全隔离
+
+**快速步骤**：
+
+1. **检查系统支持**：
+
+   ```bash
+   # 检查内核是否支持 seccomp
+   grep CONFIG_SECCOMP /boot/config-$(uname -r)
+   # 输出 CONFIG_SECCOMP=y 表示支持
+   ```
+
+2. **选择配置方式**：
+   - **Docker**：使用 `--security-opt seccomp` 参数
+   - **Kubernetes**：使用 Pod `securityContext.seccompProfile`
+   - **containerd**：使用 RuntimeClass 配置
+
+3. **应用配置**：根据实际场景选择对应的配置示例
+
+### 8.2 使用技巧
+
+#### Seccomp 配置文件编写
+
+**基础结构**：
+
+```json
+{
+  "defaultAction": "SCMP_ACT_ERRNO",  // 默认拒绝
+  "architectures": ["SCMP_ARCH_X86_64"],
+  "syscalls": [
+    {
+      "names": ["syscall1", "syscall2"],
+      "action": "SCMP_ACT_ALLOW"
+    }
+  ]
+}
+```
+
+**最佳实践**：
+
+1. **最小权限原则**：只允许应用必需的系统调用
+2. **白名单模式**：使用 `SCMP_ACT_ERRNO` 作为默认动作
+3. **架构指定**：明确指定架构，避免跨架构问题
+4. **测试验证**：在测试环境充分测试后再部署
+
+#### 系统调用识别
+
+**方法 1：使用 strace**：
+
+```bash
+# 跟踪应用系统调用
+strace -c -e trace=all ./myapp
+```
+
+**方法 2：使用 auditd**：
+
+```bash
+# 启用 auditd 记录系统调用
+auditctl -a always,exit -F arch=x86_64 -S all -F pid=12345
+```
+
+**方法 3：使用 seccomp-notify**：
+
+```bash
+# 使用 seccomp 用户通知机制（Linux 4.14+）
+# 允许应用请求未授权的系统调用
+```
+
+### 8.3 常见问题
+
+**Q1：如何确定应用需要哪些系统调用？**
+
+- 使用 `strace` 跟踪应用运行
+- 使用 `auditd` 记录系统调用
+- 参考应用文档和社区配置
+
+**Q2：Seccomp 配置导致应用无法运行？**
+
+- 检查应用日志，查看被拒绝的系统调用
+- 逐步添加缺失的系统调用
+- 使用 `SCMP_ACT_LOG` 记录被拒绝的系统调用
+
+**Q3：如何验证 Seccomp 配置是否生效？**
+
+```bash
+# 检查进程的 Seccomp 状态
+cat /proc/$$/status | grep Seccomp
+
+# 使用 auditd 监控 Seccomp 事件
+ausearch -m SECCOMP
+```
+
+### 8.4 实践建议
+
+**Web 服务器**：
+
+- 只允许网络和文件操作相关的系统调用
+- 禁止进程管理、模块加载等危险系统调用
+- 参考案例 1 的配置
+
+**数据库应用**：
+
+- 允许 IO 密集型系统调用
+- 禁止网络管理、系统管理相关系统调用
+- 参考案例 2 的配置
+
+**多租户环境**：
+
+- 使用 RuntimeClass 统一管理 Seccomp 配置
+- 设置 Namespace 级别的默认策略
+- 定期审查和更新 Seccomp 配置
+
+**性能考虑**：
+
+- Seccomp 过滤器性能开销 < 1%
+- 使用 seccomp-notify 减少误杀
+- 避免过度限制导致应用无法正常运行
+
+---
+
+**更新时间**：2025-11-15 **版本**：v1.2 **状态**：✅ 包含使用指南和 2025 年最新实践

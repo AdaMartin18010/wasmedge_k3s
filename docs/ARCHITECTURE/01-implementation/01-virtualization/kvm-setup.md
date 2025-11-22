@@ -467,4 +467,121 @@ qemu-system-x86_64 \
 
 ---
 
-**更新时间**：2025-11-15 **版本**：v1.1 **状态**：✅ 包含 2025 年最新实践
+## 9 使用指南
+
+### 9.1 快速开始
+
+**适用场景**：
+
+- 需要完整的操作系统隔离
+- 运行不同操作系统
+- 安全隔离要求高的场景
+
+**快速步骤**：
+
+1. **检查虚拟化支持**：
+
+   ```bash
+   # 检查 CPU 虚拟化支持
+   grep -E '(vmx|svm)' /proc/cpuinfo
+   # 输出包含 vmx (Intel) 或 svm (AMD) 表示支持
+   ```
+
+2. **安装 KVM**：
+
+   ```bash
+   # Ubuntu/Debian
+   sudo apt-get install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils
+
+   # CentOS/RHEL
+   sudo yum install qemu-kvm libvirt libvirt-python libguestfs-tools
+   ```
+
+3. **创建虚拟机**：使用 `virt-install` 或 `virt-manager` 创建虚拟机
+
+### 9.2 使用技巧
+
+#### 性能优化
+
+**CPU 优化**：
+
+- 使用 `host-passthrough` CPU 模式获得最佳性能
+- 设置 CPU 亲和性绑定到特定 CPU 核心
+- 考虑 NUMA 拓扑优化
+
+**内存优化**：
+
+- 使用大页内存（HugePages）提升性能
+- 启用内存气球（balloon）动态调整内存
+- 设置合理的内存限制
+
+**网络优化**：
+
+- 使用 virtio-net 驱动获得最佳网络性能
+- 考虑 SR-IOV 直通获得接近原生性能
+- 使用桥接网络实现网络隔离
+
+**存储优化**：
+
+- 使用 virtio-blk 驱动
+- 考虑使用 raw 格式获得最佳性能
+- 使用缓存策略优化 IO 性能
+
+#### 配置最佳实践
+
+1. **安全配置**：启用 SELinux/AppArmor，限制 VM 访问
+2. **资源管理**：使用 libvirt 统一管理 VM 资源
+3. **监控告警**：设置资源使用监控和告警
+4. **备份策略**：定期备份 VM 镜像和配置
+
+### 9.3 常见问题
+
+**Q1：如何检查 KVM 是否正常工作？**
+
+```bash
+# 检查 KVM 模块
+lsmod | grep kvm
+
+# 检查 libvirt 服务
+systemctl status libvirtd
+
+# 测试创建简单 VM
+virt-install --name test --ram 1024 --disk size=5 --cdrom /path/to/iso
+```
+
+**Q2：VM 性能不佳如何优化？**
+
+- 检查 CPU 模式是否为 `host-passthrough`
+- 确认启用了 CPU 虚拟化扩展（vmx/svm）
+- 检查是否使用了 virtio 驱动
+- 考虑使用 SR-IOV 或 GPU 直通
+
+**Q3：如何实现 VM 高可用？**
+
+- 使用 libvirt 的迁移功能
+- 配置共享存储（NFS/Ceph）
+- 使用集群管理工具（如 oVirt）
+
+### 9.4 实践建议
+
+**云原生部署**：
+
+- 使用 Kubernetes + KubeVirt 管理 VM
+- 配置 VM 资源限制和调度策略
+- 实现 VM 生命周期管理
+
+**安全隔离**：
+
+- 使用独立的网络和存储
+- 启用安全增强功能（SELinux/AppArmor）
+- 定期更新 VM 镜像和宿主机系统
+
+**高性能计算**：
+
+- 使用 CPU 和内存直通
+- 配置 NUMA 拓扑优化
+- 使用 GPU 直通支持 GPU 计算
+
+---
+
+**更新时间**：2025-11-15 **版本**：v1.2 **状态**：✅ 包含使用指南和 2025 年最新实践

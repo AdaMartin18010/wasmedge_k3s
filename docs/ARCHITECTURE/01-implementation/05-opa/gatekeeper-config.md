@@ -527,4 +527,172 @@ spec:
 
 ---
 
-**更新时间**：2025-11-15 **版本**：v1.1 **状态**：✅ 包含 2025 年最新实践
+## 8 使用指南
+
+### 8.1 快速开始
+
+**适用场景**：
+
+- Kubernetes 策略即代码
+- 多租户资源配额管理
+- 安全合规策略实施
+- 资源标签和注解验证
+
+**快速步骤**：
+
+1. **安装 Gatekeeper**：
+
+   ```bash
+   # 使用 Helm 安装
+   helm repo add gatekeeper https://open-policy-agent.github.io/gatekeeper/charts
+   helm install gatekeeper gatekeeper/gatekeeper
+   ```
+
+2. **验证安装**：
+
+   ```bash
+   # 检查 Gatekeeper 状态
+   kubectl get pods -n gatekeeper-system
+
+   # 检查 CRD
+   kubectl get crd | grep gatekeeper
+   ```
+
+3. **创建第一个策略**：
+
+   ```bash
+   # 创建 ConstraintTemplate
+   kubectl apply -f constraint-template.yaml
+
+   # 创建 Constraint
+   kubectl apply -f constraint.yaml
+   ```
+
+### 8.2 使用技巧
+
+#### ConstraintTemplate 编写
+
+**基础结构**：
+
+```yaml
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: k8srequiredlabels
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sRequiredLabels
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package k8srequiredlabels
+        violation[{"msg": msg}] {
+          # Rego 策略逻辑
+        }
+```
+
+**Rego 策略编写**：
+
+- **输入对象**：`input.review.object` 包含待验证的资源
+- **参数访问**：`input.parameters` 包含 Constraint 参数
+- **违规报告**：使用 `violation` 数组报告违规
+
+#### Constraint 配置
+
+**匹配规则**：
+
+```yaml
+match:
+  kinds:
+    - apiGroups: [""]
+      kinds: ["Pod"]
+  namespaces: ["production"]
+  excludedNamespaces: ["kube-system"]
+```
+
+**参数传递**：
+
+```yaml
+parameters:
+  labels:
+    - "app"
+    - "version"
+```
+
+#### 策略测试
+
+**Dry-run 模式**：
+
+```bash
+# 启用 dry-run 模式（只记录违规，不拒绝）
+kubectl patch constrainttemplate k8srequiredlabels \
+  --type merge -p '{"spec":{"targets":[{"target":"admission.k8s.gatekeeper.sh","rego":"..."}]}}'
+```
+
+**查看违规**：
+
+```bash
+# 查看所有违规
+kubectl get constraintviolations
+
+# 查看特定 Constraint 的违规
+kubectl describe constraint k8srequiredlabels must-have-labels
+```
+
+### 8.3 常见问题
+
+**Q1：策略未生效？**
+
+- 检查 ConstraintTemplate 是否创建成功
+- 检查 Constraint 的 match 规则是否正确
+- 查看 Gatekeeper 日志：`kubectl logs -n gatekeeper-system -l control-plane=controller-manager`
+
+**Q2：策略拒绝所有资源？**
+
+- 检查 Rego 策略逻辑是否正确
+- 使用 dry-run 模式测试策略
+- 检查 Constraint 的 match 规则是否过于宽泛
+
+**Q3：如何调试 Rego 策略？**
+
+- 使用 OPA Playground 测试 Rego 代码
+- 查看 Gatekeeper 审计日志
+- 使用 `kubectl get constraintviolations` 查看详细违规信息
+
+### 8.4 实践建议
+
+**多租户资源配额**：
+
+- 使用 ConstraintTemplate 定义资源限制策略
+- 为每个租户创建独立的 Constraint
+- 参考案例 1 的配置
+
+**镜像安全扫描**：
+
+- 集成镜像扫描工具（如 Trivy、Clair）
+- 使用 Constraint 验证镜像扫描状态
+- 参考案例 2 的配置
+
+**标签验证**：
+
+- 定义标准标签规范
+- 使用 Constraint 强制标签要求
+- 参考案例 3 的配置
+
+**策略管理**：
+
+- 使用 GitOps 管理策略配置
+- 定期审查和更新策略
+- 使用 Policy Library 复用常用策略
+
+**性能考虑**：
+
+- 避免过于复杂的 Rego 策略
+- 使用 Constraint 的 match 规则限制作用范围
+- 监控 Gatekeeper 的性能指标
+
+---
+
+**更新时间**：2025-11-15 **版本**：v1.2 **状态**：✅ 包含使用指南和 2025 年最新实践

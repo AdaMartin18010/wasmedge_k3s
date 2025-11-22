@@ -497,4 +497,146 @@ istioctl create-remote-secret \
 
 ---
 
-**更新时间**：2025-11-15 **版本**：v1.1 **状态**：✅ 包含 2025 年最新实践
+## 9 使用指南
+
+### 9.1 快速开始
+
+**适用场景**：
+
+- 微服务流量管理
+- 服务间安全通信（mTLS）
+- 金丝雀发布和流量镜像
+- 多集群服务治理
+
+**快速步骤**：
+
+1. **安装 Istio**：
+
+   ```bash
+   # 下载 Istio
+   curl -L https://istio.io/downloadIstio | sh -
+   cd istio-*
+
+   # 安装 Istio
+   istioctl install --set profile=default
+   ```
+
+2. **启用 Sidecar 自动注入**：
+
+   ```bash
+   # 为命名空间启用自动注入
+   kubectl label namespace default istio-injection=enabled
+   ```
+
+3. **部署应用**：
+
+   ```bash
+   # 部署应用（Sidecar 会自动注入）
+   kubectl apply -f app.yaml
+   ```
+
+### 9.2 使用技巧
+
+#### VirtualService 配置
+
+**路由规则**：
+
+- **精确匹配**：使用 `match` 字段精确匹配请求
+- **权重分配**：使用 `weight` 字段分配流量权重
+- **超时重试**：使用 `timeout` 和 `retries` 配置超时和重试
+
+**最佳实践**：
+
+1. **渐进式发布**：从 10% 流量开始，逐步增加
+2. **监控指标**：使用 Prometheus 监控流量指标
+3. **回滚准备**：保留旧版本配置，便于快速回滚
+
+#### DestinationRule 配置
+
+**负载均衡**：
+
+- **ROUND_ROBIN**：轮询（默认）
+- **LEAST_CONN**：最少连接
+- **RANDOM**：随机
+- **PASSTHROUGH**：直通
+
+**熔断配置**：
+
+```yaml
+circuitBreaker:
+  consecutiveErrors: 5
+  interval: 30s
+  baseEjectionTime: 30s
+  maxEjectionPercent: 50
+```
+
+#### 安全配置
+
+**mTLS 启用**：
+
+```yaml
+# 命名空间级别启用 mTLS
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: default
+spec:
+  mtls:
+    mode: STRICT
+```
+
+**访问控制**：
+
+- 使用 `AuthorizationPolicy` 实现细粒度访问控制
+- 基于服务身份（ServiceAccount）进行授权
+- 支持 IP 地址、命名空间等条件匹配
+
+### 9.3 常见问题
+
+**Q1：Sidecar 未自动注入？**
+
+- 检查命名空间标签：`kubectl get namespace default -o yaml`
+- 检查 Pod 注解：`kubectl get pod -o yaml | grep sidecar`
+- 手动注入：`istioctl kube-inject -f app.yaml | kubectl apply -f -`
+
+**Q2：流量路由不生效？**
+
+- 检查 VirtualService 和 DestinationRule 配置
+- 确认服务发现正常：`istioctl proxy-config clusters <pod-name>`
+- 查看 Envoy 配置：`istioctl proxy-config route <pod-name>`
+
+**Q3：mTLS 连接失败？**
+
+- 检查 PeerAuthentication 配置
+- 查看证书状态：`istioctl proxy-config secret <pod-name>`
+- 检查服务账户配置
+
+### 9.4 实践建议
+
+**微服务流量管理**：
+
+- 使用 VirtualService 实现流量路由
+- 使用 DestinationRule 配置负载均衡和熔断
+- 参考案例 1 的配置
+
+**服务间安全通信**：
+
+- 启用 mTLS 加密所有服务间通信
+- 使用 AuthorizationPolicy 实现访问控制
+- 参考案例 2 的配置
+
+**多集群部署**：
+
+- 使用 Istio 多集群功能
+- 配置跨集群服务发现
+- 参考案例 3 的配置
+
+**性能优化**：
+
+- 使用 Ambient Mesh 模式减少 Sidecar 开销（Istio 1.22+）
+- 优化 Envoy 配置减少延迟
+- 使用 Wasm 插件扩展功能
+
+---
+
+**更新时间**：2025-11-15 **版本**：v1.2 **状态**：✅ 包含使用指南和 2025 年最新实践

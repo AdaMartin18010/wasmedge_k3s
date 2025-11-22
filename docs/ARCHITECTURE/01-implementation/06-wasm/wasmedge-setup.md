@@ -410,4 +410,157 @@ wasmedge --enable-gpu tensorflow.wasm
 
 ---
 
-**更新时间**：2025-11-15 **版本**：v1.1 **参考**：WasmEdge 0.14.1 官方文档
+## 8 使用指南
+
+### 8.1 快速开始
+
+**适用场景**：
+
+- 需要极速启动的应用（< 1ms）
+- 边缘计算场景
+- AI/ML 推理应用
+- 轻量级微服务
+
+**快速步骤**：
+
+1. **安装 WasmEdge**：
+
+   ```bash
+   # Linux
+   curl -sSf https://raw.githubusercontent.com/WasmEdge/WasmEdge/master/utils/install.sh | bash
+
+   # macOS
+   brew install wasmedge
+   ```
+
+2. **验证安装**：
+
+   ```bash
+   wasmedge --version
+   # 输出：wasmedge 0.14.1
+   ```
+
+3. **运行第一个 Wasm 应用**：
+
+   ```bash
+   # 编译或下载 Wasm 文件
+   wasmedge hello.wasm
+   ```
+
+### 8.2 使用技巧
+
+#### 编译优化
+
+**Rust 编译**：
+
+```bash
+# 使用 wasm32-wasi target
+rustup target add wasm32-wasi
+
+# 优化编译
+RUSTFLAGS="-C opt-level=z -C link-arg=-zstack-size=32768" \
+  cargo build --target wasm32-wasi --release
+```
+
+**C/C++ 编译**：
+
+```bash
+# 使用 wasi-sdk
+clang --target=wasm32-wasi -O3 -nostdlib \
+  -Wl,--export-all -Wl,--no-entry \
+  -o app.wasm app.c
+```
+
+#### Kubernetes 集成
+
+**创建 Wasm Pod**：
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: wasm-app
+spec:
+  runtimeClassName: wasmedge
+  containers:
+  - name: app
+    image: wasm-app:latest
+```
+
+**性能监控**：
+
+```bash
+# 监控 Wasm Pod 性能
+kubectl top pod wasm-app
+
+# 查看启动时间
+kubectl logs wasm-app | grep "startup time"
+```
+
+#### 性能优化
+
+**启动优化**：
+
+- 使用预编译的 Wasm 文件
+- 启用 AOT 编译（如果支持）
+- 减少 Wasm 文件大小
+
+**运行时优化**：
+
+- 使用多线程运行时（如果支持）
+- 启用 GPU 加速（AI/ML 应用）
+- 优化内存使用
+
+### 8.3 常见问题
+
+**Q1：Wasm 应用启动失败？**
+
+- 检查 Wasm 文件格式是否正确
+- 确认 WasmEdge 版本兼容性
+- 查看 WasmEdge 日志
+
+**Q2：如何调试 Wasm 应用？**
+
+```bash
+# 使用 WasmEdge 调试模式
+wasmedge --enable-logging app.wasm
+
+# 使用 WABT 工具分析 Wasm 文件
+wasm-objdump -x app.wasm
+```
+
+**Q3：Wasm 应用性能不如原生应用？**
+
+- Wasm 适合轻量级、快速启动的场景
+- 对于 CPU 密集型应用，考虑使用原生容器
+- 使用 GPU 加速提升 AI/ML 应用性能
+
+### 8.4 实践建议
+
+**边缘计算**：
+
+- 利用 Wasm 的轻量级和快速启动特性
+- 使用 K3s + WasmEdge 部署边缘应用
+- 参考案例 1 的边缘计算部署
+
+**AI/ML 推理**：
+
+- 使用 WasmEdge GPU 加速
+- 优化模型大小和推理性能
+- 参考案例 2 的 AI 推理应用
+
+**微服务架构**：
+
+- 使用 Wasm 实现轻量级微服务
+- 利用快速启动特性实现弹性扩缩容
+- 结合服务网格实现服务治理
+
+**性能监控**：
+
+- 监控启动时间（目标 < 1ms）
+- 监控内存使用（目标 < 50MB）
+- 监控 CPU 使用率
+
+---
+
+**更新时间**：2025-11-15 **版本**：v1.2 **参考**：WasmEdge 0.14.1 官方文档
