@@ -27,10 +27,30 @@
   - [8 🧠 认知增强：思维导图、建模视图与图表达转换](#8--认知增强思维导图建模视图与图表达转换)
     - [8.1 代数结构完整思维导图](#81-代数结构完整思维导图)
     - [8.2 代数结构建模视图（UML类图）](#82-代数结构建模视图uml类图)
+      - [代数结构类图（UML Class Diagram）](#代数结构类图uml-class-diagram)
+      - [代数结构关系图](#代数结构关系图)
     - [8.3 代数结构多维关系矩阵](#83-代数结构多维关系矩阵)
+      - [代数结构-成分-属性三维矩阵](#代数结构-成分-属性三维矩阵)
+      - [组合运算-算子-对象映射矩阵](#组合运算-算子-对象映射矩阵)
     - [8.4 图表达和转换](#84-图表达和转换)
+      - [代数结构视图转换关系](#代数结构视图转换关系)
+      - [视图转换规则](#视图转换规则)
     - [8.5 形象化解释论证](#85-形象化解释论证)
+      - [1. 代数结构 = 建筑结构系统](#1-代数结构--建筑结构系统)
+      - [2. 对象集合 = 积木块集合](#2-对象集合--积木块集合)
+      - [3. 算子集合 = 工具集合](#3-算子集合--工具集合)
+      - [4. 组合运算 = 施工方法](#4-组合运算--施工方法)
     - [8.6 专家观点与论证](#86-专家观点与论证)
+      - [计算信息软件科学家的观点](#计算信息软件科学家的观点)
+        - [1. Garrett Birkhoff（通用代数创始人）](#1-garrett-birkhoff通用代数创始人)
+        - [2. Saunders Mac Lane（范畴论创始人）](#2-saunders-mac-lane范畴论创始人)
+        - [3. Philip Wadler（函数式编程专家）](#3-philip-wadler函数式编程专家)
+      - [计算信息软件教育家的观点](#计算信息软件教育家的观点)
+        - [1. Benjamin Pierce（类型系统教育家）](#1-benjamin-pierce类型系统教育家)
+        - [2. Robert Harper（编程语言教育家）](#2-robert-harper编程语言教育家)
+      - [计算信息软件认知学家的观点](#计算信息软件认知学家的观点)
+        - [1. David Marr（计算认知科学家）](#1-david-marr计算认知科学家)
+        - [2. Douglas Hofstadter（认知科学家）](#2-douglas-hofstadter认知科学家)
     - [8.7 认知学习路径矩阵](#87-认知学习路径矩阵)
     - [8.8 专家推荐阅读路径](#88-专家推荐阅读路径)
 
@@ -277,7 +297,7 @@ graph TB
     A --> C[算子集合ℱ]
     A --> D[组合运算𝒫]
     A --> E[结构关系ℒ]
-    
+
     B --> B1[硬件/固件层]
     B --> B2[Hypervisor/内核层]
     B --> B3[用户态运行时层]
@@ -285,21 +305,21 @@ graph TB
     B --> B5[编排与调度]
     B --> B6[服务网格与流量治理]
     B --> B7[可观测与策略]
-    
+
     C --> C1[虚拟化算子V]
     C --> C2[镜像打包算子I]
     C --> C3[容器化算子C]
     C --> C4[沙盒化算子S]
     C --> C5[服务网格算子M]
     C --> C6[其他算子15个]
-    
+
     D --> D1[复合运算∘]
     D --> D2[直积运算×]
     D --> D3[半直积运算⋊]
-    
+
     E --> E1[偏序关系⊑]
     E --> E2[同构关系≃]
-    
+
     style A fill:#ff9999
     style B fill:#99ccff
     style C fill:#99ff99
@@ -320,7 +340,7 @@ classDiagram
         +compositions: CompositionSet
         +relations: RelationSet
     }
-    
+
     class ObjectSet {
         +binary: Object
         +image: Object
@@ -328,7 +348,7 @@ classDiagram
         +vm: Object
         +pod: Object
     }
-    
+
     class OperatorSet {
         +V: Operator
         +I: Operator
@@ -336,18 +356,18 @@ classDiagram
         +S: Operator
         +M: Operator
     }
-    
+
     class CompositionSet {
         +compose: Composition
         +directProduct: DirectProduct
         +semidirectProduct: SemidirectProduct
     }
-    
+
     class RelationSet {
         +partialOrder: PartialOrder
         +isomorphism: Isomorphism
     }
-    
+
     AlgebraicStructure --> ObjectSet : contains
     AlgebraicStructure --> OperatorSet : contains
     AlgebraicStructure --> CompositionSet : contains
@@ -365,23 +385,23 @@ graph LR
     B --> C[组合运算𝒫]
     C --> D[结构关系ℒ]
     D --> A
-    
+
     A --> A1[Binary]
     A --> A2[Image]
     A --> A3[Container]
     A --> A4[VM]
-    
+
     B --> B1[V算子]
     B --> B2[I算子]
     B --> B3[C算子]
-    
+
     C --> C1[∘复合]
     C --> C2[×直积]
     C --> C3[⋊半直积]
-    
+
     D --> D1[⊑偏序]
     D --> D2[≃同构]
-    
+
     style A fill:#ff9999
     style B fill:#99ccff
     style C fill:#99ff99
@@ -417,23 +437,23 @@ graph LR
     A --> C[算子视图]
     A --> D[运算视图]
     A --> E[关系视图]
-    
+
     B --> B1[对象集合Ω]
     B --> B2[对象层次]
     B --> B3[对象关系]
-    
+
     C --> C1[算子集合ℱ]
     C --> C2[算子分类]
     C --> C3[算子属性]
-    
+
     D --> D1[组合运算𝒫]
     D --> D2[运算规则]
     D --> D3[运算性质]
-    
+
     E --> E1[结构关系ℒ]
     E --> E2[偏序关系]
     E --> E3[同构关系]
-    
+
     style A fill:#ff9999
     style B fill:#99ccff
     style C fill:#99ff99
@@ -443,7 +463,7 @@ graph LR
 
 #### 视图转换规则
 
-**转换规则 1：对象视图 → 算子视图**
+**转换规则 1：对象视图 → 算子视图**:
 
 ```yaml
 对象到算子转换:
@@ -457,7 +477,7 @@ graph LR
   输出: 算子集合ℱ（V, I, C, S, M）
 ```
 
-**转换规则 2：算子视图 → 运算视图**
+**转换规则 2：算子视图 → 运算视图**:
 
 ```yaml
 算子到运算转换:
@@ -469,7 +489,7 @@ graph LR
   输出: 组合运算𝒫（∘, ×, ⋊）
 ```
 
-**转换规则 3：运算视图 → 关系视图**
+**转换规则 3：运算视图 → 关系视图**:
 
 ```yaml
 运算到关系转换:
