@@ -184,6 +184,13 @@
 
 ## 📚 相关文档
 
+- [案例研究目录](README.md)
+- [文档索引](INDEX.md)
+- [跨案例对比分析](cross-case-comparison-analysis.md)
+- [行业维度深度分析](industry-depth-analysis.md)
+- [场景维度深度分析](scenario-depth-analysis.md)
+- [技术栈维度深度分析](tech-stack-depth-analysis.md)
+- [理论视角分析工作总结](THEORETICAL-ANALYSIS-SUMMARY.md)
 - [理论视角框架](../../docs/COGNITIVE/03-theoretical-perspectives/README.md)
 - [矩阵视角](../../docs/COGNITIVE/03-theoretical-perspectives/matrix-perspective/README.md)
 - [代数结构视角](../../docs/COGNITIVE/03-theoretical-perspectives/algebraic-structure/README.md)
