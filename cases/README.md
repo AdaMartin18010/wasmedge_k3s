@@ -122,6 +122,9 @@
 
 - [跨案例对比分析](cross-case-comparison-analysis.md) - 多维度理论视角对比分析
 - [行业维度深度分析](industry-depth-analysis.md) - 行业维度理论视角深度分析
+- [场景维度深度分析](scenario-depth-analysis.md) - 场景维度理论视角深度分析
+- [技术栈维度深度分析](tech-stack-depth-analysis.md) - 技术栈维度理论视角深度分析
+- [理论视角分析工作总结](THEORETICAL-ANALYSIS-SUMMARY.md) - 理论视角分析工作完整总结
 - [案例收集推进报告](CASE-PROGRESS-REPORT.md) - 案例收集推进工作记录
 
 ### 理论框架文档
