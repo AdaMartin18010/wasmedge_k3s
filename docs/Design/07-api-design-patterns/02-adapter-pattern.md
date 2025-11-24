@@ -1,6 +1,6 @@
 # 11.2 适配器模式：统一异构运行时
 
-> **文档版本**：v1.0 **最后更新**：2025-11-10 **维护者**：项目团队
+> **文档版本**：v1.0 **最后更新：2025-11-15 **维护者**：项目团队
 
 ---
 
@@ -18,6 +18,10 @@
     - [虚拟机运行时适配器](#虚拟机运行时适配器)
     - [适配器工厂](#适配器工厂)
   - [相关文档](#相关文档)
+  - [2025 年最新实践](#2025-年最新实践)
+    - [适配器模式最佳实践（2025）](#适配器模式最佳实践2025)
+  - [实际应用案例](#实际应用案例)
+    - [案例 1：统一运行时接口（2025）](#案例-1统一运行时接口2025)
 
 ---
 
@@ -296,4 +300,68 @@ func (f *RuntimeAdapterFactory) GetAdapter(runtimeType string) RuntimeAdapter {
 
 ---
 
-**最后更新**：2025-11-10 **维护者**：项目团队
+## 2025 年最新实践
+
+### 适配器模式最佳实践（2025）
+
+**2025 年趋势**：适配器模式的深度应用
+
+**实践要点**：
+
+- **统一运行时接口**：通过适配器模式统一容器和虚拟机的运行时接口
+- **运行时适配器**：容器运行时适配器和虚拟机运行时适配器
+- **适配器工厂**：使用适配器工厂创建适配器
+
+**代码示例**：
+
+```python
+# 2025 年适配器模式应用工具
+class RuntimeAdapterFactory:
+    def __init__(self):
+        self.container_adapter = ContainerRuntimeAdapter()
+        self.vm_adapter = VMRuntimeAdapter()
+
+    def create_adapter(self, workload_type):
+        """创建运行时适配器"""
+        if workload_type == 'container':
+            return self.container_adapter
+        elif workload_type == 'vm':
+            return self.vm_adapter
+        else:
+            raise ValueError(f"Unknown workload type: {workload_type}")
+```
+
+## 实际应用案例
+
+### 案例 1：统一运行时接口（2025）
+
+**场景**：使用适配器模式统一容器和虚拟机的运行时接口
+
+**实现方案**：
+
+```yaml
+# 统一运行时接口
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: test-vm
+spec:
+  running: true
+  template:
+    spec:
+      domain:
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu: "2"
+```
+
+**效果**：
+
+- 统一运行时接口：通过适配器模式统一容器和虚拟机的运行时接口
+- 运行时适配器：容器运行时适配器和虚拟机运行时适配器
+- 适配器工厂：使用适配器工厂创建适配器
+
+---
+
+**最后更新**：2025-11-15 **维护者**：项目团队

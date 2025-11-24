@@ -20,6 +20,13 @@
     - [8.1 容器运行时结构分析案例](#81-容器运行时结构分析案例)
     - [8.2 微服务架构结构设计案例](#82-微服务架构结构设计案例)
   - [9 相关文档](#9-相关文档)
+  - [10 2025 年最新实践](#10-2025-年最新实践)
+    - [10.1 结构视角在云原生架构设计中的应用（2025）](#101-结构视角在云原生架构设计中的应用2025)
+    - [10.2 结构视角在微服务架构中的应用（2025）](#102-结构视角在微服务架构中的应用2025)
+  - [11 实际应用案例](#11-实际应用案例)
+    - [案例 1：微服务架构结构设计（2025）](#案例-1微服务架构结构设计2025)
+    - [案例 2：边缘计算架构结构设计（2025）](#案例-2边缘计算架构结构设计2025)
+    - [案例 3：Serverless 架构结构设计（2025）](#案例-3serverless-架构结构设计2025)
 
 ---
 
@@ -380,6 +387,221 @@ mindmap
 
 ---
 
+## 10 2025 年最新实践
+
+### 10.1 结构视角在云原生架构设计中的应用（2025）
+
+**2025 年趋势**：使用结构视角进行云原生架构设计
+
+**实践要点**：
+
+- **三类结构分析**：计算结构、控制结构、信息结构
+- **结构优化**：基于结构分析进行架构优化
+- **结构验证**：验证架构设计的结构合理性
+
+**代码示例**：
+
+```python
+# 2025 年结构视角架构设计工具
+class StructuralArchitectureDesigner:
+    def __init__(self):
+        self.structure_types = ['computation', 'control', 'information']
+
+    def analyze_architecture(self, architecture):
+        """分析架构结构"""
+        structures = {}
+        for structure_type in self.structure_types:
+            structures[structure_type] = self.analyze_structure(
+                architecture, structure_type
+            )
+        return structures
+
+    def optimize_architecture(self, architecture, structures):
+        """优化架构"""
+        optimized = architecture.copy()
+        for structure_type, structure in structures.items():
+            optimized = self.optimize_structure(
+                optimized, structure_type, structure
+            )
+        return optimized
+```
+
+### 10.2 结构视角在微服务架构中的应用（2025）
+
+**2025 年趋势**：使用结构视角设计微服务架构
+
+**实践要点**：
+
+- **服务结构分析**：分析服务的计算、控制、信息结构
+- **服务间结构**：分析服务间的结构关系
+- **架构优化**：基于结构分析优化微服务架构
+
+**代码示例**：
+
+```python
+# 微服务架构结构分析
+class MicroservicesStructureAnalyzer:
+    def analyze_service_structure(self, service):
+        """分析服务结构"""
+        return {
+            'computation': self.analyze_computation_structure(service),
+            'control': self.analyze_control_structure(service),
+            'information': self.analyze_information_structure(service)
+        }
+```
+
+## 11 实际应用案例
+
+### 案例 1：微服务架构结构设计（2025）
+
+**场景**：使用结构视角设计微服务架构
+
+**实现方案**：
+
+```python
+# 微服务架构结构设计
+class MicroservicesArchitectureDesigner:
+    def design_architecture(self, requirements):
+        """设计微服务架构"""
+        # 分析计算结构
+        computation_structure = self.design_computation_structure(requirements)
+
+        # 分析控制结构
+        control_structure = self.design_control_structure(requirements)
+
+        # 分析信息结构
+        information_structure = self.design_information_structure(requirements)
+
+        # 组合结构
+        architecture = self.combine_structures(
+            computation_structure, control_structure, information_structure
+        )
+
+        return architecture
+```
+
+**Kubernetes 配置示例**：
+
+```yaml
+# 微服务架构配置
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: user-service
+  template:
+    metadata:
+      labels:
+        app: user-service
+    spec:
+      containers:
+      - name: user-service
+        image: user-service:latest
+        resources:
+          requests:
+            cpu: "200m"
+            memory: "256Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-service
+spec:
+  selector:
+    app: user-service
+  ports:
+  - port: 80
+    targetPort: 8080
+```
+
+### 案例 2：边缘计算架构结构设计（2025）
+
+**场景**：使用结构视角设计边缘计算架构
+
+**实现方案**：
+
+```yaml
+# 边缘计算架构配置
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: edge-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: edge-app
+  template:
+    metadata:
+      labels:
+        app: edge-app
+    spec:
+      runtimeClassName: wasmedge
+      nodeSelector:
+        node-type: edge
+      containers:
+      - name: edge-app
+        image: edge-app:latest
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "200m"
+            memory: "256Mi"
+```
+
+**效果**：
+
+- 架构结构清晰化
+- 结构优化自动化
+- 架构设计科学化
+
+### 案例 3：Serverless 架构结构设计（2025）
+
+**场景**：使用结构视角设计 Serverless 架构
+
+**实现方案**：
+
+```yaml
+# Serverless 函数配置
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: serverless-function
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/minScale: "0"
+        autoscaling.knative.dev/maxScale: "10"
+    spec:
+      containers:
+      - image: function:latest
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+```
+
+**效果**：
+
+- Serverless 架构结构优化
+- 资源利用效率提升
+- 架构设计规范化
+
+---
+
 **最后更新**：2025-11-15
-**文档状态**：✅ 完整 | 📊 包含结构视角详细思维导图、使用指南、使用技巧、实践案例 | 🎯 生产就绪
+**文档状态**：✅ 完整 | 📊 包含结构视角详细思维导图、使用指南、使用技巧、实践案例、2025年最新实践 | 🎯 生产就绪
 **维护者**：项目团队

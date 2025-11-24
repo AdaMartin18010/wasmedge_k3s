@@ -1,6 +1,6 @@
 # 二、多租户架构深度剖析与网络内容对标
 
-> **文档版本**：v1.0 **最后更新**：2025-11-10 **维护者**：项目团队
+> **文档版本**：v1.0 **最后更新：2025-11-15 **维护者**：项目团队
 
 ---
 
@@ -18,6 +18,10 @@
     - [配额审计与超售策略](#配额审计与超售策略)
     - [多租户网络架构（对标搜索结果的联网困难问题）](#多租户网络架构对标搜索结果的联网困难问题)
   - [相关文档](#相关文档)
+  - [2025 年最新实践](#2025-年最新实践)
+    - [多租户架构最佳实践（2025）](#多租户架构最佳实践2025)
+  - [实际应用案例](#实际应用案例)
+    - [案例 1：多租户隔离配置（2025）](#案例-1多租户隔离配置2025)
 
 ---
 
@@ -226,4 +230,93 @@ graph TD
 
 ---
 
-**最后更新**：2025-11-10 **维护者**：项目团队
+## 2025 年最新实践
+
+### 多租户架构最佳实践（2025）
+
+**2025 年趋势**：多租户架构的深度优化
+
+**实践要点**：
+
+- **租户隔离**：使用 Namespace、RBAC、NetworkPolicy 实现租户隔离
+- **配额管理**：使用 ResourceQuota 实现配额管理
+- **网络隔离**：使用 Multus 和 NetworkPolicy 实现网络隔离
+
+**代码示例**：
+
+```python
+# 2025 年多租户架构管理工具
+class MultiTenantArchitectureManager:
+    def __init__(self):
+        self.namespace_manager = NamespaceManager()
+        self.rbac_manager = RBACManager()
+        self.quota_manager = QuotaManager()
+        self.network_manager = NetworkManager()
+
+    def create_tenant(self, tenant_config):
+        """创建租户"""
+        # 创建 Namespace
+        namespace = self.namespace_manager.create(tenant_config)
+
+        # 配置 RBAC
+        rbac = self.rbac_manager.configure(tenant_config)
+
+        # 配置配额
+        quota = self.quota_manager.configure(tenant_config)
+
+        # 配置网络隔离
+        network = self.network_manager.configure(tenant_config)
+
+        return namespace, rbac, quota, network
+```
+
+## 实际应用案例
+
+### 案例 1：多租户隔离配置（2025）
+
+**场景**：使用多租户架构实现租户隔离
+
+**实现方案**：
+
+```yaml
+# 租户隔离配置
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tenant-a
+  labels:
+    tenant: tenant-a
+---
+# RBAC 配置
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: tenant-a-operator
+  namespace: tenant-a
+rules:
+  - apiGroups: ["kubevirt.io"]
+    resources: ["virtualmachines"]
+    verbs: ["get", "list", "create", "update"]
+---
+# 配额配置
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: tenant-a-quota
+  namespace: tenant-a
+spec:
+  hard:
+    cpu: "100"
+    memory: 200Gi
+    count/virtualmachines.kubevirt.io: "10"
+```
+
+**效果**：
+
+- 租户隔离：使用 Namespace、RBAC、NetworkPolicy 实现租户隔离
+- 配额管理：使用 ResourceQuota 实现配额管理
+- 网络隔离：使用 Multus 和 NetworkPolicy 实现网络隔离
+
+---
+
+**最后更新**：2025-11-15 **维护者**：项目团队

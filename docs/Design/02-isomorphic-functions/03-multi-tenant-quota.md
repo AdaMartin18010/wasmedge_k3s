@@ -1,6 +1,6 @@
 # 3. 多租户与配额同构
 
-> **文档版本**：v1.0 **最后更新**：2025-11-10 **维护者**：项目团队
+> **文档版本**：v1.0 **最后更新：2025-11-15 **维护者**：项目团队
 
 ---
 
@@ -23,6 +23,12 @@
     - [4. 网络隔离机制](#4-网络隔离机制)
     - [5. 配额审计机制](#5-配额审计机制)
   - [相关文档](#相关文档)
+  - [2025 年最新实践](#2025-年最新实践)
+    - [多租户与配额同构在云原生架构中的应用（2025）](#多租户与配额同构在云原生架构中的应用2025)
+  - [实际应用案例](#实际应用案例)
+    - [案例 1：统一配额管理（2025）](#案例-1统一配额管理2025)
+    - [案例 2：统一命名空间隔离（2025）](#案例-2统一命名空间隔离2025)
+    - [案例 3：统一 RBAC 管理（2025）](#案例-3统一-rbac-管理2025)
 
 ---
 
@@ -422,4 +428,203 @@ data:
 
 ---
 
-**最后更新**：2025-11-10 **维护者**：项目团队
+## 2025 年最新实践
+
+### 多租户与配额同构在云原生架构中的应用（2025）
+
+**2025 年趋势**：多租户与配额同构在云原生架构中的深度应用
+
+**实践要点**：
+
+- **配额统一**：容器和虚拟机通过 ResourceQuota 统一管理配额
+- **命名空间统一**：通过 Namespace 统一隔离容器和虚拟机
+- **RBAC 统一**：通过 RBAC 统一管理容器和虚拟机的访问控制
+
+**代码示例**：
+
+```python
+# 2025 年多租户与配额同构管理工具
+class MultiTenantQuotaManager:
+    def __init__(self):
+        self.resource_quotas = {}
+        self.rbac_policies = {}
+
+    def create_tenant(self, tenant_name, quota_config):
+        """创建租户"""
+        # 创建 Namespace
+        namespace = self.create_namespace(tenant_name)
+
+        # 创建 ResourceQuota
+        quota = self.create_resource_quota(tenant_name, quota_config)
+
+        # 创建 RBAC 策略
+        rbac = self.create_rbac_policy(tenant_name)
+
+        return namespace, quota, rbac
+
+    def enforce_quota(self, tenant_name, workload_type, resources):
+        """强制执行配额"""
+        # 统一的配额管理
+        return self.check_quota(tenant_name, workload_type, resources)
+```
+
+## 实际应用案例
+
+### 案例 1：统一配额管理（2025）
+
+**场景**：在 Kubernetes 集群中统一管理容器和虚拟机的配额
+
+**实现方案**：
+
+```yaml
+# ResourceQuota 统一配置
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: tenant-a-quota
+  namespace: tenant-a
+spec:
+  hard:
+    requests.cpu: "10"
+    requests.memory: 20Gi
+    limits.cpu: "20"
+    limits.memory: 40Gi
+    pods: "10"
+    persistentvolumeclaims: "5"
+    requests.storage: 100Gi
+    kubevirt.io/vms: "5"
+    kubevirt.io/vmis: "5"
+---
+# Pod 配额限制
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-pod
+  namespace: tenant-a
+spec:
+  containers:
+    - name: test
+      image: nginx:alpine
+      resources:
+        requests:
+          cpu: "100m"
+          memory: "128Mi"
+        limits:
+          cpu: "200m"
+          memory: "256Mi"
+---
+# VM 配额限制
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: test-vm
+  namespace: tenant-a
+spec:
+  template:
+    spec:
+      domain:
+        resources:
+          requests:
+            cpu: "1"
+            memory: "2Gi"
+          limits:
+            cpu: "2"
+            memory: "4Gi"
+```
+
+**效果**：
+
+- 容器和虚拟机通过 ResourceQuota 统一管理配额
+- 配额限制统一应用
+- 配额使用统一监控
+
+### 案例 2：统一命名空间隔离（2025）
+
+**场景**：使用统一的机制隔离容器和虚拟机
+
+**实现方案**：
+
+```yaml
+# Namespace 统一配置
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tenant-a
+  labels:
+    name: tenant-a
+---
+# NetworkPolicy 统一隔离
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: tenant-a-isolation
+  namespace: tenant-a
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              name: tenant-a
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              name: tenant-a
+```
+
+**效果**：
+
+- 容器和虚拟机通过 Namespace 统一隔离
+- NetworkPolicy 统一管理网络隔离
+- 隔离策略统一应用
+
+### 案例 3：统一 RBAC 管理（2025）
+
+**场景**：使用统一的机制管理容器和虚拟机的访问控制
+
+**实现方案**：
+
+```yaml
+# Role 统一配置
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: tenant-a-role
+  namespace: tenant-a
+rules:
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["get", "list", "create", "update", "delete"]
+  - apiGroups: ["kubevirt.io"]
+    resources: ["virtualmachines", "virtualmachineinstances"]
+    verbs: ["get", "list", "create", "update", "delete"]
+---
+# RoleBinding 统一配置
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: tenant-a-rolebinding
+  namespace: tenant-a
+subjects:
+  - kind: User
+    name: tenant-a-user
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: tenant-a-role
+  apiGroup: rbac.authorization.k8s.io
+```
+
+**效果**：
+
+- 容器和虚拟机通过 RBAC 统一管理访问控制
+- 权限策略统一应用
+- 访问控制统一审计
+
+---
+
+**最后更新**：2025-11-15 **维护者**：项目团队

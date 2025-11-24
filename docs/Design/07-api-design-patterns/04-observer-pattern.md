@@ -1,6 +1,6 @@
 # 11.4 观察者模式：统一事件通知
 
-> **文档版本**：v1.0 **最后更新**：2025-11-10 **维护者**：项目团队
+> **文档版本**：v1.0 **最后更新：2025-11-15 **维护者**：项目团队
 
 ---
 
@@ -20,6 +20,10 @@
     - [2. Custom Resource Watch](#2-custom-resource-watch)
     - [3. Webhook 通知](#3-webhook-通知)
   - [相关文档](#相关文档)
+  - [2025 年最新实践](#2025-年最新实践)
+    - [观察者模式最佳实践（2025）](#观察者模式最佳实践2025)
+  - [实际应用案例](#实际应用案例)
+    - [案例 1：统一事件通知（2025）](#案例-1统一事件通知2025)
 
 ---
 
@@ -348,4 +352,67 @@ dispatcher := NewEventDispatcher(eventRecorder, webhookClient)
 
 ---
 
-**最后更新**：2025-11-10 **维护者**：项目团队
+## 2025 年最新实践
+
+### 观察者模式最佳实践（2025）
+
+**2025 年趋势**：观察者模式的深度应用
+
+**实践要点**：
+
+- **统一事件通知**：通过观察者模式实现容器和虚拟机的统一事件通知
+- **事件观察者**：监控观察者、告警观察者、审计观察者
+- **事件分发器**：统一事件分发器管理所有观察者
+
+**代码示例**：
+
+```python
+# 2025 年观察者模式应用工具
+class EventObserverManager:
+    def __init__(self):
+        self.observers = []
+        self.dispatcher = EventDispatcher()
+
+    def register_observer(self, observer):
+        """注册观察者"""
+        self.observers.append(observer)
+        self.dispatcher.add_observer(observer)
+
+    def notify_event(self, event_type, event_data):
+        """通知事件"""
+        self.dispatcher.notify(event_type, event_data)
+```
+
+## 实际应用案例
+
+### 案例 1：统一事件通知（2025）
+
+**场景**：使用观察者模式实现容器和虚拟机的统一事件通知
+
+**实现方案**：
+
+```yaml
+# 事件观察者配置
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: event-observers
+data:
+  observers.yaml: |
+    - type: monitoring
+      endpoint: prometheus:9090
+    - type: alerting
+      endpoint: alertmanager:9093
+    - type: auditing
+      endpoint: audit-service:8080
+```
+
+**效果**：
+
+- 统一事件通知：通过观察者模式实现容器和虚拟机的统一事件通知
+- 事件观察者：监控观察者、告警观察者、审计观察者
+- 事件分发器：统一事件分发器管理所有观察者
+
+---
+
+**最后更新**：2025-11-15 **维护者**：项目团队

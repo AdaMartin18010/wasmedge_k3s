@@ -1,6 +1,6 @@
 # 14.1 多租户安全隔离
 
-> **文档版本**：v1.0 **最后更新**：2025-11-10 **维护者**：项目团队
+> **文档版本**：v1.0 **最后更新：2025-11-15 **维护者**：项目团队
 
 ---
 
@@ -18,6 +18,10 @@
     - [3. NetworkPolicy 网络隔离](#3-networkpolicy-网络隔离)
     - [4. ResourceQuota 资源限制](#4-resourcequota-资源限制)
   - [相关文档](#相关文档)
+  - [2025 年最新实践](#2025-年最新实践)
+    - [多租户安全隔离最佳实践（2025）](#多租户安全隔离最佳实践2025)
+  - [实际应用案例](#实际应用案例)
+    - [案例 1：多租户安全隔离配置（2025）](#案例-1多租户安全隔离配置2025)
 
 ---
 
@@ -222,4 +226,98 @@ spec:
 
 ---
 
-**最后更新**：2025-11-10 **维护者**：项目团队
+## 2025 年最新实践
+
+### 多租户安全隔离最佳实践（2025）
+
+**2025 年趋势**：多租户安全隔离的深度优化
+
+**实践要点**：
+
+- **统一隔离**：通过 Namespace、RBAC、NetworkPolicy 统一隔离
+- **安全审计**：实时审计租户操作和资源使用
+- **自动化合规**：使用 AI 技术自动化合规检查
+
+**代码示例**：
+
+```python
+# 2025 年多租户安全隔离管理工具
+class MultiTenantIsolationManager:
+    def __init__(self):
+        self.namespace_manager = NamespaceManager()
+        self.rbac_manager = RBACManager()
+        self.network_policy_manager = NetworkPolicyManager()
+        self.audit_manager = AuditManager()
+
+    def create_tenant(self, tenant_config):
+        """创建租户"""
+        # 创建 Namespace
+        namespace = self.namespace_manager.create(tenant_config)
+
+        # 配置 RBAC
+        rbac = self.rbac_manager.configure(tenant_config)
+
+        # 配置 NetworkPolicy
+        network_policy = self.network_policy_manager.configure(tenant_config)
+
+        # 启用审计
+        self.audit_manager.enable(namespace)
+
+        return namespace, rbac, network_policy
+```
+
+## 实际应用案例
+
+### 案例 1：多租户安全隔离配置（2025）
+
+**场景**：使用统一的机制实现多租户安全隔离
+
+**实现方案**：
+
+```yaml
+# Namespace 隔离
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tenant-a
+  labels:
+    security-tier: high
+---
+# RBAC 权限控制
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: tenant-a-operator
+  namespace: tenant-a
+rules:
+  - apiGroups: ["kubevirt.io"]
+    resources: ["virtualmachines"]
+    verbs: ["get", "list", "create", "update"]
+---
+# NetworkPolicy 网络隔离
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: tenant-a-isolation
+  namespace: tenant-a
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              name: tenant-a
+```
+
+**效果**：
+
+- 统一隔离：通过 Namespace、RBAC、NetworkPolicy 统一隔离
+- 安全审计：实时审计租户操作
+- 自动化合规：自动化合规检查
+
+---
+
+**最后更新**：2025-11-15 **维护者**：项目团队

@@ -2555,4 +2555,68 @@ lsns -t net -p $(pgrep -f container)
 
 ---
 
-**最后更新**：2025-11-07 **维护者**：项目团队
+---
+
+## 2025 年最新实践
+
+### 四层隔离栈应用最佳实践（2025）
+
+**2025 年趋势**：四层隔离栈在混合部署、云原生架构、边缘计算中的深度应用
+
+**实践要点**：
+
+- **混合部署**：使用四层隔离栈实现容器和 VM 的统一管理
+- **问题定位**：使用 OTLP + eBPF 进行横纵耦合问题定位
+- **观测系统**：观测系统作为第四大基础设施
+
+**代码示例**：
+
+```bash
+# 2025 年隔离栈问题定位工具
+#!/bin/bash
+# 横纵耦合问题定位脚本
+
+# 横向：OTLP Trace
+TRACE_ID=$(curl -s http://jaeger:16686/api/traces?service=app | jq -r '.data[0].traceID')
+
+# 纵向：eBPF 系统调用追踪
+bpftrace -e 'tracepoint:syscalls:sys_enter_* {
+    @[comm] = count();
+}' -p $(pgrep -f app)
+
+# 关联分析
+echo "Trace ID: $TRACE_ID"
+echo "System Calls: $(bpftrace -e 'tracepoint:syscalls:sys_enter_* { @[comm] = count(); }' -p $(pgrep -f app))"
+```
+
+## 实际应用案例
+
+### 案例 1：混合部署问题定位（2025）
+
+**场景**：使用四层隔离栈和 OTLP + eBPF 进行混合部署问题定位
+
+**实现方案**：
+
+```bash
+# 混合部署问题定位
+# 1. 横向定位：OTLP Trace
+jaeger_query --service=app --operation=request
+
+# 2. 纵向定位：eBPF 系统调用
+bpftrace -e 'tracepoint:syscalls:sys_enter_* {
+    @[comm, pid] = count();
+}' -p $(pgrep -f app)
+
+# 3. 关联分析
+correlate_trace_ebpf --trace-id=$TRACE_ID --pid=$PID
+```
+
+**效果**：
+
+- 问题定位：横纵耦合定位，快速定位问题
+- 观测系统：完整的观测系统支持
+- 混合部署：统一管理容器和 VM
+
+---
+
+**最后更新**：2025-11-15 **维护者**：项目团队

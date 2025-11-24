@@ -35,6 +35,10 @@
     - [8.1 详细机制文档](#81-详细机制文档)
     - [8.2 容器化基础机制](#82-容器化基础机制)
     - [8.3 架构分析](#83-架构分析)
+  - [2025 年最新实践](#2025-年最新实践)
+    - [Linux 安全模块应用最佳实践（2025）](#linux-安全模块应用最佳实践2025)
+  - [实际应用案例](#实际应用案例)
+    - [案例 1：Kubernetes Pod SELinux 安全配置（2025）](#案例-1kubernetes-pod-selinux-安全配置2025)
 
 ---
 
@@ -53,7 +57,7 @@
 
 **LSM 架构**：
 
-```
+```text
 用户空间
     │
     ├── 安全策略配置
@@ -167,7 +171,7 @@ int security_file_open(struct file *file) {
 
 **安全上下文格式**：
 
-```
+```text
 user:role:type:level
 ```
 
@@ -465,8 +469,81 @@ spec:
 
 ---
 
-**最后更新**：2025-11-07
-**文档状态**：✅ 完整 | 📊 包含内核实现分析 | 🎯 生产就绪
+---
+
+## 2025 年最新实践
+
+### Linux 安全模块应用最佳实践（2025）
+
+**2025 年趋势**：LSM 在容器安全、云原生安全、零信任安全中的深度应用
+
+**实践要点**：
+
+- **容器安全**：使用 SELinux/AppArmor 进行容器安全加固
+- **云原生安全**：使用 LSM 进行云原生环境安全控制
+- **零信任安全**：使用 LSM 实现零信任安全模型
+
+**代码示例**：
+
+```bash
+# 2025 年 SELinux 容器安全配置
+# 创建 SELinux 策略
+cat > container_policy.te <<EOF
+module container_policy 1.0;
+
+require {
+    type container_t;
+    type container_file_t;
+    class file { read write execute };
+}
+
+allow container_t container_file_t:file { read write execute };
+EOF
+
+# 编译并加载策略
+checkmodule -M -m -o container_policy.mod container_policy.te
+semodule_package -o container_policy.pp -m container_policy.mod
+semodule -i container_policy.pp
+```
+
+## 实际应用案例
+
+### 案例 1：Kubernetes Pod SELinux 安全配置（2025）
+
+**场景**：使用 SELinux 进行 Kubernetes Pod 安全加固
+
+**实现方案**：
+
+```yaml
+# Kubernetes Pod SELinux 配置
+apiVersion: v1
+kind: Pod
+metadata:
+  name: secure-pod
+spec:
+  securityContext:
+    seLinuxOptions:
+      type: "container_t"
+      level: "s0:c123,c456"
+  containers:
+  - name: app
+    image: nginx:latest
+    securityContext:
+      seLinuxOptions:
+        type: "container_t"
+        level: "s0:c123,c456"
+```
+
+**效果**：
+
+- 安全隔离：SELinux 提供强制访问控制
+- 最小权限：限制容器访问权限
+- 安全审计：便于安全审计和合规
+
+---
+
+**最后更新**：2025-11-15
+**文档状态**：✅ 完整 | 📊 包含内核实现分析、2025 年最新实践、实际应用案例 | 🎯 生产就绪
 **维护者**：项目团队
 
 > **📊 2025 年技术趋势参考**：详细技术状态和版本信息请查看

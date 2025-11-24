@@ -1,6 +1,6 @@
 # 12.3 案例三：DevOps CI/CD 混合工作流
 
-> **文档版本**：v1.0 **最后更新**：2025-11-10 **维护者**：项目团队
+> **文档版本**：v1.0 **最后更新：2025-11-15 **维护者**：项目团队
 
 ---
 
@@ -19,6 +19,10 @@
     - [3. 资源优化](#3-资源优化)
     - [4. 统一编排](#4-统一编排)
   - [相关文档](#相关文档)
+  - [2025 年最新实践](#2025-年最新实践)
+    - [DevOps CI/CD 混合工作流最佳实践（2025）](#devops-cicd-混合工作流最佳实践2025)
+  - [实际应用案例](#实际应用案例)
+    - [案例 1：混合 CI/CD 工作流（2025）](#案例-1混合-cicd-工作流2025)
 
 ---
 
@@ -184,4 +188,98 @@ spec:
 
 ---
 
-**最后更新**：2025-11-10 **维护者**：项目团队
+## 2025 年最新实践
+
+### DevOps CI/CD 混合工作流最佳实践（2025）
+
+**2025 年趋势**：DevOps CI/CD 混合工作流的深度优化
+
+**实践要点**：
+
+- **混合工作负载**：容器化构建任务和虚拟机测试环境统一管理
+- **资源优化**：测试完成后自动清理，提升资源利用率
+- **统一编排**：通过 Argo Workflows 统一编排容器和虚拟机任务
+
+**代码示例**：
+
+```python
+# 2025 年 CI/CD 混合工作流管理工具
+class CICDWorkflowManager:
+    def __init__(self):
+        self.workflow_engine = ArgoWorkflows()
+        self.resource_manager = ResourceManager()
+
+    def create_pipeline(self, config):
+        """创建 CI/CD 流水线"""
+        # 创建工作流
+        workflow = self.workflow_engine.create_workflow(config)
+
+        # 资源管理
+        resource_allocation = self.resource_manager.allocate(workflow)
+
+        # 执行工作流
+        return self.workflow_engine.execute(workflow, resource_allocation)
+```
+
+## 实际应用案例
+
+### 案例 1：混合 CI/CD 工作流（2025）
+
+**场景**：CI/CD 流水线需要同时运行容器化构建任务和虚拟机集成测试环境
+
+**实现方案**：
+
+```yaml
+# CI/CD 工作流配置
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  name: ci-cd-pipeline
+spec:
+  entrypoint: build-and-test
+  templates:
+  - name: build-and-test
+    steps:
+    - - name: build-container
+        template: container-build
+      - name: test-vm
+        template: vm-test-env
+        arguments:
+          parameters:
+          - name: image
+            value: "{{steps.build-container.outputs.parameters.image}}"
+
+  # 容器构建任务
+  - name: container-build
+    container:
+      image: docker:latest
+      command: [sh, -c]
+      args: ["docker build -t myapp:latest ."]
+    resources:
+      requests:
+        cpu: "2"
+        memory: 4Gi
+
+  # 虚拟机测试环境
+  - name: vm-test-env
+    inputs:
+      parameters:
+      - name: image
+    steps:
+    - - name: create-test-vm
+        template: create-vm
+      - - name: run-tests
+          template: run-integration-tests
+      - - name: cleanup-vm
+        template: delete-vm
+```
+
+**效果**：
+
+- 快速构建：容器任务秒级启动
+- 完整测试：虚拟机提供完整 OS 环境
+- 资源优化：测试完成后自动清理，资源利用率提升 50%
+
+---
+
+**最后更新**：2025-11-15 **维护者**：项目团队

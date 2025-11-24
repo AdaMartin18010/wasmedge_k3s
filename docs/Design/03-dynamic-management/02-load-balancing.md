@@ -1,6 +1,6 @@
 # 2. 负载均衡统一架构
 
-> **文档版本**：v1.0 **最后更新**：2025-11-10 **维护者**：项目团队
+> **文档版本**：v1.0 **最后更新**：2025-11-15 **维护者**：项目团队
 
 ---
 
@@ -18,6 +18,11 @@
     - [3. 健康检查](#3-健康检查)
     - [4. 负载均衡器](#4-负载均衡器)
   - [相关文档](#相关文档)
+  - [2025 年最新实践](#2025-年最新实践)
+    - [负载均衡统一架构最佳实践（2025）](#负载均衡统一架构最佳实践2025)
+  - [实际应用案例](#实际应用案例)
+    - [案例 1：统一负载均衡管理（2025）](#案例-1统一负载均衡管理2025)
+    - [案例 2：Ingress 统一负载均衡（2025）](#案例-2ingress-统一负载均衡2025)
 
 ---
 
@@ -267,4 +272,138 @@ spec:
 
 ---
 
-**最后更新**：2025-11-10 **维护者**：项目团队
+## 2025 年最新实践
+
+### 负载均衡统一架构最佳实践（2025）
+
+**2025 年趋势**：负载均衡统一架构的深度优化
+
+**实践要点**：
+
+- **统一服务发现**：容器和虚拟机通过 Kubernetes Service 统一服务发现
+- **智能负载均衡**：使用 AI 技术进行智能负载均衡决策
+- **性能优化**：优化负载均衡的性能和效率
+
+**代码示例**：
+
+```python
+# 2025 年智能负载均衡管理工具
+class IntelligentLoadBalancer:
+    def __init__(self):
+        self.metrics_collector = MetricsCollector()
+        self.ai_router = AIRouter()
+        self.health_checker = HealthChecker()
+
+    def route_traffic(self, service_name, request):
+        """智能路由流量"""
+        # 收集指标
+        metrics = self.metrics_collector.collect(service_name)
+
+        # 健康检查
+        healthy_endpoints = self.health_checker.get_healthy_endpoints(service_name)
+
+        # AI 路由决策
+        target_endpoint = self.ai_router.route(request, healthy_endpoints, metrics)
+
+        return target_endpoint
+```
+
+## 实际应用案例
+
+### 案例 1：统一负载均衡管理（2025）
+
+**场景**：使用统一的机制管理容器和虚拟机的负载均衡
+
+**实现方案**：
+
+```yaml
+# 统一 Service 配置
+apiVersion: v1
+kind: Service
+metadata:
+  name: unified-service
+spec:
+  selector:
+    app: test
+  ports:
+    - port: 80
+      targetPort: 8080
+  type: ClusterIP
+---
+# Pod 后端
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-pod
+  labels:
+    app: test
+spec:
+  containers:
+    - name: test
+      image: nginx:alpine
+      readinessProbe:
+        httpGet:
+          path: /health
+          port: 8080
+---
+# VMI 后端
+apiVersion: kubevirt.io/v1
+kind: VirtualMachineInstance
+metadata:
+  name: test-vmi
+  labels:
+    app: test
+spec:
+  domain:
+    devices:
+      interfaces:
+        - name: default
+          masquerade: {}
+    networks:
+      - name: default
+        pod: {}
+  readinessProbe:
+    guestAgentPing: {}
+```
+
+**效果**：
+
+- 统一服务发现：容器和虚拟机通过 Service 统一服务发现
+- 统一流量分发：kube-proxy 统一处理流量分发
+- 统一健康检查：Readiness Probe 和 Guest Agent 统一健康检查
+
+### 案例 2：Ingress 统一负载均衡（2025）
+
+**场景**：使用 Ingress 统一管理容器和虚拟机的 HTTP/HTTPS 负载均衡
+
+**实现方案**：
+
+```yaml
+# Ingress 统一配置
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: unified-ingress
+spec:
+  rules:
+    - host: app.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: unified-service
+                port:
+                  number: 80
+```
+
+**效果**：
+
+- Ingress 统一提供 HTTP/HTTPS 负载均衡
+- 容器和虚拟机共享同一套负载均衡服务
+- 负载均衡配置统一管理
+
+---
+
+**最后更新**：2025-11-15 **维护者**：项目团队

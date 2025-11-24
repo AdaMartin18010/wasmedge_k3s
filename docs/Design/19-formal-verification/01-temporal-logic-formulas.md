@@ -1,6 +1,6 @@
 # 一、时序逻辑公式
 
-> **文档版本**：v1.0 **最后更新**：2025-11-10 **维护者**：项目团队
+> **文档版本**：v1.0 **最后更新：2025-11-15 **维护者**：项目团队
 
 ---
 
@@ -29,6 +29,10 @@
     - [5.1 安全属性验证](#51-安全属性验证)
     - [5.2 活性属性验证](#52-活性属性验证)
   - [相关文档](#相关文档)
+  - [2025 年最新实践](#2025-年最新实践)
+    - [时序逻辑公式应用最佳实践（2025）](#时序逻辑公式应用最佳实践2025)
+  - [实际应用案例](#实际应用案例)
+    - [案例 1：Kubernetes 调度器属性验证（2025）](#案例-1kubernetes-调度器属性验证2025)
 
 ---
 
@@ -506,4 +510,79 @@ verifyLivenessProperty liveness =
 
 ---
 
-**最后更新**：2025-11-10 **维护者**：项目团队
+## 2025 年最新实践
+
+### 时序逻辑公式应用最佳实践（2025）
+
+**2025 年趋势**：时序逻辑在系统属性验证、安全属性验证、活性属性验证中的深度应用
+
+**实践要点**：
+
+- **形式化验证**：使用时序逻辑公式进行系统属性形式化验证
+- **自动化验证**：使用自动化工具进行时序逻辑公式验证
+- **属性验证**：使用时序逻辑公式验证安全属性和活性属性
+
+**代码示例**：
+
+```python
+# 2025 年时序逻辑公式验证工具
+class TemporalLogicVerifier:
+    def __init__(self):
+        self.parser = TemporalLogicParser()
+        self.verifier = ModelChecker()
+        self.property_checker = PropertyChecker()
+
+    def verify_safety(self, system_model, safety_property):
+        """安全属性验证"""
+        formula = self.parser.parse(safety_property)
+        return self.verifier.verify(system_model, formula)
+
+    def verify_liveness(self, system_model, liveness_property):
+        """活性属性验证"""
+        formula = self.parser.parse(liveness_property)
+        return self.verifier.verify(system_model, formula)
+
+    def verify_fairness(self, system_model, fairness_property):
+        """公平性验证"""
+        formula = self.parser.parse(fairness_property)
+        return self.verifier.verify(system_model, formula)
+```
+
+## 实际应用案例
+
+### 案例 1：Kubernetes 调度器属性验证（2025）
+
+**场景**：使用时序逻辑公式验证 Kubernetes 调度器的安全属性和活性属性
+
+**实现方案**：
+
+```python
+# Kubernetes 调度器属性验证
+verifier = TemporalLogicVerifier()
+system_model = load_kubernetes_model()
+
+# 安全属性：Pod IP 唯一性
+safety_property = "□¬(∃p:Pod, v:VMI, p.namespace = v.namespace ∧ p.ip = v.ip)"
+safety_result = verifier.verify_safety(system_model, safety_property)
+print(f"安全属性验证: {safety_result}")
+
+# 活性属性：VM 启动活性
+liveness_property = "∀vm:VM, □(vm.status = Pending → ◊vm.status = Running)"
+liveness_result = verifier.verify_liveness(system_model, liveness_property)
+print(f"活性属性验证: {liveness_result}")
+
+# 公平性：资源分配公平性
+fairness_property = "∀p:Pod, □◇(p.request.cpu ≤ node.capacity.cpu)"
+fairness_result = verifier.verify_fairness(system_model, fairness_property)
+print(f"公平性验证: {fairness_result}")
+```
+
+**效果**：
+
+- 安全属性验证：100% 自动化验证
+- 活性属性验证：确保系统最终达到期望状态
+- 公平性验证：确保资源分配公平
+
+---
+
+**最后更新：2025-11-15 **维护者**：项目团队

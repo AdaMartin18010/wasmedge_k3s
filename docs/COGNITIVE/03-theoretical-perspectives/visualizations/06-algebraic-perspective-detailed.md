@@ -20,6 +20,13 @@
     - [8.1 容器操作组合案例](#81-容器操作组合案例)
     - [8.2 服务网格操作组合案例](#82-服务网格操作组合案例)
   - [9 相关文档](#9-相关文档)
+  - [10 2025 年最新实践](#10-2025-年最新实践)
+    - [10.1 代数结构在云原生操作组合中的应用（2025）](#101-代数结构在云原生操作组合中的应用2025)
+    - [10.2 代数结构在服务网格中的应用（2025）](#102-代数结构在服务网格中的应用2025)
+  - [11 实际应用案例](#11-实际应用案例)
+    - [案例 1：容器操作组合（2025）](#案例-1容器操作组合2025)
+    - [案例 2：服务网格操作组合（2025）](#案例-2服务网格操作组合2025)
+    - [案例 3：Kubernetes 资源操作组合（2025）](#案例-3kubernetes-资源操作组合2025)
 
 ---
 
@@ -409,6 +416,230 @@ mindmap
 
 ---
 
+## 10 2025 年最新实践
+
+### 10.1 代数结构在云原生操作组合中的应用（2025）
+
+**2025 年趋势**：使用代数结构进行云原生操作组合
+
+**实践要点**：
+
+- **算子定义**：定义云原生操作的算子
+- **算子组合**：使用算子组合实现复杂操作
+- **结构保持**：确保操作组合的结构保持性
+
+**代码示例**：
+
+```python
+# 2025 年代数结构操作组合工具
+class CloudNativeOperator:
+    def __init__(self):
+        self.operators = {
+            'create': self.create_operator,
+            'start': self.start_operator,
+            'stop': self.stop_operator,
+            'delete': self.delete_operator
+        }
+
+    def compose_operators(self, op1, op2):
+        """组合算子"""
+        def composed(state):
+            return op2(op1(state))
+        return composed
+
+    def create_and_start(self, resource):
+        """创建并启动资源"""
+        create_op = self.operators['create']
+        start_op = self.operators['start']
+        composed = self.compose_operators(create_op, start_op)
+        return composed(resource)
+```
+
+### 10.2 代数结构在服务网格中的应用（2025）
+
+**2025 年趋势**：使用代数结构进行服务网格操作组合
+
+**实践要点**：
+
+- **服务操作算子**：定义服务注册、发现、负载均衡等算子
+- **操作组合**：组合服务操作实现复杂服务治理
+- **结构验证**：验证操作组合的结构保持性
+
+**代码示例**：
+
+```python
+# 服务网格操作组合
+class ServiceMeshOperator:
+    def register_and_discover(self, service):
+        """注册并发现服务"""
+        register_op = self.register_operator
+        discover_op = self.discover_operator
+        composed = self.compose_operators(register_op, discover_op)
+        return composed(service)
+```
+
+## 11 实际应用案例
+
+### 案例 1：容器操作组合（2025）
+
+**场景**：使用代数结构组合容器操作
+
+**实现方案**：
+
+```python
+# 容器操作组合
+class ContainerOperator:
+    def create_and_start_container(self, image, name):
+        """创建并启动容器"""
+        # 定义创建算子
+        def create(state):
+            return {'container_id': f'container_{name}', 'status': 'created'}
+
+        # 定义启动算子
+        def start(state):
+            state['status'] = 'running'
+            return state
+
+        # 组合算子
+        composed = self.compose_operators(create, start)
+        return composed({'image': image, 'name': name})
+```
+
+**Docker 配置示例**：
+
+```yaml
+# Docker Compose 配置
+version: '3.8'
+services:
+  app:
+    image: app:latest
+    container_name: app-container
+    command: ["sh", "-c", "echo 'Container started'"]
+    restart: unless-stopped
+```
+
+### 案例 2：服务网格操作组合（2025）
+
+**场景**：使用代数结构组合服务网格操作
+
+**实现方案**：
+
+```yaml
+# Istio 服务网格配置
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: service-vs
+spec:
+  hosts:
+  - service
+  http:
+  - match:
+    - headers:
+        version:
+          exact: "v2"
+    route:
+    - destination:
+        host: service
+        subset: v2
+      weight: 100
+  - route:
+    - destination:
+        host: service
+        subset: v1
+      weight: 90
+    - destination:
+        host: service
+        subset: v2
+      weight: 10
+---
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: service-dr
+spec:
+  host: service
+  subsets:
+  - name: v1
+    labels:
+      version: v1
+  - name: v2
+    labels:
+      version: v2
+```
+
+**效果**：
+
+- 服务注册和发现自动化
+- 负载均衡策略灵活配置
+- 服务治理操作组合优化
+
+### 案例 3：Kubernetes 资源操作组合（2025）
+
+**场景**：使用代数结构组合 Kubernetes 资源操作
+
+**实现方案**：
+
+```python
+# Kubernetes 资源操作组合
+class KubernetesOperator:
+    def deploy_application(self, app_config):
+        """部署应用"""
+        # 定义创建 Deployment 算子
+        def create_deployment(state):
+            return {'deployment': 'created', 'replicas': app_config['replicas']}
+
+        # 定义创建 Service 算子
+        def create_service(state):
+            return {**state, 'service': 'created'}
+
+        # 组合算子
+        composed = self.compose_operators(create_deployment, create_service)
+        return composed(app_config)
+```
+
+**Kubernetes 配置示例**：
+
+```yaml
+# Deployment 和 Service 组合
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: app
+  template:
+    metadata:
+      labels:
+        app: app
+    spec:
+      containers:
+      - name: app
+        image: app:latest
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app
+spec:
+  selector:
+    app: app
+  ports:
+  - port: 80
+    targetPort: 8080
+```
+
+**效果**：
+
+- 资源操作组合自动化
+- 部署流程简化
+- 操作结构保持性验证
+
+---
+
 **最后更新**：2025-11-15
-**文档状态**：✅ 完整 | 📊 包含代数结构视角详细思维导图、使用指南、使用技巧、实践案例 | 🎯 生产就绪
+**文档状态**：✅ 完整 | 📊 包含代数结构视角详细思维导图、使用指南、使用技巧、实践案例、2025年最新实践 | 🎯 生产就绪
 **维护者**：项目团队

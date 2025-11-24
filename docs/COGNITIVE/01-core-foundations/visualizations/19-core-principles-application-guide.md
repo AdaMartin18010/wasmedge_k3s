@@ -29,6 +29,12 @@
     - [10.2 应用方法](#102-应用方法)
     - [10.3 应用注意事项](#103-应用注意事项)
   - [11 核心理念应用工具推荐](#11-核心理念应用工具推荐)
+  - [12 2025 年最新实践](#12-2025-年最新实践)
+    - [12.1 核心理念应用在云原生技术选型中的应用（2025）](#121-核心理念应用在云原生技术选型中的应用2025)
+    - [12.2 核心理念应用在架构设计中的应用（2025）](#122-核心理念应用在架构设计中的应用2025)
+  - [13 实际应用案例](#13-实际应用案例)
+    - [案例 1：微服务架构设计（2025）](#案例-1微服务架构设计2025)
+    - [案例 2：Serverless 平台设计（2025）](#案例-2serverless-平台设计2025)
 
 ---
 
@@ -502,6 +508,152 @@ graph TD
 
 ---
 
+## 12 2025 年最新实践
+
+### 12.1 核心理念应用在云原生技术选型中的应用（2025）
+
+**2025 年趋势**：使用核心理念指导云原生技术选型
+
+**实践要点**：
+
+- **理念驱动**：使用集装箱化、声明式、弹性理念指导技术选型
+- **理念组合**：组合多个理念进行综合技术选型
+- **自动化选型**：使用 AI 技术自动化理念驱动的技术选型
+
+**代码示例**：
+
+```python
+# 2025 年理念驱动技术选型工具
+class PrincipleDrivenTechSelector:
+    def __init__(self):
+        self.principles = {
+            'containerization': self.evaluate_containerization,
+            'declarative': self.evaluate_declarative,
+            'resilience': self.evaluate_resilience
+        }
+
+    def select_technology(self, requirements, principles=['containerization', 'declarative']):
+        """使用核心理念选择技术"""
+        scores = {}
+
+        for tech in self.available_technologies:
+            score = 0
+            for principle in principles:
+                principle_score = self.principles[principle](tech, requirements)
+                score += principle_score
+            scores[tech] = score / len(principles)
+
+        return max(scores, key=scores.get), scores
+```
+
+### 12.2 核心理念应用在架构设计中的应用（2025）
+
+**2025 年趋势**：使用核心理念指导架构设计
+
+**实践要点**：
+
+- **理念应用**：在架构设计中应用集装箱化、声明式、弹性理念
+- **理念组合**：组合多个理念设计综合架构
+- **设计验证**：验证架构设计是否符合核心理念
+
+**代码示例**：
+
+```python
+# 架构设计理念应用工具
+class ArchitecturePrincipleApplier:
+    def apply_principles(self, architecture, principles):
+        """应用核心理念到架构设计"""
+        for principle in principles:
+            if principle == 'containerization':
+                architecture = self.apply_containerization(architecture)
+            elif principle == 'declarative':
+                architecture = self.apply_declarative(architecture)
+            elif principle == 'resilience':
+                architecture = self.apply_resilience(architecture)
+
+        return architecture
+```
+
+## 13 实际应用案例
+
+### 案例 1：微服务架构设计（2025）
+
+**场景**：使用核心理念设计微服务架构
+
+**实现方案**：
+
+```yaml
+# 微服务架构配置（集装箱化 + 声明式 + 弹性）
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-service
+spec:
+  replicas: 3  # 弹性：多副本
+  selector:
+    matchLabels:
+      app: user-service
+  template:
+    metadata:
+      labels:
+        app: user-service
+    spec:
+      containers:  # 集装箱化：容器封装
+      - name: user-service
+        image: user-service:latest
+        resources:
+          requests:
+            cpu: "200m"
+            memory: "256Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+```
+
+**理念应用**：
+
+- **集装箱化**：使用容器封装微服务
+- **声明式**：使用 Kubernetes 声明式配置
+- **弹性**：使用多副本和自动扩缩容
+
+### 案例 2：Serverless 平台设计（2025）
+
+**场景**：使用核心理念设计 Serverless 平台
+
+**实现方案**：
+
+```yaml
+# Serverless 函数配置（声明式 + 弹性）
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: serverless-function
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/minScale: "0"  # 弹性：自动扩缩容
+        autoscaling.knative.dev/maxScale: "10"
+    spec:
+      containers:  # 集装箱化：容器封装
+      - image: function:latest
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+```
+
+**理念应用**：
+
+- **集装箱化**：使用容器封装函数
+- **声明式**：使用 Knative 声明式配置
+- **弹性**：使用自动扩缩容（从 0 到 10）
+
+---
+
 **最后更新**：2025-11-15
-**文档状态**：✅ 完整 | 📊 包含核心理念应用综合指南、详细说明、实践案例、最佳实践、工具推荐 | 🎯 生产就绪
+**文档状态**：✅ 完整 | 📊 包含核心理念应用综合指南、详细说明、实践案例、最佳实践、工具推荐、2025年最新实践 | 🎯 生产就绪
 **维护者**：项目团队

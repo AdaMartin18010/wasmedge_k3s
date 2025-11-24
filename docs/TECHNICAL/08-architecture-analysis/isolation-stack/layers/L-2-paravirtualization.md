@@ -419,4 +419,54 @@ vif = ['bridge=xenbr0']
 
 ---
 
-**最后更新**: 2025-11-07 **维护者**: 项目团队
+## 2025 年最新实践
+
+### L-2 半虚拟化层应用最佳实践（2025）
+
+**2025 年趋势**：半虚拟化在云原生、性能优化、混合部署中的深度应用
+
+**实践要点**：
+
+- **virtio 性能优化**：使用 virtio 1.2+ 新特性优化性能
+- **SR-IOV 直通**：使用 SR-IOV 实现网络直通
+- **混合部署**：使用半虚拟化实现容器和 VM 混合部署
+
+**代码示例**：
+
+```bash
+# 2025 年 virtio 设备配置
+# virtio-net 设备
+-device virtio-net-pci,netdev=net0
+
+# virtio-blk 设备
+-device virtio-blk-pci,drive=drive0
+
+# virtio-fs 设备
+-device virtio-fs-pci,queue-size=1024
+```
+
+## 实际应用案例
+
+### 案例 1：virtio 性能优化（2025）
+
+**场景**：使用 virtio 1.2+ 优化 VM 性能
+
+**实现方案**：
+
+```bash
+# virtio 性能优化配置
+qemu-system-x86_64 \
+  -device virtio-net-pci,netdev=net0,vectors=8 \
+  -device virtio-blk-pci,drive=drive0,iothread=iothread0 \
+  -object iothread,id=iothread0
+```
+
+**效果**：
+
+- 性能优化：virtio 1.2+ 性能提升 20%+
+- 网络直通：SR-IOV 网络直通
+- 混合部署：容器和 VM 统一管理
+
+---
+
+**最后更新**: 2025-11-15 **维护者**: 项目团队

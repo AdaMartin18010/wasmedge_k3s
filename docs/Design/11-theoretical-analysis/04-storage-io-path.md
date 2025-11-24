@@ -1,6 +1,6 @@
 # 四、存储 IO 路径的同构与性能博弈
 
-> **文档版本**：v1.0 **最后更新**：2025-11-10 **维护者**：项目团队
+> **文档版本**：v1.0 **最后更新：2025-11-15 **维护者**：项目团队
 
 ---
 
@@ -18,6 +18,10 @@
     - [统一 IO 限制 API](#统一-io-限制-api)
     - [IO 隔离机制](#io-隔离机制)
   - [相关文档](#相关文档)
+  - [2025 年最新实践](#2025-年最新实践)
+    - [存储 IO 路径优化最佳实践（2025）](#存储-io-路径优化最佳实践2025)
+  - [实际应用案例](#实际应用案例)
+    - [案例 1：统一存储 IO 控制（2025）](#案例-1统一存储-io-控制2025)
 
 ---
 
@@ -165,4 +169,90 @@ spec:
 
 ---
 
-**最后更新**：2025-11-10 **维护者**：项目团队
+## 2025 年最新实践
+
+### 存储 IO 路径优化最佳实践（2025）
+
+**2025 年趋势**：存储 IO 路径优化的深度应用
+
+**实践要点**：
+
+- **统一 IO 控制**：通过 CSI 统一接口实现容器和虚拟机的 IO 控制
+- **性能优化**：使用 CDI 预加载和 QEMU 快照优化虚拟机存储性能
+- **QoS 保障**：通过 PVC annotation 传递 QoS 参数
+
+**代码示例**：
+
+```python
+# 2025 年存储 IO 路径优化工具
+class StorageIOPathOptimizer:
+    def __init__(self):
+        self.csi_manager = CSIManager()
+        self.cdi_manager = CDIManager()
+        self.qos_manager = QoSManager()
+
+    def optimize_storage_path(self, workload_type, storage_config):
+        """优化存储 IO 路径"""
+        # 统一 IO 控制
+        io_config = self.csi_manager.configure_io(storage_config)
+
+        # 性能优化
+        if workload_type == 'vm':
+            self.cdi_manager.preload_image(storage_config)
+
+        # QoS 保障
+        qos_config = self.qos_manager.configure_qos(storage_config)
+
+        return io_config, qos_config
+```
+
+## 实际应用案例
+
+### 案例 1：统一存储 IO 控制（2025）
+
+**场景**：使用统一 IO 控制实现容器和虚拟机的存储 QoS
+
+**实现方案**：
+
+```yaml
+# 统一 IO 限制 API
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: unified-pvc
+spec:
+  storageClassName: ceph-rbd
+  resources:
+    requests:
+      storage: 100Gi
+  csiDriver:
+    volumeAttributes:
+      iopsLimit: "5000"
+      bandwidthLimit: "200Mi"
+---
+# VM 专用 IO 调优
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+spec:
+  template:
+    spec:
+      domain:
+        devices:
+          disks:
+            - disk:
+                bus: virtio
+              ioThreadPolicy: shared
+              cache: writeback
+              csiVolumeAttributes:
+                iopsLimit: "5000"
+```
+
+**效果**：
+
+- 统一 IO 控制：通过 CSI 统一接口实现容器和虚拟机的 IO 控制
+- 性能优化：使用 CDI 预加载和 QEMU 快照优化虚拟机存储性能
+- QoS 保障：通过 PVC annotation 传递 QoS 参数
+
+---
+
+**最后更新**：2025-11-15 **维护者**：项目团队

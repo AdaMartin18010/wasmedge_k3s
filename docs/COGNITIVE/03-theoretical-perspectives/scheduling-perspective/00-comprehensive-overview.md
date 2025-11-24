@@ -36,6 +36,10 @@
   - [11 参考](#11-参考)
     - [学术参考](#学术参考)
     - [实践参考](#实践参考)
+  - [2025 年最新实践](#2025-年最新实践)
+    - [调度原理综合应用最佳实践（2025）](#调度原理综合应用最佳实践2025)
+  - [实际应用案例](#实际应用案例)
+    - [案例 1：跨层次调度系统设计（2025）](#案例-1跨层次调度系统设计2025)
 
 ---
 
@@ -459,4 +463,79 @@ $$
 
 ---
 
-**最后更新**：2025-11-12 **维护者**：项目团队
+## 2025 年最新实践
+
+### 调度原理综合应用最佳实践（2025）
+
+**2025 年趋势**：调度原理在跨层次系统设计中的深度应用
+
+**实践要点**：
+
+- **跨层次协同**：使用统一形式化框架实现跨层次协同
+- **端到端优化**：使用端到端延迟模型优化系统性能
+- **资源分配博弈**：使用博弈论方法优化资源分配
+
+**代码示例**：
+
+```python
+# 2025 年调度原理综合应用工具
+class SchedulingPrincipleManager:
+    def __init__(self):
+        self.formal_framework = FormalFramework()
+        self.latency_model = EndToEndLatencyModel()
+        self.game_solver = GameTheorySolver()
+
+    def design_system(self, requirements):
+        """设计调度系统"""
+        # 统一形式化框架
+        system_model = self.formal_framework.model(requirements)
+
+        # 端到端延迟模型
+        latency_analysis = self.latency_model.analyze(system_model)
+
+        # 资源分配博弈
+        resource_allocation = self.game_solver.solve(system_model)
+
+        return system_model, latency_analysis, resource_allocation
+```
+
+## 实际应用案例
+
+### 案例 1：跨层次调度系统设计（2025）
+
+**场景**：使用调度原理设计跨层次调度系统
+
+**实现方案**：
+
+```yaml
+# 跨层次调度系统配置
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cross-layer-scheduling
+data:
+  formal-framework.yaml: |
+    layers:
+      - hardware
+      - programming_model
+      - system_software
+      - enterprise_architecture
+  latency-model.yaml: |
+    endToEndLatency:
+      target: 100ms
+      layers:
+        - hardware: 10ms
+        - programming: 20ms
+        - system: 30ms
+        - enterprise: 40ms
+```
+
+**效果**：
+
+- 跨层次协同：使用统一形式化框架实现跨层次协同
+- 端到端优化：使用端到端延迟模型优化系统性能
+- 资源分配博弈：使用博弈论方法优化资源分配
+
+---
+
+**最后更新**：2025-11-15 **维护者**：项目团队

@@ -677,4 +677,58 @@ curl --unix-socket /tmp/firecracker.sock \
 
 ---
 
-**最后更新**: 2025-11-07 **维护者**: 项目团队
+## 2025 年最新实践
+
+### L-4 沙盒化层应用最佳实践（2025）
+
+**2025 年趋势**：沙盒化在 Serverless、边缘计算、安全隔离中的深度应用
+
+**实践要点**：
+
+- **WasmEdge 0.14+**：使用 WasmEdge 0.14+ 新特性
+- **gVisor 2024.1+**：使用 gVisor 2024.1+ 新特性
+- **Firecracker 1.7+**：使用 Firecracker 1.7+ 新特性
+
+**代码示例**：
+
+```yaml
+# 2025 年 WasmEdge 容器配置
+apiVersion: v1
+kind: Pod
+metadata:
+  name: wasm-pod
+spec:
+  runtimeClassName: wasmedge
+  containers:
+  - name: wasm-app
+    image: wasm-registry/app:latest
+    resources:
+      requests:
+        memory: "16Mi"
+        cpu: "50m"
+```
+
+## 实际应用案例
+
+### 案例 1：WasmEdge Serverless 函数（2025）
+
+**场景**：使用 WasmEdge 部署 Serverless 函数
+
+**实现方案**：
+
+```bash
+# WasmEdge Serverless 函数部署
+wasmedge --dir .:/app \
+  --env PORT=8080 \
+  app.wasm
+```
+
+**效果**：
+
+- 冷启动：< 50ms 冷启动时间
+- 资源占用：< 10MB 内存占用
+- 安全隔离：syscall 过滤安全隔离
+
+---
+
+**最后更新**: 2025-11-15 **维护者**: 项目团队

@@ -1,6 +1,6 @@
 # 1. 扩缩容机制对比
 
-> **文档版本**：v1.0 **最后更新**：2025-11-10 **维护者**：项目团队
+> **文档版本**：v1.0 **最后更新**：2025-11-15 **维护者**：项目团队
 
 ---
 
@@ -20,6 +20,10 @@
     - [4. 缩放策略](#4-缩放策略)
     - [5. 最小副本](#5-最小副本)
   - [相关文档](#相关文档)
+  - [2025 年最新实践](#2025-年最新实践)
+    - [扩缩容机制最佳实践（2025）](#扩缩容机制最佳实践2025)
+  - [实际应用案例](#实际应用案例)
+    - [案例 1：统一扩缩容管理（2025）](#案例-1统一扩缩容管理2025)
 
 ---
 
@@ -390,4 +394,96 @@ spec:
 
 ---
 
-**最后更新**：2025-11-10 **维护者**：项目团队
+## 2025 年最新实践
+
+### 扩缩容机制最佳实践（2025）
+
+**2025 年趋势**：扩缩容机制的深度优化
+
+**实践要点**：
+
+- **统一扩缩容**：容器和虚拟机通过 HPA 统一扩缩容
+- **智能扩缩容**：使用 AI 技术进行智能扩缩容决策
+- **性能优化**：优化扩缩容的性能和效率
+
+**代码示例**：
+
+```python
+# 2025 年智能扩缩容管理工具
+class IntelligentScalingManager:
+    def __init__(self):
+        self.metrics_collector = MetricsCollector()
+        self.ai_predictor = AIPredictor()
+        self.scaler = Scaler()
+
+    def scale_workload(self, workload_type, workload_name):
+        """智能扩缩容"""
+        # 收集指标
+        metrics = self.metrics_collector.collect(workload_type, workload_name)
+
+        # AI 预测
+        prediction = self.ai_predictor.predict(metrics)
+
+        # 执行扩缩容
+        return self.scaler.scale(workload_type, workload_name, prediction)
+```
+
+## 实际应用案例
+
+### 案例 1：统一扩缩容管理（2025）
+
+**场景**：使用统一的机制管理容器和虚拟机的扩缩容
+
+**实现方案**：
+
+```yaml
+# Pod 自动扩缩容
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: pod-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: test-deployment
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70
+---
+# VM 自动扩缩容
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: vm-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: kubevirt.io/v1
+    kind: VirtualMachineInstanceReplicaSet
+    name: test-vmirs
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70
+```
+
+**效果**：
+
+- 统一扩缩容：容器和虚拟机通过 HPA 统一扩缩容
+- 智能决策：使用 AI 技术进行智能扩缩容决策
+- 性能优化：优化扩缩容的性能和效率
+
+---
+
+**最后更新**：2025-11-15 **维护者**：项目团队

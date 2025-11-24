@@ -1,6 +1,6 @@
 # 12.1 案例一：金融核心系统混合部署
 
-> **文档版本**：v1.0 **最后更新**：2025-11-10 **维护者**：项目团队
+> **文档版本**：v1.0 **最后更新**：2025-11-15 **维护者**：项目团队
 
 ---
 
@@ -19,6 +19,10 @@
     - [3. 统一管理](#3-统一管理)
     - [4. 成本降低](#4-成本降低)
   - [相关文档](#相关文档)
+  - [2025 年最新实践](#2025-年最新实践)
+    - [金融核心系统混合部署最佳实践（2025）](#金融核心系统混合部署最佳实践2025)
+  - [实际应用案例](#实际应用案例)
+    - [案例 1：银行核心系统混合部署（2025）](#案例-1银行核心系统混合部署2025)
 
 ---
 
@@ -195,4 +199,115 @@ spec:
 
 ---
 
-**最后更新**：2025-11-10 **维护者**：项目团队
+## 2025 年最新实践
+
+### 金融核心系统混合部署最佳实践（2025）
+
+**2025 年趋势**：金融核心系统混合部署的深度优化
+
+**实践要点**：
+
+- **监管合规**：满足 PCI-DSS、SOX 等监管要求
+- **性能优化**：使用 SR-IOV、NUMA 拓扑优化等高性能技术
+- **统一管理**：通过 Kubernetes 统一管理容器和虚拟机
+
+**代码示例**：
+
+```python
+# 2025 年金融核心系统混合部署管理工具
+class FinanceCoreSystemManager:
+    def __init__(self):
+        self.compliance_checker = ComplianceChecker()
+        self.performance_optimizer = PerformanceOptimizer()
+
+    def deploy_finance_system(self, config):
+        """部署金融核心系统"""
+        # 合规检查
+        if not self.compliance_checker.check(config):
+            raise ComplianceError("配置不符合监管要求")
+
+        # 性能优化
+        optimized_config = self.performance_optimizer.optimize(config)
+
+        # 部署系统
+        return self.deploy(optimized_config)
+```
+
+## 实际应用案例
+
+### 案例 1：银行核心系统混合部署（2025）
+
+**场景**：银行核心系统需要同时运行传统虚拟机和容器化微服务
+
+**实现方案**：
+
+```yaml
+# 数据库虚拟机（监管要求）
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: oracle-db-vm
+  namespace: banking-core
+  labels:
+    tier: database
+    compliance: pci-dss
+spec:
+  running: true
+  template:
+    spec:
+      domain:
+        cpu:
+          cores: 8
+          sockets: 2
+          numa:
+            guestMappingPassthrough: {}
+        resources:
+          requests:
+            memory: 64Gi
+            cpu: "16"
+        devices:
+          interfaces:
+            - name: sriov-net
+              sriov: {}
+      networks:
+        - name: sriov-net
+          multus:
+            networkName: sriov-network
+---
+# API 网关容器（性能要求）
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway
+  namespace: banking-core
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: api-gateway
+  template:
+    metadata:
+      labels:
+        app: api-gateway
+    spec:
+      containers:
+        - name: gateway
+          image: api-gateway:latest
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "1Gi"
+            limits:
+              cpu: "1"
+              memory: "2Gi"
+```
+
+**效果**：
+
+- 满足监管要求：数据库运行在独立虚拟机
+- 性能优化：API 网关容器化部署，毫秒级响应
+- 统一管理：通过 Kubernetes 统一管理
+
+---
+
+**最后更新**：2025-11-15 **维护者**：项目团队

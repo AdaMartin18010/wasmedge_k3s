@@ -1,6 +1,6 @@
 # 八、结论：API 同构的边界与权衡
 
-> **文档版本**：v1.0 **最后更新**：2025-11-10 **维护者**：项目团队
+> **文档版本**：v1.0 **最后更新：2025-11-15 **维护者**：项目团队
 
 ---
 
@@ -19,6 +19,10 @@
     - [8.4.1 容器 vs 虚拟机选型](#841-容器-vs-虚拟机选型)
     - [8.4.2 混合架构实施建议](#842-混合架构实施建议)
   - [相关文档](#相关文档)
+  - [2025 年最新实践](#2025-年最新实践)
+    - [API 同构边界与权衡最佳实践（2025）](#api-同构边界与权衡最佳实践2025)
+  - [实际应用案例](#实际应用案例)
+    - [案例 1：技术选型决策（2025）](#案例-1技术选型决策2025)
 
 ---
 
@@ -126,4 +130,73 @@
 
 ---
 
-**最后更新**：2025-11-10 **维护者**：项目团队
+## 2025 年最新实践
+
+### API 同构边界与权衡最佳实践（2025）
+
+**2025 年趋势**：API 同构边界与权衡的深度应用
+
+**实践要点**：
+
+- **同构设计**：在适用边界内使用同构设计
+- **异构补偿**：在异构必要场景使用异构补偿机制
+- **技术选型**：根据业务需求进行技术选型
+
+**代码示例**：
+
+```python
+# 2025 年 API 同构边界管理工具
+class APIIsomorphismBoundaryManager:
+    def __init__(self):
+        self.isomorphism_analyzer = IsomorphismAnalyzer()
+        self.heterogeneity_compensator = HeterogeneityCompensator()
+        self.selector = TechnologySelector()
+
+    def manage_boundaries(self, requirements):
+        """管理 API 同构边界"""
+        # 同构设计
+        isomorphic_design = self.isomorphism_analyzer.analyze(requirements)
+
+        # 异构补偿
+        heterogeneity_compensation = self.heterogeneity_compensator.compensate(requirements)
+
+        # 技术选型
+        technology_selection = self.selector.select(requirements)
+
+        return isomorphic_design, heterogeneity_compensation, technology_selection
+```
+
+## 实际应用案例
+
+### 案例 1：技术选型决策（2025）
+
+**场景**：根据业务需求进行技术选型
+
+**实现方案**：
+
+```yaml
+# 技术选型决策树
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: technology-selection
+data:
+  decision-tree.yaml: |
+    criteria:
+      isolation: strong
+      performance: high
+      cost: medium
+
+    selection: virtualized
+    reason: "强隔离和高性能需求"
+```
+
+**效果**：
+
+- 同构设计：在适用边界内使用同构设计
+- 异构补偿：在异构必要场景使用异构补偿机制
+- 技术选型：根据业务需求进行技术选型
+
+---
+
+**最后更新**：2025-11-15 **维护者**：项目团队

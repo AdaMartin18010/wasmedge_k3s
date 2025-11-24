@@ -1,6 +1,6 @@
 # 14.2 虚拟机安全加固
 
-> **文档版本**：v1.0 **最后更新**：2025-11-10 **维护者**：项目团队
+> **文档版本**：v1.0 **最后更新：2025-11-15 **维护者**：项目团队
 
 ---
 
@@ -19,6 +19,10 @@
     - [4. Capabilities 限制](#4-capabilities-限制)
     - [5. 只读根文件系统](#5-只读根文件系统)
   - [相关文档](#相关文档)
+  - [2025 年最新实践](#2025-年最新实践)
+    - [虚拟机安全加固最佳实践（2025）](#虚拟机安全加固最佳实践2025)
+  - [实际应用案例](#实际应用案例)
+    - [案例 1：虚拟机安全加固配置（2025）](#案例-1虚拟机安全加固配置2025)
 
 ---
 
@@ -327,4 +331,91 @@ spec:
 
 ---
 
-**最后更新**：2025-11-10 **维护者**：项目团队
+## 2025 年最新实践
+
+### 虚拟机安全加固最佳实践（2025）
+
+**2025 年趋势**：虚拟机安全加固的深度优化
+
+**实践要点**：
+
+- **多层安全**：使用 Seccomp、AppArmor、SELinux 等多层安全机制
+- **最小权限**：使用 Capabilities 限制进程权限
+- **只读文件系统**：使用只读根文件系统防止文件系统被修改
+
+**代码示例**：
+
+```python
+# 2025 年虚拟机安全加固工具
+class VMSecurityHardeningManager:
+    def __init__(self):
+        self.seccomp_manager = SeccompManager()
+        self.apparmor_manager = AppArmorManager()
+        self.selinux_manager = SELinuxManager()
+        self.capabilities_manager = CapabilitiesManager()
+
+    def harden_vm(self, vm_config, security_level):
+        """加固虚拟机"""
+        # Seccomp 配置
+        self.seccomp_manager.configure(vm_config, security_level)
+
+        # AppArmor 配置
+        self.apparmor_manager.configure(vm_config, security_level)
+
+        # SELinux 配置
+        self.selinux_manager.configure(vm_config, security_level)
+
+        # Capabilities 限制
+        self.capabilities_manager.configure(vm_config, security_level)
+
+        return vm_config
+```
+
+## 实际应用案例
+
+### 案例 1：虚拟机安全加固配置（2025）
+
+**场景**：使用多层安全机制加固虚拟机
+
+**实现方案**：
+
+```yaml
+# 虚拟机安全加固配置
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: secure-vm
+spec:
+  template:
+    spec:
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+        appArmorProfile: runtime/default
+        seLinuxOptions:
+          level: "s0:c123,c456"
+        capabilities:
+          drop:
+            - ALL
+          add:
+            - NET_ADMIN
+        runAsNonRoot: true
+        runAsUser: 1000
+      domain:
+        devices:
+          disks:
+            - name: bootdisk
+              disk:
+                bus: virtio
+              readOnly: true
+```
+
+**效果**：
+
+- 多层安全：使用 Seccomp、AppArmor、SELinux 等多层安全机制
+- 最小权限：使用 Capabilities 限制进程权限
+- 只读文件系统：使用只读根文件系统防止文件系统被修改
+
+---
+
+**最后更新**：2025-11-15 **维护者**：项目团队

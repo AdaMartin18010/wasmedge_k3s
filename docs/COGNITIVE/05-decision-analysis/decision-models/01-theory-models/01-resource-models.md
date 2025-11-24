@@ -822,7 +822,91 @@ elif 资源共享需求 and 标准化需求:
 
 ---
 
-**最后更新**：2025-11-07
+---
+
+## 2025 年最新实践
+
+### 物理资源模型应用最佳实践（2025）
+
+**2025 年趋势**：物理资源模型在资源优化和性能分析中的深度应用
+
+**实践要点**：
+
+- **资源建模**：使用物理资源模型进行资源建模和优化
+- **性能分析**：使用数学模型进行性能分析和预测
+- **权衡决策**：使用权衡决策矩阵进行资源权衡
+
+**代码示例**：
+
+```python
+# 2025 年物理资源模型工具
+class ResourceModelTool:
+    def __init__(self):
+        self.cpu_model = CPUResourceModel()
+        self.memory_model = MemoryResourceModel()
+        self.io_model = IOResourceModel()
+        self.network_model = NetworkResourceModel()
+
+    def model_resources(self, workload_config):
+        """资源建模"""
+        cpu_usage = self.cpu_model.model(workload_config)
+        memory_usage = self.memory_model.model(workload_config)
+        io_usage = self.io_model.model(workload_config)
+        network_usage = self.network_model.model(workload_config)
+
+        return {
+            'cpu': cpu_usage,
+            'memory': memory_usage,
+            'io': io_usage,
+            'network': network_usage
+        }
+
+    def analyze_performance(self, resource_model):
+        """性能分析"""
+        return self.cpu_model.analyze_performance(resource_model)
+
+    def make_tradeoff(self, requirements):
+        """权衡决策"""
+        return self.cpu_model.make_tradeoff(requirements)
+```
+
+## 实际应用案例
+
+### 案例 1：资源优化决策（2025）
+
+**场景**：使用物理资源模型进行资源优化决策
+
+**实现方案**：
+
+```python
+# 资源优化决策
+workload_config = {
+    'type': 'container',
+    'cpu_requests': '2',
+    'memory_requests': '4Gi',
+    'io_requirements': 'high',
+    'network_requirements': 'medium'
+}
+
+tool = ResourceModelTool()
+resource_model = tool.model_resources(workload_config)
+performance = tool.analyze_performance(resource_model)
+tradeoff = tool.make_tradeoff(workload_config)
+
+print(f"资源模型: {resource_model}")
+print(f"性能分析: {performance}")
+print(f"权衡决策: {tradeoff}")
+```
+
+**效果**：
+
+- 资源建模：使用物理资源模型进行资源建模和优化
+- 性能分析：使用数学模型进行性能分析和预测
+- 权衡决策：使用权衡决策矩阵进行资源权衡
+
+---
+
+**最后更新**：2025-11-15
 **文档状态**：✅ 完整 | 📊 包含 2025 年最新趋势
 **维护者**：项目团队
 

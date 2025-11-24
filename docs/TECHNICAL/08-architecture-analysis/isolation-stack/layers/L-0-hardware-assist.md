@@ -341,4 +341,59 @@ virsh create sev-vm.xml
 
 ---
 
-**最后更新**: 2025-11-07 **维护者**: 项目团队
+---
+
+## 2025 年最新实践
+
+### L-0 硬件辅助层应用最佳实践（2025）
+
+**2025 年趋势**：硬件辅助虚拟化在云原生、边缘计算、安全隔离中的深度应用
+
+**实践要点**：
+
+- **SEV 内存加密**：使用 AMD SEV 进行内存加密
+- **TPM 可信计算**：使用 TPM 进行可信计算
+- **性能优化**：使用硬件辅助虚拟化优化性能
+
+**代码示例**：
+
+```bash
+# 2025 年硬件辅助虚拟化检查
+# 检查 Intel VT-x
+grep -E 'vmx|svm' /proc/cpuinfo
+
+# 检查 AMD SEV
+dmesg | grep -i sev
+
+# 检查 TPM
+ls -l /dev/tpm*
+```
+
+## 实际应用案例
+
+### 案例 1：SEV 内存加密 VM 部署（2025）
+
+**场景**：使用 AMD SEV 进行内存加密 VM 部署
+
+**实现方案**：
+
+```bash
+# SEV 内存加密 VM 创建
+qemu-system-x86_64 \
+  -machine q35,memory-encryption=sev0 \
+  -object sev-guest,id=sev0,cbitpos=47,reduced-phys-bits=1 \
+  -cpu EPYC \
+  -enable-kvm \
+  -m 4G \
+  -drive file=vm.img,format=qcow2
+```
+
+**效果**：
+
+- 内存加密：VM 内存完全加密
+- 安全隔离：硬件级别的安全隔离
+- 性能优化：硬件辅助虚拟化性能优化
+
+---
+
+**最后更新**: 2025-11-15 **维护者**: 项目团队

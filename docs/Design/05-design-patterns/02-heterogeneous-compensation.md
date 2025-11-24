@@ -1,6 +1,6 @@
 # 7.2 异构补偿机制
 
-> **文档版本**：v1.0 **最后更新**：2025-11-10 **维护者**：项目团队
+> **文档版本**：v1.0 **最后更新：2025-11-15 **维护者**：项目团队
 
 ---
 
@@ -17,6 +17,10 @@
     - [4. GuestOS 感知差异](#4-guestos-感知差异)
     - [5. 硬件直通差异](#5-硬件直通差异)
   - [相关文档](#相关文档)
+  - [2025 年最新实践](#2025-年最新实践)
+    - [异构补偿机制最佳实践（2025）](#异构补偿机制最佳实践2025)
+  - [实际应用案例](#实际应用案例)
+    - [案例 1：启动速度补偿（2025）](#案例-1启动速度补偿2025)
 
 ---
 
@@ -235,4 +239,74 @@ spec:
 
 ---
 
-**最后更新**：2025-11-10 **维护者**：项目团队
+## 2025 年最新实践
+
+### 异构补偿机制最佳实践（2025）
+
+**2025 年趋势**：异构补偿机制的深度应用
+
+**实践要点**：
+
+- **启动速度补偿**：使用预分配资源池补偿虚拟机启动速度慢
+- **状态粒度补偿**：使用更细状态机补偿虚拟机状态粒度差异
+- **热迁移补偿**：使用 Migration CRD 补偿虚拟机热迁移功能
+
+**代码示例**：
+
+```python
+# 2025 年异构补偿机制应用工具
+class HeterogeneousCompensationManager:
+    def __init__(self):
+        self.pool_manager = VirtualMachinePoolManager()
+        self.state_manager = StateManager()
+        self.migration_manager = MigrationManager()
+
+    def compensate_startup_speed(self, vm_config):
+        """补偿启动速度"""
+        return self.pool_manager.get_or_create_pool(vm_config)
+
+    def compensate_state_granularity(self, vm_config):
+        """补偿状态粒度"""
+        return self.state_manager.create_fine_grained_state(vm_config)
+
+    def compensate_live_migration(self, vm_config):
+        """补偿热迁移"""
+        return self.migration_manager.enable_migration(vm_config)
+```
+
+## 实际应用案例
+
+### 案例 1：启动速度补偿（2025）
+
+**场景**：使用预分配资源池补偿虚拟机启动速度慢
+
+**实现方案**：
+
+```yaml
+# 预分配资源池
+apiVersion: pool.kubevirt.io/v1
+kind: VirtualMachinePool
+metadata:
+  name: fast-start-pool
+spec:
+  size: 10
+  template:
+    spec:
+      domain:
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu: "2"
+  autoReplenish: true
+  minAvailable: 5
+```
+
+**效果**：
+
+- 启动速度补偿：使用预分配资源池补偿虚拟机启动速度慢
+- 状态粒度补偿：使用更细状态机补偿虚拟机状态粒度差异
+- 热迁移补偿：使用 Migration CRD 补偿虚拟机热迁移功能
+
+---
+
+**最后更新**：2025-11-15 **维护者**：项目团队

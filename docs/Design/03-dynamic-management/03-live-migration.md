@@ -1,6 +1,6 @@
 # 3. 实时迁移功能扩展
 
-> **文档版本**：v1.0 **最后更新**：2025-11-10 **维护者**：项目团队
+> **文档版本**：v1.0 **最后更新**：2025-11-15 **维护者**：项目团队
 
 ---
 
@@ -21,6 +21,10 @@
     - [4. 进度监控](#4-进度监控)
     - [5. 存储迁移](#5-存储迁移)
   - [相关文档](#相关文档)
+  - [2025 年最新实践](#2025-年最新实践)
+    - [实时迁移功能最佳实践（2025）](#实时迁移功能最佳实践2025)
+  - [实际应用案例](#实际应用案例)
+    - [案例 1：实时迁移管理（2025）](#案例-1实时迁移管理2025)
 
 ---
 
@@ -190,4 +194,79 @@ spec:
 
 ---
 
-**最后更新**：2025-11-10 **维护者**：项目团队
+## 2025 年最新实践
+
+### 实时迁移功能最佳实践（2025）
+
+**2025 年趋势**：实时迁移功能的深度优化
+
+**实践要点**：
+
+- **迁移性能优化**：优化迁移带宽和超时机制
+- **迁移自动化**：使用 AI 技术进行智能迁移决策
+- **迁移监控**：实时监控迁移进度和状态
+
+**代码示例**：
+
+```python
+# 2025 年智能迁移管理工具
+class IntelligentMigrationManager:
+    def __init__(self):
+        self.migration_controller = MigrationController()
+        self.bandwidth_optimizer = BandwidthOptimizer()
+        self.monitor = MigrationMonitor()
+
+    def migrate_vm(self, vmi_name, target_node):
+        """智能迁移虚拟机"""
+        # 带宽优化
+        optimal_bandwidth = self.bandwidth_optimizer.calculate(vmi_name)
+
+        # 创建迁移
+        migration = self.migration_controller.create_migration(
+            vmi_name, target_node, optimal_bandwidth
+        )
+
+        # 监控迁移
+        return self.monitor.monitor(migration)
+```
+
+## 实际应用案例
+
+### 案例 1：实时迁移管理（2025）
+
+**场景**：使用统一的机制管理虚拟机的实时迁移
+
+**实现方案**：
+
+```yaml
+# VM 迁移配置
+apiVersion: kubevirt.io/v1
+kind: VirtualMachineInstanceMigration
+metadata:
+  name: test-vm-migration
+spec:
+  vmiName: test-vm
+---
+# 迁移状态监控
+apiVersion: v1
+kind: Pod
+metadata:
+  name: migration-monitor
+spec:
+  containers:
+    - name: monitor
+      image: migration-monitor:latest
+      env:
+        - name: VMI_NAME
+          value: "test-vm"
+```
+
+**效果**：
+
+- 实时迁移：虚拟机支持实时迁移
+- 迁移监控：实时监控迁移进度和状态
+- 迁移优化：优化迁移带宽和超时机制
+
+---
+
+**最后更新**：2025-11-15 **维护者**：项目团队

@@ -1,6 +1,6 @@
 # 三、动态运行时管理的控制论实现
 
-> **文档版本**：v1.0 **最后更新**：2025-11-10 **维护者**：项目团队
+> **文档版本**：v1.0 **最后更新：2025-11-15 **维护者**：项目团队
 
 ---
 
@@ -16,6 +16,10 @@
     - [负载均衡形式化模型](#负载均衡形式化模型)
     - [负载均衡性能对比](#负载均衡性能对比)
   - [相关文档](#相关文档)
+  - [2025 年最新实践](#2025-年最新实践)
+    - [动态运行时管理最佳实践（2025）](#动态运行时管理最佳实践2025)
+  - [实际应用案例](#实际应用案例)
+    - [案例 1：弹性伸缩配置（2025）](#案例-1弹性伸缩配置2025)
 
 ---
 
@@ -212,4 +216,78 @@ P_vm = (L_proxy, T_proxy, C_proxy)
 
 ---
 
-**最后更新**：2025-11-10 **维护者**：项目团队
+## 2025 年最新实践
+
+### 动态运行时管理最佳实践（2025）
+
+**2025 年趋势**：动态运行时管理的深度优化
+
+**实践要点**：
+
+- **弹性伸缩**：使用 HPA 实现弹性伸缩
+- **负载均衡**：使用 Service 和 Ingress 实现负载均衡
+- **性能优化**：优化伸缩延迟和负载均衡性能
+
+**代码示例**：
+
+```python
+# 2025 年动态运行时管理工具
+class DynamicRuntimeManager:
+    def __init__(self):
+        self.hpa_manager = HPAManager()
+        self.lb_manager = LoadBalancerManager()
+        self.metrics_manager = MetricsManager()
+
+    def manage_runtime(self, workload_config):
+        """管理运行时"""
+        # 弹性伸缩
+        hpa = self.hpa_manager.create_hpa(workload_config)
+
+        # 负载均衡
+        lb = self.lb_manager.create_load_balancer(workload_config)
+
+        # 性能监控
+        metrics = self.metrics_manager.collect_metrics(workload_config)
+
+        return hpa, lb, metrics
+```
+
+## 实际应用案例
+
+### 案例 1：弹性伸缩配置（2025）
+
+**场景**：使用 HPA 实现弹性伸缩
+
+**实现方案**：
+
+```yaml
+# HPA 配置
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: app-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: app
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70
+```
+
+**效果**：
+
+- 弹性伸缩：使用 HPA 实现弹性伸缩
+- 负载均衡：使用 Service 和 Ingress 实现负载均衡
+- 性能优化：优化伸缩延迟和负载均衡性能
+
+---
+
+**最后更新**：2025-11-15 **维护者**：项目团队

@@ -1,6 +1,6 @@
 # 11.3 策略模式：多租户配额策略
 
-> **文档版本**：v1.0 **最后更新**：2025-11-10 **维护者**：项目团队
+> **文档版本**：v1.0 **最后更新：2025-11-15 **维护者**：项目团队
 
 ---
 
@@ -19,6 +19,10 @@
     - [3. 预留保证策略](#3-预留保证策略)
     - [4. 动态超售策略](#4-动态超售策略)
   - [相关文档](#相关文档)
+  - [2025 年最新实践](#2025-年最新实践)
+    - [策略模式最佳实践（2025）](#策略模式最佳实践2025)
+  - [实际应用案例](#实际应用案例)
+    - [案例 1：多租户配额策略（2025）](#案例-1多租户配额策略2025)
 
 ---
 
@@ -214,4 +218,74 @@ data:
 
 ---
 
-**最后更新**：2025-11-10 **维护者**：项目团队
+## 2025 年最新实践
+
+### 策略模式最佳实践（2025）
+
+**2025 年趋势**：策略模式的深度应用
+
+**实践要点**：
+
+- **配额策略**：使用策略模式实现不同租户的资源分配策略
+- **策略类型**：公平共享、优先级抢占、预留保证、动态超售
+- **策略切换**：支持动态切换策略
+
+**代码示例**：
+
+```python
+# 2025 年策略模式应用工具
+class QuotaStrategyManager:
+    def __init__(self):
+        self.strategies = {
+            'fair_share': FairShareStrategy(),
+            'priority_preemption': PriorityPreemptionStrategy(),
+            'reserved_guarantee': ReservedGuaranteeStrategy(),
+            'dynamic_overcommit': DynamicOvercommitStrategy()
+        }
+
+    def apply_strategy(self, tenant_config, strategy_type):
+        """应用配额策略"""
+        strategy = self.strategies.get(strategy_type)
+        if not strategy:
+            raise ValueError(f"Unknown strategy: {strategy_type}")
+
+        return strategy.apply(tenant_config)
+```
+
+## 实际应用案例
+
+### 案例 1：多租户配额策略（2025）
+
+**场景**：使用策略模式实现不同租户的资源分配策略
+
+**实现方案**：
+
+```yaml
+# 配额策略 CRD
+apiVersion: quota.kubevirt.io/v1
+kind: QuotaPolicy
+metadata:
+  name: tenant-a-policy
+  namespace: tenant-a
+spec:
+  strategy: PriorityPreemption
+  rules:
+    - priority: 100
+      guaranteed:
+        cpu: "10"
+        memory: 20Gi
+    - priority: 50
+      burstable:
+        cpu: "20"
+        memory: 40Gi
+```
+
+**效果**：
+
+- 配额策略：使用策略模式实现不同租户的资源分配策略
+- 策略类型：公平共享、优先级抢占、预留保证、动态超售
+- 策略切换：支持动态切换策略
+
+---
+
+**最后更新**：2025-11-15 **维护者**：项目团队

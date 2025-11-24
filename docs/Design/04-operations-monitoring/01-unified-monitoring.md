@@ -1,6 +1,6 @@
 # 监控指标统一采集
 
-> **文档版本**：v1.0 **最后更新**：2025-11-10 **维护者**：项目团队
+> **文档版本**：v1.0 **最后更新：2025-11-15 **维护者**：项目团队
 
 ---
 
@@ -20,6 +20,10 @@
     - [3. VM GuestOS 指标](#3-vm-guestos-指标)
     - [4. 业务指标](#4-业务指标)
   - [相关文档](#相关文档)
+  - [2025 年最新实践](#2025-年最新实践)
+    - [统一监控最佳实践（2025）](#统一监控最佳实践2025)
+  - [实际应用案例](#实际应用案例)
+    - [案例 1：统一指标采集（2025）](#案例-1统一指标采集2025)
 
 ---
 
@@ -351,4 +355,99 @@ spec:
 
 ---
 
-**最后更新**：2025-11-10 **维护者**：项目团队
+## 2025 年最新实践
+
+### 统一监控最佳实践（2025）
+
+**2025 年趋势**：统一监控的深度优化
+
+**实践要点**：
+
+- **统一指标采集**：容器和虚拟机通过 Prometheus 统一采集指标
+- **统一日志采集**：容器和虚拟机通过 EFK Stack 统一采集日志
+- **智能监控**：使用 AI 技术进行智能监控和告警
+
+**代码示例**：
+
+```python
+# 2025 年统一监控管理工具
+class UnifiedMonitoringManager:
+    def __init__(self):
+        self.metrics_collector = MetricsCollector()
+        self.log_collector = LogCollector()
+        self.ai_analyzer = AIAnalyzer()
+
+    def collect_metrics(self, workload_type, workload_name):
+        """统一采集指标"""
+        if workload_type == 'pod':
+            return self.metrics_collector.collect_pod_metrics(workload_name)
+        elif workload_type == 'vmi':
+            return self.metrics_collector.collect_vmi_metrics(workload_name)
+
+    def analyze_metrics(self, metrics):
+        """智能分析指标"""
+        return self.ai_analyzer.analyze(metrics)
+```
+
+## 实际应用案例
+
+### 案例 1：统一指标采集（2025）
+
+**场景**：使用 Prometheus 统一采集容器和虚拟机的指标
+
+**实现方案**：
+
+```yaml
+# ServiceMonitor 统一配置
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: unified-metrics
+spec:
+  selector:
+    matchLabels:
+      app: test
+  endpoints:
+    - port: metrics
+      path: /metrics
+---
+# Pod 指标暴露
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-pod
+  labels:
+    app: test
+spec:
+  containers:
+    - name: test
+      image: nginx:alpine
+      ports:
+        - name: metrics
+          containerPort: 8080
+---
+# VMI 指标暴露
+apiVersion: kubevirt.io/v1
+kind: VirtualMachineInstance
+metadata:
+  name: test-vmi
+  labels:
+    app: test
+spec:
+  domain:
+    devices:
+      channels:
+        - type: unix
+          target:
+            name: org.qemu.guest_agent.0
+```
+
+**效果**：
+
+- 统一指标采集：容器和虚拟机通过 Prometheus 统一采集指标
+- 统一存储：指标统一存储在 Prometheus
+- 统一查询：通过 PromQL 统一查询指标
+
+---
+
+**最后更新**：2025-11-15 **维护者**：项目团队

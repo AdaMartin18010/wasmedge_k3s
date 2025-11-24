@@ -1,6 +1,6 @@
 # 14.3 数据加密与密钥管理
 
-> **文档版本**：v1.0 **最后更新**：2025-11-10 **维护者**：项目团队
+> **文档版本**：v1.0 **最后更新：2025-11-15 **维护者**：项目团队
 
 ---
 
@@ -16,6 +16,10 @@
     - [2. 密钥管理](#2-密钥管理)
     - [3. 传输加密](#3-传输加密)
   - [相关文档](#相关文档)
+  - [2025 年最新实践](#2025-年最新实践)
+    - [数据加密与密钥管理最佳实践（2025）](#数据加密与密钥管理最佳实践2025)
+  - [实际应用案例](#实际应用案例)
+    - [案例 1：存储加密配置（2025）](#案例-1存储加密配置2025)
 
 ---
 
@@ -170,4 +174,85 @@ data:
 
 ---
 
-**最后更新**：2025-11-10 **维护者**：项目团队
+## 2025 年最新实践
+
+### 数据加密与密钥管理最佳实践（2025）
+
+**2025 年趋势**：数据加密与密钥管理的深度优化
+
+**实践要点**：
+
+- **存储加密**：使用存储类加密注解实现存储加密
+- **密钥管理**：使用 Sealed Secrets 等工具管理密钥
+- **传输加密**：使用 TLS 实现传输加密
+
+**代码示例**：
+
+```python
+# 2025 年数据加密与密钥管理工具
+class DataEncryptionManager:
+    def __init__(self):
+        self.storage_encryption = StorageEncryption()
+        self.key_manager = KeyManager()
+        self.tls_manager = TLSManager()
+
+    def encrypt_storage(self, pvc_config, encryption_key):
+        """加密存储"""
+        # 存储加密
+        encrypted_pvc = self.storage_encryption.encrypt(pvc_config, encryption_key)
+
+        # 密钥管理
+        sealed_secret = self.key_manager.create_sealed_secret(encryption_key)
+
+        return encrypted_pvc, sealed_secret
+
+    def configure_tls(self, service_config):
+        """配置 TLS"""
+        return self.tls_manager.configure(service_config)
+```
+
+## 实际应用案例
+
+### 案例 1：存储加密配置（2025）
+
+**场景**：使用存储加密保护虚拟机数据
+
+**实现方案**：
+
+```yaml
+# 加密存储 PVC
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: encrypted-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: encrypted-ssd
+  annotations:
+    storage.kubernetes.io/encryption: "true"
+    storage.kubernetes.io/encryption-key: "secret://encryption-key"
+  resources:
+    requests:
+      storage: 100Gi
+---
+# 密钥管理（Sealed Secrets）
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: encryption-key
+  namespace: kubevirt
+spec:
+  encryptedData:
+    key: AgBy3i4OJSWK+PiTySYZZA9rO43cGDEQAx...
+```
+
+**效果**：
+
+- 存储加密：使用存储类加密注解实现存储加密
+- 密钥管理：使用 Sealed Secrets 管理密钥
+- 数据安全：保护虚拟机数据安全
+
+---
+
+**最后更新**：2025-11-15 **维护者**：项目团队

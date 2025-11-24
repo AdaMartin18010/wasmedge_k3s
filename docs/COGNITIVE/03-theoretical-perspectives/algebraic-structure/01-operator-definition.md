@@ -52,6 +52,10 @@
         - [2. Douglas Hofstadter（认知科学家）](#2-douglas-hofstadter认知科学家)
     - [6.7 认知学习路径矩阵](#67-认知学习路径矩阵)
     - [6.8 专家推荐阅读路径](#68-专家推荐阅读路径)
+  - [2025 年最新实践](#2025-年最新实践)
+    - [算子定义应用最佳实践（2025）](#算子定义应用最佳实践2025)
+  - [实际应用案例](#实际应用案例)
+    - [案例 1：算子组合优化（2025）](#案例-1算子组合优化2025)
 
 ---
 
@@ -846,13 +850,76 @@ graph LR
 
 ---
 
-**最后更新**：2025-11-04 **维护者**：项目团队
+## 2025 年最新实践
+
+### 算子定义应用最佳实践（2025）
+
+**2025 年趋势**：算子在云原生技术栈中的深度应用
+
+**实践要点**：
+
+- **算子组合**：使用算子组合优化技术栈性能
+- **算子映射**：使用算子映射实现技术栈转换
+- **算子优化**：使用 AI 技术优化算子选择
+
+**代码示例**：
+
+```python
+# 2025 年算子管理工具
+class OperatorManager:
+    def __init__(self):
+        self.operators = {
+            'V': VirtualizationOperator(),
+            'I': ImageOperator(),
+            'C': ContainerizationOperator(),
+            'S': SandboxingOperator(),
+            'M': ServiceMeshOperator()
+        }
+        self.composition_rules = CompositionRules()
+
+    def compose_operators(self, operator_sequence):
+        """组合算子"""
+        result = None
+        for op_name in operator_sequence:
+            operator = self.operators[op_name]
+            if result is None:
+                result = operator
+            else:
+                result = self.composition_rules.compose(result, operator)
+        return result
+```
+
+## 实际应用案例
+
+### 案例 1：算子组合优化（2025）
+
+**场景**：使用算子组合优化云原生技术栈
+
+**实现方案**：
+
+```python
+# 算子组合示例
+manager = OperatorManager()
+
+# 组合算子序列
+sequence = ['V', 'I', 'C', 'S', 'M']
+composed_operator = manager.compose_operators(sequence)
+
+# 应用算子
+result = composed_operator.apply(input_object)
+```
+
+**效果**：
+
+- 算子组合：使用算子组合优化技术栈性能
+- 算子映射：使用算子映射实现技术栈转换
+- 算子优化：使用 AI 技术优化算子选择
+
+---
+
+**最后更新**：2025-11-15 **维护者**：项目团队
 
 - [Containerization (Wikipedia)](https://en.wikipedia.org/wiki/Containerization)
 - [Service Mesh (CNCF)](https://www.cncf.io/blog/2017/04/25/service-mesh/)
 - [OCI Image Spec](https://github.com/opencontainers/image-spec)
 - [WasmEdge](https://wasmedge.org/)
-
----
-
-**最后更新**：2025-11-04 **维护者**：项目团队

@@ -1,6 +1,6 @@
 # 2. 存储功能同构矩阵
 
-> **文档版本**：v1.0 **最后更新**：2025-11-10 **维护者**：项目团队
+> **文档版本**：v1.0 **最后更新：2025-11-15 **维护者**：项目团队
 
 ---
 
@@ -21,6 +21,12 @@
     - [6. 热插拔](#6-热插拔)
     - [7. 数据导入](#7-数据导入)
   - [相关文档](#相关文档)
+  - [2025 年最新实践](#2025-年最新实践)
+    - [存储功能同构在云原生架构中的应用（2025）](#存储功能同构在云原生架构中的应用2025)
+  - [实际应用案例](#实际应用案例)
+    - [案例 1：统一存储卷管理（2025）](#案例-1统一存储卷管理2025)
+    - [案例 2：统一数据导入管理（2025）](#案例-2统一数据导入管理2025)
+    - [案例 3：统一存储类管理（2025）](#案例-3统一存储类管理2025)
 
 ---
 
@@ -367,4 +373,220 @@ spec:
 
 ---
 
-**最后更新**：2025-11-10 **维护者**：项目团队
+## 2025 年最新实践
+
+### 存储功能同构在云原生架构中的应用（2025）
+
+**2025 年趋势**：存储功能同构在云原生架构中的深度应用
+
+**实践要点**：
+
+- **存储卷统一**：容器和虚拟机通过 PVC 统一使用存储卷
+- **数据导入统一**：通过 DataVolume CRD 统一管理数据导入
+- **存储类统一**：通过 StorageClass 统一管理存储类型
+
+**代码示例**：
+
+```python
+# 2025 年存储功能同构管理工具
+class StorageIsomorphismManager:
+    def __init__(self):
+        self.storage_classes = self.load_storage_classes()
+        self.data_volumes = {}
+
+    def create_storage_volume(self, workload_type, storage_config):
+        """创建存储卷"""
+        if workload_type == 'pod':
+            return self.create_pvc(storage_config)
+        elif workload_type == 'vm':
+            return self.create_datavolume(storage_config)
+
+    def import_data(self, workload_type, data_source):
+        """导入数据"""
+        # 统一的数据导入管理
+        return self.create_datavolume(workload_type, data_source)
+```
+
+## 实际应用案例
+
+### 案例 1：统一存储卷管理（2025）
+
+**场景**：在 Kubernetes 集群中统一管理容器和虚拟机的存储卷
+
+**实现方案**：
+
+```yaml
+# PVC 统一配置
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: test-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: fast-ssd
+---
+# Pod 使用 PVC
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-pod
+spec:
+  containers:
+    - name: test
+      image: nginx:alpine
+      volumeMounts:
+        - name: data
+          mountPath: /data
+  volumes:
+    - name: data
+      persistentVolumeClaim:
+        claimName: test-pvc
+---
+# VM 使用 DataVolume
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: test-vm
+spec:
+  template:
+    spec:
+      domain:
+        devices:
+          disks:
+            - name: disk0
+              disk:
+                bus: virtio
+      volumes:
+        - name: disk0
+          dataVolume:
+            name: test-datavolume
+---
+apiVersion: cdi.kubevirt.io/v1beta1
+kind: DataVolume
+metadata:
+  name: test-datavolume
+spec:
+  source:
+    pvc:
+      name: test-pvc
+      namespace: default
+  pvc:
+    accessModes:
+      - ReadWriteOnce
+    resources:
+      requests:
+        storage: 10Gi
+```
+
+**效果**：
+
+- 容器和虚拟机通过 PVC 统一使用存储卷
+- DataVolume CRD 统一管理数据导入
+- 存储配置统一描述和管理
+
+### 案例 2：统一数据导入管理（2025）
+
+**场景**：使用统一的机制管理容器和虚拟机的数据导入
+
+**实现方案**：
+
+```yaml
+# 从镜像导入数据
+apiVersion: cdi.kubevirt.io/v1beta1
+kind: DataVolume
+metadata:
+  name: test-datavolume
+spec:
+  source:
+    registry:
+      url: "docker://registry.example.com/image:latest"
+  pvc:
+    accessModes:
+      - ReadWriteOnce
+    resources:
+      requests:
+        storage: 20Gi
+---
+# 从 URL 导入数据
+apiVersion: cdi.kubevirt.io/v1beta1
+kind: DataVolume
+metadata:
+  name: test-datavolume-url
+spec:
+  source:
+    http:
+      url: "https://example.com/image.qcow2"
+  pvc:
+    accessModes:
+      - ReadWriteOnce
+    resources:
+      requests:
+        storage: 20Gi
+```
+
+**效果**：
+
+- 数据导入通过 DataVolume CRD 统一管理
+- CDI Controller 统一处理数据导入
+- 数据导入配置统一描述
+
+### 案例 3：统一存储类管理（2025）
+
+**场景**：使用统一的机制管理存储类型
+
+**实现方案**：
+
+```yaml
+# StorageClass 统一配置
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: fast-ssd
+provisioner: kubernetes.io/cinder
+parameters:
+  type: fast-ssd
+  availability: zone
+---
+# Pod 使用 StorageClass
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: test-pvc-pod
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: fast-ssd
+  resources:
+    requests:
+      storage: 10Gi
+---
+# VM 使用 StorageClass
+apiVersion: cdi.kubevirt.io/v1beta1
+kind: DataVolume
+metadata:
+  name: test-datavolume-vm
+spec:
+  source:
+    blank: {}
+  pvc:
+    accessModes:
+      - ReadWriteOnce
+    storageClassName: fast-ssd
+    resources:
+      requests:
+        storage: 10Gi
+```
+
+**效果**：
+
+- 容器和虚拟机统一使用 StorageClass
+- 存储类型统一管理
+- 存储配置统一描述
+
+---
+
+**最后更新**：2025-11-15 **维护者**：项目团队

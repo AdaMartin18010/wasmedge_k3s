@@ -28,6 +28,13 @@
     - [9.1 矩阵视角技术选型案例](#91-矩阵视角技术选型案例)
     - [9.2 结构视角架构设计案例](#92-结构视角架构设计案例)
   - [10 相关文档](#10-相关文档)
+  - [11 2025 年最新实践](#11-2025-年最新实践)
+    - [11.1 理论视角实践在云原生技术选型中的应用（2025）](#111-理论视角实践在云原生技术选型中的应用2025)
+    - [11.2 理论视角实践在架构设计中的应用（2025）](#112-理论视角实践在架构设计中的应用2025)
+  - [12 实际应用案例](#12-实际应用案例)
+    - [案例 1：容器运行时技术选型（2025）](#案例-1容器运行时技术选型2025)
+    - [案例 2：微服务架构设计（2025）](#案例-2微服务架构设计2025)
+    - [案例 3：边缘计算架构设计（2025）](#案例-3边缘计算架构设计2025)
 
 ---
 
@@ -329,6 +336,219 @@ graph TB
 
 ---
 
+## 11 2025 年最新实践
+
+### 11.1 理论视角实践在云原生技术选型中的应用（2025）
+
+**2025 年趋势**：使用理论视角实践进行云原生技术选型
+
+**实践要点**：
+
+- **多视角分析**：使用矩阵视角和结构视角组合进行技术选型
+- **自动化工具**：使用 Python 脚本自动化技术选型流程
+- **实时更新**：技术选型数据实时更新，反映最新技术趋势
+
+**代码示例**：
+
+```python
+# 2025 年理论视角技术选型工具
+class PerspectiveBasedTechSelector:
+    def __init__(self):
+        self.matrix_analyzer = MatrixPerspectiveAnalyzer()
+        self.structure_analyzer = StructurePerspectiveAnalyzer()
+        self.scheduler_analyzer = SchedulerPerspectiveAnalyzer()
+
+    def select_technology(self, requirements):
+        """使用理论视角选择技术"""
+        # 矩阵视角分析
+        matrix_result = self.matrix_analyzer.analyze(requirements)
+
+        # 结构视角分析
+        structure_result = self.structure_analyzer.analyze(requirements)
+
+        # 整合结果
+        selected_tech = self.integrate_results(
+            matrix_result, structure_result
+        )
+
+        return selected_tech
+```
+
+### 11.2 理论视角实践在架构设计中的应用（2025）
+
+**2025 年趋势**：使用理论视角实践进行架构设计
+
+**实践要点**：
+
+- **结构分析**：使用结构视角分析架构结构
+- **调度优化**：使用调度视角优化架构性能
+- **形式化验证**：使用形式化理论验证架构正确性
+
+**代码示例**：
+
+```python
+# 架构设计实践工具
+class ArchitectureDesignPractitioner:
+    def design_architecture(self, requirements):
+        """使用理论视角设计架构"""
+        # 结构视角分析
+        structure_analysis = self.structure_analyzer.analyze(requirements)
+
+        # 调度视角分析
+        scheduler_analysis = self.scheduler_analyzer.analyze(requirements)
+
+        # 设计架构
+        architecture = self.design_based_on_analyses(
+            structure_analysis, scheduler_analysis
+        )
+
+        return architecture
+```
+
+## 12 实际应用案例
+
+### 案例 1：容器运行时技术选型（2025）
+
+**场景**：使用矩阵视角和结构视角组合选择容器运行时
+
+**实现方案**：
+
+```python
+# 容器运行时技术选型
+class ContainerRuntimeSelector:
+    def select_runtime(self, requirements):
+        """选择容器运行时"""
+        # 矩阵视角分析
+        matrix_result = self.matrix_analyzer.compare_runtimes(requirements)
+
+        # 结构视角分析
+        structure_result = self.structure_analyzer.analyze_runtimes(requirements)
+
+        # 整合结果
+        selected_runtime = self.integrate_results(
+            matrix_result, structure_result
+        )
+
+        return selected_runtime
+```
+
+**Kubernetes 配置示例**：
+
+```yaml
+# 容器运行时配置
+apiVersion: node.k8s.io/v1
+kind: RuntimeClass
+metadata:
+  name: wasmedge
+handler: wasmedge
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: wasm-pod
+spec:
+  runtimeClassName: wasmedge
+  containers:
+  - name: wasm-container
+    image: wasm-app:latest
+```
+
+### 案例 2：微服务架构设计（2025）
+
+**场景**：使用结构视角和调度视角组合设计微服务架构
+
+**实现方案**：
+
+```yaml
+# 微服务架构配置
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: user-service
+  template:
+    metadata:
+      labels:
+        app: user-service
+    spec:
+      containers:
+      - name: user-service
+        image: user-service:latest
+        resources:
+          requests:
+            cpu: "200m"
+            memory: "256Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-service
+spec:
+  selector:
+    app: user-service
+  ports:
+  - port: 80
+    targetPort: 8080
+```
+
+**效果**：
+
+- 架构设计科学化
+- 性能优化自动化
+- 技术选型合理化
+
+### 案例 3：边缘计算架构设计（2025）
+
+**场景**：使用多视角组合设计边缘计算架构
+
+**实现方案**：
+
+```yaml
+# 边缘计算架构配置
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: edge-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: edge-app
+  template:
+    metadata:
+      labels:
+        app: edge-app
+    spec:
+      runtimeClassName: wasmedge
+      nodeSelector:
+        node-type: edge
+      containers:
+      - name: edge-app
+        image: edge-app:latest
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "200m"
+            memory: "256Mi"
+```
+
+**效果**：
+
+- 边缘计算架构优化
+- 资源利用效率提升
+- 架构设计规范化
+
+---
+
 **最后更新**：2025-11-15
-**文档状态**：✅ 完整 | 📊 包含理论视角实践综合指南、使用指南、使用技巧、实践案例 | 🎯 生产就绪
+**文档状态**：✅ 完整 | 📊 包含理论视角实践综合指南、使用指南、使用技巧、实践案例、2025年最新实践 | 🎯 生产就绪
 **维护者**：项目团队

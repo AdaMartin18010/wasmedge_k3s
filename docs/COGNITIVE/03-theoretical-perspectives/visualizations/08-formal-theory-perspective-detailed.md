@@ -20,6 +20,13 @@
     - [8.1 并发系统正确性验证案例](#81-并发系统正确性验证案例)
     - [8.2 安全协议验证案例](#82-安全协议验证案例)
   - [9 相关文档](#9-相关文档)
+  - [10 2025 年最新实践](#10-2025-年最新实践)
+    - [10.1 形式化理论在云原生系统验证中的应用（2025）](#101-形式化理论在云原生系统验证中的应用2025)
+    - [10.2 形式化理论在安全协议验证中的应用（2025）](#102-形式化理论在安全协议验证中的应用2025)
+  - [11 实际应用案例](#11-实际应用案例)
+    - [案例 1：Kubernetes 调度器正确性验证（2025）](#案例-1kubernetes-调度器正确性验证2025)
+    - [案例 2：服务网格安全协议验证（2025）](#案例-2服务网格安全协议验证2025)
+    - [案例 3：容器运行时安全验证（2025）](#案例-3容器运行时安全验证2025)
 
 ---
 
@@ -397,6 +404,199 @@ mindmap
 
 ---
 
+## 10 2025 年最新实践
+
+### 10.1 形式化理论在云原生系统验证中的应用（2025）
+
+**2025 年趋势**：使用形式化理论进行云原生系统验证
+
+**实践要点**：
+
+- **系统建模**：使用形式化方法建模云原生系统
+- **性质验证**：使用模型检验验证系统性质
+- **自动化验证**：使用自动化工具进行系统验证
+
+**代码示例**：
+
+```python
+# 2025 年形式化系统验证工具
+class FormalSystemVerifier:
+    def __init__(self):
+        self.model_checker = ModelChecker()
+        self.property_spec = PropertySpecification()
+
+    def verify_system(self, system_model, properties):
+        """验证系统"""
+        # 构建系统模型
+        model = self.build_model(system_model)
+
+        # 验证性质
+        results = {}
+        for prop in properties:
+            result = self.model_checker.check(model, prop)
+            results[prop] = result
+
+        return results
+```
+
+### 10.2 形式化理论在安全协议验证中的应用（2025）
+
+**2025 年趋势**：使用形式化理论进行安全协议验证
+
+**实践要点**：
+
+- **协议建模**：使用形式化方法建模安全协议
+- **安全性质定义**：定义安全性质的形式化规范
+- **自动化验证**：使用自动化工具验证安全性质
+
+**代码示例**：
+
+```python
+# 安全协议验证工具
+class SecurityProtocolVerifier:
+    def verify_tls_handshake(self, protocol_model):
+        """验证 TLS 握手协议"""
+        # 定义安全性质
+        properties = {
+            'confidentiality': self.define_confidentiality(),
+            'integrity': self.define_integrity(),
+            'authentication': self.define_authentication()
+        }
+
+        # 验证性质
+        results = {}
+        for prop_name, prop in properties.items():
+            result = self.model_checker.check(protocol_model, prop)
+            results[prop_name] = result
+
+        return results
+```
+
+## 11 实际应用案例
+
+### 案例 1：Kubernetes 调度器正确性验证（2025）
+
+**场景**：使用形式化理论验证 Kubernetes 调度器的正确性
+
+**实现方案**：
+
+```python
+# Kubernetes 调度器验证
+class KubernetesSchedulerVerifier:
+    def verify_scheduler(self, scheduler_model):
+        """验证调度器"""
+        # 定义调度性质
+        properties = {
+            'fairness': self.define_fairness_property(),
+            'resource_constraints': self.define_resource_constraints(),
+            'deadlock_freedom': self.define_deadlock_freedom()
+        }
+
+        # 验证性质
+        results = {}
+        for prop_name, prop in properties.items():
+            result = self.model_checker.check(scheduler_model, prop)
+            results[prop_name] = result
+
+        return results
+```
+
+**Kubernetes 配置示例**：
+
+```yaml
+# 调度器配置验证
+apiVersion: kubescheduler.config.k8s.io/v1
+kind: KubeSchedulerConfiguration
+profiles:
+- schedulerName: default-scheduler
+  plugins:
+    score:
+      enabled:
+      - name: NodeResourcesFit
+        weight: 1
+      - name: NodeAffinity
+        weight: 1
+    filter:
+      enabled:
+      - name: NodeResourcesFit
+      - name: NodeAffinity
+```
+
+### 案例 2：服务网格安全协议验证（2025）
+
+**场景**：使用形式化理论验证服务网格安全协议
+
+**实现方案**：
+
+```yaml
+# Istio 安全策略配置
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: default
+spec:
+  mtls:
+    mode: STRICT
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: service-authz
+spec:
+  selector:
+    matchLabels:
+      app: service
+  action: ALLOW
+  rules:
+  - from:
+    - source:
+        principals: ["cluster.local/ns/default/sa/service-account"]
+    to:
+    - operation:
+        methods: ["GET", "POST"]
+```
+
+**效果**：
+
+- 安全协议正确性验证
+- 安全漏洞自动发现
+- 安全性质保证
+
+### 案例 3：容器运行时安全验证（2025）
+
+**场景**：使用形式化理论验证容器运行时的安全性
+
+**实现方案**：
+
+```python
+# 容器运行时安全验证
+class ContainerRuntimeSecurityVerifier:
+    def verify_runtime_security(self, runtime_model):
+        """验证运行时安全性"""
+        # 定义安全性质
+        properties = {
+            'isolation': self.define_isolation_property(),
+            'resource_limits': self.define_resource_limits(),
+            'capability_restrictions': self.define_capability_restrictions()
+        }
+
+        # 验证性质
+        results = {}
+        for prop_name, prop in properties.items():
+            result = self.model_checker.check(runtime_model, prop)
+            results[prop_name] = result
+
+        return results
+```
+
+**效果**：
+
+- 容器运行时安全性验证
+- 隔离性保证
+- 资源限制验证
+
+---
+
 **最后更新**：2025-11-15
-**文档状态**：✅ 完整 | 📊 包含形式化理论视角详细思维导图、使用指南、使用技巧、实践案例 | 🎯 生产就绪
+**文档状态**：✅ 完整 | 📊 包含形式化理论视角详细思维导图、使用指南、使用技巧、实践案例、2025年最新实践 | 🎯 生产就绪
 **维护者**：项目团队

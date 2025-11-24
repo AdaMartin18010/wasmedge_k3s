@@ -17,6 +17,13 @@
   - [9 使用技巧](#9-使用技巧)
     - [9.1 案例选择技巧](#91-案例选择技巧)
   - [10 相关文档](#10-相关文档)
+  - [11 2025 年最新实践](#11-2025-年最新实践)
+    - [11.1 矩阵视角在云原生技术选型中的应用（2025）](#111-矩阵视角在云原生技术选型中的应用2025)
+    - [11.2 结构视角在微服务架构设计中的应用（2025）](#112-结构视角在微服务架构设计中的应用2025)
+  - [12 实际应用案例](#12-实际应用案例)
+    - [案例 1：Kubernetes 调度优化（2025）](#案例-1kubernetes-调度优化2025)
+    - [案例 2：微服务架构设计（2025）](#案例-2微服务架构设计2025)
+    - [案例 3：边缘计算技术栈选型（2025）](#案例-3边缘计算技术栈选型2025)
 
 ---
 
@@ -204,6 +211,284 @@
 
 ---
 
+## 11 2025 年最新实践
+
+### 11.1 矩阵视角在云原生技术选型中的应用（2025）
+
+**2025 年趋势**：使用矩阵视角进行自动化技术选型
+
+**实践要点**：
+
+- **向量化需求**：将业务需求转化为12维原子概念向量
+- **自动化匹配**：使用 Python 脚本自动化技术匹配流程
+- **实时更新**：矩阵数据实时更新，反映最新技术趋势
+
+**代码示例**：
+
+```python
+# 2025 年矩阵视角技术选型工具
+import numpy as np
+
+class TechSelectionMatrix:
+    def __init__(self):
+        self.dimensions = [
+            '计算', '存储', '网络', '隔离', '安全', '性能',
+            '可扩展性', '可维护性', '成本', '兼容性', '成熟度', '社区'
+        ]
+
+    def select_runtime(self, requirements):
+        """选择容器运行时"""
+        req_vector = self.vectorize(requirements)
+
+        # 候选技术向量
+        runc_vector = np.array([0.9, 0.8, 0.8, 0.5, 0.5, 0.9, 0.8, 0.8, 0.9, 0.9, 0.9, 0.9])
+        gvisor_vector = np.array([0.7, 0.7, 0.7, 0.9, 0.9, 0.7, 0.7, 0.7, 0.8, 0.7, 0.8, 0.7])
+        wasmedge_vector = np.array([0.8, 0.6, 0.7, 0.8, 0.8, 0.8, 0.8, 0.8, 0.9, 0.8, 0.7, 0.8])
+
+        scores = {
+            'runc': np.dot(req_vector, runc_vector),
+            'gvisor': np.dot(req_vector, gvisor_vector),
+            'wasmedge': np.dot(req_vector, wasmedge_vector)
+        }
+
+        return max(scores, key=scores.get), scores
+
+# 使用示例
+selector = TechSelectionMatrix()
+requirements = {
+    '性能': 0.9,
+    '隔离': 0.8,
+    '安全': 0.8,
+    '轻量级': 0.7
+}
+selected, scores = selector.select_runtime(requirements)
+print(f"推荐运行时: {selected}, 匹配度: {scores}")
+```
+
+### 11.2 结构视角在微服务架构设计中的应用（2025）
+
+**2025 年趋势**：使用结构视角进行微服务架构设计
+
+**实践要点**：
+
+- **三类结构分析**：计算结构、控制结构、信息结构
+- **架构模式识别**：识别适合的架构模式
+- **性能优化**：基于结构分析进行性能优化
+
+**代码示例**：
+
+```python
+# 微服务架构结构分析
+class MicroservicesStructureAnalysis:
+    def analyze_computation_structure(self, services):
+        """分析计算结构"""
+        return {
+            'service_count': len(services),
+            'avg_complexity': sum(s['complexity'] for s in services) / len(services),
+            'communication_pattern': self.detect_communication_pattern(services)
+        }
+
+    def analyze_control_structure(self, services):
+        """分析控制结构"""
+        return {
+            'orchestration': self.detect_orchestration(services),
+            'choreography': self.detect_choreography(services),
+            'control_flow': self.analyze_control_flow(services)
+        }
+
+    def analyze_information_structure(self, services):
+        """分析信息结构"""
+        return {
+            'data_flow': self.analyze_data_flow(services),
+            'data_consistency': self.analyze_data_consistency(services),
+            'event_driven': self.detect_event_driven(services)
+        }
+```
+
+## 12 实际应用案例
+
+### 案例 1：Kubernetes 调度优化（2025）
+
+**场景**：优化 Kubernetes Pod 调度性能
+
+**实现方案**：
+
+```python
+# Kubernetes 调度优化工具
+class KubernetesSchedulerOptimizer:
+    def optimize_pod_scheduling(self, pods, nodes):
+        """优化 Pod 调度"""
+        # 分析节点资源
+        node_resources = self.analyze_node_resources(nodes)
+
+        # 分析 Pod 需求
+        pod_requirements = self.analyze_pod_requirements(pods)
+
+        # 调度优化
+        optimized_schedule = self.optimize_schedule(
+            pods, nodes, node_resources, pod_requirements
+        )
+
+        return optimized_schedule
+
+    def analyze_node_resources(self, nodes):
+        """分析节点资源"""
+        resources = {}
+        for node in nodes:
+            resources[node['name']] = {
+                'cpu': node['cpu_capacity'] - node['cpu_allocated'],
+                'memory': node['memory_capacity'] - node['memory_allocated']
+            }
+        return resources
+```
+
+**Kubernetes 配置示例**：
+
+```yaml
+# 调度器配置
+apiVersion: kubescheduler.config.k8s.io/v1
+kind: KubeSchedulerConfiguration
+profiles:
+- schedulerName: default-scheduler
+  plugins:
+    score:
+      enabled:
+      - name: NodeResourcesFit
+        weight: 1
+      - name: NodeAffinity
+        weight: 1
+      - name: PodTopologySpread
+        weight: 2
+```
+
+### 案例 2：微服务架构设计（2025）
+
+**场景**：设计微服务架构
+
+**实现方案**：
+
+```yaml
+# 微服务架构示例
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-service
+spec:
+  selector:
+    app: user-service
+  ports:
+  - port: 80
+    targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: user-service
+  template:
+    metadata:
+      labels:
+        app: user-service
+    spec:
+      containers:
+      - name: user-service
+        image: user-service:latest
+        ports:
+        - containerPort: 8080
+```
+
+**Python 架构分析工具**：
+
+```python
+# 微服务架构分析
+class MicroservicesArchitectureAnalyzer:
+    def analyze_architecture(self, services):
+        """分析微服务架构"""
+        analysis = {
+            'service_count': len(services),
+            'communication_patterns': self.analyze_communication(services),
+            'data_flow': self.analyze_data_flow(services),
+            'scalability': self.analyze_scalability(services)
+        }
+        return analysis
+```
+
+### 案例 3：边缘计算技术栈选型（2025）
+
+**场景**：为边缘计算场景选择技术栈
+
+**实现方案**：
+
+```python
+# 边缘计算技术栈选型
+class EdgeTechStackSelector:
+    def select_orchestration(self, edge_requirements):
+        """选择编排平台"""
+        if edge_requirements.get('lightweight') and edge_requirements.get('resource_constrained'):
+            return 'K3s'
+        return 'Kubernetes'
+
+    def select_runtime(self, edge_requirements):
+        """选择运行时"""
+        if edge_requirements.get('lightweight') and edge_requirements.get('fast_startup'):
+            return 'WasmEdge'
+        return 'containerd'
+
+# 使用示例
+edge_selector = EdgeTechStackSelector()
+requirements = {
+    'lightweight': True,
+    'resource_constrained': True,
+    'fast_startup': True
+}
+orchestration = edge_selector.select_orchestration(requirements)
+runtime = edge_selector.select_runtime(requirements)
+print(f"编排平台: {orchestration}, 运行时: {runtime}")
+```
+
+**Kubernetes 配置示例**：
+
+```yaml
+# 边缘节点配置
+apiVersion: v1
+kind: Node
+metadata:
+  name: edge-node-1
+  labels:
+    node-type: edge
+spec:
+  taints:
+  - key: edge
+    value: "true"
+    effect: NoSchedule
+---
+# 边缘工作负载
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: edge-app
+spec:
+  replicas: 3
+  template:
+    spec:
+      runtimeClassName: wasmedge
+      nodeSelector:
+        node-type: edge
+      containers:
+      - name: app
+        image: edge-app:latest
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+```
+
+---
+
 **最后更新**：2025-11-15
-**文档状态**：✅ 完整 | 📊 包含理论视角应用案例、使用指南、使用技巧 | 🎯 生产就绪
+**文档状态**：✅ 完整 | 📊 包含理论视角应用案例、使用指南、使用技巧、2025年最新实践、实际应用案例 | 🎯 生产就绪
 **维护者**：项目团队

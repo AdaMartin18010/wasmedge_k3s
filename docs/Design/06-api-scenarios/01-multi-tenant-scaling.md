@@ -1,6 +1,6 @@
 # 场景：创建多租户虚拟机并自动扩缩容
 
-> **文档版本**：v1.0 **最后更新**：2025-11-10 **维护者**：项目团队
+> **文档版本**：v1.0 **最后更新：2025-11-15 **维护者**：项目团队
 
 ---
 
@@ -18,6 +18,10 @@
     - [4. 调度和启动](#4-调度和启动)
     - [5. 自动扩缩容](#5-自动扩缩容)
   - [相关文档](#相关文档)
+  - [2025 年最新实践](#2025-年最新实践)
+    - [多租户扩缩容场景最佳实践（2025）](#多租户扩缩容场景最佳实践2025)
+  - [实际应用案例](#实际应用案例)
+    - [案例 1：多租户虚拟机自动扩缩容（2025）](#案例-1多租户虚拟机自动扩缩容2025)
 
 ---
 
@@ -283,4 +287,96 @@ spec:
 
 ---
 
-**最后更新**：2025-11-10 **维护者**：项目团队
+## 2025 年最新实践
+
+### 多租户扩缩容场景最佳实践（2025）
+
+**2025 年趋势**：多租户扩缩容场景的深度优化
+
+**实践要点**：
+
+- **统一认证授权**：通过 IAM Gateway 统一认证授权
+- **自动扩缩容**：使用 HPA 实现自动扩缩容
+- **资源隔离**：通过 Namespace 和 ResourceQuota 实现资源隔离
+
+**代码示例**：
+
+```python
+# 2025 年多租户扩缩容场景管理工具
+class MultiTenantScalingManager:
+    def __init__(self):
+        self.iam_gateway = IAMGateway()
+        self.hpa_manager = HPAManager()
+        self.resource_manager = ResourceManager()
+
+    def create_tenant_vm_with_scaling(self, tenant_config):
+        """创建租户虚拟机并配置扩缩容"""
+        # 认证授权
+        if not self.iam_gateway.authenticate(tenant_config):
+            raise AuthenticationError("认证失败")
+
+        # 创建虚拟机
+        vm = self.create_vm(tenant_config)
+
+        # 配置 HPA
+        hpa = self.hpa_manager.create_hpa(vm, tenant_config)
+
+        return vm, hpa
+```
+
+## 实际应用案例
+
+### 案例 1：多租户虚拟机自动扩缩容（2025）
+
+**场景**：租户用户创建虚拟机并配置自动扩缩容
+
+**实现方案**：
+
+```yaml
+# 租户虚拟机
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: tenant-a-vm
+  namespace: tenant-a
+spec:
+  running: true
+  template:
+    spec:
+      domain:
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu: "2"
+---
+# HPA 自动扩缩容
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: tenant-a-hpa
+  namespace: tenant-a
+spec:
+  scaleTargetRef:
+    apiVersion: kubevirt.io/v1
+    kind: VirtualMachineInstanceReplicaSet
+    name: tenant-a-vmirs
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70
+```
+
+**效果**：
+
+- 统一认证授权：通过 IAM Gateway 统一认证授权
+- 自动扩缩容：使用 HPA 实现自动扩缩容
+- 资源隔离：通过 Namespace 和 ResourceQuota 实现资源隔离
+
+---
+
+**最后更新**：2025-11-15 **维护者**：项目团队

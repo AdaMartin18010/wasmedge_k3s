@@ -1,6 +1,6 @@
 # 六、关键 API 设计模式与论证
 
-> **文档版本**：v1.0 **最后更新**：2025-11-10 **维护者**：项目团队
+> **文档版本**：v1.0 **最后更新：2025-11-15 **维护者**：项目团队
 
 ---
 
@@ -19,6 +19,10 @@
     - [统一 NetworkPolicy 执行](#统一-networkpolicy-执行)
     - [执行引擎差异](#执行引擎差异)
   - [相关文档](#相关文档)
+  - [2025 年最新实践](#2025-年最新实践)
+    - [API 设计模式最佳实践（2025）](#api-设计模式最佳实践2025)
+  - [实际应用案例](#实际应用案例)
+    - [案例 1：声明式状态管理（2025）](#案例-1声明式状态管理2025)
 
 ---
 
@@ -161,4 +165,78 @@ spec:
 
 ---
 
-**最后更新**：2025-11-10 **维护者**：项目团队
+## 2025 年最新实践
+
+### API 设计模式最佳实践（2025）
+
+**2025 年趋势**：API 设计模式的深度应用
+
+**实践要点**：
+
+- **声明式状态管理**：使用声明式 API 实现状态管理
+- **配额冲突解决**：使用配额超分算法解决配额冲突
+- **网络策略强制**：使用 NetworkPolicy 实现网络策略强制
+
+**代码示例**：
+
+```python
+# 2025 年 API 设计模式应用工具
+class APIDesignPatternManager:
+    def __init__(self):
+        self.state_manager = StateManager()
+        self.quota_manager = QuotaManager()
+        self.network_manager = NetworkManager()
+
+    def apply_design_patterns(self, workload_config):
+        """应用 API 设计模式"""
+        # 声明式状态管理
+        state = self.state_manager.create_declarative_state(workload_config)
+
+        # 配额冲突解决
+        quota = self.quota_manager.resolve_conflicts(workload_config)
+
+        # 网络策略强制
+        network = self.network_manager.enforce_policies(workload_config)
+
+        return state, quota, network
+```
+
+## 实际应用案例
+
+### 案例 1：声明式状态管理（2025）
+
+**场景**：使用声明式 API 实现状态管理
+
+**实现方案**：
+
+```yaml
+# 声明式状态管理
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: test-vm
+spec:
+  running: true
+  template:
+    spec:
+      domain:
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu: "2"
+status:
+  phase: Running
+  conditions:
+    - type: Ready
+      status: "True"
+```
+
+**效果**：
+
+- 声明式状态管理：使用声明式 API 实现状态管理
+- 配额冲突解决：使用配额超分算法解决配额冲突
+- 网络策略强制：使用 NetworkPolicy 实现网络策略强制
+
+---
+
+**最后更新**：2025-11-15 **维护者**：项目团队

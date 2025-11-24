@@ -36,6 +36,13 @@
     - [9.2 案例学习方法](#92-案例学习方法)
     - [9.3 案例学习注意事项](#93-案例学习注意事项)
   - [10 案例学习工具推荐](#10-案例学习工具推荐)
+  - [11 2025 年最新实践](#11-2025-年最新实践)
+    - [11.1 实践案例在云原生技术选型中的应用（2025）](#111-实践案例在云原生技术选型中的应用2025)
+    - [11.2 实践案例在架构设计中的应用（2025）](#112-实践案例在架构设计中的应用2025)
+  - [12 实际应用案例](#12-实际应用案例)
+    - [案例 1：微服务架构设计案例（2025）](#案例-1微服务架构设计案例2025)
+    - [案例 2：边缘计算架构设计案例（2025）](#案例-2边缘计算架构设计案例2025)
+    - [案例 3：Serverless 平台设计案例（2025）](#案例-3serverless-平台设计案例2025)
 
 ---
 
@@ -709,6 +716,235 @@ graph TB
 
 ---
 
+## 11 2025 年最新实践
+
+### 11.1 实践案例在云原生技术选型中的应用（2025）
+
+**2025 年趋势**：使用实践案例指导技术选型
+
+**实践要点**：
+
+- **案例库建设**：建立完整的实践案例库
+- **案例匹配**：使用 AI 技术进行案例匹配
+- **案例更新**：实时更新案例库，反映最新实践
+
+**代码示例**：
+
+```python
+# 2025 年实践案例匹配工具
+class PracticeCaseMatcher:
+    def __init__(self):
+        self.case_library = self.load_case_library()
+
+    def match_case(self, requirements):
+        """匹配相似案例"""
+        # 需求向量化
+        req_vector = self.vectorize_requirements(requirements)
+
+        # 案例匹配
+        matched_cases = []
+        for case in self.case_library:
+            case_vector = self.vectorize_case(case)
+            similarity = self.calculate_similarity(req_vector, case_vector)
+            if similarity > 0.7:
+                matched_cases.append((case, similarity))
+
+        # 排序
+        matched_cases.sort(key=lambda x: x[1], reverse=True)
+
+        return matched_cases[:5]  # 返回前5个最相似的案例
+```
+
+### 11.2 实践案例在架构设计中的应用（2025）
+
+**2025 年趋势**：使用实践案例指导架构设计
+
+**实践要点**：
+
+- **架构模式识别**：从案例中识别架构模式
+- **最佳实践提取**：从案例中提取最佳实践
+- **架构模板生成**：基于案例生成架构模板
+
+**代码示例**：
+
+```python
+# 架构设计案例应用
+class ArchitectureCaseApplier:
+    def apply_case_to_design(self, case, requirements):
+        """将案例应用到架构设计"""
+        # 提取案例架构模式
+        patterns = self.extract_patterns(case)
+
+        # 适配到当前需求
+        adapted_patterns = self.adapt_patterns(patterns, requirements)
+
+        # 生成架构设计
+        architecture = self.generate_architecture(adapted_patterns)
+
+        return architecture
+```
+
+## 12 实际应用案例
+
+### 案例 1：微服务架构设计案例（2025）
+
+**场景**：基于实践案例设计微服务架构
+
+**实现方案**：
+
+```python
+# 微服务架构设计案例应用
+class MicroservicesArchitectureCase:
+    def design_architecture(self, requirements):
+        """设计微服务架构"""
+        # 匹配相似案例
+        matcher = PracticeCaseMatcher()
+        similar_cases = matcher.match_case(requirements)
+
+        # 应用最佳案例
+        best_case = similar_cases[0][0]
+        architecture = self.apply_case(best_case, requirements)
+
+        return architecture
+```
+
+**Kubernetes 配置示例**：
+
+```yaml
+# 微服务架构配置
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: user-service
+  template:
+    metadata:
+      labels:
+        app: user-service
+    spec:
+      containers:
+      - name: user-service
+        image: user-service:latest
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            cpu: "200m"
+            memory: "256Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-service
+spec:
+  selector:
+    app: user-service
+  ports:
+  - port: 80
+    targetPort: 8080
+```
+
+### 案例 2：边缘计算架构设计案例（2025）
+
+**场景**：基于实践案例设计边缘计算架构
+
+**实现方案**：
+
+```yaml
+# 边缘计算架构配置
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: edge-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: edge-app
+  template:
+    metadata:
+      labels:
+        app: edge-app
+    spec:
+      runtimeClassName: wasmedge
+      nodeSelector:
+        node-type: edge
+      containers:
+      - name: edge-app
+        image: edge-app:latest
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "200m"
+            memory: "256Mi"
+```
+
+**Python 架构分析工具**：
+
+```python
+# 边缘计算架构分析
+class EdgeArchitectureAnalyzer:
+    def analyze_edge_architecture(self, components):
+        """分析边缘计算架构"""
+        analysis = {
+            'component_count': len(components),
+            'resource_usage': self.analyze_resources(components),
+            'communication_patterns': self.analyze_communication(components),
+            'scalability': self.analyze_scalability(components),
+            'latency': self.analyze_latency(components)
+        }
+        return analysis
+```
+
+### 案例 3：Serverless 平台设计案例（2025）
+
+**场景**：基于实践案例设计 Serverless 平台
+
+**实现方案**：
+
+```yaml
+# Serverless 函数配置
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: serverless-function
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/minScale: "0"
+        autoscaling.knative.dev/maxScale: "10"
+        autoscaling.knative.dev/target: "100"
+    spec:
+      containers:
+      - image: function:latest
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+```
+
+**效果**：
+
+- 自动扩缩容：根据负载自动扩缩容
+- 资源优化：最小化资源占用
+- 成本优化：按需付费，降低成本
+- 快速部署：快速部署和更新函数
+
+---
+
 **最后更新**：2025-11-15
-**文档状态**：✅ 完整 | 📊 包含实践案例详细指南、详细说明、实践流程、最佳实践、工具推荐 | 🎯 生产就绪
+**文档状态**：✅ 完整 | 📊 包含实践案例详细指南、详细说明、实践流程、最佳实践、工具推荐、2025年最新实践 | 🎯 生产就绪
 **维护者**：项目团队

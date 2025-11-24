@@ -1,6 +1,6 @@
 # 11.1 声明式 API 设计模式
 
-> **文档版本**：v1.0 **最后更新**：2025-11-10 **维护者**：项目团队
+> **文档版本**：v1.0 **最后更新：2025-11-15 **维护者**：项目团队
 
 ---
 
@@ -19,6 +19,10 @@
     - [4. 状态机](#4-状态机)
     - [5. 事件驱动](#5-事件驱动)
   - [相关文档](#相关文档)
+  - [2025 年最新实践](#2025-年最新实践)
+    - [声明式 API 设计模式最佳实践（2025）](#声明式-api-设计模式最佳实践2025)
+  - [实际应用案例](#实际应用案例)
+    - [案例 1：声明式 API 应用（2025）](#案例-1声明式-api-应用2025)
 
 ---
 
@@ -281,4 +285,93 @@ for event := range watcher.ResultChan() {
 
 ---
 
-**最后更新**：2025-11-10 **维护者**：项目团队
+## 2025 年最新实践
+
+### 声明式 API 设计模式最佳实践（2025）
+
+**2025 年趋势**：声明式 API 设计模式的深度应用
+
+**实践要点**：
+
+- **期望状态分离**：期望状态（Spec）与实际状态（Status）分离
+- **控制器调谐**：控制器负责调谐（Reconcile）实现期望状态
+- **状态机对齐**：容器和虚拟机的状态机保持对齐
+
+**代码示例**：
+
+```python
+# 2025 年声明式 API 设计模式应用工具
+class DeclarativeAPIDesigner:
+    def __init__(self):
+        self.spec_manager = SpecManager()
+        self.status_manager = StatusManager()
+        self.controller = Controller()
+
+    def create_declarative_resource(self, workload_type, spec):
+        """创建声明式资源"""
+        # 期望状态
+        desired_spec = self.spec_manager.create_spec(workload_type, spec)
+
+        # 实际状态
+        actual_status = self.status_manager.get_status(workload_type, spec)
+
+        # 控制器调谐
+        reconciled_status = self.controller.reconcile(desired_spec, actual_status)
+
+        return desired_spec, reconciled_status
+```
+
+## 实际应用案例
+
+### 案例 1：声明式 API 应用（2025）
+
+**场景**：使用声明式 API 设计模式创建资源
+
+**实现方案**：
+
+```yaml
+# 声明式 Pod 配置
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-pod
+spec:
+  containers:
+    - name: test
+      image: nginx:alpine
+status:
+  phase: Running
+  conditions:
+    - type: Ready
+      status: "True"
+---
+# 声明式 VM 配置
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: test-vm
+spec:
+  running: true
+  template:
+    spec:
+      domain:
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu: "2"
+status:
+  phase: Running
+  conditions:
+    - type: Ready
+      status: "True"
+```
+
+**效果**：
+
+- 期望状态分离：期望状态（Spec）与实际状态（Status）分离
+- 控制器调谐：控制器负责调谐实现期望状态
+- 状态机对齐：容器和虚拟机的状态机保持对齐
+
+---
+
+**最后更新**：2025-11-15 **维护者**：项目团队

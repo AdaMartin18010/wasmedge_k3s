@@ -1,6 +1,6 @@
 # 12.2 案例二：边缘计算场景统一编排
 
-> **文档版本**：v1.0 **最后更新**：2025-11-10 **维护者**：项目团队
+> **文档版本**：v1.0 **最后更新**：2025-11-15 **维护者**：项目团队
 
 ---
 
@@ -19,6 +19,10 @@
     - [3. 统一 API](#3-统一-api)
     - [4. 资源优化](#4-资源优化)
   - [相关文档](#相关文档)
+  - [2025 年最新实践](#2025-年最新实践)
+    - [边缘计算混合部署最佳实践（2025）](#边缘计算混合部署最佳实践2025)
+  - [实际应用案例](#实际应用案例)
+    - [案例 1：边缘计算混合部署（2025）](#案例-1边缘计算混合部署2025)
 
 ---
 
@@ -171,4 +175,98 @@ spec:
 
 ---
 
-**最后更新**：2025-11-10 **维护者**：项目团队
+## 2025 年最新实践
+
+### 边缘计算混合部署最佳实践（2025）
+
+**2025 年趋势**：边缘计算混合部署的深度优化
+
+**实践要点**：
+
+- **轻量级部署**：使用 K3s 和 WasmEdge 实现轻量级边缘部署
+- **资源优化**：优化边缘节点的资源使用
+- **统一管理**：通过 Kubernetes 统一管理边缘和云端资源
+
+**代码示例**：
+
+```python
+# 2025 年边缘计算混合部署管理工具
+class EdgeComputingManager:
+    def __init__(self):
+        self.edge_optimizer = EdgeOptimizer()
+        self.resource_manager = ResourceManager()
+
+    def deploy_edge_application(self, config):
+        """部署边缘应用"""
+        # 边缘优化
+        optimized_config = self.edge_optimizer.optimize(config)
+
+        # 资源管理
+        resource_allocation = self.resource_manager.allocate(optimized_config)
+
+        # 部署应用
+        return self.deploy(optimized_config, resource_allocation)
+```
+
+## 实际应用案例
+
+### 案例 1：边缘计算混合部署（2025）
+
+**场景**：边缘节点需要同时运行容器和虚拟机
+
+**实现方案**：
+
+```yaml
+# 边缘容器应用
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: edge-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: edge-app
+  template:
+    metadata:
+      labels:
+        app: edge-app
+    spec:
+      runtimeClassName: wasmedge
+      nodeSelector:
+        node-type: edge
+      containers:
+        - name: app
+          image: edge-app:latest
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+---
+# 边缘虚拟机
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: edge-vm
+spec:
+  running: true
+  template:
+    spec:
+      nodeSelector:
+        node-type: edge
+      domain:
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "1"
+```
+
+**效果**：
+
+- 轻量级部署：使用 K3s 和 WasmEdge
+- 资源优化：优化边缘节点资源使用
+- 统一管理：通过 Kubernetes 统一管理
+
+---
+
+**最后更新**：2025-11-15 **维护者**：项目团队

@@ -711,7 +711,84 @@ elif 低安全要求:
 
 ---
 
-**最后更新**：2025-11-07
+---
+
+## 2025 年最新实践
+
+### 安全模型应用最佳实践（2025）
+
+**2025 年趋势**：安全模型在安全评估和加固中的深度应用
+
+**实践要点**：
+
+- **信任边界分析**：使用信任边界模型分析系统信任边界
+- **攻击面评估**：使用攻击面模型评估系统攻击面
+- **安全加固**：使用安全模型进行安全加固
+
+**代码示例**：
+
+```python
+# 2025 年安全模型工具
+class SecurityModelTool:
+    def __init__(self):
+        self.trust_boundary_analyzer = TrustBoundaryAnalyzer()
+        self.attack_surface_evaluator = AttackSurfaceEvaluator()
+        self.security_hardener = SecurityHardener()
+
+    def analyze_trust_boundary(self, system_config):
+        """信任边界分析"""
+        return self.trust_boundary_analyzer.analyze(system_config)
+
+    def evaluate_attack_surface(self, system_config):
+        """攻击面评估"""
+        return self.attack_surface_evaluator.evaluate(system_config)
+
+    def harden_security(self, system_config, security_requirements):
+        """安全加固"""
+        return self.security_hardener.harden(system_config, security_requirements)
+```
+
+## 实际应用案例
+
+### 案例 1：金融系统安全加固（2025）
+
+**场景**：使用安全模型进行金融系统安全加固
+
+**实现方案**：
+
+```python
+# 金融系统安全加固
+system_config = {
+    'type': 'virtualization',
+    'isolation_level': 'hardware',
+    'compliance': 'pci-dss'
+}
+
+security_requirements = {
+    'trust_boundary': 'strict',
+    'attack_surface': 'minimal',
+    'compliance': 'pci-dss'
+}
+
+tool = SecurityModelTool()
+trust_boundary = tool.analyze_trust_boundary(system_config)
+attack_surface = tool.evaluate_attack_surface(system_config)
+hardened = tool.harden_security(system_config, security_requirements)
+
+print(f"信任边界: {trust_boundary}")
+print(f"攻击面: {attack_surface}")
+print(f"加固配置: {hardened}")
+```
+
+**效果**：
+
+- 信任边界分析：使用信任边界模型分析系统信任边界
+- 攻击面评估：使用攻击面模型评估系统攻击面
+- 安全加固：使用安全模型进行安全加固
+
+---
+
+**最后更新**：2025-11-15
 **文档状态**：✅ 完整 | 📊 包含 2025 年最新趋势
 **维护者**：项目团队
 

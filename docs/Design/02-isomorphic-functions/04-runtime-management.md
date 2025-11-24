@@ -1,6 +1,6 @@
 # 4. 运行时管理同构
 
-> **文档版本**：v1.0 **最后更新**：2025-11-10 **维护者**：项目团队
+> **文档版本**：v1.0 **最后更新：2025-11-15 **维护者**：项目团队
 
 ---
 
@@ -22,6 +22,12 @@
     - [7. 迁移操作](#7-迁移操作)
     - [8. 扩缩容操作](#8-扩缩容操作)
   - [相关文档](#相关文档)
+  - [2025 年最新实践](#2025-年最新实践)
+    - [运行时管理同构在云原生架构中的应用（2025）](#运行时管理同构在云原生架构中的应用2025)
+  - [实际应用案例](#实际应用案例)
+    - [案例 1：统一生命周期管理（2025）](#案例-1统一生命周期管理2025)
+    - [案例 2：统一扩缩容管理（2025）](#案例-2统一扩缩容管理2025)
+    - [案例 3：统一迁移管理（2025）](#案例-3统一迁移管理2025)
 
 ---
 
@@ -315,4 +321,182 @@ spec:
 
 ---
 
-**最后更新**：2025-11-10 **维护者**：项目团队
+## 2025 年最新实践
+
+### 运行时管理同构在云原生架构中的应用（2025）
+
+**2025 年趋势**：运行时管理同构在云原生架构中的深度应用
+
+**实践要点**：
+
+- **状态机统一**：容器和虚拟机的状态机保持映射关系
+- **生命周期统一**：通过 CRD 统一管理容器和虚拟机的生命周期
+- **操作统一**：通过统一的 API 和工具管理容器和虚拟机
+
+**代码示例**：
+
+```python
+# 2025 年运行时管理同构工具
+class RuntimeManagementManager:
+    def __init__(self):
+        self.state_machine = StateMachineMapper()
+        self.lifecycle_manager = LifecycleManager()
+
+    def create_workload(self, workload_type, config):
+        """创建工作负载"""
+        if workload_type == 'pod':
+            return self.create_pod(config)
+        elif workload_type == 'vm':
+            return self.create_vm(config)
+
+    def manage_lifecycle(self, workload_type, operation, workload_name):
+        """管理生命周期"""
+        # 统一的生命周期管理
+        return self.execute_operation(workload_type, operation, workload_name)
+```
+
+## 实际应用案例
+
+### 案例 1：统一生命周期管理（2025）
+
+**场景**：在 Kubernetes 集群中统一管理容器和虚拟机的生命周期
+
+**实现方案**：
+
+```yaml
+# Pod 创建
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-pod
+spec:
+  containers:
+    - name: test
+      image: nginx:alpine
+---
+# VM 创建
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: test-vm
+spec:
+  running: true
+  template:
+    spec:
+      domain:
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "1"
+        devices:
+          disks:
+            - name: disk0
+              disk:
+                bus: virtio
+          interfaces:
+            - name: default
+              masquerade: {}
+      networks:
+        - name: default
+          pod: {}
+```
+
+**效果**：
+
+- 容器和虚拟机通过统一的 API 创建
+- 状态机对齐确保生命周期管理一致性
+- virt-launcher Pod 实现 VMI 的 1:1 映射
+
+### 案例 2：统一扩缩容管理（2025）
+
+**场景**：使用统一的机制管理容器和虚拟机的扩缩容
+
+**实现方案**：
+
+```yaml
+# Pod 自动扩缩容
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: test-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: test-deployment
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70
+---
+# VM 手动扩缩容
+apiVersion: kubevirt.io/v1
+kind: VirtualMachineInstanceReplicaSet
+metadata:
+  name: test-vmirs
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: test
+  template:
+    metadata:
+      labels:
+        app: test
+    spec:
+      domain:
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "1"
+```
+
+**效果**：
+
+- 容器通过 HPA 实现自动扩缩容
+- 虚拟机通过 VMIRS 实现手动扩缩容
+- 扩缩容操作统一管理
+
+### 案例 3：统一迁移管理（2025）
+
+**场景**：使用统一的机制管理虚拟机的迁移
+
+**实现方案**：
+
+```yaml
+# VM 迁移
+apiVersion: kubevirt.io/v1
+kind: VirtualMachineInstanceMigration
+metadata:
+  name: test-vm-migration
+spec:
+  vmiName: test-vm
+---
+# 迁移状态监控
+apiVersion: v1
+kind: Pod
+metadata:
+  name: migration-monitor
+spec:
+  containers:
+    - name: monitor
+      image: migration-monitor:latest
+      env:
+        - name: VMI_NAME
+          value: "test-vm"
+```
+
+**效果**：
+
+- 虚拟机支持实时迁移
+- 迁移状态通过 CRD 统一管理
+- 迁移操作对容器和虚拟机统一处理
+
+---
+
+**最后更新**：2025-11-15 **维护者**：项目团队

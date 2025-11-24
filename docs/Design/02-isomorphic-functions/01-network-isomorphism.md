@@ -1,6 +1,6 @@
 # 1. 网络功能同构矩阵
 
-> **文档版本**：v1.1 **最后更新**：2025-11-10 **维护者**：项目团队
+> **文档版本**：v1.1 **最后更新：2025-11-15 **维护者**：项目团队
 
 ---
 
@@ -21,6 +21,12 @@
     - [6. 固定 IP](#6-固定-ip)
     - [7. 性能加速](#7-性能加速)
   - [相关文档](#相关文档)
+  - [2025 年最新实践](#2025-年最新实践)
+    - [网络功能同构在云原生架构中的应用（2025）](#网络功能同构在云原生架构中的应用2025)
+  - [实际应用案例](#实际应用案例)
+    - [案例 1：多平面网络统一管理（2025）](#案例-1多平面网络统一管理2025)
+    - [案例 2：统一网络策略管理（2025）](#案例-2统一网络策略管理2025)
+    - [案例 3：SR-IOV 性能加速统一应用（2025）](#案例-3sr-iov-性能加速统一应用2025)
 
 ---
 
@@ -399,4 +405,216 @@ spec:
 
 ---
 
-**最后更新**：2025-11-10 **维护者**：项目团队
+## 2025 年最新实践
+
+### 网络功能同构在云原生架构中的应用（2025）
+
+**2025 年趋势**：网络功能同构在云原生架构中的深度应用
+
+**实践要点**：
+
+- **CNI 生态统一**：容器和虚拟机通过 Multus 统一使用 CNI 生态
+- **网络策略统一**：NetworkPolicy 对容器和虚拟机同等生效
+- **性能优化**：SR-IOV 等高性能网络技术在容器和虚拟机中统一应用
+
+**代码示例**：
+
+```python
+# 2025 年网络功能同构管理工具
+class NetworkIsomorphismManager:
+    def __init__(self):
+        self.cni_plugins = self.load_cni_plugins()
+        self.network_policies = {}
+
+    def create_unified_network(self, workload_type, network_config):
+        """创建统一网络配置"""
+        if workload_type == 'pod':
+            return self.create_pod_network(network_config)
+        elif workload_type == 'vmi':
+            return self.create_vmi_network(network_config)
+
+    def apply_network_policy(self, policy, workload_type):
+        """应用网络策略"""
+        # NetworkPolicy 对 Pod 和 VMI 同等生效
+        return self.apply_policy(policy, workload_type)
+```
+
+## 实际应用案例
+
+### 案例 1：多平面网络统一管理（2025）
+
+**场景**：在 Kubernetes 集群中统一管理容器和虚拟机的多平面网络
+
+**实现方案**：
+
+```yaml
+# NetworkAttachmentDefinition 统一配置
+apiVersion: k8s.cni.cncf.io/v1
+kind: NetworkAttachmentDefinition
+metadata:
+  name: macvlan-conf
+spec:
+  config: |
+    {
+      "cniVersion": "0.3.1",
+      "type": "macvlan",
+      "master": "eth0",
+      "mode": "bridge",
+      "ipam": {
+        "type": "host-local",
+        "subnet": "10.56.0.0/16"
+      }
+    }
+---
+# Pod 使用多平面网络
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-pod
+  annotations:
+    k8s.v1.cni.cncf.io/networks: macvlan-conf
+spec:
+  containers:
+    - name: test
+      image: nginx:alpine
+---
+# VMI 使用多平面网络
+apiVersion: kubevirt.io/v1
+kind: VirtualMachineInstance
+metadata:
+  name: test-vmi
+spec:
+  domain:
+    devices:
+      interfaces:
+        - name: default
+          masquerade: {}
+        - name: macvlan-net
+          bridge: {}
+    networks:
+      - name: default
+        pod: {}
+      - name: macvlan-net
+        multus:
+          networkName: macvlan-conf
+```
+
+**效果**：
+
+- 容器和虚拟机共享 NetworkAttachmentDefinition
+- Multus CNI 统一管理多平面网络
+- 网络配置统一描述和管理
+
+### 案例 2：统一网络策略管理（2025）
+
+**场景**：使用 NetworkPolicy 统一管理容器和虚拟机的网络策略
+
+**实现方案**：
+
+```yaml
+# 统一网络策略配置
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: unified-network-policy
+spec:
+  podSelector:
+    matchLabels:
+      app: test
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              name: tenant-a
+      ports:
+        - protocol: TCP
+          port: 80
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              name: tenant-a
+      ports:
+        - protocol: TCP
+          port: 443
+```
+
+**效果**：
+
+- NetworkPolicy 对 Pod 和 VMI 同等生效
+- OVN-Kubernetes 等网络插件统一处理网络策略
+- 网络策略规则统一描述和管理
+
+### 案例 3：SR-IOV 性能加速统一应用（2025）
+
+**场景**：在容器和虚拟机中统一应用 SR-IOV 性能加速
+
+**实现方案**：
+
+```yaml
+# SR-IOV NetworkAttachmentDefinition
+apiVersion: k8s.cni.cncf.io/v1
+kind: NetworkAttachmentDefinition
+metadata:
+  name: sriov-network
+spec:
+  config: |
+    {
+      "cniVersion": "0.3.1",
+      "type": "sriov",
+      "vlan": 100,
+      "ipam": {
+        "type": "host-local",
+        "subnet": "10.57.0.0/16"
+      }
+    }
+---
+# Pod 使用 SR-IOV
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-pod
+  annotations:
+    k8s.v1.cni.cncf.io/networks: sriov-network
+spec:
+  containers:
+    - name: test
+      image: nginx:alpine
+      resources:
+        requests:
+          intel.com/sriov: "1"
+        limits:
+          intel.com/sriov: "1"
+---
+# VMI 使用 SR-IOV
+apiVersion: kubevirt.io/v1
+kind: VirtualMachineInstance
+metadata:
+  name: test-vmi
+spec:
+  domain:
+    devices:
+      interfaces:
+        - name: sriov-net
+          sriov: {}
+          resources:
+            requests:
+              intel.com/sriov: "1"
+    networks:
+      - name: sriov-net
+        multus:
+          networkName: sriov-network
+```
+
+**效果**：
+
+- 容器和虚拟机统一使用 SR-IOV 资源
+- Device Plugin 机制统一分配 SR-IOV 资源
+- 网络性能加速统一应用
+
+---
+
+**最后更新**：2025-11-15 **维护者**：项目团队

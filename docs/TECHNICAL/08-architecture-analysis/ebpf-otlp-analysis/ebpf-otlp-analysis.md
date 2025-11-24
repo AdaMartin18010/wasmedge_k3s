@@ -3455,4 +3455,80 @@ eBPF 与 OTLP 的融合，标志着可观测性从 **"数据采集工具"** 演�
 
 ---
 
-**最后更新**：2025-11-07 **文档版本**：v1.0 **维护者**：项目团队
+---
+
+## 2025 年最新实践
+
+### eBPF/OTLP 扩展技术应用最佳实践（2025）
+
+**2025 年趋势**：eBPF/OTLP 在可观测性、安全监控、性能分析中的深度应用
+
+**实践要点**：
+
+- **内核态预聚合**：使用 eBPF 进行内核态预聚合优化
+- **列式编码**：使用 Apache Arrow 进行列式编码优化
+- **批处理优化**：使用 OTLP 批处理优化数据传输
+
+**代码示例**：
+
+```bash
+# 2025 年 eBPF/OTLP 集成工具
+#!/bin/bash
+# eBPF 数据采集和 OTLP 传输
+
+# eBPF 数据采集
+bpftrace -e 'tracepoint:syscalls:sys_enter_* {
+    @[comm] = count();
+}' > /tmp/ebpf_data.json
+
+# OTLP 数据传输
+otelcol-contrib --config=otel-config.yaml \
+  --set exporters.otlp.endpoint=http://collector:4317 \
+  --set receivers.filelog.paths=[/tmp/ebpf_data.json]
+```
+
+## 实际应用案例
+
+### 案例 1：eBPF/OTLP 可观测性平台（2025）
+
+**场景**：使用 eBPF/OTLP 构建可观测性平台
+
+**实现方案**：
+
+```yaml
+# eBPF/OTLP 可观测性配置
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: otel-config
+data:
+  config.yaml: |
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+            endpoint: 0.0.0.0:4317
+    processors:
+      batch:
+        timeout: 1s
+        send_batch_size: 1024
+    exporters:
+      otlp:
+        endpoint: jaeger:4317
+    service:
+      pipelines:
+        traces:
+          receivers: [otlp]
+          processors: [batch]
+          exporters: [otlp]
+```
+
+**效果**：
+
+- 可观测性：完整的 Trace/Metric/Log 支持
+- 性能优化：内核态预聚合和列式编码优化
+- 安全监控：eBPF LSM 安全事件监控
+
+---
+
+**最后更新**：2025-11-15 **文档版本**：v1.0 **维护者**：项目团队

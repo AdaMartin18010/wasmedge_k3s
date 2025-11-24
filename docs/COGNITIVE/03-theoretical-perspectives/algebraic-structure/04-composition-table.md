@@ -19,12 +19,24 @@
   - [8 🧠 认知增强：思维导图、建模视图与图表达转换](#8--认知增强思维导图建模视图与图表达转换)
     - [8.1 复合运算表完整思维导图](#81-复合运算表完整思维导图)
     - [8.2 复合运算表建模视图](#82-复合运算表建模视图)
+      - [运算表矩阵视图](#运算表矩阵视图)
     - [8.3 复合运算表多维关系矩阵](#83-复合运算表多维关系矩阵)
+      - [组合-指标-性能三维矩阵](#组合-指标-性能三维矩阵)
     - [8.4 图表达和转换](#84-图表达和转换)
+      - [运算表视图转换关系](#运算表视图转换关系)
     - [8.5 形象化解释论证](#85-形象化解释论证)
+      - [1. 复合运算表 = 乘法表](#1-复合运算表--乘法表)
+      - [2. 三维指标 = 体检报告](#2-三维指标--体检报告)
     - [8.6 专家观点与论证](#86-专家观点与论证)
+      - [计算信息软件科学家的观点](#计算信息软件科学家的观点)
+        - [1. Arthur Cayley（群论创始人）](#1-arthur-cayley群论创始人)
+        - [2. Évariste Galois（群论先驱）](#2-évariste-galois群论先驱)
     - [8.7 认知学习路径矩阵](#87-认知学习路径矩阵)
     - [8.8 专家推荐阅读路径](#88-专家推荐阅读路径)
+  - [2025 年最新实践](#2025-年最新实践)
+    - [复合运算表应用最佳实践（2025）](#复合运算表应用最佳实践2025)
+  - [实际应用案例](#实际应用案例)
+    - [案例 1：算子组合性能分析（2025）](#案例-1算子组合性能分析2025)
 
 ---
 
@@ -424,4 +436,91 @@ graph LR
 
 ---
 
-**最后更新**：2025-11-04 **维护者**：项目团队
+## 2025 年最新实践
+
+### 复合运算表应用最佳实践（2025）
+
+**2025 年趋势**：复合运算表在技术选型和性能分析中的深度应用
+
+**实践要点**：
+
+- **运算表查询**：使用运算表快速查询算子组合的性能指标
+- **性能分析**：使用三维指标（Latency, Security, Observability）进行性能分析
+- **技术选型**：基于运算表进行技术选型决策
+
+**代码示例**：
+
+```python
+# 2025 年复合运算表查询工具
+class CompositionTableQuery:
+    def __init__(self):
+        self.table = CompositionTable()
+        self.analyzer = PerformanceAnalyzer()
+
+    def query_composition(self, operator1, operator2):
+        """查询算子组合"""
+        # 查询运算表
+        metrics = self.table.get_metrics(operator1, operator2)
+
+        # 性能分析
+        analysis = self.analyzer.analyze(metrics)
+
+        return {
+            'latency': metrics['latency'],
+            'security': metrics['security'],
+            'observability': metrics['observability'],
+            'analysis': analysis
+        }
+
+    def compare_compositions(self, compositions):
+        """对比多个算子组合"""
+        results = []
+        for op1, op2 in compositions:
+            result = self.query_composition(op1, op2)
+            results.append({
+                'composition': f"{op1}∘{op2}",
+                'metrics': result
+            })
+        return results
+```
+
+## 实际应用案例
+
+### 案例 1：算子组合性能分析（2025）
+
+**场景**：使用复合运算表分析不同算子组合的性能指标
+
+**实现方案**：
+
+```python
+# 算子组合性能分析
+query_tool = CompositionTableQuery()
+
+# 查询关键组合
+compositions = [
+    ('V', 'C'),  # VM → Container
+    ('C', 'S'),  # Container → Sandbox
+    ('C', 'M'),  # Container → Mesh
+    ('I', 'C', 'S', 'M')  # 完整路径
+]
+
+results = query_tool.compare_compositions(compositions)
+
+# 输出结果
+for result in results:
+    print(f"组合: {result['composition']}")
+    print(f"延迟: {result['metrics']['latency']}")
+    print(f"安全: {result['metrics']['security']}")
+    print(f"可观测: {result['metrics']['observability']}")
+    print()
+```
+
+**效果**：
+
+- 运算表查询：使用运算表快速查询算子组合的性能指标
+- 性能分析：使用三维指标进行性能分析
+- 技术选型：基于运算表进行技术选型决策
+
+---
+
+**最后更新**：2025-11-15 **维护者**：项目团队
