@@ -170,6 +170,7 @@
   技术组合方案与决策框架
 - **[06. 问题解决方案矩阵](../../02-architecture-design/problem-solution-matrix/problem-solution-matrix.md)** -
   问题分类与解决方案
+- **[性能基准文档](../benchmarks/README.md)** ⭐ - 性能评估框架（容器 vs Wasm、Kubernetes vs K3s、OPA、Service Mesh 性能对比）
 - **[08. 范畴论视角](../../03-theoretical-perspectives/category-theory/category-theory.md)** -
   技术概念的数学抽象
 

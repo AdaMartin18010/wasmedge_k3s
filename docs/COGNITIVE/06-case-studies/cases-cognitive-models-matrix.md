@@ -369,19 +369,19 @@
 ### 案例研究目录文档
 
 - [案例研究知识图谱](cases-knowledge-map.md) - 案例研究多维度认知框架
-- [跨案例对比分析](cross-case-comparison-analysis.md) - 多维度理论视角对比分析
-- [行业维度深度分析](industry-depth-analysis.md) - 行业维度理论视角深度分析
-- [场景维度深度分析](scenario-depth-analysis.md) - 场景维度理论视角深度分析
-- [技术栈维度深度分析](tech-stack-depth-analysis.md) - 技术栈维度理论视角深度分析
-- [理论视角分析总结](THEORETICAL-ANALYSIS-SUMMARY.md) - 理论视角分析工作总结
+- [跨案例对比分析](../../../cases/cross-case-comparison-analysis.md) - 多维度理论视角对比分析
+- [行业维度深度分析](../../../cases/industry-depth-analysis.md) - 行业维度理论视角深度分析
+- [场景维度深度分析](../../../cases/scenario-depth-analysis.md) - 场景维度理论视角深度分析
+- [技术栈维度深度分析](../../../cases/tech-stack-depth-analysis.md) - 技术栈维度理论视角深度分析
+- [理论视角分析总结](../../../cases/THEORETICAL-ANALYSIS-SUMMARY.md) - 理论视角分析工作总结
 
 ### COGNITIVE目录参考文档
 
-- [COGNITIVE目录总览](../../docs/COGNITIVE/README.md) - COGNITIVE目录完整说明 ⭐
-- [案例研究认知增强文档总览](../../docs/COGNITIVE/06-case-studies/README.md) - 案例研究认知增强文档完整说明 ⭐
-- [认知模型矩阵](../../docs/COGNITIVE/01-core-foundations/visualizations/02-cognitive-models-matrix.md) - 认知模型对比矩阵
-- [理论视角框架](../../docs/COGNITIVE/03-theoretical-perspectives/README.md) - 多维度理论分析框架
-- [理论视角对比矩阵](../../docs/COGNITIVE/03-theoretical-perspectives/visualizations/02-perspective-comparison-matrix.md) - 理论视角对比矩阵
+- [COGNITIVE目录总览](../README.md) - COGNITIVE目录完整说明 ⭐
+- [案例研究认知增强文档总览](README.md) - 案例研究认知增强文档完整说明 ⭐
+- [认知模型矩阵](../01-core-foundations/visualizations/02-cognitive-models-matrix.md) - 认知模型对比矩阵
+- [理论视角框架](../03-theoretical-perspectives/README.md) - 多维度理论分析框架
+- [理论视角对比矩阵](../03-theoretical-perspectives/visualizations/02-perspective-comparison-matrix.md) - 理论视角对比矩阵
 
 ---
 

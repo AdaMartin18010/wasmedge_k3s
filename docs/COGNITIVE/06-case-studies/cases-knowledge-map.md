@@ -480,12 +480,12 @@ graph LR
    - 学习调度视角
 
 2. **深度分析案例**（24-32小时）
-   - 阅读[industry-depth-analysis.md](industry-depth-analysis.md)
-   - 阅读[scenario-depth-analysis.md](scenario-depth-analysis.md)
-   - 阅读[tech-stack-depth-analysis.md](tech-stack-depth-analysis.md)
+   - 阅读[industry-depth-analysis.md](../../../cases/industry-depth-analysis.md)
+   - 阅读[scenario-depth-analysis.md](../../../cases/scenario-depth-analysis.md)
+   - 阅读[tech-stack-depth-analysis.md](../../../cases/tech-stack-depth-analysis.md)
 
 3. **跨案例对比**（8-16小时）
-   - 阅读[cross-case-comparison-analysis.md](cross-case-comparison-analysis.md)
+   - 阅读[cross-case-comparison-analysis.md](../../../cases/cross-case-comparison-analysis.md)
    - 理解行业差异
    - 理解场景差异
 
@@ -596,11 +596,11 @@ graph LR
 
 | 理论视角 | 核心工具 | 适用场景 | 案例覆盖 | 文档链接 |
 |---------|---------|---------|---------|---------|
-| 矩阵视角 | 向量、矩阵 | 技术选型、场景转换 | 13/13 | [矩阵视角](../../docs/COGNITIVE/03-theoretical-perspectives/matrix-perspective/README.md) |
-| 代数结构视角 | 算子、代数结构 | 操作组合、结构保持 | 13/13 | [代数结构视角](../../docs/COGNITIVE/03-theoretical-perspectives/algebraic-structure/README.md) |
-| 结构视角 | 三类结构 | 技术本质、架构设计 | 13/13 | [结构视角](../../docs/COGNITIVE/03-theoretical-perspectives/structural-perspective/README.md) |
-| 调度视角 | 分层、图 | 调度优化、性能分析 | 13/13 | [调度视角](../../docs/COGNITIVE/03-theoretical-perspectives/scheduling-perspective/README.md) |
-| 形式化理论视角 | 时序逻辑、模型检验 | 系统验证、正确性证明 | 3/13 | [形式化理论视角](../../docs/COGNITIVE/03-theoretical-perspectives/formal-theory/formal-theory.md) |
+| 矩阵视角 | 向量、矩阵 | 技术选型、场景转换 | 13/13 | [矩阵视角](../03-theoretical-perspectives/matrix-perspective/README.md) |
+| 代数结构视角 | 算子、代数结构 | 操作组合、结构保持 | 13/13 | [代数结构视角](../03-theoretical-perspectives/algebraic-structure/README.md) |
+| 结构视角 | 三类结构 | 技术本质、架构设计 | 13/13 | [结构视角](../03-theoretical-perspectives/structural-perspective/README.md) |
+| 调度视角 | 分层、图 | 调度优化、性能分析 | 13/13 | [调度视角](../03-theoretical-perspectives/scheduling-perspective/README.md) |
+| 形式化理论视角 | 时序逻辑、模型检验 | 系统验证、正确性证明 | 3/13 | [形式化理论视角](../03-theoretical-perspectives/formal-theory/formal-theory.md) |
 
 ### 7.3 文档导航快速参考
 
@@ -608,10 +608,10 @@ graph LR
 |---------|---------|------|------|
 | **索引文档** | INDEX.md | 快速导航所有文档 | [INDEX.md](INDEX.md) |
 | **快速参考** | QUICK-REFERENCE.md | 快速查找关键信息 | [QUICK-REFERENCE.md](QUICK-REFERENCE.md) |
-| **对比分析** | cross-case-comparison-analysis.md | 跨案例对比分析 | [cross-case-comparison-analysis.md](cross-case-comparison-analysis.md) |
-| **行业分析** | industry-depth-analysis.md | 行业维度深度分析 | [industry-depth-analysis.md](industry-depth-analysis.md) |
-| **场景分析** | scenario-depth-analysis.md | 场景维度深度分析 | [scenario-depth-analysis.md](scenario-depth-analysis.md) |
-| **技术栈分析** | tech-stack-depth-analysis.md | 技术栈维度深度分析 | [tech-stack-depth-analysis.md](tech-stack-depth-analysis.md) |
+| **对比分析** | cross-case-comparison-analysis.md | 跨案例对比分析 | [cross-case-comparison-analysis.md](../../../cases/cross-case-comparison-analysis.md) |
+| **行业分析** | industry-depth-analysis.md | 行业维度深度分析 | [industry-depth-analysis.md](../../../cases/industry-depth-analysis.md) |
+| **场景分析** | scenario-depth-analysis.md | 场景维度深度分析 | [scenario-depth-analysis.md](../../../cases/scenario-depth-analysis.md) |
+| **技术栈分析** | tech-stack-depth-analysis.md | 技术栈维度深度分析 | [tech-stack-depth-analysis.md](../../../cases/tech-stack-depth-analysis.md) |
 | **总结文档** | THEORETICAL-ANALYSIS-SUMMARY.md | 理论视角分析总结 | [THEORETICAL-ANALYSIS-SUMMARY.md](THEORETICAL-ANALYSIS-SUMMARY.md) |
 
 ---
@@ -912,19 +912,19 @@ classDiagram
 
 1. **第一步**：阅读[支付网关](finance-payment-gateway.md)（矩阵视角、调度视角）
 2. **第二步**：阅读[银行核心系统](finance-bank-core.md)（所有视角）
-3. **第三步**：阅读[industry-depth-analysis.md](industry-depth-analysis.md)（金融行业深度分析）
+3. **第三步**：阅读[industry-depth-analysis.md](../../../cases/industry-depth-analysis.md)（金融行业深度分析）
 
 **路径2：边缘计算理解路径**:
 
 1. **第一步**：阅读[电商物流系统](ecommerce-logistics.md)（边缘计算场景）
-2. **第二步**：阅读[scenario-depth-analysis.md](scenario-depth-analysis.md)（边缘计算场景深度分析）
-3. **第三步**：阅读[tech-stack-depth-analysis.md](tech-stack-depth-analysis.md)（WasmEdge技术栈分析）
+2. **第二步**：阅读[scenario-depth-analysis.md](../../../cases/scenario-depth-analysis.md)（边缘计算场景深度分析）
+3. **第三步**：阅读[tech-stack-depth-analysis.md](../../../cases/tech-stack-depth-analysis.md)（WasmEdge技术栈分析）
 
 **路径3：形式化证明理解路径**:
 
 1. **第一步**：阅读[银行核心系统](finance-bank-core.md)（形式化理论视角）
 2. **第二步**：阅读[健康数据管理](healthcare-health-data-management.md)（形式化理论视角）
-3. **第三步**：阅读[形式化理论文档](../../docs/COGNITIVE/03-theoretical-perspectives/formal-theory/formal-theory.md)
+3. **第三步**：阅读[形式化理论文档](../03-theoretical-perspectives/formal-theory/formal-theory.md)
 
 ---
 
@@ -935,20 +935,20 @@ classDiagram
 - [案例研究目录](README.md) - 案例研究主目录
 - [快速参考指南](QUICK-REFERENCE.md) - 快速查找关键信息
 - [文档索引](INDEX.md) - 文档快速导航索引
-- [跨案例对比分析](cross-case-comparison-analysis.md) - 多维度理论视角对比分析
-- [行业维度深度分析](industry-depth-analysis.md) - 行业维度理论视角深度分析
-- [场景维度深度分析](scenario-depth-analysis.md) - 场景维度理论视角深度分析
-- [技术栈维度深度分析](tech-stack-depth-analysis.md) - 技术栈维度理论视角深度分析
-- [理论视角分析总结](THEORETICAL-ANALYSIS-SUMMARY.md) - 理论视角分析工作总结
+- [跨案例对比分析](../../../cases/cross-case-comparison-analysis.md) - 多维度理论视角对比分析
+- [行业维度深度分析](../../../cases/industry-depth-analysis.md) - 行业维度理论视角深度分析
+- [场景维度深度分析](../../../cases/scenario-depth-analysis.md) - 场景维度理论视角深度分析
+- [技术栈维度深度分析](../../../cases/tech-stack-depth-analysis.md) - 技术栈维度理论视角深度分析
+- [理论视角分析总结](../../../cases/THEORETICAL-ANALYSIS-SUMMARY.md) - 理论视角分析工作总结
 
 ### COGNITIVE目录参考文档
 
-- [COGNITIVE目录总览](../../docs/COGNITIVE/README.md) - COGNITIVE目录完整说明 ⭐
-- [案例研究认知增强文档总览](../../docs/COGNITIVE/06-case-studies/README.md) - 案例研究认知增强文档完整说明 ⭐
-- [知识图谱](../../docs/COGNITIVE/01-core-foundations/knowledge-map/knowledge-map.md) - 云原生容器技术栈知识图谱
-- [认知模型矩阵](../../docs/COGNITIVE/01-core-foundations/visualizations/02-cognitive-models-matrix.md) - 认知模型对比矩阵
-- [理论视角框架](../../docs/COGNITIVE/03-theoretical-perspectives/README.md) - 多维度理论分析框架
-- [形式化理论](../../docs/COGNITIVE/03-theoretical-perspectives/formal-theory/formal-theory.md) - 形式化理论基础
+- [COGNITIVE目录总览](../README.md) - COGNITIVE目录完整说明 ⭐
+- [案例研究认知增强文档总览](README.md) - 案例研究认知增强文档完整说明 ⭐
+- [知识图谱](../01-core-foundations/knowledge-map/knowledge-map.md) - 云原生容器技术栈知识图谱
+- [认知模型矩阵](../01-core-foundations/visualizations/02-cognitive-models-matrix.md) - 认知模型对比矩阵
+- [理论视角框架](../03-theoretical-perspectives/README.md) - 多维度理论分析框架
+- [形式化理论](../03-theoretical-perspectives/formal-theory/formal-theory.md) - 形式化理论基础
 
 ---
 
