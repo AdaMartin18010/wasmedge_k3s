@@ -8,6 +8,18 @@
   - [2 安全机制详解](#2-安全机制详解)
   - [3 安全策略详解](#3-安全策略详解)
   - [4 安全评估详解](#4-安全评估详解)
+  - [5 安全模型应用场景矩阵](#5-安全模型应用场景矩阵)
+  - [6 使用指南](#6-使用指南)
+    - [6.1 快速开始](#61-快速开始)
+    - [6.2 安全设计应用](#62-安全设计应用)
+    - [6.3 安全优化应用](#63-安全优化应用)
+  - [7 使用技巧](#7-使用技巧)
+    - [7.1 安全机制选择技巧](#71-安全机制选择技巧)
+    - [7.2 安全策略制定技巧](#72-安全策略制定技巧)
+  - [8 实践案例](#8-实践案例)
+    - [8.1 多租户安全设计案例](#81-多租户安全设计案例)
+    - [8.2 Serverless安全设计案例](#82-serverless安全设计案例)
+  - [9 相关文档](#9-相关文档)
 
 ---
 
@@ -389,7 +401,77 @@ mindmap
 
 ---
 
-## 9 相关文档
+## 9 2025 年最新实践
+
+### 9.1 安全模型详细思维导图应用最佳实践（2025）
+
+**2025 年趋势**：安全模型在安全设计、安全评估、安全优化中的深度应用
+
+**实践要点**：
+
+- **多层防护**：组合使用多个安全机制，建立多层安全防护体系
+- **最小权限**：实施最小权限原则，减少攻击面
+- **持续监控**：持续监控安全状态，快速响应安全事件
+- **安全测试**：进行全面的安全测试和验证
+
+**代码示例**：
+
+```python
+# 2025 年安全模型工具
+class SecurityModelTool:
+    def __init__(self):
+        self.analyzer = SecurityRequirementAnalyzer()
+        self.designer = SecurityDesigner()
+        self.monitor = SecurityMonitor()
+        self.tester = SecurityTester()
+
+    def analyze_requirements(self, context, threats):
+        """安全需求分析"""
+        return self.analyzer.analyze(context, threats)
+
+    def design_security(self, requirements, constraints):
+        """安全设计"""
+        return self.designer.design(requirements, constraints)
+
+    def monitor_security(self, system):
+        """安全监控"""
+        return self.monitor.monitor(system)
+```
+
+## 10 实际应用案例
+
+### 案例 1：安全模型应用（2025）
+
+**场景**：使用安全模型设计多租户SaaS平台安全方案
+
+**实现方案**：
+
+```python
+# 安全模型应用
+tool = SecurityModelTool()
+
+# 安全需求分析
+context = Context(type="saas", tenants="multi")
+threats = Threats(data_leak=True, privilege_escalation=True)
+requirements = tool.analyze_requirements(context, threats)
+
+# 安全设计
+constraints = Constraints(performance="maintain", cost="limited")
+design = tool.design_security(requirements, constraints)
+
+# 安全监控
+monitoring = tool.monitor_security(system)
+```
+
+**效果**：
+
+- 安全需求分析：系统化分析安全需求，提高分析质量
+- 安全设计：设计多层防护，提高安全水平
+- 安全监控：实时监控安全，提高响应速度
+
+---
+
+## 11 相关文档
 
 - **[决策框架对比矩阵](01-decision-framework-matrix.md)** - 决策框架功能、决策场景适用、决策方法对比
 - **[隔离模型详细思维导图](05-isolation-model-detailed.md)** - 隔离模型核心概念、隔离层次详解、隔离机制详解

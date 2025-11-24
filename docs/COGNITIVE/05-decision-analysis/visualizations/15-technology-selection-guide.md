@@ -8,6 +8,16 @@
   - [2 隔离技术选型指南](#2-隔离技术选型指南)
   - [3 编排平台选型指南](#3-编排平台选型指南)
   - [4 服务网格选型指南](#4-服务网格选型指南)
+  - [5 技术选型决策流程](#5-技术选型决策流程)
+  - [6 技术选型检查清单](#6-技术选型检查清单)
+  - [7 使用指南](#7-使用指南)
+    - [7.1 快速开始](#71-快速开始)
+    - [7.2 技术选型应用](#72-技术选型应用)
+  - [8 使用技巧](#8-使用技巧)
+    - [8.1 选型因素分析技巧](#81-选型因素分析技巧)
+  - [9 实践案例](#9-实践案例)
+    - [9.1 容器运行时选型案例](#91-容器运行时选型案例)
+  - [10 相关文档](#10-相关文档)
 
 ---
 
@@ -224,7 +234,80 @@ graph TB
 
 ---
 
-## 10 相关文档
+## 10 2025 年最新实践
+
+### 10.1 技术选型详细指南应用最佳实践（2025）
+
+**2025 年趋势**：技术选型详细指南在容器运行时、隔离技术、编排平台选型中的深度应用
+
+**实践要点**：
+
+- **需求分析**：系统化分析技术选型需求
+- **因素分析**：全面分析选型因素
+- **技术对比**：多维度对比技术方案
+- **决策制定**：基于分析结果制定决策
+
+**代码示例**：
+
+```python
+# 2025 年技术选型详细指南工具
+class TechnologySelectionGuideTool:
+    def __init__(self):
+        self.analyzer = RequirementAnalyzer()
+        self.factor_analyzer = FactorAnalyzer()
+        self.comparator = TechnologyComparator()
+        self.decision_maker = DecisionMaker()
+
+    def analyze_requirements(self, project, constraints):
+        """需求分析"""
+        return self.analyzer.analyze(project, constraints)
+
+    def analyze_factors(self, requirements, technologies):
+        """因素分析"""
+        return self.factor_analyzer.analyze(requirements, technologies)
+
+    def compare_technologies(self, technologies, factors):
+        """技术对比"""
+        return self.comparator.compare(technologies, factors)
+```
+
+## 11 实际应用案例
+
+### 案例 1：技术选型详细指南应用（2025）
+
+**场景**：使用技术选型详细指南进行容器运行时选型
+
+**实现方案**：
+
+```python
+# 技术选型详细指南应用
+tool = TechnologySelectionGuideTool()
+
+# 需求分析
+project = Project(type="microservices", scale="large")
+constraints = Constraints(budget="limited", team="small")
+requirements = tool.analyze_requirements(project, constraints)
+
+# 因素分析
+technologies = [Technology(name="containerd"), Technology(name="CRI-O")]
+factors = tool.analyze_factors(requirements, technologies)
+
+# 技术对比
+comparison = tool.compare_technologies(technologies, factors)
+
+# 决策制定
+decision = tool.decision_maker.make(comparison)
+```
+
+**效果**：
+
+- 需求分析：系统化分析需求，提高分析质量
+- 因素分析：全面分析因素，提高分析准确性
+- 技术对比：多维度对比技术，提高对比质量
+
+---
+
+## 12 相关文档
 
 - **[技术选型决策树](03-technology-selection-decision-tree.md)** - 容器运行时、隔离技术、编排平台、服务网格选型决策树
 - **[决策框架对比矩阵](01-decision-framework-matrix.md)** - 决策框架功能、决策场景适用、决策方法

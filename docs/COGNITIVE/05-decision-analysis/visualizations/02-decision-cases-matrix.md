@@ -8,6 +8,14 @@
   - [2 Serverless决策案例](#2-serverless决策案例)
   - [3 企业级决策案例](#3-企业级决策案例)
   - [4 服务网格决策案例](#4-服务网格决策案例)
+  - [5 决策模型应用矩阵](#5-决策模型应用矩阵)
+  - [6 决策成功因素矩阵](#6-决策成功因素矩阵)
+  - [7 使用指南](#7-使用指南)
+    - [7.1 快速开始](#71-快速开始)
+    - [7.2 决策案例参考应用](#72-决策案例参考应用)
+  - [8 使用技巧](#8-使用技巧)
+    - [8.1 案例选择技巧](#81-案例选择技巧)
+  - [9 相关文档](#9-相关文档)
 
 ---
 
@@ -177,7 +185,78 @@
 
 ---
 
-## 9 相关文档
+## 9 2025 年最新实践
+
+### 9.1 决策案例对比矩阵应用最佳实践（2025）
+
+**2025 年趋势**：决策案例对比矩阵在边缘计算、Serverless、企业级、服务网格决策中的深度应用
+
+**实践要点**：
+
+- **案例查询**：使用矩阵快速查询相关决策案例
+- **案例对比**：对比不同场景的决策方法和结果
+- **案例应用**：参考案例进行决策制定
+- **持续更新**：定期更新案例数据，反映最新实践
+
+**代码示例**：
+
+```python
+# 2025 年决策案例对比矩阵工具
+class DecisionCasesMatrixTool:
+    def __init__(self):
+        self.matrix = DecisionCasesMatrix()
+        self.query_engine = CaseQueryEngine()
+        self.comparator = CaseComparator()
+        self.applicator = CaseApplicator()
+
+    def query_cases(self, scenario, requirements):
+        """案例查询"""
+        return self.query_engine.query(scenario, requirements)
+
+    def compare_cases(self, cases, dimensions):
+        """案例对比"""
+        return self.comparator.compare(cases, dimensions)
+
+    def apply_case(self, case, context):
+        """案例应用"""
+        return self.applicator.apply(case, context)
+```
+
+## 10 实际应用案例
+
+### 案例 1：决策案例对比矩阵应用（2025）
+
+**场景**：使用决策案例对比矩阵进行边缘计算场景决策
+
+**实现方案**：
+
+```python
+# 决策案例对比矩阵应用
+tool = DecisionCasesMatrixTool()
+
+# 案例查询
+scenario = Scenario(type="edge_computing", scale="medium")
+requirements = Requirements(latency="low", resources="limited")
+cases = tool.query_cases(scenario, requirements)
+
+# 案例对比
+dimensions = ["decision_method", "technology_stack", "outcome"]
+comparison = tool.compare_cases(cases, dimensions)
+
+# 案例应用
+context = Context(project="iot", constraints="budget_limited")
+decision = tool.apply_case(cases[0], context)
+```
+
+**效果**：
+
+- 案例查询：快速查询相关案例，提高查询效率
+- 案例对比：多维度对比案例，提高对比质量
+- 案例应用：参考案例制定决策，提高决策质量
+
+---
+
+## 11 相关文档
 
 - **[决策框架对比矩阵](01-decision-framework-matrix.md)** - 决策框架功能、决策场景适用、决策方法
 - **[技术选型决策树](03-technology-selection-decision-tree.md)** - 容器运行时、隔离技术、编排平台选型决策树

@@ -8,6 +8,18 @@
   - [2 内存概念详解](#2-内存概念详解)
   - [3 调度概念详解](#3-调度概念详解)
   - [4 计算性能优化](#4-计算性能优化)
+  - [5 计算概念应用矩阵](#5-计算概念应用矩阵)
+  - [6 使用指南](#6-使用指南)
+    - [6.1 快速开始](#61-快速开始)
+    - [6.2 计算资源管理应用](#62-计算资源管理应用)
+    - [6.3 性能优化应用](#63-性能优化应用)
+  - [7 使用技巧](#7-使用技巧)
+    - [7.1 资源选择技巧](#71-资源选择技巧)
+    - [7.2 性能优化技巧](#72-性能优化技巧)
+  - [8 实践案例](#8-实践案例)
+    - [8.1 计算密集型应用优化案例](#81-计算密集型应用优化案例)
+    - [8.2 实时系统性能优化案例](#82-实时系统性能优化案例)
+  - [9 相关文档](#9-相关文档)
 
 ---
 
@@ -374,7 +386,80 @@ mindmap
 
 ---
 
-## 9 相关文档
+## 9 2025 年最新实践
+
+### 9.1 计算概念详细思维导图应用最佳实践（2025）
+
+**2025 年趋势**：计算概念详细思维导图在CPU、内存、调度概念理解中的深度应用
+
+**实践要点**：
+
+- **概念理解**：深入理解CPU、内存、调度等计算概念
+- **性能优化**：基于概念理解进行性能优化
+- **资源管理**：系统化管理计算资源
+- **持续学习**：持续学习最新计算技术
+
+**代码示例**：
+
+```python
+# 2025 年计算概念详细思维导图工具
+class ComputingConceptsDetailedTool:
+    def __init__(self):
+        self.analyzer = ConceptAnalyzer()
+        self.optimizer = PerformanceOptimizer()
+        self.manager = ResourceManager()
+        self.learner = TechnologyLearner()
+
+    def analyze_concept(self, concept, context):
+        """概念理解"""
+        return self.analyzer.analyze(concept, context)
+
+    def optimize_performance(self, system, metrics):
+        """性能优化"""
+        return self.optimizer.optimize(system, metrics)
+
+    def manage_resources(self, resources, requirements):
+        """资源管理"""
+        return self.manager.manage(resources, requirements)
+```
+
+## 10 实际应用案例
+
+### 案例 1：计算概念详细思维导图应用（2025）
+
+**场景**：使用计算概念详细思维导图优化实时系统性能
+
+**实现方案**：
+
+```python
+# 计算概念详细思维导图应用
+tool = ComputingConceptsDetailedTool()
+
+# 概念理解
+concept = Concept(type="cpu_scheduling")
+context = Context(type="realtime", requirements="low_latency")
+analysis = tool.analyze_concept(concept, context)
+
+# 性能优化
+system = System(type="realtime", scale="large")
+metrics = Metrics(latency="high", throughput="low")
+optimization = tool.optimize_performance(system, metrics)
+
+# 资源管理
+resources = Resources(cpu="high", memory="medium")
+requirements = Requirements(performance="high", cost="limited")
+management = tool.manage_resources(resources, requirements)
+```
+
+**效果**：
+
+- 概念理解：深入理解计算概念，提高理解质量
+- 性能优化：基于概念理解优化性能，提高优化效果
+- 资源管理：系统化管理资源，提高资源利用效率
+
+---
+
+## 11 相关文档
 
 - **[资源模型详细思维导图](04-resource-model-detailed.md)** - 资源模型核心概念、资源类型详解、资源分配详解
 - **[性能优化指南](18-performance-optimization-guide.md)** - 性能优化全景、CPU性能优化、内存性能优化

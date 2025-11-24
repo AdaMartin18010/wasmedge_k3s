@@ -16,7 +16,11 @@
   - [7 使用技巧](#7-使用技巧)
     - [7.1 视角选择技巧](#71-视角选择技巧)
     - [7.2 视角应用技巧](#72-视角应用技巧)
-  - [8 相关文档](#8-相关文档)
+  - [8 2025 年最新实践](#8-2025-年最新实践)
+    - [8.1 理论视角思维导图应用最佳实践（2025）](#81-理论视角思维导图应用最佳实践2025)
+  - [9 实际应用案例](#9-实际应用案例)
+    - [案例 1：理论视角思维导图应用（2025）](#案例-1理论视角思维导图应用2025)
+  - [10 相关文档](#10-相关文档)
 
 ---
 
@@ -423,7 +427,76 @@ mindmap
 
 ---
 
-## 8 相关文档
+## 8 2025 年最新实践
+
+### 8.1 理论视角思维导图应用最佳实践（2025）
+
+**2025 年趋势**：理论视角思维导图在知识组织、视角选择、问题分析中的深度应用
+
+**实践要点**：
+
+- **知识组织**：使用思维导图组织理论视角知识
+- **视角选择**：基于思维导图选择合适的理论视角
+- **问题分析**：使用思维导图进行问题分析
+- **持续优化**：基于实践效果优化思维导图
+
+**代码示例**：
+
+```python
+# 2025 年理论视角思维导图工具
+class TheoreticalPerspectivesMindmapTool:
+    def __init__(self):
+        self.organizer = KnowledgeOrganizer()
+        self.selector = PerspectiveSelector()
+        self.analyzer = ProblemAnalyzer()
+        self.optimizer = MindmapOptimizer()
+
+    def organize_knowledge(self, perspectives):
+        """知识组织"""
+        return self.organizer.organize(perspectives)
+
+    def select_perspective(self, problem, mindmap):
+        """视角选择"""
+        return self.selector.select(problem, mindmap)
+
+    def analyze_problem(self, problem, perspective):
+        """问题分析"""
+        return self.analyzer.analyze(problem, perspective)
+```
+
+## 9 实际应用案例
+
+### 案例 1：理论视角思维导图应用（2025）
+
+**场景**：使用理论视角思维导图进行技术选型
+
+**实现方案**：
+
+```python
+# 理论视角思维导图应用
+tool = TheoreticalPerspectivesMindmapTool()
+
+# 知识组织
+perspectives = [Perspective(type="matrix"), Perspective(type="structural")]
+mindmap = tool.organize_knowledge(perspectives)
+
+# 视角选择
+problem = Problem(type="technology_selection", domain="runtime")
+perspective = tool.select_perspective(problem, mindmap)
+
+# 问题分析
+analysis = tool.analyze_problem(problem, perspective)
+```
+
+**效果**：
+
+- 知识组织：系统化组织理论视角知识，提高知识组织效率
+- 视角选择：基于思维导图选择视角，提高选择准确性
+- 问题分析：使用思维导图分析问题，提高分析质量
+
+---
+
+## 10 相关文档
 
 - **[理论视角对比矩阵](02-perspective-comparison-matrix.md)** - 视角功能对比、适用场景、复杂度、选择指南
 - **[矩阵视角详细思维导图](03-matrix-perspective-detailed.md)** - 矩阵视角核心概念、12维原子概念详解、关系矩阵详解

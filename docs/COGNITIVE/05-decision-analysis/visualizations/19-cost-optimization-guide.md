@@ -8,6 +8,15 @@
   - [2 资源成本优化](#2-资源成本优化)
   - [3 运维成本优化](#3-运维成本优化)
   - [4 开发成本优化](#4-开发成本优化)
+  - [5 成本优化检查清单](#5-成本优化检查清单)
+  - [6 使用指南](#6-使用指南)
+    - [6.1 快速开始](#61-快速开始)
+    - [6.2 成本优化应用](#62-成本优化应用)
+  - [7 使用技巧](#7-使用技巧)
+    - [7.1 成本分析技巧](#71-成本分析技巧)
+  - [8 实践案例](#8-实践案例)
+    - [8.1 资源成本优化案例](#81-资源成本优化案例)
+  - [9 相关文档](#9-相关文档)
 
 ---
 
@@ -203,7 +212,79 @@ graph TB
 
 ---
 
-## 9 相关文档
+## 9 2025 年最新实践
+
+### 9.1 成本优化指南应用最佳实践（2025）
+
+**2025 年趋势**：成本优化指南在资源成本、运维成本、总拥有成本优化中的深度应用
+
+**实践要点**：
+
+- **成本分析**：全面识别和分类系统成本
+- **成本优化**：设计合理的成本优化策略
+- **成本监控**：建立成本监控机制
+- **持续优化**：平衡成本优化和系统性能
+
+**代码示例**：
+
+```python
+# 2025 年成本优化指南工具
+class CostOptimizationGuideTool:
+    def __init__(self):
+        self.analyzer = CostAnalyzer()
+        self.strategy_designer = CostOptimizationStrategyDesigner()
+        self.monitor = CostMonitor()
+        self.optimizer = CostOptimizer()
+
+    def analyze_costs(self, resources, period):
+        """成本分析"""
+        return self.analyzer.analyze(resources, period)
+
+    def design_strategy(self, costs, constraints):
+        """成本优化策略设计"""
+        return self.strategy_designer.design(costs, constraints)
+
+    def monitor_costs(self, resources):
+        """成本监控"""
+        return self.monitor.monitor(resources)
+```
+
+## 10 实际应用案例
+
+### 案例 1：成本优化指南应用（2025）
+
+**场景**：使用成本优化指南优化Kubernetes集群成本
+
+**实现方案**：
+
+```python
+# 成本优化指南应用
+tool = CostOptimizationGuideTool()
+
+# 成本分析
+resources = Resources(cluster="kubernetes", nodes=100)
+costs = tool.analyze_costs(resources, period="monthly")
+
+# 成本优化策略设计
+constraints = Constraints(performance="maintain", downtime="minimal")
+strategy = tool.design_strategy(costs, constraints)
+
+# 成本监控
+monitoring = tool.monitor_costs(resources)
+
+# 方案实施
+results = tool.optimizer.optimize(strategy)
+```
+
+**效果**：
+
+- 成本分析：全面分析成本，提高分析质量
+- 成本优化：设计合理策略，提高优化效果
+- 成本监控：实时监控成本，提高监控效率
+
+---
+
+## 11 相关文档
 
 - **[资源模型详细思维导图](04-resource-model-detailed.md)** - 资源模型核心概念、资源类型详解、资源分配详解
 - **[性能优化指南](18-performance-optimization-guide.md)** - CPU性能优化、内存性能优化、I/O性能优化、网络性能优化

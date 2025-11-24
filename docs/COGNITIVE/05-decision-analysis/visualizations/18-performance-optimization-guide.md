@@ -8,6 +8,16 @@
   - [2 CPU性能优化](#2-cpu性能优化)
   - [3 内存性能优化](#3-内存性能优化)
   - [4 I/O性能优化](#4-io性能优化)
+  - [5 网络性能优化](#5-网络性能优化)
+  - [6 性能优化检查清单](#6-性能优化检查清单)
+  - [7 使用指南](#7-使用指南)
+    - [7.1 快速开始](#71-快速开始)
+    - [7.2 性能优化应用](#72-性能优化应用)
+  - [8 使用技巧](#8-使用技巧)
+    - [8.1 性能分析技巧](#81-性能分析技巧)
+  - [9 实践案例](#9-实践案例)
+    - [9.1 CPU性能优化案例](#91-cpu性能优化案例)
+  - [10 相关文档](#10-相关文档)
 
 ---
 
@@ -231,7 +241,79 @@ graph TB
 
 ---
 
-## 10 相关文档
+## 10 2025 年最新实践
+
+### 10.1 性能优化指南应用最佳实践（2025）
+
+**2025 年趋势**：性能优化指南在CPU、内存、I/O、网络性能优化中的深度应用
+
+**实践要点**：
+
+- **性能监控**：使用监控工具实时监控性能指标
+- **瓶颈识别**：系统化识别性能瓶颈和根因
+- **优化策略**：设计合理的性能优化策略
+- **持续优化**：建立持续优化机制
+
+**代码示例**：
+
+```python
+# 2025 年性能优化指南工具
+class PerformanceOptimizationGuideTool:
+    def __init__(self):
+        self.monitor = PerformanceMonitor()
+        self.analyzer = BottleneckAnalyzer()
+        self.strategy_designer = OptimizationStrategyDesigner()
+        self.optimizer = PerformanceOptimizer()
+
+    def monitor_performance(self, metrics, duration):
+        """性能监控"""
+        return self.monitor.monitor(metrics, duration)
+
+    def identify_bottlenecks(self, metrics):
+        """瓶颈识别"""
+        return self.analyzer.identify(metrics)
+
+    def design_strategy(self, bottlenecks, constraints):
+        """优化策略设计"""
+        return self.strategy_designer.design(bottlenecks, constraints)
+```
+
+## 11 实际应用案例
+
+### 案例 1：性能优化指南应用（2025）
+
+**场景**：使用性能优化指南优化微服务应用性能
+
+**实现方案**：
+
+```python
+# 性能优化指南应用
+tool = PerformanceOptimizationGuideTool()
+
+# 性能监控
+metrics = Metrics(cpu=True, memory=True, io=True, network=True)
+monitoring = tool.monitor_performance(metrics, duration="24h")
+
+# 瓶颈识别
+bottlenecks = tool.identify_bottlenecks(monitoring)
+
+# 优化策略设计
+constraints = Constraints(budget="limited", downtime="minimal")
+strategy = tool.design_strategy(bottlenecks, constraints)
+
+# 方案实施
+results = tool.optimizer.optimize(strategy)
+```
+
+**效果**：
+
+- 性能监控：实时监控性能，提高监控效率
+- 瓶颈识别：系统化识别瓶颈，提高识别准确性
+- 优化策略：设计合理策略，提高优化效果
+
+---
+
+## 12 相关文档
 
 - **[计算概念详细思维导图](10-computing-concepts-detailed.md)** - CPU概念详解、内存概念详解、调度概念详解
 - **[网络概念详细思维导图](11-network-concepts-detailed.md)** - 网络协议详解、网络拓扑详解、网络性能详解

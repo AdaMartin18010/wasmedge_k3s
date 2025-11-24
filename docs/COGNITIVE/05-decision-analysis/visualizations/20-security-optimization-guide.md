@@ -8,6 +8,15 @@
   - [2 隔离安全优化](#2-隔离安全优化)
   - [3 权限安全优化](#3-权限安全优化)
   - [4 网络安全优化](#4-网络安全优化)
+  - [5 安全优化检查清单](#5-安全优化检查清单)
+  - [6 使用指南](#6-使用指南)
+    - [6.1 快速开始](#61-快速开始)
+    - [6.2 安全优化应用](#62-安全优化应用)
+  - [7 使用技巧](#7-使用技巧)
+    - [7.1 安全设计技巧](#71-安全设计技巧)
+  - [8 实践案例](#8-实践案例)
+    - [8.1 多租户安全优化案例](#81-多租户安全优化案例)
+  - [9 相关文档](#9-相关文档)
 
 ---
 
@@ -55,6 +64,7 @@ graph TB
 | **隔离恢复** | 快速恢复 | 中 | 故障场景 | ⭐⭐⭐ |
 
 **推荐度说明**：
+
 - **⭐⭐⭐⭐⭐**：强烈推荐
 - **⭐⭐⭐⭐**：推荐
 - **⭐⭐⭐**：可选
@@ -73,6 +83,7 @@ graph TB
 | **权限监控** | 监控权限 | 中 | 生产环境 | ⭐⭐⭐⭐ |
 
 **推荐度说明**：
+
 - **⭐⭐⭐⭐⭐**：强烈推荐
 - **⭐⭐⭐⭐**：推荐
 - **⭐⭐⭐**：可选
@@ -91,6 +102,7 @@ graph TB
 | **网络审计** | 审计网络 | 中 | 合规要求 | ⭐⭐⭐⭐ |
 
 **推荐度说明**：
+
 - **⭐⭐⭐⭐⭐**：强烈推荐
 - **⭐⭐⭐⭐**：推荐
 - **⭐⭐⭐**：可选
@@ -109,6 +121,7 @@ graph TB
 | **安全监控** | 安全监控、威胁检测、安全响应 | 中 | ⭐⭐⭐⭐ |
 
 **推荐度说明**：
+
 - **⭐⭐⭐⭐⭐**：强烈推荐
 - **⭐⭐⭐⭐**：推荐
 - **⭐⭐⭐**：可选
@@ -212,7 +225,81 @@ graph TB
 
 ---
 
-## 9 相关文档
+## 9 2025 年最新实践
+
+### 9.1 安全优化指南应用最佳实践（2025）
+
+**2025 年趋势**：安全优化指南在隔离方案、权限方案、网络安全方案中的深度应用
+
+**实践要点**：
+
+- **多层防护**：设计多层安全防护机制
+- **最小权限**：实施最小权限原则
+- **安全监控**：建立安全监控和威胁检测机制
+- **持续改进**：建立纵深防御体系
+
+**代码示例**：
+
+```python
+# 2025 年安全优化指南工具
+class SecurityOptimizationGuideTool:
+    def __init__(self):
+        self.analyzer = SecurityAnalyzer()
+        self.designer = SecurityDesigner()
+        self.monitor = SecurityMonitor()
+        self.optimizer = SecurityOptimizer()
+
+    def analyze_security(self, system, threats):
+        """安全分析"""
+        return self.analyzer.analyze(system, threats)
+
+    def design_security(self, requirements, constraints):
+        """安全设计"""
+        return self.designer.design(requirements, constraints)
+
+    def monitor_security(self, system):
+        """安全监控"""
+        return self.monitor.monitor(system)
+```
+
+## 10 实际应用案例
+
+### 案例 1：安全优化指南应用（2025）
+
+**场景**：使用安全优化指南设计多租户安全方案
+
+**实现方案**：
+
+```python
+# 安全优化指南应用
+tool = SecurityOptimizationGuideTool()
+
+# 安全分析
+system = System(type="saas", tenants="multi")
+threats = Threats(data_leak=True, privilege_escalation=True)
+analysis = tool.analyze_security(system, threats)
+
+# 安全设计
+requirements = Requirements(isolation="strong", access_control="strict")
+constraints = Constraints(performance="maintain", cost="limited")
+design = tool.design_security(requirements, constraints)
+
+# 安全监控
+monitoring = tool.monitor_security(system)
+
+# 方案实施
+results = tool.optimizer.optimize(design)
+```
+
+**效果**：
+
+- 安全分析：全面分析安全需求，提高分析质量
+- 安全设计：设计多层防护，提高安全水平
+- 安全监控：实时监控安全，提高响应速度
+
+---
+
+## 11 相关文档
 
 - **[安全模型详细思维导图](06-security-model-detailed.md)** - 安全模型核心概念、安全机制详解、安全策略详解
 - **[隔离模型详细思维导图](05-isolation-model-detailed.md)** - 隔离模型核心概念、隔离层次详解、隔离机制详解

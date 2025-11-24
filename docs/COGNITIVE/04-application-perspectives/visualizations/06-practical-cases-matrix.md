@@ -8,6 +8,22 @@
   - [2 边缘计算案例](#2-边缘计算案例)
   - [3 AI推理案例](#3-ai推理案例)
   - [4 混合云案例](#4-混合云案例)
+  - [5 案例成功因素矩阵](#5-案例成功因素矩阵)
+  - [6 使用指南](#6-使用指南)
+    - [6.1 快速开始](#61-快速开始)
+    - [6.2 技术选型应用](#62-技术选型应用)
+    - [6.3 架构设计应用](#63-架构设计应用)
+  - [7 使用技巧](#7-使用技巧)
+    - [7.1 案例选择技巧](#71-案例选择技巧)
+    - [7.2 案例应用技巧](#72-案例应用技巧)
+  - [8 实践案例](#8-实践案例)
+    - [8.1 云原生应用案例应用](#81-云原生应用案例应用)
+    - [8.2 边缘计算案例应用](#82-边缘计算案例应用)
+  - [9 2025 年最新实践](#9-2025-年最新实践)
+    - [9.1 实际应用案例矩阵应用最佳实践（2025）](#91-实际应用案例矩阵应用最佳实践2025)
+  - [10 实际应用案例](#10-实际应用案例)
+    - [案例 1：实际应用案例矩阵应用（2025）](#案例-1实际应用案例矩阵应用2025)
+  - [11 相关文档](#11-相关文档)
 
 ---
 
@@ -261,7 +277,78 @@
 
 ---
 
-## 9 相关文档
+## 9 2025 年最新实践
+
+### 9.1 实际应用案例矩阵应用最佳实践（2025）
+
+**2025 年趋势**：实际应用案例矩阵在案例参考、技术选型、架构设计中的深度应用
+
+**实践要点**：
+
+- **案例查询**：使用矩阵快速查询相关案例
+- **案例对比**：对比不同案例的技术栈和架构模式
+- **案例应用**：参考案例进行技术选型和架构设计
+- **持续更新**：定期更新案例数据，反映最新实践
+
+**代码示例**：
+
+```python
+# 2025 年实际应用案例矩阵工具
+class PracticalCasesMatrixTool:
+    def __init__(self):
+        self.matrix = PracticalCasesMatrix()
+        self.query_engine = CaseQueryEngine()
+        self.comparator = CaseComparator()
+        self.applicator = CaseApplicator()
+
+    def query_cases(self, scenario, requirements):
+        """案例查询"""
+        return self.query_engine.query(scenario, requirements)
+
+    def compare_cases(self, cases, dimensions):
+        """案例对比"""
+        return self.comparator.compare(cases, dimensions)
+
+    def apply_case(self, case, context):
+        """案例应用"""
+        return self.applicator.apply(case, context)
+```
+
+## 10 实际应用案例
+
+### 案例 1：实际应用案例矩阵应用（2025）
+
+**场景**：使用实际应用案例矩阵进行云原生应用架构设计
+
+**实现方案**：
+
+```python
+# 实际应用案例矩阵应用
+tool = PracticalCasesMatrixTool()
+
+# 案例查询
+scenario = Scenario(type="cloud_native", domain="microservices")
+requirements = Requirements(scale="high", observability="high")
+cases = tool.query_cases(scenario, requirements)
+
+# 案例对比
+dimensions = ["technology_stack", "architecture_pattern", "performance"]
+comparison = tool.compare_cases(cases, dimensions)
+
+# 案例应用
+context = Context(team="devops", constraints="budget_limited")
+design = tool.apply_case(cases[0], context)
+```
+
+**效果**：
+
+- 案例查询：快速查询相关案例，提高查询效率
+- 案例对比：多维度对比案例，提高对比质量
+- 案例应用：参考案例设计架构，提高设计质量
+
+---
+
+## 11 相关文档
 
 - **[应用视角思维导图](01-application-perspectives-mindmap.md)** - 应用视角全景、eBPF/OTLP视角、程序设计视角
 - **[应用场景认知矩阵](02-application-scenarios-matrix.md)** - 技术演进场景、业务架构场景、API演进场景

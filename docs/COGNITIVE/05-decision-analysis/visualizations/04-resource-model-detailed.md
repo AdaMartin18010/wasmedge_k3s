@@ -8,6 +8,18 @@
   - [2 资源类型详解](#2-资源类型详解)
   - [3 资源分配详解](#3-资源分配详解)
   - [4 资源优化详解](#4-资源优化详解)
+  - [5 资源模型应用场景矩阵](#5-资源模型应用场景矩阵)
+  - [6 使用指南](#6-使用指南)
+    - [6.1 快速开始](#61-快速开始)
+    - [6.2 资源管理应用](#62-资源管理应用)
+    - [6.3 资源优化应用](#63-资源优化应用)
+  - [7 使用技巧](#7-使用技巧)
+    - [7.1 资源分配技巧](#71-资源分配技巧)
+    - [7.2 资源优化技巧](#72-资源优化技巧)
+  - [8 实践案例](#8-实践案例)
+    - [8.1 容器化资源管理案例](#81-容器化资源管理案例)
+    - [8.2 Serverless资源优化案例](#82-serverless资源优化案例)
+  - [9 相关文档](#9-相关文档)
 
 ---
 
@@ -389,7 +401,78 @@ mindmap
 
 ---
 
-## 9 相关文档
+## 9 2025 年最新实践
+
+### 9.1 资源模型详细思维导图应用最佳实践（2025）
+
+**2025 年趋势**：资源模型在资源管理、资源优化、成本控制中的深度应用
+
+**实践要点**：
+
+- **资源识别**：系统化识别系统中的资源类型
+- **动态分配**：根据实际需求动态分配资源
+- **资源优化**：持续优化资源利用率和成本
+- **监控分析**：建立资源监控和分析机制
+
+**代码示例**：
+
+```python
+# 2025 年资源模型工具
+class ResourceModelTool:
+    def __init__(self):
+        self.identifier = ResourceIdentifier()
+        self.allocator = ResourceAllocator()
+        self.optimizer = ResourceOptimizer()
+        self.monitor = ResourceMonitor()
+
+    def identify_resources(self, system):
+        """资源识别"""
+        return self.identifier.identify(system)
+
+    def allocate_resources(self, requirements, constraints):
+        """资源分配"""
+        return self.allocator.allocate(requirements, constraints)
+
+    def optimize_resources(self, resources, metrics):
+        """资源优化"""
+        return self.optimizer.optimize(resources, metrics)
+```
+
+## 10 实际应用案例
+
+### 案例 1：资源模型应用（2025）
+
+**场景**：使用资源模型优化Kubernetes集群资源管理
+
+**实现方案**：
+
+```python
+# 资源模型应用
+tool = ResourceModelTool()
+
+# 资源识别
+system = System(type="kubernetes", nodes=100)
+resources = tool.identify_resources(system)
+
+# 资源分配
+requirements = Requirements(cpu="high", memory="medium", io="medium")
+constraints = Constraints(budget="limited", performance="maintain")
+allocation = tool.allocate_resources(requirements, constraints)
+
+# 资源优化
+metrics = Metrics(utilization="low", cost="high")
+optimization = tool.optimize_resources(resources, metrics)
+```
+
+**效果**：
+
+- 资源识别：系统化识别资源，提高识别准确性
+- 资源分配：动态分配资源，提高资源利用率
+- 资源优化：持续优化资源，降低运营成本
+
+---
+
+## 11 相关文档
 
 - **[决策框架对比矩阵](01-decision-framework-matrix.md)** - 决策框架功能、决策场景适用、决策方法对比
 - **[成本优化指南](19-cost-optimization-guide.md)** - 成本优化全景、资源成本优化、运维成本优化

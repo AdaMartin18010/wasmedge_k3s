@@ -249,7 +249,78 @@
 
 ---
 
-## 9 相关文档
+## 9 2025 年最新实践
+
+### 9.1 决策框架矩阵应用最佳实践（2025）
+
+**2025 年趋势**：决策框架矩阵在技术选型、架构决策、资源管理中的深度应用
+
+**实践要点**：
+
+- **框架选择**：根据决策场景选择合适的决策框架
+- **方法应用**：系统化应用决策方法和工具
+- **决策优化**：基于实践效果优化决策流程
+- **持续改进**：定期更新框架数据，反映最新趋势
+
+**代码示例**：
+
+```python
+# 2025 年决策框架矩阵工具
+class DecisionFrameworkMatrixTool:
+    def __init__(self):
+        self.matrix = DecisionFrameworkMatrix()
+        self.selector = FrameworkSelector()
+        self.applicator = MethodApplicator()
+        self.optimizer = DecisionOptimizer()
+
+    def select_framework(self, scenario, requirements):
+        """框架选择"""
+        return self.selector.select(scenario, requirements)
+
+    def apply_method(self, framework, context):
+        """方法应用"""
+        return self.applicator.apply(framework, context)
+
+    def optimize_decision(self, decision, feedback):
+        """决策优化"""
+        return self.optimizer.optimize(decision, feedback)
+```
+
+## 10 实际应用案例
+
+### 案例 1：决策框架矩阵应用（2025）
+
+**场景**：使用决策框架矩阵进行容器运行时技术选型
+
+**实现方案**：
+
+```python
+# 决策框架矩阵应用
+tool = DecisionFrameworkMatrixTool()
+
+# 框架选择
+scenario = Scenario(type="technology_selection", domain="runtime")
+requirements = Requirements(complexity="medium", accuracy="high")
+framework = tool.select_framework(scenario, requirements)
+
+# 方法应用
+context = Context(alternatives=["containerd", "CRI-O", "runc"])
+decision = tool.apply_method(framework, context)
+
+# 决策优化
+feedback = Feedback(performance="good", satisfaction="high")
+optimized = tool.optimize_decision(decision, feedback)
+```
+
+**效果**：
+
+- 框架选择：基于场景选择框架，提高选择准确性
+- 方法应用：系统化应用方法，提高决策质量
+- 决策优化：基于反馈优化决策，提高决策效果
+
+---
+
+## 11 相关文档
 
 - **[技术选型决策树](03-technology-selection-decision-tree.md)** - 容器运行时、隔离技术、编排平台、服务网格选型决策树
 - **[决策案例对比矩阵](02-decision-cases-matrix.md)** - 边缘计算、Serverless、企业级、服务网格决策案例

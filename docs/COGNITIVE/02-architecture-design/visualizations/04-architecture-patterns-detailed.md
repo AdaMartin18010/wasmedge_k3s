@@ -19,7 +19,11 @@
   - [8 实践案例](#8-实践案例)
     - [8.1 微服务架构选择案例](#81-微服务架构选择案例)
     - [8.2 Serverless架构选择案例](#82-serverless架构选择案例)
-  - [9 相关文档](#9-相关文档)
+  - [9 2025 年最新实践](#9-2025-年最新实践)
+    - [9.1 架构模式详细思维导图应用最佳实践（2025）](#91-架构模式详细思维导图应用最佳实践2025)
+  - [10 实际应用案例](#10-实际应用案例)
+    - [案例 1：架构模式详细思维导图应用（2025）](#案例-1架构模式详细思维导图应用2025)
+  - [11 相关文档](#11-相关文档)
 
 ---
 
@@ -328,7 +332,78 @@ mindmap
 
 ---
 
-## 9 相关文档
+## 9 2025 年最新实践
+
+### 9.1 架构模式详细思维导图应用最佳实践（2025）
+
+**2025 年趋势**：架构模式详细思维导图在架构设计、模式选择、架构演进中的深度应用
+
+**实践要点**：
+
+- **模式选择**：根据场景选择合适的架构模式
+- **模式应用**：系统化应用架构模式
+- **模式演进**：基于业务需求演进架构模式
+- **效果评估**：持续评估架构模式的效果
+
+**代码示例**：
+
+```python
+# 2025 年架构模式详细思维导图工具
+class ArchitecturePatternsDetailedTool:
+    def __init__(self):
+        self.selector = PatternSelector()
+        self.applicator = PatternApplicator()
+        self.evolver = PatternEvolver()
+        self.evaluator = PatternEvaluator()
+
+    def select_pattern(self, requirements, constraints):
+        """模式选择"""
+        return self.selector.select(requirements, constraints)
+
+    def apply_pattern(self, pattern, context):
+        """模式应用"""
+        return self.applicator.apply(pattern, context)
+
+    def evolve_pattern(self, pattern, new_requirements):
+        """模式演进"""
+        return self.evolver.evolve(pattern, new_requirements)
+```
+
+## 10 实际应用案例
+
+### 案例 1：架构模式详细思维导图应用（2025）
+
+**场景**：使用架构模式详细思维导图进行微服务架构设计
+
+**实现方案**：
+
+```python
+# 架构模式详细思维导图应用
+tool = ArchitecturePatternsDetailedTool()
+
+# 模式选择
+requirements = Requirements(scale="high", complexity="medium")
+constraints = Constraints(resources="limited", team="small")
+pattern = tool.select_pattern(requirements, constraints)
+
+# 模式应用
+context = Context(domain="e-commerce", team_size=10)
+architecture = tool.apply_pattern(pattern, context)
+
+# 模式演进
+new_requirements = Requirements(scale="very_high", complexity="high")
+evolved = tool.evolve_pattern(pattern, new_requirements)
+```
+
+**效果**：
+
+- 模式选择：基于需求选择合适模式，提高架构适用性
+- 模式应用：系统化应用模式，保证架构质量
+- 模式演进：基于需求演进模式，提高架构灵活性
+
+---
+
+## 11 相关文档
 
 - **[架构认知地图](01-architecture-cognitive-map.md)** - 架构认知全景、架构设计、架构决策、架构演进
 - **[架构模式对比矩阵](03-architecture-patterns-matrix.md)** - 架构模式功能、适用场景、复杂度、演进路径

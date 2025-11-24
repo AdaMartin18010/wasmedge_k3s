@@ -8,6 +8,15 @@
   - [2 问题识别流程](#2-问题识别流程)
   - [3 方案设计流程](#3-方案设计流程)
   - [4 决策执行流程](#4-决策执行流程)
+  - [5 决策制定检查清单](#5-决策制定检查清单)
+  - [6 使用指南](#6-使用指南)
+    - [6.1 快速开始](#61-快速开始)
+    - [6.2 决策制定流程应用](#62-决策制定流程应用)
+  - [7 使用技巧](#7-使用技巧)
+    - [7.1 决策制定技巧](#71-决策制定技巧)
+  - [8 实践案例](#8-实践案例)
+    - [8.1 架构决策制定案例](#81-架构决策制定案例)
+  - [9 相关文档](#9-相关文档)
 
 ---
 
@@ -296,7 +305,89 @@ graph LR
 
 ---
 
-## 9 相关文档
+## 9 2025 年最新实践
+
+### 9.1 决策制定完整流程应用最佳实践（2025）
+
+**2025 年趋势**：决策制定完整流程在问题识别、需求分析、方案设计、决策制定中的深度应用
+
+**实践要点**：
+
+- **问题识别**：准确识别问题的本质和范围
+- **需求分析**：系统化分析决策需求
+- **方案设计**：全面设计决策方案
+- **决策执行**：严格执行决策并验证效果
+
+**代码示例**：
+
+```python
+# 2025 年决策制定完整流程工具
+class DecisionMakingProcessTool:
+    def __init__(self):
+        self.process = DecisionMakingProcess()
+        self.problem_identifier = ProblemIdentifier()
+        self.requirement_analyzer = RequirementAnalyzer()
+        self.solution_designer = SolutionDesigner()
+        self.decision_executor = DecisionExecutor()
+
+    def identify_problem(self, context, symptoms):
+        """问题识别"""
+        return self.problem_identifier.identify(context, symptoms)
+
+    def analyze_requirements(self, problem, constraints):
+        """需求分析"""
+        return self.requirement_analyzer.analyze(problem, constraints)
+
+    def design_solution(self, requirements, alternatives):
+        """方案设计"""
+        return self.solution_designer.design(requirements, alternatives)
+
+    def execute_decision(self, decision, plan):
+        """决策执行"""
+        return self.decision_executor.execute(decision, plan)
+```
+
+## 10 实际应用案例
+
+### 案例 1：决策制定完整流程应用（2025）
+
+**场景**：使用决策制定完整流程进行微服务架构决策
+
+**实现方案**：
+
+```python
+# 决策制定完整流程应用
+tool = DecisionMakingProcessTool()
+
+# 问题识别
+context = Context(project="microservices", scale="large")
+symptoms = Symptoms(performance="low", scalability="limited")
+problem = tool.identify_problem(context, symptoms)
+
+# 需求分析
+constraints = Constraints(budget="limited", timeline="tight")
+requirements = tool.analyze_requirements(problem, constraints)
+
+# 方案设计
+alternatives = [Alternative(type="service_mesh"), Alternative(type="api_gateway")]
+solution = tool.design_solution(requirements, alternatives)
+
+# 决策执行
+decision = Decision(solution=solution)
+plan = ExecutionPlan(steps=[...])
+results = tool.execute_decision(decision, plan)
+```
+
+**效果**：
+
+- 问题识别：准确识别问题，提高识别质量
+- 需求分析：系统化分析需求，提高分析质量
+- 方案设计：全面设计方案，提高设计质量
+- 决策执行：严格执行决策，提高执行效果
+
+---
+
+## 11 相关文档
 
 - **[决策框架对比矩阵](01-decision-framework-matrix.md)** - 决策框架功能、决策场景适用、决策方法
 - **[架构决策完整流程](../../02-architecture-design/visualizations/08-architecture-decision-process.md)** - 架构决策全景流程、需求分析流程、架构设计流程

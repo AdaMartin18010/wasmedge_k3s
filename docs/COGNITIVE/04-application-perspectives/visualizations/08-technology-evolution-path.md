@@ -8,6 +8,23 @@
   - [2 虚拟化演进路径](#2-虚拟化演进路径)
   - [3 容器化演进路径](#3-容器化演进路径)
   - [4 沙盒化演进路径](#4-沙盒化演进路径)
+  - [5 技术演进时间线](#5-技术演进时间线)
+  - [6 技术演进驱动因素](#6-技术演进驱动因素)
+  - [7 使用指南](#7-使用指南)
+    - [7.1 快速开始](#71-快速开始)
+    - [7.2 技术演进应用](#72-技术演进应用)
+    - [7.3 技术选型应用](#73-技术选型应用)
+  - [8 使用技巧](#8-使用技巧)
+    - [8.1 演进规划技巧](#81-演进规划技巧)
+    - [8.2 技术选型技巧](#82-技术选型技巧)
+  - [9 实践案例](#9-实践案例)
+    - [9.1 容器化演进案例](#91-容器化演进案例)
+    - [9.2 沙盒化演进案例](#92-沙盒化演进案例)
+  - [10 2025 年最新实践](#10-2025-年最新实践)
+    - [10.1 技术演进路径图应用最佳实践（2025）](#101-技术演进路径图应用最佳实践2025)
+  - [11 实际应用案例](#11-实际应用案例)
+    - [案例 1：技术演进路径图应用（2025）](#案例-1技术演进路径图应用2025)
+  - [12 相关文档](#12-相关文档)
 
 ---
 
@@ -312,7 +329,77 @@ graph TB
 
 ---
 
-## 10 相关文档
+## 10 2025 年最新实践
+
+### 10.1 技术演进路径图应用最佳实践（2025）
+
+**2025 年趋势**：技术演进路径图在技术规划、演进决策、架构设计中的深度应用
+
+**实践要点**：
+
+- **路径规划**：使用路径图规划技术演进路径
+- **演进决策**：基于路径图进行演进决策
+- **风险评估**：评估技术演进的风险和收益
+- **持续优化**：基于实践效果优化演进路径
+
+**代码示例**：
+
+```python
+# 2025 年技术演进路径图工具
+class TechnologyEvolutionPathTool:
+    def __init__(self):
+        self.path_map = TechnologyEvolutionPathMap()
+        self.planner = EvolutionPlanner()
+        self.decision_support = DecisionSupport()
+        self.risk_analyzer = RiskAnalyzer()
+
+    def plan_path(self, current_state, target_state):
+        """路径规划"""
+        return self.planner.plan(current_state, target_state)
+
+    def support_decision(self, path, constraints):
+        """演进决策"""
+        return self.decision_support.recommend(path, constraints)
+
+    def analyze_risk(self, path):
+        """风险评估"""
+        return self.risk_analyzer.analyze(path)
+```
+
+## 11 实际应用案例
+
+### 案例 1：技术演进路径图应用（2025）
+
+**场景**：使用技术演进路径图规划容器化技术演进
+
+**实现方案**：
+
+```python
+# 技术演进路径图应用
+tool = TechnologyEvolutionPathTool()
+
+# 路径规划
+current_state = State(technology="traditional", version="v1.0")
+target_state = State(technology="containerized", version="v2.0")
+path = tool.plan_path(current_state, target_state)
+
+# 演进决策
+constraints = Constraints(budget="limited", timeline="6months")
+decision = tool.support_decision(path, constraints)
+
+# 风险评估
+risk = tool.analyze_risk(path)
+```
+
+**效果**：
+
+- 路径规划：系统化规划技术演进路径，提高规划质量
+- 演进决策：基于路径图进行决策，提高决策准确性
+- 风险评估：评估演进风险，降低演进风险
+
+---
+
+## 12 相关文档
 
 - **[应用视角思维导图](01-application-perspectives-mindmap.md)** - 应用视角全景、eBPF/OTLP视角、程序设计视角
 - **[应用场景认知矩阵](02-application-scenarios-matrix.md)** - 技术演进场景、业务架构场景、API演进场景

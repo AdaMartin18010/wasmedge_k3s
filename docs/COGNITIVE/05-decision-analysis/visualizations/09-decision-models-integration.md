@@ -8,6 +8,19 @@
   - [2 资源与隔离集成](#2-资源与隔离集成)
   - [3 安全与分布式集成](#3-安全与分布式集成)
   - [4 决策流程集成](#4-决策流程集成)
+  - [5 决策模型组合使用矩阵](#5-决策模型组合使用矩阵)
+  - [6 决策模型选择指南](#6-决策模型选择指南)
+  - [7 使用指南](#7-使用指南)
+    - [7.1 快速开始](#71-快速开始)
+    - [7.2 模型组合应用](#72-模型组合应用)
+    - [7.3 决策流程应用](#73-决策流程应用)
+  - [8 使用技巧](#8-使用技巧)
+    - [8.1 模型组合技巧](#81-模型组合技巧)
+    - [8.2 综合决策技巧](#82-综合决策技巧)
+  - [9 实践案例](#9-实践案例)
+    - [9.1 企业级应用综合决策案例](#91-企业级应用综合决策案例)
+    - [9.2 云原生应用综合决策案例](#92-云原生应用综合决策案例)
+  - [10 相关文档](#10-相关文档)
 
 ---
 
@@ -344,7 +357,77 @@ graph TB
 
 ---
 
-## 10 相关文档
+## 10 2025 年最新实践
+
+### 10.1 决策模型集成关系图应用最佳实践（2025）
+
+**2025 年趋势**：决策模型集成在资源与隔离集成、安全与分布式集成中的深度应用
+
+**实践要点**：
+
+- **模型组合**：系统化组合使用多个决策模型
+- **关系理解**：深入理解模型之间的关系
+- **集成优化**：优化模型集成效果
+- **持续改进**：基于实践效果持续改进集成
+
+**代码示例**：
+
+```python
+# 2025 年决策模型集成工具
+class DecisionModelsIntegrationTool:
+    def __init__(self):
+        self.combiner = ModelCombiner()
+        self.relation_analyzer = RelationAnalyzer()
+        self.optimizer = IntegrationOptimizer()
+        self.improver = ContinuousImprover()
+
+    def combine_models(self, models, requirements):
+        """模型组合"""
+        return self.combiner.combine(models, requirements)
+
+    def analyze_relations(self, models):
+        """关系分析"""
+        return self.relation_analyzer.analyze(models)
+
+    def optimize_integration(self, integration, metrics):
+        """集成优化"""
+        return self.optimizer.optimize(integration, metrics)
+```
+
+## 11 实际应用案例
+
+### 案例 1：决策模型集成应用（2025）
+
+**场景**：使用决策模型集成设计云原生应用
+
+**实现方案**：
+
+```python
+# 决策模型集成应用
+tool = DecisionModelsIntegrationTool()
+
+# 模型组合
+models = [Model(type="resource"), Model(type="isolation"), Model(type="security"), Model(type="distributed")]
+requirements = Requirements(type="cloud_native", scale="large")
+integration = tool.combine_models(models, requirements)
+
+# 关系分析
+relations = tool.analyze_relations(models)
+
+# 集成优化
+metrics = Metrics(efficiency="low", quality="good")
+optimization = tool.optimize_integration(integration, metrics)
+```
+
+**效果**：
+
+- 模型组合：系统化组合模型，提高组合质量
+- 关系分析：深入理解模型关系，提高理解质量
+- 集成优化：优化集成效果，提高集成效率
+
+---
+
+## 12 相关文档
 
 - **[资源模型详细思维导图](04-resource-model-detailed.md)** - 资源模型核心概念、资源类型详解、资源分配详解
 - **[隔离模型详细思维导图](05-isolation-model-detailed.md)** - 隔离模型核心概念、隔离层次详解、隔离机制详解

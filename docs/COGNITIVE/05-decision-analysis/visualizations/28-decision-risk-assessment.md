@@ -9,6 +9,15 @@
   - [3 业务风险评估](#3-业务风险评估)
   - [4 运维风险评估](#4-运维风险评估)
   - [5 综合风险评估](#5-综合风险评估)
+  - [6 风险评估检查清单](#6-风险评估检查清单)
+  - [7 使用指南](#7-使用指南)
+    - [7.1 快速开始](#71-快速开始)
+    - [7.2 风险评估应用](#72-风险评估应用)
+  - [8 使用技巧](#8-使用技巧)
+    - [8.1 风险识别技巧](#81-风险识别技巧)
+  - [9 实践案例](#9-实践案例)
+    - [9.1 微服务架构风险评估案例](#91-微服务架构风险评估案例)
+  - [10 相关文档](#10-相关文档)
 
 ---
 
@@ -60,11 +69,13 @@ graph TB
 | **安全风险** | 安全漏洞、安全威胁 | 高 | 系统安全 | 安全审计、安全加固 | ⭐⭐⭐⭐⭐ |
 
 **风险等级说明**：
+
 - **高**：严重影响系统，需要重点关注
 - **中**：一定影响，需要适当关注
 - **低**：影响较小，可接受
 
 **推荐度说明**：
+
 - **⭐⭐⭐⭐⭐**：强烈推荐
 - **⭐⭐⭐⭐**：推荐
 - **⭐⭐⭐**：可选
@@ -83,11 +94,13 @@ graph TB
 | **业务扩展风险** | 扩展困难、架构限制 | 中 | 业务扩展 | 可扩展设计、架构优化 | ⭐⭐⭐⭐ |
 
 **风险等级说明**：
+
 - **高**：严重影响业务，需要重点关注
 - **中**：一定影响，需要适当关注
 - **低**：影响较小，可接受
 
 **推荐度说明**：
+
 - **⭐⭐⭐⭐⭐**：强烈推荐
 - **⭐⭐⭐⭐**：推荐
 - **⭐⭐⭐**：可选
@@ -106,11 +119,13 @@ graph TB
 | **运维故障风险** | 故障频发、恢复困难 | 高 | 系统稳定性 | 故障预防、故障恢复 | ⭐⭐⭐⭐⭐ |
 
 **风险等级说明**：
+
 - **高**：严重影响运维，需要重点关注
 - **中**：一定影响，需要适当关注
 - **低**：影响较小，可接受
 
 **推荐度说明**：
+
 - **⭐⭐⭐⭐⭐**：强烈推荐
 - **⭐⭐⭐⭐**：推荐
 - **⭐⭐⭐**：可选
@@ -153,6 +168,7 @@ graph LR
 | **安全风险** | 20% | 高 | 高 | P0 |
 
 **风险应对优先级**：
+
 - **P0**：立即应对，最高优先级
 - **P1**：尽快应对，高优先级
 - **P2**：计划应对，中优先级
@@ -170,6 +186,7 @@ graph LR
 | **风险监控** | 风险监控、风险预警、风险报告 | 中 | ⭐⭐⭐⭐ |
 
 **推荐度说明**：
+
 - **⭐⭐⭐⭐⭐**：强烈推荐
 - **⭐⭐⭐⭐**：推荐
 - **⭐⭐⭐**：可选
@@ -269,7 +286,81 @@ graph LR
 
 ---
 
-## 10 相关文档
+## 10 2025 年最新实践
+
+### 10.1 决策风险评估综合指南应用最佳实践（2025）
+
+**2025 年趋势**：决策风险评估综合指南在技术风险评估、业务风险评估、运维风险评估中的深度应用
+
+**实践要点**：
+
+- **全面识别**：全面识别各类风险
+- **准确评估**：准确评估风险等级和影响
+- **应对策略**：制定合理的风险应对策略
+- **风险监控**：建立风险监控和预警机制
+
+**代码示例**：
+
+```python
+# 2025 年决策风险评估综合指南工具
+class DecisionRiskAssessmentTool:
+    def __init__(self):
+        self.identifier = RiskIdentifier()
+        self.evaluator = RiskEvaluator()
+        self.strategy_designer = RiskStrategyDesigner()
+        self.monitor = RiskMonitor()
+
+    def identify_risks(self, decision, context):
+        """风险识别"""
+        return self.identifier.identify(decision, context)
+
+    def evaluate_risks(self, risks, criteria):
+        """风险评估"""
+        return self.evaluator.evaluate(risks, criteria)
+
+    def design_strategy(self, risks, constraints):
+        """应对策略设计"""
+        return self.strategy_designer.design(risks, constraints)
+```
+
+## 11 实际应用案例
+
+### 案例 1：决策风险评估综合指南应用（2025）
+
+**场景**：使用决策风险评估综合指南进行微服务架构风险评估
+
+**实现方案**：
+
+```python
+# 决策风险评估综合指南应用
+tool = DecisionRiskAssessmentTool()
+
+# 风险识别
+decision = Decision(type="microservices", scale="large")
+context = Context(team="devops", infrastructure="cloud")
+risks = tool.identify_risks(decision, context)
+
+# 风险评估
+criteria = Criteria(probability=True, impact=True, severity=True)
+evaluation = tool.evaluate_risks(risks, criteria)
+
+# 应对策略设计
+constraints = Constraints(budget="limited", timeline="tight")
+strategy = tool.design_strategy(risks, constraints)
+
+# 风险监控
+monitoring = tool.monitor.monitor(risks)
+```
+
+**效果**：
+
+- 风险识别：全面识别风险，提高识别完整性
+- 风险评估：准确评估风险，提高评估质量
+- 应对策略：设计合理策略，提高风险应对能力
+
+---
+
+## 12 相关文档
 
 - **[决策制定完整流程](24-decision-making-process.md)** - 决策制定全景流程、问题识别流程、方案设计流程
 - **[最佳实践指南](14-best-practices-guide.md)** - 技术选型最佳实践、架构设计最佳实践、安全设计最佳实践

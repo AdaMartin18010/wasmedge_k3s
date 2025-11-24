@@ -8,6 +8,15 @@
   - [2 监控设计](#2-监控设计)
   - [3 告警管理](#3-告警管理)
   - [4 运维自动化](#4-运维自动化)
+  - [5 监控运维检查清单](#5-监控运维检查清单)
+  - [6 使用指南](#6-使用指南)
+    - [6.1 快速开始](#61-快速开始)
+    - [6.2 监控运维应用](#62-监控运维应用)
+  - [7 使用技巧](#7-使用技巧)
+    - [7.1 监控设计技巧](#71-监控设计技巧)
+  - [8 实践案例](#8-实践案例)
+    - [8.1 微服务监控运维案例](#81-微服务监控运维案例)
+  - [9 相关文档](#9-相关文档)
 
 ---
 
@@ -59,6 +68,7 @@ graph TB
 | **成本监控** | 资源成本、运维成本 | 成本监控系统 | 资源模型 | ⭐⭐⭐⭐ |
 
 **推荐度说明**：
+
 - **⭐⭐⭐⭐⭐**：强烈推荐
 - **⭐⭐⭐⭐**：推荐
 - **⭐⭐⭐**：可选
@@ -77,6 +87,7 @@ graph TB
 | **成本告警** | 成本超支、成本异常 | 成本告警、成本趋势告警 | 成本分析→成本优化 | ⭐⭐⭐⭐ |
 
 **推荐度说明**：
+
 - **⭐⭐⭐⭐⭐**：强烈推荐
 - **⭐⭐⭐⭐**：推荐
 - **⭐⭐⭐**：可选
@@ -95,6 +106,7 @@ graph TB
 | **备份自动化** | 自动备份、自动恢复 | 备份工具 | 可靠性优化指南 | ⭐⭐⭐⭐ |
 
 **推荐度说明**：
+
 - **⭐⭐⭐⭐⭐**：强烈推荐
 - **⭐⭐⭐⭐**：推荐
 - **⭐⭐⭐**：可选
@@ -113,6 +125,7 @@ graph TB
 | **持续改进** | 监控优化、告警优化、运维优化 | 中 | ⭐⭐⭐⭐ |
 
 **推荐度说明**：
+
 - **⭐⭐⭐⭐⭐**：强烈推荐
 - **⭐⭐⭐⭐**：推荐
 - **⭐⭐⭐**：可选
@@ -210,7 +223,80 @@ graph TB
 
 ---
 
-## 9 相关文档
+## 9 2025 年最新实践
+
+### 9.1 监控运维指南应用最佳实践（2025）
+
+**2025 年趋势**：监控运维指南在监控设计、告警管理、运维自动化中的深度应用
+
+**实践要点**：
+
+- **全面监控**：设计全面的监控体系（指标、日志、追踪）
+- **告警优化**：设计合理的告警策略，避免告警风暴
+- **运维自动化**：建立运维自动化机制
+- **持续改进**：基于实践效果持续优化
+
+**代码示例**：
+
+```python
+# 2025 年监控运维指南工具
+class MonitoringOperationsGuideTool:
+    def __init__(self):
+        self.designer = MonitoringDesigner()
+        self.alert_manager = AlertManager()
+        self.automator = OperationsAutomator()
+        self.optimizer = MonitoringOptimizer()
+
+    def design_monitoring(self, requirements, system):
+        """监控设计"""
+        return self.designer.design(requirements, system)
+
+    def manage_alerts(self, alerts, policies):
+        """告警管理"""
+        return self.alert_manager.manage(alerts, policies)
+
+    def automate_operations(self, operations, workflows):
+        """运维自动化"""
+        return self.automator.automate(operations, workflows)
+```
+
+## 10 实际应用案例
+
+### 案例 1：监控运维指南应用（2025）
+
+**场景**：使用监控运维指南设计微服务架构监控运维方案
+
+**实现方案**：
+
+```python
+# 监控运维指南应用
+tool = MonitoringOperationsGuideTool()
+
+# 监控设计
+requirements = Requirements(metrics=True, logs=True, traces=True)
+system = System(type="microservices", scale="large")
+monitoring = tool.design_monitoring(requirements, system)
+
+# 告警管理
+alerts = Alerts(performance=True, errors=True, availability=True)
+policies = AlertPolicies(thresholds=[...], escalation=[...])
+alert_management = tool.manage_alerts(alerts, policies)
+
+# 运维自动化
+operations = Operations(deployment=True, scaling=True, recovery=True)
+workflows = Workflows([...])
+automation = tool.automate_operations(operations, workflows)
+```
+
+**效果**：
+
+- 监控设计：全面监控体系，提高可观测性
+- 告警管理：合理告警策略，提高响应效率
+- 运维自动化：自动化运维，提高运维效率
+
+---
+
+## 11 相关文档
 
 - **[eBPF/OTLP视角详细思维导图](../../04-application-perspectives/visualizations/03-ebpf-otlp-detailed-mindmap.md)** - eBPF技术详解、OTLP技术详解、可观测性体系
 - **[性能优化指南](18-performance-optimization-guide.md)** - CPU性能优化、内存性能优化、I/O性能优化、网络性能优化

@@ -415,7 +415,80 @@ graph LR
 
 ---
 
-## 9 相关文档
+## 9 2025 年最新实践
+
+### 9.1 架构决策完整流程应用最佳实践（2025）
+
+**2025 年趋势**：架构决策完整流程在架构设计、技术选型、决策支持中的深度应用
+
+**实践要点**：
+
+- **需求分析**：系统化分析架构需求
+- **方案设计**：基于需求设计架构方案
+- **方案评估**：多维度评估架构方案
+- **决策制定**：基于评估结果制定决策
+
+**代码示例**：
+
+```python
+# 2025 年架构决策完整流程工具
+class ArchitectureDecisionProcessTool:
+    def __init__(self):
+        self.analyzer = RequirementAnalyzer()
+        self.designer = ArchitectureDesigner()
+        self.evaluator = ArchitectureEvaluator()
+        self.decision_maker = DecisionMaker()
+
+    def make_decision(self, requirements, constraints):
+        """架构决策"""
+        # 需求分析
+        analysis = self.analyzer.analyze(requirements)
+
+        # 方案设计
+        designs = self.designer.design(analysis, constraints)
+
+        # 方案评估
+        evaluations = self.evaluator.evaluate(designs)
+
+        # 决策制定
+        decision = self.decision_maker.decide(evaluations)
+
+        return decision
+```
+
+## 10 实际应用案例
+
+### 案例 1：架构决策完整流程应用（2025）
+
+**场景**：使用架构决策完整流程进行 Serverless 架构决策
+
+**实现方案**：
+
+```python
+# 架构决策完整流程应用
+tool = ArchitectureDecisionProcessTool()
+
+# 架构决策
+requirements = Requirements(scale="high", cost="low", automation="high")
+constraints = Constraints(budget="limited", team="small")
+decision = tool.make_decision(requirements, constraints)
+
+# 输出决策
+print(f"决策方案: {decision['solution']}")
+print(f"决策理由: {decision['rationale']}")
+print(f"风险评估: {decision['risk']}")
+```
+
+**效果**：
+
+- 需求分析：系统化分析需求，提高分析质量
+- 方案设计：基于需求设计方案，提高方案适用性
+- 方案评估：多维度评估方案，提高评估准确性
+- 决策制定：基于评估制定决策，提高决策质量
+
+---
+
+## 11 相关文档
 
 - **[架构认知地图](01-architecture-cognitive-map.md)** - 架构设计全景、架构模式、架构决策
 - **[架构模式对比矩阵](03-architecture-patterns-matrix.md)** - 架构模式功能对比、适用场景、复杂度

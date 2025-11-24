@@ -20,7 +20,11 @@
   - [9 实践案例](#9-实践案例)
     - [9.1 单体到微服务演进案例](#91-单体到微服务演进案例)
     - [9.2 传统到云原生演进案例](#92-传统到云原生演进案例)
-  - [10 相关文档](#10-相关文档)
+  - [10 2025 年最新实践](#10-2025-年最新实践)
+    - [10.1 架构演进路径图应用最佳实践（2025）](#101-架构演进路径图应用最佳实践2025)
+  - [11 实际应用案例](#11-实际应用案例)
+    - [案例 1：架构演进路径图应用（2025）](#案例-1架构演进路径图应用2025)
+  - [12 相关文档](#12-相关文档)
 
 ---
 
@@ -339,7 +343,78 @@ graph TB
 
 ---
 
-## 10 相关文档
+## 10 2025 年最新实践
+
+### 10.1 架构演进路径图应用最佳实践（2025）
+
+**2025 年趋势**：架构演进路径图在架构规划、演进决策、技术选型中的深度应用
+
+**实践要点**：
+
+- **路径规划**：根据业务需求规划架构演进路径
+- **演进决策**：基于路径图进行演进决策
+- **风险评估**：评估演进路径的风险和收益
+- **持续优化**：基于实践效果优化演进路径
+
+**代码示例**：
+
+```python
+# 2025 年架构演进路径图工具
+class ArchitectureEvolutionPathTool:
+    def __init__(self):
+        self.planner = EvolutionPathPlanner()
+        self.decision_support = EvolutionDecisionSupport()
+        self.risk_assessor = RiskAssessor()
+        self.optimizer = PathOptimizer()
+
+    def plan_path(self, current_state, target_state, constraints):
+        """路径规划"""
+        return self.planner.plan(current_state, target_state, constraints)
+
+    def support_decision(self, path, requirements):
+        """演进决策支持"""
+        return self.decision_support.recommend(path, requirements)
+
+    def assess_risk(self, path):
+        """风险评估"""
+        return self.risk_assessor.assess(path)
+```
+
+## 11 实际应用案例
+
+### 案例 1：架构演进路径图应用（2025）
+
+**场景**：使用架构演进路径图规划云原生架构演进
+
+**实现方案**：
+
+```python
+# 架构演进路径图应用
+tool = ArchitectureEvolutionPathTool()
+
+# 路径规划
+current_state = ArchitectureState(type="monolithic", tech_stack="traditional")
+target_state = ArchitectureState(type="cloud_native", tech_stack="kubernetes")
+constraints = Constraints(budget="limited", timeline="12_months")
+path = tool.plan_path(current_state, target_state, constraints)
+
+# 演进决策支持
+requirements = Requirements(scale="high", automation="high")
+decision = tool.support_decision(path, requirements)
+
+# 风险评估
+risk = tool.assess_risk(path)
+```
+
+**效果**：
+
+- 路径规划：系统化规划演进路径，提高规划质量
+- 演进决策：基于路径图支持决策，提高决策准确性
+- 风险评估：评估演进风险，降低演进风险
+
+---
+
+## 12 相关文档
 
 - **[架构认知地图](01-architecture-cognitive-map.md)** - 架构设计全景、架构模式、架构决策
 - **[架构模式对比矩阵](03-architecture-patterns-matrix.md)** - 架构模式功能对比、适用场景、复杂度

@@ -8,6 +8,22 @@
   - [2 创业公司场景](#2-创业公司场景)
   - [3 政府机构场景](#3-政府机构场景)
   - [4 教育机构场景](#4-教育机构场景)
+  - [5 场景选择决策矩阵](#5-场景选择决策矩阵)
+  - [6 使用指南](#6-使用指南)
+    - [6.1 快速开始](#61-快速开始)
+    - [6.2 场景选择应用](#62-场景选择应用)
+    - [6.3 决策制定应用](#63-决策制定应用)
+  - [7 使用技巧](#7-使用技巧)
+    - [7.1 场景识别技巧](#71-场景识别技巧)
+    - [7.2 技术选型技巧](#72-技术选型技巧)
+  - [8 实践案例](#8-实践案例)
+    - [8.1 企业级场景应用案例](#81-企业级场景应用案例)
+    - [8.2 创业公司场景应用案例](#82-创业公司场景应用案例)
+  - [9 2025 年最新实践](#9-2025-年最新实践)
+    - [9.1 真实世界场景矩阵应用最佳实践（2025）](#91-真实世界场景矩阵应用最佳实践2025)
+  - [10 实际应用案例](#10-实际应用案例)
+    - [案例 1：真实世界场景矩阵应用（2025）](#案例-1真实世界场景矩阵应用2025)
+  - [11 相关文档](#11-相关文档)
 
 ---
 
@@ -262,7 +278,78 @@
 
 ---
 
-## 9 相关文档
+## 9 2025 年最新实践
+
+### 9.1 真实世界场景矩阵应用最佳实践（2025）
+
+**2025 年趋势**：真实世界场景矩阵在场景识别、技术选型、架构设计中的深度应用
+
+**实践要点**：
+
+- **场景识别**：使用矩阵识别真实世界场景特征
+- **场景匹配**：基于矩阵匹配场景和技术方案
+- **场景应用**：参考场景进行技术选型和架构设计
+- **持续更新**：定期更新场景数据，反映最新趋势
+
+**代码示例**：
+
+```python
+# 2025 年真实世界场景矩阵工具
+class RealWorldScenariosMatrixTool:
+    def __init__(self):
+        self.matrix = RealWorldScenariosMatrix()
+        self.identifier = ScenarioIdentifier()
+        self.matcher = ScenarioMatcher()
+        self.applicator = ScenarioApplicator()
+
+    def identify_scenario(self, context, constraints):
+        """场景识别"""
+        return self.identifier.identify(context, constraints)
+
+    def match_scenario(self, scenario, solutions):
+        """场景匹配"""
+        return self.matcher.match(scenario, solutions)
+
+    def apply_scenario(self, scenario, requirements):
+        """场景应用"""
+        return self.applicator.apply(scenario, requirements)
+```
+
+## 10 实际应用案例
+
+### 案例 1：真实世界场景矩阵应用（2025）
+
+**场景**：使用真实世界场景矩阵进行企业级场景技术选型
+
+**实现方案**：
+
+```python
+# 真实世界场景矩阵应用
+tool = RealWorldScenariosMatrixTool()
+
+# 场景识别
+context = Context(organization="enterprise", size="large")
+constraints = Constraints(budget="high", compliance="required")
+scenario = tool.identify_scenario(context, constraints)
+
+# 场景匹配
+solutions = [Solution(type="kubernetes"), Solution(type="service_mesh")]
+match = tool.match_scenario(scenario, solutions)
+
+# 场景应用
+requirements = Requirements(scale="high", security="high")
+design = tool.apply_scenario(scenario, requirements)
+```
+
+**效果**：
+
+- 场景识别：准确识别真实世界场景，提高识别准确性
+- 场景匹配：基于矩阵匹配场景和方案，提高匹配质量
+- 场景应用：参考场景设计架构，提高设计质量
+
+---
+
+## 11 相关文档
 
 - **[应用视角思维导图](01-application-perspectives-mindmap.md)** - 应用视角全景、eBPF/OTLP视角、程序设计视角
 - **[应用场景认知矩阵](02-application-scenarios-matrix.md)** - 技术演进场景、业务架构场景、API演进场景

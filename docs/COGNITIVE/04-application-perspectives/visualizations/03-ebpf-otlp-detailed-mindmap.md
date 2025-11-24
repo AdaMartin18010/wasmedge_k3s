@@ -8,6 +8,22 @@
   - [2 OTLP技术详解](#2-otlp技术详解)
   - [3 可观测性体系](#3-可观测性体系)
   - [4 技术演进路径](#4-技术演进路径)
+  - [5 eBPF/OTLP应用场景矩阵](#5-ebpfotlp应用场景矩阵)
+  - [6 使用指南](#6-使用指南)
+    - [6.1 快速开始](#61-快速开始)
+    - [6.2 可观测性设计应用](#62-可观测性设计应用)
+    - [6.3 性能分析应用](#63-性能分析应用)
+  - [7 使用技巧](#7-使用技巧)
+    - [7.1 eBPF使用技巧](#71-ebpf使用技巧)
+    - [7.2 OTLP使用技巧](#72-otlp使用技巧)
+  - [8 实践案例](#8-实践案例)
+    - [8.1 Kubernetes集群可观测性案例](#81-kubernetes集群可观测性案例)
+    - [8.2 微服务性能分析案例](#82-微服务性能分析案例)
+  - [9 2025 年最新实践](#9-2025-年最新实践)
+    - [9.1 eBPF/OTLP视角详细思维导图应用最佳实践（2025）](#91-ebpfotlp视角详细思维导图应用最佳实践2025)
+  - [10 实际应用案例](#10-实际应用案例)
+    - [案例 1：eBPF/OTLP视角应用（2025）](#案例-1ebpfotlp视角应用2025)
+  - [11 相关文档](#11-相关文档)
 
 ---
 
@@ -359,7 +375,77 @@ mindmap
 
 ---
 
-## 9 相关文档
+## 9 2025 年最新实践
+
+### 9.1 eBPF/OTLP视角详细思维导图应用最佳实践（2025）
+
+**2025 年趋势**：eBPF/OTLP视角在可观测性、性能分析、安全监控中的深度应用
+
+**实践要点**：
+
+- **可观测性**：使用 eBPF 和 OTLP 构建统一可观测性体系
+- **性能分析**：使用 eBPF 进行内核级性能分析
+- **安全监控**：使用 eBPF 进行实时安全监控
+- **数据采集**：使用 OTLP 统一数据采集标准
+
+**代码示例**：
+
+```python
+# 2025 年 eBPF/OTLP 视角工具
+class EBPFOTLPPerspectiveTool:
+    def __init__(self):
+        self.ebpf_collector = EBPFCollector()
+        self.otlp_exporter = OTLPExporter()
+        self.analyzer = PerformanceAnalyzer()
+        self.monitor = SecurityMonitor()
+
+    def collect_metrics(self, ebpf_programs):
+        """指标采集"""
+        metrics = self.ebpf_collector.collect(ebpf_programs)
+        return self.otlp_exporter.export(metrics)
+
+    def analyze_performance(self, metrics):
+        """性能分析"""
+        return self.analyzer.analyze(metrics)
+
+    def monitor_security(self, events):
+        """安全监控"""
+        return self.monitor.monitor(events)
+```
+
+## 10 实际应用案例
+
+### 案例 1：eBPF/OTLP视角应用（2025）
+
+**场景**：使用 eBPF/OTLP 构建云原生可观测性体系
+
+**实现方案**：
+
+```python
+# eBPF/OTLP 视角应用
+tool = EBPFOTLPPerspectiveTool()
+
+# 指标采集
+ebpf_programs = [Program(type="tracepoint"), Program(type="kprobe")]
+metrics = tool.collect_metrics(ebpf_programs)
+
+# 性能分析
+analysis = tool.analyze_performance(metrics)
+
+# 安全监控
+events = [Event(type="syscall"), Event(type="network")]
+security = tool.monitor_security(events)
+```
+
+**效果**：
+
+- 可观测性：统一可观测性体系，提高监控效率
+- 性能分析：内核级性能分析，提高分析准确性
+- 安全监控：实时安全监控，提高安全响应速度
+
+---
+
+## 11 相关文档
 
 - **[应用视角思维导图](01-application-perspectives-mindmap.md)** - 应用视角全景、eBPF/OTLP视角概述
 - **[应用场景认知矩阵](02-application-scenarios-matrix.md)** - 技术演进场景、业务架构场景

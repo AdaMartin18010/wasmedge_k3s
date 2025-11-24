@@ -108,6 +108,7 @@
 | 认知图谱 | `01-core-foundations/knowledge-map/` | 知识地图和学习路径     |
 | 总览     | `01-core-foundations/overview/`      | 技术栈总览和决策框架   |
 | 理念层   | `01-core-foundations/principles/`    | 云原生核心理念         |
+| 多维度概念对比矩阵 | `01-core-foundations/comprehensive-concept-comparison-matrix.md` | 6个核心概念完整定义、8个多维度对比矩阵、权威文档对齐（Wikipedia、标准组织、学术论文）⭐ |
 | 可视化文档 | `01-core-foundations/visualizations/` | 认知框架思维导图、认知模型对比矩阵、24个核心基础可视化文档（全部增强） |
 
 ### 架构与设计

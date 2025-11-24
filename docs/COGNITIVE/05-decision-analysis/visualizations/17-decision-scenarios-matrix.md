@@ -8,6 +8,15 @@
   - [2 架构设计场景](#2-架构设计场景)
   - [3 资源管理场景](#3-资源管理场景)
   - [4 安全设计场景](#4-安全设计场景)
+  - [5 决策场景选择指南](#5-决策场景选择指南)
+  - [6 使用指南](#6-使用指南)
+    - [6.1 快速开始](#61-快速开始)
+    - [6.2 决策场景应用](#62-决策场景应用)
+  - [7 使用技巧](#7-使用技巧)
+    - [7.1 场景匹配技巧](#71-场景匹配技巧)
+  - [8 实践案例](#8-实践案例)
+    - [8.1 多租户SaaS场景应用案例](#81-多租户saas场景应用案例)
+  - [9 相关文档](#9-相关文档)
 
 ---
 
@@ -196,7 +205,77 @@
 
 ---
 
-## 9 相关文档
+## 9 2025 年最新实践
+
+### 9.1 决策场景详细矩阵应用最佳实践（2025）
+
+**2025 年趋势**：决策场景详细矩阵在场景识别、技术选型、架构设计中的深度应用
+
+**实践要点**：
+
+- **场景识别**：使用矩阵快速识别决策场景
+- **场景匹配**：基于矩阵匹配场景和技术方案
+- **场景应用**：参考场景进行技术选型和架构设计
+- **持续更新**：定期更新场景数据，反映最新实践
+
+**代码示例**：
+
+```python
+# 2025 年决策场景详细矩阵工具
+class DecisionScenariosMatrixTool:
+    def __init__(self):
+        self.matrix = DecisionScenariosMatrix()
+        self.identifier = ScenarioIdentifier()
+        self.matcher = ScenarioMatcher()
+        self.applicator = ScenarioApplicator()
+
+    def identify_scenario(self, context, requirements):
+        """场景识别"""
+        return self.identifier.identify(context, requirements)
+
+    def match_scenario(self, scenario, solutions):
+        """场景匹配"""
+        return self.matcher.match(scenario, solutions)
+
+    def apply_scenario(self, scenario, context):
+        """场景应用"""
+        return self.applicator.apply(scenario, context)
+```
+
+## 10 实际应用案例
+
+### 案例 1：决策场景详细矩阵应用（2025）
+
+**场景**：使用决策场景详细矩阵进行边缘计算场景技术选型
+
+**实现方案**：
+
+```python
+# 决策场景详细矩阵应用
+tool = DecisionScenariosMatrixTool()
+
+# 场景识别
+context = Context(type="edge_computing", scale="medium")
+requirements = Requirements(latency="low", resources="limited")
+scenario = tool.identify_scenario(context, requirements)
+
+# 场景匹配
+solutions = [Solution(type="k3s"), Solution(type="wasm")]
+match = tool.match_scenario(scenario, solutions)
+
+# 场景应用
+design = tool.apply_scenario(scenario, context)
+```
+
+**效果**：
+
+- 场景识别：快速识别场景，提高识别准确性
+- 场景匹配：基于矩阵匹配方案，提高匹配质量
+- 场景应用：参考场景设计架构，提高设计质量
+
+---
+
+## 11 相关文档
 
 - **[决策案例对比矩阵](02-decision-cases-matrix.md)** - 边缘计算、Serverless、企业级、服务网格决策案例
 - **[技术选型详细指南](15-technology-selection-guide.md)** - 容器运行时选型指南、隔离技术选型指南、编排平台选型指南

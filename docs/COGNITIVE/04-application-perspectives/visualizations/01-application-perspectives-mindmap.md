@@ -9,6 +9,18 @@
   - [3 程序设计视角思维导图](#3-程序设计视角思维导图)
   - [4 应用业务架构视角思维导图](#4-应用业务架构视角思维导图)
   - [5 API规范视角思维导图](#5-api规范视角思维导图)
+  - [6 使用指南](#6-使用指南)
+    - [6.1 快速开始](#61-快速开始)
+    - [6.2 视角选择应用](#62-视角选择应用)
+    - [6.3 实践应用](#63-实践应用)
+  - [7 使用技巧](#7-使用技巧)
+    - [7.1 视角选择技巧](#71-视角选择技巧)
+    - [7.2 视角应用技巧](#72-视角应用技巧)
+  - [8 2025 年最新实践](#8-2025-年最新实践)
+    - [8.1 应用视角思维导图应用最佳实践（2025）](#81-应用视角思维导图应用最佳实践2025)
+  - [9 实际应用案例](#9-实际应用案例)
+    - [案例 1：应用视角思维导图应用（2025）](#案例-1应用视角思维导图应用2025)
+  - [10 相关文档](#10-相关文档)
 
 ---
 
@@ -371,7 +383,78 @@ mindmap
 
 ---
 
-## 8 相关文档
+## 8 2025 年最新实践
+
+### 8.1 应用视角思维导图应用最佳实践（2025）
+
+**2025 年趋势**：应用视角思维导图在应用开发、技术选型、架构设计中的深度应用
+
+**实践要点**：
+
+- **视角选择**：根据应用场景选择合适的应用视角
+- **视角应用**：系统化应用应用视角进行分析
+- **技术集成**：基于视角进行技术集成
+- **持续优化**：基于实践效果优化视角应用
+
+**代码示例**：
+
+```python
+# 2025 年应用视角思维导图工具
+class ApplicationPerspectivesMindmapTool:
+    def __init__(self):
+        self.selector = PerspectiveSelector()
+        self.applicator = PerspectiveApplicator()
+        self.integrator = TechnologyIntegrator()
+        self.optimizer = PerspectiveOptimizer()
+
+    def select_perspective(self, scenario, requirements):
+        """视角选择"""
+        return self.selector.select(scenario, requirements)
+
+    def apply_perspective(self, perspective, context):
+        """视角应用"""
+        return self.applicator.apply(perspective, context)
+
+    def integrate_technologies(self, perspective, technologies):
+        """技术集成"""
+        return self.integrator.integrate(perspective, technologies)
+```
+
+## 9 实际应用案例
+
+### 案例 1：应用视角思维导图应用（2025）
+
+**场景**：使用应用视角思维导图进行云原生应用开发
+
+**实现方案**：
+
+```python
+# 应用视角思维导图应用
+tool = ApplicationPerspectivesMindmapTool()
+
+# 视角选择
+scenario = Scenario(type="cloud_native", domain="microservices")
+requirements = Requirements(scale="high", observability="high")
+perspective = tool.select_perspective(scenario, requirements)
+
+# 视角应用
+context = Context(team="devops", stack="kubernetes")
+analysis = tool.apply_perspective(perspective, context)
+
+# 技术集成
+technologies = [Technology(name="containerd"), Technology(name="istio")]
+integration = tool.integrate_technologies(perspective, technologies)
+```
+
+**效果**：
+
+- 视角选择：基于场景选择合适视角，提高视角适用性
+- 视角应用：系统化应用视角，保证分析质量
+- 技术集成：基于视角集成技术，提高集成效率
+
+---
+
+## 10 相关文档
 
 - **[应用场景认知矩阵](02-application-scenarios-matrix.md)** - 技术演进场景、业务架构场景、API演进场景、编程范式场景
 - **[eBPF/OTLP视角详细思维导图](03-ebpf-otlp-detailed-mindmap.md)** - eBPF技术详解、OTLP技术详解、可观测性体系

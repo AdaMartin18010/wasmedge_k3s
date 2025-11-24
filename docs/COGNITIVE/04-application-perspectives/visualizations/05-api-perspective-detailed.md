@@ -8,6 +8,22 @@
   - [2 容器化API详解](#2-容器化api详解)
   - [3 沙盒化API详解](#3-沙盒化api详解)
   - [4 API演进路径](#4-api演进路径)
+  - [5 API规范应用场景矩阵](#5-api规范应用场景矩阵)
+  - [6 使用指南](#6-使用指南)
+    - [6.1 快速开始](#61-快速开始)
+    - [6.2 API设计应用](#62-api设计应用)
+    - [6.3 API演进应用](#63-api演进应用)
+  - [7 使用技巧](#7-使用技巧)
+    - [7.1 API设计技巧](#71-api设计技巧)
+    - [7.2 API演进技巧](#72-api演进技巧)
+  - [8 实践案例](#8-实践案例)
+    - [8.1 容器运行时API设计案例](#81-容器运行时api设计案例)
+    - [8.2 WASM沙盒API设计案例](#82-wasm沙盒api设计案例)
+  - [9 2025 年最新实践](#9-2025-年最新实践)
+    - [9.1 API规范视角详细思维导图应用最佳实践（2025）](#91-api规范视角详细思维导图应用最佳实践2025)
+  - [10 实际应用案例](#10-实际应用案例)
+    - [案例 1：API规范视角应用（2025）](#案例-1api规范视角应用2025)
+  - [11 相关文档](#11-相关文档)
 
 ---
 
@@ -367,7 +383,78 @@ mindmap
 
 ---
 
-## 9 相关文档
+## 9 2025 年最新实践
+
+### 9.1 API规范视角详细思维导图应用最佳实践（2025）
+
+**2025 年趋势**：API规范视角在容器化API、沙盒化API、WASM化API中的深度应用
+
+**实践要点**：
+
+- **API设计**：基于规范设计标准化API
+- **API演进**：系统化演进API规范
+- **API验证**：使用形式化方法验证API规范
+- **API兼容性**：确保API向后兼容性
+
+**代码示例**：
+
+```python
+# 2025 年 API规范视角工具
+class APIPerspectiveTool:
+    def __init__(self):
+        self.designer = APIDesigner()
+        self.evolver = APIEvolver()
+        self.verifier = APIVerifier()
+        self.compatibility_checker = CompatibilityChecker()
+
+    def design_api(self, spec, standards):
+        """API设计"""
+        return self.designer.design(spec, standards)
+
+    def evolve_api(self, current_api, requirements):
+        """API演进"""
+        return self.evolver.evolve(current_api, requirements)
+
+    def verify_api(self, api_spec):
+        """API验证"""
+        return self.verifier.verify(api_spec)
+```
+
+## 10 实际应用案例
+
+### 案例 1：API规范视角应用（2025）
+
+**场景**：使用API规范视角设计容器化API
+
+**实现方案**：
+
+```python
+# API规范视角应用
+tool = APIPerspectiveTool()
+
+# API设计
+spec = APISpec(type="containerization", features=["runtime", "image"])
+standards = Standards(oci=True, cri=True)
+api = tool.design_api(spec, standards)
+
+# API演进
+current_api = API(version="v1.0")
+requirements = Requirements(wasm_support=True)
+evolved = tool.evolve_api(current_api, requirements)
+
+# API验证
+verification = tool.verify_api(api)
+```
+
+**效果**：
+
+- API设计：标准化API设计，提高API质量
+- API演进：系统化API演进，保证向后兼容
+- API验证：形式化API验证，提高API可靠性
+
+---
+
+## 11 相关文档
 
 - **[应用视角思维导图](01-application-perspectives-mindmap.md)** - 应用视角全景、API规范视角概述
 - **[应用场景认知矩阵](02-application-scenarios-matrix.md)** - 技术演进场景、业务架构场景、API演进场景

@@ -8,6 +8,18 @@
   - [2 CAP理论详解](#2-cap理论详解)
   - [3 一致性模型详解](#3-一致性模型详解)
   - [4 分布式系统模式详解](#4-分布式系统模式详解)
+  - [5 分布式模型应用场景矩阵](#5-分布式模型应用场景矩阵)
+  - [6 使用指南](#6-使用指南)
+    - [6.1 快速开始](#61-快速开始)
+    - [6.2 分布式设计应用](#62-分布式设计应用)
+    - [6.3 分布式优化应用](#63-分布式优化应用)
+  - [7 使用技巧](#7-使用技巧)
+    - [7.1 CAP权衡技巧](#71-cap权衡技巧)
+    - [7.2 一致性模型选择技巧](#72-一致性模型选择技巧)
+  - [8 实践案例](#8-实践案例)
+    - [8.1 金融系统分布式设计案例](#81-金融系统分布式设计案例)
+    - [8.2 电商系统分布式设计案例](#82-电商系统分布式设计案例)
+  - [9 相关文档](#9-相关文档)
 
 ---
 
@@ -371,7 +383,77 @@ mindmap
 
 ---
 
-## 9 相关文档
+## 9 2025 年最新实践
+
+### 9.1 分布式模型详细思维导图应用最佳实践（2025）
+
+**2025 年趋势**：分布式模型在分布式系统设计、CAP权衡、一致性模型选择中的深度应用
+
+**实践要点**：
+
+- **需求优先**：根据业务需求优先选择CAP维度
+- **场景匹配**：根据应用场景选择合适的CAP组合
+- **性能平衡**：平衡一致性和性能
+- **持续优化**：持续优化分布式系统性能
+
+**代码示例**：
+
+```python
+# 2025 年分布式模型工具
+class DistributedModelTool:
+    def __init__(self):
+        self.analyzer = DistributedRequirementAnalyzer()
+        self.cap_analyzer = CAPAnalyzer()
+        self.model_selector = ConsistencyModelSelector()
+        self.optimizer = DistributedOptimizer()
+
+    def analyze_requirements(self, context, requirements):
+        """需求分析"""
+        return self.analyzer.analyze(context, requirements)
+
+    def analyze_cap(self, requirements):
+        """CAP分析"""
+        return self.cap_analyzer.analyze(requirements)
+
+    def select_model(self, cap_analysis, constraints):
+        """一致性模型选择"""
+        return self.model_selector.select(cap_analysis, constraints)
+```
+
+## 10 实际应用案例
+
+### 案例 1：分布式模型应用（2025）
+
+**场景**：使用分布式模型设计金融系统分布式架构
+
+**实现方案**：
+
+```python
+# 分布式模型应用
+tool = DistributedModelTool()
+
+# 需求分析
+context = Context(type="financial", scale="large")
+requirements = Requirements(consistency="strong", availability="high")
+analysis = tool.analyze_requirements(context, requirements)
+
+# CAP分析
+cap_analysis = tool.analyze_cap(requirements)
+
+# 一致性模型选择
+constraints = Constraints(performance="maintain", cost="limited")
+model = tool.select_model(cap_analysis, constraints)
+```
+
+**效果**：
+
+- 需求分析：系统化分析分布式需求，提高分析质量
+- CAP分析：准确进行CAP权衡，提高权衡质量
+- 模型选择：选择合适的一致性模型，提高系统设计质量
+
+---
+
+## 11 相关文档
 
 - **[决策框架对比矩阵](01-decision-framework-matrix.md)** - 决策框架功能、决策场景适用、决策方法对比
 - **[可靠性优化指南](21-reliability-optimization-guide.md)** - 可靠性优化全景、可用性优化、容错性优化

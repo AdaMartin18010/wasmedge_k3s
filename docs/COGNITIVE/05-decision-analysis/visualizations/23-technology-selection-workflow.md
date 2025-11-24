@@ -8,6 +8,15 @@
   - [2 需求分析流程](#2-需求分析流程)
   - [3 技术评估流程](#3-技术评估流程)
   - [4 决策实施流程](#4-决策实施流程)
+  - [5 技术选型检查清单](#5-技术选型检查清单)
+  - [6 使用指南](#6-使用指南)
+    - [6.1 快速开始](#61-快速开始)
+    - [6.2 技术选型工作流应用](#62-技术选型工作流应用)
+  - [7 使用技巧](#7-使用技巧)
+    - [7.1 工作流执行技巧](#71-工作流执行技巧)
+  - [8 实践案例](#8-实践案例)
+    - [8.1 容器运行时选型工作流案例](#81-容器运行时选型工作流案例)
+  - [9 相关文档](#9-相关文档)
 
 ---
 
@@ -162,6 +171,7 @@ graph LR
 | **效果评估** | 效果测量、效果分析、效果报告 | 中 | ⭐⭐⭐⭐ |
 
 **推荐度说明**：
+
 - **⭐⭐⭐⭐⭐**：强烈推荐
 - **⭐⭐⭐⭐**：推荐
 - **⭐⭐⭐**：可选
@@ -283,7 +293,79 @@ graph LR
 
 ---
 
-## 9 相关文档
+## 9 2025 年最新实践
+
+### 9.1 技术选型完整工作流应用最佳实践（2025）
+
+**2025 年趋势**：技术选型完整工作流在需求分析、技术评估、决策实施中的深度应用
+
+**实践要点**：
+
+- **检查点利用**：充分利用检查点验证阶段成果
+- **迭代优化**：根据效果评估结果优化工作流
+- **流程标准化**：建立标准化的技术选型流程
+- **持续改进**：积累工作流使用经验，形成使用模式
+
+**代码示例**：
+
+```python
+# 2025 年技术选型完整工作流工具
+class TechnologySelectionWorkflowTool:
+    def __init__(self):
+        self.workflow = TechnologySelectionWorkflow()
+        self.executor = WorkflowExecutor()
+        self.checkpoint_manager = CheckpointManager()
+        self.optimizer = WorkflowOptimizer()
+
+    def execute_workflow(self, requirements, context):
+        """工作流执行"""
+        return self.executor.execute(self.workflow, requirements, context)
+
+    def verify_checkpoint(self, checkpoint, results):
+        """检查点验证"""
+        return self.checkpoint_manager.verify(checkpoint, results)
+
+    def optimize_workflow(self, workflow, feedback):
+        """工作流优化"""
+        return self.optimizer.optimize(workflow, feedback)
+```
+
+## 10 实际应用案例
+
+### 案例 1：技术选型完整工作流应用（2025）
+
+**场景**：使用技术选型完整工作流选择容器运行时
+
+**实现方案**：
+
+```python
+# 技术选型完整工作流应用
+tool = TechnologySelectionWorkflowTool()
+
+# 工作流执行
+requirements = Requirements(type="container_runtime", scale="large")
+context = Context(team="devops", budget="limited")
+results = tool.execute_workflow(requirements, context)
+
+# 检查点验证
+checkpoints = ["需求分析", "技术评估", "决策制定"]
+for checkpoint in checkpoints:
+    verification = tool.verify_checkpoint(checkpoint, results)
+
+# 工作流优化
+feedback = Feedback(performance="good", satisfaction="high")
+optimized = tool.optimize_workflow(tool.workflow, feedback)
+```
+
+**效果**：
+
+- 工作流执行：系统化执行流程，提高执行质量
+- 检查点验证：验证阶段成果，确保流程质量
+- 工作流优化：基于反馈优化工作流，提高工作流效率
+
+---
+
+## 11 相关文档
 
 - **[技术选型详细指南](15-technology-selection-guide.md)** - 容器运行时选型指南、隔离技术选型指南、编排平台选型指南
 - **[技术选型决策树](03-technology-selection-decision-tree.md)** - 容器运行时、隔离技术、编排平台、服务网格选型决策树

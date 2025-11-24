@@ -8,6 +8,15 @@
   - [2 决策流程优化](#2-决策流程优化)
   - [3 决策质量优化](#3-决策质量优化)
   - [4 决策效率优化](#4-决策效率优化)
+  - [5 决策优化检查清单](#5-决策优化检查清单)
+  - [6 使用指南](#6-使用指南)
+    - [6.1 快速开始](#61-快速开始)
+    - [6.2 决策优化应用](#62-决策优化应用)
+  - [7 使用技巧](#7-使用技巧)
+    - [7.1 优化设计技巧](#71-优化设计技巧)
+  - [8 实践案例](#8-实践案例)
+    - [8.1 决策流程优化案例](#81-决策流程优化案例)
+  - [9 相关文档](#9-相关文档)
 
 ---
 
@@ -57,6 +66,7 @@ graph TB
 | **流程持续改进** | 流程改进、流程优化 | 问题识别、改进实施 | 流程持续优化 | ⭐⭐⭐⭐ |
 
 **推荐度说明**：
+
 - **⭐⭐⭐⭐⭐**：强烈推荐
 - **⭐⭐⭐⭐**：推荐
 - **⭐⭐⭐**：可选
@@ -74,6 +84,7 @@ graph TB
 | **实施质量** | 实施准确性、实施有效性 | 实施计划、实施验证 | 实施质量提升 | ⭐⭐⭐⭐ |
 
 **推荐度说明**：
+
 - **⭐⭐⭐⭐⭐**：强烈推荐
 - **⭐⭐⭐⭐**：推荐
 - **⭐⭐⭐**：可选
@@ -91,6 +102,7 @@ graph TB
 | **决策可追溯性** | 决策记录、决策追溯 | 记录设计、追溯设计 | 决策可追溯性提升 | ⭐⭐⭐⭐ |
 
 **推荐度说明**：
+
 - **⭐⭐⭐⭐⭐**：强烈推荐
 - **⭐⭐⭐⭐**：推荐
 - **⭐⭐⭐**：可选
@@ -107,6 +119,7 @@ graph TB
 | **持续改进** | 问题识别、改进实施、效果评估 | 中 | ⭐⭐⭐⭐ |
 
 **推荐度说明**：
+
 - **⭐⭐⭐⭐⭐**：强烈推荐
 - **⭐⭐⭐⭐**：推荐
 - **⭐⭐⭐**：可选
@@ -204,7 +217,78 @@ graph TB
 
 ---
 
-## 9 相关文档
+## 9 2025 年最新实践
+
+### 9.1 决策优化综合指南应用最佳实践（2025）
+
+**2025 年趋势**：决策优化综合指南在决策流程优化、决策质量优化、决策效率优化中的深度应用
+
+**实践要点**：
+
+- **问题识别**：准确识别决策流程、质量、效率的问题
+- **优化策略**：设计合理的优化策略
+- **持续改进**：建立持续优化机制
+- **效果评估**：持续评估优化效果
+
+**代码示例**：
+
+```python
+# 2025 年决策优化综合指南工具
+class DecisionOptimizationGuideTool:
+    def __init__(self):
+        self.analyzer = DecisionAnalyzer()
+        self.optimizer = DecisionOptimizer()
+        self.evaluator = OptimizationEvaluator()
+        self.improver = ContinuousImprover()
+
+    def analyze_decision(self, decision, metrics):
+        """决策分析"""
+        return self.analyzer.analyze(decision, metrics)
+
+    def optimize_decision(self, decision, constraints):
+        """决策优化"""
+        return self.optimizer.optimize(decision, constraints)
+
+    def evaluate_optimization(self, optimization, results):
+        """优化评估"""
+        return self.evaluator.evaluate(optimization, results)
+```
+
+## 10 实际应用案例
+
+### 案例 1：决策优化综合指南应用（2025）
+
+**场景**：使用决策优化综合指南优化技术选型决策流程
+
+**实现方案**：
+
+```python
+# 决策优化综合指南应用
+tool = DecisionOptimizationGuideTool()
+
+# 决策分析
+decision = Decision(type="technology_selection", process="complex")
+metrics = Metrics(efficiency="low", quality="unstable", cost="high")
+analysis = tool.analyze_decision(decision, metrics)
+
+# 决策优化
+constraints = Constraints(budget="limited", timeline="tight")
+optimization = tool.optimize_decision(decision, constraints)
+
+# 优化评估
+results = Results(efficiency="improved", quality="stable", cost="reduced")
+evaluation = tool.evaluate_optimization(optimization, results)
+```
+
+**效果**：
+
+- 决策分析：系统化分析决策问题，提高分析质量
+- 决策优化：设计合理优化策略，提高优化效果
+- 优化评估：持续评估优化效果，提高持续改进能力
+
+---
+
+## 11 相关文档
 
 - **[决策框架对比矩阵](01-decision-framework-matrix.md)** - 决策框架功能、决策场景适用、决策方法
 - **[技术选型完整工作流](23-technology-selection-workflow.md)** - 技术选型全景流程、需求分析流程、技术评估流程

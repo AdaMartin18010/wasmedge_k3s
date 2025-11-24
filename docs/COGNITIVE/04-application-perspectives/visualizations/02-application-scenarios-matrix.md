@@ -8,6 +8,21 @@
   - [2 业务架构场景矩阵](#2-业务架构场景矩阵)
   - [3 API演进场景矩阵](#3-api演进场景矩阵)
   - [4 编程范式场景矩阵](#4-编程范式场景矩阵)
+  - [5 认知模型应用矩阵](#5-认知模型应用矩阵)
+  - [6 使用指南](#6-使用指南)
+    - [6.1 快速开始](#61-快速开始)
+    - [6.2 技术选型应用](#62-技术选型应用)
+    - [6.3 架构设计应用](#63-架构设计应用)
+  - [7 使用技巧](#7-使用技巧)
+    - [7.1 场景识别技巧](#71-场景识别技巧)
+  - [8 实践案例](#8-实践案例)
+    - [8.1 微服务架构场景案例](#81-微服务架构场景案例)
+    - [8.2 边缘计算场景案例](#82-边缘计算场景案例)
+  - [9 2025 年最新实践](#9-2025-年最新实践)
+    - [9.1 应用场景认知矩阵应用最佳实践（2025）](#91-应用场景认知矩阵应用最佳实践2025)
+  - [10 实际应用案例](#10-实际应用案例)
+    - [案例 1：应用场景认知矩阵应用（2025）](#案例-1应用场景认知矩阵应用2025)
+  - [11 相关文档](#11-相关文档)
 
 ---
 
@@ -218,7 +233,77 @@
 
 ---
 
-## 9 相关文档
+## 9 2025 年最新实践
+
+### 9.1 应用场景认知矩阵应用最佳实践（2025）
+
+**2025 年趋势**：应用场景认知矩阵在场景识别、技术选型、架构设计中的深度应用
+
+**实践要点**：
+
+- **场景识别**：使用矩阵快速识别应用场景
+- **场景匹配**：基于矩阵匹配场景和技术栈
+- **技术选型**：基于场景矩阵进行技术选型
+- **持续更新**：定期更新矩阵数据，反映最新趋势
+
+**代码示例**：
+
+```python
+# 2025 年应用场景认知矩阵工具
+class ApplicationScenariosMatrixTool:
+    def __init__(self):
+        self.matrix = ApplicationScenariosMatrix()
+        self.identifier = ScenarioIdentifier()
+        self.matcher = ScenarioMatcher()
+        self.selector = TechnologySelector()
+
+    def identify_scenario(self, requirements, constraints):
+        """场景识别"""
+        return self.identifier.identify(requirements, constraints)
+
+    def match_scenario(self, scenario, technologies):
+        """场景匹配"""
+        return self.matcher.match(scenario, technologies)
+
+    def select_technology(self, scenario, requirements):
+        """技术选型"""
+        return self.selector.select(scenario, requirements)
+```
+
+## 10 实际应用案例
+
+### 案例 1：应用场景认知矩阵应用（2025）
+
+**场景**：使用应用场景认知矩阵进行边缘计算场景技术选型
+
+**实现方案**：
+
+```python
+# 应用场景认知矩阵应用
+tool = ApplicationScenariosMatrixTool()
+
+# 场景识别
+requirements = Requirements(latency="low", resources="limited")
+constraints = Constraints(environment="edge", offline="required")
+scenario = tool.identify_scenario(requirements, constraints)
+
+# 场景匹配
+technologies = [Technology(name="WasmEdge"), Technology(name="K3s")]
+match = tool.match_scenario(scenario, technologies)
+
+# 技术选型
+selection = tool.select_technology(scenario, requirements)
+```
+
+**效果**：
+
+- 场景识别：快速识别应用场景，提高识别准确性
+- 场景匹配：基于矩阵匹配场景和技术，提高匹配质量
+- 技术选型：基于场景选择技术，提高选型准确性
+
+---
+
+## 11 相关文档
 
 - **[应用视角思维导图](01-application-perspectives-mindmap.md)** - 应用视角全景、eBPF/OTLP视角、程序设计视角、应用业务架构视角
 - **[实际应用案例矩阵](06-practical-cases-matrix.md)** - 云原生应用案例、边缘计算案例、AI推理案例

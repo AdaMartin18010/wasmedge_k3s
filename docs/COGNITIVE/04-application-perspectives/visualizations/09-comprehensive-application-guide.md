@@ -8,6 +8,17 @@
   - [2 技术栈选择](#2-技术栈选择)
   - [3 架构设计](#3-架构设计)
   - [4 部署运维](#4-部署运维)
+  - [5 应用开发检查清单](#5-应用开发检查清单)
+  - [6 使用指南](#6-使用指南)
+    - [6.1 快速开始](#61-快速开始)
+    - [6.2 应用开发应用](#62-应用开发应用)
+  - [7 使用技巧](#7-使用技巧)
+    - [7.1 技术选型技巧](#71-技术选型技巧)
+  - [8 2025 年最新实践](#8-2025-年最新实践)
+    - [8.1 综合应用指南应用最佳实践（2025）](#81-综合应用指南应用最佳实践2025)
+  - [9 实际应用案例](#9-实际应用案例)
+    - [案例 1：综合应用指南应用（2025）](#案例-1综合应用指南应用2025)
+  - [10 相关文档](#10-相关文档)
 
 ---
 
@@ -184,7 +195,78 @@ graph TB
 
 ---
 
-## 8 相关文档
+## 8 2025 年最新实践
+
+### 8.1 综合应用指南应用最佳实践（2025）
+
+**2025 年趋势**：综合应用指南在应用开发、技术栈选择、架构设计、部署运维中的深度应用
+
+**实践要点**：
+
+- **应用开发**：使用指南进行系统化应用开发
+- **技术栈选择**：基于指南选择合适的技术栈
+- **架构设计**：参考指南进行架构设计
+- **部署运维**：使用指南进行部署和运维
+
+**代码示例**：
+
+```python
+# 2025 年综合应用指南工具
+class ComprehensiveApplicationGuideTool:
+    def __init__(self):
+        self.developer = ApplicationDeveloper()
+        self.selector = TechnologyStackSelector()
+        self.designer = ArchitectureDesigner()
+        self.operator = DeploymentOperator()
+
+    def develop_application(self, requirements, guide):
+        """应用开发"""
+        return self.developer.develop(requirements, guide)
+
+    def select_stack(self, requirements, constraints):
+        """技术栈选择"""
+        return self.selector.select(requirements, constraints)
+
+    def design_architecture(self, requirements, patterns):
+        """架构设计"""
+        return self.designer.design(requirements, patterns)
+```
+
+## 9 实际应用案例
+
+### 案例 1：综合应用指南应用（2025）
+
+**场景**：使用综合应用指南进行云原生应用开发
+
+**实现方案**：
+
+```python
+# 综合应用指南应用
+tool = ComprehensiveApplicationGuideTool()
+
+# 应用开发
+requirements = Requirements(type="microservices", scale="high")
+guide = Guide(type="cloud_native")
+application = tool.develop_application(requirements, guide)
+
+# 技术栈选择
+constraints = Constraints(budget="limited", team="small")
+stack = tool.select_stack(requirements, constraints)
+
+# 架构设计
+patterns = [Pattern(type="microservices"), Pattern(type="service_mesh")]
+architecture = tool.design_architecture(requirements, patterns)
+```
+
+**效果**：
+
+- 应用开发：系统化应用开发，提高开发效率
+- 技术栈选择：基于指南选择技术栈，提高选型准确性
+- 架构设计：参考指南设计架构，提高设计质量
+
+---
+
+## 10 相关文档
 
 - **[应用视角思维导图](01-application-perspectives-mindmap.md)** - 应用视角全景、eBPF/OTLP视角、程序设计视角
 - **[应用场景认知矩阵](02-application-scenarios-matrix.md)** - 技术演进场景、业务架构场景、API演进场景

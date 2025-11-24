@@ -8,6 +8,15 @@
   - [2 需求分析工作流](#2-需求分析工作流)
   - [3 技术选型工作流](#3-技术选型工作流)
   - [4 方案实施工作流](#4-方案实施工作流)
+  - [5 决策工作流检查点](#5-决策工作流检查点)
+  - [6 使用指南](#6-使用指南)
+    - [6.1 快速开始](#61-快速开始)
+    - [6.2 综合决策应用](#62-综合决策应用)
+  - [7 使用技巧](#7-使用技巧)
+    - [7.1 工作流执行技巧](#71-工作流执行技巧)
+  - [8 实践案例](#8-实践案例)
+    - [8.1 企业级应用综合决策案例](#81-企业级应用综合决策案例)
+  - [9 相关文档](#9-相关文档)
 
 ---
 
@@ -263,7 +272,79 @@ graph LR
 
 ---
 
-## 9 相关文档
+## 9 2025 年最新实践
+
+### 9.1 综合决策工作流应用最佳实践（2025）
+
+**2025 年趋势**：综合决策工作流在需求分析、技术选型、方案实施中的深度应用
+
+**实践要点**：
+
+- **工作流执行**：严格按照工作流执行决策流程
+- **检查点利用**：充分利用检查点验证阶段成果
+- **迭代优化**：基于效果评估结果优化工作流
+- **持续改进**：积累工作流使用经验，形成使用模式
+
+**代码示例**：
+
+```python
+# 2025 年综合决策工作流工具
+class ComprehensiveDecisionWorkflowTool:
+    def __init__(self):
+        self.workflow = ComprehensiveDecisionWorkflow()
+        self.executor = WorkflowExecutor()
+        self.checkpoint_manager = CheckpointManager()
+        self.optimizer = WorkflowOptimizer()
+
+    def execute_workflow(self, requirements, context):
+        """工作流执行"""
+        return self.executor.execute(self.workflow, requirements, context)
+
+    def verify_checkpoint(self, checkpoint, results):
+        """检查点验证"""
+        return self.checkpoint_manager.verify(checkpoint, results)
+
+    def optimize_workflow(self, workflow, feedback):
+        """工作流优化"""
+        return self.optimizer.optimize(workflow, feedback)
+```
+
+## 10 实际应用案例
+
+### 案例 1：综合决策工作流应用（2025）
+
+**场景**：使用综合决策工作流进行企业级应用技术决策
+
+**实现方案**：
+
+```python
+# 综合决策工作流应用
+tool = ComprehensiveDecisionWorkflowTool()
+
+# 工作流执行
+requirements = Requirements(type="enterprise", scale="large")
+context = Context(team="devops", budget="high")
+results = tool.execute_workflow(requirements, context)
+
+# 检查点验证
+checkpoints = ["需求分析", "技术选型", "方案实施"]
+for checkpoint in checkpoints:
+    verification = tool.verify_checkpoint(checkpoint, results)
+
+# 工作流优化
+feedback = Feedback(performance="good", satisfaction="high")
+optimized = tool.optimize_workflow(tool.workflow, feedback)
+```
+
+**效果**：
+
+- 工作流执行：系统化执行决策流程，提高执行质量
+- 检查点验证：验证阶段成果，确保流程质量
+- 工作流优化：基于反馈优化工作流，提高工作流效率
+
+---
+
+## 11 相关文档
 
 - **[决策框架对比矩阵](01-decision-framework-matrix.md)** - 决策框架功能、决策场景适用、决策方法
 - **[决策模型集成关系图](09-decision-models-integration.md)** - 决策模型全景集成、资源与隔离集成、安全与分布式集成

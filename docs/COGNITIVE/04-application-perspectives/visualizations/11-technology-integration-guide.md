@@ -8,6 +8,17 @@
   - [2 容器化技术集成](#2-容器化技术集成)
   - [3 可观测性技术集成](#3-可观测性技术集成)
   - [4 服务网格技术集成](#4-服务网格技术集成)
+  - [5 技术集成检查清单](#5-技术集成检查清单)
+  - [6 使用指南](#6-使用指南)
+    - [6.1 快速开始](#61-快速开始)
+    - [6.2 技术集成应用](#62-技术集成应用)
+  - [7 使用技巧](#7-使用技巧)
+    - [7.1 集成设计技巧](#71-集成设计技巧)
+  - [8 2025 年最新实践](#8-2025-年最新实践)
+    - [8.1 技术集成综合指南应用最佳实践（2025）](#81-技术集成综合指南应用最佳实践2025)
+  - [9 实际应用案例](#9-实际应用案例)
+    - [案例 1：技术集成综合指南应用（2025）](#案例-1技术集成综合指南应用2025)
+  - [10 相关文档](#10-相关文档)
 
 ---
 
@@ -170,7 +181,78 @@ graph TB
 
 ---
 
-## 8 相关文档
+## 8 2025 年最新实践
+
+### 8.1 技术集成综合指南应用最佳实践（2025）
+
+**2025 年趋势**：技术集成综合指南在容器化技术集成、可观测性技术集成、服务网格技术集成中的深度应用
+
+**实践要点**：
+
+- **技术选型**：基于指南选择合适的技术进行集成
+- **集成设计**：系统化设计技术集成方案
+- **集成验证**：全面验证技术集成的功能、性能、安全
+- **持续优化**：基于实践效果优化技术集成
+
+**代码示例**：
+
+```python
+# 2025 年技术集成综合指南工具
+class TechnologyIntegrationGuideTool:
+    def __init__(self):
+        self.selector = TechnologySelector()
+        self.designer = IntegrationDesigner()
+        self.verifier = IntegrationVerifier()
+        self.optimizer = IntegrationOptimizer()
+
+    def select_technologies(self, requirements, constraints):
+        """技术选型"""
+        return self.selector.select(requirements, constraints)
+
+    def design_integration(self, technologies, patterns):
+        """集成设计"""
+        return self.designer.design(technologies, patterns)
+
+    def verify_integration(self, integration, criteria):
+        """集成验证"""
+        return self.verifier.verify(integration, criteria)
+```
+
+## 9 实际应用案例
+
+### 案例 1：技术集成综合指南应用（2025）
+
+**场景**：使用技术集成综合指南进行容器化和可观测性技术集成
+
+**实现方案**：
+
+```python
+# 技术集成综合指南应用
+tool = TechnologyIntegrationGuideTool()
+
+# 技术选型
+requirements = Requirements(containerization=True, observability=True)
+constraints = Constraints(budget="limited", team="small")
+technologies = tool.select_technologies(requirements, constraints)
+
+# 集成设计
+patterns = [Pattern(type="container_runtime"), Pattern(type="metrics_collection")]
+integration = tool.design_integration(technologies, patterns)
+
+# 集成验证
+criteria = Criteria(functionality=True, performance=True, security=True)
+verification = tool.verify_integration(integration, criteria)
+```
+
+**效果**：
+
+- 技术选型：基于指南选择技术，提高选型准确性
+- 集成设计：系统化设计集成方案，提高设计质量
+- 集成验证：全面验证集成效果，提高集成可靠性
+
+---
+
+## 10 相关文档
 
 - **[应用视角思维导图](01-application-perspectives-mindmap.md)** - 应用视角全景、eBPF/OTLP视角、程序设计视角
 - **[综合应用指南](09-comprehensive-application-guide.md)** - 应用开发全景、技术栈选择、架构设计

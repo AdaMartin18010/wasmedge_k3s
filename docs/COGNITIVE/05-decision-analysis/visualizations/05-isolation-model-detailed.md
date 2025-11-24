@@ -8,6 +8,18 @@
   - [2 隔离层次详解](#2-隔离层次详解)
   - [3 隔离机制详解](#3-隔离机制详解)
   - [4 隔离优化详解](#4-隔离优化详解)
+  - [5 隔离模型应用场景矩阵](#5-隔离模型应用场景矩阵)
+  - [6 使用指南](#6-使用指南)
+    - [6.1 快速开始](#61-快速开始)
+    - [6.2 隔离设计应用](#62-隔离设计应用)
+    - [6.3 隔离优化应用](#63-隔离优化应用)
+  - [7 使用技巧](#7-使用技巧)
+    - [7.1 隔离层次选择技巧](#71-隔离层次选择技巧)
+    - [7.2 隔离机制选择技巧](#72-隔离机制选择技巧)
+  - [8 实践案例](#8-实践案例)
+    - [8.1 多租户隔离设计案例](#81-多租户隔离设计案例)
+    - [8.2 Serverless隔离设计案例](#82-serverless隔离设计案例)
+  - [9 相关文档](#9-相关文档)
 
 ---
 
@@ -401,7 +413,78 @@ mindmap
 
 ---
 
-## 9 相关文档
+## 9 2025 年最新实践
+
+### 9.1 隔离模型详细思维导图应用最佳实践（2025）
+
+**2025 年趋势**：隔离模型在隔离设计、安全隔离、多租户隔离中的深度应用
+
+**实践要点**：
+
+- **需求分析**：系统化分析隔离需求和安全要求
+- **层次选择**：根据需求选择合适的隔离层次
+- **机制组合**：组合使用多个隔离机制
+- **性能平衡**：平衡隔离强度和性能影响
+
+**代码示例**：
+
+```python
+# 2025 年隔离模型工具
+class IsolationModelTool:
+    def __init__(self):
+        self.analyzer = IsolationRequirementAnalyzer()
+        self.selector = IsolationLevelSelector()
+        self.combiner = IsolationMechanismCombiner()
+        self.optimizer = IsolationPerformanceOptimizer()
+
+    def analyze_requirements(self, context, security_requirements):
+        """需求分析"""
+        return self.analyzer.analyze(context, security_requirements)
+
+    def select_level(self, requirements, constraints):
+        """层次选择"""
+        return self.selector.select(requirements, constraints)
+
+    def combine_mechanisms(self, level, mechanisms):
+        """机制组合"""
+        return self.combiner.combine(level, mechanisms)
+```
+
+## 10 实际应用案例
+
+### 案例 1：隔离模型应用（2025）
+
+**场景**：使用隔离模型设计多租户SaaS平台隔离方案
+
+**实现方案**：
+
+```python
+# 隔离模型应用
+tool = IsolationModelTool()
+
+# 需求分析
+context = Context(type="saas", tenants="multi")
+security_requirements = SecurityRequirements(isolation="strong", compliance="required")
+requirements = tool.analyze_requirements(context, security_requirements)
+
+# 层次选择
+constraints = Constraints(performance="maintain", cost="limited")
+level = tool.select_level(requirements, constraints)
+
+# 机制组合
+mechanisms = [Mechanism(type="kvm"), Mechanism(type="lsm"), Mechanism(type="network")]
+isolation = tool.combine_mechanisms(level, mechanisms)
+```
+
+**效果**：
+
+- 需求分析：系统化分析需求，提高分析质量
+- 层次选择：选择合适的层次，提高隔离效果
+- 机制组合：组合使用机制，提高安全水平
+
+---
+
+## 11 相关文档
 
 - **[决策框架对比矩阵](01-decision-framework-matrix.md)** - 决策框架功能、决策场景适用、决策方法对比
 - **[安全模型详细思维导图](06-security-model-detailed.md)** - 安全模型核心概念、安全机制详解、安全策略详解

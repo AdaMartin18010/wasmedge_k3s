@@ -8,6 +8,15 @@
   - [2 反馈收集流程](#2-反馈收集流程)
   - [3 反馈分析流程](#3-反馈分析流程)
   - [4 反馈应用流程](#4-反馈应用流程)
+  - [5 决策反馈检查清单](#5-决策反馈检查清单)
+  - [6 使用指南](#6-使用指南)
+    - [6.1 快速开始](#61-快速开始)
+    - [6.2 决策反馈应用](#62-决策反馈应用)
+  - [7 使用技巧](#7-使用技巧)
+    - [7.1 反馈收集技巧](#71-反馈收集技巧)
+  - [8 实践案例](#8-实践案例)
+    - [8.1 微服务架构决策反馈案例](#81-微服务架构决策反馈案例)
+  - [9 相关文档](#9-相关文档)
 
 ---
 
@@ -172,6 +181,7 @@ graph LR
 | **反馈机制** | 反馈机制、反馈流程、反馈工具 | 中 | ⭐⭐⭐⭐ |
 
 **推荐度说明**：
+
 - **⭐⭐⭐⭐⭐**：强烈推荐
 - **⭐⭐⭐⭐**：推荐
 - **⭐⭐⭐**：可选
@@ -272,7 +282,78 @@ graph LR
 
 ---
 
-## 9 相关文档
+## 9 2025 年最新实践
+
+### 9.1 决策反馈完整流程应用最佳实践（2025）
+
+**2025 年趋势**：决策反馈完整流程在反馈收集、反馈分析、反馈应用中的深度应用
+
+**实践要点**：
+
+- **多渠道收集**：建立多渠道反馈收集机制
+- **系统化分析**：系统化分析反馈，识别根本原因
+- **持续改进**：建立持续改进机制
+- **反馈循环**：建立反馈循环机制
+
+**代码示例**：
+
+```python
+# 2025 年决策反馈完整流程工具
+class DecisionFeedbackProcessTool:
+    def __init__(self):
+        self.collector = FeedbackCollector()
+        self.analyzer = FeedbackAnalyzer()
+        self.applicator = FeedbackApplicator()
+        self.improver = ContinuousImprover()
+
+    def collect_feedback(self, decision, channels):
+        """反馈收集"""
+        return self.collector.collect(decision, channels)
+
+    def analyze_feedback(self, feedback, criteria):
+        """反馈分析"""
+        return self.analyzer.analyze(feedback, criteria)
+
+    def apply_feedback(self, analysis, context):
+        """反馈应用"""
+        return self.applicator.apply(analysis, context)
+```
+
+## 10 实际应用案例
+
+### 案例 1：决策反馈完整流程应用（2025）
+
+**场景**：使用决策反馈完整流程优化微服务架构决策
+
+**实现方案**：
+
+```python
+# 决策反馈完整流程应用
+tool = DecisionFeedbackProcessTool()
+
+# 反馈收集
+decision = Decision(type="microservices", status="implemented")
+channels = Channels(users=True, system=True, business=True)
+feedback = tool.collect_feedback(decision, channels)
+
+# 反馈分析
+criteria = Criteria(priority=True, impact=True, feasibility=True)
+analysis = tool.analyze_feedback(feedback, criteria)
+
+# 反馈应用
+context = Context(team="devops", constraints="budget_limited")
+improvements = tool.apply_feedback(analysis, context)
+```
+
+**效果**：
+
+- 反馈收集：多渠道收集反馈，提高反馈完整性
+- 反馈分析：系统化分析反馈，提高分析质量
+- 反馈应用：持续应用反馈，提高持续改进能力
+
+---
+
+## 11 相关文档
 
 - **[决策制定完整流程](24-decision-making-process.md)** - 决策制定全景流程、问题识别流程、方案设计流程
 - **[决策优化综合指南](25-decision-optimization-guide.md)** - 决策流程优化、决策质量优化、决策效率优化
