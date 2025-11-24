@@ -1,6 +1,6 @@
 # API 缓存规范
 
-**版本**：v1.0 **最后更新**：2025-11-07 **维护者**：项目团队
+**版本**：v1.0 **最后更新：2025-11-15 **维护者**：项目团队
 
 ## 📑 目录
 
@@ -474,4 +474,4 @@ func (wbs *WriteBehindStrategy) Update(ctx context.Context, key string, value in
 - **[最佳实践](../08-best-practices/best-practices.md)** - 缓存最佳实践
 - **[API 视角主文档](../../../api_view.md)** ⭐ - API 规范视角的核心论述
 
-**最后更新**：2025-11-07 **维护者**：项目团队
+**最后更新：2025-11-15 **维护者**：项目团队

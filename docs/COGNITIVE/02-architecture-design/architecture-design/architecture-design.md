@@ -1584,6 +1584,81 @@ graph LR
 3. **模型构建**：构建架构设计的心理模型
 4. **认知提升**：通过架构设计学习，提升认知能力
 
+---
+
+## 2025 年最新实践
+
+### 全局架构设计应用最佳实践（2025）
+
+**2025 年趋势**：技术组合方案、决策框架在云原生架构设计中的深度应用
+
+**实践要点**：
+
+- **技术组合**：使用技术组合方案矩阵进行架构设计
+- **决策框架**：使用架构设计决策框架指导技术选型
+- **演进路径**：使用技术栈演进路径规划架构演进
+
+**代码示例**：
+
+```python
+# 2025 年全局架构设计工具
+class GlobalArchitectureDesignTool:
+    def __init__(self):
+        self.combiner = TechnologyCombiner()
+        self.decider = ArchitectureDecider()
+        self.evolver = TechnologyEvolver()
+
+    def combine_technologies(self, requirements):
+        """技术组合"""
+        return self.combiner.combine(requirements)
+
+    def decide_architecture(self, scenario):
+        """架构决策"""
+        return self.decider.decide(scenario)
+
+    def evolve_architecture(self, current, target):
+        """架构演进"""
+        return self.evolver.evolve(current, target)
+```
+
+## 实际应用案例
+
+### 案例 1：全局架构设计技术组合（2025）
+
+**场景**：使用技术组合方案进行全局架构设计
+
+**实现方案**：
+
+```python
+# 全局架构设计技术组合
+tool = GlobalArchitectureDesignTool()
+
+# 技术组合
+requirements = Requirements(
+    scenario="edge-computing",
+    performance=HIGH,
+    security=HIGH
+)
+combination = tool.combine_technologies(requirements)
+
+# 架构决策
+scenario = Scenario(industry="finance", scale="large")
+architecture = tool.decide_architecture(scenario)
+
+# 架构演进
+current = Architecture(technologies=[...])
+target = Architecture(technologies=[...])
+evolution = tool.evolve_architecture(current, target)
+```
+
+**效果**：
+
+- 技术组合：基于技术组合方案矩阵的架构设计，提高设计规范性
+- 架构决策：使用决策框架指导技术选型，提高选型准确性
+- 架构演进：使用演进路径规划架构演进，提高演进可控性
+
+---
+
 **最后更新**：2025-11-15
 **文档状态**：✅ 完整 | 📊 包含思维导图、建模视图、多维矩阵、图表达转换、形象化解释论证、专家观点 | 🎯 生产就绪技术组合
 **维护者**：项目团队

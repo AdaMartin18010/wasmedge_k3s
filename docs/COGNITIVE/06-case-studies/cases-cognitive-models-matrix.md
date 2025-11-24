@@ -27,6 +27,10 @@
   - [11 相关文档](#11-相关文档)
     - [案例研究目录文档](#案例研究目录文档)
     - [COGNITIVE目录参考文档](#cognitive目录参考文档)
+  - [2025 年最新实践](#2025-年最新实践)
+    - [案例研究认知模型矩阵应用最佳实践（2025）](#案例研究认知模型矩阵应用最佳实践2025)
+  - [实际应用案例](#实际应用案例)
+    - [案例 1：案例研究认知模型矩阵应用（2025）](#案例-1案例研究认知模型矩阵应用2025)
 
 ---
 
@@ -382,6 +386,73 @@
 - [认知模型矩阵](../01-core-foundations/visualizations/02-cognitive-models-matrix.md) - 认知模型对比矩阵
 - [理论视角框架](../03-theoretical-perspectives/README.md) - 多维度理论分析框架
 - [理论视角对比矩阵](../03-theoretical-perspectives/visualizations/02-perspective-comparison-matrix.md) - 理论视角对比矩阵
+
+---
+
+## 2025 年最新实践
+
+### 案例研究认知模型矩阵应用最佳实践（2025）
+
+**2025 年趋势**：认知模型矩阵在案例研究、技术选型、架构设计中的深度应用
+
+**实践要点**：
+
+- **模型组合**：使用多个认知模型组合分析案例
+- **矩阵对比**：使用认知模型矩阵对比不同案例
+- **决策支持**：使用认知模型矩阵支持技术决策
+
+**代码示例**：
+
+```python
+# 2025 年案例研究认知模型矩阵工具
+class CaseCognitiveModelsMatrixTool:
+    def __init__(self):
+        self.model_matcher = ModelMatcher()
+        self.matrix_builder = MatrixBuilder()
+        self.decision_supporter = DecisionSupporter()
+
+    def match_models(self, case):
+        """模型匹配"""
+        return self.model_matcher.match(case)
+
+    def build_matrix(self, cases):
+        """矩阵构建"""
+        return self.matrix_builder.build(cases)
+
+    def support_decision(self, case, models):
+        """决策支持"""
+        return self.decision_supporter.support(case, models)
+```
+
+## 实际应用案例
+
+### 案例 1：案例研究认知模型矩阵应用（2025）
+
+**场景**：使用认知模型矩阵进行案例研究和技术选型
+
+**实现方案**：
+
+```python
+# 案例研究认知模型矩阵应用
+tool = CaseCognitiveModelsMatrixTool()
+
+# 模型匹配
+case = Case(industry="finance", scenario="core-system")
+matched_models = tool.match_models(case)
+
+# 矩阵构建
+cases = [case1, case2, case3]
+matrix = tool.build_matrix(cases)
+
+# 决策支持
+decision = tool.support_decision(case, matched_models)
+```
+
+**效果**：
+
+- 案例研究：基于认知模型矩阵的案例研究，提高分析准确性
+- 技术选型：使用认知模型矩阵支持技术选型，提高选型准确性
+- 架构设计：使用认知模型矩阵指导架构设计，提高设计质量
 
 ---
 

@@ -10,6 +10,7 @@
     - [理论视角（Theoretical Perspectives）](#理论视角theoretical-perspectives)
     - [应用视角（Application Perspectives）](#应用视角application-perspectives)
     - [决策与分析（Decision \& Analysis）](#决策与分析decision--analysis)
+    - [案例研究认知增强（Case Studies Cognitive Enhancement）](#案例研究认知增强case-studies-cognitive-enhancement)
 
 ---
 

@@ -31,6 +31,10 @@
     - [5.1 扩展性极限验证](#51-扩展性极限验证)
     - [5.2 扩展瓶颈验证](#52-扩展瓶颈验证)
   - [相关文档](#相关文档)
+  - [2025 年最新实践](#2025-年最新实践)
+    - [扩展性极限应用最佳实践（2025）](#扩展性极限应用最佳实践2025)
+  - [实际应用案例](#实际应用案例)
+    - [案例 1：集群扩展性规划（2025）](#案例-1集群扩展性规划2025)
 
 ---
 
@@ -506,6 +510,77 @@ verifyExtensionBottleneck node =
 - [风险调整后的期望效用](./03-risk-adjusted-utility.md) - 风险调整后的期望效用
 - [核心功能架构矩阵对比](../01-core-architecture/01-architecture-matrix.md) - 功
   能域对比矩阵
+
+---
+
+## 2025 年最新实践
+
+### 扩展性极限应用最佳实践（2025）
+
+**2025 年趋势**：扩展性极限在集群管理、资源规划、容量规划中的深度应用
+
+**实践要点**：
+
+- **扩展性分析**：使用扩展性极限进行集群扩展性分析
+- **瓶颈识别**：使用扩展瓶颈识别进行资源瓶颈识别
+- **扩展策略**：使用扩展策略进行集群扩展规划
+
+**代码示例**：
+
+```python
+# 2025 年扩展性极限工具
+class ExtensionLimitsTool:
+    def __init__(self):
+        self.limit_analyzer = LimitAnalyzer()
+        self.bottleneck_detector = BottleneckDetector()
+        self.strategy_planner = StrategyPlanner()
+
+    def analyze_limits(self, cluster):
+        """扩展性分析"""
+        return self.limit_analyzer.analyze(cluster)
+
+    def detect_bottlenecks(self, node):
+        """瓶颈识别"""
+        return self.bottleneck_detector.detect(node)
+
+    def plan_strategy(self, limits, bottlenecks):
+        """扩展策略规划"""
+        return self.strategy_planner.plan(limits, bottlenecks)
+```
+
+## 实际应用案例
+
+### 案例 1：集群扩展性规划（2025）
+
+**场景**：使用扩展性极限进行集群扩展性规划
+
+**实现方案**：
+
+```python
+# 集群扩展性规划
+tool = ExtensionLimitsTool()
+
+# 分析扩展性极限
+cluster = Cluster(nodes=100, pods=1000, vms=50)
+limits = tool.analyze_limits(cluster)
+
+# 识别瓶颈
+bottlenecks = []
+for node in cluster.nodes:
+    bottlenecks.extend(tool.detect_bottlenecks(node))
+
+# 规划扩展策略
+strategy = tool.plan_strategy(limits, bottlenecks)
+
+# 执行扩展
+execute_extension(strategy)
+```
+
+**效果**：
+
+- 扩展性分析：基于扩展性极限的扩展性分析，量化扩展能力
+- 瓶颈识别：扩展瓶颈识别，快速定位资源瓶颈
+- 扩展策略：基于扩展性极限的扩展策略规划，优化扩展方案
 
 ---
 

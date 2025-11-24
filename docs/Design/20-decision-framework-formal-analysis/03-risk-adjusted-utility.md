@@ -25,6 +25,10 @@
     - [4.1 期望效用范围验证](#41-期望效用范围验证)
     - [4.2 风险调整单调性验证](#42-风险调整单调性验证)
   - [相关文档](#相关文档)
+  - [2025 年最新实践](#2025-年最新实践)
+    - [风险调整后的期望效用应用最佳实践（2025）](#风险调整后的期望效用应用最佳实践2025)
+  - [实际应用案例](#实际应用案例)
+    - [案例 1：生产环境决策分析（2025）](#案例-1生产环境决策分析2025)
 
 ---
 
@@ -403,6 +407,78 @@ verifyRiskAdjustmentMonotonicity utility1 utility2 lambda =
 - [扩展性极限](./04-extension-limits.md) - 扩展性极限
 - [核心功能架构矩阵对比](../01-core-architecture/01-architecture-matrix.md) - 功
   能域对比矩阵
+
+---
+
+## 2025 年最新实践
+
+### 风险调整后的期望效用应用最佳实践（2025）
+
+**2025 年趋势**：风险调整后的期望效用在决策分析、风险评估、投资决策中的深度应用
+
+**实践要点**：
+
+- **期望效用计算**：使用期望效用进行决策分析
+- **风险调整**：使用风险调整系数进行风险评估
+- **决策优化**：使用风险调整后的期望效用进行决策优化
+
+**代码示例**：
+
+```python
+# 2025 年风险调整后的期望效用工具
+class RiskAdjustedUtilityTool:
+    def __init__(self):
+        self.utility_calculator = UtilityCalculator()
+        self.risk_adjuster = RiskAdjuster()
+        self.optimizer = DecisionOptimizer()
+
+    def compute_expected_utility(self, outcomes, probabilities):
+        """期望效用计算"""
+        return self.utility_calculator.compute_expected(outcomes, probabilities)
+
+    def adjust_risk(self, utility, variance, lambda_coef):
+        """风险调整"""
+        return self.risk_adjuster.adjust(utility, variance, lambda_coef)
+
+    def optimize_decision(self, decisions):
+        """决策优化"""
+        return self.optimizer.optimize(decisions)
+```
+
+## 实际应用案例
+
+### 案例 1：生产环境决策分析（2025）
+
+**场景**：使用风险调整后的期望效用进行生产环境决策分析
+
+**实现方案**：
+
+```python
+# 生产环境决策分析
+tool = RiskAdjustedUtilityTool()
+
+# 定义决策结果和概率
+outcomes = [0.8, 0.9, 0.85]
+probabilities = [0.3, 0.5, 0.2]
+
+# 计算期望效用
+expected_utility = tool.compute_expected_utility(outcomes, probabilities)
+
+# 风险调整
+variance = compute_variance(outcomes, probabilities)
+lambda_coef = 0.5  # 风险厌恶系数
+risk_adjusted_utility = tool.adjust_risk(expected_utility, variance, lambda_coef)
+
+# 决策优化
+decisions = [decision1, decision2, decision3]
+optimal_decision = tool.optimize_decision(decisions)
+```
+
+**效果**：
+
+- 决策分析：基于期望效用的决策分析，提高决策准确性
+- 风险评估：风险调整后的期望效用，量化风险影响
+- 决策优化：基于风险调整后的期望效用进行决策优化
 
 ---
 
