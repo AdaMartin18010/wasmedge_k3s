@@ -901,14 +901,14 @@ E(c) = [e₁(c), e₂(c), ..., e₁₂(c)]
    - 所有章节链接
 
 3. **核心章节**：
-   - 1. 案例基本信息
-   - 2. 案例描述
-   - 3. 技术栈
-   - 4. 关键指标
-   - 5. 实施步骤
-   - 6. 经验总结
-   - 7. 相关链接
-   - 8. 更新记录
+         - 1. 案例基本信息
+         - 2. 案例描述
+         - 3. 技术栈
+         - 4. 关键指标
+         - 5. 实施步骤
+         - 6. 经验总结
+         - 7. 相关链接
+         - 8. 更新记录
 
 4. **理论视角分析章节**（可选）：
    - 11. 理论视角深度分析
@@ -935,13 +935,13 @@ E(c) = [e₁(c), e₂(c), ..., e₁₂(c)]
    - 完整的目录结构
 
 3. **核心章节**：
-   - 1. 文档定位
-   - 2. 分析框架
-   - 3. 详细分析
-   - 4. 对比分析
-   - 5. 最佳实践
-   - 6. 相关文档
-   - 7. 更新记录
+         - 1. 文档定位
+         - 2. 分析框架
+         - 3. 详细分析
+         - 4. 对比分析
+         - 5. 最佳实践
+         - 6. 相关文档
+         - 7. 更新记录
 
 4. **认知增强章节**（可选）：
    - X. 认知增强：知识多维关系矩阵
@@ -965,15 +965,15 @@ E(c) = [e₁(c), e₂(c), ..., e₁₂(c)]
    - 完整的目录结构
 
 3. **核心章节**：
-   - 1. 文档定位
-   - 2. 核心内容
-   - 3. 认知增强内容
-     - 3.1 思维导图
-     - 3.2 知识矩阵
-     - 3.3 形式化定义
-     - 3.4 专家观点
-     - 3.5 形象化解释
-   - 4. 相关文档
+         - 1. 文档定位
+         - 2. 核心内容
+         - 3. 认知增强内容
+           - 3.1 思维导图
+           - 3.2 知识矩阵
+           - 3.3 形式化定义
+           - 3.4 专家观点
+           - 3.5 形象化解释
+         - 4. 相关文档
 
 ---
 
@@ -1128,18 +1128,18 @@ E(c) = [e₁(c), e₂(c), ..., e₁₂(c)]
 - [案例研究认知模型矩阵](cases-cognitive-models-matrix.md) - 认知模型对比矩阵
 - [案例研究形式化证明](cases-formal-proofs.md) - 形式化证明和理论论证
 - [认知增强扩展计划](COGNITIVE-ENHANCEMENT-PLAN.md) - 认知增强扩展计划和方案
-- [案例理论视角分析模板](case-theoretical-analysis-template.md) - 理论视角分析模板
+- [案例理论视角分析模板](../../../cases/case-theoretical-analysis-template.md) - 理论视角分析模板
 
 ### COGNITIVE目录参考文档
 
 - [COGNITIVE目录总览](../../docs/COGNITIVE/README.md) - COGNITIVE目录完整说明 ⭐
 - [案例研究认知增强文档总览](../../docs/COGNITIVE/06-case-studies/README.md) - 案例研究认知增强文档完整说明 ⭐
-- [理论视角框架](../../docs/COGNITIVE/03-theoretical-perspectives/README.md) - 多维度理论分析框架
-- [矩阵视角](../../docs/COGNITIVE/03-theoretical-perspectives/matrix-perspective/README.md) - 矩阵视角详细文档
-- [代数结构视角](../../docs/COGNITIVE/03-theoretical-perspectives/algebraic-structure/README.md) - 代数结构视角详细文档
-- [结构视角](../../docs/COGNITIVE/03-theoretical-perspectives/structural-perspective/README.md) - 结构视角详细文档
-- [调度视角](../../docs/COGNITIVE/03-theoretical-perspectives/scheduling-perspective/README.md) - 调度视角详细文档
-- [形式化理论](../../docs/COGNITIVE/03-theoretical-perspectives/formal-theory/formal-theory.md) - 形式化理论基础
+- [理论视角框架](../03-theoretical-perspectives/README.md) - 多维度理论分析框架
+- [矩阵视角](../03-theoretical-perspectives/matrix-perspective/README.md) - 矩阵视角详细文档
+- [代数结构视角](../03-theoretical-perspectives/algebraic-structure/README.md) - 代数结构视角详细文档
+- [结构视角](../03-theoretical-perspectives/structural-perspective/README.md) - 结构视角详细文档
+- [调度视角](../03-theoretical-perspectives/scheduling-perspective/README.md) - 调度视角详细文档
+- [形式化理论](../03-theoretical-perspectives/formal-theory/formal-theory.md) - 形式化理论基础
 
 ---
 

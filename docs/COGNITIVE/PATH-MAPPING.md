@@ -2,13 +2,14 @@
 
 ## 📑 目录
 
-- [📑 目录](#-目录)
-- [📋 路径映射表](#-路径映射表)
-  - [核心基础（Core Foundations）](#核心基础core-foundations)
-  - [架构与设计（Architecture \& Design）](#架构与设计architecture--design)
-  - [理论视角（Theoretical Perspectives）](#理论视角theoretical-perspectives)
-  - [应用视角（Application Perspectives）](#应用视角application-perspectives)
-  - [决策与分析（Decision \& Analysis）](#决策与分析decision--analysis)
+- [COGNITIVE 目录路径映射表](#cognitive-目录路径映射表)
+  - [📑 目录](#-目录)
+  - [📋 路径映射表](#-路径映射表)
+    - [核心基础（Core Foundations）](#核心基础core-foundations)
+    - [架构与设计（Architecture \& Design）](#架构与设计architecture--design)
+    - [理论视角（Theoretical Perspectives）](#理论视角theoretical-perspectives)
+    - [应用视角（Application Perspectives）](#应用视角application-perspectives)
+    - [决策与分析（Decision \& Analysis）](#决策与分析decision--analysis)
 
 ---
 
@@ -60,6 +61,20 @@
 | `10-decision-models/` | `05-decision-analysis/decision-models/` |
 | `04-benchmarks/`      | `05-decision-analysis/benchmarks/`      |
 
+### 案例研究认知增强（Case Studies Cognitive Enhancement）
+
+| 说明 | 新路径 |
+| ---- | ------ |
+| **案例研究认知增强文档**（新增目录，无旧路径） | `06-case-studies/` |
+
+**包含文档**：
+
+- `cases-knowledge-map.md` - 案例研究知识图谱
+- `cases-cognitive-models-matrix.md` - 案例研究认知模型矩阵
+- `cases-formal-proofs.md` - 案例研究形式化证明
+- `cases-analysis-models-standard.md` - 案例研究分析模型标准
+- `COGNITIVE-ENHANCEMENT-PLAN.md` - 认知增强扩展计划
+
 ---
 
-**最后更新**：2025-11-08 **维护者**：项目团队
+**最后更新**：2025-11-15 **维护者**：项目团队

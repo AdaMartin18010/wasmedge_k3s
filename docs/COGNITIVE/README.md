@@ -151,20 +151,20 @@
 
 | 文档     | 路径                               | 核心内容               |
 | -------- | ---------------------------------- | ---------------------- |
-| 性能基准 | `05-decision-analysis/benchmarks/` | 性能评估框架（混合型） |
+| 性能基准 | `05-decision-analysis/benchmarks/` | 性能评估框架（混合型）<br/>✅ **包含**：容器 vs Wasm、Kubernetes vs K3s、OPA、Service Mesh 性能对比 |
 
 ### 案例研究认知增强 ⭐
 
 | 文档             | 路径                                    | 核心内容                                                                 |
 | ---------------- | --------------------------------------- | ------------------------------------------------------------------------ |
-| 案例研究知识图谱 | `06-case-studies/`（链接到`cases/`目录） | 案例研究多维度认知框架、思维导图、知识矩阵、专家观点、学习路径 ⭐        |
-| 案例研究认知模型矩阵 | `06-case-studies/`（链接到`cases/`目录） | 认知模型功能矩阵、适用场景矩阵、复杂度矩阵、学习路径矩阵、组合使用矩阵 ⭐ |
-| 案例研究形式化证明 | `06-case-studies/`（链接到`cases/`目录） | 形式化理论基础、关键案例的形式化证明、理论视角的形式化定义 ⭐            |
-| 案例研究分析模型标准 | `06-case-studies/`（链接到`cases/`目录） | 分析模型定义标准、思维工具使用标准、论证方法标准、文档结构标准 ⭐        |
-| 认知增强扩展计划 | `06-case-studies/`（链接到`cases/`目录） | 认知增强扩展计划和方案、实施计划、质量标准 ⭐                            |
-| 深度分析文档认知增强 | `06-case-studies/`（链接到`cases/`目录） | 跨案例对比、行业维度、场景维度、技术栈维度分析的认知增强章节 ⭐          |
+| 案例研究知识图谱 | `06-case-studies/cases-knowledge-map.md` | 案例研究多维度认知框架、思维导图、知识矩阵、专家观点、学习路径 ⭐        |
+| 案例研究认知模型矩阵 | `06-case-studies/cases-cognitive-models-matrix.md` | 认知模型功能矩阵、适用场景矩阵、复杂度矩阵、学习路径矩阵、组合使用矩阵 ⭐ |
+| 案例研究形式化证明 | `06-case-studies/cases-formal-proofs.md` | 形式化理论基础、关键案例的形式化证明、理论视角的形式化定义 ⭐            |
+| 案例研究分析模型标准 | `06-case-studies/cases-analysis-models-standard.md` | 分析模型定义标准、思维工具使用标准、论证方法标准、文档结构标准 ⭐        |
+| 认知增强扩展计划 | `06-case-studies/COGNITIVE-ENHANCEMENT-PLAN.md` | 认知增强扩展计划和方案、实施计划、质量标准 ⭐                            |
+| 深度分析文档认知增强 | `06-case-studies/`（引用`cases/`目录的深度分析文档） | 跨案例对比、行业维度、场景维度、技术栈维度分析的认知增强章节 ⭐          |
 
-**说明**：案例研究认知增强文档位于 `cases/` 目录，本目录提供快速导航和索引。详细文档请查看 [`06-case-studies/README.md`](06-case-studies/README.md)。
+**说明**：案例研究认知增强文档位于 `06-case-studies/` 目录，深度分析文档位于 `cases/` 目录。详细文档请查看 [`06-case-studies/README.md`](06-case-studies/README.md)。
 
 ## 3 快速开始
 
@@ -424,11 +424,11 @@
 **快速导航**：
 
 - 📖 [案例研究认知增强文档总览](06-case-studies/README.md) - 案例研究认知增强文档完整说明
-- 🗺️ [案例研究知识图谱](../../cases/cases-knowledge-map.md) - 案例研究多维度认知框架
-- 📊 [案例研究认知模型矩阵](../../cases/cases-cognitive-models-matrix.md) - 认知模型对比矩阵
-- 🔬 [案例研究形式化证明](../../cases/cases-formal-proofs.md) - 形式化证明和理论论证
-- 📋 [案例研究分析模型标准](../../cases/cases-analysis-models-standard.md) - 分析模型、思维工具和论证方法标准
-- 📝 [认知增强扩展计划](../../cases/COGNITIVE-ENHANCEMENT-PLAN.md) - 认知增强扩展计划和方案
+- 🗺️ [案例研究知识图谱](06-case-studies/cases-knowledge-map.md) - 案例研究多维度认知框架
+- 📊 [案例研究认知模型矩阵](06-case-studies/cases-cognitive-models-matrix.md) - 认知模型对比矩阵
+- 🔬 [案例研究形式化证明](06-case-studies/cases-formal-proofs.md) - 形式化证明和理论论证
+- 📋 [案例研究分析模型标准](06-case-studies/cases-analysis-models-standard.md) - 分析模型、思维工具和论证方法标准
+- 📝 [认知增强扩展计划](06-case-studies/COGNITIVE-ENHANCEMENT-PLAN.md) - 认知增强扩展计划和方案
 
 **认知增强内容统计**：
 

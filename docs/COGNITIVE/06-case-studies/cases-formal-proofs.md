@@ -793,17 +793,17 @@ Policy(sys) = (Static(sys), Dynamic(sys))
 
 ### 案例研究目录文档
 
-- [银行核心系统](finance-bank-core.md) - 包含形式化理论视角分析
-- [健康数据管理](healthcare-health-data-management.md) - 包含形式化理论视角分析
-- [医院信息系统](healthcare-hospital-information-system.md) - 包含形式化理论视角分析
-- [理论视角分析总结](THEORETICAL-ANALYSIS-SUMMARY.md) - 理论视角分析工作总结
+- [银行核心系统](../../../cases/finance-bank-core.md) - 包含形式化理论视角分析
+- [健康数据管理](../../../cases/healthcare-health-data-management.md) - 包含形式化理论视角分析
+- [医院信息系统](../../../cases/healthcare-hospital-information-system.md) - 包含形式化理论视角分析
+- [理论视角分析总结](../../../cases/THEORETICAL-ANALYSIS-SUMMARY.md) - 理论视角分析工作总结
 
 ### COGNITIVE目录参考文档
 
-- [COGNITIVE目录总览](../../docs/COGNITIVE/README.md) - COGNITIVE目录完整说明 ⭐
-- [案例研究认知增强文档总览](../../docs/COGNITIVE/06-case-studies/README.md) - 案例研究认知增强文档完整说明 ⭐
-- [形式化理论](../../docs/COGNITIVE/03-theoretical-perspectives/formal-theory/formal-theory.md) - 形式化理论基础
-- [理论视角框架](../../docs/COGNITIVE/03-theoretical-perspectives/README.md) - 多维度理论分析框架
+- [COGNITIVE目录总览](../README.md) - COGNITIVE目录完整说明 ⭐
+- [案例研究认知增强文档总览](README.md) - 案例研究认知增强文档完整说明 ⭐
+- [形式化理论](../03-theoretical-perspectives/formal-theory/formal-theory.md) - 形式化理论基础
+- [理论视角框架](../03-theoretical-perspectives/README.md) - 多维度理论分析框架
 
 ---
 
