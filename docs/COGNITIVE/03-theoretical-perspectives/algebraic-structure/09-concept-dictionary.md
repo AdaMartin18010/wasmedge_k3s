@@ -40,6 +40,10 @@
         - [2. Douglas Hofstadter（认知科学家）](#2-douglas-hofstadter认知科学家)
     - [12.7 认知学习路径矩阵](#127-认知学习路径矩阵)
     - [12.8 专家推荐阅读路径](#128-专家推荐阅读路径)
+  - [2025 年最新实践](#2025-年最新实践)
+    - [概念词典应用最佳实践（2025）](#概念词典应用最佳实践2025)
+  - [实际应用案例](#实际应用案例)
+    - [案例 1：概念词典应用（2025）](#案例-1概念词典应用2025)
 
 ---
 
@@ -630,4 +634,74 @@ graph LR
 
 ---
 
-**最后更新**：2025-11-04 **维护者**：项目团队
+---
+
+## 2025 年最新实践
+
+### 概念词典应用最佳实践（2025）
+
+**2025 年趋势**：概念词典在知识管理、术语标准化、文档编写中的深度应用
+
+**实践要点**：
+
+- **知识管理**：使用概念词典进行知识管理和术语管理
+- **术语标准化**：基于概念词典进行术语标准化
+- **文档编写**：使用概念词典辅助文档编写
+
+**代码示例**：
+
+```python
+# 2025 年概念词典工具
+class ConceptDictionaryTool:
+    def __init__(self):
+        self.knowledge_manager = KnowledgeManager()
+        self.standardizer = TermStandardizer()
+        self.writing_assistant = WritingAssistant()
+
+    def manage_knowledge(self, concepts):
+        """知识管理"""
+        return self.knowledge_manager.manage(concepts)
+
+    def standardize_terms(self, terms):
+        """术语标准化"""
+        return self.standardizer.standardize(terms)
+
+    def assist_writing(self, document, dictionary):
+        """文档编写辅助"""
+        return self.writing_assistant.assist(document, dictionary)
+```
+
+## 实际应用案例
+
+### 案例 1：概念词典应用（2025）
+
+**场景**：使用概念词典进行知识管理和文档编写
+
+**实现方案**：
+
+```python
+# 概念词典应用
+tool = ConceptDictionaryTool()
+
+# 知识管理
+concepts = [Concept(name="...", definition="..."), ...]
+dictionary = tool.manage_knowledge(concepts)
+
+# 术语标准化
+terms = ["term1", "term2", ...]
+standardized = tool.standardize_terms(terms)
+
+# 文档编写辅助
+document = Document(content="...")
+assisted = tool.assist_writing(document, dictionary)
+```
+
+**效果**：
+
+- 知识管理：基于概念词典的知识管理，提高知识管理效率
+- 术语标准化：使用概念词典进行术语标准化，提高术语一致性
+- 文档编写：使用概念词典辅助文档编写，提高文档质量
+
+---
+
+**最后更新**：2025-11-15 **维护者**：项目团队

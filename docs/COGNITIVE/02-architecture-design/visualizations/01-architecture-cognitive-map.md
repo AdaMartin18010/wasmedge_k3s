@@ -16,6 +16,10 @@
     - [6.1 架构设计技巧](#61-架构设计技巧)
     - [6.2 架构决策技巧](#62-架构决策技巧)
   - [7 相关文档](#7-相关文档)
+  - [2025 年最新实践](#2025-年最新实践)
+    - [架构认知地图应用最佳实践（2025）](#架构认知地图应用最佳实践2025)
+  - [实际应用案例](#实际应用案例)
+    - [案例 1：架构认知地图应用（2025）](#案例-1架构认知地图应用2025)
 
 ---
 
@@ -310,6 +314,74 @@ mindmap
 - **[架构演进路径图](06-architecture-evolution-path.md)** - 架构演进全景、演进路径、演进策略
 - **[架构决策完整流程](08-architecture-decision-process.md)** - 架构决策全景流程、需求分析流程、架构设计流程
 - **[架构模式实践综合指南](09-architecture-patterns-practice-guide.md)** - 架构模式实践、最佳实践、案例分析
+
+---
+
+## 2025 年最新实践
+
+### 架构认知地图应用最佳实践（2025）
+
+**2025 年趋势**：架构认知地图在架构设计、知识管理、团队协作中的深度应用
+
+**实践要点**：
+
+- **地图构建**：使用认知地图构建架构知识体系
+- **知识导航**：基于认知地图进行架构知识导航
+- **协作共享**：使用认知地图促进团队协作和知识共享
+
+**代码示例**：
+
+```python
+# 2025 年架构认知地图工具
+class ArchitectureCognitiveMapTool:
+    def __init__(self):
+        self.map_builder = MapBuilder()
+        self.navigator = KnowledgeNavigator()
+        self.collaborator = CollaborationTool()
+
+    def build_map(self, architecture):
+        """构建地图"""
+        return self.map_builder.build(architecture)
+
+    def navigate(self, map, query):
+        """知识导航"""
+        return self.navigator.navigate(map, query)
+
+    def share_map(self, map, team):
+        """共享地图"""
+        return self.collaborator.share(map, team)
+```
+
+## 实际应用案例
+
+### 案例 1：架构认知地图应用（2025）
+
+**场景**：使用架构认知地图进行架构设计和知识管理
+
+**实现方案**：
+
+```python
+# 架构认知地图应用
+tool = ArchitectureCognitiveMapTool()
+
+# 构建地图
+architecture = Architecture(components=[...], patterns=[...])
+cognitive_map = tool.build_map(architecture)
+
+# 知识导航
+query = "microservices patterns"
+results = tool.navigate(cognitive_map, query)
+
+# 共享地图
+team = Team(members=[...])
+tool.share_map(cognitive_map, team)
+```
+
+**效果**：
+
+- 地图构建：基于认知地图的架构知识体系，提高知识组织效率
+- 知识导航：使用认知地图进行知识导航，提高知识查找效率
+- 协作共享：使用认知地图促进协作，提高团队协作效率
 
 ---
 
