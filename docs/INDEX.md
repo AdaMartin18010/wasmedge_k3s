@@ -13,11 +13,11 @@
     - [技术类（6 个）](#技术类6-个)
     - [安全类（2 个）](#安全类2-个)
     - [场景类（2 个）](#场景类2-个)
-    - [实践类（5 个）](#实践类5-个)
+    - [实践类（6 个）](#实践类6-个)
     - [设计类（2 个）](#设计类2-个)
     - [理论类（5 个）](#理论类5-个)
     - [规格类（9 个）](#规格类9-个)
-    - [参考类（5 个）](#参考类5-个)
+    - [参考类（7 个）](#参考类7-个)
   - [🗺️ 文档关系图](#️-文档关系图)
   - [📖 按使用场景索引](#-按使用场景索引)
     - [快速入门](#快速入门)
@@ -95,9 +95,12 @@
 | 35   | 社区生态和最佳实践  | [35-community-best-practices](TECHNICAL/09-optimization-practices/community-best-practices/community-best-practices.md) | 社区生态和最佳实践（可选）                   | 参考 |
 | 36   | 文档体系分析与改进  | [36-analysis-improvement](TECHNICAL/09-optimization-practices/analysis-improvement/analysis-improvement.md)             | 批判性分析和改进计划                         | 参考 |
 | 37   | 2025 年技术趋势汇总 | [37-2025-trends](TECHNICAL/10-reference-trends/2025-trends/2025-trends.md)                                              | 2025 年最新技术趋势和版本信息                | 参考 |
-| 38   | 矩阵视角            | [38-matrix-perspective](COGNITIVE/03-theoretical-perspectives/matrix-perspective/README.md)                             | 云原生技术栈的矩阵力学                       | 理论 |
-| 39   | 代数结构视角        | [39-algebraic-structure](COGNITIVE/03-theoretical-perspectives/algebraic-structure/README.md)                           | 算子理论与代数结构                           | 理论 |
-| 40   | 结构视角            | [40-structural-perspective](COGNITIVE/03-theoretical-perspectives/structural-perspective/README.md)                     | 计算结构、控制结构、信息结构（结构主义视角） | 理论 |
+| 38   | 核心概念词典        | [38-concept-dictionary](TECHNICAL/10-reference-trends/concept-dictionary/concept-dictionary.md) ⭐                      | 统一概念定义，标注来源（2025-11-15 新增）   | 参考 |
+| 39   | 版本信息更新机制    | [39-version-update-mechanism](TECHNICAL/10-reference-trends/version-update-mechanism.md) ⭐                              | 版本信息更新流程和检查清单（2025-11-15 新增）| 参考 |
+| 40   | 性能测试指南        | [40-performance-testing-guide](TECHNICAL/09-optimization-practices/performance-testing-guide.md) ⭐                      | 性能测试方法和测试环境说明（2025-11-15 新增）| 实践 |
+| 41   | 矩阵视角            | [41-matrix-perspective](COGNITIVE/03-theoretical-perspectives/matrix-perspective/README.md)                             | 云原生技术栈的矩阵力学                       | 理论 |
+| 42   | 代数结构视角        | [42-algebraic-structure](COGNITIVE/03-theoretical-perspectives/algebraic-structure/README.md)                           | 算子理论与代数结构                           | 理论 |
+| 43   | 结构视角            | [43-structural-perspective](COGNITIVE/03-theoretical-perspectives/structural-perspective/README.md)                     | 计算结构、控制结构、信息结构（结构主义视角） | 理论 |
 | 41   | AI/ML 架构视角      | [41-ai-ml-architecture-view](ARCHITECTURE/01-views/ai-ml-architecture-view.md)                                          | LLM 推理与容器编排集成                       | 架构 |
 | 42   | 边缘计算架构视角    | [42-edge-computing-view](ARCHITECTURE/01-views/edge-computing-view.md)                                                  | 5G MEC 架构、离线自治、热更新                | 架构 |
 | 43   | 文档对标分析        | [43-documentation-benchmark-analysis](DOCUMENTATION-BENCHMARK-ANALYSIS.md)                                              | 全面对标分析和改进建议                       | 参考 |
@@ -172,7 +175,7 @@ COGNITIVE/03-theoretical-perspectives/matrix-perspective 目录下）。
 - [12. AI 推理](TECHNICAL/03-application-scenarios/ai-inference/ai-inference.md) -
   AI 推理应用
 
-### 实践类（5 个）
+### 实践类（6 个）
 
 - [04. 性能基准](COGNITIVE/05-decision-analysis/benchmarks/benchmarks.md) - 性能
   指标和基准测试
@@ -184,6 +187,8 @@ COGNITIVE/03-theoretical-perspectives/matrix-perspective 目录下）。
   工具规范
 - [34. 成本优化](TECHNICAL/09-optimization-practices/cost-optimization/cost-optimization.md) -
   成本优化技术规范（可选）
+- [40. 性能测试指南](TECHNICAL/09-optimization-practices/performance-testing-guide.md) ⭐ -
+  性能测试方法和测试环境说明（2025-11-15 新增）
 
 ### 设计类（2 个）
 
@@ -234,7 +239,7 @@ COGNITIVE/03-theoretical-perspectives/matrix-perspective 目录下）。
   ⭐ - eBPF/OTLP 扩展技术分析；架构设计、性能分析、实践指南；技术规范对齐、虚拟
   化/容器化/沙盒化架构（2025-11-07）
 
-### 参考类（5 个）
+### 参考类（7 个）
 
 - [22. 缩写词汇表](TECHNICAL/10-reference-trends/acronyms-glossary/acronyms-glossary.md) -
   所有缩写词定义与关系
@@ -246,6 +251,10 @@ COGNITIVE/03-theoretical-perspectives/matrix-perspective 目录下）。
   批判性分析和改进计划
 - [37. 2025 年技术趋势汇总](TECHNICAL/10-reference-trends/2025-trends/2025-trends.md) -
   2025 年最新技术趋势和版本信息
+- [38. 核心概念词典](TECHNICAL/10-reference-trends/concept-dictionary/concept-dictionary.md) ⭐ -
+  统一概念定义，标注来源（2025-11-15 新增）
+- [39. 版本信息更新机制](TECHNICAL/10-reference-trends/version-update-mechanism.md) ⭐ -
+  版本信息更新流程和检查清单（2025-11-15 新增）
 
 ## 🗺️ 文档关系图
 
@@ -346,6 +355,8 @@ graph TB
 
 1. [04. 性能基准](COGNITIVE/05-decision-analysis/benchmarks/benchmarks.md) - 性
    能基线
+2. [40. 性能测试指南](TECHNICAL/09-optimization-practices/performance-testing-guide.md) ⭐ -
+   性能测试方法和测试环境说明（2025-11-15 新增）
 
 #### 安全合规
 
@@ -434,10 +445,14 @@ graph TB
    缩写查询
 2. [23. 主题清单](TECHNICAL/10-reference-trends/theme-inventory/theme-inventory.md) -
    主题查询
-3. [文档一致性分析](DOCUMENTATION-CONSISTENCY-ANALYSIS.md) - 文档一致性分析报告
-4. [文档一致性总结](DOCUMENTATION-CONSISTENCY-SUMMARY.md) - 文档一致性修复完成总
+3. [38. 核心概念词典](TECHNICAL/10-reference-trends/concept-dictionary/concept-dictionary.md) ⭐ -
+   概念定义查询（2025-11-15 新增）
+4. [39. 版本信息更新机制](TECHNICAL/10-reference-trends/version-update-mechanism.md) ⭐ -
+   版本信息查询（2025-11-15 新增）
+5. [文档一致性分析](DOCUMENTATION-CONSISTENCY-ANALYSIS.md) - 文档一致性分析报告
+6. [文档一致性总结](DOCUMENTATION-CONSISTENCY-SUMMARY.md) - 文档一致性修复完成总
    结
-5. [文档一致性检查清单](DOCUMENTATION-CONSISTENCY-CHECKLIST.md) ⭐ - 文档一致性
+7. [文档一致性检查清单](DOCUMENTATION-CONSISTENCY-CHECKLIST.md) ⭐ - 文档一致性
    检查清单（快速参考）
 6. [REFERENCES.md](REFERENCES.md) - 参考资源
 
@@ -506,14 +521,13 @@ graph TB
 
 ## 📊 文档统计
 
-- **总文档数**：43 个核心文档（含可选文档和分析文档，新增 AI/ML 架构视角、边缘计
-  算架构视角）
+- **总文档数**：47 个核心文档（含可选文档和分析文档，新增 AI/ML 架构视角、边缘计算架构视角、核心概念词典、版本信息更新机制、性能测试指南）
 - **主题覆盖度**：98.2%（113/115 主题）
 - **技术规范覆盖度**：100%（27/27 规范）
-- **文档分类**：11 大类（导航、理念、架构、技术、安全、场景、实践、设计、理论、
-  规格、参考）
-- **理论类文档**：5 个（形式化理论、范畴论视角、矩阵视角、代数结构视角、结构视角
-  ）
+- **文档分类**：11 大类（导航、理念、架构、技术、安全、场景、实践、设计、理论、规格、参考）
+- **理论类文档**：5 个（形式化理论、范畴论视角、矩阵视角、代数结构视角、结构视角）
+- **参考类文档**：7 个（新增核心概念词典、版本信息更新机制）
+- **实践类文档**：6 个（新增性能测试指南）
 
 ## 🔗 快速链接
 
@@ -529,9 +543,15 @@ graph TB
 
 ---
 
-**最后更新**：2025-11-07
+**最后更新**：2025-11-15
 **文档状态**：✅ 完整 | 📊 包含 2025 年最新趋势 | 🎯 生产就绪技术组合
 **维护者**：项目团队
+
+**最新更新**（2025-11-15）：
+- ⭐ 新增核心概念词典（文档 38）
+- ⭐ 新增版本信息更新机制（文档 39）
+- ⭐ 新增性能测试指南（文档 40）
+- ⭐ 更新文档编号：矩阵视角（38→41）、代数结构视角（39→42）、结构视角（40→43）
 
 > **📊 2025 年技术趋势参考**：详细技术状态和版本信息请查看
 > [27. 2025 年技术趋势汇总](TECHNICAL/10-reference-trends/2025-trends/2025-trends.md)

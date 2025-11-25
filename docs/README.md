@@ -523,6 +523,10 @@
   所有主题
 - [缩写词汇表](TECHNICAL/10-reference-trends/acronyms-glossary/acronyms-glossary.md) -
   缩写查询
+- [核心概念词典](TECHNICAL/10-reference-trends/concept-dictionary/concept-dictionary.md) ⭐ -
+  统一概念定义，标注来源（2025-11-15 新增）
+- [版本信息更新机制](TECHNICAL/10-reference-trends/version-update-mechanism.md) ⭐ -
+  版本信息更新流程和检查清单（2025-11-15 新增）
 - [文档一致性分析](DOCUMENTATION-CONSISTENCY-ANALYSIS.md) - 文档一致性分析报告
 - [文档一致性总结](DOCUMENTATION-CONSISTENCY-SUMMARY.md) - 文档一致性修复完成总
   结
@@ -537,6 +541,8 @@
   CSI、PV/PVC
 - [监控与可观测性](TECHNICAL/04-infrastructure-stack/observability/observability.md) -
   Metrics、Logging、Tracing
+- [性能测试指南](TECHNICAL/09-optimization-practices/performance-testing-guide.md) ⭐ -
+  性能测试方法和测试环境说明（2025-11-15 新增）
 
 ### 实践指南
 

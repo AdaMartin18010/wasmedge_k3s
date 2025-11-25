@@ -157,6 +157,7 @@
 - [案例收集指南](../CASE-STUDY-COLLECTION-GUIDE.md) - 案例收集标准化指南
 - [案例模板](case-template.md) - 案例信息模板
 - [案例理论分析模板](case-theoretical-analysis-template.md) - 理论视角分析模板
+- [案例真实性标注指南](CASE-AUTHENTICITY-GUIDELINES.md) ⭐ - 案例类型分类和标注规范（2025-11-15 新增）
 - [工作索引](../EVALUATION-WORK-INDEX.md) - 评价总结工作完整索引
 
 ### 目录和导航文档
