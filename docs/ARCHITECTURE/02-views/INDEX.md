@@ -2,21 +2,22 @@
 
 ## 📑 目录
 
-- [📑 目录](#-目录)
-- [1 文档索引](#1-文档索引)
-  - [1.1 架构拆解与组合 (`01-decomposition-composition/`)](#11-架构拆解与组合-01-decomposition-composition)
-  - [1.2 虚拟化容器化沙盒化 (`02-virtualization-containerization-sandboxing/`)](#12-虚拟化容器化沙盒化-02-virtualization-containerization-sandboxing)
-  - [1.3 服务网格与网络服务网格 (`03-service-mesh-nsm/`)](#13-服务网格与网络服务网格-03-service-mesh-nsm)
-  - [1.4 OPA 策略治理 (`04-opa-policy-governance/`)](#14-opa-策略治理-04-opa-policy-governance)
-  - [1.5 形式化论证 (`05-formal-proofs/`)](#15-形式化论证-05-formal-proofs)
-  - [1.6 概念属性关系 (`06-concepts-properties-relations/`)](#16-概念属性关系-06-concepts-properties-relations)
-  - [1.7 动态运维 (`07-dynamic-operations/`)](#17-动态运维-07-dynamic-operations)
-  - [1.8 组合模式 (`08-composition-patterns/`)](#18-组合模式-08-composition-patterns)
-  - [1.9 多视角分析 (`09-multi-perspectives/`)](#19-多视角分析-09-multi-perspectives)
-  - [1.10 2025 年 11 月更新 ⚠️ 已删除（内容合并到 `05-trends/`）](#110-2025-年-11-月更新-️-已删除内容合并到-05-trends)
-- [2 相关文档](#2-相关文档)
-  - [2.1 参考资源](#21-参考资源)
-  - [2.2 组合模式文档](#22-组合模式文档)
+- [软件架构视角文档索引](#软件架构视角文档索引)
+  - [📑 目录](#-目录)
+  - [1 文档索引](#1-文档索引)
+    - [1.1 架构拆解与组合 (`01-decomposition-composition/`)](#11-架构拆解与组合-01-decomposition-composition)
+    - [1.2 虚拟化容器化沙盒化 (`02-virtualization-containerization-sandboxing/`)](#12-虚拟化容器化沙盒化-02-virtualization-containerization-sandboxing)
+    - [1.3 服务网格与网络服务网格 (`03-service-mesh-nsm/`)](#13-服务网格与网络服务网格-03-service-mesh-nsm)
+    - [1.4 OPA 策略治理 (`04-opa-policy-governance/`)](#14-opa-策略治理-04-opa-policy-governance)
+    - [1.5 形式化论证 (`05-formal-proofs/`)](#15-形式化论证-05-formal-proofs)
+    - [1.6 概念属性关系 (`06-concepts-properties-relations/`)](#16-概念属性关系-06-concepts-properties-relations)
+    - [1.7 动态运维 (`07-dynamic-operations/`)](#17-动态运维-07-dynamic-operations)
+    - [1.8 组合模式 (`08-composition-patterns/`)](#18-组合模式-08-composition-patterns)
+    - [1.9 多视角分析 (`09-multi-perspectives/`)](#19-多视角分析-09-multi-perspectives)
+    - [1.10 2025 年 11 月更新 ⚠️ 已删除（内容合并到 `05-trends/`）](#110-2025-年-11-月更新-️-已删除内容合并到-05-trends)
+  - [2 相关文档](#2-相关文档)
+    - [2.1 参考资源](#21-参考资源)
+    - [2.2 组合模式文档](#22-组合模式文档)
 
 ---
 

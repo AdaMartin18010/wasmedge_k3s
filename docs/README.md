@@ -480,6 +480,7 @@
 
 ### 核心视角文档（项目根目录）
 
+- **[global_perspective.md](../view/global_perspective.md)** ⭐⭐ - 全局视角：云原生技术栈的完整知识体系（全局思维导图、多维概念矩阵、范畴论理论模型全面梳理）
 - **[ai_view.md](../ai_view.md)** ⭐ - 认知视角和技术演进主线
 - **[algebra_view.md](../algebra_view.md)** ⭐ - 代数解构视角
 - **[architecture_view.md](../architecture_view.md)** ⭐ v2.0 - 架构视角（已重构
