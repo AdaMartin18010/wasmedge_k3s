@@ -973,6 +973,9 @@ kubectl top pod <opa-pod-name>
 
 ### 06.13.3 OPA 策略相关文档
 
+- **[Kyverno v2](KYVERNO-V2.md)** ⭐ - Kyverno v2 策略引擎（2025-11-15 新增）
+- **[策略引擎对比分析](POLICY-ENGINE-COMPARISON.md)** ⭐ - Gatekeeper vs Kyverno 对比分析（2025-11-15 新增）
+
 - **[09. 安全合规](../09-security-compliance/security-compliance.md)** - 安全与
   合规最佳实践（包含 OPA-Wasm 数据脱敏）
 - **[03. WasmEdge](../03-wasm-edge/wasmedge.md)** - WasmEdge 运行时和 Wasm 容器

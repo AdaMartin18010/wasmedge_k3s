@@ -138,14 +138,19 @@
 | 文档               | 路径                                   | 核心内容                   |
 | ------------------ | -------------------------------------- | -------------------------- |
 | 服务网格           | `06-advanced-features/service-mesh/`   | 服务网格技术规范（可选）   |
+| Cilium Service Mesh | `06-advanced-features/service-mesh/CILIUM-SERVICE-MESH.md` ⭐ | Cilium Service Mesh 技术文档（2025-11-15 新增） |
+| 服务网格对比       | `06-advanced-features/service-mesh/SERVICE-MESH-COMPARISON.md` ⭐ | Istio、Linkerd、Cilium 对比分析（2025-11-15 新增） |
 | 多集群管理         | `06-advanced-features/multi-cluster/`  | 多集群管理技术规范（可选） |
+| Dapr 2.0          | `06-advanced-features/microservices/DAPR-2.0.md` ⭐ | Dapr 2.0 微服务运行时（2025-11-15 新增） |
 | 镜像仓库和镜像管理 | `06-advanced-features/image-registry/` | 镜像仓库与管理技术规范     |
 
 ### 2.8 安全与合规（Security & Compliance）
 
-| 文档     | 路径                                          | 核心内容           |
-| -------- | --------------------------------------------- | ------------------ |
-| 安全合规 | `07-security-compliance/security-compliance/` | 安全与合规最佳实践 |
+| 文档             | 路径                                          | 核心内容                                                           |
+| ---------------- | --------------------------------------------- | ------------------------------------------------------------------ |
+| 安全合规         | `07-security-compliance/security-compliance/` | 安全与合规最佳实践                                                 |
+| 安全最佳实践     | `07-security-compliance/SECURITY-BEST-PRACTICES.md` ⭐ | 容器安全、镜像安全、运行时安全、安全工具对比（2025-11-15 新增）   |
+| 合规性检查清单   | `07-security-compliance/COMPLIANCE-CHECKLIST.md` ⭐ | GDPR、HIPAA、等保合规性检查清单（2025-11-15 新增）                |
 
 ### 2.9 架构与分析（Architecture & Analysis）
 
@@ -166,11 +171,13 @@
 
 ### 2.11 参考与趋势（Reference & Trends）
 
-| 文档       | 路径                                     | 核心内容                 |
-| ---------- | ---------------------------------------- | ------------------------ |
-| 缩写词汇表 | `10-reference-trends/acronyms-glossary/` | 所有缩写词定义与关系     |
-| 主题清单   | `10-reference-trends/theme-inventory/`   | 全面梳理所有主题与子主题 |
-| 2025 趋势  | `10-reference-trends/2025-trends/`       | 2025 技术趋势            |
+| 文档                 | 路径                                                      | 核心内容                                                           |
+| -------------------- | --------------------------------------------------------- | ------------------------------------------------------------------ |
+| 缩写词汇表           | `10-reference-trends/acronyms-glossary/`                  | 所有缩写词定义与关系                                               |
+| 主题清单             | `10-reference-trends/theme-inventory/`                    | 全面梳理所有主题与子主题                                           |
+| 2025 趋势            | `10-reference-trends/2025-trends/`                        | 2025 技术趋势                                                      |
+| 技术趋势更新流程     | `10-reference-trends/TECHNOLOGY-TREND-UPDATE-PROCESS.md` ⭐ | 季度技术趋势更新流程、CNCF项目跟踪、版本信息验证（2025-11-15 新增） |
+| 版本信息更新机制     | `10-reference-trends/version-update-mechanism.md`         | 版本信息更新机制和检查清单                                         |
 
 ## 3 快速开始
 

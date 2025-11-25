@@ -116,21 +116,21 @@
 
 #### 导航文档（4个）
 
-10. [x] `README.md`
-11. [x] `docs/README.md`
-12. [x] `docs/INDEX.md`
-13. [x] `cases/README.md`
+1. [x] `README.md`
+2. [x] `docs/README.md`
+3. [x] `docs/INDEX.md`
+4. [x] `cases/README.md`
 
 #### 认知增强文档（8个）
 
-14. [x] `view/formal_analysis_view.md` - 添加认知增强工具
-15. [x] `view/system_view.md` - 添加认知增强工具
-16. [x] `view/structure_view.md` - 添加认知增强工具
-17. [x] `view/tech_view.md` - 添加认知增强工具
-18. [x] `view/ebpf_otlp_view.md` - 添加认知增强工具
-19. [x] `view/architect_domain_view.md` - 添加认知增强工具
-20. [x] `view/network_view.md` - 添加认知增强工具
-21. [x] `view/storage_view.md` - 添加认知增强工具
+1. [x] `view/formal_analysis_view.md` - 添加认知增强工具
+2. [x] `view/system_view.md` - 添加认知增强工具
+3. [x] `view/structure_view.md` - 添加认知增强工具
+4. [x] `view/tech_view.md` - 添加认知增强工具
+5. [x] `view/ebpf_otlp_view.md` - 添加认知增强工具
+6. [x] `view/architect_domain_view.md` - 添加认知增强工具
+7. [x] `view/network_view.md` - 添加认知增强工具
+8. [x] `view/storage_view.md` - 添加认知增强工具
 
 ### ✅ 文档索引更新
 

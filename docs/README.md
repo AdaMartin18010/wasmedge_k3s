@@ -464,6 +464,16 @@
   - ⚠️ **注意**：Kubernetes 1.30 支持期已于2025年7月15日结束，建议使用 Kubernetes 1.31 或 1.32
   - 📝 **版本验证状态**：详见 [版本验证结果记录](../VERSION-VERIFICATION-RESULTS.md)
 
+## 📚 文档元数据
+
+### 文档类型和模板
+
+- [文档类型说明](META/DOCUMENT-TYPES.md) ⭐ - 认知模型、架构视图、技术参考三类文档的特征和定位（2025-11-15 新增）
+- [文档模板库](META/DOCUMENT-TEMPLATES.md) ⭐ - 各类文档的标准模板（2025-11-15 新增）
+- [认知增强工具模板库](META/COGNITIVE-ENHANCEMENT-TOOL-TEMPLATES.md) ⭐ - 思维导图、多维矩阵、知识图谱等工具模板（2025-11-15 新增）
+
+---
+
 ## 🔗 快速链接
 
 ### 文档质量与对标分析

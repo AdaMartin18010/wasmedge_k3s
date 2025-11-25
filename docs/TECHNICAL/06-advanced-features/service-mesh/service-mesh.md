@@ -1620,7 +1620,16 @@ istioctl proxy-config route <pod-name>
 kubectl logs <pod-name> -c istio-proxy
 ```
 
-## 19.14 参考
+## 19.14 相关文档
+
+### 新兴技术文档 ⭐
+
+- [Cilium Service Mesh](CILIUM-SERVICE-MESH.md) ⭐ - Cilium Service Mesh 技术文档（2025-11-15 新增）
+- [服务网格对比分析](SERVICE-MESH-COMPARISON.md) ⭐ - Istio、Linkerd、Cilium 三种方案对比（2025-11-15 新增）
+
+---
+
+## 19.15 参考
 
 ### 19.14.1 2025 年最新更新（2025-11-06）
 
