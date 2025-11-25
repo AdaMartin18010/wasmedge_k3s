@@ -287,7 +287,8 @@
 
 ### 6.1 COGNITIVE目录文档
 
-- [COGNITIVE目录总览](../README.md) - COGNITIVE目录完整说明
+- [COGNITIVE目录总览](../README.md) - COGNITIVE目录完整说明 ⭐
+- [概念理论模型全面梳理](../COMPREHENSIVE-CONCEPT-THEORY-MODELS-OVERVIEW.md) ⭐ - 思维导图、多维概念矩阵、形式化论证证明等多种思维表征方式的全面梳理
 - [理论视角框架](../03-theoretical-perspectives/README.md) - 多维度理论分析框架
 - [认知图谱](../01-core-foundations/knowledge-map/knowledge-map.md) - 知识地图和学习路径
 - [认知模型对比矩阵](../01-core-foundations/visualizations/02-cognitive-models-matrix.md) - 认知模型对比矩阵

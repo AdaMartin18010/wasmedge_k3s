@@ -49,7 +49,7 @@
 
 ### 核心目录
 
-```
+```text
 wasmedge_k3s/
 ├── README.md                    # 项目主文档
 ├── QUICK-START-GUIDE.md         # 快速开始指南
@@ -67,7 +67,7 @@ wasmedge_k3s/
 
 ### 归档目录
 
-```
+```text
 docs/ARCHIVE/project-management/
 ├── task-execution/              # 任务执行相关（12个文件）
 ├── work-completion/             # 工作完成报告（10个文件）

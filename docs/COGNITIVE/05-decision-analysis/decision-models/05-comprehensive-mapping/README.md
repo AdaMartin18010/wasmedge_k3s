@@ -100,6 +100,7 @@
 
 ## 4 相关文档
 
+- **[概念理论模型全面梳理](../../../COMPREHENSIVE-CONCEPT-THEORY-MODELS-OVERVIEW.md)** ⭐ - COGNITIVE目录概念理论模型全面梳理
 - **[主文档](../decision-models.md)** - 完整技术决策模型文档
 - **[理论模型](../01-theory-models/)** - 技术范式背后的理论模型
 - **[场景模型](../02-scenario-models/)** - 技术场景应用决策模型
