@@ -98,16 +98,22 @@
 
 | 文档 | 路径 | 核心内容 | 状态 |
 |------|------|----------|------|
-| **架构拆解与组合思维导图** | `02-views/01-decomposition-composition/` | 5步拆分流程、分层拆解、组合模式 | ✅ 部分补充（5步流程已补充） |
+| **架构拆解与组合思维导图** | `02-views/01-decomposition-composition/` | 5步拆分流程、分层拆解、组合模式 | ✅ 已补充（5步流程、分层拆解、组合模式已补充） |
 | **5步拆分流程思维导图** | `02-views/01-decomposition-composition/01-5-step-process.md` | 5步拆分流程完整思维导图、知识矩阵、专家观点 | ✅ 已补充（2025-11-15） |
+| **分层拆解思维导图** | `02-views/01-decomposition-composition/02-layered-decomposition.md` | 9层架构模型完整思维导图、知识矩阵、专家观点 | ✅ 已补充（2025-11-15） |
+| **组合模式思维导图** | `02-views/01-decomposition-composition/03-composition-patterns.md` | 组合模式完整思维导图、知识矩阵、专家观点 | ✅ 已补充（2025-11-15） |
 | **虚拟化容器化沙盒化思维导图** | `02-views/02-virtualization-containerization-sandboxing/` | 四层抽象、递进抽象论证 | ✅ 部分补充（递进抽象论证已补充） |
 | **虚拟化抽象思维导图** | `02-views/02-virtualization-containerization-sandboxing/01-virtualization-abstraction.md` | 虚拟化抽象完整思维导图、知识矩阵、专家观点 | ✅ 已补充（2025-11-15） |
+| **容器化抽象思维导图** | `02-views/02-virtualization-containerization-sandboxing/02-containerization-abstraction.md` | 容器化抽象完整思维导图、知识矩阵、专家观点 | ✅ 已补充（2025-11-15） |
+| **沙盒化抽象思维导图** | `02-views/02-virtualization-containerization-sandboxing/03-sandboxing-abstraction.md` | 沙盒化抽象完整思维导图、知识矩阵、专家观点 | ✅ 已补充（2025-11-15） |
 | **递进抽象论证思维导图** | `02-views/02-virtualization-containerization-sandboxing/04-progressive-abstraction.md` | 递进抽象完整思维导图、知识矩阵、专家观点 | ✅ 已补充（2025-11-15） |
 | **服务网格思维导图** | `02-views/03-service-mesh-nsm/` | 节点聚合、服务组合、范式重塑 | ✅ 部分补充（节点聚合已补充） |
 | **节点聚合思维导图** | `02-views/03-service-mesh-nsm/01-node-aggregation.md` | 节点聚合完整思维导图、知识矩阵、专家观点 | ✅ 已补充（2025-11-15） |
 | **OPA策略治理思维导图** | `02-views/04-opa-policy-governance/` | OPA定位、能力闭包、服务权限 | ✅ 部分补充（OPA定位已补充） |
 | **OPA在中层模型定位思维导图** | `02-views/04-opa-policy-governance/01-opa-in-middle-layer.md` | OPA定位完整思维导图、知识矩阵、专家观点 | ✅ 已补充（2025-11-15） |
 | **安全形式化思维导图** | `02-views/04-opa-policy-governance/02-formalization.md` | 安全形式化完整思维导图、知识矩阵、专家观点 | ✅ 已补充（2025-11-15） |
+| **能力闭包思维导图** | `02-views/04-opa-policy-governance/03-capability-closure.md` | 能力闭包完整思维导图、知识矩阵、专家观点 | ✅ 已补充（2025-11-15） |
+| **服务间权限思维导图** | `02-views/04-opa-policy-governance/04-service-permissions.md` | 服务间权限完整思维导图、知识矩阵、专家观点 | ✅ 已补充（2025-11-15） |
 | **动态运维思维导图** | `02-views/07-dynamic-operations/` | GitOps、可观测性、弹性伸缩 | ✅ 部分补充（GitOps、可观测性、弹性伸缩已补充） |
 | **GitOps思维导图** | `02-views/07-dynamic-operations/01-gitops.md` | GitOps完整思维导图、知识矩阵、专家观点 | ✅ 已补充（2025-11-15） |
 | **可观测性思维导图** | `02-views/07-dynamic-operations/02-observability.md` | 可观测性完整思维导图、知识矩阵、专家观点 | ✅ 已补充（2025-11-15） |
@@ -128,6 +134,7 @@
 | **eBPF/OTLP架构视角思维导图** | `02-views/09-multi-perspectives/07-ebpf-otlp-perspective.md` | eBPF/OTLP架构视角完整思维导图、知识矩阵、专家观点 | ✅ 已补充（2025-11-15） |
 | **服务组合思维导图** | `02-views/03-service-mesh-nsm/02-service-composition.md` | 服务组合完整思维导图、知识矩阵、专家观点 | ✅ 已补充（2025-11-15） |
 | **范式重塑思维导图** | `02-views/03-service-mesh-nsm/03-paradigm-reshaping.md` | 范式重塑完整思维导图、知识矩阵、专家观点 | ✅ 已补充（2025-11-15） |
+| **NSM架构思维导图** | `02-views/03-service-mesh-nsm/04-nsm-architecture.md` | NSM架构完整思维导图、知识矩阵、专家观点 | ✅ 已补充（2025-11-15） |
 
 ### 2.3 实现细节思维导图
 
@@ -353,8 +360,8 @@
 
 | 思维表征方式 | 已包含 | 待补充 | 总计 | 完成率 |
 |-------------|--------|--------|------|--------|
-| **思维导图** | 28 | 0+ | 28+ | 100% |
-| **概念矩阵** | 27 | 0+ | 27+ | 100% |
+| **思维导图** | 35 | 0+ | 35+ | 100% |
+| **概念矩阵** | 34 | 0+ | 34+ | 100% |
 | **形式化定义** | 15+ | 5+ | 20+ | 75% |
 | **形式化证明** | 15+ | 5+ | 20+ | 75% |
 | **关系图谱** | 0 | 5+ | 5+ | 0% |
@@ -372,11 +379,11 @@
 | **03-models/** | 0个文档 | 7个文档 | 0% |
 | **04-applications/** | 0个文档 | 14+个文档 | 0% |
 | **06-domain-semantics/** | 7个文档 | 5+个文档 | 58% |
-| **总计** | **34个文档** | **40+个文档** | **46%** |
+| **总计** | **42个文档** | **32+个文档** | **57%** |
 
 ### 9.3 认知增强覆盖度
 
-**总体覆盖度**：46%（34/74+文档）
+**总体覆盖度**：57%（42/74+文档）
 
 **高优先级补充**：
 
@@ -512,7 +519,7 @@
 ---
 
 **最后更新**：2025-11-15
-**文档状态**：✅ 创建完成 | 📊 认知增强覆盖度46%（34/74+文档） | 🎯 持续补充中
+**文档状态**：✅ 创建完成 | 📊 认知增强覆盖度57%（42/74+文档） | 🎯 持续补充中
 **维护者**：项目团队
 
 **最新进展**（2025-11-15）：
@@ -698,6 +705,30 @@
   - ✅ 知识多维关系矩阵（安全形式化矩阵、OPA公理体系矩阵）
   - ✅ 形象化解释论证（5个类比：从手写法律到法典化、法庭审判流程、法律条文语言、法律版本管理、法律审计）
   - ✅ 专家观点与论证（6位专家：Tim Hinrichs、Leslie Lamport、Edsger W. Dijkstra、Robert C. Martin、Martin Fowler、Donald Norman、Herbert A. Simon）
+  - ✅ 认知学习路径矩阵
+  - ✅ 专家推荐阅读路径（3条路径）
+
+- ✅ 为`03-sandboxing-abstraction.md`补充完整认知增强工具：
+  - ✅ 沙盒化抽象完整思维导图
+  - ✅ 知识多维关系矩阵（沙盒化抽象矩阵、沙盒化技术矩阵）
+  - ✅ 形象化解释论证（5个类比：从开放房间到保险柜、从万能钥匙到专用钥匙、从大型仓库到小型保险库、从普通门锁到多重安全锁、从单层门锁到双层安全门）
+  - ✅ 专家观点与论证（6位专家：Ben Laurie、Saltzer & Schroeder、David Parnas、Robert C. Martin、Martin Fowler、Donald Norman、Herbert A. Simon）
+  - ✅ 认知学习路径矩阵
+  - ✅ 专家推荐阅读路径（3条路径）
+
+- ✅ 为`03-capability-closure.md`补充完整认知增强工具：
+  - ✅ 能力闭包完整思维导图
+  - ✅ 知识多维关系矩阵（能力闭包矩阵、双层闸门矩阵）
+  - ✅ 形象化解释论证（5个类比：从万能钥匙到专用钥匙串、从单层门锁到双层安全门、从单一锁到多重锁系统、从松散集合到紧密集合、从可能泄漏到完全密封）
+  - ✅ 专家观点与论证（6位专家：Saltzer & Schroeder、Ben Laurie、Tim Hinrichs、Robert C. Martin、Martin Fowler、Donald Norman、Herbert A. Simon）
+  - ✅ 认知学习路径矩阵
+  - ✅ 专家推荐阅读路径（3条路径）
+
+- ✅ 为`04-service-permissions.md`补充完整认知增强工具：
+  - ✅ 服务间权限完整思维导图
+  - ✅ 知识多维关系矩阵（服务间权限矩阵、服务间权限组合模式矩阵）
+  - ✅ 形象化解释论证（5个类比：从门禁卡到智能门禁系统、从单一门卫到智能安保系统、从单一锁到多重锁系统、从手工管理到自动化管理、从自然语言到形式化语言）
+  - ✅ 专家观点与论证（6位专家：Tim Hinrichs、William Morgan、David Parnas、Robert C. Martin、Martin Fowler、Donald Norman、Herbert A. Simon）
   - ✅ 认知学习路径矩阵
   - ✅ 专家推荐阅读路径（3条路径）
 
