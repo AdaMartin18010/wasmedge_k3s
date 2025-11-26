@@ -227,8 +227,8 @@ ARCHITECTURE/
 - ✅ **形式化定义**：15+个文档（公理、引理、定理）
 - ✅ **形式化证明**：15+个文档（归纳证明、引理证明、定理证明）
 - ✅ **Wikipedia参考文档**：7个文档（已包含完整认知增强）
-- ⏳ **待补充**：32+个文档（架构视图、实现细节、应用场景）
-- 📊 **总体覆盖度**：57%（42/74+文档）
+- ⏳ **待补充**：30+个文档（架构视图、实现细节、应用场景）
+- 📊 **总体覆盖度**：59%（44/74+文档）
 - ✅ **最新进展**（2025-11-15）：
   - ✅ 为`04-progressive-abstraction.md`补充完整认知增强工具
   - ✅ 为`05-comparison-matrix.md`补充完整认知增强工具
@@ -260,6 +260,8 @@ ARCHITECTURE/
   - ✅ 为`02-layered-decomposition.md`补充完整认知增强工具
   - ✅ 为`03-composition-patterns.md`补充完整认知增强工具
   - ✅ 为`04-nsm-architecture.md`补充完整认知增强工具
+  - ✅ 为`03-models/service-mesh-layer.md`补充完整认知增强工具
+  - ✅ 为`03-models/layer-model.md`补充完整认知增强工具
   - ✅ 为`02-service-composition.md`补充完整认知增强工具
   - ✅ 为`03-paradigm-reshaping.md`补充完整认知增强工具
 
